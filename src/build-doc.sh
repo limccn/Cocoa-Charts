@@ -1,0 +1,1 @@
+appledoc --project-name "Cocoa-Charts" --project-company "limc.cn" --company-id cn.limc --no-create-docset --output ../doc ./CocoaCharts/
