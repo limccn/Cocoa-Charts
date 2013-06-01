@@ -1,7 +1,7 @@
 # Welcome to Cocoa-Charts
 
 Welcome to `Cocoa-Charts` project page on github.com. We just moved from Google Code.<br />
-Cocoa-Charts is an open-source ios developing framework written in Objective-c on Apple Cocoa SDK.<br />
+Cocoa-Charts is an open-source iOS developing framework written in Objective-c on Apple Cocoa SDK.<br />
 Cocoa-Charts includes a set of very useful graphs/charts you need for developing iPhone/iPad Application.<br />
 
 ###Released Charts
@@ -14,7 +14,7 @@ Cocoa-Charts includes a set of very useful graphs/charts you need for developing
 
 ###Under developing Charts
 - `area chart`
-- `separeted stick chart`
+- `separated stick chart`
 - `pizza chart`
 - `round radar chart`
     
@@ -24,19 +24,19 @@ If you need further information of Cocoa-Charts, you can visit the web site of C
 
 - [http://www.limc.cn/cocoacharts](http://www.limc.cn/cocoacharts).
 
-or Contact us by follow
+Or Contact us by follow
 
-- Twitter: [@limccn](http://twitter.com/limc_cn)
-- Sina Weibo:[@limc_cn](http://weibo.com/limc_cn)
+- Twitter: [@limccn](https://twitter.com/limccn)
+- Sina Weibo:[@limccn](http://weibo.com/limccn)
 
-also, you can goto Google Code and find the old versions of Cocoa-Charts.
+Also, you can goto Google Code and find the old versions of Cocoa-Charts.
 
 - [Cocoa-Charts on Google Code](https://code.google.com/p/cocoa-charts/)
 
 ### Need Android version?
 
 We also released an Android version Chart Framework, if you need develop your 
-application on both iOS and Android.
+application on both iOS and Android platforms.
 
 - [Android-Charts](https://github.com/limccn/Android-Charts.git)
 
