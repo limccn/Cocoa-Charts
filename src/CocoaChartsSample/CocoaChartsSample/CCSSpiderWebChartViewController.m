@@ -37,7 +37,7 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor grayColor];
 	
-    CCSSpiderWebChart *spiderwebchart =[[[CCSSpiderWebChart alloc] initWithFrame:CGRectMake(0, 0, 320, 320)]autorelease];
+    CCSSpiderWebChart *spiderwebchart =[[[CCSSpiderWebChart alloc] initWithFrame:CGRectMake(0, 80, 320, 320)]autorelease];
     
     spiderwebchart.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth;
     

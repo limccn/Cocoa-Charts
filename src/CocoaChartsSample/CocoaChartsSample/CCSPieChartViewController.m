@@ -37,7 +37,7 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor grayColor];
 
-    CCSPieChart *piechart =[[[CCSPieChart alloc] initWithFrame:CGRectMake(0, 0, 320, 320)]autorelease];
+    CCSPieChart *piechart =[[[CCSPieChart alloc] initWithFrame:CGRectMake(0, 80, 320, 320)]autorelease];
     
     piechart.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth;
     

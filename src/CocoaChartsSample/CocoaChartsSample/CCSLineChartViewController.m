@@ -57,7 +57,7 @@
     
     [linedata addObject:singleline];
     
-    CCSLineChart *linechart =[[[CCSLineChart alloc] initWithFrame:CGRectMake(0, 0, 320, 200)] autorelease];
+    CCSLineChart *linechart =[[[CCSLineChart alloc] initWithFrame:CGRectMake(0, 80, 320, 200)] autorelease];
     
     linechart.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth;
     

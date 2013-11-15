@@ -362,7 +362,7 @@
     [linesdata addObject:lineMA5];
     [linesdata addObject:lineMA10];
 
-    CCSMAStickChart *stickchart =[[[CCSMAStickChart alloc] initWithFrame:CGRectMake(0, 0, 320, 200)]autorelease];
+    CCSMAStickChart *stickchart =[[[CCSMAStickChart alloc] initWithFrame:CGRectMake(0, 80, 320, 200)]autorelease];
     
     stickchart.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth;
     

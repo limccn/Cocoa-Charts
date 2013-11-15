@@ -364,7 +364,7 @@
     [linesdata addObject:lineMA5];
     [linesdata addObject:lineMA10];
     
-    CCSMACandleStickChart * candleStickChart = [[[CCSMACandleStickChart alloc]initWithFrame:CGRectMake(0, 0, 320, 200)] autorelease];
+    CCSMACandleStickChart * candleStickChart = [[[CCSMACandleStickChart alloc]initWithFrame:CGRectMake(0, 80, 320, 200)] autorelease];
     
     //设置stickData
     candleStickChart.stickData = candlestickData;

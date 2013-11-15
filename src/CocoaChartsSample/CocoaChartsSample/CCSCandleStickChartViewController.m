@@ -166,7 +166,7 @@
     [candlestickData addObject: [[[CCSCandleStickChartData alloc] initWithOpen:229 high:238 low:229 close:236 date:@"11/22"] autorelease]];
     [candlestickData addObject: [[[CCSCandleStickChartData alloc] initWithOpen:232 high:236 low:224 close:225 date:@"11/24"] autorelease]];
     
-    CCSCandleStickChart * candleStickChart = [[[CCSCandleStickChart alloc]initWithFrame:CGRectMake(0, 0, 320, 200)] autorelease];
+    CCSCandleStickChart * candleStickChart = [[[CCSCandleStickChart alloc]initWithFrame:CGRectMake(0, 80, 320, 200)] autorelease];
     
     //设置stickData
     candleStickChart.stickData = candlestickData;
@@ -179,6 +179,7 @@
     candleStickChart.axisMarginLeft = 30;
     candleStickChart.userInteractionEnabled = YES;
     candleStickChart.backgroundColor=[UIColor whiteColor];
+    candleStickChart.candleStickStyle = CCSCandleStickStyleBar;
     
     [self.view addSubview:candleStickChart];
 }

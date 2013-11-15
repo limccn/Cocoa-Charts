@@ -48,7 +48,7 @@
     [stickData addObject: [[[CCSStickChartData alloc] initWithHigh:130887 low:0 date: @"1/7"] autorelease]];
     [stickData addObject: [[[CCSStickChartData alloc] initWithHigh:146849 low:0 date: @"1/14"] autorelease]];
     
-    CCSStickChart *stickchart =[[[CCSStickChart alloc] initWithFrame:CGRectMake(0, 0, 320, 200)]autorelease];
+    CCSStickChart *stickchart =[[[CCSStickChart alloc] initWithFrame:CGRectMake(0, 80, 320, 200)]autorelease];
     
     stickchart.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth;
     
