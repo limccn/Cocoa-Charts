@@ -21,6 +21,14 @@
 #import <UIKit/UIKit.h>
 #import "CCSStickChart.h"
 
+
+typedef enum {
+    CCSCandleStickStyleStandard,            //Standard Candle Style
+    CCSCandleStickStyleBar,                 //American Bar Style
+    CCSCandleStickStyleLine,                //Close Line Style
+} CCSCandleStickStyle;
+
+
 /*!
  CCSCandleStickChart
  
@@ -40,6 +48,8 @@
     UIColor *_negativeStickBorderColor;
     UIColor *_negativeStickFillColor;
     UIColor *_crossStarColor;
+    
+    NSInteger _candleStickStyle;
 }
 
 /*!
@@ -76,5 +86,8 @@
  十字线显示颜色（十字星,一字平线,T形线的情况）
  */
 @property(retain, nonatomic) UIColor *crossStarColor;
+
+
+@property(assign, nonatomic) NSInteger candleStickStyle;
 
 @end
