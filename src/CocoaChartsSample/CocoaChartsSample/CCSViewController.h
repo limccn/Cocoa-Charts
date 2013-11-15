@@ -18,7 +18,14 @@ typedef enum
     CCSChartTypeMACandleStickChart     = 5,
     CCSChartTypePieChart               = 6,
     CCSChartTypePizzaChart             = 7,
-    CCSChartTypeSpiderWebChart         = 8
+    CCSChartTypeSpiderWebChart         = 8,
+    CCSChartTypeMinusStickChart        = 9,
+    CCSChartTypeMACDChart              = 10,
+    CCSChartTypeAreaChart              = 11,
+    CCSChartTypeStackedAreaChart       = 12,
+    CCSChartTypeBandAreaChart          = 13,
+    CCSChartTypeRadarChart             = 14,
+    
 } CCSChartType;
 
 @interface CCSViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>

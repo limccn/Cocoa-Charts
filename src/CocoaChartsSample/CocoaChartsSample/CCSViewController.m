@@ -17,6 +17,12 @@
 #import "CCSPieChartViewController.h"
 #import "CCSPizzaChartViewController.h"
 #import "CCSSpiderWebChartViewController.h"
+#import "CCSMinusStickChartViewController.h"
+#import "CCSMACDChartViewController.h"
+#import "CCSAreaChartViewController.h"
+#import "CCSStackedAreaChartViewController.h"
+#import "CCSBandAreaChartViewController.h"
+#import "CCSRadarChartViewController.h"
 
 
 @interface CCSViewController ()
@@ -36,6 +42,7 @@
     [super viewWillAppear:animated];
     
     self.title = @"Cocoa-Charts";
+    self.navigationController.navigationBarHidden = NO;
 }
 
 - (void)didReceiveMemoryWarning
@@ -46,7 +53,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 9;
+    return 15;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -100,6 +107,30 @@
     else if (CCSChartTypeSpiderWebChart == row)
     {
         cell.textLabel.text = @"SpiderWebChart";
+    }
+    else if (CCSChartTypeMinusStickChart == row)
+    {
+        cell.textLabel.text = @"MinusStickChart";
+    }
+    else if (CCSChartTypeMACDChart == row)
+    {
+        cell.textLabel.text = @"MACDChart";
+    }
+    else if (CCSChartTypeAreaChart == row)
+    {
+        cell.textLabel.text = @"AreaChart";
+    }
+    else if (CCSChartTypeStackedAreaChart == row)
+    {
+        cell.textLabel.text = @"StackedAreaChart";
+    }
+    else if (CCSChartTypeBandAreaChart == row)
+    {
+        cell.textLabel.text = @"BandAreaChart";
+    }
+    else if (CCSChartTypeRadarChart == row)
+    {
+        cell.textLabel.text = @"RadarChart";
     }
     else
     {
@@ -160,8 +191,38 @@
     }
     else if (CCSChartTypeSpiderWebChart == row)
     {
-        CCSSpiderWebChartViewController *pizzaChartViewController = [[[CCSSpiderWebChartViewController alloc]init]autorelease];
-        [appDelegate.viewController pushViewController:pizzaChartViewController animated:YES];
+        CCSSpiderWebChartViewController *spiderWebChartViewController = [[[CCSSpiderWebChartViewController alloc]init]autorelease];
+        [appDelegate.viewController pushViewController:spiderWebChartViewController animated:YES];
+    }
+    else if (CCSChartTypeMinusStickChart == row)
+    {
+        CCSMinusStickChartViewController *minusStickChartViewController = [[[CCSMinusStickChartViewController alloc]init]autorelease];
+        [appDelegate.viewController pushViewController:minusStickChartViewController animated:YES];
+    }
+    else if (CCSChartTypeMACDChart == row)
+    {
+        CCSMACDChartViewController *macdChartViewController = [[[CCSMACDChartViewController alloc]init]autorelease];
+        [appDelegate.viewController pushViewController:macdChartViewController animated:YES];
+    }
+    else if (CCSChartTypeAreaChart == row)
+    {
+        CCSAreaChartViewController *areaChartViewController = [[[CCSAreaChartViewController alloc]init]autorelease];
+        [appDelegate.viewController pushViewController:areaChartViewController animated:YES];
+    }
+    else if (CCSChartTypeStackedAreaChart == row)
+    {
+        CCSStackedAreaChartViewController *stackedAreaChartViewController = [[[CCSStackedAreaChartViewController alloc]init]autorelease];
+        [appDelegate.viewController pushViewController:stackedAreaChartViewController animated:YES];
+    }
+    else if (CCSChartTypeBandAreaChart == row)
+    {
+        CCSBandAreaChartViewController *bandAreaChartViewController = [[[CCSBandAreaChartViewController alloc]init]autorelease];
+        [appDelegate.viewController pushViewController:bandAreaChartViewController animated:YES];
+    }
+    else if (CCSChartTypeRadarChart == row)
+    {
+        CCSRadarChartViewController *radarChartViewController = [[[CCSRadarChartViewController alloc]init]autorelease];
+        [appDelegate.viewController pushViewController:radarChartViewController animated:YES];
     }
     else
     {
