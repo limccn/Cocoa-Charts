@@ -7,6 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A63AD43C1831F641007A0C07 /* CCSMinusStickChart.m in Sources */ = {isa = PBXBuildFile; fileRef = A63AD43B1831F641007A0C07 /* CCSMinusStickChart.m */; };
+		A63AD43F1831F6CC007A0C07 /* CCSMinusStickChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A63AD43E1831F6CC007A0C07 /* CCSMinusStickChartViewController.m */; };
+		A63AD44218320302007A0C07 /* CCSMACDChart.m in Sources */ = {isa = PBXBuildFile; fileRef = A63AD44118320302007A0C07 /* CCSMACDChart.m */; };
+		A63AD445183203EF007A0C07 /* CCSMACDData.m in Sources */ = {isa = PBXBuildFile; fileRef = A63AD444183203EF007A0C07 /* CCSMACDData.m */; };
+		A63AD44818320AF5007A0C07 /* CCSMACDChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A63AD44718320AF5007A0C07 /* CCSMACDChartViewController.m */; };
+		A6541AD2183E0183008393DE /* CCSSlipStickChart.m in Sources */ = {isa = PBXBuildFile; fileRef = A6541AD1183E0183008393DE /* CCSSlipStickChart.m */; };
+		A66797C81834BD53005B0D43 /* CCSStackedAreaChart.m in Sources */ = {isa = PBXBuildFile; fileRef = A66797C71834BD53005B0D43 /* CCSStackedAreaChart.m */; };
+		A66797CB1834BE10005B0D43 /* CCSStackedAreaChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A66797CA1834BE10005B0D43 /* CCSStackedAreaChartViewController.m */; };
+		A66797CE1834C8FE005B0D43 /* CCSBandAreaChart.m in Sources */ = {isa = PBXBuildFile; fileRef = A66797CD1834C8FE005B0D43 /* CCSBandAreaChart.m */; };
+		A66797D11835E205005B0D43 /* CCSBandAreaChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A66797D01835E205005B0D43 /* CCSBandAreaChartViewController.m */; };
+		A68BD32B1833621400D1F191 /* CCSAreaChart.m in Sources */ = {isa = PBXBuildFile; fileRef = A68BD32A1833621400D1F191 /* CCSAreaChart.m */; };
+		A68BD32E1833649300D1F191 /* CCSAreaChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A68BD32D1833649300D1F191 /* CCSAreaChartViewController.m */; };
+		A68BD33118337FA300D1F191 /* CCSRadarChart.m in Sources */ = {isa = PBXBuildFile; fileRef = A68BD33018337FA300D1F191 /* CCSRadarChart.m */; };
+		A68BD334183384F800D1F191 /* CCSRadarChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A68BD333183384F800D1F191 /* CCSRadarChartViewController.m */; };
 		A69DD0B8174CCB870012B2A0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A69DD0B7174CCB870012B2A0 /* UIKit.framework */; };
 		A69DD0BA174CCB870012B2A0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A69DD0B9174CCB870012B2A0 /* Foundation.framework */; };
 		A69DD0BC174CCB870012B2A0 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A69DD0BB174CCB870012B2A0 /* CoreGraphics.framework */; };
@@ -64,6 +78,34 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A63AD43A1831F641007A0C07 /* CCSMinusStickChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSMinusStickChart.h; sourceTree = "<group>"; };
+		A63AD43B1831F641007A0C07 /* CCSMinusStickChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSMinusStickChart.m; sourceTree = "<group>"; };
+		A63AD43D1831F6CC007A0C07 /* CCSMinusStickChartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSMinusStickChartViewController.h; sourceTree = "<group>"; };
+		A63AD43E1831F6CC007A0C07 /* CCSMinusStickChartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSMinusStickChartViewController.m; sourceTree = "<group>"; };
+		A63AD44018320302007A0C07 /* CCSMACDChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSMACDChart.h; sourceTree = "<group>"; };
+		A63AD44118320302007A0C07 /* CCSMACDChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSMACDChart.m; sourceTree = "<group>"; };
+		A63AD443183203EE007A0C07 /* CCSMACDData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSMACDData.h; sourceTree = "<group>"; };
+		A63AD444183203EF007A0C07 /* CCSMACDData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSMACDData.m; sourceTree = "<group>"; };
+		A63AD44618320AF5007A0C07 /* CCSMACDChartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSMACDChartViewController.h; sourceTree = "<group>"; };
+		A63AD44718320AF5007A0C07 /* CCSMACDChartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSMACDChartViewController.m; sourceTree = "<group>"; };
+		A6541AD0183E0183008393DE /* CCSSlipStickChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSSlipStickChart.h; sourceTree = "<group>"; };
+		A6541AD1183E0183008393DE /* CCSSlipStickChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSSlipStickChart.m; sourceTree = "<group>"; };
+		A66797C61834BD53005B0D43 /* CCSStackedAreaChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSStackedAreaChart.h; sourceTree = "<group>"; };
+		A66797C71834BD53005B0D43 /* CCSStackedAreaChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSStackedAreaChart.m; sourceTree = "<group>"; };
+		A66797C91834BE10005B0D43 /* CCSStackedAreaChartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSStackedAreaChartViewController.h; sourceTree = "<group>"; };
+		A66797CA1834BE10005B0D43 /* CCSStackedAreaChartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSStackedAreaChartViewController.m; sourceTree = "<group>"; };
+		A66797CC1834C8FE005B0D43 /* CCSBandAreaChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSBandAreaChart.h; sourceTree = "<group>"; };
+		A66797CD1834C8FE005B0D43 /* CCSBandAreaChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSBandAreaChart.m; sourceTree = "<group>"; };
+		A66797CF1835E205005B0D43 /* CCSBandAreaChartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSBandAreaChartViewController.h; sourceTree = "<group>"; };
+		A66797D01835E205005B0D43 /* CCSBandAreaChartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSBandAreaChartViewController.m; sourceTree = "<group>"; };
+		A68BD3291833621400D1F191 /* CCSAreaChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSAreaChart.h; sourceTree = "<group>"; };
+		A68BD32A1833621400D1F191 /* CCSAreaChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSAreaChart.m; sourceTree = "<group>"; };
+		A68BD32C1833649300D1F191 /* CCSAreaChartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSAreaChartViewController.h; sourceTree = "<group>"; };
+		A68BD32D1833649300D1F191 /* CCSAreaChartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSAreaChartViewController.m; sourceTree = "<group>"; };
+		A68BD32F18337FA300D1F191 /* CCSRadarChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSRadarChart.h; sourceTree = "<group>"; };
+		A68BD33018337FA300D1F191 /* CCSRadarChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSRadarChart.m; sourceTree = "<group>"; };
+		A68BD332183384F800D1F191 /* CCSRadarChartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSRadarChartViewController.h; sourceTree = "<group>"; };
+		A68BD333183384F800D1F191 /* CCSRadarChartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSRadarChartViewController.m; sourceTree = "<group>"; };
 		A69DD0B4174CCB870012B2A0 /* CocoaChartsSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CocoaChartsSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A69DD0B7174CCB870012B2A0 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		A69DD0B9174CCB870012B2A0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -223,6 +265,18 @@
 				A69DD12C174CCC6C0012B2A0 /* CCSSpiderWebChartViewController.m */,
 				A69DD12D174CCC6C0012B2A0 /* CCSStickChartViewController.h */,
 				A69DD12E174CCC6C0012B2A0 /* CCSStickChartViewController.m */,
+				A63AD43D1831F6CC007A0C07 /* CCSMinusStickChartViewController.h */,
+				A63AD43E1831F6CC007A0C07 /* CCSMinusStickChartViewController.m */,
+				A63AD44618320AF5007A0C07 /* CCSMACDChartViewController.h */,
+				A63AD44718320AF5007A0C07 /* CCSMACDChartViewController.m */,
+				A68BD32C1833649300D1F191 /* CCSAreaChartViewController.h */,
+				A68BD32D1833649300D1F191 /* CCSAreaChartViewController.m */,
+				A66797C91834BE10005B0D43 /* CCSStackedAreaChartViewController.h */,
+				A66797CA1834BE10005B0D43 /* CCSStackedAreaChartViewController.m */,
+				A66797CF1835E205005B0D43 /* CCSBandAreaChartViewController.h */,
+				A66797D01835E205005B0D43 /* CCSBandAreaChartViewController.m */,
+				A68BD332183384F800D1F191 /* CCSRadarChartViewController.h */,
+				A68BD333183384F800D1F191 /* CCSRadarChartViewController.m */,
 				A69DD12F174CCC6C0012B2A0 /* CCSViewController.h */,
 				A69DD130174CCC6C0012B2A0 /* CCSViewController.m */,
 				A69DD136174CCC6C0012B2A0 /* CCSViewController.xib */,
@@ -294,6 +348,8 @@
 				A69DD184174CCCCE0012B2A0 /* CCSSpiderWebChart.m */,
 				A69DD185174CCCCE0012B2A0 /* CCSStickChart.h */,
 				A69DD186174CCCCE0012B2A0 /* CCSStickChart.m */,
+				A6541AD0183E0183008393DE /* CCSSlipStickChart.h */,
+				A6541AD1183E0183008393DE /* CCSSlipStickChart.m */,
 				A69DD187174CCCCE0012B2A0 /* CCSStickChartData.h */,
 				A69DD188174CCCCE0012B2A0 /* CCSStickChartData.m */,
 				A69DD189174CCCCE0012B2A0 /* CCSTitledLine.h */,
@@ -306,6 +362,20 @@
 				A69DD190174CCCCE0012B2A0 /* CCSTitleValues.m */,
 				A69DD191174CCCCE0012B2A0 /* CCSTitleValuesColor.h */,
 				A69DD192174CCCCE0012B2A0 /* CCSTitleValuesColor.m */,
+				A63AD43A1831F641007A0C07 /* CCSMinusStickChart.h */,
+				A63AD43B1831F641007A0C07 /* CCSMinusStickChart.m */,
+				A63AD44018320302007A0C07 /* CCSMACDChart.h */,
+				A63AD44118320302007A0C07 /* CCSMACDChart.m */,
+				A63AD443183203EE007A0C07 /* CCSMACDData.h */,
+				A63AD444183203EF007A0C07 /* CCSMACDData.m */,
+				A68BD3291833621400D1F191 /* CCSAreaChart.h */,
+				A68BD32A1833621400D1F191 /* CCSAreaChart.m */,
+				A66797C61834BD53005B0D43 /* CCSStackedAreaChart.h */,
+				A66797C71834BD53005B0D43 /* CCSStackedAreaChart.m */,
+				A66797CC1834C8FE005B0D43 /* CCSBandAreaChart.h */,
+				A66797CD1834C8FE005B0D43 /* CCSBandAreaChart.m */,
+				A68BD32F18337FA300D1F191 /* CCSRadarChart.h */,
+				A68BD33018337FA300D1F191 /* CCSRadarChart.m */,
 			);
 			name = CocoaCharts;
 			path = ../CocoaCharts;
@@ -426,32 +496,46 @@
 				A69DD142174CCC6C0012B2A0 /* CCSCandleStickChartViewController.m in Sources */,
 				A69DD156174CCC6C0012B2A0 /* CCSGridChartViewController.m in Sources */,
 				A69DD157174CCC6C0012B2A0 /* CCSLineChartViewController.m in Sources */,
+				A63AD43C1831F641007A0C07 /* CCSMinusStickChart.m in Sources */,
 				A69DD158174CCC6C0012B2A0 /* CCSMACandleStickChartViewController.m in Sources */,
+				A63AD44818320AF5007A0C07 /* CCSMACDChartViewController.m in Sources */,
 				A69DD159174CCC6C0012B2A0 /* CCSMAStickChartViewController.m in Sources */,
 				A69DD15A174CCC6C0012B2A0 /* CCSPieChartViewController.m in Sources */,
 				A69DD15B174CCC6C0012B2A0 /* CCSPizzaChartViewController.m in Sources */,
 				A69DD15C174CCC6C0012B2A0 /* CCSSpiderWebChartViewController.m in Sources */,
+				A66797CB1834BE10005B0D43 /* CCSStackedAreaChartViewController.m in Sources */,
 				A69DD15D174CCC6C0012B2A0 /* CCSStickChartViewController.m in Sources */,
+				A66797CE1834C8FE005B0D43 /* CCSBandAreaChart.m in Sources */,
 				A69DD15E174CCC6C0012B2A0 /* CCSViewController.m in Sources */,
 				A69DD165174CCC6C0012B2A0 /* main.m in Sources */,
+				A63AD44218320302007A0C07 /* CCSMACDChart.m in Sources */,
 				A69DD193174CCCCE0012B2A0 /* CCSBaseChartView.m in Sources */,
+				A68BD33118337FA300D1F191 /* CCSRadarChart.m in Sources */,
+				A68BD32E1833649300D1F191 /* CCSAreaChartViewController.m in Sources */,
 				A69DD194174CCCCE0012B2A0 /* CCSBaseData.m in Sources */,
 				A69DD195174CCCCE0012B2A0 /* CCSCandleStickChart.m in Sources */,
 				A69DD196174CCCCE0012B2A0 /* CCSCandleStickChartData.m in Sources */,
 				A69DD197174CCCCE0012B2A0 /* CCSGridChart.m in Sources */,
 				A69DD198174CCCCE0012B2A0 /* CCSLineChart.m in Sources */,
 				A69DD199174CCCCE0012B2A0 /* CCSLineData.m in Sources */,
+				A66797D11835E205005B0D43 /* CCSBandAreaChartViewController.m in Sources */,
+				A63AD43F1831F6CC007A0C07 /* CCSMinusStickChartViewController.m in Sources */,
 				A69DD19A174CCCCE0012B2A0 /* CCSMACandleStickChart.m in Sources */,
 				A69DD19B174CCCCE0012B2A0 /* CCSMAStickChart.m in Sources */,
 				A69DD19C174CCCCE0012B2A0 /* CCSPieChart.m in Sources */,
 				A69DD19D174CCCCE0012B2A0 /* CCSPizzaChart.m in Sources */,
+				A6541AD2183E0183008393DE /* CCSSlipStickChart.m in Sources */,
+				A66797C81834BD53005B0D43 /* CCSStackedAreaChart.m in Sources */,
 				A69DD19E174CCCCE0012B2A0 /* CCSSpiderWebChart.m in Sources */,
 				A69DD19F174CCCCE0012B2A0 /* CCSStickChart.m in Sources */,
 				A69DD1A0174CCCCE0012B2A0 /* CCSStickChartData.m in Sources */,
 				A69DD1A1174CCCCE0012B2A0 /* CCSTitledLine.m in Sources */,
 				A69DD1A2174CCCCE0012B2A0 /* CCSTitleValue.m in Sources */,
+				A68BD32B1833621400D1F191 /* CCSAreaChart.m in Sources */,
 				A69DD1A3174CCCCE0012B2A0 /* CCSTitleValueColor.m in Sources */,
+				A68BD334183384F800D1F191 /* CCSRadarChartViewController.m in Sources */,
 				A69DD1A4174CCCCE0012B2A0 /* CCSTitleValues.m in Sources */,
+				A63AD445183203EF007A0C07 /* CCSMACDData.m in Sources */,
 				A69DD1A5174CCCCE0012B2A0 /* CCSTitleValuesColor.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -562,6 +646,11 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CocoaChartsSample/CocoaChartsSample-Prefix.pch";
 				INFOPLIST_FILE = "CocoaChartsSample/CocoaChartsSample-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/ohs/Desktop,
+				);
 				PRODUCT_NAME = CocoaChartsSample;
 				WRAPPER_EXTENSION = app;
 			};
@@ -573,6 +662,11 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CocoaChartsSample/CocoaChartsSample-Prefix.pch";
 				INFOPLIST_FILE = "CocoaChartsSample/CocoaChartsSample-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/ohs/Desktop,
+				);
 				PRODUCT_NAME = CocoaChartsSample;
 				WRAPPER_EXTENSION = app;
 			};

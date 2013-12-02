@@ -44,7 +44,7 @@ application on both iOS and Android platforms.
 
 1. Clone or download Cocoa-Charts if you haven't yet, At the command prompt type command like this
 
-        git git://github.com/limccn/Cocoa-Charts.git
+        git clone git://github.com/limccn/Cocoa-Charts.git
         
 2. Import the Cocoa-Charts source files to your Xcode project.
 
