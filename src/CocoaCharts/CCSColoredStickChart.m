@@ -70,8 +70,10 @@
             // 蜡烛棒起始绘制位置
             float stickX = rect.size.width - self.axisMarginRight - 1 - stickWidth;
             //判断显示为方柱或显示为线条
-            for (NSInteger i = [self.stickData count] - 1; i >= 0; i--) {
-                CCSColoredStickChartData *stick = [self.stickData objectAtIndex:i];
+            for (NSUInteger i = 0 ; i < self.displayNumber; i++) {
+                //获取index
+                NSUInteger index = self.displayFrom + self.displayNumber - 1 - i;
+                CCSColoredStickChartData *stick = [self.stickData objectAtIndex:index];
                 
                 float highY = ((1 - (stick.high - self.minValue) / (self.maxValue - self.minValue)) * (rect.size.height - self.axisMarginBottom) - super.axisMarginTop);
                 float lowY = ((1 - (stick.low - self.minValue) / (self.maxValue - self.minValue)) * (rect.size.height - self.axisMarginBottom) - self.axisMarginTop);

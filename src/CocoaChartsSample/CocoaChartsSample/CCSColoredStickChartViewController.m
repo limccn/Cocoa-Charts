@@ -143,8 +143,13 @@
     //stickchart.displayCrossYOnTouch = NO;
     stickchart.latitudeNum = 2;
     stickchart.longitudeNum = 2;
-    stickchart.stickFillColor = [UIColor orangeColor];
+    //stickchart.stickFillColor = [UIColor orangeColor];
     stickchart.backgroundColor = [UIColor whiteColor];
+    stickchart.axisMarginRight = 30;
+    stickchart.axisMarginLeft = 2;
+    stickchart.userInteractionEnabled = YES;
+    stickchart.displayNumber=50;
+    stickchart.axisYPosition = CCSGridChartAxisYPositionRight;
     
     [self.view addSubview:stickchart];
 }

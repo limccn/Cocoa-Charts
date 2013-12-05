@@ -3116,7 +3116,7 @@
     candleStickChart.axisMarginLeft = 2;
     candleStickChart.userInteractionEnabled = YES;
     candleStickChart.backgroundColor=[UIColor whiteColor];
-    candleStickChart.displayFrom=0;
+    candleStickChart.displayFrom=449;
     candleStickChart.displayNumber=50;
     candleStickChart.axisYPosition = CCSGridChartAxisYPositionRight;
     
