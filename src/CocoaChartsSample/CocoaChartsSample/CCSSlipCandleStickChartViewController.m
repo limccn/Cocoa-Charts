@@ -1,21 +1,20 @@
 //
-//  CCSCandleStickViewController.m
-//  Cocoa-Charts
+//  CCSSlipCandleStickChartViewController.m
+//  CocoaChartsSample
 //
-//  Created by limc on 13-05-22.
-//  Copyright (c) 2012 limc.cn All rights reserved.
+//  Created by limc on 12/3/13.
+//  Copyright (c) 2013 limc. All rights reserved.
 //
 
-#import "CCSCandleStickChartViewController.h"
-#import "CCSCandleStickChart.h"
+#import "CCSSlipCandleStickChartViewController.h"
+#import "CCSSlipCandleStickChart.h"
 #import "CCSCandleStickChartData.h"
 
-@interface CCSCandleStickViewController ()
+@interface CCSSlipCandleStickChartViewController ()
 
 @end
 
-@implementation CCSCandleStickViewController
-
+@implementation CCSSlipCandleStickChartViewController
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -29,39 +28,14 @@
 {
     [super viewWillAppear:animated];
     
-    self.title = @"Candle Stick Chart";
+    self.title = @"Slip Candle Stick Chart";
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor grayColor];
-    
 
-//    NSMutableArray *linesdata = [[[NSMutableArray alloc]init]autorelease];
-//    
-//    NSArray *linedataMA5 = [appDelegate.stockChartTable ma5Data:secCode];
-//    TitledLine *lineMA5 = [[[TitledLine alloc]init] autorelease];
-//    lineMA5.data = linedataMA5;
-//    lineMA5.color = [UIColor whiteColor];
-//    lineMA5.title = @"MA5";
-//    
-//    NSArray *linedataMA10 = [appDelegate.stockChartTable ma10Data:secCode];
-//    TitledLine *lineMA10 = [[[TitledLine alloc]init] autorelease];
-//    lineMA10.data = linedataMA10;
-//    lineMA10.color = [UIColor redColor];
-//    lineMA10.title = @"MA10";
-//    
-//    NSArray *linedataMA25 = [appDelegate.stockChartTable ma25Data:secCode];
-//    TitledLine *lineMA25 = [[[TitledLine alloc]init] autorelease];
-//    lineMA25.data = linedataMA25;
-//    lineMA25.color = [UIColor greenColor];
-//    lineMA25.title = @"MA25";
-//    
-//    
-//    [linesdata addObject:lineMA5];
-//    [linesdata addObject:lineMA10];
-//    [linesdata addObject:lineMA25];
     
     NSMutableArray *candlestickData =  [[[NSMutableArray alloc]init]autorelease];
     
@@ -166,8 +140,8 @@
     [candlestickData addObject: [[[CCSCandleStickChartData alloc] initWithOpen:229 high:238 low:229 close:236 date:@"11/22"] autorelease]];
     [candlestickData addObject: [[[CCSCandleStickChartData alloc] initWithOpen:232 high:236 low:224 close:225 date:@"11/24"] autorelease]];
     
-    CCSCandleStickChart * candleStickChart = [[[CCSCandleStickChart alloc]initWithFrame:CGRectMake(0, MARGIN_TOP, 320, 320)] autorelease];
-
+    CCSSlipCandleStickChart * candleStickChart = [[[CCSSlipCandleStickChart alloc]initWithFrame:CGRectMake(0, 80, 320, 200)] autorelease];
+    
     candleStickChart.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth;
     
     //设置stickData
@@ -181,7 +155,7 @@
     candleStickChart.axisMarginLeft = 30;
     candleStickChart.userInteractionEnabled = YES;
     candleStickChart.backgroundColor=[UIColor whiteColor];
-    candleStickChart.candleStickStyle = CCSCandleStickStyleBar;
+    //candleStickChart.candleStickStyle = CCSCandleStickStyleBar;
     
     [self.view addSubview:candleStickChart];
 }

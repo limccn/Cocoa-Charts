@@ -8,15 +8,24 @@
 
 #import "CCSStickChart.h"
 
+typedef enum {
+    CCSStickZoomBaseLineCenter,
+    CCSStickZoomBaseLineLeft,
+    CCSStickZoomBaseLineRight
+} CCSStickZoomBaseLine;
+
+
 @interface CCSSlipStickChart : CCSStickChart {
     NSUInteger _displayNumber;
     NSUInteger _displayFrom;
     NSUInteger _minDisplayNumber;
+    NSUInteger _zoomBaseLine;
 }
 
 @property(assign, nonatomic) NSUInteger displayNumber;
 @property(assign, nonatomic) NSUInteger displayFrom;
 @property(assign, nonatomic) NSUInteger minDisplayNumber;
 
+@property(assign, nonatomic) NSUInteger zoomBaseLine;
 
 @end

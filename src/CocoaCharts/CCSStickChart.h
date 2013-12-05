@@ -169,4 +169,10 @@
  选中点
  */
 - (void)setSelectedPointAddReDraw:(CGPoint)point;
+
+- (void) calcDataValueRange;
+- (void) calcValueRangePaddingZero;
+- (void) calcValueRangeFormatForAxis;
+- (void) calcValueRange;
+
 @end

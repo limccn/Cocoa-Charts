@@ -141,7 +141,7 @@
     [stickData addObject: [[[CCSMACDData alloc] initWithDea:65698 diff:81679 macd:31960 date:@"11/1"] autorelease]];
     [stickData addObject: [[[CCSMACDData alloc] initWithDea:68247 diff:78442 macd:20388 date:@"11/4"] autorelease]];
     
-    CCSMACDChart *stickchart =[[[CCSMACDChart alloc] initWithFrame:CGRectMake(0, 80, 320, 200)]autorelease];
+    CCSMACDChart *stickchart =[[[CCSMACDChart alloc] initWithFrame:CGRectMake(0, MARGIN_TOP, 320, 320)]autorelease];
     
     stickchart.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth;
     

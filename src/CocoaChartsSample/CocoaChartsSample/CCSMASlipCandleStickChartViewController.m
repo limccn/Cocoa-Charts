@@ -1,22 +1,22 @@
 //
-//  CCSMACandleStickChartViewController.m
-//  Cocoa-Charts
+//  CCSMASlipCandleStickChartViewController.m
+//  CocoaChartsSample
 //
-//  Created by limc on 13-05-22.
-//  Copyright (c) 2012 limc.cn All rights reserved.
+//  Created by limc on 12/3/13.
+//  Copyright (c) 2013 limc. All rights reserved.
 //
 
-#import "CCSMACandleStickChartViewController.h"
-#import "CCSMACandleStickChart.h"
+#import "CCSMASlipCandleStickChartViewController.h"
+#import "CCSMASlipCandleStickChart.h"
 #import "CCSCandleStickChartData.h"
 #import "CCSLineData.h"
 #import "CCSTitledLine.h"
 
-@interface CCSMACandleStickChartViewController ()
+@interface CCSMASlipCandleStickChartViewController ()
 
 @end
 
-@implementation CCSMACandleStickChartViewController
+@implementation CCSMASlipCandleStickChartViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -31,7 +31,7 @@
 {
     [super viewWillAppear:animated];
     
-    self.title = @"MA Candle Stick Chart";
+    self.title = @"MA Slip Candle Stick Chart";
 }
 
 - (void)viewDidLoad
@@ -143,7 +143,7 @@
     [candlestickData addObject: [[[CCSCandleStickChartData alloc] initWithOpen:232 high:236 low:224 close:225 date:@"11/24"] autorelease]];
     
     NSMutableArray *linesdata = [[[NSMutableArray alloc]init]autorelease];
-
+    
     NSMutableArray *linedataMA5 = [[[NSMutableArray alloc]initWithCapacity:100]autorelease];
     
     [linedataMA5 addObject: [[[CCSLineData alloc] initWithValue:291.8 date:@"06/30"] autorelease]];
@@ -252,7 +252,7 @@
     lineMA5.data = linedataMA5;
     lineMA5.color = [UIColor cyanColor];
     lineMA5.title = @"MA5";
-
+    
     NSMutableArray *linedataMA10 = [[[NSMutableArray alloc]initWithCapacity:100]autorelease];
     
     [linedataMA10 addObject: [[[CCSLineData alloc] initWithValue:281.8 date:@"06/30"] autorelease]];
@@ -358,13 +358,13 @@
     
     CCSTitledLine *lineMA10 = [[[CCSTitledLine alloc]init] autorelease];
     lineMA10.data = linedataMA10;
-    lineMA10.color = [UIColor redColor];
+    lineMA10.color = [UIColor purpleColor];
     lineMA10.title = @"MA10";
-
+    
     [linesdata addObject:lineMA5];
     [linesdata addObject:lineMA10];
     
-    CCSMACandleStickChart * candleStickChart = [[[CCSMACandleStickChart alloc]initWithFrame:CGRectMake(0, MARGIN_TOP, 320, 320)] autorelease];
+    CCSMASlipCandleStickChart * candleStickChart = [[[CCSMASlipCandleStickChart alloc]initWithFrame:CGRectMake(0, MARGIN_TOP, 320, 320)] autorelease];
     
     candleStickChart.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth;
     
@@ -389,5 +389,6 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 
 @end

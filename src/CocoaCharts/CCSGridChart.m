@@ -91,8 +91,8 @@
     self.axisMarginRight = 1;
     self.longitudeFontSize = 11;
     self.latitudeFontSize = 11;
-    self.axisXPosition = CCSGridChartAxisPositionBottom;
-    self.axisYPosition = CCSGridChartAxisPositionLeft;
+    self.axisXPosition = CCSGridChartAxisXPositionBottom;
+    self.axisYPosition = CCSGridChartAxisYPositionLeft;
     self.displayAxisXTitle = YES;
     self.displayAxisYTitle = YES;
     self.displayLongitude = YES;
@@ -159,7 +159,7 @@
 
 
 - (void)drawXAxis:(CGRect)rect {
-    if (self.axisXPosition == CCSGridChartAxisPositionBottom) {
+    if (self.axisXPosition == CCSGridChartAxisXPositionBottom) {
         CGContextRef context = UIGraphicsGetCurrentContext();
         CGContextSetLineWidth(context, 1.0f);
 
@@ -181,7 +181,7 @@
 }
 
 - (void)drawYAxis:(CGRect)rect {
-    if (self.axisYPosition == CCSGridChartAxisPositionLeft) {
+    if (self.axisYPosition == CCSGridChartAxisYPositionLeft) {
         CGContextRef context = UIGraphicsGetCurrentContext();
         CGContextSetLineWidth(context, 1.0f);
 
@@ -195,7 +195,7 @@
         CGContextRef context = UIGraphicsGetCurrentContext();
         CGContextSetLineWidth(context, 1.0f);
 
-        if (self.axisXPosition == CCSGridChartAxisPositionBottom) {
+        if (self.axisXPosition == CCSGridChartAxisXPositionBottom) {
             CGContextMoveToPoint(context, rect.size.width - self.axisMarginRight, 0.0f);
             CGContextAddLineToPoint(context, rect.size.width - self.axisMarginRight, rect.size.height - self.axisMarginBottom);
         } else {
@@ -222,7 +222,7 @@
 
     if ([self.axisXTitles count] > 0) {
         float postOffset;
-        if (self.axisXPosition == CCSGridChartAxisPositionBottom) {
+        if (self.axisXPosition == CCSGridChartAxisXPositionBottom) {
             postOffset = (rect.size.height - self.axisMarginBottom - 2 * self.axisMarginTop) * 1.0 / ([self.axisXTitles count] - 1);
         }
         else {
@@ -234,7 +234,7 @@
         for (NSUInteger i = 0; i <= [self.axisXTitles count]; i++) {
             // 绘制线条
             if (self.displayLatitude) {
-                if (self.axisYPosition == CCSGridChartAxisPositionLeft) {
+                if (self.axisYPosition == CCSGridChartAxisYPositionLeft) {
                     CGContextMoveToPoint(context, self.axisMarginLeft, offset - i * postOffset);
                     CGContextAddLineToPoint(context, rect.size.width, offset - i * postOffset);
 
@@ -329,7 +329,7 @@
         float postOffset;
         float offset;
 
-        if (self.axisYPosition == CCSGridChartAxisPositionLeft) {
+        if (self.axisYPosition == CCSGridChartAxisYPositionLeft) {
             postOffset = (rect.size.width - self.axisMarginLeft - 2 * self.axisMarginRight) / ([self.axisYTitles count] - 1);
             offset = self.axisMarginLeft + self.axisMarginRight;
         }
@@ -340,7 +340,7 @@
 
         for (NSUInteger i = 0; i <= [self.axisYTitles count]; i++) {
 
-            if (self.axisXPosition == CCSGridChartAxisPositionBottom) {
+            if (self.axisXPosition == CCSGridChartAxisXPositionBottom) {
                 // 绘制线条
                 if (self.displayLongitude) {
                     CGContextMoveToPoint(context, offset + i * postOffset, 0);
@@ -359,7 +359,7 @@
                               alignment:NSTextAlignmentLeft];
 
                     } else if (i == [self.axisYTitles count] - 1) {
-                        if (self.axisYPosition == CCSGridChartAxisPositionLeft) {
+                        if (self.axisYPosition == CCSGridChartAxisYPositionLeft) {
                             [str drawInRect:CGRectMake(rect.size.width - postOffset, rect.size.height - self.axisMarginBottom, postOffset, self.longitudeFontSize)
                                    withFont:font
                               lineBreakMode:NSLineBreakByWordWrapping
@@ -397,7 +397,7 @@
                               alignment:NSTextAlignmentLeft];
 
                     } else if (i == [self.axisYTitles count] - 1) {
-                        if (self.axisYPosition == CCSGridChartAxisPositionLeft) {
+                        if (self.axisYPosition == CCSGridChartAxisYPositionLeft) {
                             [str drawInRect:CGRectMake(rect.size.width - postOffset, 0, postOffset, self.longitudeFontSize)
                                    withFont:font
                               lineBreakMode:NSLineBreakByWordWrapping
@@ -432,7 +432,7 @@
     CGContextSetStrokeColorWithColor(context, self.crossLinesColor.CGColor);
     CGContextSetFillColorWithColor(context, self.crossLinesColor.CGColor);
 
-    if (self.axisXPosition == CCSGridChartAxisPositionBottom) {
+    if (self.axisXPosition == CCSGridChartAxisXPositionBottom) {
         if (self.singleTouchPoint.y <= 0) {
             self.singleTouchPoint = CGPointMake(self.singleTouchPoint.x, 1);
         }
@@ -456,7 +456,7 @@
     }
 
 
-    if (self.axisXPosition == CCSGridChartAxisPositionBottom && self.axisYPosition == CCSGridChartAxisPositionLeft) {
+    if (self.axisXPosition == CCSGridChartAxisXPositionBottom && self.axisYPosition == CCSGridChartAxisYPositionLeft) {
         //界定点击有效范围
         if (self.singleTouchPoint.x >= self.axisMarginLeft
                 && self.singleTouchPoint.y > 0
@@ -534,7 +534,7 @@
 
             }
         }
-    } else if (self.axisXPosition == CCSGridChartAxisPositionBottom && self.axisYPosition == CCSGridChartAxisPositionRight) {
+    } else if (self.axisXPosition == CCSGridChartAxisXPositionBottom && self.axisYPosition == CCSGridChartAxisYPositionRight) {
         //界定点击有效范围
         if (self.singleTouchPoint.x >= self.axisMarginLeft
                 && self.singleTouchPoint.y > 0
@@ -613,7 +613,7 @@
             }
         }
 
-    } else if (self.axisXPosition == CCSGridChartAxisPositionTop && self.axisYPosition == CCSGridChartAxisPositionLeft) {
+    } else if (self.axisXPosition == CCSGridChartAxisXPositionTop && self.axisYPosition == CCSGridChartAxisYPositionLeft) {
         //界定点击有效范围
         if (self.singleTouchPoint.x >= self.axisMarginLeft
                 && self.singleTouchPoint.y > self.axisMarginTop
@@ -690,7 +690,7 @@
             }
         }
 
-    } else if (self.axisXPosition == CCSGridChartAxisPositionTop && self.axisYPosition == CCSGridChartAxisPositionRight) {
+    } else if (self.axisXPosition == CCSGridChartAxisXPositionTop && self.axisYPosition == CCSGridChartAxisYPositionRight) {
         //界定点击有效范围
         if (self.singleTouchPoint.x >= self.axisMarginLeft
                 && self.singleTouchPoint.y > self.axisMarginTop
@@ -781,7 +781,7 @@
 
 
 - (CGFloat)touchPointAxisXValue:(CGRect)rect {
-    if (self.axisYPosition == CCSGridChartAxisPositionLeft) {
+    if (self.axisYPosition == CCSGridChartAxisYPositionLeft) {
         float length = rect.size.width - self.axisMarginLeft - 2 * self.axisMarginRight;
         float valueLength = self.singleTouchPoint.x - self.axisMarginLeft - self.axisMarginRight;
 
@@ -795,7 +795,7 @@
 }
 
 - (CGFloat)touchPointAxisYValue:(CGRect)rect {
-    if (self.axisXPosition == CCSGridChartAxisPositionBottom) {
+    if (self.axisXPosition == CCSGridChartAxisXPositionBottom) {
         float length = rect.size.height - self.axisMarginBottom - 2 * self.axisMarginTop;
         float valueLength = length - self.singleTouchPoint.y + self.axisMarginTop;
 

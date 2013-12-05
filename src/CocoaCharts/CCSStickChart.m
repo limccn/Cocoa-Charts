@@ -62,79 +62,85 @@
     [super dealloc];
 }
 
-- (void)calcValueRange {
-    if (self.stickData != NULL && [self.stickData count] > 0) {
-
-        double maxValue = 0;
-        double minValue = NSIntegerMax;
-
-        CCSStickChartData *first = [self.stickData objectAtIndex:0];
-        //第一个stick为停盘的情况
-        if (first.high == 0 && first.low == 0) {
-
-        } else {
-            maxValue = first.high;
-            minValue = first.low;
+- (void) calcDataValueRange {
+    double maxValue = 0;
+    double minValue = NSIntegerMax;
+    
+    CCSStickChartData *first = [self.stickData objectAtIndex:0];
+    //第一个stick为停盘的情况
+    if (first.high == 0 && first.low == 0) {
+        
+    } else {
+        maxValue = first.high;
+        minValue = first.low;
+    }
+    
+    //判断显示为方柱或显示为线条
+    for (NSUInteger i = 0; i < [self.stickData count]; i++) {
+        CCSStickChartData *stick = [self.stickData objectAtIndex:i];
+        if (stick.low < minValue) {
+            minValue = stick.low;
         }
-
-        //判断显示为方柱或显示为线条
-        for (NSUInteger i = 0; i < [self.stickData count]; i++) {
-            CCSStickChartData *stick = [self.stickData objectAtIndex:i];
-            if (stick.low < minValue) {
-                minValue = stick.low;
-            }
-
-            if (stick.high > maxValue) {
-                maxValue = stick.high;
-            }
-
+        
+        if (stick.high > maxValue) {
+            maxValue = stick.high;
         }
+        
+    }
+    
+    self.maxValue = maxValue;
+    self.minValue = minValue;
+}
 
-        if ((long) maxValue > (long) minValue) {
-            if ((maxValue - minValue) < 10 && minValue > 1) {
-                self.maxValue = (long) (maxValue + 1);
-                self.minValue = (long) (minValue - 1);
-            } else {
-                self.maxValue = (long) (maxValue + (maxValue - minValue) * 0.1);
-                self.minValue = (long) (minValue - (maxValue - minValue) * 0.1);
-                if (self.minValue < 0) {
-                    self.minValue = 0;
-                }
-            }
-        } else if ((long) maxValue == (long) minValue) {
-            if (maxValue <= 10 && maxValue > 1) {
-                self.maxValue = maxValue + 1;
-                self.minValue = minValue - 1;
-            } else if (maxValue <= 100 && maxValue > 10) {
-                self.maxValue = maxValue + 10;
-                self.minValue = minValue - 10;
-            } else if (maxValue <= 1000 && maxValue > 100) {
-                self.maxValue = maxValue + 100;
-                self.minValue = minValue - 100;
-            } else if (maxValue <= 10000 && maxValue > 1000) {
-                self.maxValue = maxValue + 1000;
-                self.minValue = minValue - 1000;
-            } else if (maxValue <= 100000 && maxValue > 10000) {
-                self.maxValue = maxValue + 10000;
-                self.minValue = minValue - 10000;
-            } else if (maxValue <= 1000000 && maxValue > 100000) {
-                self.maxValue = maxValue + 100000;
-                self.minValue = minValue - 100000;
-            } else if (maxValue <= 10000000 && maxValue > 1000000) {
-                self.maxValue = maxValue + 1000000;
-                self.minValue = minValue - 1000000;
-            } else if (maxValue <= 100000000 && maxValue > 10000000) {
-                self.maxValue = maxValue + 10000000;
-                self.minValue = minValue - 10000000;
-            }
+- (void) calcValueRangePaddingZero {
+    
+    double maxValue = self.maxValue;
+    double minValue = self.minValue;
+    
+    if ((long) maxValue > (long) minValue) {
+        if ((maxValue - minValue) < 10 && minValue > 1) {
+            self.maxValue = (long) (maxValue + 1);
+            self.minValue = (long) (minValue - 1);
         } else {
-            self.maxValue = 0;
-            self.minValue = 0;
+            self.maxValue = (long) (maxValue + (maxValue - minValue) * 0.1);
+            self.minValue = (long) (minValue - (maxValue - minValue) * 0.1);
+            if (self.minValue < 0) {
+                self.minValue = 0;
+            }
+        }
+    } else if ((long) maxValue == (long) minValue) {
+        if (maxValue <= 10 && maxValue > 1) {
+            self.maxValue = maxValue + 1;
+            self.minValue = minValue - 1;
+        } else if (maxValue <= 100 && maxValue > 10) {
+            self.maxValue = maxValue + 10;
+            self.minValue = minValue - 10;
+        } else if (maxValue <= 1000 && maxValue > 100) {
+            self.maxValue = maxValue + 100;
+            self.minValue = minValue - 100;
+        } else if (maxValue <= 10000 && maxValue > 1000) {
+            self.maxValue = maxValue + 1000;
+            self.minValue = minValue - 1000;
+        } else if (maxValue <= 100000 && maxValue > 10000) {
+            self.maxValue = maxValue + 10000;
+            self.minValue = minValue - 10000;
+        } else if (maxValue <= 1000000 && maxValue > 100000) {
+            self.maxValue = maxValue + 100000;
+            self.minValue = minValue - 100000;
+        } else if (maxValue <= 10000000 && maxValue > 1000000) {
+            self.maxValue = maxValue + 1000000;
+            self.minValue = minValue - 1000000;
+        } else if (maxValue <= 100000000 && maxValue > 10000000) {
+            self.maxValue = maxValue + 10000000;
+            self.minValue = minValue - 10000000;
         }
     } else {
         self.maxValue = 0;
         self.minValue = 0;
     }
+}
+
+- (void) calcValueRangeFormatForAxis {
     //修正最大值和最小值
     long rate = (self.maxValue - self.minValue) / (self.latitudeNum);
     NSString *strRate = [NSString stringWithFormat:@"%ld", rate];
@@ -155,12 +161,29 @@
     }
 }
 
+- (void)calcValueRange {
+    if (self.stickData != NULL && [self.stickData count] > 0) {
+
+        //计算数据的真实范围
+        [self calcDataValueRange];
+        
+        //计算数据的真实范围
+        [self calcValueRangePaddingZero];
+
+    } else {
+        self.maxValue = 0;
+        self.minValue = 0;
+    }
+    
+    [self calcValueRangeFormatForAxis];
+}
+
 - (void)initAxisY {
     NSMutableArray *TitleY = [[[NSMutableArray alloc] init] autorelease];
     if (self.stickData != NULL && [self.stickData count] > 0) {
         float average = self.maxSticksNum / self.longitudeNum;
         CCSStickChartData *chartdata = nil;
-        if (self.axisYPosition == CCSGridChartAxisPositionLeft) {
+        if (self.axisYPosition == CCSGridChartAxisYPositionLeft) {
             //处理刻度
             for (NSUInteger i = 0; i < self.longitudeNum; i++) {
                 NSUInteger index = (NSUInteger) floor(i * average);
@@ -252,7 +275,7 @@
 
     if (self.stickData != NULL && [self.stickData count] > 0) {
 
-        if (self.axisYPosition == CCSGridChartAxisPositionLeft) {
+        if (self.axisYPosition == CCSGridChartAxisYPositionLeft) {
             // 蜡烛棒起始绘制位置
             float stickX = self.axisMarginLeft + 1;
             //判断显示为方柱或显示为线条
@@ -318,7 +341,7 @@
     float value = [self touchPointAxisXValue:rect];
     NSString *result = @"";
     if (self.stickData != NULL && [self.stickData count] > 0) {
-        if (self.axisYPosition == CCSGridChartAxisPositionLeft) {
+        if (self.axisYPosition == CCSGridChartAxisYPositionLeft) {
             if (value >= 1) {
                 result = ((CCSStickChartData *) [self.stickData objectAtIndex:self.maxSticksNum]).date;
             } else if (value <= 0) {
@@ -390,7 +413,7 @@
 
 - (void)calcSelectedIndex {
     //X在系统范围内、进行计算
-    if (self.axisYPosition == CCSGridChartAxisPositionLeft) {
+    if (self.axisYPosition == CCSGridChartAxisYPositionLeft) {
         if (self.singleTouchPoint.x > self.axisMarginLeft
                 && self.singleTouchPoint.x < self.frame.size.width) {
             float stickWidth = ((self.frame.size.width - self.axisMarginLeft - self.axisMarginRight) / self.maxSticksNum);

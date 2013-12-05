@@ -36,7 +36,7 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     
-    CCSGridChart *gridchart =[[[CCSGridChart alloc] initWithFrame:CGRectMake(0, 80, 320, 200)] autorelease];
+    CCSGridChart *gridchart =[[[CCSGridChart alloc] initWithFrame:CGRectMake(0, MARGIN_TOP, 320, 320)] autorelease];
     
     gridchart.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth;
     

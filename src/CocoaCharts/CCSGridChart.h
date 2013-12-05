@@ -29,10 +29,10 @@
  X轴、Y轴在画面种的表示位置
  */
 typedef enum {
-    CCSGridChartAxisPositionLeft,               //Axis Y left
-    CCSGridChartAxisPositionRight,              //Axis Y right
-    CCSGridChartAxisPositionTop,                //Axis X top
-    CCSGridChartAxisPositionBottom              //Axis X bottom
+    CCSGridChartAxisYPositionLeft,               //Axis Y left
+    CCSGridChartAxisYPositionRight,              //Axis Y right
+    CCSGridChartAxisXPositionTop,                //Axis X top
+    CCSGridChartAxisXPositionBottom              //Axis X bottom
 } CCSGridChartAxisPosition;
 
 

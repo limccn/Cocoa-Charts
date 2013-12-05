@@ -23,7 +23,11 @@
 #import "CCSStackedAreaChartViewController.h"
 #import "CCSBandAreaChartViewController.h"
 #import "CCSRadarChartViewController.h"
-
+#import "CCSSlipStickChartViewController.h"
+#import "CCSColoredStickChartViewController.h"
+#import "CCSSlipCandleStickChartViewController.h"
+#import "CCSMASlipCandleStickChartViewController.h"
+#import "CCSBOLLMASlipCandleStickChartViewController.h"
 
 @interface CCSViewController ()
 
@@ -53,7 +57,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 15;
+    return 20;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -131,6 +135,26 @@
     else if (CCSChartTypeRadarChart == row)
     {
         cell.textLabel.text = @"RadarChart";
+    }
+    else if (CCSChartTypeSlipStickChart == row)
+    {
+        cell.textLabel.text = @"SlipStickChart";
+    }
+    else if (CCSChartTypeColoredSlipStickChart == row)
+    {
+        cell.textLabel.text = @"ColoredSlipStickChart";
+    }
+    else if (CCSChartTypeSlipCandleStickChart == row)
+    {
+        cell.textLabel.text = @"SlipCandleStickChart";
+    }
+    else if (CCSChartTypeMASlipCandleStickChart == row)
+    {
+        cell.textLabel.text = @"MASlipCandleStickChart";
+    }
+    else if (CCSChartTypeBOLLMASlipCandleStickChart == row)
+    {
+        cell.textLabel.text = @"BOLLMASlipCandleStickChart";
     }
     else
     {
@@ -224,10 +248,36 @@
         CCSRadarChartViewController *radarChartViewController = [[[CCSRadarChartViewController alloc]init]autorelease];
         [appDelegate.viewController pushViewController:radarChartViewController animated:YES];
     }
+    else if (CCSChartTypeSlipStickChart == row)
+    {
+        CCSSlipStickChartViewController *slipStickChartViewController = [[[CCSSlipStickChartViewController alloc]init]autorelease];
+        [appDelegate.viewController pushViewController:slipStickChartViewController animated:YES];
+    }
+    else if (CCSChartTypeColoredSlipStickChart == row)
+    {
+        CCSColoredStickChartViewController *coloredStickChartViewController = [[[CCSColoredStickChartViewController alloc]init]autorelease];
+        [appDelegate.viewController pushViewController:coloredStickChartViewController animated:YES];
+    }
+    else if (CCSChartTypeSlipCandleStickChart == row)
+    {
+        CCSSlipCandleStickChartViewController *slipCandleStickChartViewController = [[[CCSSlipCandleStickChartViewController alloc]init]autorelease];
+        [appDelegate.viewController pushViewController:slipCandleStickChartViewController animated:YES];
+    }
+    else if (CCSChartTypeMASlipCandleStickChart == row)
+    {
+        CCSMASlipCandleStickChartViewController *mASlipCandleStickChartViewController = [[[CCSMASlipCandleStickChartViewController alloc]init]autorelease];
+        [appDelegate.viewController pushViewController:mASlipCandleStickChartViewController animated:YES];
+    }
+    else if (CCSChartTypeBOLLMASlipCandleStickChart == row)
+    {
+        CCSBOLLMASlipCandleStickChartViewController *bOLLMASlipCandleStickChartViewController = [[[CCSBOLLMASlipCandleStickChartViewController alloc]init]autorelease];
+        [appDelegate.viewController pushViewController:bOLLMASlipCandleStickChartViewController animated:YES];
+    }
     else
     {
         
     }
 }
+
 
 @end

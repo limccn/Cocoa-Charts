@@ -1,20 +1,20 @@
 //
-//  CCSStickChartViewController.m
-//  Cocoa-Charts
+//  CCSSlipStickChartViewController.m
+//  CocoaChartsSample
 //
-//  Created by limc on 13-05-22.
-//  Copyright (c) 2012 limc.cn All rights reserved.
+//  Created by limc on 12/3/13.
+//  Copyright (c) 2013 limc. All rights reserved.
 //
 
-#import "CCSStickChartViewController.h"
+#import "CCSSlipStickChartViewController.h"
 #import "CCSStickChartData.h"
-#import "CCSStickChart.h"
+#import "CCSSlipStickChart.h"
 
-@interface CCSStickChartViewController ()
+@interface CCSSlipStickChartViewController ()
 
 @end
 
-@implementation CCSStickChartViewController
+@implementation CCSSlipStickChartViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -29,7 +29,7 @@
 {
     [super viewWillAppear:animated];
     
-    self.title = @"Stick Chart";
+    self.title = @"Slip Stick Chart";
 }
 
 - (void)viewDidLoad
@@ -130,7 +130,7 @@
     [stickData addObject: [[[CCSStickChartData alloc] initWithHigh:193016 low:0 date: @"1/29"] autorelease]];
     [stickData addObject: [[[CCSStickChartData alloc] initWithHigh:107695 low:0 date: @"1/30"] autorelease]];
     
-    CCSStickChart *stickchart =[[[CCSStickChart alloc] initWithFrame:CGRectMake(0, MARGIN_TOP, 320, 320)]autorelease];
+    CCSSlipStickChart *stickchart =[[[CCSSlipStickChart alloc] initWithFrame:CGRectMake(0, MARGIN_TOP, 320, 320)]autorelease];
     
     stickchart.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth;
     
@@ -154,5 +154,6 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 
 @end
