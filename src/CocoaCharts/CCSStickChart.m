@@ -62,41 +62,41 @@
     [super dealloc];
 }
 
-- (void) calcDataValueRange {
+- (void)calcDataValueRange {
     double maxValue = 0;
     double minValue = NSIntegerMax;
-    
+
     CCSStickChartData *first = [self.stickData objectAtIndex:0];
     //第一个stick为停盘的情况
     if (first.high == 0 && first.low == 0) {
-        
+
     } else {
         maxValue = first.high;
         minValue = first.low;
     }
-    
+
     //判断显示为方柱或显示为线条
     for (NSUInteger i = 0; i < [self.stickData count]; i++) {
         CCSStickChartData *stick = [self.stickData objectAtIndex:i];
         if (stick.low < minValue) {
             minValue = stick.low;
         }
-        
+
         if (stick.high > maxValue) {
             maxValue = stick.high;
         }
-        
+
     }
-    
+
     self.maxValue = maxValue;
     self.minValue = minValue;
 }
 
-- (void) calcValueRangePaddingZero {
-    
+- (void)calcValueRangePaddingZero {
+
     double maxValue = self.maxValue;
     double minValue = self.minValue;
-    
+
     if ((long) maxValue > (long) minValue) {
         if ((maxValue - minValue) < 10 && minValue > 1) {
             self.maxValue = (long) (maxValue + 1);
@@ -140,7 +140,7 @@
     }
 }
 
-- (void) calcValueRangeFormatForAxis {
+- (void)calcValueRangeFormatForAxis {
     //修正最大值和最小值
     long rate = (self.maxValue - self.minValue) / (self.latitudeNum);
     NSString *strRate = [NSString stringWithFormat:@"%ld", rate];
@@ -166,7 +166,7 @@
 
         //计算数据的真实范围
         [self calcDataValueRange];
-        
+
         //计算数据的真实范围
         [self calcValueRangePaddingZero];
 
@@ -174,7 +174,7 @@
         self.maxValue = 0;
         self.minValue = 0;
     }
-    
+
     [self calcValueRangeFormatForAxis];
 }
 

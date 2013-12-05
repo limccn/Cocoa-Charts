@@ -48,7 +48,7 @@ typedef enum {
     UIColor *_negativeStickBorderColor;
     UIColor *_negativeStickFillColor;
     UIColor *_crossStarColor;
-    
+
     NSInteger _candleStickStyle;
 }
 

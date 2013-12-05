@@ -17,6 +17,7 @@
 @property(retain, nonatomic) UIColor *borderColor;
 
 - (id)initWithHigh:(float)high low:(float)low date:(NSString *)date color:(UIColor *)color;
+
 - (id)initWithHigh:(float)high low:(float)low date:(NSString *)date fill:(UIColor *)fill border:(UIColor *)border;
 
 @end

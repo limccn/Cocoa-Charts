@@ -829,7 +829,6 @@ float _minDistance = 8;
         CGPoint pt2 = [[allTouches objectAtIndex:1] locationInView:self];
 
         _startDistance = fabsf(pt1.x - pt2.x);
-        NSLog(@"Start Distance:%f", _startDistance);
     } else {
 
     }

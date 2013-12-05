@@ -170,9 +170,12 @@
  */
 - (void)setSelectedPointAddReDraw:(CGPoint)point;
 
-- (void) calcDataValueRange;
-- (void) calcValueRangePaddingZero;
-- (void) calcValueRangeFormatForAxis;
-- (void) calcValueRange;
+- (void)calcDataValueRange;
+
+- (void)calcValueRangePaddingZero;
+
+- (void)calcValueRangeFormatForAxis;
+
+- (void)calcValueRange;
 
 @end

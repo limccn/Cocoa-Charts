@@ -43,13 +43,13 @@ typedef enum {
  CCSMACandleStickChart。
  */
 
-@interface CCSSlipCandleStickChart : CCSSlipStickChart{
+@interface CCSSlipCandleStickChart : CCSSlipStickChart {
     UIColor *_positiveStickBorderColor;
     UIColor *_positiveStickFillColor;
     UIColor *_negativeStickBorderColor;
     UIColor *_negativeStickFillColor;
     UIColor *_crossStarColor;
-    
+
     NSInteger _candleStickStyle;
 }
 

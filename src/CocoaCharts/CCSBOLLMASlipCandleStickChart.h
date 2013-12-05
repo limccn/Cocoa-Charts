@@ -10,7 +10,7 @@
 
 @interface CCSBOLLMASlipCandleStickChart : CCSMASlipCandleStickChart {
     NSArray *_bollingerBandData;
-    
+
     CGFloat _areaAlpha;
     BOOL _displayBollingerBand;
 }

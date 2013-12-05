@@ -15,7 +15,7 @@
 @synthesize linesData = _linesData;
 
 - (void)initProperty {
-    
+
     [super initProperty];
     //初始化颜色
     self.linesData = nil;
@@ -33,7 +33,7 @@
 - (void)drawData:(CGRect)rect {
     //调用父类的绘制方法
     [super drawData:rect];
-    
+
     //在K线图上增加均线
     [self drawLinesData:rect];
 }
@@ -43,10 +43,10 @@
     float lineLength;
     // 起始位置
     float startX;
-    
+
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSetLineWidth(context, 1.0f);
-    
+
     if (self.linesData != NULL) {
         //逐条输出MA线
         for (NSUInteger i = 0; i < [self.linesData count]; i++) {
@@ -57,7 +57,7 @@
                 //获取线条数据
                 NSArray *lineDatas = line.data;
                 if ([line.data count] > 0) {
-                    
+
                     //判断Y轴的位置设置从左往右还是从右往左绘制
                     if (self.axisYPosition == CCSGridChartAxisYPositionLeft) {
                         // 点线距离
@@ -80,7 +80,7 @@
                                     CGContextAddLineToPoint(context, startX, valueY);
                                 }
                             }
-                            
+
                             //X位移
                             startX = startX + 1 + lineLength;
                         }
@@ -90,7 +90,7 @@
                         //起始点
                         startX = rect.size.width - self.axisMarginRight - lineLength / 2;
                         //遍历并绘制线条
-                        for (NSUInteger j = 0 ; j < self.displayNumber; j++) {
+                        for (NSUInteger j = 0; j < self.displayNumber; j++) {
                             NSUInteger index = self.displayFrom + self.displayNumber - 1 - j;
                             CCSLineData *lineData = [lineDatas objectAtIndex:index];
                             //获取终点Y坐标
@@ -112,7 +112,7 @@
                         }
                     }
                 }
-                
+
                 //绘制路径
                 CGContextStrokePath(context);
             }

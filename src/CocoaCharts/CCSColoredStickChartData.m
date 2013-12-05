@@ -16,14 +16,14 @@
 - (id)init {
     self = [super init];
     if (self) {
-        
+
     }
     return self;
 }
 
-- (id)initWithHigh:(float)high low:(float)low date:(NSString *)date color:(UIColor *)color{
+- (id)initWithHigh:(float)high low:(float)low date:(NSString *)date color:(UIColor *)color {
     self = [self init];
-    
+
     if (self) {
         self.high = high;
         self.low = low;
@@ -34,9 +34,9 @@
     return self;
 }
 
-- (id)initWithHigh:(float)high low:(float)low date:(NSString *)date fill:(UIColor *)fill border:(UIColor *)border{
+- (id)initWithHigh:(float)high low:(float)low date:(NSString *)date fill:(UIColor *)fill border:(UIColor *)border {
     self = [self init];
-    
+
     if (self) {
         self.high = high;
         self.low = low;

@@ -23,9 +23,9 @@ typedef enum {
 
 
 @interface CCSMACDChart : CCSMAStickChart {
-    
+
     NSInteger _macdDisplayType;
-    
+
     UIColor *_positiveStickColor;
     UIColor *_negativeStickColor;
     UIColor *_macdLineColor;

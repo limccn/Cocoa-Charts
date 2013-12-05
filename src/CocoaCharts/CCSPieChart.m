@@ -151,7 +151,7 @@
                 //调整X轴坐标位置
                 [title drawInRect:CGRectMake(offsetX, offsetY, 100, 11)
                          withFont:font
-                    lineBreakMode:NSLineBreakByWordWrapping 
+                    lineBreakMode:NSLineBreakByWordWrapping
                         alignment:NSTextAlignmentLeft];
 
                 //调整X轴坐标位置
