@@ -71,7 +71,7 @@
                 }
 
                 //X位移
-                stickX = stickX + 3 + stickWidth;
+                stickX = stickX + 1 + stickWidth;
             }
         } else {
             // 蜡烛棒起始绘制位置
@@ -108,7 +108,7 @@
                     }
                 }
                 //X位移
-                stickX = stickX - 3 - stickWidth;
+                stickX = stickX - 1 - stickWidth;
             }
         }
 

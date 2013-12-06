@@ -182,8 +182,7 @@
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    //调用父类的触摸事件
-    //[super touchesBegan:touches withEvent:event];
+
 
     NSArray *allTouches = [touches allObjects];
     //处理点击事件
@@ -220,11 +219,13 @@
     } else {
 
     }
+    
+    //调用父类的触摸事件
+    [super touchesBegan:touches withEvent:event];
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
-    //调用父类的触摸事件
-    [super touchesMoved:touches withEvent:event];
+
 
     NSArray *allTouches = [touches allObjects];
     //处理点击事件
@@ -283,6 +284,9 @@
     } else {
 
     }
+    
+    //调用父类的触摸事件
+    [super touchesMoved:touches withEvent:event];
 
 }
 
@@ -371,6 +375,42 @@
         }
 
     }
+}
+
+- (void)calcSelectedIndex {
+    //X在系统范围内、进行计算
+    if (self.axisYPosition == CCSGridChartAxisYPositionLeft) {
+        if (self.singleTouchPoint.x > self.axisMarginLeft
+            && self.singleTouchPoint.x < self.frame.size.width) {
+            float stickWidth = ((self.frame.size.width - self.axisMarginLeft - self.axisMarginRight) / self.displayNumber);
+            float valueWidth = self.singleTouchPoint.x - self.axisMarginLeft;
+            if (valueWidth > 0) {
+                NSUInteger index = (NSUInteger) (valueWidth / stickWidth);
+                //如果超过则设置位最大
+                if (index >= self.displayNumber) {
+                    index = self.displayNumber - 1;
+                }
+                //设置选中的index
+                self.selectedStickIndex = self.displayFrom + index;
+            }
+        }
+    } else {
+        if (self.singleTouchPoint.x > self.axisMarginLeft
+            && self.singleTouchPoint.x < self.frame.size.width - self.axisMarginRight) {
+            float stickWidth = 1.0 * ((self.frame.size.width - self.axisMarginLeft - self.axisMarginRight) / self.displayNumber);
+            float valueWidth = self.singleTouchPoint.x - self.axisMarginLeft;
+            if (valueWidth > 0) {
+                NSUInteger index = (NSUInteger) (valueWidth / stickWidth);
+                //如果超过则设置位最大
+                if (index >= self.displayNumber) {
+                    index = self.displayNumber - 1;
+                }
+                //设置选中的index
+                self.selectedStickIndex = self.displayFrom + index;
+            }
+        }
+    }
+    
 }
 
 - (void)zoomOut {
