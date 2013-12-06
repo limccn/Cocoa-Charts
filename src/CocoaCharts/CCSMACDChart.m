@@ -59,12 +59,12 @@
         double maxValue = 0;
         double minValue = 0;
 
-        CCSMACDData *first = [self.stickData objectAtIndex:0];
+        CCSMACDData *first = [self.stickData objectAtIndex:self.displayFrom];
         maxValue = MAX(first.dea, MAX(first.diff, first.macd));
         minValue = MIN(first.dea, MIN(first.diff, first.macd));
 
         //判断显示为方柱或显示为线条
-        for (NSUInteger i = 0; i < [self.stickData count]; i++) {
+        for (NSUInteger i = self.displayFrom; i < self.displayFrom + self.displayNumber; i++) {
             CCSMACDData *stick = [self.stickData objectAtIndex:i];
             maxValue = MAX(maxValue, MAX(stick.dea, MAX(stick.diff, stick.macd)));
             minValue = MIN(minValue, MIN(stick.dea, MIN(stick.diff, stick.macd)));
@@ -81,7 +81,7 @@
 
 - (void)drawData:(CGRect)rect {
     // 蜡烛棒宽度
-    float stickWidth = ((rect.size.width - self.axisMarginLeft - self.axisMarginRight) / self.maxSticksNum) - 1;
+    float stickWidth = ((rect.size.width - self.axisMarginLeft - self.axisMarginRight) / self.displayNumber) - 1;
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSetLineWidth(context, 1.0f);
 
@@ -91,7 +91,7 @@
             // 蜡烛棒起始绘制位置
             float stickX = self.axisMarginLeft + 1;
             //判断显示为方柱或显示为线条
-            for (NSUInteger i = 0; i < [self.stickData count]; i++) {
+            for (NSUInteger i = self.displayFrom; i < self.displayFrom + self.displayNumber; i++) {
                 CCSMACDData *stick = [self.stickData objectAtIndex:i];
 
                 float highY = ((1 - (stick.macd - self.minValue) / (self.maxValue - self.minValue)) * (rect.size.height - self.axisMarginBottom) - super.axisMarginTop);
@@ -129,9 +129,9 @@
                         CGContextStrokePath(context);
                     } else {
                         //绘制线条
-                        if (i == 0) {
+                        if (i == self.displayFrom) {
                             CGContextMoveToPoint(context, stickX + stickWidth / 2, highY);
-                        } else if (i == [self.stickData count] - 1) {
+                        } else if (i == self.displayFrom + self.displayNumber - 1) {
                             CGContextAddLineToPoint(context, stickX + stickWidth / 2, highY);
                             CGContextSetStrokeColorWithColor(context, self.macdLineColor.CGColor);
                             CGContextStrokePath(context);
@@ -148,8 +148,9 @@
             // 蜡烛棒起始绘制位置
             float stickX = rect.size.width - self.axisMarginRight - 1 - stickWidth;
             //判断显示为方柱或显示为线条
-            for (NSInteger i = [self.stickData count] - 1; i >= 0; i--) {
-                CCSMACDData *stick = [self.stickData objectAtIndex:i];
+            for (NSUInteger i = 0; i < self.displayNumber; i++) {
+                NSUInteger index = self.displayFrom + self.displayNumber - 1 - i;
+                CCSMACDData *stick = [self.stickData objectAtIndex:index];
 
                 float highY = ((1 - (stick.macd - self.minValue) / (self.maxValue - self.minValue)) * (rect.size.height - self.axisMarginBottom) - super.axisMarginTop);
                 float lowY = ((1 - (0 - self.minValue) / (self.maxValue - self.minValue)) * (rect.size.height - self.axisMarginBottom) - self.axisMarginTop);
@@ -186,9 +187,9 @@
                         CGContextStrokePath(context);
                     } else {
                         //绘制线条
-                        if (i == [self.stickData count] - 1) {
+                        if (index == self.displayFrom + self.displayNumber - 1) {
                             CGContextMoveToPoint(context, stickX - stickWidth / 2, highY);
-                        } else if (i == 0) {
+                        } else if (index == 0) {
                             CGContextAddLineToPoint(context, stickX - stickWidth / 2, highY);
                             CGContextSetStrokeColorWithColor(context, self.macdLineColor.CGColor);
                             CGContextStrokePath(context);
@@ -223,7 +224,7 @@
         //设置线条颜色
         CGContextSetStrokeColorWithColor(context, self.deaLineColor.CGColor);
         // 点线距离
-        float lineLength = ((rect.size.width - self.axisMarginLeft - self.axisMarginRight) / self.maxSticksNum);
+        float lineLength = ((rect.size.width - self.axisMarginLeft - self.axisMarginRight) / self.displayNumber);
 
         //起始点
         startX = self.axisMarginLeft + 1;
@@ -243,15 +244,15 @@
 
         } else {
             //遍历并绘制线条
-            for (NSInteger j = 0; j < [self.stickData count]; j++) {
+            for (NSInteger j = self.displayFrom; j < self.displayFrom + self.displayNumber; j++) {
                 CCSMACDData *lineData = [self.stickData objectAtIndex:j];
 
                 float valueY = ((1 - (lineData.dea - self.minValue) / (self.maxValue - self.minValue)) * (rect.size.height - self.axisMarginBottom) - super.axisMarginTop);
                 //绘制线条路径
-                if (j == 0) {
+                if (j == self.displayFrom) {
                     CGContextMoveToPoint(context, startX, valueY);
                     lastY = valueY;
-                } else if (j == [self.stickData count] - 1) {
+                } else if (j == self.displayFrom + self.displayNumber - 1) {
                     if (lineData.dea == 0) {
                         CGContextAddLineToPoint(context, rect.size.width - self.axisMarginRight, lastY);
                     } else {
@@ -296,15 +297,15 @@
 
         } else {
             //遍历并绘制线条
-            for (NSInteger j = 0; j < [self.stickData count]; j++) {
+            for (NSInteger j = self.displayFrom; j < self.displayFrom + self.displayNumber; j++) {
                 CCSMACDData *lineData = [self.stickData objectAtIndex:j];
 
                 float valueY = ((1 - (lineData.diff - self.minValue) / (self.maxValue - self.minValue)) * (rect.size.height - self.axisMarginBottom) - super.axisMarginTop);
                 //绘制线条路径
-                if (j == 0) {
+                if (j == self.displayFrom) {
                     CGContextMoveToPoint(context, startX, valueY);
                     lastY = valueY;
-                } else if (j == [self.stickData count] - 1) {
+                } else if (j == self.displayFrom + self.displayNumber - 1) {
                     if (lineData.dea == 0) {
                         CGContextAddLineToPoint(context, rect.size.width - self.axisMarginRight, lastY);
                     } else {

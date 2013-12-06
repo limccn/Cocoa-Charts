@@ -148,6 +148,39 @@
     self.axisXTitles = TitleX;
 }
 
+- (NSString *)calcAxisXGraduate:(CGRect)rect {
+    float value = [self touchPointAxisXValue:rect];
+    NSString *result = @"";
+    if (self.stickData != NULL && [self.stickData count] > 0) {
+        if (self.axisYPosition == CCSGridChartAxisYPositionLeft) {
+            if (value >= 1) {
+                result = ((CCSStickChartData *) [self.stickData objectAtIndex:self.displayFrom + self.displayNumber - 1]).date;
+            } else if (value <= 0) {
+                result = ((CCSStickChartData *) [self.stickData objectAtIndex:self.displayFrom]).date;
+            } else {
+                NSUInteger index = self.displayFrom + (NSUInteger) (self.displayNumber * value);
+                if (index > self.displayFrom + self.displayNumber - 1) {
+                    index = self.displayFrom + self.displayNumber - 1;
+                }
+                result = ((CCSStickChartData *) [self.stickData objectAtIndex:index]).date;
+            }
+        } else {
+            if (value >= 1) {
+                result = ((CCSStickChartData *) [self.stickData objectAtIndex:self.displayFrom + self.displayNumber - 1]).date;
+            } else if (value <= 0) {
+                result = ((CCSStickChartData *) [self.stickData objectAtIndex:self.displayFrom]).date;
+            } else {
+                NSUInteger index = self.displayFrom + (NSUInteger) (self.displayNumber * value);
+                if (index > self.displayFrom + self.displayNumber - 1) {
+                    index = self.displayFrom + self.displayNumber - 1;
+                }
+                result = ((CCSStickChartData *) [self.stickData objectAtIndex:index]).date;
+            }
+        }
+    }
+    return result;
+}
+
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     //调用父类的触摸事件
     //[super touchesBegan:touches withEvent:event];
@@ -201,11 +234,11 @@
             float stickWidth = ((self.frame.size.width - self.axisMarginLeft - self.axisMarginRight) / self.displayNumber) - 1;
 
             if (pt1.x - _firstX > stickWidth) {
-                if (self.displayFrom > 1) {
+                if (self.displayFrom > 2) {
                     self.displayFrom = self.displayFrom - 2;
                 }
             } else if (pt1.x - _firstX < -stickWidth) {
-                if (self.displayFrom < [self.stickData count] - 2 - self.displayNumber) {
+                if (self.displayFrom + self.displayNumber + 2 < [self.stickData count]) {
                     self.displayFrom = self.displayFrom + 2;
                 }
             }
@@ -214,7 +247,7 @@
 
             [self setNeedsDisplay];
             //设置可滚动
-            [self performSelector:@selector(setNeedsDisplay) withObject:nil afterDelay:0];
+            //[self performSelector:@selector(setNeedsDisplay) withObject:nil afterDelay:0];
             
             if (self.coChart) {
                 ((CCSSlipStickChart *)self.coChart).displayFrom = self.displayFrom;
@@ -225,7 +258,8 @@
             //获取选中点
             self.singleTouchPoint = [[allTouches objectAtIndex:0] locationInView:self];
             //设置可滚动
-            [self performSelector:@selector(setNeedsDisplay) withObject:nil afterDelay:0];
+            //[self performSelector:@selector(setNeedsDisplay) withObject:nil afterDelay:0];
+            [self setNeedsDisplay];
         }
         //        }
     } else if ([allTouches count] == 2) {

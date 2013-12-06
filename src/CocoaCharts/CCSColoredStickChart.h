@@ -8,6 +8,16 @@
 
 #import "CCSSlipStickChart.h"
 
-@interface CCSColoredStickChart : CCSSlipStickChart
+typedef enum {
+    CCSColoredStickStyleNoBorder = 0,
+    CCSColoredStickStyleWithBorder = 1,
+} CCSColoredStickStyle;
+
+
+@interface CCSColoredStickChart : CCSSlipStickChart {
+    CCSColoredStickStyle _coloredStickStyle;
+}
+
+@property(assign, nonatomic) CCSColoredStickStyle coloredStickStyle;
 
 @end

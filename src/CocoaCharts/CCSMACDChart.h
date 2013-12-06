@@ -7,14 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "CCSMAStickChart.h"
+#import "CCSSlipStickChart.h"
 
-/*!
- @typedef enum CCSGridChartAxisPosition
- XY Axis' Display position in grid
- X軸、Y軸の表示位置
- X轴、Y轴在画面种的表示位置
- */
 typedef enum {
     CCSMACDChartDisplayTypeStick,
     CCSMACDChartDisplayTypeLineStick,
@@ -22,10 +16,9 @@ typedef enum {
 } CCSMACDChartDisplayType;
 
 
-@interface CCSMACDChart : CCSMAStickChart {
-
-    NSInteger _macdDisplayType;
-
+@interface CCSMACDChart : CCSSlipStickChart {
+    CCSMACDChartDisplayType _macdDisplayType;
+    
     UIColor *_positiveStickColor;
     UIColor *_negativeStickColor;
     UIColor *_macdLineColor;
@@ -33,7 +26,9 @@ typedef enum {
     UIColor *_deaLineColor;
 }
 
-@property(assign, nonatomic) NSInteger macdDisplayType;
+@property(retain, nonatomic) NSArray *linesData;
+
+@property(assign, nonatomic) CCSMACDChartDisplayType macdDisplayType;
 
 @property(retain, nonatomic) UIColor *positiveStickColor;
 @property(retain, nonatomic) UIColor *negativeStickColor;

@@ -10,6 +10,7 @@
 #import "CCSColoredStickChartData.h"
 
 @implementation CCSColoredStickChart
+@synthesize coloredStickStyle = _coloredStickStyle;
 
 - (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
@@ -19,9 +20,15 @@
     return self;
 }
 
+- (void)initProperty {
+    //初始化父类的熟悉
+    [super initProperty];
+    self.coloredStickStyle = CCSColoredStickStyleNoBorder;
+}
+
 - (void)drawData:(CGRect)rect {
     // 蜡烛棒宽度
-    float stickWidth = ((rect.size.width - self.axisMarginLeft - self.axisMarginRight) / self.displayNumber) - 3;
+    float stickWidth = ((rect.size.width - self.axisMarginLeft - self.axisMarginRight) / self.displayNumber) - 1;
 
     CGContextRef context = UIGraphicsGetCurrentContext();
 
@@ -48,10 +55,11 @@
                         CGContextSetFillColorWithColor(context, stick.fillColor.CGColor);
                         //填充路径
                         CGContextFillPath(context);
-
-                        CGContextAddRect(context, CGRectMake(stickX, highY, stickWidth, lowY - highY));
-                        CGContextSetStrokeColorWithColor(context, stick.borderColor.CGColor);
-                        CGContextStrokePath(context);
+                        if (self.coloredStickStyle == CCSColoredStickStyleWithBorder) {
+                            CGContextAddRect(context, CGRectMake(stickX, highY, stickWidth, lowY - highY));
+                            CGContextSetStrokeColorWithColor(context, stick.borderColor.CGColor);
+                            CGContextStrokePath(context);
+                        }
                     } else {
                         CGContextMoveToPoint(context, stickX, highY);
                         CGContextAddLineToPoint(context, stickX, lowY);
@@ -86,9 +94,11 @@
                         CGContextSetFillColorWithColor(context, stick.fillColor.CGColor);
                         //填充路径
                         CGContextFillPath(context);
-                        CGContextAddRect(context, CGRectMake(stickX, highY, stickWidth, lowY - highY));
-                        CGContextSetStrokeColorWithColor(context, stick.borderColor.CGColor);
-                        CGContextStrokePath(context);
+                        if (self.coloredStickStyle == CCSColoredStickStyleWithBorder) {
+                            CGContextAddRect(context, CGRectMake(stickX, highY, stickWidth, lowY - highY));
+                            CGContextSetStrokeColorWithColor(context, stick.borderColor.CGColor);
+                            CGContextStrokePath(context);
+                        }
                     } else {
                         CGContextMoveToPoint(context, stickX, highY);
                         CGContextAddLineToPoint(context, stickX, lowY);
