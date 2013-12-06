@@ -65,6 +65,8 @@
 		A69DD1A4174CCCCE0012B2A0 /* CCSTitleValues.m in Sources */ = {isa = PBXBuildFile; fileRef = A69DD190174CCCCE0012B2A0 /* CCSTitleValues.m */; };
 		A69DD1A5174CCCCE0012B2A0 /* CCSTitleValuesColor.m in Sources */ = {isa = PBXBuildFile; fileRef = A69DD192174CCCCE0012B2A0 /* CCSTitleValuesColor.m */; };
 		A69DD1A6174CCE130012B2A0 /* CocoaChartsSampleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A69DD13D174CCC6C0012B2A0 /* CocoaChartsSampleTests.m */; };
+		A6BB8040185167A8006858AB /* CCSSlipLineChart.m in Sources */ = {isa = PBXBuildFile; fileRef = A6BB803F185167A8006858AB /* CCSSlipLineChart.m */; };
+		A6BB804318516EF0006858AB /* CCSSlipLineChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6BB804218516EF0006858AB /* CCSSlipLineChartViewController.m */; };
 		A6BCD644184DD2F600DFAAF3 /* CCSBOLLMASlipCandleStickChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6BCD63B184DD2F600DFAAF3 /* CCSBOLLMASlipCandleStickChartViewController.m */; };
 		A6BCD645184DD2F600DFAAF3 /* CCSColoredStickChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6BCD63D184DD2F600DFAAF3 /* CCSColoredStickChartViewController.m */; };
 		A6BCD646184DD2F600DFAAF3 /* CCSMASlipCandleStickChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6BCD63F184DD2F600DFAAF3 /* CCSMASlipCandleStickChartViewController.m */; };
@@ -195,6 +197,10 @@
 		A69DD190174CCCCE0012B2A0 /* CCSTitleValues.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSTitleValues.m; sourceTree = "<group>"; };
 		A69DD191174CCCCE0012B2A0 /* CCSTitleValuesColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSTitleValuesColor.h; sourceTree = "<group>"; };
 		A69DD192174CCCCE0012B2A0 /* CCSTitleValuesColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSTitleValuesColor.m; sourceTree = "<group>"; };
+		A6BB803E185167A8006858AB /* CCSSlipLineChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSSlipLineChart.h; sourceTree = "<group>"; };
+		A6BB803F185167A8006858AB /* CCSSlipLineChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSSlipLineChart.m; sourceTree = "<group>"; };
+		A6BB804118516EF0006858AB /* CCSSlipLineChartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSSlipLineChartViewController.h; sourceTree = "<group>"; };
+		A6BB804218516EF0006858AB /* CCSSlipLineChartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSSlipLineChartViewController.m; sourceTree = "<group>"; };
 		A6BCD63A184DD2F600DFAAF3 /* CCSBOLLMASlipCandleStickChartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSBOLLMASlipCandleStickChartViewController.h; sourceTree = "<group>"; };
 		A6BCD63B184DD2F600DFAAF3 /* CCSBOLLMASlipCandleStickChartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSBOLLMASlipCandleStickChartViewController.m; sourceTree = "<group>"; };
 		A6BCD63C184DD2F600DFAAF3 /* CCSColoredStickChartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSColoredStickChartViewController.h; sourceTree = "<group>"; };
@@ -293,6 +299,8 @@
 				A69DD120174CCC6C0012B2A0 /* CCSGridChartViewController.m */,
 				A69DD121174CCC6C0012B2A0 /* CCSLineChartViewController.h */,
 				A69DD122174CCC6C0012B2A0 /* CCSLineChartViewController.m */,
+				A6BB804118516EF0006858AB /* CCSSlipLineChartViewController.h */,
+				A6BB804218516EF0006858AB /* CCSSlipLineChartViewController.m */,
 				A69DD123174CCC6C0012B2A0 /* CCSMACandleStickChartViewController.h */,
 				A69DD124174CCC6C0012B2A0 /* CCSMACandleStickChartViewController.m */,
 				A69DD125174CCC6C0012B2A0 /* CCSMAStickChartViewController.h */,
@@ -426,6 +434,8 @@
 				A66797CD1834C8FE005B0D43 /* CCSBandAreaChart.m */,
 				A68BD32F18337FA300D1F191 /* CCSRadarChart.h */,
 				A68BD33018337FA300D1F191 /* CCSRadarChart.m */,
+				A6BB803E185167A8006858AB /* CCSSlipLineChart.h */,
+				A6BB803F185167A8006858AB /* CCSSlipLineChart.m */,
 			);
 			name = CocoaCharts;
 			path = ../CocoaCharts;
@@ -552,12 +562,14 @@
 				A63AD44818320AF5007A0C07 /* CCSMACDChartViewController.m in Sources */,
 				A69DD159174CCC6C0012B2A0 /* CCSMAStickChartViewController.m in Sources */,
 				A6BCD644184DD2F600DFAAF3 /* CCSBOLLMASlipCandleStickChartViewController.m in Sources */,
+				A6BB804318516EF0006858AB /* CCSSlipLineChartViewController.m in Sources */,
 				A69DD15A174CCC6C0012B2A0 /* CCSPieChartViewController.m in Sources */,
 				A69DD15B174CCC6C0012B2A0 /* CCSPizzaChartViewController.m in Sources */,
 				A6BCD657184DD30700DFAAF3 /* CCSSlipCandleStickChart.m in Sources */,
 				A6BCD647184DD2F600DFAAF3 /* CCSSlipCandleStickChartViewController.m in Sources */,
 				A6BCD645184DD2F600DFAAF3 /* CCSColoredStickChartViewController.m in Sources */,
 				A69DD15C174CCC6C0012B2A0 /* CCSSpiderWebChartViewController.m in Sources */,
+				A6BB8040185167A8006858AB /* CCSSlipLineChart.m in Sources */,
 				A66797CB1834BE10005B0D43 /* CCSStackedAreaChartViewController.m in Sources */,
 				A69DD15D174CCC6C0012B2A0 /* CCSStickChartViewController.m in Sources */,
 				A66797CE1834C8FE005B0D43 /* CCSBandAreaChart.m in Sources */,
