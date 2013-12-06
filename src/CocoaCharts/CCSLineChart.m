@@ -51,79 +51,86 @@
     [super dealloc];
 }
 
-- (void)calcValueRange {
-    if (self.linesData != NULL && [self.linesData count] > 0) {
-        double maxValue = 0;
-        double minValue = NSIntegerMax;
-        //逐条输出MA线
-        for (NSUInteger i = 0; i < [self.linesData count]; i++) {
-            CCSTitledLine *line = [self.linesData objectAtIndex:i];
-            if (line != NULL && [line.data count] > 0) {
-                //判断显示为方柱或显示为线条
-                for (NSUInteger j = 0; j < [line.data count]; j++) {
-                    CCSLineData *lineData = [line.data objectAtIndex:j];
-                    if (lineData.value < minValue) {
-                        minValue = lineData.value;
-                    }
-
-                    if (lineData.value > maxValue) {
-                        maxValue = lineData.value;
-                    }
-
+- (void)calcDataValueRange
+{
+    double maxValue = 0;
+    double minValue = NSIntegerMax;
+    //逐条输出MA线
+    for (NSUInteger i = 0; i < [self.linesData count]; i++) {
+        CCSTitledLine *line = [self.linesData objectAtIndex:i];
+        if (line != NULL && [line.data count] > 0) {
+            //判断显示为方柱或显示为线条
+            for (NSUInteger j = 0; j < [line.data count]; j++) {
+                CCSLineData *lineData = [line.data objectAtIndex:j];
+                if (lineData.value < minValue) {
+                    minValue = lineData.value;
                 }
+                
+                if (lineData.value > maxValue) {
+                    maxValue = lineData.value;
+                }
+                
             }
         }
+    }
+    
+    self.maxValue = maxValue;
+    self.minValue = minValue;
+}
 
-        if ((long) maxValue > (long) minValue) {
-            if ((maxValue - minValue) < 10. && minValue > 1.) {
-                self.maxValue = (long) (maxValue + 1);
-                self.minValue = (long) (minValue - 1);
-            } else {
-                self.maxValue = (long) (maxValue + (maxValue - minValue) * 0.1);
-                self.minValue = (long) (minValue - (maxValue - minValue) * 0.1);
-
-                if (self.minValue < 0) {
-                    self.minValue = 0;
-                }
-            }
-        } else if ((long) maxValue == (long) minValue) {
-            if (maxValue <= 10 && maxValue > 1) {
-                self.maxValue = maxValue + 1;
-                self.minValue = minValue - 1;
-            } else if (maxValue <= 100 && maxValue > 10) {
-                self.maxValue = maxValue + 10;
-                self.minValue = minValue - 10;
-            } else if (maxValue <= 1000 && maxValue > 100) {
-                self.maxValue = maxValue + 100;
-                self.minValue = minValue - 100;
-            } else if (maxValue <= 10000 && maxValue > 1000) {
-                self.maxValue = maxValue + 1000;
-                self.minValue = minValue - 1000;
-            } else if (maxValue <= 100000 && maxValue > 10000) {
-                self.maxValue = maxValue + 10000;
-                self.minValue = minValue - 10000;
-            } else if (maxValue <= 1000000 && maxValue > 100000) {
-                self.maxValue = maxValue + 100000;
-                self.minValue = minValue - 100000;
-            } else if (maxValue <= 10000000 && maxValue > 1000000) {
-                self.maxValue = maxValue + 1000000;
-                self.minValue = minValue - 1000000;
-            } else if (maxValue <= 100000000 && maxValue > 10000000) {
-                self.maxValue = maxValue + 10000000;
-                self.minValue = minValue - 10000000;
-            }
+- (void)calcValueRangePaddingZero
+{
+    double maxValue = self.maxValue;
+    double minValue = self.minValue;
+    
+    if ((long) maxValue > (long) minValue) {
+        if ((maxValue - minValue) < 10. && minValue > 1.) {
+            self.maxValue = (long) (maxValue + 1);
+            self.minValue = (long) (minValue - 1);
         } else {
-            self.maxValue = 0;
-            self.minValue = 0;
+            self.maxValue = (long) (maxValue + (maxValue - minValue) * 0.1);
+            self.minValue = (long) (minValue - (maxValue - minValue) * 0.1);
+            
+            if (self.minValue < 0) {
+                self.minValue = 0;
+            }
         }
-
+    } else if ((long) maxValue == (long) minValue) {
+        if (maxValue <= 10 && maxValue > 1) {
+            self.maxValue = maxValue + 1;
+            self.minValue = minValue - 1;
+        } else if (maxValue <= 100 && maxValue > 10) {
+            self.maxValue = maxValue + 10;
+            self.minValue = minValue - 10;
+        } else if (maxValue <= 1000 && maxValue > 100) {
+            self.maxValue = maxValue + 100;
+            self.minValue = minValue - 100;
+        } else if (maxValue <= 10000 && maxValue > 1000) {
+            self.maxValue = maxValue + 1000;
+            self.minValue = minValue - 1000;
+        } else if (maxValue <= 100000 && maxValue > 10000) {
+            self.maxValue = maxValue + 10000;
+            self.minValue = minValue - 10000;
+        } else if (maxValue <= 1000000 && maxValue > 100000) {
+            self.maxValue = maxValue + 100000;
+            self.minValue = minValue - 100000;
+        } else if (maxValue <= 10000000 && maxValue > 1000000) {
+            self.maxValue = maxValue + 1000000;
+            self.minValue = minValue - 1000000;
+        } else if (maxValue <= 100000000 && maxValue > 10000000) {
+            self.maxValue = maxValue + 10000000;
+            self.minValue = minValue - 10000000;
+        }
     } else {
         self.maxValue = 0;
         self.minValue = 0;
     }
+}
 
+- (void)calcValueRangeFormatForAxis
+{
     int rate = 1;
-
+    
     if (self.maxValue < 3000) {
         rate = 1;
     } else if (self.maxValue >= 3000 && self.maxValue < 5000) {
@@ -147,7 +154,7 @@
     } else {
         rate = 100000;
     }
-
+    
     //等分轴修正
     if (self.latitudeNum > 0 && rate > 1 && (long) (self.minValue) % rate != 0) {
         //最大值加上轴差
@@ -158,12 +165,25 @@
         //最大值加上轴差
         self.maxValue = (long) self.maxValue + (self.latitudeNum * rate) - ((long) (self.maxValue - self.minValue) % (self.latitudeNum * rate));
     }
+    
+    //    //等分轴修正
+    //    if (self.latitudeNum >0 && (int)(self.maxValue - self.minValue) % (self.latitudeNum) != 0) {
+    //        //最大值加上轴差
+    //        self.maxValue = self.maxValue + self.latitudeNum - ((int)(self.maxValue - self.minValue) % self.latitudeNum);
+    //    }
+}
 
-//    //等分轴修正
-//    if (self.latitudeNum >0 && (int)(self.maxValue - self.minValue) % (self.latitudeNum) != 0) {
-//        //最大值加上轴差
-//        self.maxValue = self.maxValue + self.latitudeNum - ((int)(self.maxValue - self.minValue) % self.latitudeNum); 
-//    }
+
+- (void)calcValueRange {
+    if (self.linesData != NULL && [self.linesData count] > 0) {
+        [self calcDataValueRange];
+        [self calcValueRangePaddingZero];
+    } else {
+        self.maxValue = 0;
+        self.minValue = 0;
+    }
+    
+    [self calcValueRangeFormatForAxis];
 }
 
 - (void)drawRect:(CGRect)rect {

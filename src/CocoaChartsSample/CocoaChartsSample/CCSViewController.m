@@ -28,6 +28,7 @@
 #import "CCSSlipCandleStickChartViewController.h"
 #import "CCSMASlipCandleStickChartViewController.h"
 #import "CCSBOLLMASlipCandleStickChartViewController.h"
+#import "CCSSlipLineChartViewController.h"
 
 @interface CCSViewController ()
 
@@ -57,7 +58,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 20;
+    return 21;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -155,6 +156,10 @@
     else if (CCSChartTypeBOLLMASlipCandleStickChart == row)
     {
         cell.textLabel.text = @"BOLLMASlipCandleStickChart";
+    }
+    else if (CCSChartTypeSlipLineChart == row)
+    {
+        cell.textLabel.text = @"SlipLineChart";
     }
     else
     {
@@ -272,6 +277,11 @@
     {
         CCSBOLLMASlipCandleStickChartViewController *bOLLMASlipCandleStickChartViewController = [[[CCSBOLLMASlipCandleStickChartViewController alloc]init]autorelease];
         [appDelegate.viewController pushViewController:bOLLMASlipCandleStickChartViewController animated:YES];
+    }
+    else if (CCSChartTypeSlipLineChart == row)
+    {
+        CCSSlipLineChartViewController *slipLineChartViewController = [[[CCSSlipLineChartViewController alloc]init]autorelease];
+        [appDelegate.viewController pushViewController:slipLineChartViewController animated:YES];
     }
     else
     {

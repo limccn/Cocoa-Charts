@@ -26,6 +26,46 @@
     [super dealloc];
 }
 
+- (void)calcDataValueRange {
+    //调用父类
+    [super calcDataValueRange];
+    
+    double maxValue = 0;
+    double minValue = NSIntegerMax;
+    
+    for (NSInteger i = [self.linesData count] - 1; i >= 0; i--) {
+        CCSTitledLine *line = [self.linesData objectAtIndex:i];
+        
+        //获取线条数据
+        NSArray *lineDatas = line.data;
+        for (NSUInteger j = self.displayFrom; j < self.displayFrom + self.displayNumber; j++) {
+            CCSLineData *lineData = [lineDatas objectAtIndex:j];
+            
+            //忽略值为0的情况
+            if (lineData.value == 0) {
+                
+            }else {
+                if (lineData.value < minValue) {
+                    minValue = lineData.value;
+                }
+                
+                if (lineData.value > maxValue) {
+                    maxValue = lineData.value;
+                }
+            }
+        }
+        
+    }
+    
+    if (self.minValue > minValue) {
+        self.minValue = minValue;
+    }
+    
+    if (self.maxValue < maxValue) {
+        self.maxValue = maxValue;
+    }
+}
+
 - (void)drawRect:(CGRect)rect {
     [super drawRect:rect];
 }

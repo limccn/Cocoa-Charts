@@ -9,6 +9,14 @@
 #import "CCSSlipStickChart.h"
 #import "CCSStickChartData.h"
 
+@interface  CCSSlipStickChart () {
+    float _startDistance1;
+    float _minDistance1;
+    int _flag;
+    float _firstX;
+}
+@end
+
 @implementation CCSSlipStickChart
 @synthesize displayNumber = _displayNumber;
 @synthesize displayFrom = _displayFrom;
@@ -18,7 +26,10 @@
 - (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        // Initialization code
+        _startDistance1 = 0;
+        _minDistance1 = 8;
+        _flag = 1;
+        _firstX = 0;
     }
     return self;
 }
@@ -137,11 +148,6 @@
     self.axisXTitles = TitleX;
 }
 
-float _startDistance1 = 0;
-float _minDistance1 = 8;
-int _flag = 1;
-float _firstX = 0;
-
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     //调用父类的触摸事件
     //[super touchesBegan:touches withEvent:event];
@@ -209,6 +215,12 @@ float _firstX = 0;
             [self setNeedsDisplay];
             //设置可滚动
             [self performSelector:@selector(setNeedsDisplay) withObject:nil afterDelay:0];
+            
+            if (self.coChart) {
+                ((CCSSlipStickChart *)self.coChart).displayFrom = self.displayFrom;
+                ((CCSSlipStickChart *)self.coChart).displayNumber = self.displayNumber;
+                [self.coChart setNeedsDisplay];
+            }
         } else {
             //获取选中点
             self.singleTouchPoint = [[allTouches objectAtIndex:0] locationInView:self];
@@ -352,7 +364,8 @@ float _firstX = 0;
         }
 
         if (self.coChart) {
-            self.coChart.maxSticksNum = self.maxSticksNum;
+            ((CCSSlipStickChart *)self.coChart).displayFrom = self.displayFrom;
+            ((CCSSlipStickChart *)self.coChart).displayNumber = self.displayNumber;
             [self.coChart setNeedsDisplay];
         }
     }
@@ -389,7 +402,8 @@ float _firstX = 0;
         }
 
         if (self.coChart) {
-            self.coChart.maxSticksNum = self.maxSticksNum;
+            ((CCSSlipStickChart *)self.coChart).displayFrom = self.displayFrom;
+            ((CCSSlipStickChart *)self.coChart).displayNumber = self.displayNumber;
             [self.coChart setNeedsDisplay];
         }
     }

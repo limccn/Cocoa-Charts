@@ -113,4 +113,12 @@
  */
 - (void)initAxisY;
 
+- (void)calcDataValueRange;
+
+- (void)calcValueRangePaddingZero;
+
+- (void)calcValueRangeFormatForAxis;
+
+- (void)calcValueRange;
+
 @end

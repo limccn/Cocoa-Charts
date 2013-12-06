@@ -20,14 +20,7 @@
 
 #import <UIKit/UIKit.h>
 #import "CCSSlipStickChart.h"
-
-
-typedef enum {
-    CCSCandleStickStyleStandard,            //Standard Candle Style
-    CCSCandleStickStyleBar,                 //American Bar Style
-    CCSCandleStickStyleLine,                //Close Line Style
-} CCSCandleStickStyle;
-
+#import "CCSCandleStickChart.h"
 
 /*!
  CCSCandleStickChart
