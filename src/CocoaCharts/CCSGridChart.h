@@ -21,6 +21,11 @@
 #import <UIKit/UIKit.h>
 #import "CCSBaseChartView.h"
 
+@protocol CCSChartDelegate <NSObject>
+@optional
+- (void)CCSChartBeTouchedOn:(CGPoint *)point indexAt:(NSUInteger *) index;
+- (void)CCSChartDisplayChangedFrom:(NSUInteger *)from number:(NSUInteger *) number;
+@end
 
 /*!
  @typedef enum CCSGridChartAxisPosition
@@ -34,7 +39,6 @@ typedef enum {
     CCSGridChartAxisXPositionTop,                //Axis X top
     CCSGridChartAxisXPositionBottom              //Axis X bottom
 } CCSGridChartAxisPosition;
-
 
 /*!
  CCSGridChart
@@ -77,6 +81,8 @@ typedef enum {
     BOOL _displayCrossXOnTouch;
     BOOL _displayCrossYOnTouch;
     CGPoint _singleTouchPoint;
+    
+    UIViewController<CCSChartDelegate> *_chartDelegate;
 }
 
 /*!
@@ -284,6 +290,14 @@ typedef enum {
 
 
 /*!
+ Touched point inside of grid
+ タッチしたポイント
+ 单点触控的选中点
+ */
+@property(assign, nonatomic) UIViewController<CCSChartDelegate> *chartDelegate;
+
+
+/*!
  @abstract Draw the border
  枠を書く。
  绘制边框
@@ -406,7 +420,7 @@ typedef enum {
  图表的rect
  
  @result CGFloat the calculated value
- 計算出した度数
+ 計算出した度数］
  纬度计算结果
  */
 - (CGFloat)touchPointAxisYValue:(CGRect)rect;

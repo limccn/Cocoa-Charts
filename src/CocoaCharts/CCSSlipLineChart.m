@@ -23,6 +23,7 @@
 @synthesize displayFrom = _displayFrom;
 @synthesize minDisplayNumber = _minDisplayNumber;
 @synthesize zoomBaseLine = _zoomBaseLine;
+@synthesize noneDisplayValue = _noneDisplayValue;
 
 - (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
@@ -43,14 +44,15 @@
     self.displayNumber = 10;
     self.minDisplayNumber = 20;
     self.zoomBaseLine = CCSLineZoomBaseLineCenter;
+    self.noneDisplayValue = 0;
 }
 
 
-- (void)calcDataValueRange {
+- (void)calcValueRange {
     //调用父类
-    [super calcDataValueRange];
+    //[super calcDataValueRange];
     
-    double maxValue = 0;
+    double maxValue = -NSIntegerMax;
     double minValue = NSIntegerMax;
     
     for (NSInteger i = [self.linesData count] - 1; i >= 0; i--) {
@@ -61,8 +63,8 @@
         for (NSUInteger j = self.displayFrom; j < self.displayFrom + self.displayNumber; j++) {
             CCSLineData *lineData = [lineDatas objectAtIndex:j];
             
-            //忽略值为0的情况
-            if (lineData.value == 0) {
+            //忽略不显示值的情况
+            if (lineData.value - self.noneDisplayValue == 0) {
                 
             }else {
                 if (lineData.value < minValue) {
@@ -124,7 +126,7 @@
                     // 点线距离
                     float lineLength = ((rect.size.width - self.axisMarginLeft - 2 * self.axisMarginRight) / self.displayNumber);
                     //起始点
-                    startX = super.axisMarginLeft + lineLength;
+                    startX = super.axisMarginLeft + lineLength / 2;
                     //遍历并绘制线条
                     for (NSUInteger j = self.displayFrom; j < self.displayFrom + self.displayNumber; j++) {
                         CCSLineData *lineData = [lineDatas objectAtIndex:j];
@@ -135,7 +137,7 @@
                             CGContextMoveToPoint(context, startX, valueY);
                             lastY = valueY;
                         } else {
-                            if (lineData.value == 0) {
+                            if (lineData.value - self.noneDisplayValue == 0) {
                                 CGContextMoveToPoint(context, startX, lastY);
                             } else {
                                 CGContextAddLineToPoint(context, startX, valueY);
@@ -150,7 +152,7 @@
                     // 点线距离
                     float lineLength = ((rect.size.width - 2 * self.axisMarginLeft - self.axisMarginRight) / self.displayNumber);
                     //起始点
-                    startX = rect.size.width - self.axisMarginRight - self.axisMarginLeft;
+                    startX = rect.size.width - self.axisMarginRight - self.axisMarginLeft - lineLength / 2;
                     
                     //判断点的多少
                     if ([lineDatas count] == 0) {
@@ -176,16 +178,8 @@
                             if (index == self.displayFrom + self.displayNumber - 1) {
                                 CGContextMoveToPoint(context, startX, valueY);
                                 lastY = valueY;
-                            } else if (index == 0) {
-                                if (lineData.value == 0) {
-                                    //                                    CGContextMoveToPoint(context, startX, lastY);
-                                    CGContextAddLineToPoint(context, self.axisMarginLeft, lastY);
-                                } else {
-                                    CGContextAddLineToPoint(context, self.axisMarginLeft, valueY);
-                                    lastY = valueY;
-                                }
                             } else {
-                                if (lineData.value == 0) {
+                                if (lineData.value - self.noneDisplayValue == 0) {
                                     CGContextMoveToPoint(context, startX, lastY);
                                 } else {
                                     CGContextAddLineToPoint(context, startX, valueY);

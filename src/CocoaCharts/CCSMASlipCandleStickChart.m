@@ -86,6 +86,7 @@
 
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSetLineWidth(context, 1.0f);
+    CGContextSetAllowsAntialiasing(context, YES);
 
     if (self.linesData != NULL) {
         //逐条输出MA线

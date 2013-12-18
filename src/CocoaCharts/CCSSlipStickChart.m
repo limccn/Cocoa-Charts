@@ -12,6 +12,7 @@
 @interface  CCSSlipStickChart () {
     float _startDistance1;
     float _minDistance1;
+    float _doubleTouchInterval;
     int _flag;
     float _firstX;
 }
@@ -28,6 +29,7 @@
     if (self) {
         _startDistance1 = 0;
         _minDistance1 = 8;
+        _doubleTouchInterval = 100;
         _flag = 1;
         _firstX = 0;
     }
@@ -192,7 +194,7 @@
         if (_flag == 0) {
             _firstX = pt1.x;
         } else {
-            if (fabs(pt1.x - self.singleTouchPoint.x) < 6) {
+            if (fabs(pt1.x - self.singleTouchPoint.x) < 10) {
                 self.displayCrossXOnTouch = NO;
                 self.displayCrossYOnTouch = NO;
                 [self setNeedsDisplay];
@@ -483,4 +485,21 @@
     }
 }
 
+- (void) setDisplayFrom:(NSUInteger)displayFrom
+{
+    _displayFrom = displayFrom;
+    
+    if (self.chartDelegate && [self.chartDelegate respondsToSelector:@selector(CCSChartDisplayChangedFrom:number:)]) {
+        [self.chartDelegate CCSChartDisplayChangedFrom:displayFrom number:self.displayNumber];
+    }
+}
+
+-(void) setDisplayNumber:(NSUInteger)displayNumber
+{
+    _displayNumber = displayNumber;
+    
+    if (self.chartDelegate && [self.chartDelegate respondsToSelector:@selector(CCSChartDisplayChangedFrom: number:)]) {
+        [self.chartDelegate CCSChartDisplayChangedFrom:self.displayFrom number:displayNumber];
+    }
+}
 @end

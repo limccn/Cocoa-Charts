@@ -46,7 +46,7 @@
  ラインを表示用データ
  表示线条用的数据
  */
-@property(retain, nonatomic) NSArray *linesData;
+@property(retain, nonatomic, setter = setLinesData:) NSArray *linesData;
 
 /*!
  Number of latitude lines

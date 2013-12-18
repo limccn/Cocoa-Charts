@@ -51,6 +51,7 @@
 @synthesize singleTouchPoint = _singleTouchPoint;
 @synthesize crossLinesColor = _crossLinesColor;
 @synthesize crossLinesFontColor = _crossLinesFontColor;
+@synthesize chartDelegate = _chartDelegate;
 
 - (void)dealloc {
 
@@ -886,5 +887,9 @@ float _minDistance = 8;
 
 - (void)zoomIn {
 }
+
+- (void)CCSChartDidTouched:(CGPoint *)point {
+}
+
 
 @end

@@ -80,14 +80,15 @@
 }
 
 - (void)drawData:(CGRect)rect {
-    // 蜡烛棒宽度
-    float stickWidth = ((rect.size.width - self.axisMarginLeft - self.axisMarginRight) / self.displayNumber) - 1;
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSetLineWidth(context, 1.0f);
 
     if (self.stickData != NULL && [self.stickData count] > 0) {
 
         if (self.axisYPosition == CCSGridChartAxisYPositionLeft) {
+            // 蜡烛棒宽度
+            float stickWidth = ((rect.size.width - self.axisMarginLeft - 2 * self.axisMarginRight) / self.displayNumber) - 1;
+            
             // 蜡烛棒起始绘制位置
             float stickX = self.axisMarginLeft + 1;
             //判断显示为方柱或显示为线条
@@ -145,6 +146,7 @@
                 stickX = stickX + 1 + stickWidth;
             }
         } else {
+            float stickWidth = ((rect.size.width - 2 * self.axisMarginLeft - self.axisMarginRight) / self.displayNumber) - 1;
             // 蜡烛棒起始绘制位置
             float stickX = rect.size.width - self.axisMarginRight - 1 - stickWidth;
             //判断显示为方柱或显示为线条
@@ -223,11 +225,18 @@
     if (self.stickData != NULL) {
         //设置线条颜色
         CGContextSetStrokeColorWithColor(context, self.deaLineColor.CGColor);
+        
         // 点线距离
-        float lineLength = ((rect.size.width - self.axisMarginLeft - self.axisMarginRight) / self.displayNumber);
+        float lineLength;
+        
+        if (self.axisYPosition == CCSGridChartAxisYPositionLeft) {
+            lineLength = ((rect.size.width - self.axisMarginLeft - 2 * self.axisMarginRight) / self.displayNumber);
+        }else{
+            lineLength = ((rect.size.width - 2 * self.axisMarginLeft - self.axisMarginRight) / self.displayNumber);
+        }
 
         //起始点
-        startX = self.axisMarginLeft + 1;
+        startX = super.axisMarginLeft + lineLength / 2;
 
         //判断点的多少
         if ([self.stickData count] == 0) {
@@ -249,22 +258,26 @@
 
                 float valueY = ((1 - (lineData.dea - self.minValue) / (self.maxValue - self.minValue)) * (rect.size.height - self.axisMarginBottom) - super.axisMarginTop);
                 //绘制线条路径
-                if (j == self.displayFrom) {
-                    CGContextMoveToPoint(context, startX, valueY);
-                    lastY = valueY;
-                } else if (j == self.displayFrom + self.displayNumber - 1) {
-                    if (lineData.dea == 0) {
-                        CGContextAddLineToPoint(context, rect.size.width - self.axisMarginRight, lastY);
-                    } else {
-                        CGContextAddLineToPoint(context, rect.size.width - self.axisMarginRight, valueY);
+                if (j == self.displayFrom || j == 0) {
+                    if (lineData.diff == 0) {
+                        //DO NOTHING
+                    }else{
+                        CGContextMoveToPoint(context, startX, valueY);
                         lastY = valueY;
                     }
-                } else {
+                }else {
+                    CCSMACDData *preLineData = [self.stickData objectAtIndex:j - 1];
                     if (lineData.dea == 0) {
                         CGContextMoveToPoint(context, startX, lastY);
                     } else {
-                        CGContextAddLineToPoint(context, startX, valueY);
-                        lastY = valueY;
+                        if (preLineData.dea == 0) {
+                            CGContextMoveToPoint(context, startX, valueY);
+                            CGContextAddLineToPoint(context, startX, valueY);
+                            lastY = valueY;
+                        }else {
+                            CGContextAddLineToPoint(context, startX, valueY);
+                            lastY = valueY;
+                        }
                     }
                 }
                 //X位移
@@ -280,7 +293,9 @@
         CGContextSetStrokeColorWithColor(context, self.diffLineColor.CGColor);
 
         //起始点
-        startX = self.axisMarginLeft + 1;
+        //startX = self.axisMarginLeft + 1;
+        //起始点
+        startX = super.axisMarginLeft + lineLength / 2;
 
         //判断点的多少
         if ([self.stickData count] == 0) {
@@ -302,22 +317,26 @@
 
                 float valueY = ((1 - (lineData.diff - self.minValue) / (self.maxValue - self.minValue)) * (rect.size.height - self.axisMarginBottom) - super.axisMarginTop);
                 //绘制线条路径
-                if (j == self.displayFrom) {
-                    CGContextMoveToPoint(context, startX, valueY);
-                    lastY = valueY;
-                } else if (j == self.displayFrom + self.displayNumber - 1) {
-                    if (lineData.dea == 0) {
-                        CGContextAddLineToPoint(context, rect.size.width - self.axisMarginRight, lastY);
-                    } else {
-                        CGContextAddLineToPoint(context, rect.size.width - self.axisMarginRight, valueY);
+                if (j == self.displayFrom || j == 0) {
+                    if (lineData.diff == 0) {
+                        //DO NOTHING
+                    }else{
+                        CGContextMoveToPoint(context, startX, valueY);
                         lastY = valueY;
                     }
-                } else {
-                    if (lineData.dea == 0) {
+                }else {
+                    CCSMACDData *preLineData = [self.stickData objectAtIndex:j - 1];
+                    if (lineData.diff == 0) {
                         CGContextMoveToPoint(context, startX, lastY);
                     } else {
-                        CGContextAddLineToPoint(context, startX, valueY);
-                        lastY = valueY;
+                        if (preLineData.diff == 0) {
+                            CGContextMoveToPoint(context, startX, valueY);
+                            CGContextAddLineToPoint(context, startX, valueY);
+                            lastY = valueY;
+                        }else {
+                            CGContextAddLineToPoint(context, startX, valueY);
+                            lastY = valueY;
+                        }
                     }
                 }
                 //X位移

@@ -22,8 +22,8 @@ typedef enum {
     NSUInteger _zoomBaseLine;
 }
 
-@property(assign, nonatomic) NSUInteger displayNumber;
-@property(assign, nonatomic) NSUInteger displayFrom;
+@property(assign, nonatomic, setter = setDisplayNumber:) NSUInteger displayNumber;
+@property(assign, nonatomic, setter = setDisplayFrom:) NSUInteger displayFrom;
 @property(assign, nonatomic) NSUInteger minDisplayNumber;
 
 @property(assign, nonatomic) NSUInteger zoomBaseLine;

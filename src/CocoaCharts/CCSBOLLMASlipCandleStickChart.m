@@ -118,8 +118,15 @@
                     if (j == self.displayFrom) {
                         CGContextMoveToPoint(context, startX, valueY);
                     } else {
-                        CGContextAddLineToPoint(context, startX, valueY);
+                        if (((CCSLineData *) [lineDatas objectAtIndex:j - 1]).value != 0) {
+                            CGContextAddLineToPoint(context, startX, valueY);
+                        } else {
+                            CGContextMoveToPoint(context, startX, valueY);
+                            CGContextAddLineToPoint(context, startX, valueY);
+                        }
                     }
+                    
+                    
                     lastY = valueY;
                     //X位移
                     startX = startX + lineLength;
@@ -154,10 +161,13 @@
                         //绘制线条路径
                         if (index == self.displayFrom + self.displayNumber - 1) {
                             CGContextMoveToPoint(context, startX, valueY);
-                        } else if (index == self.displayFrom) {
-                            CGContextAddLineToPoint(context, self.axisMarginLeft, valueY);
                         } else {
-                            CGContextAddLineToPoint(context, startX, valueY);
+                            if (lineData.value != 0) {
+                                CGContextAddLineToPoint(context, startX, valueY);
+                            } else {
+                                CGContextMoveToPoint(context, startX, valueY);
+                                CGContextAddLineToPoint(context, startX, valueY);
+                            }
                         }
                         
                         lastY = valueY;
@@ -230,7 +240,7 @@
             // 点线距离
             float lineLength = ((rect.size.width - 2 * self.axisMarginLeft - self.axisMarginRight) / self.displayNumber);
             //起始点
-            startX = rect.size.width - self.axisMarginRight - self.axisMarginLeft;
+            startX = rect.size.width - self.axisMarginRight - self.axisMarginLeft - lineLength / 2;
             
             //判断点的多少
             if ([line1Datas count] == 0 || [line2Datas count] == 0) {

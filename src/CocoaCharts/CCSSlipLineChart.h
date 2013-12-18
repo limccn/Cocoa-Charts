@@ -19,11 +19,15 @@ typedef enum {
     NSUInteger _displayFrom;
     NSUInteger _minDisplayNumber;
     NSUInteger _zoomBaseLine;
+    
+    CGFloat _noneDisplayValue;
 }
 
 @property(assign, nonatomic) NSUInteger displayNumber;
 @property(assign, nonatomic) NSUInteger displayFrom;
 @property(assign, nonatomic) NSUInteger minDisplayNumber;
 @property(assign, nonatomic) NSUInteger zoomBaseLine;
+
+@property(assign, nonatomic) CGFloat noneDisplayValue;
 
 @end

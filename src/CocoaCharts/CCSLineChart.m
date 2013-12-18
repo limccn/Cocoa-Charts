@@ -38,8 +38,8 @@
 
     self.latitudeNum = 3;
     self.longitudeNum = 3;
-    self.maxValue = 0;
-    self.minValue = 0;
+    self.maxValue = NSIntegerMin;
+    self.minValue = NSIntegerMax;
     self.selectedIndex = 0;
     self.lineWidth = 1.0f;
 
@@ -387,6 +387,15 @@
     } else {
         return [NSString stringWithFormat:@"%d", (int) (value * (self.maxValue - self.minValue) + self.minValue)];
     }
+}
+
+- (void) setLinesData:(NSArray *)linesData
+{
+    [_linesData autorelease];
+    _linesData = [linesData retain];
+    
+    self.maxValue = NSIntegerMin;
+    self.minValue = NSIntegerMax;
 }
 
 //-(void) calcSelectedIndex
