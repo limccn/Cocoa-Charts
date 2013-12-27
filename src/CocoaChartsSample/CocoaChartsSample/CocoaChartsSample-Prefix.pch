@@ -14,3 +14,7 @@
 #endif
 
 #define MARGIN_TOP ([[[UIDevice currentDevice] systemVersion] floatValue] > 6.9 ? 66:0)
+#define DEVICE_WIDTH ((UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) ? 320:690)
+#define DEVICE_HEIGHT ((UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) ? 120:200)
+
+

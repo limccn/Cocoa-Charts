@@ -516,4 +516,14 @@
     }
 }
 
+- (void) setSingleTouchPoint:(CGPoint) point
+{
+    _singleTouchPoint = point;
+    
+    [self calcSelectedIndex];
+    
+    if (self.chartDelegate && [self.chartDelegate respondsToSelector:@selector(CCSChartBeTouchedOn:indexAt:)]) {
+        [self.chartDelegate CCSChartBeTouchedOn:point indexAt:self.selectedStickIndex];
+    }
+}
 @end

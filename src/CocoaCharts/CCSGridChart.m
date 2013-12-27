@@ -891,5 +891,13 @@ float _minDistance = 8;
 - (void)CCSChartDidTouched:(CGPoint *)point {
 }
 
+- (void) setSingleTouchPoint:(CGPoint) point
+{
+    _singleTouchPoint = point;
+    
+    if (self.chartDelegate && [self.chartDelegate respondsToSelector:@selector(CCSChartBeTouchedOn:indexAt:)]) {
+        [self.chartDelegate CCSChartBeTouchedOn:point indexAt:0];
+    }
+}
 
 @end

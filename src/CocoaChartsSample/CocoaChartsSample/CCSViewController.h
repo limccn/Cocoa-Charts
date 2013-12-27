@@ -37,7 +37,9 @@ typedef enum
 
 @interface CCSViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
 {
-    
+    UITableView *_tableView;
 }
+
+@property(retain, nonatomic) UITableView *tableView;
 
 @end

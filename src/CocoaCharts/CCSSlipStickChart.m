@@ -502,4 +502,5 @@
         [self.chartDelegate CCSChartDisplayChangedFrom:self.displayFrom number:displayNumber];
     }
 }
+
 @end

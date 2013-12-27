@@ -9,6 +9,7 @@
 #import "CCSAppDelegate.h"
 
 #import "CCSViewController.h"
+#import "CCSDetailViewController.h"
 
 @implementation CCSAppDelegate
 
@@ -22,8 +23,18 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
+
     // Override point for customization after application launch.
-    self.viewController = [[[UINavigationController alloc] initWithRootViewController:[[[CCSViewController alloc] initWithNibName:@"CCSViewController" bundle:nil] autorelease]] autorelease];
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+        self.viewController = [[[UINavigationController alloc] initWithRootViewController:[[[CCSViewController alloc] init] autorelease]] autorelease];
+    }else if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        UISplitViewController *splitViewController = [[[UISplitViewController alloc] init]autorelease];
+        UINavigationController *leftNavigationController = [[[UINavigationController alloc] initWithRootViewController:[[[CCSViewController alloc] init] autorelease]] autorelease];
+        UINavigationController *rightNavigationController = [[[UINavigationController alloc] initWithRootViewController:[[[CCSDetailViewController alloc] init] autorelease]] autorelease];
+        splitViewController.viewControllers = [NSArray arrayWithObjects:leftNavigationController,rightNavigationController, nil];
+        self.viewController = splitViewController;
+    }
+    
     self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];
     return YES;

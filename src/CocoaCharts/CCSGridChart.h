@@ -23,8 +23,8 @@
 
 @protocol CCSChartDelegate <NSObject>
 @optional
-- (void)CCSChartBeTouchedOn:(CGPoint *)point indexAt:(NSUInteger *) index;
-- (void)CCSChartDisplayChangedFrom:(NSUInteger *)from number:(NSUInteger *) number;
+- (void)CCSChartBeTouchedOn:(CGPoint)point indexAt:(NSUInteger) index;
+- (void)CCSChartDisplayChangedFrom:(NSUInteger)from number:(NSUInteger) number;
 @end
 
 /*!
@@ -286,7 +286,7 @@ typedef enum {
  タッチしたポイント
  单点触控的选中点
  */
-@property(assign, nonatomic) CGPoint singleTouchPoint;
+@property(assign, nonatomic ,setter = setSingleTouchPoint:) CGPoint singleTouchPoint;
 
 
 /*!

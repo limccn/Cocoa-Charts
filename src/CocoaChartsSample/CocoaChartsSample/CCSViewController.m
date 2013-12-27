@@ -8,6 +8,7 @@
 
 #import "CCSViewController.h"
 #import "CCSAppDelegate.h"
+#import "CCSDetailViewController.h"
 #import "CCSGridChartViewController.h"
 #import "CCSLineChartViewController.h"
 #import "CCSStickChartViewController.h"
@@ -29,24 +30,46 @@
 #import "CCSMASlipCandleStickChartViewController.h"
 #import "CCSBOLLMASlipCandleStickChartViewController.h"
 #import "CCSSlipLineChartViewController.h"
+#import "CCSSimpleDemoViewController.h"
 
 @interface CCSViewController ()
+{
+}
 
 @end
 
 @implementation CCSViewController
+@synthesize tableView =_tableView;
+
+- (void) dealloc
+{
+    [_tableView release];
+    [super dealloc];
+}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+	
+    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)
+                                                          style:UITableViewStylePlain];
+    self.tableView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin
+    |UIViewAutoresizingFlexibleTopMargin
+    |UIViewAutoresizingFlexibleRightMargin
+    |UIViewAutoresizingFlexibleBottomMargin
+    |UIViewAutoresizingFlexibleHeight
+    |UIViewAutoresizingFlexibleWidth;
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
+    [self.view addSubview:self.tableView];
+
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     
-    self.title = @"Cocoa-Charts";
+    self.title = @"Cocoa-Charts v0.2";
     self.navigationController.navigationBarHidden = NO;
 }
 
@@ -56,9 +79,56 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 2;
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 21;
+    if (section == 0) {
+        return 1;
+    }else if (section == 1)
+    {
+        return 21;
+    }
+    
+    return 0;
+
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    if (section == 0) {
+        UILabel* lblTitle = [[UILabel alloc]init];
+        lblTitle.backgroundColor = [UIColor grayColor];
+        lblTitle.textColor = [UIColor whiteColor];
+        lblTitle.text = @"Charts Demo";
+        return lblTitle;
+    }else if (section == 1) {
+        UILabel* lblTitle = [[UILabel alloc]init];
+        lblTitle.backgroundColor = [UIColor grayColor];
+        lblTitle.textColor = [UIColor whiteColor];
+        lblTitle.text = @"Single Chart Demo";
+        return lblTitle;
+    }else{
+        return nil;
+    }
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+{
+    return nil;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 22.0f;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    return 0.0f;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -73,96 +143,101 @@
     if (cell == nil) {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
     }
-        
-    NSUInteger row = indexPath.row;
-//    NSLog(@"%d",row);
     
-    if (CCSChartTypeGridChart == row)
-    {
-        cell.textLabel.text = @"GridChart";
-    }
-    else if (CCSChartTypeLineChart == row)
-    {
-        cell.textLabel.text = @"LineChart";
-    }
-    else if (CCSChartTypeStickChart == row)
-    {
-        cell.textLabel.text = @"StickChart";
-    }
-    else if (CCSChartTypeMAStickChart == row)
-    {
-        cell.textLabel.text = @"MAStickChart";
-    }
-    else if (CCSChartTypeCandleStickChart == row)
-    {
-        cell.textLabel.text = @"CandleStickChart";
-    }
-    else if (CCSChartTypeMACandleStickChart == row)
-    {
-        cell.textLabel.text = @"MACandleStickChart";
-    }
-    else if (CCSChartTypePieChart == row)
-    {
-        cell.textLabel.text = @"PieChart";
-    }
-    else if (CCSChartTypePizzaChart == row)
-    {
-        cell.textLabel.text = @"PizzaChart";
-    }
-    else if (CCSChartTypeSpiderWebChart == row)
-    {
-        cell.textLabel.text = @"SpiderWebChart";
-    }
-    else if (CCSChartTypeMinusStickChart == row)
-    {
-        cell.textLabel.text = @"MinusStickChart";
-    }
-    else if (CCSChartTypeMACDChart == row)
-    {
-        cell.textLabel.text = @"MACDChart";
-    }
-    else if (CCSChartTypeAreaChart == row)
-    {
-        cell.textLabel.text = @"AreaChart";
-    }
-    else if (CCSChartTypeStackedAreaChart == row)
-    {
-        cell.textLabel.text = @"StackedAreaChart";
-    }
-    else if (CCSChartTypeBandAreaChart == row)
-    {
-        cell.textLabel.text = @"BandAreaChart";
-    }
-    else if (CCSChartTypeRadarChart == row)
-    {
-        cell.textLabel.text = @"RadarChart";
-    }
-    else if (CCSChartTypeSlipStickChart == row)
-    {
-        cell.textLabel.text = @"SlipStickChart";
-    }
-    else if (CCSChartTypeColoredSlipStickChart == row)
-    {
-        cell.textLabel.text = @"ColoredSlipStickChart";
-    }
-    else if (CCSChartTypeSlipCandleStickChart == row)
-    {
-        cell.textLabel.text = @"SlipCandleStickChart";
-    }
-    else if (CCSChartTypeMASlipCandleStickChart == row)
-    {
-        cell.textLabel.text = @"MASlipCandleStickChart";
-    }
-    else if (CCSChartTypeBOLLMASlipCandleStickChart == row)
-    {
-        cell.textLabel.text = @"BOLLMASlipCandleStickChart";
-    }
-    else if (CCSChartTypeSlipLineChart == row)
-    {
-        cell.textLabel.text = @"SlipLineChart";
-    }
-    else
-    {
+    if(indexPath.section == 0) {
+        cell.textLabel.text = @"Simple Demo";
+    }else {
+        NSUInteger row = indexPath.row;
+        //    NSLog(@"%d",row);
+        
+        if (CCSChartTypeGridChart == row)
+        {
+            cell.textLabel.text = @"GridChart";
+        }
+        else if (CCSChartTypeLineChart == row)
+        {
+            cell.textLabel.text = @"LineChart";
+        }
+        else if (CCSChartTypeStickChart == row)
+        {
+            cell.textLabel.text = @"StickChart";
+        }
+        else if (CCSChartTypeMAStickChart == row)
+        {
+            cell.textLabel.text = @"MAStickChart";
+        }
+        else if (CCSChartTypeCandleStickChart == row)
+        {
+            cell.textLabel.text = @"CandleStickChart";
+        }
+        else if (CCSChartTypeMACandleStickChart == row)
+        {
+            cell.textLabel.text = @"MACandleStickChart";
+        }
+        else if (CCSChartTypePieChart == row)
+        {
+            cell.textLabel.text = @"PieChart";
+        }
+        else if (CCSChartTypePizzaChart == row)
+        {
+            cell.textLabel.text = @"PizzaChart";
+        }
+        else if (CCSChartTypeSpiderWebChart == row)
+        {
+            cell.textLabel.text = @"SpiderWebChart";
+        }
+        else if (CCSChartTypeMinusStickChart == row)
+        {
+            cell.textLabel.text = @"MinusStickChart";
+        }
+        else if (CCSChartTypeMACDChart == row)
+        {
+            cell.textLabel.text = @"MACDChart";
+        }
+        else if (CCSChartTypeAreaChart == row)
+        {
+            cell.textLabel.text = @"AreaChart";
+        }
+        else if (CCSChartTypeStackedAreaChart == row)
+        {
+            cell.textLabel.text = @"StackedAreaChart";
+        }
+        else if (CCSChartTypeBandAreaChart == row)
+        {
+            cell.textLabel.text = @"BandAreaChart";
+        }
+        else if (CCSChartTypeRadarChart == row)
+        {
+            cell.textLabel.text = @"RadarChart";
+        }
+        else if (CCSChartTypeSlipStickChart == row)
+        {
+            cell.textLabel.text = @"SlipStickChart";
+        }
+        else if (CCSChartTypeColoredSlipStickChart == row)
+        {
+            cell.textLabel.text = @"ColoredSlipStickChart";
+        }
+        else if (CCSChartTypeSlipCandleStickChart == row)
+        {
+            cell.textLabel.text = @"SlipCandleStickChart";
+        }
+        else if (CCSChartTypeMASlipCandleStickChart == row)
+        {
+            cell.textLabel.text = @"MASlipCandleStickChart";
+        }
+        else if (CCSChartTypeBOLLMASlipCandleStickChart == row)
+        {
+            cell.textLabel.text = @"BOLLMASlipCandleStickChart";
+        }
+        else if (CCSChartTypeSlipLineChart == row)
+        {
+            cell.textLabel.text = @"SlipLineChart";
+        }
+        else
+        {
+        }
+
     }
     
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -172,120 +247,116 @@
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
-    CCSAppDelegate *appDelegate = (CCSAppDelegate*)[UIApplication sharedApplication].delegate;
-    
-    NSUInteger row = indexPath.row;
-    //    NSLog(@"%d",row);
 
-    if (CCSChartTypeGridChart == row)
-    {
-        CCSGridChartViewController *gridChartViewController = [[[CCSGridChartViewController alloc]init]autorelease];
-        [appDelegate.viewController pushViewController:gridChartViewController animated:YES];
+    UIViewController *viewController = nil;
+
+    if(indexPath.section == 0) {
+        NSUInteger row = indexPath.row;
+        if (row == 0) {
+            viewController = [[[CCSSimpleDemoViewController alloc]init]autorelease];
+        }
+    }else if(indexPath.section == 1){
+        NSUInteger row = indexPath.row;
+        if (CCSChartTypeGridChart == row)
+        {
+            viewController = [[[CCSGridChartViewController alloc]init]autorelease];
+        }
+        else if (CCSChartTypeLineChart == row)
+        {
+            viewController = [[[CCSLineChartViewController alloc]init]autorelease];
+        }
+        else if (CCSChartTypeStickChart == row)
+        {
+            viewController = [[[CCSStickChartViewController alloc]init]autorelease];
+        }
+        else if (CCSChartTypeMAStickChart == row)
+        {
+            viewController = [[[CCSMAStickChartViewController alloc]init]autorelease];
+        }
+        else if (CCSChartTypeCandleStickChart == row)
+        {
+            viewController = [[[CCSCandleStickViewController alloc]init]autorelease];
+        }
+        else if (CCSChartTypeMACandleStickChart == row)
+        {
+            viewController = [[[CCSMACandleStickChartViewController alloc]init]autorelease];
+        }
+        else if (CCSChartTypePieChart == row)
+        {
+            viewController = [[[CCSPieChartViewController alloc]init]autorelease];
+        }
+        else if (CCSChartTypePizzaChart == row)
+        {
+            viewController = [[[CCSPizzaChartViewController alloc]init]autorelease];
+        }
+        else if (CCSChartTypeSpiderWebChart == row)
+        {
+            viewController = [[[CCSSpiderWebChartViewController alloc]init]autorelease];
+        }
+        else if (CCSChartTypeMinusStickChart == row)
+        {
+            viewController = [[[CCSMinusStickChartViewController alloc]init]autorelease];
+        }
+        else if (CCSChartTypeMACDChart == row)
+        {
+            viewController = [[[CCSMACDChartViewController alloc]init]autorelease];
+        }
+        else if (CCSChartTypeAreaChart == row)
+        {
+            viewController = [[[CCSAreaChartViewController alloc]init]autorelease];
+        }
+        else if (CCSChartTypeStackedAreaChart == row)
+        {
+            viewController = [[[CCSStackedAreaChartViewController alloc]init]autorelease];
+        }
+        else if (CCSChartTypeBandAreaChart == row)
+        {
+            viewController = [[[CCSBandAreaChartViewController alloc]init]autorelease];
+        }
+        else if (CCSChartTypeRadarChart == row)
+        {
+            viewController = [[[CCSRadarChartViewController alloc]init]autorelease];
+        }
+        else if (CCSChartTypeSlipStickChart == row)
+        {
+            viewController = [[[CCSSlipStickChartViewController alloc]init]autorelease];
+        }
+        else if (CCSChartTypeColoredSlipStickChart == row)
+        {
+            viewController = [[[CCSColoredStickChartViewController alloc]init]autorelease];
+        }
+        else if (CCSChartTypeSlipCandleStickChart == row)
+        {
+            viewController = [[[CCSSlipCandleStickChartViewController alloc]init]autorelease];
+        }
+        else if (CCSChartTypeMASlipCandleStickChart == row)
+        {
+            viewController = [[[CCSMASlipCandleStickChartViewController alloc]init]autorelease];
+        }
+        else if (CCSChartTypeBOLLMASlipCandleStickChart == row)
+        {
+            viewController = [[[CCSBOLLMASlipCandleStickChartViewController alloc]init]autorelease];
+        }
+        else if (CCSChartTypeSlipLineChart == row)
+        {
+            viewController = [[[CCSSlipLineChartViewController alloc]init]autorelease];
+        }
+        else
+        {
+            
+        }
+    }else {
+        return;
     }
-    else if (CCSChartTypeLineChart == row)
-    {
-        CCSLineChartViewController *lineChartViewController = [[[CCSLineChartViewController alloc]init]autorelease];
-        [appDelegate.viewController pushViewController:lineChartViewController animated:YES];
-    }
-    else if (CCSChartTypeStickChart == row)
-    {
-        CCSStickChartViewController *stickChartViewController = [[[CCSStickChartViewController alloc]init]autorelease];
-        [appDelegate.viewController pushViewController:stickChartViewController animated:YES];
-    }
-    else if (CCSChartTypeMAStickChart == row)
-    {
-        CCSMAStickChartViewController *MAStickChartViewController = [[[CCSMAStickChartViewController alloc]init]autorelease];
-        [appDelegate.viewController pushViewController:MAStickChartViewController animated:YES];
-    }
-    else if (CCSChartTypeCandleStickChart == row)
-    {
-        CCSCandleStickViewController *candleStickChartViewController = [[[CCSCandleStickViewController alloc]init]autorelease];
-        [appDelegate.viewController pushViewController:candleStickChartViewController animated:YES];
-    }
-    else if (CCSChartTypeMACandleStickChart == row)
-    {
-        CCSMACandleStickChartViewController *MACandleStickChartViewController = [[[CCSMACandleStickChartViewController alloc]init]autorelease];
-        [appDelegate.viewController pushViewController:MACandleStickChartViewController animated:YES];
-    }
-    else if (CCSChartTypePieChart == row)
-    {
-        CCSPieChartViewController *pieChartViewController = [[[CCSPieChartViewController alloc]init]autorelease];
-        [appDelegate.viewController pushViewController:pieChartViewController animated:YES];
-    }
-    else if (CCSChartTypePizzaChart == row)
-    {
-        CCSPizzaChartViewController *pizzaChartViewController = [[[CCSPizzaChartViewController alloc]init]autorelease];
-        [appDelegate.viewController pushViewController:pizzaChartViewController animated:YES];
-    }
-    else if (CCSChartTypeSpiderWebChart == row)
-    {
-        CCSSpiderWebChartViewController *spiderWebChartViewController = [[[CCSSpiderWebChartViewController alloc]init]autorelease];
-        [appDelegate.viewController pushViewController:spiderWebChartViewController animated:YES];
-    }
-    else if (CCSChartTypeMinusStickChart == row)
-    {
-        CCSMinusStickChartViewController *minusStickChartViewController = [[[CCSMinusStickChartViewController alloc]init]autorelease];
-        [appDelegate.viewController pushViewController:minusStickChartViewController animated:YES];
-    }
-    else if (CCSChartTypeMACDChart == row)
-    {
-        CCSMACDChartViewController *macdChartViewController = [[[CCSMACDChartViewController alloc]init]autorelease];
-        [appDelegate.viewController pushViewController:macdChartViewController animated:YES];
-    }
-    else if (CCSChartTypeAreaChart == row)
-    {
-        CCSAreaChartViewController *areaChartViewController = [[[CCSAreaChartViewController alloc]init]autorelease];
-        [appDelegate.viewController pushViewController:areaChartViewController animated:YES];
-    }
-    else if (CCSChartTypeStackedAreaChart == row)
-    {
-        CCSStackedAreaChartViewController *stackedAreaChartViewController = [[[CCSStackedAreaChartViewController alloc]init]autorelease];
-        [appDelegate.viewController pushViewController:stackedAreaChartViewController animated:YES];
-    }
-    else if (CCSChartTypeBandAreaChart == row)
-    {
-        CCSBandAreaChartViewController *bandAreaChartViewController = [[[CCSBandAreaChartViewController alloc]init]autorelease];
-        [appDelegate.viewController pushViewController:bandAreaChartViewController animated:YES];
-    }
-    else if (CCSChartTypeRadarChart == row)
-    {
-        CCSRadarChartViewController *radarChartViewController = [[[CCSRadarChartViewController alloc]init]autorelease];
-        [appDelegate.viewController pushViewController:radarChartViewController animated:YES];
-    }
-    else if (CCSChartTypeSlipStickChart == row)
-    {
-        CCSSlipStickChartViewController *slipStickChartViewController = [[[CCSSlipStickChartViewController alloc]init]autorelease];
-        [appDelegate.viewController pushViewController:slipStickChartViewController animated:YES];
-    }
-    else if (CCSChartTypeColoredSlipStickChart == row)
-    {
-        CCSColoredStickChartViewController *coloredStickChartViewController = [[[CCSColoredStickChartViewController alloc]init]autorelease];
-        [appDelegate.viewController pushViewController:coloredStickChartViewController animated:YES];
-    }
-    else if (CCSChartTypeSlipCandleStickChart == row)
-    {
-        CCSSlipCandleStickChartViewController *slipCandleStickChartViewController = [[[CCSSlipCandleStickChartViewController alloc]init]autorelease];
-        [appDelegate.viewController pushViewController:slipCandleStickChartViewController animated:YES];
-    }
-    else if (CCSChartTypeMASlipCandleStickChart == row)
-    {
-        CCSMASlipCandleStickChartViewController *mASlipCandleStickChartViewController = [[[CCSMASlipCandleStickChartViewController alloc]init]autorelease];
-        [appDelegate.viewController pushViewController:mASlipCandleStickChartViewController animated:YES];
-    }
-    else if (CCSChartTypeBOLLMASlipCandleStickChart == row)
-    {
-        CCSBOLLMASlipCandleStickChartViewController *bOLLMASlipCandleStickChartViewController = [[[CCSBOLLMASlipCandleStickChartViewController alloc]init]autorelease];
-        [appDelegate.viewController pushViewController:bOLLMASlipCandleStickChartViewController animated:YES];
-    }
-    else if (CCSChartTypeSlipLineChart == row)
-    {
-        CCSSlipLineChartViewController *slipLineChartViewController = [[[CCSSlipLineChartViewController alloc]init]autorelease];
-        [appDelegate.viewController pushViewController:slipLineChartViewController animated:YES];
-    }
-    else
-    {
-        
+    CCSAppDelegate *appDelegate = (CCSAppDelegate*)[UIApplication sharedApplication].delegate;
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+        UINavigationController *navigationController = (UINavigationController *)appDelegate.viewController;
+        [navigationController pushViewController:viewController animated:YES];
+    }else if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        UISplitViewController *splitViewController = (UISplitViewController *)appDelegate.viewController;
+        UINavigationController *navigationController = [splitViewController.viewControllers objectAtIndex:1];
+        [navigationController popToRootViewControllerAnimated:NO];
+        [navigationController pushViewController:viewController animated:YES];
     }
 }
 
