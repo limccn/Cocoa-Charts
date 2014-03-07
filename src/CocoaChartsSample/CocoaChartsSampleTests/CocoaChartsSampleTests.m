@@ -1,14 +1,14 @@
 //
-//  CocoaChartSampleTests.m
-//  CocoaChartSampleTests
+//  CocoaChartsSampleTests.m
+//  CocoaChartsSampleTests
 //
 //  Created by limc on 13-05-22.
 //  Copyright (c) 2012 limc.cn All rights reserved.
 //
 
-#import "CocoaChartSampleTests.h"
+#import "CocoaChartsSampleTests.h"
 
-@implementation CocoaChartSampleTests
+@implementation CocoaChartsSampleTests
 
 - (void)setUp
 {
@@ -26,7 +26,7 @@
 
 - (void)testExample
 {
-    STFail(@"Unit tests are not implemented yet in CocoaChartSampleTests");
+    STFail(@"Unit tests are not implemented yet in CocoaChartsSampleTests");
 }
 
 @end

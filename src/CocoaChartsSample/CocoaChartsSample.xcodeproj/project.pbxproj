@@ -254,7 +254,7 @@
 			containerPortal = A69DD0AC174CCB870012B2A0 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = A69DD0B3174CCB870012B2A0;
-			remoteInfo = CocoaChartSample;
+			remoteInfo = CocoaChartsSample;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -1032,7 +1032,7 @@
 			dependencies = (
 			);
 			name = CocoaChartsSample;
-			productName = CocoaChartSample;
+			productName = CocoaChartsSample;
 			productReference = A69DD0B4174CCB870012B2A0 /* CocoaChartsSample.app */;
 			productType = "com.apple.product-type.application";
 		};
@@ -1051,7 +1051,7 @@
 				A69DD0E0174CCB880012B2A0 /* PBXTargetDependency */,
 			);
 			name = CocoaChartsSampleTests;
-			productName = CocoaChartSampleTests;
+			productName = CocoaChartsSampleTests;
 			productReference = A69DD0DA174CCB880012B2A0 /* CocoaChartsSampleTests.octest */;
 			productType = "com.apple.product-type.bundle";
 		};
@@ -1485,13 +1485,13 @@
 		A69DD0F0174CCB880012B2A0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/CocoaChartSample.app/CocoaChartSample";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/CocoaChartsSample.app/CocoaChartsSample";
 				FRAMEWORK_SEARCH_PATHS = (
 					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
 					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "CocoaChartsSample/CocoaChartSample-Prefix.pch";
+				GCC_PREFIX_HEADER = "CocoaChartsSample/CocoaChartsSample-Prefix.pch";
 				INFOPLIST_FILE = "CocoaChartsSampleTests/CocoaChartsSampleTests-Info.plist";
 				PRODUCT_NAME = CocoaChartsSampleTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
@@ -1502,13 +1502,13 @@
 		A69DD0F1174CCB880012B2A0 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/CocoaChartSample.app/CocoaChartSample";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/CocoaChartsSample.app/CocoaChartsSample";
 				FRAMEWORK_SEARCH_PATHS = (
 					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
 					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "CocoaChartsSample/CocoaChartSample-Prefix.pch";
+				GCC_PREFIX_HEADER = "CocoaChartsSample/CocoaChartsSample-Prefix.pch";
 				INFOPLIST_FILE = "CocoaChartsSampleTests/CocoaChartsSampleTests-Info.plist";
 				PRODUCT_NAME = CocoaChartsSampleTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";

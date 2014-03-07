@@ -1,5 +1,5 @@
 //
-// Prefix header for all source files of the 'CocoaChartSample' target in the 'CocoaChartSample' project
+// Prefix header for all source files of the 'CocoaChartsSample' target in the 'CocoaChartsSample' project
 //
 
 #import <Availability.h>
@@ -16,5 +16,3 @@
 #define MARGIN_TOP ([[[UIDevice currentDevice] systemVersion] floatValue] > 6.9 ? 66:0)
 #define DEVICE_WIDTH ((UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) ? 320:690)
 #define DEVICE_HEIGHT ((UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) ? 120:200)
-
-
