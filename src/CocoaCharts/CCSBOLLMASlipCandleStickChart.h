@@ -26,7 +26,7 @@ typedef enum {
 }
 
 @property(retain, nonatomic) NSArray *bollingerBandData;
-@property(assign, nonatomic) UIColor *bollingerBandColor;
+@property(retain, nonatomic) UIColor *bollingerBandColor;
 @property(assign, nonatomic) CGFloat bollingerBandAlpha;
 @property(assign, nonatomic) NSUInteger bollingerBandStyle;
 

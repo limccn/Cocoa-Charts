@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3BB5DEF218C960AF00288894 /* CCSStringUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5DEF118C960AF00288894 /* CCSStringUtils.m */; };
 		A63AD43C1831F641007A0C07 /* CCSMinusStickChart.m in Sources */ = {isa = PBXBuildFile; fileRef = A63AD43B1831F641007A0C07 /* CCSMinusStickChart.m */; };
 		A63AD43F1831F6CC007A0C07 /* CCSMinusStickChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A63AD43E1831F6CC007A0C07 /* CCSMinusStickChartViewController.m */; };
 		A63AD44218320302007A0C07 /* CCSMACDChart.m in Sources */ = {isa = PBXBuildFile; fileRef = A63AD44118320302007A0C07 /* CCSMACDChart.m */; };
@@ -244,7 +245,6 @@
 		A6E5450B186D166500B079AC /* ta_WILLR.c in Sources */ = {isa = PBXBuildFile; fileRef = A6E54466186D166500B079AC /* ta_WILLR.c */; };
 		A6E5450C186D166500B079AC /* ta_WMA.c in Sources */ = {isa = PBXBuildFile; fileRef = A6E54467186D166500B079AC /* ta_WMA.c */; };
 		A6E5450F186D168600B079AC /* CCSTALibUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = A6E5450E186D168600B079AC /* CCSTALibUtils.m */; };
-		A6E54512186D17C700B079AC /* CCSStringUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = A6E54511186D17C700B079AC /* CCSStringUtils.m */; };
 		A6E54514186D41B000B079AC /* N225.xml in Resources */ = {isa = PBXBuildFile; fileRef = A6E54513186D41B000B079AC /* N225.xml */; };
 /* End PBXBuildFile section */
 
@@ -259,6 +259,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3BB5DEF018C960AF00288894 /* CCSStringUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSStringUtils.h; sourceTree = "<group>"; };
+		3BB5DEF118C960AF00288894 /* CCSStringUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSStringUtils.m; sourceTree = "<group>"; };
 		A63AD43A1831F641007A0C07 /* CCSMinusStickChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSMinusStickChart.h; sourceTree = "<group>"; };
 		A63AD43B1831F641007A0C07 /* CCSMinusStickChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSMinusStickChart.m; sourceTree = "<group>"; };
 		A63AD43D1831F6CC007A0C07 /* CCSMinusStickChartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSMinusStickChartViewController.h; sourceTree = "<group>"; };
@@ -570,8 +572,6 @@
 		A6E54467186D166500B079AC /* ta_WMA.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_WMA.c; sourceTree = "<group>"; };
 		A6E5450D186D168600B079AC /* CCSTALibUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSTALibUtils.h; sourceTree = "<group>"; };
 		A6E5450E186D168600B079AC /* CCSTALibUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSTALibUtils.m; sourceTree = "<group>"; };
-		A6E54510186D17C700B079AC /* CCSStringUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSStringUtils.h; sourceTree = "<group>"; };
-		A6E54511186D17C700B079AC /* CCSStringUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSStringUtils.m; sourceTree = "<group>"; };
 		A6E54513186D41B000B079AC /* N225.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = N225.xml; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -635,10 +635,10 @@
 		A69DD0F2174CCC6C0012B2A0 /* CocoaChartsSample */ = {
 			isa = PBXGroup;
 			children = (
+				3BB5DEF018C960AF00288894 /* CCSStringUtils.h */,
+				3BB5DEF118C960AF00288894 /* CCSStringUtils.m */,
 				A6E5450D186D168600B079AC /* CCSTALibUtils.h */,
 				A6E5450E186D168600B079AC /* CCSTALibUtils.m */,
-				A6E54510186D17C700B079AC /* CCSStringUtils.h */,
-				A6E54511186D17C700B079AC /* CCSStringUtils.m */,
 				A6BCD63A184DD2F600DFAAF3 /* CCSBOLLMASlipCandleStickChartViewController.h */,
 				A6BCD63B184DD2F600DFAAF3 /* CCSBOLLMASlipCandleStickChartViewController.m */,
 				A6BCD63C184DD2F600DFAAF3 /* CCSColoredStickChartViewController.h */,
@@ -1196,7 +1196,7 @@
 				A6BCD645184DD2F600DFAAF3 /* CCSColoredStickChartViewController.m in Sources */,
 				A6E54498186D166500B079AC /* ta_CDLHIGHWAVE.c in Sources */,
 				A6E5446D186D166500B079AC /* ta_AD.c in Sources */,
-				A6E54512186D17C700B079AC /* CCSStringUtils.m in Sources */,
+				3BB5DEF218C960AF00288894 /* CCSStringUtils.m in Sources */,
 				A6E544F9186D166500B079AC /* ta_STOCH.c in Sources */,
 				A6E544A3186D166500B079AC /* ta_CDLLONGLINE.c in Sources */,
 				A69DD15C174CCC6C0012B2A0 /* CCSSpiderWebChartViewController.m in Sources */,
@@ -1400,6 +1400,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = NO;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
@@ -1430,6 +1431,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = NO;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
@@ -1455,10 +1457,7 @@
 				GCC_PREFIX_HEADER = "CocoaChartsSample/CocoaChartsSample-Prefix.pch";
 				INFOPLIST_FILE = "CocoaChartsSample/CocoaChartsSample-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					/Users/ohs/Desktop,
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = CocoaChartsSample;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
@@ -1472,10 +1471,7 @@
 				GCC_PREFIX_HEADER = "CocoaChartsSample/CocoaChartsSample-Prefix.pch";
 				INFOPLIST_FILE = "CocoaChartsSample/CocoaChartsSample-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					/Users/ohs/Desktop,
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = CocoaChartsSample;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
