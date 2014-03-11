@@ -221,18 +221,19 @@
 - (void)initAxisX {
     //计算取值范围
     [self calcValueRange];
-
+    
     if (self.maxValue == 0. && self.minValue == 0.) {
         self.axisXTitles = nil;
         return;
     }
-
-    NSMutableArray *TitleX = [[[NSMutableArray alloc] init] autorelease];
+    
+    NSMutableArray *TitleX = [[NSMutableArray alloc] init];
     float average = (NSUInteger) ((self.maxValue - self.minValue) / self.latitudeNum);
     //处理刻度
     for (NSUInteger i = 0; i < self.latitudeNum; i++) {
         if (self.axisCalc == 1) {
-            NSString *value = [NSString stringWithFormat:@"%d", (int) floor(self.minValue + i * average) / self.axisCalc];
+            NSUInteger degree = floor(self.minValue + i * average) / self.axisCalc;
+            NSString *value = [[NSNumber numberWithUnsignedInteger:degree]stringValue];
             [TitleX addObject:value];
         } else {
             NSString *value = [NSString stringWithFormat:@"%-.2f", floor(self.minValue + i * average) / self.axisCalc];
@@ -241,14 +242,15 @@
     }
     //处理最大值
     if (self.axisCalc == 1) {
-        NSString *value = [NSString stringWithFormat:@"%d", (int) (self.maxValue) / self.axisCalc];
+        NSUInteger degree = (NSInteger) (self.maxValue) / self.axisCalc;
+        NSString *value = [[NSNumber numberWithUnsignedInteger:degree]stringValue];
         [TitleX addObject:value];
     }
     else {
         NSString *value = [NSString stringWithFormat:@"%-.2f", (self.maxValue) / self.axisCalc];
         [TitleX addObject:value];
     }
-
+    
     self.axisXTitles = TitleX;
 }
 

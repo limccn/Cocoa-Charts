@@ -363,8 +363,8 @@
     return str;
 }
 
-- (NSString *) decimal:(int)deci
-{    
+- (NSString *) decimal:(NSUInteger)deci
+{
     NSMutableString *ms=[[NSMutableString alloc] init];
     [ms appendString:@"###,###,###,##0"];
     if(deci != 0){

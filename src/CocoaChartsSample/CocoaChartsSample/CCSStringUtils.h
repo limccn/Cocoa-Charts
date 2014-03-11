@@ -136,7 +136,7 @@
 - (NSString *) currency:(NSString *)code;
 
 // deci=4 123456 ->123,456.0000
-- (NSString *) decimal:(int)deci;
+- (NSString *) decimal:(NSUInteger)deci;
 
 // 123456 -> +123,456
 - (NSString *) decimalWithSign;

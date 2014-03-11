@@ -20,6 +20,6 @@
 @property(assign, nonatomic) CGFloat macd;
 @property(strong, nonatomic) NSString *date;
 
-- (id)initWithDea:(CGFloat)dea diff:(CGFloat)diff macd:(float)CGFloat date:(NSString *)date;
+- (id)initWithDea:(CGFloat)dea diff:(CGFloat)diff macd:(CGFloat)macd date:(NSString *)date;
 
 @end

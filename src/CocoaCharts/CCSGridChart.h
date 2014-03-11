@@ -339,7 +339,7 @@ typedef enum {
  グリドのrect
  图表的rect
  */
-- (void)drawAxisGridX:(CGRect)rect;
+- (void)drawLatitudeLines:(CGRect)rect;
 
 /*!
  @abstract Draw the longitude lines
@@ -350,7 +350,29 @@ typedef enum {
  グリドのrect
  图表的rect
  */
-- (void)drawAxisGridY:(CGRect)rect;
+- (void)drawLongitudeLines:(CGRect)rect;
+
+/*!
+ @abstract Draw the titles on X Axis
+ X軸の目盛りを書く。
+ 绘制X轴上的刻度
+ 
+ @param rect the rect of the grid
+ グリドのrect
+ 图表的rect
+ */
+- (void)drawXAxisTitles:(CGRect)rect;
+
+/*!
+ @abstract Draw the titles on Y Axis
+ Y軸の目盛りを書く。
+ 绘制Y轴上的刻度
+ 
+ @param rect the rect of the grid
+ グリドのrect
+ 图表的rect
+ */
+- (void)drawYAxisTitles:(CGRect)rect;
 
 /*!
  @abstract Draw the cross lines

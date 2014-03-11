@@ -225,7 +225,8 @@
     //处理刻度
     for (NSUInteger i = 0; i < self.latitudeNum; i++) {
         if (self.axisCalc == 1) {
-            NSString *value = [NSString stringWithFormat:@"%d", (int) floor(self.minValue + i * average) / self.axisCalc];
+            NSUInteger degree = floor(self.minValue + i * average) / self.axisCalc;
+            NSString *value = [[NSNumber numberWithUnsignedInteger:degree]stringValue];
             [TitleX addObject:value];
         } else {
             NSString *value = [NSString stringWithFormat:@"%-.2f", floor(self.minValue + i * average) / self.axisCalc];
@@ -234,7 +235,8 @@
     }
     //处理最大值
     if (self.axisCalc == 1) {
-        NSString *value = [NSString stringWithFormat:@"%d", (int) (self.maxValue) / self.axisCalc];
+        NSUInteger degree = (NSInteger) (self.maxValue) / self.axisCalc;
+        NSString *value = [[NSNumber numberWithUnsignedInteger:degree]stringValue];
         [TitleX addObject:value];
     }
     else {

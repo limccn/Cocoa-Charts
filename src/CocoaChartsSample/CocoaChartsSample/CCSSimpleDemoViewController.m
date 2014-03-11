@@ -371,8 +371,6 @@
 
 - (void)segChartTypeValueChaged:(UISegmentedControl *)segmentedControl
 {
-    NSLog(@"index: %d", segmentedControl.selectedSegmentIndex);
-    
     if (0 == segmentedControl.selectedSegmentIndex) {
         self.candleStickChart.candleStickStyle = CCSCandleStickStyleStandard;
             [self.candleStickChart setNeedsDisplay];
@@ -1526,8 +1524,6 @@
         for (NSInteger index = 0; index < arrCls.count; index++) {
             OHLCVDData *item = [items objectAtIndex:items.count - 1 - index];
             [wrLineData addObject:[[[CCSLineData alloc] initWithValue:-([[arrWR objectAtIndex:index] doubleValue]) date:item.date] autorelease]];
-            
-            NSLog(@"WR:%f", -([[arrWR objectAtIndex:index] doubleValue]));
         }
     }
     

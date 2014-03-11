@@ -363,7 +363,7 @@
     return str;
 }
 
-- (NSString *) decimal:(int)deci
+- (NSString *) decimal:(NSUInteger)deci
 {    
     NSMutableString *ms=[[[NSMutableString alloc] init] autorelease];
     [ms appendString:@"###,###,###,##0"];

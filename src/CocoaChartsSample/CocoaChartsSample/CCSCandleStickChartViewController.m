@@ -181,7 +181,7 @@
     candleStickChart.axisMarginLeft = 30;
     candleStickChart.userInteractionEnabled = YES;
     candleStickChart.backgroundColor=[UIColor whiteColor];
-    candleStickChart.candleStickStyle = CCSCandleStickStyleBar;
+    candleStickChart.candleStickStyle = CCSCandleStickStyleStandard;
     
     [self.view addSubview:candleStickChart];
 }
