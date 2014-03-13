@@ -40,6 +40,6 @@ typedef enum
     UITableView *_tableView;
 }
 
-@property(retain, nonatomic) UITableView *tableView;
+@property(strong, nonatomic) UITableView *tableView;
 
 @end

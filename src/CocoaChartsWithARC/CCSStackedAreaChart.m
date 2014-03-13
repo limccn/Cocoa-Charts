@@ -26,6 +26,7 @@
     [super initProperty];
     //去除轴对称属性
     self.areaAlpha = 0.2;
+    self.lineAlignType = CCSLineAlignTypeJustify;
 }
 
 - (void)calcValueRange {

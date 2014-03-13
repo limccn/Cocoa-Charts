@@ -44,7 +44,7 @@
     self.selectedIndex = 0;
     self.lineWidth = 1.0f;
     self.axisCalc = 1;
-    self.lineAlignType = CCSLineAlignTypeCenter;
+    self.lineAlignType = CCSLineAlignTypeJustify;
 
     self.linesData = nil;
 }

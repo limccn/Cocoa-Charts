@@ -40,15 +40,15 @@ typedef enum {
     NSString *_preclose;
     
 }
-@property(retain ,nonatomic) NSString *open;
-@property(retain ,nonatomic) NSString *high;
-@property(retain ,nonatomic) NSString *low;
-@property(retain ,nonatomic) NSString *close;
-@property(retain ,nonatomic) NSString *vol;
-@property(retain ,nonatomic) NSString *date;
-@property(retain ,nonatomic) NSString *current;
-@property(retain ,nonatomic) NSString *change;
-@property(retain ,nonatomic) NSString *preclose;
+@property(strong ,nonatomic) NSString *open;
+@property(strong ,nonatomic) NSString *high;
+@property(strong ,nonatomic) NSString *low;
+@property(strong ,nonatomic) NSString *close;
+@property(strong ,nonatomic) NSString *vol;
+@property(strong ,nonatomic) NSString *date;
+@property(strong ,nonatomic) NSString *current;
+@property(strong ,nonatomic) NSString *change;
+@property(strong ,nonatomic) NSString *preclose;
 
 @end
 
@@ -90,41 +90,41 @@ typedef enum {
     OHLCVDData *_oHLCVDData;
 }
 
-@property(retain, nonatomic) UILabel *lblTitle;
-@property(retain, nonatomic) UILabel *lblOpen;
-@property(retain, nonatomic) UILabel *lblHigh;
-@property(retain, nonatomic) UILabel *lblLow;
-@property(retain, nonatomic) UILabel *lblClose;
-@property(retain, nonatomic) UILabel *lblVolume;
-@property(retain, nonatomic) UILabel *lblDate;
-@property(retain, nonatomic) UILabel *lblChange;
-@property(retain, nonatomic) UILabel *lblPreClose;
-@property(retain, nonatomic) UILabel *lblSubTitle1;
-@property(retain, nonatomic) UILabel *lblSubTitle2;
-@property(retain, nonatomic) UILabel *lblSubTitle3;
-@property(retain, nonatomic) UILabel *lblSubTitle4;
-@property(retain, nonatomic) UILabel *lblSubTitle5;
-@property(retain, nonatomic) UILabel *lblSubTitle6;
-@property(retain, nonatomic) UILabel *lblSubTitle7;
-@property(retain, nonatomic) UILabel *lblSubTitle8;
-@property(retain, nonatomic) UILabel *lblSubTitle9;
-@property(retain, nonatomic) UILabel *lblSubTitle10;
-@property(retain, nonatomic) CCSColoredStickChart *stickChart;
-@property(retain, nonatomic) CCSBOLLMASlipCandleStickChart *candleStickChart;
-@property(retain, nonatomic) CCSMACDChart *macdChart;
-@property(retain, nonatomic) CCSSlipLineChart *kdjChart;
-@property(retain, nonatomic) CCSSlipLineChart *rsiChart;
-@property(retain, nonatomic) CCSSlipLineChart *wrChart;
-@property(retain, nonatomic) CCSSlipLineChart *cciChart;
-@property(retain, nonatomic) CCSSlipLineChart *bollChart;
-@property(retain, nonatomic) UISegmentedControl *segChartType;
-@property(retain, nonatomic) UISegmentedControl *segBottomChartType;
-@property(retain, nonatomic) UIScrollView *scrollViewBottomChart;
+@property(strong, nonatomic) UILabel *lblTitle;
+@property(strong, nonatomic) UILabel *lblOpen;
+@property(strong, nonatomic) UILabel *lblHigh;
+@property(strong, nonatomic) UILabel *lblLow;
+@property(strong, nonatomic) UILabel *lblClose;
+@property(strong, nonatomic) UILabel *lblVolume;
+@property(strong, nonatomic) UILabel *lblDate;
+@property(strong, nonatomic) UILabel *lblChange;
+@property(strong, nonatomic) UILabel *lblPreClose;
+@property(strong, nonatomic) UILabel *lblSubTitle1;
+@property(strong, nonatomic) UILabel *lblSubTitle2;
+@property(strong, nonatomic) UILabel *lblSubTitle3;
+@property(strong, nonatomic) UILabel *lblSubTitle4;
+@property(strong, nonatomic) UILabel *lblSubTitle5;
+@property(strong, nonatomic) UILabel *lblSubTitle6;
+@property(strong, nonatomic) UILabel *lblSubTitle7;
+@property(strong, nonatomic) UILabel *lblSubTitle8;
+@property(strong, nonatomic) UILabel *lblSubTitle9;
+@property(strong, nonatomic) UILabel *lblSubTitle10;
+@property(strong, nonatomic) CCSColoredStickChart *stickChart;
+@property(strong, nonatomic) CCSBOLLMASlipCandleStickChart *candleStickChart;
+@property(strong, nonatomic) CCSMACDChart *macdChart;
+@property(strong, nonatomic) CCSSlipLineChart *kdjChart;
+@property(strong, nonatomic) CCSSlipLineChart *rsiChart;
+@property(strong, nonatomic) CCSSlipLineChart *wrChart;
+@property(strong, nonatomic) CCSSlipLineChart *cciChart;
+@property(strong, nonatomic) CCSSlipLineChart *bollChart;
+@property(strong, nonatomic) UISegmentedControl *segChartType;
+@property(strong, nonatomic) UISegmentedControl *segBottomChartType;
+@property(strong, nonatomic) UIScrollView *scrollViewBottomChart;
 
 @property(assign, nonatomic) CandleStickChartType topChartType;
 @property(assign, nonatomic) ChartViewType bottomChartType;
-@property(retain, nonatomic) NSMutableArray *chartData;
-@property(retain, nonatomic) OHLCVDData *oHLCVDData;
+@property(strong, nonatomic) NSMutableArray *chartData;
+@property(strong, nonatomic) OHLCVDData *oHLCVDData;
 
 
 
