@@ -149,7 +149,7 @@
     stickchart.axisMarginLeft = 2;
     stickchart.userInteractionEnabled = YES;
     stickchart.displayNumber=50;
-    stickchart.axisYPosition = CCSGridChartAxisYPositionRight;
+    stickchart.axisYPosition = CCSGridChartYAxisPositionRight;
     
     [self.view addSubview:stickchart];
 }

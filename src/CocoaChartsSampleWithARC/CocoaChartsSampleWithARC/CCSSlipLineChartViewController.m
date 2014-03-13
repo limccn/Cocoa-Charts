@@ -160,7 +160,7 @@
     linechart.userInteractionEnabled = YES;
     linechart.displayFrom=0;
     linechart.displayNumber=20;
-    //linechart.axisYPosition = CCSGridChartAxisYPositionRight;
+    //linechart.axisYPosition = CCSGridChartYAxisPositionRight;
     
     [self.view addSubview:linechart];
 }

@@ -373,8 +373,8 @@
     candleStickChart.linesData = linesdata;
     candleStickChart.maxValue=340;
     candleStickChart.minValue=220;
-    candleStickChart.displayAxisYTitle = YES;
-    candleStickChart.displayAxisXTitle = YES;
+    candleStickChart.displayLongitudeTitle = YES;
+    candleStickChart.displayLatitudeTitle = YES;
     candleStickChart.axisMarginBottom = 12;
     candleStickChart.maxSticksNum = 60;
     candleStickChart.axisMarginLeft = 30;

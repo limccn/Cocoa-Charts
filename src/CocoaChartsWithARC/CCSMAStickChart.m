@@ -69,7 +69,7 @@
                 if ([line.data count] > 0) {
 
                     //判断Y轴的位置设置从左往右还是从右往左绘制
-                    if (self.axisYPosition == CCSGridChartAxisYPositionLeft) {
+                    if (self.axisYPosition == CCSGridChartYAxisPositionLeft) {
                         // 点线距离
                         lineLength = ((rect.size.width - self.axisMarginLeft - self.axisMarginRight) * 1.0 / self.maxSticksNum) - 1;
                         //起始点

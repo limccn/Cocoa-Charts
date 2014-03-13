@@ -86,18 +86,18 @@
     linechart.lineWidth=1.5;
     linechart.areaAlpha=0.2;
     
-    NSMutableArray *TitleY = [[NSMutableArray alloc] init];
+    NSMutableArray *TitleX = [[NSMutableArray alloc] init];
     
-    [TitleY addObject:@"11/26"];
-    [TitleY addObject:@"12/3"];
-    [TitleY addObject:@"12/10"];
-    [TitleY addObject:@"12/17"];
-    [TitleY addObject:@"12/24"];
-    [TitleY addObject:@"12/31"];
-    [TitleY addObject:@"1/7"];
-    [TitleY addObject:@"1/14"];
+    [TitleX addObject:@"11/26"];
+    [TitleX addObject:@"12/3"];
+    [TitleX addObject:@"12/10"];
+    [TitleX addObject:@"12/17"];
+    [TitleX addObject:@"12/24"];
+    [TitleX addObject:@"12/31"];
+    [TitleX addObject:@"1/7"];
+    [TitleX addObject:@"1/14"];
     
-    linechart.axisYTitles = TitleY;
+    linechart.longitudeTitles = TitleX;
     
     [self.view addSubview:linechart];
 }

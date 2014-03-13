@@ -91,8 +91,8 @@
 - (void)drawRect:(CGRect)rect {
     
     //初始化XY轴
-    [self initAxisX];
     [self initAxisY];
+    [self initAxisX];
     
     [super drawRect:rect];
     
@@ -121,7 +121,7 @@
                 //获取线条数据
                 NSArray *lineDatas = line.data;
                 //判断Y轴的位置设置从左往右还是从右往左绘制
-                if (self.axisYPosition == CCSGridChartAxisYPositionLeft) {
+                if (self.axisYPosition == CCSGridChartYAxisPositionLeft) {
                     //TODO:自左向右绘图未对应
                     // 点线距离
                     float lineLength = ((rect.size.width - self.axisMarginLeft - 2 * self.axisMarginRight) / self.displayNumber);
@@ -199,8 +199,8 @@
     }
 }
 
-- (void)initAxisY {
-    NSMutableArray *TitleY = [[NSMutableArray alloc] init];
+- (void)initAxisX {
+    NSMutableArray *TitleX = [[NSMutableArray alloc] init];
     if (self.linesData != NULL && [self.linesData count] > 0) {
         //以第1条线作为X轴的标示
         CCSTitledLine *line = [self.linesData objectAtIndex:0];
@@ -214,14 +214,14 @@
                 }
                 CCSLineData *lineData = [line.data objectAtIndex:index];
                 //追加标题
-                [TitleY addObject:[NSString stringWithFormat:@"%@", lineData.date]];
+                [TitleX addObject:[NSString stringWithFormat:@"%@", lineData.date]];
             }
-            CCSLineData *lineData = [line.data objectAtIndex:[line.data count] - 1];
+            CCSLineData *lineData = [line.data objectAtIndex:self.displayFrom + self.displayNumber];
             //追加标题
-            [TitleY addObject:[NSString stringWithFormat:@"%@", lineData.date]];
+            [TitleX addObject:[NSString stringWithFormat:@"%@", lineData.date]];
         }
     }
-    self.axisYTitles = TitleY;
+    self.longitudeTitles = TitleX;
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {

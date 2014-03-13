@@ -3108,8 +3108,8 @@
     candleStickChart.bollingerBandData = bollBanddata;
     candleStickChart.maxValue=340;
     candleStickChart.minValue=220;
-    candleStickChart.displayAxisYTitle = YES;
-    candleStickChart.displayAxisXTitle = YES;
+    candleStickChart.displayLongitudeTitle = YES;
+    candleStickChart.displayLatitudeTitle = YES;
     candleStickChart.axisMarginBottom = 12;
     candleStickChart.maxSticksNum = 60;
     candleStickChart.axisMarginRight = 30;
@@ -3118,7 +3118,7 @@
     candleStickChart.backgroundColor=[UIColor whiteColor];
     candleStickChart.displayFrom=449;
     candleStickChart.displayNumber=50;
-    candleStickChart.axisYPosition = CCSGridChartAxisYPositionRight;
+    candleStickChart.axisYPosition = CCSGridChartYAxisPositionRight;
     
     
     [self.view addSubview:candleStickChart];

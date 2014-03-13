@@ -143,14 +143,14 @@
  初期化X軸の目盛
  初始化X轴的刻度
  */
-- (void)initAxisX;
+- (void)initAxisY;
 
 /*!
  @abstract Init Y axis degrees
  初期化Y軸の目盛
  初始化Y轴的刻度
  */
-- (void)initAxisY;
+- (void)initAxisX;
 
 /*!
  calculate the selected index from selected point 

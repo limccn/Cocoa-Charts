@@ -745,7 +745,7 @@
     self.stickChart.axisMarginLeft = 2;
     self.stickChart.axisMarginRight = 58;
     self.stickChart.axisMarginTop = 1;
-    self.stickChart.axisYPosition = CCSGridChartAxisYPositionRight;
+    self.stickChart.axisYPosition = CCSGridChartYAxisPositionRight;
     self.stickChart.displayNumber = 50;
     self.stickChart.displayFrom = 99;
     
@@ -804,7 +804,7 @@
     self.macdChart.axisMarginLeft = 2;
     self.macdChart.axisMarginRight = 58;
     self.macdChart.axisMarginTop = 1;
-    self.macdChart.axisYPosition = CCSGridChartAxisYPositionRight;
+    self.macdChart.axisYPosition = CCSGridChartYAxisPositionRight;
     
     self.macdChart.maxValue=300000;
     self.macdChart.minValue=-300000;
@@ -858,7 +858,7 @@
     self.kdjChart.axisMarginLeft = 2;
     self.kdjChart.axisMarginRight = 58;
     self.kdjChart.axisMarginTop = 1;
-    self.kdjChart.axisYPosition = CCSGridChartAxisYPositionRight;
+    self.kdjChart.axisYPosition = CCSGridChartYAxisPositionRight;
     self.kdjChart.displayCrossXOnTouch = YES;
     self.kdjChart.displayCrossYOnTouch = YES;
     self.kdjChart.latitudeNum = 2;
@@ -889,7 +889,7 @@
     self.rsiChart.axisMarginLeft = 2;
     self.rsiChart.axisMarginRight = 58;
     self.rsiChart.axisMarginTop = 1;
-    self.rsiChart.axisYPosition = CCSGridChartAxisYPositionRight;
+    self.rsiChart.axisYPosition = CCSGridChartYAxisPositionRight;
     self.rsiChart.displayCrossXOnTouch = YES;
     self.rsiChart.displayCrossYOnTouch = YES;
     self.rsiChart.latitudeNum = 2;
@@ -935,7 +935,7 @@
     self.wrChart.axisMarginLeft = 2;
     self.wrChart.axisMarginRight = 58;
     self.wrChart.axisMarginTop = 1;
-    self.wrChart.axisYPosition = CCSGridChartAxisYPositionRight;
+    self.wrChart.axisYPosition = CCSGridChartYAxisPositionRight;
     self.wrChart.displayCrossXOnTouch = YES;
     self.wrChart.displayCrossYOnTouch = YES;
     self.wrChart.latitudeNum = 2;
@@ -977,7 +977,7 @@
     self.cciChart.axisMarginLeft = 2;
     self.cciChart.axisMarginRight = 58;
     self.cciChart.axisMarginTop = 1;
-    self.cciChart.axisYPosition = CCSGridChartAxisYPositionRight;
+    self.cciChart.axisYPosition = CCSGridChartYAxisPositionRight;
     self.cciChart.displayCrossXOnTouch = YES;
     self.cciChart.displayCrossYOnTouch = YES;
     self.cciChart.latitudeNum = 2;
@@ -1018,7 +1018,7 @@
     self.bollChart.axisMarginLeft = 2;
     self.bollChart.axisMarginRight = 58;
     self.bollChart.axisMarginTop = 1;
-    self.bollChart.axisYPosition = CCSGridChartAxisYPositionRight;
+    self.bollChart.axisYPosition = CCSGridChartYAxisPositionRight;
     self.bollChart.displayCrossXOnTouch = YES;
     self.bollChart.displayCrossYOnTouch = YES;
     self.bollChart.latitudeNum = 2;
@@ -1079,7 +1079,7 @@
     candleStickChart.maxValue = 340;
     candleStickChart.minValue = 240;
     candleStickChart.axisCalc = 1;
-    candleStickChart.displayAxisYTitle = NO;
+    candleStickChart.displayLongitudeTitle = NO;
     candleStickChart.axisMarginBottom = 0;
     candleStickChart.minDisplayNumber = 25;
     candleStickChart.axisMarginLeft = 50;
@@ -1095,7 +1095,7 @@
     candleStickChart.axisMarginRight = 58;
     candleStickChart.axisMarginBottom = 0;
     candleStickChart.axisMarginTop = 1;
-    candleStickChart.axisYPosition = CCSGridChartAxisYPositionRight;
+    candleStickChart.axisYPosition = CCSGridChartYAxisPositionRight;
     candleStickChart.displayNumber = 50;
     candleStickChart.displayFrom = 99;
     candleStickChart.bollingerBandStyle = CCSBollingerBandStyleNone;

@@ -64,22 +64,11 @@
     linechart.linesData=linedata;
     linechart.maxValue=150000;
     linechart.minValue=100000;
-    linechart.longitudeNum=6;
+    linechart.longitudeNum=7;
     linechart.backgroundColor = [UIColor clearColor];
     linechart.lineWidth=1.5;
-    
-    NSMutableArray *TitleY = [[NSMutableArray alloc] init];
-    
-    [TitleY addObject:@"11/26"];
-    [TitleY addObject:@"12/3"];
-    [TitleY addObject:@"12/10"];
-    [TitleY addObject:@"12/17"];
-    [TitleY addObject:@"12/24"];
-    [TitleY addObject:@"12/31"];
-    [TitleY addObject:@"1/7"];
-    [TitleY addObject:@"1/14"];
-    
-    linechart.axisYTitles = TitleY;    
+    linechart.axisCalc = 100;
+    linechart.lineAlignType = CCSLineAlignTypeJustify;
     
     [self.view addSubview:linechart];
 }

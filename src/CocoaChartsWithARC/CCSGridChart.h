@@ -28,17 +28,26 @@
 @end
 
 /*!
- @typedef enum CCSGridChartAxisPosition
- XY Axis' Display position in grid 
- X軸、Y軸の表示位置
- X轴、Y轴在画面种的表示位置
+ @typedef enum CCSGridChartYAxisPosition
+ Y Axis' Display position in grid
+ Y軸の表示位置
+ Y轴在画面中的表示位置
  */
 typedef enum {
-    CCSGridChartAxisYPositionLeft,               //Axis Y left
-    CCSGridChartAxisYPositionRight,              //Axis Y right
-    CCSGridChartAxisXPositionTop,                //Axis X top
-    CCSGridChartAxisXPositionBottom              //Axis X bottom
-} CCSGridChartAxisPosition;
+    CCSGridChartYAxisPositionLeft,               //Axis Y left
+    CCSGridChartYAxisPositionRight,              //Axis Y right
+} CCSGridChartYAxisPosition;
+
+/*!
+ @typedef enum CCSGridChartXAxisPosition
+ X Axis' Display position in grid
+ X軸表示位置
+ X轴在画面中的表示位置
+ */
+typedef enum {
+    CCSGridChartXAxisPositionTop,                //Axis X top
+    CCSGridChartXAxisPositionBottom              //Axis X bottom
+} CCSGridChartXAxisPosition;
 
 /*!
  CCSGridChart
@@ -52,8 +61,8 @@ typedef enum {
  CCSGridChart是所有网格图表的基础类对象，它实现了基本的网格图表功能，这些功能将被它的继承类使用
  */
 @interface CCSGridChart : CCSBaseChartView {
-    NSMutableArray *_axisXTitles;
-    NSMutableArray *_axisYTitles;
+    NSMutableArray *_latitudeTitles;
+    NSMutableArray *_longitudeTitles;
     UIColor *_axisXColor;
     UIColor *_axisYColor;
     UIColor *_longitudeColor;
@@ -63,16 +72,18 @@ typedef enum {
     UIColor *_latitudeFontColor;
     UIColor *_crossLinesColor;
     UIColor *_crossLinesFontColor;
+    UIFont *_longitudeFont;
+    UIFont *_latitudeFont;
     CGFloat _axisMarginLeft;
     CGFloat _axisMarginBottom;
     CGFloat _axisMarginTop;
     CGFloat _axisMarginRight;
     NSUInteger _longitudeFontSize;
     NSUInteger _latitudeFontSize;
-    NSUInteger _axisXPosition;
-    NSUInteger _axisYPosition;
-    BOOL _displayAxisXTitle;
-    BOOL _displayAxisYTitle;
+    CCSGridChartXAxisPosition _axisXPosition;
+    CCSGridChartYAxisPosition _axisYPosition;
+    BOOL _displayLatitudeTitle;
+    BOOL _displayLongitudeTitle;
     BOOL _displayLongitude;
     BOOL _dashLongitude;
     BOOL _displayLatitude;
@@ -90,14 +101,14 @@ typedef enum {
  X軸の表示用タイトル配列
  X轴标题数组
  */
-@property(strong, nonatomic) NSMutableArray *axisXTitles;
+@property(strong, nonatomic) NSMutableArray *latitudeTitles;
 
 /*!
  Titles for display of Y axis
  Y軸の表示用タイトル配列
  Y轴标题数组
  */
-@property(strong, nonatomic) NSMutableArray *axisYTitles;
+@property(strong, nonatomic) NSMutableArray *longitudeTitles;
 
 /*!
  Color of X axis
@@ -162,6 +173,9 @@ typedef enum {
  */
 @property(strong, nonatomic) UIColor *crossLinesFontColor;
 
+@property(strong, nonatomic) UIFont *longitudeFont;
+@property(strong, nonatomic) UIFont *latitudeFont;
+
 /*!
  Margin of the axis to the left border
  轴線より左枠線の距離
@@ -209,28 +223,28 @@ typedef enum {
  X軸の表示位置（上、下）参照：CCSGridChartAxisPosition
  X轴显示位置（上、下）参看：CCSGridChartAxisPosition
  */
-@property(assign, nonatomic) NSUInteger axisXPosition;
+@property(assign, nonatomic) CCSGridChartXAxisPosition axisXPosition;
 
 /*!
  The position of Y axis(left,right) reference:CCSGridChartAxisPosition
  Y軸の表示位置（左、右）参照：CCSGridChartAxisPosition
  Y轴显示位置（左、右）参看：CCSGridChartAxisPosition
  */
-@property(assign, nonatomic) NSUInteger axisYPosition;
+@property(assign, nonatomic) CCSGridChartYAxisPosition axisYPosition;
 
 /*!
  Should display the degrees in X axis？
  X軸のタイトルを表示するか？
  X轴上的标题是否显示
  */
-@property(assign, nonatomic) BOOL displayAxisXTitle;
+@property(assign, nonatomic) BOOL displayLatitudeTitle;
 
 /*!
  Should display the degrees in Y axis？
  Y軸のタイトルを表示するか？
  Y轴上的标题是否显示
  */
-@property(assign, nonatomic) BOOL displayAxisYTitle;
+@property(assign, nonatomic) BOOL displayLongitudeTitle;
 
 /*!
  Should display longitude line？
