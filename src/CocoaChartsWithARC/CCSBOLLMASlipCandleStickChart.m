@@ -86,7 +86,6 @@
     CGContextSetAllowsAntialiasing(context, YES);
     
     float startX;
-    float lastY = 0;
     
     //逐条输出MA线
     for (NSInteger i = [self.bollingerBandData count] - 1; i >= 0; i--) {
@@ -122,7 +121,6 @@
                     }
                     
                     
-                    lastY = valueY;
                     //X位移
                     startX = startX + lineLength;
                 }
@@ -165,7 +163,6 @@
                             }
                         }
                         
-                        lastY = valueY;
                         //X位移
                         startX = startX - lineLength;
                     }

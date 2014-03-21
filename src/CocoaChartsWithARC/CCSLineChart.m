@@ -201,9 +201,9 @@
 - (void)drawData:(CGRect)rect {
 
     // 起始位置
-    float startX;
+    float startX = 0;
     float lastY = 0;
-    float lineLength;
+    float lineLength = 0;
 
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSetLineWidth(context, self.lineWidth);
