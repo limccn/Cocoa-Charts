@@ -8,12 +8,11 @@
 
 #import "CCSTALibUtils.h"
 
-void NSArrayToCArray(NSArray *array, double outCArray[])
-{
+void NSArrayToCArray(NSArray *array, double outCArray[]) {
     if (NULL == outCArray) {
         return;
     }
-    
+
     NSInteger index = 0;
     for (NSString *str in array) {
         outCArray[index] = [str doubleValue];
@@ -21,50 +20,47 @@ void NSArrayToCArray(NSArray *array, double outCArray[])
     }
 }
 
-NSArray *CArrayToNSArray(const double inCArray[], int length, int outBegIdx, int outNBElement)
-{
+NSArray *CArrayToNSArray(const double inCArray[], int length, int outBegIdx, int outNBElement) {
     if (NULL == inCArray) {
         return nil;
     }
-    
+
     NSMutableArray *outNSArray = [[NSMutableArray alloc] initWithCapacity:length];
-    
+
     for (NSInteger index = 0; index < length; index++) {
-        
+
         if (index >= outBegIdx && index < outBegIdx + outNBElement) {
             [outNSArray addObject:[NSString stringWithFormat:@"%f", inCArray[index - outBegIdx]]];
-        }else{
+        } else {
             [outNSArray addObject:[NSString stringWithFormat:@"%f", 0.0f]];
         }
-        
+
     }
-    
+
     return outNSArray;
 }
 
-NSArray *CArrayToNSArrayWithParameter(const double inCArray[], int length, int outBegIdx, int outNBElement, double parmeter)
-{
+NSArray *CArrayToNSArrayWithParameter(const double inCArray[], int length, int outBegIdx, int outNBElement, double parmeter) {
     if (NULL == inCArray) {
         return nil;
     }
-    
+
     NSMutableArray *outNSArray = [[NSMutableArray alloc] initWithCapacity:length];
-    
+
     for (NSInteger index = 0; index < length; index++) {
-        
+
         if (index >= outBegIdx && index < outBegIdx + outNBElement) {
             [outNSArray addObject:[NSString stringWithFormat:@"%f", inCArray[index - outBegIdx]]];
-        }else{
+        } else {
             [outNSArray addObject:[NSString stringWithFormat:@"%f", parmeter]];
         }
-        
+
     }
-    
+
     return outNSArray;
 }
 
-void freeAndSetNULL(void *ptr)
-{
+void freeAndSetNULL(void *ptr) {
     free(ptr);
     ptr = NULL;
 }

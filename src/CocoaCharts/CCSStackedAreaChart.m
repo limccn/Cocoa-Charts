@@ -26,6 +26,7 @@
     [super initProperty];
     //去除轴对称属性
     self.areaAlpha = 0.2;
+    self.lineAlignType = CCSLineAlignTypeJustify;
 }
 
 - (void)calcValueRange {
@@ -167,7 +168,7 @@
                 //获取线条数据
                 NSArray *lineDatas = line.data;
                 //判断Y轴的位置设置从左往右还是从右往左绘制
-                if (self.axisYPosition == CCSGridChartAxisYPositionLeft) {
+                if (self.axisYPosition == CCSGridChartYAxisPositionLeft) {
                     //TODO:自左向右绘图未对应
                     // 点线距离
                     float lineLength = ((rect.size.width - self.axisMarginLeft - 2 * self.axisMarginRight) / ([line.data count] - 1));

@@ -11,6 +11,6 @@
 
 @interface CCSPizzaChartViewController : UIViewController
 
-@property(retain,nonatomic)CCSPizzaChart *pizzaChart;
+@property(retain, nonatomic) CCSPizzaChart *pizzaChart;
 
 @end

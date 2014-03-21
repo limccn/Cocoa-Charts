@@ -8,76 +8,102 @@
 
 #import <Foundation/Foundation.h>
 
-@interface NSString(date)
+@interface NSString (date)
 
-- (NSString *) dateWithFormat:(NSString *)source target:(NSString *)target;
+- (NSString *)dateWithFormat:(NSString *)source target:(NSString *)target;
 
 //清空格式
 - (NSString *)plainDate;
+
 //20120619095532 ->20120619095532
-- (NSString *) yyyyMMddHHmmss;
+- (NSString *)yyyyMMddHHmmss;
+
 //20120619095532 ->201206190955
-- (NSString *) yyyyMMddHHmm;
+- (NSString *)yyyyMMddHHmm;
+
 //20120619095532 ->20120619
-- (NSString *) yyyyMMdd;
+- (NSString *)yyyyMMdd;
+
 //20120619095532 ->0619
-- (NSString *) yyMMdd;
+- (NSString *)yyMMdd;
+
 //20120619095532 ->0619
-- (NSString *) MMdd;
+- (NSString *)MMdd;
+
 //20120619095532 ->095532
-- (NSString *) HHmmss;
+- (NSString *)HHmmss;
+
 //095532 ->0955
-- (NSString *) HHmm;
+- (NSString *)HHmm;
+
 //20120619095532 ->20120619
-- (NSString *) yyyyMMddHHmm:(NSString *)split;
+- (NSString *)yyyyMMddHHmm:(NSString *)split;
+
 //20120619095532 ->20120619
-- (NSString *) yyyyMMddHHmmss:(NSString *)split;
+- (NSString *)yyyyMMddHHmmss:(NSString *)split;
+
 // spilt=@"-"  20120619->2012-06-19
-- (NSString *) yyyyMMdd:(NSString *)split;
+- (NSString *)yyyyMMdd:(NSString *)split;
+
 //20120619095532 ->0619
-- (NSString *) yyMMdd:(NSString *)split;
+- (NSString *)yyMMdd:(NSString *)split;
+
 // spilt=@"-"  0619->06-19
-- (NSString *) MMdd:(NSString *)split;
+- (NSString *)MMdd:(NSString *)split;
 
 @end
 
-@interface NSString(cstring)
+@interface NSString (cstring)
 //查找和替换
--(NSString *) replaceAll:(NSString *)str target:(NSString *)target;
+- (NSString *)replaceAll:(NSString *)str target:(NSString *)target;
+
 //对应位置插入
--(NSString *) insertAt:(NSString *)str post:(NSUInteger)post;
+- (NSString *)insertAt:(NSString *)str post:(NSUInteger)post;
+
 //字符串查找
--(NSUInteger) indexOf:(NSString *)str;
+- (NSUInteger)indexOf:(NSString *)str;
+
 //尾部位置追加
--(NSString *) append:(NSString *)str;
+- (NSString *)append:(NSString *)str;
+
 //头部位置插入
--(NSString *) concate:(NSString *)str;
+- (NSString *)concate:(NSString *)str;
+
 //对应字符分割
--(NSArray *) split:(NSString *)split;
+- (NSArray *)split:(NSString *)split;
+
 //去除多余的空白字符
--(NSString *) trim;
+- (NSString *)trim;
+
 //去除多余的特定字符
--(NSString *) trim:(NSString *)trim;
+- (NSString *)trim:(NSString *)trim;
+
 //去除左边多余的空白字符
--(NSString *) trimLeft;
+- (NSString *)trimLeft;
+
 //去除左边多余的特定字符
--(NSString *) trimLeft:(NSString *)trim;
+- (NSString *)trimLeft:(NSString *)trim;
+
 //去除右边多余的空白字符
--(NSString *) trimRight;
+- (NSString *)trimRight;
+
 //去除右边多余的特定字符
--(NSString *) trimRight:(NSString *)trim;
+- (NSString *)trimRight:(NSString *)trim;
 
 //取得字符串的左边特定字符数
--(NSString *) left:(NSUInteger)num;
+- (NSString *)left:(NSUInteger)num;
+
 //取得字符串的右边特定字符数
--(NSString *) right:(NSUInteger)num;
+- (NSString *)right:(NSUInteger)num;
+
 //取得字符串的左边右边特定字符数
--(NSString *) left:(NSUInteger) left right:(NSUInteger) right;
+- (NSString *)left:(NSUInteger)left right:(NSUInteger)right;
+
 //取得字符串的右边左边特定字符数
--(NSString *) right:(NSUInteger) right left:(NSUInteger) left;
+- (NSString *)right:(NSUInteger)right left:(NSUInteger)left;
 @end
 
-@interface NSString(convert)
+@interface NSString (convert)
 
 ////nil -> 0
 //-(NSString *) nilIsZero;
@@ -90,71 +116,83 @@
 
 
 //"" -> nil
--(NSString *) blankIsNil;
+- (NSString *)blankIsNil;
+
 //"" -> " "
--(NSString *) blankIsSpace;
+- (NSString *)blankIsSpace;
+
 //"" -> 0
--(NSString *) blankIsZero;
+- (NSString *)blankIsZero;
+
 //"" -> replace
--(NSString *) blankIs:(NSString *)replace;
+- (NSString *)blankIs:(NSString *)replace;
 
 
 //" " -> nil
--(NSString *) spaceIsNil;
+- (NSString *)spaceIsNil;
+
 //" " -> ""
--(NSString *) spaceIsBlank;
+- (NSString *)spaceIsBlank;
+
 //" " -> 0
--(NSString *) spaceIsZero;
+- (NSString *)spaceIsZero;
+
 //" " -> replace
--(NSString *) spaceIs:(NSString *)replace;
+- (NSString *)spaceIs:(NSString *)replace;
 
 @end
 
-@interface NSString(decimal)
+@interface NSString (decimal)
 
 //123456789.11->123,456,789.11
-- (NSString *) decimal;
+- (NSString *)decimal;
 
 //0-> -
-- (NSString *) zero;
+- (NSString *)zero;
+
 //0->""
-- (NSString *) zeroIsBlank;
+- (NSString *)zeroIsBlank;
+
 //0->nil
-- (NSString *) zeroIsNil;
+- (NSString *)zeroIsNil;
+
 //0->" "
-- (NSString *) zeroIsSpace;
+- (NSString *)zeroIsSpace;
+
 //0-> -
-- (NSString *) zeroIs;
+- (NSString *)zeroIs;
+
 //0-> replace
-- (NSString *) zeroIs:(NSString *)replace;
+- (NSString *)zeroIs:(NSString *)replace;
 
 /*
  @"HKD" 返回三位小数点格式化字符
  @"USD" 返回两位小数点格式化字符
  @"JPY" 返回无小数点格式化字符
  */
-- (NSString *) currency:(NSString *)code;
+- (NSString *)currency:(NSString *)code;
 
 // deci=4 123456 ->123,456.0000
-- (NSString *) decimal:(NSUInteger)deci;
+- (NSString *)decimal:(NSUInteger)deci;
 
 // 123456 -> +123,456
-- (NSString *) decimalWithSign;
+- (NSString *)decimalWithSign;
 
 // deci=4 123456-> +123,456.0000
-- (NSString *) decimalWithSign:(NSUInteger)deci;
+- (NSString *)decimalWithSign:(NSUInteger)deci;
 
 //正返回红色 0返回黑 负返回蓝色
-- (UIColor *) colorForSign;
+- (UIColor *)colorForSign;
 
 // self > value值返回红色 self = value值返回黑色 self < value值返回蓝色
-- (UIColor *) colorForCompare:(NSString *)value;
+- (UIColor *)colorForCompare:(NSString *)value;
 
 // self > value值返回红色 self = value值返回黑色 self < value值返回蓝色
-- (UIColor *) colorForCompareDouble:(double)value;
+- (UIColor *)colorForCompareDouble:(double)value;
 
-- (NSString *) normal;
+- (NSString *)normal;
+
 // 123,456,789 -> 123456789
-- (NSString *) numberic;
+- (NSString *)numberic;
 
 @end

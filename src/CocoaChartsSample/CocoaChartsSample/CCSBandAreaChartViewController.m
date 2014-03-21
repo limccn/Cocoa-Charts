@@ -17,8 +17,7 @@
 
 @implementation CCSBandAreaChartViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
@@ -26,21 +25,19 @@
     return self;
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
+- (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
+
     self.title = @"Band Area Chart";
 }
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
-    
-    NSMutableArray *linedata = [[[NSMutableArray alloc]init]autorelease];
-    
-    NSMutableArray *singlelinedatas1 = [[[NSMutableArray alloc]init]autorelease];
+
+    NSMutableArray *linedata = [[[NSMutableArray alloc] init] autorelease];
+
+    NSMutableArray *singlelinedatas1 = [[[NSMutableArray alloc] init] autorelease];
     [singlelinedatas1 addObject:[[[CCSLineData alloc] initWithValue:10617113 date:@"11/4"] autorelease]];
     [singlelinedatas1 addObject:[[[CCSLineData alloc] initWithValue:10603895 date:@"11/1"] autorelease]];
     [singlelinedatas1 addObject:[[[CCSLineData alloc] initWithValue:10580560 date:@"10/31"] autorelease]];
@@ -141,15 +138,15 @@
     [singlelinedatas1 addObject:[[[CCSLineData alloc] initWithValue:10749237 date:@"6/6"] autorelease]];
     [singlelinedatas1 addObject:[[[CCSLineData alloc] initWithValue:10692279 date:@"6/5"] autorelease]];
     [singlelinedatas1 addObject:[[[CCSLineData alloc] initWithValue:10658587 date:@"6/4"] autorelease]];
-    
-    CCSTitledLine *singleline1 = [[[CCSTitledLine alloc]init] autorelease];
+
+    CCSTitledLine *singleline1 = [[[CCSTitledLine alloc] init] autorelease];
     singleline1.data = singlelinedatas1;
     singleline1.color = [UIColor blueColor];
     singleline1.title = @"chartLine1";
-    
+
     [linedata addObject:singleline1];
-    
-    NSMutableArray *singlelinedatas2 = [[[NSMutableArray alloc]init]autorelease];
+
+    NSMutableArray *singlelinedatas2 = [[[NSMutableArray alloc] init] autorelease];
     [singlelinedatas2 addObject:[[[CCSLineData alloc] initWithValue:9725886 date:@"11/4"] autorelease]];
     [singlelinedatas2 addObject:[[[CCSLineData alloc] initWithValue:9718104 date:@"11/1"] autorelease]];
     [singlelinedatas2 addObject:[[[CCSLineData alloc] initWithValue:9723439 date:@"10/31"] autorelease]];
@@ -250,15 +247,15 @@
     [singlelinedatas2 addObject:[[[CCSLineData alloc] initWithValue:9541762 date:@"6/6"] autorelease]];
     [singlelinedatas2 addObject:[[[CCSLineData alloc] initWithValue:9650720 date:@"6/5"] autorelease]];
     [singlelinedatas2 addObject:[[[CCSLineData alloc] initWithValue:9724412 date:@"6/4"] autorelease]];
-    
-    CCSTitledLine *singleline2 = [[[CCSTitledLine alloc]init] autorelease];
+
+    CCSTitledLine *singleline2 = [[[CCSTitledLine alloc] init] autorelease];
     singleline2.data = singlelinedatas2;
     singleline2.color = [UIColor redColor];
     singleline2.title = @"chartLine2";
-    
+
     [linedata addObject:singleline2];
-    
-    NSMutableArray *singlelinedatas3 = [[[NSMutableArray alloc]init]autorelease];
+
+    NSMutableArray *singlelinedatas3 = [[[NSMutableArray alloc] init] autorelease];
     [singlelinedatas3 addObject:[[[CCSLineData alloc] initWithValue:10171500 date:@"11/4"] autorelease]];
     [singlelinedatas3 addObject:[[[CCSLineData alloc] initWithValue:10161000 date:@"11/1"] autorelease]];
     [singlelinedatas3 addObject:[[[CCSLineData alloc] initWithValue:10152000 date:@"10/31"] autorelease]];
@@ -359,30 +356,29 @@
     [singlelinedatas3 addObject:[[[CCSLineData alloc] initWithValue:10145500 date:@"6/6"] autorelease]];
     [singlelinedatas3 addObject:[[[CCSLineData alloc] initWithValue:10171500 date:@"6/5"] autorelease]];
     [singlelinedatas3 addObject:[[[CCSLineData alloc] initWithValue:10191500 date:@"6/4"] autorelease]];
-    
-    CCSTitledLine *singleline3 = [[[CCSTitledLine alloc]init] autorelease];
+
+    CCSTitledLine *singleline3 = [[[CCSTitledLine alloc] init] autorelease];
     singleline3.data = singlelinedatas3;
     singleline3.color = [UIColor greenColor];
     singleline3.title = @"chartLine2";
-    
+
     [linedata addObject:singleline3];
-    
-    CCSBandAreaChart *linechart =[[[CCSBandAreaChart alloc] initWithFrame:CGRectMake(0, MARGIN_TOP, 320, 320)] autorelease];
-    
-    linechart.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth;
-    
-    linechart.linesData=linedata;
-    linechart.longitudeNum=6;
+
+    CCSBandAreaChart *linechart = [[[CCSBandAreaChart alloc] initWithFrame:CGRectMake(0, MARGIN_TOP, 320, 320)] autorelease];
+
+    linechart.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+
+    linechart.linesData = linedata;
+    linechart.longitudeNum = 6;
     linechart.backgroundColor = [UIColor clearColor];
-    linechart.lineWidth=1.5;
-    linechart.areaAlpha=0.5;
-    
+    linechart.lineWidth = 1.5;
+    linechart.areaAlpha = 0.5;
+
     [self.view addSubview:linechart];
 }
 
 
-- (void)didReceiveMemoryWarning
-{
+- (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }

@@ -11,7 +11,9 @@
 void NSArrayToCArray(NSArray *array, double outCArray[]);
 
 NSArray *CArrayToNSArray(const double inCArray[], int length, int outBegIdx, int outNBElement);
+
 NSArray *CArrayToNSArrayWithParameter(const double inCArray[], int length, int outBegIdx, int outNBElement, double parmeter);
+
 void freeAndSetNULL(void *ptr);
 
 

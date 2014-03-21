@@ -19,16 +19,16 @@ typedef enum {
 } CandleStickChartType;
 
 typedef enum {
-    ChartViewTypeVOL  = 101,
+    ChartViewTypeVOL = 101,
     ChartViewTypeMACD = 102,
-    ChartViewTypeKDJ  = 103,
-    ChartViewTypeRSI  = 104,
-    ChartViewTypeWR   = 105,
-    ChartViewTypeCCI  = 106,
+    ChartViewTypeKDJ = 103,
+    ChartViewTypeRSI = 104,
+    ChartViewTypeWR = 105,
+    ChartViewTypeCCI = 106,
     ChartViewTypeBOLL = 107
 } ChartViewType;
 
-@interface OHLCVDData:NSObject{
+@interface OHLCVDData : NSObject {
     NSString *_open;
     NSString *_high;
     NSString *_low;
@@ -38,21 +38,21 @@ typedef enum {
     NSString *_current;
     NSString *_change;
     NSString *_preclose;
-    
+
 }
-@property(retain ,nonatomic) NSString *open;
-@property(retain ,nonatomic) NSString *high;
-@property(retain ,nonatomic) NSString *low;
-@property(retain ,nonatomic) NSString *close;
-@property(retain ,nonatomic) NSString *vol;
-@property(retain ,nonatomic) NSString *date;
-@property(retain ,nonatomic) NSString *current;
-@property(retain ,nonatomic) NSString *change;
-@property(retain ,nonatomic) NSString *preclose;
+@property(retain, nonatomic) NSString *open;
+@property(retain, nonatomic) NSString *high;
+@property(retain, nonatomic) NSString *low;
+@property(retain, nonatomic) NSString *close;
+@property(retain, nonatomic) NSString *vol;
+@property(retain, nonatomic) NSString *date;
+@property(retain, nonatomic) NSString *current;
+@property(retain, nonatomic) NSString *change;
+@property(retain, nonatomic) NSString *preclose;
 
 @end
 
-@interface CCSSimpleDemoViewController : UIViewController<NSXMLParserDelegate,UIScrollViewDelegate,CCSChartDelegate> {
+@interface CCSSimpleDemoViewController : UIViewController <NSXMLParserDelegate, UIScrollViewDelegate, CCSChartDelegate> {
     UILabel *_lblTitle;
     UILabel *_lblOpen;
     UILabel *_lblHigh;
@@ -83,7 +83,7 @@ typedef enum {
     UISegmentedControl *_segChartType;
     UISegmentedControl *_segBottomChartType;
     UIScrollView *_scrollViewBottomChart;
-    
+
     CandleStickChartType _topChartType;
     ChartViewType _bottomChartType;
     NSMutableArray *_chartData;
@@ -125,7 +125,6 @@ typedef enum {
 @property(assign, nonatomic) ChartViewType bottomChartType;
 @property(retain, nonatomic) NSMutableArray *chartData;
 @property(retain, nonatomic) OHLCVDData *oHLCVDData;
-
 
 
 @end

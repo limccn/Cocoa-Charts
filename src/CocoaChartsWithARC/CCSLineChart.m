@@ -32,6 +32,7 @@
 @synthesize maxValue = _maxValue;
 @synthesize minValue = _minValue;
 @synthesize axisCalc = _axisCalc;
+@synthesize lineAlignType = _lineAlignType;
 
 - (void)initProperty {
 

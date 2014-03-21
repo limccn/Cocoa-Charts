@@ -76,12 +76,12 @@
     self.minValue = minValue;
 }
 
-- (void)initAxisY {
-    NSMutableArray *TitleY = [[[NSMutableArray alloc] init] autorelease];
+- (void)initAxisX {
+    NSMutableArray *TitleX = [[[NSMutableArray alloc] init] autorelease];
     if (self.stickData != NULL && [self.stickData count] > 0) {
         float average = self.displayNumber / self.longitudeNum;
         CCSStickChartData *chartdata = nil;
-        if (self.axisYPosition == CCSGridChartAxisYPositionLeft) {
+        if (self.axisYPosition == CCSGridChartYAxisPositionLeft) {
             //处理刻度
             for (NSUInteger i = 0; i < self.longitudeNum; i++) {
                 NSUInteger index = self.displayFrom + (NSUInteger) floor(i * average);
@@ -90,11 +90,11 @@
                 }
                 chartdata = [self.stickData objectAtIndex:index];
                 //追加标题
-                [TitleY addObject:[NSString stringWithFormat:@"%@", chartdata.date]];
+                [TitleX addObject:[NSString stringWithFormat:@"%@", chartdata.date]];
             }
             chartdata = [self.stickData objectAtIndex:self.displayFrom + self.displayNumber - 1];
             //追加标题
-            [TitleY addObject:[NSString stringWithFormat:@"%@", chartdata.date]];
+            [TitleX addObject:[NSString stringWithFormat:@"%@", chartdata.date]];
         }
         else {
             //处理刻度
@@ -105,58 +105,58 @@
                 }
                 chartdata = [self.stickData objectAtIndex:index];
                 //追加标题
-                [TitleY addObject:[NSString stringWithFormat:@"%@", chartdata.date]];
+                [TitleX addObject:[NSString stringWithFormat:@"%@", chartdata.date]];
             }
             chartdata = [self.stickData objectAtIndex:self.displayFrom + self.displayNumber - 1];
             //追加标题
-            [TitleY addObject:[NSString stringWithFormat:@"%@", chartdata.date]];
+            [TitleX addObject:[NSString stringWithFormat:@"%@", chartdata.date]];
         }
 
     }
-    self.axisYTitles = TitleY;
+    self.longitudeTitles = TitleX;
 }
 
-- (void)initAxisX {
+- (void)initAxisY {
     //计算取值范围
     [self calcValueRange];
     
     if (self.maxValue == 0. && self.minValue == 0.) {
-        self.axisXTitles = nil;
+        self.latitudeTitles = nil;
         return;
     }
     
-    NSMutableArray *TitleX = [[NSMutableArray alloc] init];
+    NSMutableArray *TitleY = [[[NSMutableArray alloc] init]autorelease];
     float average = (NSUInteger) ((self.maxValue - self.minValue) / self.latitudeNum);
     //处理刻度
     for (NSUInteger i = 0; i < self.latitudeNum; i++) {
         if (self.axisCalc == 1) {
             NSUInteger degree = floor(self.minValue + i * average) / self.axisCalc;
             NSString *value = [[NSNumber numberWithUnsignedInteger:degree]stringValue];
-            [TitleX addObject:value];
+            [TitleY addObject:value];
         } else {
             NSString *value = [NSString stringWithFormat:@"%-.2f", floor(self.minValue + i * average) / self.axisCalc];
-            [TitleX addObject:value];
+            [TitleY addObject:value];
         }
     }
     //处理最大值
     if (self.axisCalc == 1) {
         NSUInteger degree = (NSInteger) (self.maxValue) / self.axisCalc;
         NSString *value = [[NSNumber numberWithUnsignedInteger:degree]stringValue];
-        [TitleX addObject:value];
+        [TitleY addObject:value];
     }
     else {
         NSString *value = [NSString stringWithFormat:@"%-.2f", (self.maxValue) / self.axisCalc];
-        [TitleX addObject:value];
+        [TitleY addObject:value];
     }
     
-    self.axisXTitles = TitleX;
+    self.latitudeTitles = TitleY;
 }
 
 - (NSString *)calcAxisXGraduate:(CGRect)rect {
     float value = [self touchPointAxisXValue:rect];
     NSString *result = @"";
     if (self.stickData != NULL && [self.stickData count] > 0) {
-        if (self.axisYPosition == CCSGridChartAxisYPositionLeft) {
+        if (self.axisYPosition == CCSGridChartYAxisPositionLeft) {
             if (value >= 1) {
                 result = ((CCSStickChartData *) [self.stickData objectAtIndex:self.displayFrom + self.displayNumber - 1]).date;
             } else if (value <= 0) {
@@ -317,7 +317,7 @@
 
     if (self.stickData != NULL && [self.stickData count] > 0) {
 
-        if (self.axisYPosition == CCSGridChartAxisYPositionLeft) {
+        if (self.axisYPosition == CCSGridChartYAxisPositionLeft) {
             // 蜡烛棒起始绘制位置
             float stickX = self.axisMarginLeft + 1;
             //判断显示为方柱或显示为线条
@@ -383,7 +383,7 @@
 
 - (void)calcSelectedIndex {
     //X在系统范围内、进行计算
-    if (self.axisYPosition == CCSGridChartAxisYPositionLeft) {
+    if (self.axisYPosition == CCSGridChartYAxisPositionLeft) {
         if (self.singleTouchPoint.x > self.axisMarginLeft
             && self.singleTouchPoint.x < self.frame.size.width) {
             float stickWidth = ((self.frame.size.width - self.axisMarginLeft - self.axisMarginRight) / self.displayNumber);

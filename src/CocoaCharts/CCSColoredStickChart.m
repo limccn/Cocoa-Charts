@@ -36,7 +36,7 @@
 
     if (self.stickData != NULL && [self.stickData count] > 0) {
 
-        if (self.axisYPosition == CCSGridChartAxisYPositionLeft) {
+        if (self.axisYPosition == CCSGridChartYAxisPositionLeft) {
             // 蜡烛棒起始绘制位置
             float stickX = self.axisMarginLeft + 1;
             //判断显示为方柱或显示为线条

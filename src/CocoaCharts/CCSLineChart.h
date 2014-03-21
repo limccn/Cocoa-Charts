@@ -22,6 +22,12 @@
 #import "CCSGridChart.h"
 #import "CCSStickChart.h"
 
+typedef enum {
+    CCSLineAlignTypeCenter,
+    CCSLineAlignTypeJustify
+} CCSLineAlignType;
+
+
 /*!
  CCSLineChart
  
@@ -39,6 +45,8 @@
     CGFloat _lineWidth;
     CGFloat _maxValue;
     CGFloat _minValue;
+    NSUInteger _axisCalc;
+    CCSLineAlignType _lineAlignType;
 }
 
 /*!
@@ -86,6 +94,15 @@
  Y轴显示最小值
  */
 @property(assign, nonatomic) CGFloat minValue;
+
+/*!
+ fast calculator for axis Y degrees （display degrees＝degrees/axisCalc）
+ Y軸目盛りの快速計算子，（表示目盛り＝計算目盛り/axisCalc）
+ Y轴显示值的快速计算子（表示刻度＝ 计算刻度/axisCalc）
+ */
+@property(assign, nonatomic) NSUInteger axisCalc;
+
+@property(assign, nonatomic) CCSLineAlignType lineAlignType;
 
 
 /*!

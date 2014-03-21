@@ -249,7 +249,7 @@
                 float valueY = ((1 - (lineData.dea - self.minValue) / (self.maxValue - self.minValue)) * (rect.size.height - self.axisMarginBottom) - super.axisMarginTop);
                 //绘制线条路径
                 if (j == self.displayFrom || j == 0) {
-                    if (lineData.diff == 0) {
+                    if (lineData.dea == 0) {
                         //DO NOTHING
                     }else{
                         CGContextMoveToPoint(context, startX, valueY);

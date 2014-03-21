@@ -15,8 +15,7 @@
 
 @implementation CCSGridChartViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
@@ -24,52 +23,49 @@
     return self;
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
+- (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
+
     self.title = @"Grid Chart";
 }
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
-    
-    CCSGridChart *gridchart =[[[CCSGridChart alloc] initWithFrame:CGRectMake(0, MARGIN_TOP, 320, 320)] autorelease];
-    
-    gridchart.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth;
-    
+
+    CCSGridChart *gridchart = [[[CCSGridChart alloc] initWithFrame:CGRectMake(0, MARGIN_TOP, 320, 320)] autorelease];
+
+    gridchart.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+
     gridchart.backgroundColor = [UIColor clearColor];
-    
-    NSMutableArray *TitleY = [[[NSMutableArray alloc] init]autorelease];
-    
-    [TitleY addObject:@"11/26"];
-    [TitleY addObject:@"12/3"];
-    [TitleY addObject:@"12/10"];
-    [TitleY addObject:@"12/17"];
-    [TitleY addObject:@"12/24"];
-    [TitleY addObject:@"12/31"];
-    [TitleY addObject:@"1/7"];
-    [TitleY addObject:@"1/14"];
-    
-    gridchart.axisYTitles = TitleY;
-    
-    NSMutableArray *TitleX = [[[NSMutableArray alloc] init]autorelease];
-    
-    [TitleX addObject:@"0"];
-    [TitleX addObject:@"1000"];
-    [TitleX addObject:@"2000"];
-    [TitleX addObject:@"3000"];
-    [TitleX addObject:@"4000"];
-    
-    gridchart.axisXTitles = TitleX;
-    
+
+    NSMutableArray *TitleX = [[[NSMutableArray alloc] init] autorelease];
+
+    [TitleX addObject:@"11/26"];
+    [TitleX addObject:@"12/3"];
+    [TitleX addObject:@"12/10"];
+    [TitleX addObject:@"12/17"];
+    [TitleX addObject:@"12/24"];
+    [TitleX addObject:@"12/31"];
+    [TitleX addObject:@"1/7"];
+    [TitleX addObject:@"1/14"];
+
+    gridchart.longitudeTitles = TitleX;
+
+    NSMutableArray *TitleY = [[[NSMutableArray alloc] init] autorelease];
+
+    [TitleY addObject:@"0"];
+    [TitleY addObject:@"1000"];
+    [TitleY addObject:@"2000"];
+    [TitleY addObject:@"3000"];
+    [TitleY addObject:@"4000"];
+
+    gridchart.latitudeTitles = TitleY;
+
     [self.view addSubview:gridchart];
 }
 
-- (void)didReceiveMemoryWarning
-{
+- (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }

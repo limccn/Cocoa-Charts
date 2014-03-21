@@ -12,8 +12,8 @@
 
 @interface CCSAppDelegate : UIResponder <UIApplicationDelegate>
 
-@property (retain, nonatomic) UIWindow *window;
+@property(retain, nonatomic) UIWindow *window;
 
-@property (retain, nonatomic) UIViewController *viewController;
+@property(retain, nonatomic) UIViewController *viewController;
 
 @end

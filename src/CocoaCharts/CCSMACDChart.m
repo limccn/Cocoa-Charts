@@ -85,7 +85,7 @@
 
     if (self.stickData != NULL && [self.stickData count] > 0) {
 
-        if (self.axisYPosition == CCSGridChartAxisYPositionLeft) {
+        if (self.axisYPosition == CCSGridChartYAxisPositionLeft) {
             // 蜡烛棒宽度
             float stickWidth = ((rect.size.width - self.axisMarginLeft - 2 * self.axisMarginRight) / self.displayNumber) - 1;
             
@@ -229,7 +229,7 @@
         // 点线距离
         float lineLength;
         
-        if (self.axisYPosition == CCSGridChartAxisYPositionLeft) {
+        if (self.axisYPosition == CCSGridChartYAxisPositionLeft) {
             lineLength = ((rect.size.width - self.axisMarginLeft - 2 * self.axisMarginRight) / self.displayNumber);
         }else{
             lineLength = ((rect.size.width - 2 * self.axisMarginLeft - self.axisMarginRight) / self.displayNumber);
@@ -259,7 +259,7 @@
                 float valueY = ((1 - (lineData.dea - self.minValue) / (self.maxValue - self.minValue)) * (rect.size.height - self.axisMarginBottom) - super.axisMarginTop);
                 //绘制线条路径
                 if (j == self.displayFrom || j == 0) {
-                    if (lineData.diff == 0) {
+                    if (lineData.dea == 0) {
                         //DO NOTHING
                     }else{
                         CGContextMoveToPoint(context, startX, valueY);

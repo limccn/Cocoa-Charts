@@ -69,7 +69,7 @@
     }
 
     //判断显示为方柱或显示为线条
-    if (self.axisYPosition == CCSGridChartAxisYPositionLeft) {
+    if (self.axisYPosition == CCSGridChartYAxisPositionLeft) {
         for (NSUInteger i = self.displayFrom; i < self.displayFrom + self.displayNumber; i++) {
             CCSCandleStickChartData *stick = [self.stickData objectAtIndex:i];
             if (stick.open == 0 && stick.high == 0 && stick.low == 0) {
@@ -165,14 +165,14 @@
     }
 }
 
-- (void)initAxisY {
+- (void)initAxisX {
     //计算取值范围
     [self calcValueRange];
 
-    NSMutableArray *TitleY = [[[NSMutableArray alloc] init] autorelease];
+    NSMutableArray *TitleX = [[[NSMutableArray alloc] init] autorelease];
     if (self.stickData != NULL && [self.stickData count] > 0) {
         float average = 1.0 * self.displayNumber / self.longitudeNum;
-        if (self.axisYPosition == CCSGridChartAxisYPositionLeft) {
+        if (self.axisYPosition == CCSGridChartYAxisPositionLeft) {
             CCSCandleStickChartData *chartdata = nil;
             //处理刻度
             for (NSUInteger i = 0; i < self.longitudeNum; i++) {
@@ -182,11 +182,11 @@
                 }
                 chartdata = [self.stickData objectAtIndex:index];
                 //追加标题
-                [TitleY addObject:[NSString stringWithFormat:@"%@", chartdata.date]];
+                [TitleX addObject:[NSString stringWithFormat:@"%@", chartdata.date]];
             }
             chartdata = [self.stickData objectAtIndex:self.displayFrom + self.displayNumber - 1];
             //追加标题
-            [TitleY addObject:[NSString stringWithFormat:@"%@", chartdata.date]];
+            [TitleX addObject:[NSString stringWithFormat:@"%@", chartdata.date]];
         } else {
             CCSCandleStickChartData *chartdata = nil;
             //处理刻度
@@ -197,21 +197,21 @@
                 }
                 chartdata = [self.stickData objectAtIndex:index];
                 //追加标题
-                [TitleY addObject:[NSString stringWithFormat:@"%@", chartdata.date]];
+                [TitleX addObject:[NSString stringWithFormat:@"%@", chartdata.date]];
             }
             chartdata = [self.stickData objectAtIndex:self.displayFrom + self.displayNumber - 1];
             //追加标题
-            [TitleY addObject:[NSString stringWithFormat:@"%@", chartdata.date]];
+            [TitleX addObject:[NSString stringWithFormat:@"%@", chartdata.date]];
         }
 
     }
-    self.axisYTitles = TitleY;
+    self.longitudeTitles = TitleX;
 }
 
 
-- (void)initAxisX {
+- (void)initAxisY {
     //调用父类的initAxisX方法
-    [super initAxisX];
+    [super initAxisY];
 }
 
 
@@ -228,7 +228,7 @@
 
     if (self.stickData != NULL && [self.stickData count] > 0) {
         //判断Y轴的位置设置从左往右还是从右往左绘制
-        if (self.axisYPosition == CCSGridChartAxisYPositionLeft) {
+        if (self.axisYPosition == CCSGridChartYAxisPositionLeft) {
             // 蜡烛棒起始绘制位置
             float stickX = self.axisMarginLeft + 1;
             for (NSUInteger i = self.displayFrom; i < self.displayFrom + self.displayNumber; i++) {
