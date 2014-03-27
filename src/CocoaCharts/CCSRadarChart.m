@@ -5,6 +5,18 @@
 //  Created by limc on 11/13/13.
 //  Copyright (c) 2013 limc. All rights reserved.
 //
+//  Licensed under the Apache License, Version 2.0 (the "License");
+//  you may not use this file except in compliance with the License.
+//  You may obtain a copy of the License at
+//
+//  http://www.apache.org/licenses/LICENSE-2.0
+//
+//  Unless required by applicable law or agreed to in writing, software
+//  distributed under the License is distributed on an "AS IS" BASIS,
+//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//  See the License for the specific language governing permissions and
+//  limitations under the License.
+//
 
 #import "CCSRadarChart.h"
 #import "CCSTitleValuesColor.h"
@@ -40,10 +52,10 @@
             //绘制Web图
             for (NSUInteger i = 0; i < self.longitudeNum; i++) {
                 //获取值
-                float value = [((NSNumber *) [values objectAtIndex:i]) floatValue];
+                CGFloat value = [((NSNumber *) [values objectAtIndex:i]) floatValue];
 
-                float ptX = (float) (self.position.x - self.longitudeLength * value / self.latitudeNum * sin(i * 2 * PI / self.longitudeNum));
-                float ptY = (float) (self.position.y - self.longitudeLength * value / self.latitudeNum * cos(i * 2 * PI / self.longitudeNum));
+                CGFloat ptX = (CGFloat) (self.position.x - self.longitudeLength * value / self.latitudeNum * sin(i * 2 * PI / self.longitudeNum));
+                CGFloat ptY = (CGFloat) (self.position.y - self.longitudeLength * value / self.latitudeNum * cos(i * 2 * PI / self.longitudeNum));
 
                 if (i == 0) {
                     CGContextMoveToPoint(context, ptX, ptY);
@@ -78,13 +90,13 @@
     //绘制蛛网图外围边框与填充
     for (NSUInteger i = 0; i < self.longitudeNum; i++) {
 
-        float ptX = (float) (self.position.x - self.longitudeLength * sin(i * 2 * PI / self.longitudeNum));
-        float ptY = (float) (self.position.y - self.longitudeLength * cos(i * 2 * PI / self.longitudeNum));
+        CGFloat ptX = (CGFloat) (self.position.x - self.longitudeLength * sin(i * 2 * PI / self.longitudeNum));
+        CGFloat ptY = (CGFloat) (self.position.y - self.longitudeLength * cos(i * 2 * PI / self.longitudeNum));
 
         //绘制标题
         NSString *title = [self.titles objectAtIndex:i];
-        float realx = 0;
-        float realy = 0;
+        CGFloat realx = 0;
+        CGFloat realy = 0;
 
         //重新计算坐标
         //TODO 计算算法日后完善
@@ -137,8 +149,8 @@
     //绘制蛛网经线
     for (NSUInteger i = 0; i < self.longitudeNum; i++) {
 
-        float ptX = (float) (self.position.x - self.longitudeLength * sin(i * 2 * PI / self.longitudeNum));
-        float ptY = (float) (self.position.y - self.longitudeLength * cos(i * 2 * PI / self.longitudeNum));
+        CGFloat ptX = (CGFloat) (self.position.x - self.longitudeLength * sin(i * 2 * PI / self.longitudeNum));
+        CGFloat ptY = (CGFloat) (self.position.y - self.longitudeLength * cos(i * 2 * PI / self.longitudeNum));
 
         CGContextMoveToPoint(context, self.position.x, self.position.y);
         CGContextAddLineToPoint(context, ptX, ptY);

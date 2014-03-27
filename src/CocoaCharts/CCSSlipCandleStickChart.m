@@ -171,7 +171,7 @@
 
     NSMutableArray *TitleX = [[[NSMutableArray alloc] init] autorelease];
     if (self.stickData != NULL && [self.stickData count] > 0) {
-        float average = 1.0 * self.displayNumber / self.longitudeNum;
+        CGFloat average = 1.0 * self.displayNumber / self.longitudeNum;
         if (self.axisYPosition == CCSGridChartYAxisPositionLeft) {
             CCSCandleStickChartData *chartdata = nil;
             //处理刻度
@@ -221,7 +221,7 @@
 
 - (void)drawData:(CGRect)rect {
     // 蜡烛棒宽度
-    float stickWidth = ((rect.size.width - self.axisMarginLeft - self.axisMarginRight) / self.displayNumber) - 1;
+    CGFloat stickWidth = ([self dataQuadrantPaddingWidth:rect] / self.displayNumber) - 1;
 
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSetLineWidth(context, 1.0f);
@@ -230,13 +230,13 @@
         //判断Y轴的位置设置从左往右还是从右往左绘制
         if (self.axisYPosition == CCSGridChartYAxisPositionLeft) {
             // 蜡烛棒起始绘制位置
-            float stickX = self.axisMarginLeft + 1;
+            CGFloat stickX = [self dataQuadrantPaddingStartX:rect] + 1;
             for (NSUInteger i = self.displayFrom; i < self.displayFrom + self.displayNumber; i++) {
                 CCSCandleStickChartData *data = [self.stickData objectAtIndex:i];
-                float openY = ((1 - (data.open - self.minValue) / (self.maxValue - self.minValue)) * (rect.size.height - self.axisMarginBottom) - self.axisMarginTop);
-                float highY = ((1 - (data.high - self.minValue) / (self.maxValue - self.minValue)) * (rect.size.height - self.axisMarginBottom) - self.axisMarginTop);
-                float lowY = ((1 - (data.low - self.minValue) / (self.maxValue - self.minValue)) * (rect.size.height - self.axisMarginBottom) - self.axisMarginTop);
-                float closeY = ((1 - (data.close - self.minValue) / (self.maxValue - self.minValue)) * (rect.size.height - self.axisMarginBottom) - self.axisMarginTop);
+                CGFloat openY = ((1 - (data.open - self.minValue) / (self.maxValue - self.minValue)) * [self dataQuadrantPaddingHeight:rect]+[self dataQuadrantPaddingStartX:rect]);
+                CGFloat highY = ((1 - (data.high - self.minValue) / (self.maxValue - self.minValue)) * [self dataQuadrantPaddingHeight:rect]+[self dataQuadrantPaddingStartX:rect]);
+                CGFloat lowY = ((1 - (data.low - self.minValue) / (self.maxValue - self.minValue)) * [self dataQuadrantPaddingHeight:rect]+[self dataQuadrantPaddingStartX:rect]);
+                CGFloat closeY = ((1 - (data.close - self.minValue) / (self.maxValue - self.minValue)) * [self dataQuadrantPaddingHeight:rect]+[self dataQuadrantPaddingStartX:rect]);
 
                 // 处理和生产K线中的阴线和阳线
                 if (data.open == 0 && data.high == 0 && data.low == 0) {
@@ -328,16 +328,16 @@
             }
         } else {
             // 蜡烛棒起始绘制位置
-            float stickX = rect.size.width - self.axisMarginRight - 1 - stickWidth;
+            CGFloat stickX = [self dataQuadrantPaddingEndX:rect] - 1 - stickWidth;
             for (NSUInteger i = 0; i < self.displayNumber; i++) {
                 //获取index
                 NSUInteger index = self.displayFrom + self.displayNumber - 1 - i;
 
                 CCSCandleStickChartData *data = [self.stickData objectAtIndex:index];
-                float openY = ((1 - (data.open - self.minValue) / (self.maxValue - self.minValue)) * (rect.size.height - self.axisMarginBottom) - self.axisMarginTop);
-                float highY = ((1 - (data.high - self.minValue) / (self.maxValue - self.minValue)) * (rect.size.height - self.axisMarginBottom) - self.axisMarginTop);
-                float lowY = ((1 - (data.low - self.minValue) / (self.maxValue - self.minValue)) * (rect.size.height - self.axisMarginBottom) - self.axisMarginTop);
-                float closeY = ((1 - (data.close - self.minValue) / (self.maxValue - self.minValue)) * (rect.size.height - self.axisMarginBottom) - self.axisMarginTop);
+                CGFloat openY = ((1 - (data.open - self.minValue) / (self.maxValue - self.minValue)) * [self dataQuadrantPaddingHeight:rect]+[self dataQuadrantPaddingStartX:rect]);
+                CGFloat highY = ((1 - (data.high - self.minValue) / (self.maxValue - self.minValue)) * [self dataQuadrantPaddingHeight:rect]+[self dataQuadrantPaddingStartX:rect]);
+                CGFloat lowY = ((1 - (data.low - self.minValue) / (self.maxValue - self.minValue)) * [self dataQuadrantPaddingHeight:rect]+[self dataQuadrantPaddingStartX:rect]);
+                CGFloat closeY = ((1 - (data.close - self.minValue) / (self.maxValue - self.minValue)) * [self dataQuadrantPaddingHeight:rect]+[self dataQuadrantPaddingStartX:rect]);
 
                 // 处理和生产K线中的阴线和阳线
                 if (data.open == 0 && data.high == 0 && data.low == 0) {

@@ -5,6 +5,18 @@
 //  Created by limc on 12/26/13.
 //  Copyright (c) 2013 limc. All rights reserved.
 //
+//  Licensed under the Apache License, Version 2.0 (the "License");
+//  you may not use this file except in compliance with the License.
+//  You may obtain a copy of the License at
+//
+//  http://www.apache.org/licenses/LICENSE-2.0
+//
+//  Unless required by applicable law or agreed to in writing, software
+//  distributed under the License is distributed on an "AS IS" BASIS,
+//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//  See the License for the specific language governing permissions and
+//  limitations under the License.
+//
 
 #import "CCSSimpleDemoViewController.h"
 #import "CCSColoredStickChartData.h"
@@ -772,7 +784,6 @@
     self.stickChart.minDisplayNumber = 25;
     self.stickChart.maxValue = 800000;
     self.stickChart.minValue = 0;
-    self.stickChart.axisMarginLeft = 50;
     self.stickChart.displayCrossYOnTouch = YES;
     self.stickChart.displayCrossXOnTouch = YES;
     self.stickChart.stickFillColor = [UIColor colorWithRed:0.7 green:0.7 blue:0 alpha:0.8];
@@ -783,9 +794,6 @@
     self.stickChart.longitudeColor = [UIColor darkGrayColor];
     self.stickChart.latitudeFontColor = [UIColor darkGrayColor];
     self.stickChart.longitudeFontColor = [UIColor darkGrayColor];
-    self.stickChart.axisMarginLeft = 2;
-    self.stickChart.axisMarginRight = 58;
-    self.stickChart.axisMarginTop = 1;
     self.stickChart.axisYPosition = CCSGridChartYAxisPositionRight;
     self.stickChart.displayNumber = 50;
     self.stickChart.displayFrom = 99;
@@ -831,7 +839,6 @@
     self.macdChart.minDisplayNumber = 25;
     self.macdChart.maxValue = 800000;
     self.macdChart.minValue = 0;
-    self.macdChart.axisMarginLeft = 50;
     self.macdChart.displayCrossYOnTouch = YES;
     self.macdChart.displayCrossXOnTouch = YES;
     self.macdChart.stickFillColor = [UIColor colorWithRed:0.7 green:0.7 blue:0 alpha:0.8];
@@ -842,9 +849,6 @@
     self.macdChart.longitudeColor = [UIColor darkGrayColor];
     self.macdChart.latitudeFontColor = [UIColor darkGrayColor];
     self.macdChart.longitudeFontColor = [UIColor darkGrayColor];
-    self.macdChart.axisMarginLeft = 2;
-    self.macdChart.axisMarginRight = 58;
-    self.macdChart.axisMarginTop = 1;
     self.macdChart.axisYPosition = CCSGridChartYAxisPositionRight;
 
     self.macdChart.maxValue = 300000;
@@ -896,9 +900,6 @@
     self.kdjChart.longitudeColor = [UIColor darkGrayColor];
     self.kdjChart.latitudeFontColor = [UIColor darkGrayColor];
     self.kdjChart.longitudeFontColor = [UIColor darkGrayColor];
-    self.kdjChart.axisMarginLeft = 2;
-    self.kdjChart.axisMarginRight = 58;
-    self.kdjChart.axisMarginTop = 1;
     self.kdjChart.axisYPosition = CCSGridChartYAxisPositionRight;
     self.kdjChart.displayCrossXOnTouch = YES;
     self.kdjChart.displayCrossYOnTouch = YES;
@@ -927,9 +928,6 @@
     self.rsiChart.longitudeColor = [UIColor darkGrayColor];
     self.rsiChart.latitudeFontColor = [UIColor darkGrayColor];
     self.rsiChart.longitudeFontColor = [UIColor darkGrayColor];
-    self.rsiChart.axisMarginLeft = 2;
-    self.rsiChart.axisMarginRight = 58;
-    self.rsiChart.axisMarginTop = 1;
     self.rsiChart.axisYPosition = CCSGridChartYAxisPositionRight;
     self.rsiChart.displayCrossXOnTouch = YES;
     self.rsiChart.displayCrossYOnTouch = YES;
@@ -973,9 +971,6 @@
     self.wrChart.longitudeColor = [UIColor darkGrayColor];
     self.wrChart.latitudeFontColor = [UIColor darkGrayColor];
     self.wrChart.longitudeFontColor = [UIColor darkGrayColor];
-    self.wrChart.axisMarginLeft = 2;
-    self.wrChart.axisMarginRight = 58;
-    self.wrChart.axisMarginTop = 1;
     self.wrChart.axisYPosition = CCSGridChartYAxisPositionRight;
     self.wrChart.displayCrossXOnTouch = YES;
     self.wrChart.displayCrossYOnTouch = YES;
@@ -1015,9 +1010,6 @@
     self.cciChart.longitudeColor = [UIColor darkGrayColor];
     self.cciChart.latitudeFontColor = [UIColor darkGrayColor];
     self.cciChart.longitudeFontColor = [UIColor darkGrayColor];
-    self.cciChart.axisMarginLeft = 2;
-    self.cciChart.axisMarginRight = 58;
-    self.cciChart.axisMarginTop = 1;
     self.cciChart.axisYPosition = CCSGridChartYAxisPositionRight;
     self.cciChart.displayCrossXOnTouch = YES;
     self.cciChart.displayCrossYOnTouch = YES;
@@ -1056,9 +1048,6 @@
     self.bollChart.longitudeColor = [UIColor darkGrayColor];
     self.bollChart.latitudeFontColor = [UIColor darkGrayColor];
     self.bollChart.longitudeFontColor = [UIColor darkGrayColor];
-    self.bollChart.axisMarginLeft = 2;
-    self.bollChart.axisMarginRight = 58;
-    self.bollChart.axisMarginTop = 1;
     self.bollChart.axisYPosition = CCSGridChartYAxisPositionRight;
     self.bollChart.displayCrossXOnTouch = YES;
     self.bollChart.displayCrossYOnTouch = YES;
@@ -1121,9 +1110,6 @@
     candleStickChart.minValue = 240;
     candleStickChart.axisCalc = 1;
     candleStickChart.displayLongitudeTitle = NO;
-    candleStickChart.axisMarginBottom = 0;
-    candleStickChart.minDisplayNumber = 25;
-    candleStickChart.axisMarginLeft = 50;
     candleStickChart.userInteractionEnabled = YES;
 
     candleStickChart.axisXColor = [UIColor darkGrayColor];
@@ -1132,13 +1118,10 @@
     candleStickChart.longitudeColor = [UIColor darkGrayColor];
     candleStickChart.latitudeFontColor = [UIColor darkGrayColor];
     candleStickChart.longitudeFontColor = [UIColor darkGrayColor];
-    candleStickChart.axisMarginLeft = 2;
-    candleStickChart.axisMarginRight = 58;
-    candleStickChart.axisMarginBottom = 0;
-    candleStickChart.axisMarginTop = 1;
     candleStickChart.axisYPosition = CCSGridChartYAxisPositionRight;
     candleStickChart.displayNumber = 50;
     candleStickChart.displayFrom = 99;
+    candleStickChart.axisXTitleQuadrantHeight = 0;
     candleStickChart.bollingerBandStyle = CCSBollingerBandStyleNone;
 
     candleStickChart.chartDelegate = self;

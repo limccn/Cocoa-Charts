@@ -5,16 +5,28 @@
 //  Created by limc on 12/6/13.
 //  Copyright (c) 2013 limc. All rights reserved.
 //
+//  Licensed under the Apache License, Version 2.0 (the "License");
+//  you may not use this file except in compliance with the License.
+//  You may obtain a copy of the License at
+//
+//  http://www.apache.org/licenses/LICENSE-2.0
+//
+//  Unless required by applicable law or agreed to in writing, software
+//  distributed under the License is distributed on an "AS IS" BASIS,
+//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//  See the License for the specific language governing permissions and
+//  limitations under the License.
+//
 
 #import "CCSSlipLineChart.h"
 #import "CCSTitledLine.h"
 #import "CCSLineData.h"
 
 @interface CCSSlipLineChart () {
-    float _startDistance1;
-    float _minDistance1;
+    CGFloat _startDistance1;
+    CGFloat _minDistance1;
     int _flag;
-    float _firstX;
+    CGFloat _firstX;
 }
 @end
 
@@ -104,8 +116,8 @@
 - (void)drawData:(CGRect)rect {
     
     // 起始位置
-    float startX;
-    float lastY = 0;
+    CGFloat startX;
+    CGFloat lastY = 0;
     
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSetLineWidth(context, self.lineWidth);
@@ -125,14 +137,14 @@
                 if (self.axisYPosition == CCSGridChartYAxisPositionLeft) {
                     //TODO:自左向右绘图未对应
                     // 点线距离
-                    float lineLength = ((rect.size.width - self.axisMarginLeft - 2 * self.axisMarginRight) / self.displayNumber);
+                    CGFloat lineLength = ([self dataQuadrantPaddingWidth:rect] / self.displayNumber);
                     //起始点
-                    startX = super.axisMarginLeft + lineLength / 2;
+                    startX = [self dataQuadrantPaddingStartX:rect] + lineLength / 2;
                     //遍历并绘制线条
                     for (NSUInteger j = self.displayFrom; j < self.displayFrom + self.displayNumber; j++) {
                         CCSLineData *lineData = [lineDatas objectAtIndex:j];
                         //获取终点Y坐标
-                        float valueY = ((1 - (lineData.value - self.minValue) / (self.maxValue - self.minValue)) * (rect.size.height - 2 * self.axisMarginTop - self.axisMarginBottom) + self.axisMarginTop);
+                        CGFloat valueY = ((1 - (lineData.value - self.minValue) / (self.maxValue - self.minValue)) * [self dataQuadrantPaddingHeight:rect] + [self dataQuadrantPaddingStartY:rect]);
                         //绘制线条路径
                         if (j == self.displayFrom) {
                             CGContextMoveToPoint(context, startX, valueY);
@@ -151,9 +163,9 @@
                 } else {
                     
                     // 点线距离
-                    float lineLength = ((rect.size.width - 2 * self.axisMarginLeft - self.axisMarginRight) / self.displayNumber);
+                    CGFloat lineLength = ([self dataQuadrantPaddingWidth:rect] / self.displayNumber);
                     //起始点
-                    startX = rect.size.width - self.axisMarginRight - self.axisMarginLeft - lineLength / 2;
+                    startX = [self dataQuadrantPaddingEndX:rect] - lineLength / 2;
                     
                     //判断点的多少
                     if ([lineDatas count] == 0) {
@@ -163,10 +175,10 @@
                         //1根则绘制一条直线
                         CCSLineData *lineData = [lineDatas objectAtIndex:0];
                         //获取终点Y坐标
-                        float valueY = ((1 - (lineData.value - self.minValue) / (self.maxValue - self.minValue)) * (rect.size.height - 2 * self.axisMarginTop - self.axisMarginBottom) + self.axisMarginTop);
+                        CGFloat valueY = ((1 - (lineData.value - self.minValue) / (self.maxValue - self.minValue)) * [self dataQuadrantPaddingHeight:rect] + [self dataQuadrantPaddingStartY:rect]);
                         
                         CGContextMoveToPoint(context, startX, valueY);
-                        CGContextAddLineToPoint(context, self.axisMarginLeft, valueY);
+                        CGContextAddLineToPoint(context, [self dataQuadrantPaddingStartX:rect], valueY);
                         
                     } else {
                         //遍历并绘制线条
@@ -174,7 +186,7 @@
                             NSUInteger index = self.displayFrom + self.displayNumber - 1 - j;
                             CCSLineData *lineData = [lineDatas objectAtIndex:index];
                             //获取终点Y坐标
-                            float valueY = ((1 - (lineData.value - self.minValue) / (self.maxValue - self.minValue)) * (rect.size.height - 2 * self.axisMarginTop - self.axisMarginBottom) + self.axisMarginTop);
+                            CGFloat valueY = ((1 - (lineData.value - self.minValue) / (self.maxValue - self.minValue)) * [self dataQuadrantPaddingHeight:rect] + [self dataQuadrantPaddingStartY:rect]);
                             //绘制线条路径
                             if (index == self.displayFrom + self.displayNumber - 1) {
                                 CGContextMoveToPoint(context, startX, valueY);
@@ -206,7 +218,7 @@
         //以第1条线作为X轴的标示
         CCSTitledLine *line = [self.linesData objectAtIndex:0];
         if ([line.data count] > 0) {
-            float average = [line.data count] / self.longitudeNum;            
+            CGFloat average = [line.data count] / self.longitudeNum;            
             //处理刻度
             for (NSUInteger i = 0; i < self.longitudeNum; i++) {
                 NSUInteger index = self.displayFrom + (NSUInteger) floor(i * average);
@@ -275,7 +287,7 @@
     if ([allTouches count] == 1) {
         if (_flag == 0) {
             CGPoint pt1 = [[allTouches objectAtIndex:0] locationInView:self];
-            float stickWidth = ((self.frame.size.width - self.axisMarginLeft - self.axisMarginRight) / self.displayNumber) - 1;
+            CGFloat stickWidth = ([self dataQuadrantPaddingWidth:self.frame] / self.displayNumber) - 1;
             
             if (pt1.x - _firstX > stickWidth) {
                 if (self.displayFrom > 1) {
@@ -306,7 +318,7 @@
         CGPoint pt1 = [[allTouches objectAtIndex:0] locationInView:self];
         CGPoint pt2 = [[allTouches objectAtIndex:1] locationInView:self];
         
-        float endDistance = fabsf(pt1.x - pt2.x);
+        CGFloat endDistance = fabsf(pt1.x - pt2.x);
         //放大
         if (endDistance - _startDistance1 > _minDistance1) {
             [self zoomOut];

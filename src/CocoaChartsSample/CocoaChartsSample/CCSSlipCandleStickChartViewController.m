@@ -5,6 +5,18 @@
 //  Created by limc on 12/3/13.
 //  Copyright (c) 2013 limc. All rights reserved.
 //
+//  Licensed under the Apache License, Version 2.0 (the "License");
+//  you may not use this file except in compliance with the License.
+//  You may obtain a copy of the License at
+//
+//  http://www.apache.org/licenses/LICENSE-2.0
+//
+//  Unless required by applicable law or agreed to in writing, software
+//  distributed under the License is distributed on an "AS IS" BASIS,
+//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//  See the License for the specific language governing permissions and
+//  limitations under the License.
+//
 
 #import "CCSSlipCandleStickChartViewController.h"
 #import "CCSSlipCandleStickChart.h"
@@ -137,7 +149,7 @@
     [candlestickData addObject:[[[CCSCandleStickChartData alloc] initWithOpen:229 high:238 low:229 close:236 date:@"11/22"] autorelease]];
     [candlestickData addObject:[[[CCSCandleStickChartData alloc] initWithOpen:232 high:236 low:224 close:225 date:@"11/24"] autorelease]];
 
-    CCSSlipCandleStickChart *candleStickChart = [[[CCSSlipCandleStickChart alloc] initWithFrame:CGRectMake(0, 80, 320, 200)] autorelease];
+    CCSSlipCandleStickChart *candleStickChart = [[[CCSSlipCandleStickChart alloc] initWithFrame:CGRectMake(0, MARGIN_TOP, 320, 320)] autorelease];
 
     candleStickChart.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
 
@@ -147,9 +159,7 @@
     candleStickChart.minValue = 220;
     candleStickChart.displayLongitudeTitle = YES;
     candleStickChart.displayLatitudeTitle = YES;
-    candleStickChart.axisMarginBottom = 12;
     candleStickChart.maxSticksNum = 60;
-    candleStickChart.axisMarginLeft = 30;
     candleStickChart.userInteractionEnabled = YES;
     candleStickChart.backgroundColor = [UIColor whiteColor];
     //candleStickChart.candleStickStyle = CCSCandleStickStyleBar;

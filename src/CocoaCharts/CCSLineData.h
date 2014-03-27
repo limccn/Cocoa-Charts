@@ -31,7 +31,7 @@
  保存线图表示用单个线的对象、多条线的时候请使用相应的数据结构保存数据
  */
 @interface CCSLineData : CCSBaseData {
-    float _value;
+    CGFloat _value;
     NSString *_date;
 }
 
@@ -40,7 +40,7 @@
  値
  值
  */
-@property(assign, nonatomic) float value;
+@property(assign, nonatomic) CGFloat value;
 
 /*!
  Date
@@ -67,6 +67,6 @@
  初期化したオブジェクト
  初期化完成对象
  */
-- (id)initWithValue:(float)value date:(NSString *)date;
+- (id)initWithValue:(CGFloat)value date:(NSString *)date;
 
 @end

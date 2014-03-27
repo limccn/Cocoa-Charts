@@ -104,10 +104,10 @@
             //绘制Web图
             for (NSUInteger i = 0; i < self.longitudeNum; i++) {
                 //获取值
-                float value = [((NSNumber *) [values objectAtIndex:i]) floatValue];
+                CGFloat value = [((NSNumber *) [values objectAtIndex:i]) floatValue];
 
-                float ptX = (float) (self.position.x - self.longitudeLength * value / self.latitudeNum * sin(i * 2 * PI / self.longitudeNum));
-                float ptY = (float) (self.position.y - self.longitudeLength * value / self.latitudeNum * cos(i * 2 * PI / self.longitudeNum));
+                CGFloat ptX = (CGFloat) (self.position.x - self.longitudeLength * value / self.latitudeNum * sin(i * 2 * PI / self.longitudeNum));
+                CGFloat ptY = (CGFloat) (self.position.y - self.longitudeLength * value / self.latitudeNum * cos(i * 2 * PI / self.longitudeNum));
 
                 if (i == 0) {
                     CGContextMoveToPoint(context, ptX, ptY);
@@ -142,8 +142,8 @@
     //绘制蛛网图外围边框与填充
     for (NSUInteger i = 0; i < self.longitudeNum; i++) {
 
-        float ptX = (float) (self.position.x - self.longitudeLength * sin(i * 2 * PI / self.longitudeNum));
-        float ptY = (float) (self.position.y - self.longitudeLength * cos(i * 2 * PI / self.longitudeNum));
+        CGFloat ptX = (CGFloat) (self.position.x - self.longitudeLength * sin(i * 2 * PI / self.longitudeNum));
+        CGFloat ptY = (CGFloat) (self.position.y - self.longitudeLength * cos(i * 2 * PI / self.longitudeNum));
 
         if (i == 0) {
             CGContextMoveToPoint(context, ptX, ptY);
@@ -153,8 +153,8 @@
 
         //绘制标题
         NSString *title = [self.titles objectAtIndex:i];
-        float realx = 0;
-        float realy = 0;
+        CGFloat realx = 0;
+        CGFloat realy = 0;
 
         //重新计算坐标
         //TODO 计算算法日后完善
@@ -206,8 +206,8 @@
 
         //绘制Web图
         for (int i = 0; i < self.longitudeNum; i++) {
-            float ptX = (float) (self.position.x - self.longitudeLength * j * 1.0f / self.latitudeNum * sin(i * 2 * PI / self.longitudeNum));
-            float ptY = (float) (self.position.y - self.longitudeLength * j * 1.0f / self.latitudeNum * cos(i * 2 * PI / self.longitudeNum));
+            CGFloat ptX = (CGFloat) (self.position.x - self.longitudeLength * j * 1.0f / self.latitudeNum * sin(i * 2 * PI / self.longitudeNum));
+            CGFloat ptY = (CGFloat) (self.position.y - self.longitudeLength * j * 1.0f / self.latitudeNum * cos(i * 2 * PI / self.longitudeNum));
 
             if (i == 0) {
                 CGContextMoveToPoint(context, ptX, ptY);
@@ -223,8 +223,8 @@
     //绘制蛛网经线
     for (NSUInteger i = 0; i < self.longitudeNum; i++) {
 
-        float ptX = (float) (self.position.x - self.longitudeLength * sin(i * 2 * PI / self.longitudeNum));
-        float ptY = (float) (self.position.y - self.longitudeLength * cos(i * 2 * PI / self.longitudeNum));
+        CGFloat ptX = (CGFloat) (self.position.x - self.longitudeLength * sin(i * 2 * PI / self.longitudeNum));
+        CGFloat ptY = (CGFloat) (self.position.y - self.longitudeLength * cos(i * 2 * PI / self.longitudeNum));
 
         CGContextMoveToPoint(context, self.position.x, self.position.y);
         CGContextAddLineToPoint(context, ptX, ptY);

@@ -205,9 +205,9 @@
 - (void)drawData:(CGRect)rect {
 
     // 起始位置
-    float startX = 0;
-    float lastY = 0;
-    float lineLength = 0;
+    CGFloat startX = 0;
+    CGFloat lastY = 0;
+    CGFloat lineLength = 0;
 
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSetLineWidth(context, self.lineWidth);
@@ -236,14 +236,14 @@
 
             if (self.lineAlignType == CCSLineAlignTypeCenter) {
                 // 点线距离
-                lineLength= ((rect.size.width - self.axisMarginLeft - 2 * self.axisMarginRight) / [line.data count]);
+                lineLength= ([self dataQuadrantPaddingWidth:rect] / [line.data count]);
                 //起始点
-                startX = super.axisMarginLeft + lineLength / 2;
+                startX = [self dataQuadrantStartX:rect] + lineLength / 2;
             }else if (self.lineAlignType == CCSLineAlignTypeJustify) {
                 // 点线距离
-                lineLength= ((rect.size.width - self.axisMarginLeft - 2 * self.axisMarginRight) / ([line.data count] - 1));
+                lineLength= ([self dataQuadrantPaddingWidth:rect] / ([line.data count] - 1));
                 //起始点
-                startX = super.axisMarginLeft + self.axisMarginRight;
+                startX = [self dataQuadrantPaddingStartX:rect];
             }
 
 
@@ -251,7 +251,7 @@
             for (NSUInteger j = 0; j < [lineDatas count]; j++) {
                 CCSLineData *lineData = [lineDatas objectAtIndex:j];
                 //获取终点Y坐标
-                float valueY = ((1 - (lineData.value - self.minValue) / (self.maxValue - self.minValue)) * (rect.size.height - 2 * self.axisMarginTop - self.axisMarginBottom) + self.axisMarginTop);
+                CGFloat valueY = ((1 - (lineData.value - self.minValue) / (self.maxValue - self.minValue)) * [self dataQuadrantPaddingHeight:rect] + [self dataQuadrantPaddingStartY:rect]);
                 //绘制线条路径
                 if (j == 0) {
                     CGContextMoveToPoint(context, startX, valueY);
@@ -271,14 +271,14 @@
 
             if (self.lineAlignType == CCSLineAlignTypeCenter) {
                 // 点线距离
-                float lineLength = ((rect.size.width - 2 * self.axisMarginLeft - self.axisMarginRight) / [line.data count] - 1);
+                CGFloat lineLength = ([self dataQuadrantPaddingWidth:rect] / [line.data count] - 1);
                 //起始点
-                startX = rect.size.width - self.axisMarginRight - self.axisMarginLeft - lineLength / 2;
+                startX = [self dataQuadrantPaddingEndX:rect] - lineLength / 2;
             }else if (self.lineAlignType == CCSLineAlignTypeJustify) {
                 // 点线距离
-                lineLength= ((rect.size.width - self.axisMarginLeft - 2 * self.axisMarginRight) / [line.data count]);
+                lineLength= ([self dataQuadrantPaddingWidth:rect] / [line.data count]);
                 //起始点
-                startX = rect.size.width - self.axisMarginRight - self.axisMarginLeft;
+                startX = [self dataQuadrantPaddingEndX:rect];
             }
 
             //判断点的多少
@@ -289,27 +289,26 @@
                 //1根则绘制一条直线
                 CCSLineData *lineData = [lineDatas objectAtIndex:0];
                 //获取终点Y坐标
-                float valueY = ((1 - (lineData.value - self.minValue) / (self.maxValue - self.minValue)) * (rect.size.height - 2 * self.axisMarginTop - self.axisMarginBottom) + self.axisMarginTop);
+                CGFloat valueY = ((1 - (lineData.value - self.minValue) / (self.maxValue - self.minValue)) * [self dataQuadrantPaddingHeight:rect] + [self dataQuadrantPaddingStartY:rect]);
 
                 CGContextMoveToPoint(context, startX, valueY);
-                CGContextAddLineToPoint(context, self.axisMarginLeft, valueY);
+                CGContextAddLineToPoint(context, [self dataQuadrantPaddingStartX:rect], valueY);
 
             } else {
                 //遍历并绘制线条
                 for (NSInteger j = [lineDatas count] - 1; j >= 0; j--) {
                     CCSLineData *lineData = [lineDatas objectAtIndex:j];
                     //获取终点Y坐标
-                    float valueY = ((1 - (lineData.value - self.minValue) / (self.maxValue - self.minValue)) * (rect.size.height - 2 * self.axisMarginTop - self.axisMarginBottom) + self.axisMarginTop);
+                    CGFloat valueY = ((1 - (lineData.value - self.minValue) / (self.maxValue - self.minValue)) * [self dataQuadrantPaddingHeight:rect] + [self dataQuadrantPaddingStartY:rect]);
                     //绘制线条路径
                     if (j == [lineDatas count] - 1) {
                         CGContextMoveToPoint(context, startX, valueY);
                         lastY = valueY;
                     } else if (j == 0) {
                         if (lineData.value == 0) {
-//                                    CGContextMoveToPoint(context, startX, lastY);
-                            CGContextAddLineToPoint(context, self.axisMarginLeft, lastY);
+                            CGContextAddLineToPoint(context, [self dataQuadrantPaddingStartX:rect], lastY);
                         } else {
-                            CGContextAddLineToPoint(context, self.axisMarginLeft, valueY);
+                            CGContextAddLineToPoint(context, [self dataQuadrantPaddingStartX:rect], valueY);
                             lastY = valueY;
                         }
                     } else {
@@ -354,27 +353,21 @@
         CGFloat lengths[] = {3.0, 3.0};
         CGContextSetLineDash(context, 0.0, lengths, 2);
     }
-    float postOffset;
-    float offset;
+    CGFloat postOffset;
+    CGFloat offset;
 
     if (self.axisYPosition == CCSGridChartYAxisPositionLeft) {
-        postOffset = (rect.size.width - self.axisMarginLeft - 2 * self.axisMarginRight) / ([self.longitudeTitles count]);
-        offset = self.axisMarginLeft + self.axisMarginRight + postOffset / 2;
+        postOffset = [self dataQuadrantPaddingWidth:rect] / ([self.longitudeTitles count]);
+        offset = [self dataQuadrantPaddingStartX:rect] + postOffset / 2;
     }
     else {
-        //TODO
-        postOffset = (rect.size.width - 2 * self.axisMarginLeft - self.axisMarginRight) / ([self.longitudeTitles count]);
-        offset = self.axisMarginLeft;
+        postOffset = [self dataQuadrantPaddingWidth:rect] / ([self.longitudeTitles count]);
+        offset = [self dataQuadrantStartX:rect];
     }
 
     for (NSUInteger i = 0; i < [self.longitudeTitles count]; i++) {
-        if (self.axisXPosition == CCSGridChartXAxisPositionBottom) {
-            CGContextMoveToPoint(context, offset + i * postOffset, 0);
-            CGContextAddLineToPoint(context, offset + i * postOffset, rect.size.height - self.axisMarginBottom);
-        } else {
-            CGContextMoveToPoint(context, offset + i * postOffset, self.axisMarginTop);
-            CGContextAddLineToPoint(context, offset + i * postOffset, rect.size.height);
-        }
+        CGContextMoveToPoint(context, offset + i * postOffset, [self dataQuadrantStartY:rect]);
+        CGContextAddLineToPoint(context, offset + i * postOffset, [self dataQuadrantEndY:rect]);
     }
 
     CGContextStrokePath(context);
@@ -404,16 +397,16 @@
         return;
     }
 
-    float postOffset;
-    float offset;
+    CGFloat postOffset;
+    CGFloat offset;
 
     if (self.axisYPosition == CCSGridChartYAxisPositionLeft) {
-        postOffset = (rect.size.width - self.axisMarginLeft - 2 * self.axisMarginRight) / ([self.longitudeTitles count]);
-        offset = self.axisMarginLeft + self.axisMarginRight + postOffset / 2;
+        postOffset = [self dataQuadrantPaddingWidth:rect] / ([self.longitudeTitles count]);
+        offset = [self dataQuadrantPaddingStartX:rect] + postOffset / 2;
     } else {
         //TODO
-        postOffset = (rect.size.width - 2 * self.axisMarginLeft - self.axisMarginRight) / ([self.longitudeTitles count]);
-        offset = self.axisMarginLeft;
+        postOffset = [self dataQuadrantPaddingWidth:rect] / ([self.longitudeTitles count]);
+        offset = [self dataQuadrantStartX:rect];
     }
 
     for (NSUInteger i = 0; i < [self.longitudeTitles count]; i++) {
@@ -421,7 +414,7 @@
             NSString *str = (NSString *) [self.longitudeTitles objectAtIndex:i];
 
             //调整X轴坐标位置
-            [str drawInRect:CGRectMake(offset + (i - 0.5) * postOffset, rect.size.height - self.axisMarginBottom, postOffset, self.longitudeFontSize)
+            [str drawInRect:CGRectMake(offset + (i - 0.5) * postOffset, [self dataQuadrantEndY:rect] + [self axisWidth], postOffset, self.longitudeFontSize)
                    withFont:self.longitudeFont
               lineBreakMode:NSLineBreakByWordWrapping
                   alignment:NSTextAlignmentCenter];
@@ -448,7 +441,7 @@
     }
 
     NSMutableArray *TitleY = [[[NSMutableArray alloc] init] autorelease];
-    float average = (NSUInteger) ((self.maxValue - self.minValue) / self.latitudeNum);
+    CGFloat average = (NSUInteger) ((self.maxValue - self.minValue) / self.latitudeNum);
     //螟�炊蛻ｻ蠎ｦ
     for (NSUInteger i = 0; i < self.latitudeNum; i++) {
         if (self.axisCalc == 1) {
@@ -482,7 +475,7 @@
         //以第1条线作为X轴的标示
         CCSTitledLine *line = [self.linesData objectAtIndex:0];
         if ([line.data count] > 0) {
-            float average = [line.data count] / self.longitudeNum;
+            CGFloat average = [line.data count] / self.longitudeNum;
             //处理刻度
             for (NSUInteger i = 0; i < self.longitudeNum; i++) {
                 NSUInteger index = (NSUInteger) floor(i * average);
@@ -502,7 +495,7 @@
 }
 
 - (NSString *)calcAxisXGraduate:(CGRect)rect {
-    float value = [self touchPointAxisXValue:rect];
+    CGFloat value = [self touchPointAxisXValue:rect];
     NSString *result = @"";
     if (self.linesData != NULL) {
         CCSTitledLine *line = [self.linesData objectAtIndex:0];
@@ -529,7 +522,7 @@
 }
 
 - (NSString *)calcAxisYGraduate:(CGRect)rect {
-    float value = [self touchPointAxisYValue:rect];
+    CGFloat value = [self touchPointAxisYValue:rect];
     if (self.maxValue == 0. && self.minValue == 0.) {
         return @"";
     }
@@ -557,8 +550,8 @@
 //    if(self.singleTouchPoint.x > self.axisMarginLeft 
 //       && self.singleTouchPoint.x < self.frame.size.width)
 //    {
-//        float stickWidth = ((self.frame.size.width - self.axisMarginLeft -self.axisMarginRight) / self.maxPointsNum);
-//        float valueWidth = self.singleTouchPoint.x - self.axisMarginLeft;
+//        CGFloat stickWidth = ((self.frame.size.width - self.axisMarginLeft -self.axisMarginRight) / self.maxPointsNum);
+//        CGFloat valueWidth = self.singleTouchPoint.x - self.axisMarginLeft;
 //        if(valueWidth > 0)
 //        {
 //            int index = round(valueWidth / stickWidth);
@@ -588,10 +581,10 @@
 //    if(selectedIndex < [line.data count])
 //    {
 //        //计算选中的点
-//        float value = ((CCSLineData *)[line.data objectAtIndex:selectedIndex]).value;
-//        float ptY = (1 - (value-self.minValue)/(self.maxValue-self.minValue)) * (self.frame.size.height-self.axisMarginBottom-2*self.axisMarginTop) + self.axisMarginTop;
+//        CGFloat value = ((CCSLineData *)[line.data objectAtIndex:selectedIndex]).value;
+//        CGFloat ptY = (1 - (value-self.minValue)/(self.maxValue-self.minValue)) * (self.frame.size.height-self.axisMarginBottom-2*self.axisMarginTop) + self.axisMarginTop;
 //        
-//        float ptX = self.axisMarginLeft + selectedIndex * ((self.frame.size.width - self.axisMarginLeft -2 * self.axisMarginRight) / self.maxPointsNum);
+//        CGFloat ptX = self.axisMarginLeft + selectedIndex * ((self.frame.size.width - self.axisMarginLeft -2 * self.axisMarginRight) / self.maxPointsNum);
 //        
 //        self.singleTouchPoint = CGPointMake(ptX,ptY);
 //        //设置选中的index
@@ -616,7 +609,7 @@
 //        }        
 //    }
 //    
-//    float value = [self touchPointAxisXValue:self.frame];
+//    CGFloat value = [self touchPointAxisXValue:self.frame];
 //    if(self.linesData != NULL){
 //        CCSTitledLine *line = [self.linesData objectAtIndex:0];
 //        int index = 0;
@@ -630,14 +623,14 @@
 //        
 //        if(index < [line.data count])
 //        {
-//            float value = ((CCSLineData *)[line.data objectAtIndex:index]).value;
-//            float ptY = (1 - (value-self.minValue)/(self.maxValue-self.minValue)) * (self.frame.size.height-self.axisMarginBottom-2*self.axisMarginTop) + self.axisMarginTop;
+//            CGFloat value = ((CCSLineData *)[line.data objectAtIndex:index]).value;
+//            CGFloat ptY = (1 - (value-self.minValue)/(self.maxValue-self.minValue)) * (self.frame.size.height-self.axisMarginBottom-2*self.axisMarginTop) + self.axisMarginTop;
 //            
 //            self.singleTouchPoint = CGPointMake(self.singleTouchPoint.x,ptY);
 //            
 //            [self calcSelectedIndex];
 //            
-//            float ptX = self.axisMarginLeft + self.selectedIndex * ((self.frame.size.width - self.axisMarginLeft -2 * self.axisMarginRight) / self.maxPointsNum);
+//            CGFloat ptX = self.axisMarginLeft + self.selectedIndex * ((self.frame.size.width - self.axisMarginLeft -2 * self.axisMarginRight) / self.maxPointsNum);
 //            self.singleTouchPoint = CGPointMake(ptX,ptY);
 //
 //        }

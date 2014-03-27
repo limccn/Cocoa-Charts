@@ -83,12 +83,12 @@
     if (self.data != nil) {
 
         //获得总数
-        float sum = 0;
+        CGFloat sum = 0;
         for (NSUInteger i = 0; i < [self.data count]; i++) {
             sum = sum + ((CCSTitleValueColor *) [self.data objectAtIndex:i]).value;
         }
 
-        float offset = PI * -0.5f;
+        CGFloat offset = PI * -0.5f;
         // 遍历每一条数据列表
         for (NSUInteger j = 0; j < [self.data count]; j++) {
             CCSTitleValueColor *entity = [self.data objectAtIndex:j];
@@ -97,7 +97,7 @@
             CGContextSetFillColorWithColor(context, entity.color.CGColor);
 
             //角度
-            float sweep = entity.value * 2 * PI / sum;
+            CGFloat sweep = entity.value * 2 * PI / sum;
 
             //移动到圆心
             CGContextMoveToPoint(context, self.position.x, self.position.y);
@@ -123,19 +123,19 @@
         CGContextSetFillColorWithColor(context, [UIColor lightGrayColor].CGColor);
 
         if (self.displayValueTitle) {
-            float sumvalue = 0.0;
+            CGFloat sumvalue = 0.0;
             //
             for (NSUInteger k = 0; k < [self.data count]; k++) {
                 CCSTitleValueColor *entity = [self.data objectAtIndex:k];
                 //值
-                float value = entity.value;
+                CGFloat value = entity.value;
                 //添加偏移
                 sumvalue = sumvalue + value;
                 //比例
-                float rate = (sumvalue - value / 2.0f) / sum;
+                CGFloat rate = (sumvalue - value / 2.0f) / sum;
 
-                float offsetX = (float) (self.position.x - self.radius * 0.8 * sin(rate * -2 * PI));
-                float offsetY = (float) (self.position.y - self.radius * 0.8 * cos(rate * -2 * PI));
+                CGFloat offsetX = (CGFloat) (self.position.x - self.radius * 0.8 * sin(rate * -2 * PI));
+                CGFloat offsetY = (CGFloat) (self.position.y - self.radius * 0.8 * cos(rate * -2 * PI));
 
                 //绘制标题
                 NSString *title = entity.title;

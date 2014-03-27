@@ -18,6 +18,7 @@
 //  limitations under the License.
 //
 
+//Ver0.1
 #import "CCSBaseChartView.h"
 #import "CCSGridChart.h"
 #import "CCSLineChart.h"
@@ -35,6 +36,26 @@
 #import "CCSTitleValueColor.h"
 #import "CCSTitleValues.h"
 #import "CCSTitleValuesColor.h"
+
+//Ver0.2
+#import "CCSBOLLMASlipCandleStickChart.h"
+#import "CCSColoredStickChart.h"
+#import "CCSSlipLineChart.h"
+#import "CCSSlipStickChart.h"
+#import "CCSSlipCandleStickChart.h"
+#import "CCSMASlipStickChart.h"
+#import "CCSMASlipCandleStickChart.h"
+#import "CCSMACDChart.h"
+#import "CCSMinusStickChart.h"
+#import "CCSAreaChart.h"
+#import "CCSStackedAreaChart.h"
+#import "CCSBandAreaChart.h"
+#import "CCSRadarAreaChart.h"
+
+#import "CCSColoredStickChartData.h"
+
+
+
 
 
 

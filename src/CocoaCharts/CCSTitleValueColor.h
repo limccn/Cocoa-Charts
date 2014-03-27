@@ -63,6 +63,6 @@
  初期化完成对象
  
  */
-- (id)initWithTitle:(NSString *)title value:(float)value color:(UIColor *)color;
+- (id)initWithTitle:(NSString *)title value:(CGFloat)value color:(UIColor *)color;
 
 @end

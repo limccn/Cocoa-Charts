@@ -33,10 +33,18 @@
 @synthesize latitudeFontColor = _latitudeFontColor;
 @synthesize longitudeFont = _longitudeFont;
 @synthesize latitudeFont = _latitudeFont;
-@synthesize axisMarginLeft = _axisMarginLeft;
-@synthesize axisMarginBottom = _axisMarginBottom;
-@synthesize axisMarginTop = _axisMarginTop;
-@synthesize axisMarginRight = _axisMarginRight;
+//@synthesize axisMarginLeft = _axisMarginLeft;
+//@synthesize axisMarginBottom = _axisMarginBottom;
+//@synthesize axisMarginTop = _axisMarginTop;
+//@synthesize axisMarginRight = _axisMarginRight;
+@synthesize axisYTitleQuadrantWidth = _axisYTitleQuadrantWidth;
+@synthesize axisXTitleQuadrantHeight = _axisXTitleQuadrantHeight;
+@synthesize dataQuadrantPaddingTop = _dataQuadrantPaddingTop;
+@synthesize dataQuadrantPaddingLeft = _dataQuadrantPaddingLeft;
+@synthesize dataQuadrantPaddingBottom = _dataQuadrantPaddingBottom;
+@synthesize dataQuadrantPaddingRight = _dataQuadrantPaddingRight;
+@synthesize axisWidth = _axisWidth;
+@synthesize borderWidth = _borderWidth;
 @synthesize longitudeFontSize = _longitudeFontSize;
 @synthesize latitudeFontSize = _latitudeFontSize;
 @synthesize axisXPosition = _axisXPosition;
@@ -94,12 +102,20 @@
     self.latitudeFontSize = 11;
     self.longitudeFont = [UIFont systemFontOfSize:self.longitudeFontSize];
     self.latitudeFont = [UIFont systemFontOfSize:self.latitudeFontSize];
-    self.axisMarginLeft = 40;
-    self.axisMarginBottom = 16;
-    self.axisMarginTop = 3;
-    self.axisMarginRight = 1;
+//    self.axisMarginLeft = 40;
+//    self.axisMarginBottom = 16;
+//    self.axisMarginTop = 3;
+//    self.axisMarginRight = 1;
+    self.axisYTitleQuadrantWidth = 40;
+    self.axisXTitleQuadrantHeight = 16;
+    self.dataQuadrantPaddingTop = 3;
+    self.dataQuadrantPaddingLeft = 1;
+    self.dataQuadrantPaddingBottom = 1;
+    self.dataQuadrantPaddingRight = 1;
+    self.axisWidth = 1;
+    self.borderWidth = 1;
     self.axisXPosition = CCSGridChartXAxisPositionBottom;
-    self.axisYPosition = CCSGridChartYAxisPositionLeft;
+    self.axisYPosition = CCSGridChartYAxisPositionRight;
     self.displayLatitudeTitle = YES;
     self.displayLongitudeTitle = YES;
     self.displayLongitude = YES;
@@ -135,7 +151,6 @@
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSetFillColorWithColor(context, self.backgroundColor.CGColor);
     CGContextFillRect(context, rect);
-
     //消除锯齿
     CGContextSetAllowsAntialiasing(context, YES);
 
@@ -160,7 +175,7 @@
 
 - (void)drawBorder:(CGRect)rect {
     CGContextRef context = UIGraphicsGetCurrentContext();
-    CGContextSetLineWidth(context, 2.0f);
+    CGContextSetLineWidth(context, [self borderWidth] * 2);
 
     CGContextMoveToPoint(context, 0.0f, 0.0f);
     CGContextAddRect(context, rect);
@@ -171,60 +186,38 @@
 
 
 - (void)drawXAxis:(CGRect)rect {
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSetLineWidth(context,[self axisWidth]);
+    
     if (self.axisXPosition == CCSGridChartXAxisPositionBottom) {
-        CGContextRef context = UIGraphicsGetCurrentContext();
-        CGContextSetLineWidth(context, 1.0f);
-
-        CGContextMoveToPoint(context, 0.0f, rect.size.height - self.axisMarginBottom);
-        CGContextAddLineToPoint(context, rect.size.width, rect.size.height - self.axisMarginBottom);
-
-        CGContextSetStrokeColorWithColor(context, self.axisXColor.CGColor);
-        CGContextStrokePath(context);
-    } else {
-        CGContextRef context = UIGraphicsGetCurrentContext();
-        CGContextSetLineWidth(context, 1.0f);
-
-        CGContextMoveToPoint(context, 0.0f, self.axisMarginTop);
-        CGContextAddLineToPoint(context, rect.size.width, self.axisMarginTop);
-
-        CGContextSetStrokeColorWithColor(context, self.axisXColor.CGColor);
-        CGContextStrokePath(context);
+        CGContextMoveToPoint(context, [self borderWidth], [self dataQuadrantEndY:rect]+[self axisWidth]/2);
+        CGContextAddLineToPoint(context, rect.size.width - [self borderWidth], [self dataQuadrantEndY:rect]+[self axisWidth]/2);
+    }else{
+        CGContextMoveToPoint(context, [self borderWidth], [self dataQuadrantStartY:rect] - [self axisWidth]/2);
+        CGContextAddLineToPoint(context, rect.size.width - [self borderWidth], [self dataQuadrantStartY:rect]- [self axisWidth]/2);
     }
+    
+    CGContextSetStrokeColorWithColor(context, self.axisXColor.CGColor);
+    CGContextStrokePath(context);
 }
 
 - (void)drawYAxis:(CGRect)rect {
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSetLineWidth(context, [self axisWidth]);
     if (self.axisYPosition == CCSGridChartYAxisPositionLeft) {
-        CGContextRef context = UIGraphicsGetCurrentContext();
-        CGContextSetLineWidth(context, 1.0f);
+        CGContextMoveToPoint(context, [self dataQuadrantStartX:rect]-[self axisWidth]/2, [self dataQuadrantStartY:rect]);
+        CGContextAddLineToPoint(context, [self dataQuadrantStartX:rect]-[self axisWidth]/2, [self dataQuadrantEndY:rect]);
 
-        CGContextMoveToPoint(context, self.axisMarginLeft, 0.0f);
-        CGContextAddLineToPoint(context, self.axisMarginLeft, rect.size.height - self.axisMarginBottom);
+    } else {
+        CGContextMoveToPoint(context, [self dataQuadrantEndX:rect]+[self axisWidth]/2, [self dataQuadrantStartY:rect]);
+        CGContextAddLineToPoint(context, [self dataQuadrantEndX:rect]+[self axisWidth]/2, [self dataQuadrantEndY:rect]);
 
-        CGContextSetStrokeColorWithColor(context, self.axisYColor.CGColor);
-        CGContextStrokePath(context);
     }
-    else {
-        CGContextRef context = UIGraphicsGetCurrentContext();
-        CGContextSetLineWidth(context, 1.0f);
-
-        if (self.axisXPosition == CCSGridChartXAxisPositionBottom) {
-            CGContextMoveToPoint(context, rect.size.width - self.axisMarginRight, 0.0f);
-            CGContextAddLineToPoint(context, rect.size.width - self.axisMarginRight, rect.size.height - self.axisMarginBottom);
-        } else {
-            CGContextMoveToPoint(context, rect.size.width - self.axisMarginRight, self.axisMarginTop);
-            CGContextAddLineToPoint(context, rect.size.width - self.axisMarginRight, rect.size.height);
-        }
-
-        CGContextSetStrokeColorWithColor(context, self.axisYColor.CGColor);
-        CGContextStrokePath(context);
-    }
+    CGContextSetStrokeColorWithColor(context, self.axisYColor.CGColor);
+    CGContextStrokePath(context);
 }
 
 - (void)drawLatitudeLines:(CGRect)rect {
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    CGContextSetLineWidth(context, 0.5f);
-    CGContextSetStrokeColorWithColor(context, self.latitudeColor.CGColor);
-    CGContextSetFillColorWithColor(context, self.latitudeFontColor.CGColor);
     
     if (self.displayLatitude == NO) {
         return;
@@ -233,31 +226,24 @@
     if ([self.latitudeTitles count] <= 0){
         return ;
     }
+    
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSetLineWidth(context, 0.5f);
+    CGContextSetStrokeColorWithColor(context, self.latitudeColor.CGColor);
+    CGContextSetFillColorWithColor(context, self.latitudeFontColor.CGColor);
+    
     //设置线条为点线
     if (self.dashLatitude) {
         CGFloat lengths[] = {3.0, 3.0};
         CGContextSetLineDash(context, 0.0, lengths, 2);
     }
     
-    float postOffset;
-    if (self.axisXPosition == CCSGridChartXAxisPositionBottom) {
-        postOffset = (rect.size.height - self.axisMarginBottom - 2 * self.axisMarginTop) * 1.0 / ([self.latitudeTitles count] - 1);
-    }
-    else {
-        postOffset = (rect.size.height - 2 * self.axisMarginBottom - self.axisMarginTop) * 1.0 / ([self.latitudeTitles count] - 1);
-    }
+    CGFloat postOffset = [self dataQuadrantPaddingHeight:rect] / ([self.latitudeTitles count] - 1);
+    CGFloat offset = [self dataQuadrantPaddingEndY:rect];
     
-    float offset = rect.size.height - self.axisMarginBottom - self.axisMarginTop;
-    
-    for (NSUInteger i = 0; i <= [self.latitudeTitles count]; i++) {
-        if (self.axisYPosition == CCSGridChartYAxisPositionLeft) {
-            CGContextMoveToPoint(context, self.axisMarginLeft, offset - i * postOffset);
-            CGContextAddLineToPoint(context, rect.size.width, offset - i * postOffset);
-            
-        } else {
-            CGContextMoveToPoint(context, 0, offset - i * postOffset);
-            CGContextAddLineToPoint(context, rect.size.width - self.axisMarginRight, offset - i * postOffset);
-        }
+    for (NSUInteger i = 0; i < [self.latitudeTitles count]; i++) {
+        CGContextMoveToPoint(context,[self dataQuadrantStartX:rect], offset - i * postOffset);
+        CGContextAddLineToPoint(context, [self dataQuadrantEndX:rect], offset - i * postOffset);
     }
     CGContextStrokePath(context);
     //还原线条
@@ -265,11 +251,6 @@
 }
 
 - (void)drawYAxisTitles:(CGRect)rect {
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    CGContextSetLineWidth(context, 0.5f);
-    CGContextSetStrokeColorWithColor(context, self.latitudeColor.CGColor);
-    CGContextSetFillColorWithColor(context, self.latitudeFontColor.CGColor);
-    
     if (self.displayLatitude == NO) {
         return;
     }
@@ -282,89 +263,53 @@
         return;
     }
     
-    float postOffset;
-    if (self.axisXPosition == CCSGridChartXAxisPositionBottom) {
-        postOffset = (rect.size.height - self.axisMarginBottom - 2 * self.axisMarginTop) * 1.0 / ([self.latitudeTitles count] - 1);
-    } else {
-        postOffset = (rect.size.height - 2 * self.axisMarginBottom - self.axisMarginTop) * 1.0 / ([self.latitudeTitles count] - 1);
-    }
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSetLineWidth(context, 0.5f);
+    CGContextSetStrokeColorWithColor(context, self.latitudeColor.CGColor);
+    CGContextSetFillColorWithColor(context, self.latitudeFontColor.CGColor);
     
-    float offset = rect.size.height - self.axisMarginBottom - self.axisMarginTop;
+    CGFloat postOffset = [self dataQuadrantPaddingHeight:rect] / ([self.latitudeTitles count] - 1);
+    CGFloat offset = [self dataQuadrantPaddingEndY:rect];
     
-    for (NSUInteger i = 0; i <= [self.latitudeTitles count]; i++) {
+    for (NSUInteger i = 0; i < [self.latitudeTitles count]; i++) {
+        CGFloat startX;
         // 绘制线条
         if (self.axisYPosition == CCSGridChartYAxisPositionLeft) {
-            if (i < [self.latitudeTitles count]) {
-                NSString *str = (NSString *) [self.latitudeTitles objectAtIndex:i];
-                
-                //处理成千分数形式
-                NSNumberFormatter *decimalformatter = [[[NSNumberFormatter alloc] init]autorelease];
-                decimalformatter.numberStyle = NSNumberFormatterDecimalStyle;
-                
-                str = [decimalformatter stringFromNumber:[NSNumber numberWithDouble:[str doubleValue]]];
-                
-                //调整Y轴坐标位置
-                if (i == 0) {
-                    [str drawInRect:CGRectMake(0, offset - i * postOffset - self.latitudeFontSize, self.axisMarginLeft, self.latitudeFontSize)
-                           withFont:self.latitudeFont
-                      lineBreakMode:NSLineBreakByWordWrapping
-                          alignment:NSTextAlignmentRight];
-                    
-                } else if (i == [self.latitudeTitles count] - 1) {
-                    [str drawInRect:CGRectMake(0, offset - i * postOffset, self.axisMarginLeft, self.latitudeFontSize)
-                           withFont:self.latitudeFont
-                      lineBreakMode:NSLineBreakByWordWrapping
-                          alignment:NSTextAlignmentRight];
-                    
-                } else {
-                    [str drawInRect:CGRectMake(0, offset - i * postOffset - self.latitudeFontSize / 2.0, self.axisMarginLeft, self.latitudeFontSize)
-                           withFont:self.latitudeFont
-                      lineBreakMode:NSLineBreakByWordWrapping
-                          alignment:NSTextAlignmentRight];
-                }
-                
-            }
+            startX = [self borderWidth];
+        }else{
+            startX = rect.size.width - [self borderWidth] - [self axisYTitleQuadrantWidth];
+        }
+        NSString *str = (NSString *) [self.latitudeTitles objectAtIndex:i];
+        
+        //处理成千分数形式
+        NSNumberFormatter *decimalformatter = [[[NSNumberFormatter alloc] init]autorelease];
+        decimalformatter.numberStyle = NSNumberFormatterDecimalStyle;
+        
+        str = [decimalformatter stringFromNumber:[NSNumber numberWithDouble:[str doubleValue]]];
+        
+        //调整Y轴坐标位置
+        if (i == 0) {
+            [str drawInRect:CGRectMake(startX, offset - i * postOffset - self.latitudeFontSize, [self axisYTitleQuadrantWidth], self.latitudeFontSize)
+                   withFont:self.latitudeFont
+              lineBreakMode:NSLineBreakByWordWrapping
+                  alignment:NSTextAlignmentRight];
+            
+        } else if (i == [self.latitudeTitles count] - 1) {
+            [str drawInRect:CGRectMake(startX, offset - i * postOffset, [self axisYTitleQuadrantWidth], self.latitudeFontSize)
+                   withFont:self.latitudeFont
+              lineBreakMode:NSLineBreakByWordWrapping
+                  alignment:NSTextAlignmentRight];
             
         } else {
-            if (i < [self.latitudeTitles count]) {
-                NSString *str = (NSString *) [self.latitudeTitles objectAtIndex:i];
-                
-                //处理成千分数形式
-                NSNumberFormatter *decimalformatter = [[[NSNumberFormatter alloc] init]autorelease];
-                decimalformatter.numberStyle = NSNumberFormatterDecimalStyle;
-                
-                str = [decimalformatter stringFromNumber:[NSNumber numberWithDouble:[str doubleValue]]];
-                
-                //调整Y轴坐标位置
-                if (i == 0) {
-                    [str drawInRect:CGRectMake(rect.size.width - self.axisMarginRight, offset - i * postOffset - self.latitudeFontSize, self.axisMarginRight, self.latitudeFontSize)
-                           withFont:self.latitudeFont
-                      lineBreakMode:NSLineBreakByWordWrapping
-                          alignment:NSTextAlignmentLeft];
-                    
-                } else if (i == [self.latitudeTitles count] - 1) {
-                    [str drawInRect:CGRectMake(rect.size.width - self.axisMarginRight, offset - i * postOffset, self.axisMarginRight, self.latitudeFontSize)
-                           withFont:self.latitudeFont
-                      lineBreakMode:NSLineBreakByWordWrapping
-                          alignment:NSTextAlignmentLeft];
-                    
-                } else {
-                    [str drawInRect:CGRectMake(rect.size.width - self.axisMarginRight, offset - i * postOffset - self.latitudeFontSize / 2.0, self.axisMarginRight, self.latitudeFontSize)
-                           withFont:self.latitudeFont
-                      lineBreakMode:NSLineBreakByWordWrapping
-                          alignment:NSTextAlignmentLeft];
-                }
-            }
+            [str drawInRect:CGRectMake(startX, offset - i * postOffset - self.latitudeFontSize / 2.0, [self axisYTitleQuadrantWidth], self.latitudeFontSize)
+                   withFont:self.latitudeFont
+              lineBreakMode:NSLineBreakByWordWrapping
+                  alignment:NSTextAlignmentRight];
         }
     }
 }
 
 - (void)drawLongitudeLines:(CGRect)rect {
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    CGContextSetLineWidth(context, 0.5f);
-    CGContextSetStrokeColorWithColor(context, self.longitudeColor.CGColor);
-    CGContextSetFillColorWithColor(context, self.longitudeFontColor.CGColor);
-    
     if (self.displayLongitude == NO) {
         return;
     }
@@ -372,31 +317,24 @@
     if ([self.longitudeTitles count] <= 0) {
         return;
     }
+    
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSetLineWidth(context, 0.5f);
+    CGContextSetStrokeColorWithColor(context, self.longitudeColor.CGColor);
+    CGContextSetFillColorWithColor(context, self.longitudeFontColor.CGColor);
+    
     //设置线条为点线
     if (self.dashLongitude) {
         CGFloat lengths[] = {3.0, 3.0};
         CGContextSetLineDash(context, 0.0, lengths, 2);
     }
-    float postOffset;
-    float offset;
     
-    if (self.axisYPosition == CCSGridChartYAxisPositionLeft) {
-        postOffset = (rect.size.width - self.axisMarginLeft - 2 * self.axisMarginRight) / ([self.longitudeTitles count] - 1);
-        offset = self.axisMarginLeft + self.axisMarginRight;
-    }
-    else {
-        postOffset = (rect.size.width - 2 * self.axisMarginLeft - self.axisMarginRight) / ([self.longitudeTitles count] - 1);
-        offset = self.axisMarginLeft;
-    }
+    CGFloat postOffset= [self dataQuadrantPaddingWidth:rect] / ([self.longitudeTitles count] - 1);
+    CGFloat offset = [self dataQuadrantPaddingStartX:rect];
     
-    for (NSUInteger i = 0; i <= [self.longitudeTitles count]; i++) {
-        if (self.axisXPosition == CCSGridChartXAxisPositionBottom) {
-            CGContextMoveToPoint(context, offset + i * postOffset, 0);
-            CGContextAddLineToPoint(context, offset + i * postOffset, rect.size.height - self.axisMarginBottom);
-        } else {
-            CGContextMoveToPoint(context, offset + i * postOffset, self.axisMarginTop);
-            CGContextAddLineToPoint(context, offset + i * postOffset, rect.size.height);
-        }
+    for (NSUInteger i = 0; i < [self.longitudeTitles count]; i++) {
+        CGContextMoveToPoint(context, offset + i * postOffset, [self dataQuadrantStartY:rect]);
+        CGContextAddLineToPoint(context, offset + i * postOffset, [self dataQuadrantEndY:rect]);
     }
     
     CGContextStrokePath(context);
@@ -422,426 +360,106 @@
         return;
     }
     
-    float postOffset;
-    float offset;
+    CGFloat postOffset= [self dataQuadrantPaddingWidth:rect] / ([self.longitudeTitles count] - 1);
+    CGFloat offset = [self dataQuadrantPaddingStartX:rect];
     
-    if (self.axisYPosition == CCSGridChartYAxisPositionLeft) {
-        postOffset = (rect.size.width - self.axisMarginLeft - 2 * self.axisMarginRight) / ([self.longitudeTitles count] - 1);
-        offset = self.axisMarginLeft + self.axisMarginRight;
-    } else {
-        postOffset = (rect.size.width - 2 * self.axisMarginLeft - self.axisMarginRight) / ([self.longitudeTitles count] - 1);
-        offset = self.axisMarginLeft;
-    }
-    
-    for (NSUInteger i = 0; i <= [self.longitudeTitles count]; i++) {
+    for (NSUInteger i = 0; i < [self.longitudeTitles count]; i++) {
+        CGFloat startY;
         if (self.axisXPosition == CCSGridChartXAxisPositionBottom) {
-            if (i < [self.longitudeTitles count]) {
-                NSString *str = (NSString *) [self.longitudeTitles objectAtIndex:i];
-                
-                //调整X轴坐标位置
-                if (i == 0) {
-                    [str drawInRect:CGRectMake(self.axisMarginLeft, rect.size.height - self.axisMarginBottom, postOffset, self.longitudeFontSize)
-                           withFont:self.longitudeFont
-                      lineBreakMode:NSLineBreakByWordWrapping
-                          alignment:NSTextAlignmentLeft];
-                    
-                } else if (i == [self.longitudeTitles count] - 1) {
-                    if (self.axisYPosition == CCSGridChartYAxisPositionLeft) {
-                        [str drawInRect:CGRectMake(rect.size.width - postOffset, rect.size.height - self.axisMarginBottom, postOffset, self.longitudeFontSize)
-                               withFont:self.longitudeFont
-                          lineBreakMode:NSLineBreakByWordWrapping
-                              alignment:NSTextAlignmentRight];
-                    } else {
-                        [str drawInRect:CGRectMake(offset + (i - 0.5) * postOffset, rect.size.height - self.axisMarginBottom, postOffset, self.longitudeFontSize)
-                               withFont:self.longitudeFont
-                          lineBreakMode:NSLineBreakByWordWrapping
-                              alignment:NSTextAlignmentCenter];
-                    }
-                    
-                } else {
-                    [str drawInRect:CGRectMake(offset + (i - 0.5) * postOffset, rect.size.height - self.axisMarginBottom, postOffset, self.longitudeFontSize)
-                           withFont:self.longitudeFont
-                      lineBreakMode:NSLineBreakByWordWrapping
-                          alignment:NSTextAlignmentCenter];
-                }
-            }
-        } else {
+            startY = [self dataQuadrantEndY:rect] + [self axisWidth];
+        }else{
+            startY = [self borderWidth];
+        }
+        
+        NSString *str = (NSString *) [self.longitudeTitles objectAtIndex:i];
+        
+        //调整X轴坐标位置
+        if (i == 0) {
+            [str drawInRect:CGRectMake([self dataQuadrantPaddingStartX:rect], startY, postOffset, self.longitudeFontSize)
+                   withFont:self.longitudeFont
+              lineBreakMode:NSLineBreakByWordWrapping
+                  alignment:NSTextAlignmentLeft];
             
-            if (i < [self.longitudeTitles count]) {
-                NSString *str = (NSString *) [self.longitudeTitles objectAtIndex:i];
-                
-                //调整X轴坐标位置
-                if (i == 0) {
-                    [str drawInRect:CGRectMake(self.axisMarginLeft, 0, postOffset, self.longitudeFontSize)
-                           withFont:self.longitudeFont
-                      lineBreakMode:NSLineBreakByWordWrapping
-                          alignment:NSTextAlignmentLeft];
-                    
-                } else if (i == [self.longitudeTitles count] - 1) {
-                    if (self.axisYPosition == CCSGridChartYAxisPositionLeft) {
-                        [str drawInRect:CGRectMake(rect.size.width - postOffset, 0, postOffset, self.longitudeFontSize)
-                               withFont:self.longitudeFont
-                          lineBreakMode:NSLineBreakByWordWrapping
-                              alignment:NSTextAlignmentRight];
-                    } else {
-                        [str drawInRect:CGRectMake(offset + (i - 0.5) * postOffset, 0, postOffset, self.longitudeFontSize)
-                               withFont:self.longitudeFont
-                          lineBreakMode:NSLineBreakByWordWrapping
-                              alignment:NSTextAlignmentCenter];
-                    }
-                } else {
-                    [str drawInRect:CGRectMake(offset + (i - 0.5) * postOffset, 0, postOffset, self.longitudeFontSize)
-                           withFont:self.longitudeFont
-                      lineBreakMode:NSLineBreakByWordWrapping
-                          alignment:NSTextAlignmentCenter];
-                }
+        } else if (i == [self.longitudeTitles count] - 1) {
+            if (self.axisYPosition == CCSGridChartYAxisPositionLeft) {
+                [str drawInRect:CGRectMake(rect.size.width - postOffset, startY, postOffset, self.longitudeFontSize)
+                       withFont:self.longitudeFont
+                  lineBreakMode:NSLineBreakByWordWrapping
+                      alignment:NSTextAlignmentRight];
+            } else {
+                [str drawInRect:CGRectMake(offset + (i - 0.5) * postOffset, startY, postOffset, self.longitudeFontSize)
+                       withFont:self.longitudeFont
+                  lineBreakMode:NSLineBreakByWordWrapping
+                      alignment:NSTextAlignmentCenter];
             }
+            
+        } else {
+            [str drawInRect:CGRectMake(offset + (i - 0.5) * postOffset, startY, postOffset, self.longitudeFontSize)
+                   withFont:self.longitudeFont
+              lineBreakMode:NSLineBreakByWordWrapping
+                  alignment:NSTextAlignmentCenter];
         }
     }
 }
 
 - (void)drawCrossLines:(CGRect)rect {
+
+    if (self.singleTouchPoint.y < [self dataQuadrantPaddingStartY:rect]) {
+        self.singleTouchPoint = CGPointMake(self.singleTouchPoint.x, [self dataQuadrantPaddingStartY:rect]);
+    }
+    if (self.singleTouchPoint.y > [self dataQuadrantPaddingEndY:rect]) {
+        self.singleTouchPoint = CGPointMake(self.singleTouchPoint.x, [self dataQuadrantPaddingEndY:rect]);
+    }
+
+    if (self.singleTouchPoint.x < [self dataQuadrantPaddingStartX:rect]) {
+        self.singleTouchPoint = CGPointMake([self dataQuadrantPaddingStartX:rect], self.singleTouchPoint.y);
+    }
+    if (self.singleTouchPoint.x > [self dataQuadrantPaddingEndX:rect]) {
+        self.singleTouchPoint = CGPointMake([self dataQuadrantPaddingEndX:rect], self.singleTouchPoint.y);
+    }
+
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSetLineWidth(context, 1.0f);
     CGContextSetStrokeColorWithColor(context, self.crossLinesColor.CGColor);
     CGContextSetFillColorWithColor(context, self.crossLinesColor.CGColor);
-
-    if (self.axisXPosition == CCSGridChartXAxisPositionBottom) {
-        if (self.singleTouchPoint.y <= 0) {
-            self.singleTouchPoint = CGPointMake(self.singleTouchPoint.x, 1);
-        }
-        if (self.singleTouchPoint.y >= rect.size.height - self.axisMarginBottom) {
-            self.singleTouchPoint = CGPointMake(self.singleTouchPoint.x, rect.size.height - self.axisMarginBottom - 1);
-        }
-    } else {
-        if (self.singleTouchPoint.y <= self.axisMarginTop) {
-            self.singleTouchPoint = CGPointMake(self.singleTouchPoint.x, self.axisMarginTop + 1);
-        }
-        if (self.singleTouchPoint.y >= rect.size.height) {
-            self.singleTouchPoint = CGPointMake(self.singleTouchPoint.x, rect.size.height - 1);
-        }
+    
+    //绘制横线
+    if (self.displayCrossXOnTouch) {
+        //还原半透明
+        CGContextSetAlpha(context, 1);
+        
+        CGContextMoveToPoint(context, self.singleTouchPoint.x, [self dataQuadrantStartY:rect]);
+        CGContextAddLineToPoint(context, self.singleTouchPoint.x, [self dataQuadrantEndY:rect]);
+        
+        CGContextStrokePath(context);
+        
     }
 
-    if (self.singleTouchPoint.x <= 0) {
-        self.singleTouchPoint = CGPointMake(1, self.singleTouchPoint.y);
+    
+    //绘制纵线与刻度
+    if (self.displayCrossYOnTouch) {
+
+        //还原半透明
+        CGContextSetAlpha(context, 1);
+        
+        CGContextMoveToPoint(context, [self dataQuadrantStartX:rect], self.singleTouchPoint.y);
+        CGContextAddLineToPoint(context, [self dataQuadrantEndX:rect], self.singleTouchPoint.y);
+        
+        CGContextStrokePath(context);
+        
     }
-    if (self.singleTouchPoint.x >= rect.size.width - self.axisMarginRight) {
-        self.singleTouchPoint = CGPointMake(rect.size.width - self.axisMarginRight - 1, self.singleTouchPoint.y);
-    }
 
+//    CGContextSetFillColorWithColor(context,[UIColor blueColor].CGColor);
+//    
+//    NSString *degree = [NSString stringWithFormat:@"(%@,%@)",[self calcAxisXGraduate:rect],[self calcAxisYGraduate:rect]];
+//    
+//    //绘制标尺刻度
+//    [degree drawInRect:CGRectMake([self borderWidth], [self borderWidth], 200, 14)
+//              withFont:[UIFont fontWithName:@"Helvetica" size:self.longitudeFontSize]
+//         lineBreakMode:UILineBreakModeTailTruncation
+//             alignment:NSTextAlignmentLeft];
+//    CGContextFillPath(context);
 
-    if (self.axisXPosition == CCSGridChartXAxisPositionBottom && self.axisYPosition == CCSGridChartYAxisPositionLeft) {
-        //界定点击有效范围
-        if (self.singleTouchPoint.x >= self.axisMarginLeft
-                && self.singleTouchPoint.y > 0
-                && self.singleTouchPoint.x < rect.size.width
-                && self.singleTouchPoint.y < rect.size.height - self.axisMarginBottom) {
-
-//            //获得标尺刻度
-//            NSString *meterY = [self calcAxisYGraduate:rect];
-//            NSString *meterX = [self calcAxisXGraduate:rect];
-//            
-//            //处理成千分数形式
-//            NSNumberFormatter *decimalformatter = [[[NSNumberFormatter alloc]init]autorelease];
-//            decimalformatter.numberStyle = NSNumberFormatterDecimalStyle;
-//            
-//            meterY = [decimalformatter stringFromNumber:[NSNumber numberWithDouble:[meterY doubleValue]]];
-
-
-            //绘制横线
-            if (self.displayCrossXOnTouch) {
-//                //设置半透明
-//                CGContextSetAlpha(context, 0.7);
-//                CGContextSetFillColorWithColor(context,self.crossLinesColor.CGColor);
-//                //填充方框
-//                CGContextAddRect(context,CGRectMake(self.singleTouchPoint.x -35, rect.size.height - self.axisMarginBottom + 1, 70, 14));
-//                //绘制线条
-//                CGContextFillPath(context);
-
-                //还原半透明
-                CGContextSetAlpha(context, 1);
-
-                CGContextMoveToPoint(context, self.singleTouchPoint.x, 0);
-                CGContextAddLineToPoint(context, self.singleTouchPoint.x, rect.size.height - self.axisMarginBottom);
-
-//                //绘制方框
-//                CGContextAddRect(context,CGRectMake(self.singleTouchPoint.x -35, rect.size.height - self.axisMarginBottom + 1, 70, 14));
-//                //绘制线条
-                CGContextStrokePath(context);
-//                
-//                CGContextSetFillColorWithColor(context,self.crossLinesFontColor.CGColor);
-
-//                //绘制标尺刻度
-//                [meterX drawInRect:CGRectMake(self.singleTouchPoint.x -35, rect.size.height - self.axisMarginBottom + 1, 70, 12)
-//                          withFont:[UIFont fontWithName:@"Helvetica" size:self.longitudeFontSize] 
-//                     lineBreakMode:UILineBreakModeTailTruncation 
-//                         alignment:NSTextAlignmentCenter];
-
-            }
-
-            //绘制纵线与刻度
-            if (self.displayCrossYOnTouch) {
-//                //设置半透明
-//                CGContextSetAlpha(context, 0.7);
-//                CGContextSetFillColorWithColor(context,self.crossLinesColor.CGColor);
-//                //填充方框
-//                CGContextAddRect(context,CGRectMake(1, self.singleTouchPoint.y - 6, self.axisMarginLeft-2, 14));
-//                //绘制线条
-//                CGContextFillPath(context);
-                //还原半透明
-                CGContextSetAlpha(context, 1);
-
-                CGContextMoveToPoint(context, self.axisMarginLeft, self.singleTouchPoint.y);
-                CGContextAddLineToPoint(context, rect.size.width, self.singleTouchPoint.y);
-
-//                //绘制方框
-//                CGContextAddRect(context,CGRectMake(1, self.singleTouchPoint.y - 6, self.axisMarginLeft-2, 14));
-//                //绘制线条
-                CGContextStrokePath(context);
-//                
-//                CGContextSetFillColorWithColor(context,self.crossLinesFontColor.CGColor);
-
-//                [meterY drawInRect:CGRectMake(1, self.singleTouchPoint.y - 5, self.axisMarginLeft-2, 50)
-//                          withFont:[UIFont fontWithName:@"Helvetica" size:self.latitudeFontSize]
-//                     lineBreakMode:NSLineBreakByWordWrapping 
-//                         alignment:NSTextAlignmentRight];
-
-            }
-        }
-    } else if (self.axisXPosition == CCSGridChartXAxisPositionBottom && self.axisYPosition == CCSGridChartYAxisPositionRight) {
-        //界定点击有效范围
-        if (self.singleTouchPoint.x >= self.axisMarginLeft
-                && self.singleTouchPoint.y > 0
-                && self.singleTouchPoint.x < rect.size.width - self.axisMarginRight
-                && self.singleTouchPoint.y < rect.size.height - self.axisMarginBottom) {
-
-//            //获得标尺刻度
-//            NSString *meterY = [self calcAxisYGraduate:rect];
-//            NSString *meterX = [self calcAxisXGraduate:rect];
-//            
-//            //处理成千分数形式
-//            NSNumberFormatter *decimalformatter = [[[NSNumberFormatter alloc]init]autorelease];
-//            decimalformatter.numberStyle = NSNumberFormatterDecimalStyle;
-//            
-//            meterY = [decimalformatter stringFromNumber:[NSNumber numberWithDouble:[meterY doubleValue]]];
-
-            //绘制横线
-            if (self.displayCrossXOnTouch) {
-
-//                //设置半透明
-//                CGContextSetAlpha(context, 0.7);
-//                CGContextSetFillColorWithColor(context,self.crossLinesColor.CGColor);
-//                //填充方框
-//                CGContextAddRect(context,CGRectMake(self.singleTouchPoint.x -35, rect.size.height - self.axisMarginBottom + 1, 70, 14));
-//                //绘制线条
-//                CGContextFillPath(context);
-
-                //还原半透明
-                CGContextSetAlpha(context, 1);
-
-                CGContextMoveToPoint(context, self.singleTouchPoint.x, 0);
-                CGContextAddLineToPoint(context, self.singleTouchPoint.x, rect.size.height - self.axisMarginBottom);
-
-//                //绘制方框
-//                CGContextAddRect(context,CGRectMake(self.singleTouchPoint.x -35, rect.size.height - self.axisMarginBottom + 1, 70, 14));
-//                //绘制线条
-                CGContextStrokePath(context);
-//                
-//                CGContextSetFillColorWithColor(context,self.crossLinesFontColor.CGColor);
-
-//                //绘制标尺刻度
-//                [meterX drawInRect:CGRectMake(self.singleTouchPoint.x -35, rect.size.height - self.axisMarginBottom + 1, 70, 12)
-//                          withFont:[UIFont fontWithName:@"Helvetica" size:self.longitudeFontSize] 
-//                     lineBreakMode:UILineBreakModeTailTruncation 
-//                         alignment:NSTextAlignmentCenter];
-
-            }
-
-            //绘制纵线与刻度
-            if (self.displayCrossYOnTouch) {
-
-//                //设置半透明
-//                CGContextSetAlpha(context, 0.7);
-//                CGContextSetFillColorWithColor(context,self.crossLinesColor.CGColor);
-//                //填充方框
-//                CGContextAddRect(context,CGRectMake(rect.size.width - self.axisMarginRight, self.singleTouchPoint.y - 6, self.axisMarginRight-2, 14));
-//                //绘制线条
-//                CGContextFillPath(context);
-                //还原半透明
-                CGContextSetAlpha(context, 1);
-
-                CGContextMoveToPoint(context, 0, self.singleTouchPoint.y);
-                CGContextAddLineToPoint(context, rect.size.width - self.axisMarginRight, self.singleTouchPoint.y);
-
-//                //绘制方框
-//                CGContextAddRect(context,CGRectMake(rect.size.width - self.axisMarginRight, self.singleTouchPoint.y - 6, self.axisMarginRight-2, 14));
-//                //绘制线条
-                CGContextStrokePath(context);
-//                
-//                CGContextSetFillColorWithColor(context,self.crossLinesFontColor.CGColor);
-
-//                [meterY drawInRect:CGRectMake(rect.size.width - self.axisMarginRight, self.singleTouchPoint.y - 5, self.axisMarginRight-2, 50)
-//                          withFont:[UIFont fontWithName:@"Helvetica" size:self.latitudeFontSize]
-//                     lineBreakMode:NSLineBreakByWordWrapping 
-//                         alignment:NSTextAlignmentLeft];
-            }
-        }
-
-    } else if (self.axisXPosition == CCSGridChartXAxisPositionTop && self.axisYPosition == CCSGridChartYAxisPositionLeft) {
-        //界定点击有效范围
-        if (self.singleTouchPoint.x >= self.axisMarginLeft
-                && self.singleTouchPoint.y > self.axisMarginTop
-                && self.singleTouchPoint.x < rect.size.width
-                && self.singleTouchPoint.y < rect.size.height) {
-
-//            //获得标尺刻度
-//            NSString *meterY = [self calcAxisYGraduate:rect];
-//            NSString *meterX = [self calcAxisXGraduate:rect];
-//            
-//            //处理成千分数形式
-//            NSNumberFormatter *decimalformatter = [[[NSNumberFormatter alloc]init]autorelease];
-//            decimalformatter.numberStyle = NSNumberFormatterDecimalStyle;
-//            
-//            meterY = [decimalformatter stringFromNumber:[NSNumber numberWithDouble:[meterY doubleValue]]];
-
-            //绘制横线
-            if (self.displayCrossXOnTouch) {
-//                //设置半透明
-//                CGContextSetAlpha(context, 0.7);
-//                CGContextSetFillColorWithColor(context,self.crossLinesColor.CGColor);
-//                //填充方框
-//                CGContextAddRect(context,CGRectMake(self.singleTouchPoint.x -35, self.axisMarginTop + 1, 70, 14));
-//                //绘制线条
-//                CGContextFillPath(context);
-
-                //还原半透明
-                CGContextSetAlpha(context, 1);
-
-                CGContextMoveToPoint(context, self.singleTouchPoint.x, self.axisMarginTop);
-                CGContextAddLineToPoint(context, self.singleTouchPoint.x, rect.size.height);
-
-//                //绘制方框
-//                CGContextAddRect(context,CGRectMake(self.singleTouchPoint.x -35, self.axisMarginTop + 1, 70, 14));
-//                //绘制线条
-                CGContextStrokePath(context);
-//                
-//                CGContextSetFillColorWithColor(context,self.crossLinesFontColor.CGColor);
-
-//                //绘制标尺刻度
-//                [meterX drawInRect:CGRectMake(self.singleTouchPoint.x -35, self.axisMarginTop + 1, 70, 12)
-//                          withFont:[UIFont fontWithName:@"Helvetica" size:self.longitudeFontSize] 
-//                     lineBreakMode:UILineBreakModeTailTruncation 
-//                         alignment:NSTextAlignmentCenter];
-            }
-
-            //绘制纵线与刻度
-            if (self.displayCrossYOnTouch) {
-
-//                //设置半透明
-//                CGContextSetAlpha(context, 0.7);
-//                CGContextSetFillColorWithColor(context,self.crossLinesColor.CGColor);
-//                //填充方框
-//                CGContextAddRect(context,CGRectMake(1, self.singleTouchPoint.y - 6, self.axisMarginLeft-2, 14));
-//                //绘制线条
-//                CGContextFillPath(context);
-                //还原半透明
-                CGContextSetAlpha(context, 1);
-
-                CGContextMoveToPoint(context, self.axisMarginLeft, self.singleTouchPoint.y);
-                CGContextAddLineToPoint(context, rect.size.width, self.singleTouchPoint.y);
-
-//                //绘制方框
-//                CGContextAddRect(context,CGRectMake(1, self.singleTouchPoint.y - 6, self.axisMarginLeft-2, 14));
-//                //绘制线条
-                CGContextStrokePath(context);
-//                
-//                CGContextSetFillColorWithColor(context,self.crossLinesFontColor.CGColor);
-
-//                [meterY drawInRect:CGRectMake(1, self.singleTouchPoint.y - 5, self.axisMarginLeft-2, 50)
-//                          withFont:[UIFont fontWithName:@"Helvetica" size:self.latitudeFontSize]
-//                     lineBreakMode:NSLineBreakByWordWrapping 
-//                         alignment:NSTextAlignmentRight];
-            }
-        }
-
-    } else if (self.axisXPosition == CCSGridChartXAxisPositionTop && self.axisYPosition == CCSGridChartYAxisPositionRight) {
-        //界定点击有效范围
-        if (self.singleTouchPoint.x >= self.axisMarginLeft
-                && self.singleTouchPoint.y > self.axisMarginTop
-                && self.singleTouchPoint.x < rect.size.width - self.axisMarginRight
-                && self.singleTouchPoint.y < rect.size.height) {
-
-//            //获得标尺刻度
-//            NSString *meterY = [self calcAxisYGraduate:rect];
-//            NSString *meterX = [self calcAxisXGraduate:rect];
-//            
-//            //处理成千分数形式
-//            NSNumberFormatter *decimalformatter = [[[NSNumberFormatter alloc]init]autorelease];
-//            decimalformatter.numberStyle = NSNumberFormatterDecimalStyle;
-//            
-//            meterY = [decimalformatter stringFromNumber:[NSNumber numberWithDouble:[meterY doubleValue]]];
-
-
-            //绘制横线
-            if (self.displayCrossXOnTouch) {
-//                //设置半透明
-//                CGContextSetAlpha(context, 0.7);
-//                CGContextSetFillColorWithColor(context,self.crossLinesColor.CGColor);
-//                //填充方框
-//                CGContextAddRect(context,CGRectMake(self.singleTouchPoint.x -35, self.axisMarginTop + 1, 70, 14));
-//                //绘制线条
-//                CGContextFillPath(context);
-
-                //还原半透明
-                CGContextSetAlpha(context, 1);
-
-                CGContextMoveToPoint(context, self.singleTouchPoint.x, self.axisMarginTop);
-                CGContextAddLineToPoint(context, self.singleTouchPoint.x, rect.size.height);
-
-//                //绘制方框
-//                CGContextAddRect(context,CGRectMake(self.singleTouchPoint.x -35, self.axisMarginTop + 1, 70, 14));
-//                //绘制线条
-                CGContextStrokePath(context);
-//                
-//                CGContextSetFillColorWithColor(context,self.crossLinesFontColor.CGColor);
-
-//                //绘制标尺刻度
-//                [meterX drawInRect:CGRectMake(self.singleTouchPoint.x -35, self.axisMarginTop + 1, 70, 12)
-//                          withFont:[UIFont fontWithName:@"Helvetica" size:self.longitudeFontSize] 
-//                     lineBreakMode:UILineBreakModeTailTruncation 
-//                         alignment:NSTextAlignmentCenter];
-            }
-
-            //绘制纵线与刻度
-            if (self.displayCrossYOnTouch) {
-
-//                //设置半透明
-//                CGContextSetAlpha(context, 0.7);
-//                CGContextSetFillColorWithColor(context,self.crossLinesColor.CGColor);
-//                //填充方框
-//                CGContextAddRect(context,CGRectMake(rect.size.width - self.axisMarginRight, self.singleTouchPoint.y - 6, self.axisMarginRight-2, 14));
-//                //绘制线条
-//                CGContextFillPath(context);
-                //还原半透明
-                CGContextSetAlpha(context, 1);
-
-                CGContextMoveToPoint(context, 0, self.singleTouchPoint.y);
-                CGContextAddLineToPoint(context, rect.size.width - self.axisMarginRight, self.singleTouchPoint.y);
-
-//                //绘制方框
-//                CGContextAddRect(context,CGRectMake(rect.size.width - self.axisMarginRight, self.singleTouchPoint.y - 6, self.axisMarginRight-2, 14));
-//                //绘制线条
-                CGContextStrokePath(context);
-//                
-//                CGContextSetFillColorWithColor(context,self.crossLinesFontColor.CGColor);
-
-//                [meterY drawInRect:CGRectMake(rect.size.width - self.axisMarginRight, self.singleTouchPoint.y - 5, self.axisMarginRight-2, 50)
-//                          withFont:[UIFont fontWithName:@"Helvetica" size:self.latitudeFontSize]
-//                     lineBreakMode:NSLineBreakByWordWrapping 
-//                         alignment:NSTextAlignmentLeft];
-            }
-        }
-    }
 }
 
 
@@ -855,37 +473,19 @@
 
 
 - (CGFloat)touchPointAxisXValue:(CGRect)rect {
-    if (self.axisYPosition == CCSGridChartYAxisPositionLeft) {
-        float length = rect.size.width - self.axisMarginLeft - 2 * self.axisMarginRight;
-        float valueLength = self.singleTouchPoint.x - self.axisMarginLeft - self.axisMarginRight;
-
-        return valueLength / length;
-    } else {
-        float length = rect.size.width - 2 * self.axisMarginLeft - self.axisMarginRight;
-        float valueLength = self.singleTouchPoint.x - self.axisMarginLeft;
-
-        return valueLength / length;
-    }
+    CGFloat length = [self dataQuadrantPaddingWidth:rect];
+    CGFloat valueLength = self.singleTouchPoint.x - [self dataQuadrantPaddingStartX:rect];;
+    return valueLength / length;
 }
 
 - (CGFloat)touchPointAxisYValue:(CGRect)rect {
-    if (self.axisXPosition == CCSGridChartXAxisPositionBottom) {
-        float length = rect.size.height - self.axisMarginBottom - 2 * self.axisMarginTop;
-        float valueLength = length - self.singleTouchPoint.y + self.axisMarginTop;
-
-        return valueLength / length;
-    }
-    else {
-        float length = rect.size.height - 2 * self.axisMarginBottom - self.axisMarginTop;
-        float valueLength = length - self.singleTouchPoint.y - self.axisMarginBottom;
-
-        return valueLength / length;
-    }
+    CGFloat length = [self dataQuadrantPaddingHeight:rect];
+    CGFloat valueLength = length - self.singleTouchPoint.y + [self dataQuadrantPaddingStartY:rect];
+    return valueLength / length;
 }
 
-
-float _startDistance = 0;
-float _minDistance = 8;
+CGFloat _startDistance = 0;
+CGFloat _minDistance = 8;
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     //调用父类的触摸事件
@@ -926,7 +526,7 @@ float _minDistance = 8;
         CGPoint pt1 = [[allTouches objectAtIndex:0] locationInView:self];
         CGPoint pt2 = [[allTouches objectAtIndex:1] locationInView:self];
 
-        float endDistance = fabsf(pt1.x - pt2.x);
+        CGFloat endDistance = fabsf(pt1.x - pt2.x);
         //放大
         if (endDistance - _startDistance > _minDistance) {
             [self zoomOut];
@@ -944,6 +544,77 @@ float _minDistance = 8;
 
     }
 
+}
+
+
+- (CGFloat) dataQuadrantWidth:(CGRect)rect{
+    return rect.size.width - [self axisYTitleQuadrantWidth] - 2 * [self borderWidth]
+            - [self axisWidth];
+}
+
+- (CGFloat) dataQuadrantHeight:(CGRect)rect{
+    return rect.size.height - [self axisXTitleQuadrantHeight] - 2 * [self borderWidth]
+            - [self axisWidth];
+}
+
+- (CGFloat) dataQuadrantStartX:(CGRect)rect{
+    if ([self axisYPosition] == CCSGridChartYAxisPositionLeft) {
+        return [self borderWidth] + [self axisYTitleQuadrantWidth] + [self axisWidth];
+    } else {
+        return [self borderWidth];
+    }
+}
+
+- (CGFloat) dataQuadrantPaddingStartX:(CGRect)rect{
+    return [self dataQuadrantStartX:rect] + [self dataQuadrantPaddingLeft];
+}
+
+- (CGFloat) dataQuadrantEndX:(CGRect)rect{
+    if ([self axisYPosition] == CCSGridChartYAxisPositionLeft) {
+        return rect.size.width - [self borderWidth];
+    } else {
+        return rect.size.width - [self borderWidth] - [self axisYTitleQuadrantWidth]
+                - [self axisWidth];
+    }
+}
+
+- (CGFloat) dataQuadrantPaddingEndX:(CGRect)rect{
+    return [self dataQuadrantEndX:rect] - [self dataQuadrantPaddingRight];
+}
+
+- (CGFloat) dataQuadrantStartY:(CGRect)rect{
+    if ([self axisXPosition] == CCSGridChartXAxisPositionBottom) {
+        return [self borderWidth];
+    }else{
+        return [self borderWidth] + [self axisXTitleQuadrantHeight] + [self axisWidth];
+    }
+}
+
+- (CGFloat) dataQuadrantPaddingStartY:(CGRect)rect{
+    return [self dataQuadrantStartY:rect] + [self dataQuadrantPaddingTop];
+}
+
+- (CGFloat) dataQuadrantEndY:(CGRect)rect{
+    if ([self axisXPosition] == CCSGridChartXAxisPositionBottom) {
+        return rect.size.height - [self borderWidth] - [self axisXTitleQuadrantHeight]
+            - [self axisWidth];
+    }else{
+        return rect.size.height - [self borderWidth];
+    }
+}
+
+- (CGFloat) dataQuadrantPaddingEndY:(CGRect)rect{
+    return [self dataQuadrantEndY:rect] - [self dataQuadrantPaddingTop];
+}
+
+- (CGFloat) dataQuadrantPaddingWidth:(CGRect)rect{
+    return [self dataQuadrantWidth:rect] - [self dataQuadrantPaddingLeft]
+            - [self dataQuadrantPaddingRight];
+}
+
+- (CGFloat) dataQuadrantPaddingHeight:(CGRect)rect{
+    return [self dataQuadrantHeight:rect] - [self dataQuadrantPaddingTop]
+            - [self dataQuadrantPaddingBottom];
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -971,6 +642,52 @@ float _minDistance = 8;
     if (self.chartDelegate && [self.chartDelegate respondsToSelector:@selector(CCSChartBeTouchedOn:indexAt:)]) {
         [self.chartDelegate CCSChartBeTouchedOn:point indexAt:0];
     }
+}
+
+
+- (void) setAxisMarginLeft:(CGFloat)val{
+    self.axisYTitleQuadrantWidth = val;
+}
+
+- (CGFloat) getAxisMarginLeft {
+    return [self axisYTitleQuadrantWidth];
+}
+
+- (void) setAxisMarginRight:(CGFloat)val{
+    self.dataQuadrantPaddingLeft = val;
+    self.dataQuadrantPaddingRight = val;
+}
+
+- (CGFloat) getAxisMarginRight {
+    return [self dataQuadrantPaddingLeft];
+}
+
+- (void) setAxisMarginBottom:(CGFloat)val{
+    self.axisXTitleQuadrantHeight = val;
+}
+
+- (CGFloat) getAxisMarginBottom {
+    return [self axisXTitleQuadrantHeight];
+}
+
+- (void) setAxisMarginTop:(CGFloat)val{
+    self.dataQuadrantPaddingTop = val;
+    self.dataQuadrantPaddingBottom = val;
+}
+
+- (CGFloat) getAxisMarginTop {
+    return [self dataQuadrantPaddingTop];
+}
+
+- (void) setDataQuadrantPadding:(CGFloat)val {
+    self.dataQuadrantPaddingTop = val;
+    self.dataQuadrantPaddingBottom = val;
+    self.dataQuadrantPaddingLeft = val;
+    self.dataQuadrantPaddingRight = val;
+}
+
+- (CGFloat) getDataQuadrantPadding {
+    return MAX(MAX([self dataQuadrantPaddingTop],[self dataQuadrantPaddingBottom]),MAX([self dataQuadrantPaddingLeft],[self dataQuadrantPaddingRight]));
 }
 
 @end

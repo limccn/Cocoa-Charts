@@ -59,12 +59,12 @@
     if (self.data != NULL) {
 
         //获得总数
-        float sum = 0;
+        CGFloat sum = 0;
         for (NSUInteger i = 0; i < [self.data count]; i++) {
             sum = sum + ((CCSTitleValueColor *) [self.data objectAtIndex:i]).value;
         }
 
-        float offset = 0;
+        CGFloat offset = 0;
         // 遍历每一条数据列表
         for (NSUInteger j = 0; j < [self.data count]; j++) {
 
@@ -77,12 +77,12 @@
             CGContextSetFillColorWithColor(context, entity.color.CGColor);
 
             //角度
-            float sweep = entity.value * 2 * PI / sum;
+            CGFloat sweep = entity.value * 2 * PI / sum;
             //如果是选中的数据
             if (j == 0) {
                 //初始化偏移值
                 offset = -0.5f * sweep;
-                float realOffset;
+                CGFloat realOffset;
                 if (offset != -PI / 2 && offset != 0 && offset != -PI) {
                     if (offset > 0) {
                         realOffset = self.offsetLength / sin(offset);

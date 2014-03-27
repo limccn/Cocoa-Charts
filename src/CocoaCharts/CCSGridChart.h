@@ -74,10 +74,18 @@ typedef enum {
     UIColor *_crossLinesFontColor;
     UIFont *_longitudeFont;
     UIFont *_latitudeFont;
-    CGFloat _axisMarginLeft;
-    CGFloat _axisMarginBottom;
-    CGFloat _axisMarginTop;
-    CGFloat _axisMarginRight;
+//    CGFloat _axisMarginLeft;
+//    CGFloat _axisMarginBottom;
+//    CGFloat _axisMarginTop;
+//    CGFloat _axisMarginRight;
+    CGFloat _axisYTitleQuadrantWidth;
+    CGFloat _axisXTitleQuadrantHeight;
+    CGFloat _dataQuadrantPaddingTop;
+    CGFloat _dataQuadrantPaddingLeft;
+    CGFloat _dataQuadrantPaddingBottom;
+    CGFloat _dataQuadrantPaddingRight;
+    CGFloat _axisWidth;
+    CGFloat _borderWidth;
     NSUInteger _longitudeFontSize;
     NSUInteger _latitudeFontSize;
     CCSGridChartXAxisPosition _axisXPosition;
@@ -181,28 +189,37 @@ typedef enum {
  轴線より左枠線の距離
  轴线左边距
  */
-@property(assign, nonatomic) CGFloat axisMarginLeft;
+@property(assign, nonatomic , setter = setAxisMarginLeft:,getter = getAxisMarginLeft) CGFloat axisMarginLeft;
 
 /*!
  Margin of the axis to the bottom border
  轴線より下枠線の距離
  轴线下边距
  */
-@property(assign, nonatomic) CGFloat axisMarginBottom;
+@property(assign, nonatomic, setter = setAxisMarginBottom:,getter = getAxisMarginBottom) CGFloat axisMarginBottom;
 
 /*!
  Margin of the axis to the top border
  轴線より上枠線の距離
  轴线上边距
  */
-@property(assign, nonatomic) CGFloat axisMarginTop;
+@property(assign, nonatomic, setter = setAxisMarginTop:,getter = getAxisMarginTop) CGFloat axisMarginTop;
 
 /*!
  Margin of the axis to the top border
  轴線より右枠線の距離
  轴线右边距
  */
-@property(assign, nonatomic) CGFloat axisMarginRight;
+@property(assign, nonatomic,  setter = setAxisMarginRight:,getter = getAxisMarginRight) CGFloat axisMarginRight;
+
+@property(assign, nonatomic) CGFloat axisYTitleQuadrantWidth;
+@property(assign, nonatomic) CGFloat axisXTitleQuadrantHeight;
+@property(assign, nonatomic) CGFloat dataQuadrantPaddingTop;
+@property(assign, nonatomic) CGFloat dataQuadrantPaddingLeft;
+@property(assign, nonatomic) CGFloat dataQuadrantPaddingBottom;
+@property(assign, nonatomic) CGFloat dataQuadrantPaddingRight;
+@property(assign, nonatomic) CGFloat axisWidth;
+@property(assign, nonatomic) CGFloat borderWidth;
 
 /*!
  Font size of text for the longitude　degrees display
@@ -474,5 +491,18 @@ typedef enum {
  放大表示
  */
 - (void)zoomIn;
+
+- (CGFloat) dataQuadrantWidth:(CGRect)rect;
+- (CGFloat) dataQuadrantHeight:(CGRect)rect;
+- (CGFloat) dataQuadrantStartX:(CGRect)rect;
+- (CGFloat) dataQuadrantPaddingStartX:(CGRect)rect;
+- (CGFloat) dataQuadrantEndX:(CGRect)rect;
+- (CGFloat) dataQuadrantPaddingEndX:(CGRect)rect;
+- (CGFloat) dataQuadrantStartY:(CGRect)rect;
+- (CGFloat) dataQuadrantPaddingStartY:(CGRect)rect;
+- (CGFloat) dataQuadrantEndY:(CGRect)rect;
+- (CGFloat) dataQuadrantPaddingEndY:(CGRect)rect;
+- (CGFloat) dataQuadrantPaddingWidth:(CGRect)rect;
+- (CGFloat) dataQuadrantPaddingHeight:(CGRect)rect;
 
 @end

@@ -144,9 +144,9 @@
     //修正最大值和最小值
     long rate = (self.maxValue - self.minValue) / (self.latitudeNum);
     NSString *strRate = [NSString stringWithFormat:@"%ld", rate];
-    float first = [[strRate substringToIndex:1] intValue] + 1.0f;
+    CGFloat first = [[strRate substringToIndex:1] intValue] + 1.0f;
     if (first > 0 && strRate.length > 1) {
-        float second = [[[strRate substringToIndex:2] substringFromIndex:1] intValue];
+        CGFloat second = [[[strRate substringToIndex:2] substringFromIndex:1] intValue];
         if (second < 5) {
             first = first - 0.5;
         }
@@ -181,7 +181,7 @@
 - (void)initAxisX {
     NSMutableArray *TitleX = [[[NSMutableArray alloc] init] autorelease];
     if (self.stickData != NULL && [self.stickData count] > 0) {
-        float average = self.maxSticksNum / self.longitudeNum;
+        CGFloat average = self.maxSticksNum / self.longitudeNum;
         CCSStickChartData *chartdata = nil;
         if (self.axisYPosition == CCSGridChartYAxisPositionLeft) {
             //处理刻度
@@ -228,7 +228,7 @@
     }
     
     NSMutableArray *TitleY = [[[NSMutableArray alloc] init]autorelease];
-    float average = (NSUInteger) ((self.maxValue - self.minValue) / self.latitudeNum);
+    CGFloat average = (NSUInteger) ((self.maxValue - self.minValue) / self.latitudeNum);
     //处理刻度
     for (NSUInteger i = 0; i < self.latitudeNum; i++) {
         if (self.axisCalc == 1) {
@@ -268,7 +268,7 @@
 
 - (void)drawData:(CGRect)rect {
     // 蜡烛棒宽度
-    float stickWidth = ((rect.size.width - self.axisMarginLeft - self.axisMarginRight) / self.maxSticksNum) - 1;
+    CGFloat stickWidth = ([self dataQuadrantPaddingWidth:rect] / self.maxSticksNum) - 1;
 
     CGContextRef context = UIGraphicsGetCurrentContext();
 
@@ -280,13 +280,13 @@
 
         if (self.axisYPosition == CCSGridChartYAxisPositionLeft) {
             // 蜡烛棒起始绘制位置
-            float stickX = self.axisMarginLeft + 1;
+            CGFloat stickX = [self dataQuadrantPaddingStartX:rect] + 1;
             //判断显示为方柱或显示为线条
             for (NSUInteger i = 0; i < [self.stickData count]; i++) {
                 CCSStickChartData *stick = [self.stickData objectAtIndex:i];
 
-                float highY = ((1 - (stick.high - self.minValue) / (self.maxValue - self.minValue)) * (rect.size.height - self.axisMarginBottom) - super.axisMarginTop);
-                float lowY = ((1 - (stick.low - self.minValue) / (self.maxValue - self.minValue)) * (rect.size.height - self.axisMarginBottom) - self.axisMarginTop);
+                CGFloat highY = ((1 - (stick.high - self.minValue) / (self.maxValue - self.minValue)) * [self dataQuadrantPaddingHeight:rect] +[self dataQuadrantPaddingStartY:rect]);
+                CGFloat lowY = ((1 - (stick.low - self.minValue) / (self.maxValue - self.minValue)) * [self dataQuadrantPaddingHeight:rect] +[self dataQuadrantPaddingStartY:rect]);
 
                 if (stick.high == 0) {
                     //没有值的情况下不绘制
@@ -309,13 +309,13 @@
             }
         } else {
             // 蜡烛棒起始绘制位置
-            float stickX = rect.size.width - self.axisMarginRight - 1 - stickWidth;
+            CGFloat stickX = [self dataQuadrantPaddingEndX:rect] - 1 - stickWidth;
             //判断显示为方柱或显示为线条
             for (NSInteger i = [self.stickData count] - 1; i >= 0; i--) {
                 CCSStickChartData *stick = [self.stickData objectAtIndex:i];
 
-                float highY = ((1 - (stick.high - self.minValue) / (self.maxValue - self.minValue)) * (rect.size.height - self.axisMarginBottom) - super.axisMarginTop);
-                float lowY = ((1 - (stick.low - self.minValue) / (self.maxValue - self.minValue)) * (rect.size.height - self.axisMarginBottom) - self.axisMarginTop);
+                CGFloat highY = ((1 - (stick.high - self.minValue) / (self.maxValue - self.minValue)) * [self dataQuadrantPaddingHeight:rect] +[self dataQuadrantPaddingStartY:rect]);
+                CGFloat lowY = ((1 - (stick.low - self.minValue) / (self.maxValue - self.minValue)) * [self dataQuadrantPaddingHeight:rect] +[self dataQuadrantPaddingStartY:rect]);
 
                 if (stick.high == 0) {
                     //没有值的情况下不绘制
@@ -341,7 +341,7 @@
 }
 
 - (NSString *)calcAxisXGraduate:(CGRect)rect {
-    float value = [self touchPointAxisXValue:rect];
+    CGFloat value = [self touchPointAxisXValue:rect];
     NSString *result = @"";
     if (self.stickData != NULL && [self.stickData count] > 0) {
         if (self.axisYPosition == CCSGridChartYAxisPositionLeft) {
@@ -371,7 +371,7 @@
 }
 
 - (NSString *)calcAxisYGraduate:(CGRect)rect {
-    float value = [self touchPointAxisYValue:rect];
+    CGFloat value = [self touchPointAxisYValue:rect];
 
     if (self.maxValue == 0. && self.minValue == 0.) {
         return @"";
@@ -416,38 +416,25 @@
 
 - (void)calcSelectedIndex {
     //X在系统范围内、进行计算
-    if (self.axisYPosition == CCSGridChartYAxisPositionLeft) {
-        if (self.singleTouchPoint.x > self.axisMarginLeft
-                && self.singleTouchPoint.x < self.frame.size.width) {
-            float stickWidth = ((self.frame.size.width - self.axisMarginLeft - self.axisMarginRight) / self.maxSticksNum);
-            float valueWidth = self.singleTouchPoint.x - self.axisMarginLeft;
-            if (valueWidth > 0) {
-                NSUInteger index = (NSUInteger) (valueWidth / stickWidth);
-                //如果超过则设置位最大
-                if (index >= self.maxSticksNum) {
-                    index = self.maxSticksNum - 1;
-                }
-                //设置选中的index
-                self.selectedStickIndex = index;
+    if (self.singleTouchPoint.x >= [self dataQuadrantPaddingStartX:self.frame]
+        && self.singleTouchPoint.x < [self dataQuadrantPaddingEndX:self.frame]) {
+        CGFloat stickWidth = ([self dataQuadrantPaddingWidth:self.frame] / self.maxSticksNum);
+        CGFloat valueWidth = self.singleTouchPoint.x - [self dataQuadrantPaddingStartX:self.frame] ;
+        if (valueWidth > 0) {
+            NSUInteger index;
+            if (self.axisYPosition == CCSGridChartYAxisPositionLeft) {
+                index = (NSUInteger) (valueWidth / stickWidth);
+            }else{
+                index = (NSUInteger) ([self.stickData count] - self.maxSticksNum + (valueWidth / stickWidth));
             }
-        }
-    } else {
-        if (self.singleTouchPoint.x > self.axisMarginLeft
-                && self.singleTouchPoint.x < self.frame.size.width - self.axisMarginRight) {
-            float stickWidth = 1.0 * ((self.frame.size.width - self.axisMarginLeft - self.axisMarginRight) / self.maxSticksNum);
-            float valueWidth = self.singleTouchPoint.x - self.axisMarginLeft;
-            if (valueWidth > 0) {
-                NSUInteger index = (NSUInteger) ([self.stickData count] - self.maxSticksNum + (valueWidth / stickWidth));
-                //如果超过则设置位最大
-                if (index >= [self.stickData count]) {
-                    index = [self.stickData count] - 1;
-                }
-                //设置选中的index
-                self.selectedStickIndex = index;
+            //如果超过则设置位最大
+            if (index >= self.maxSticksNum) {
+                index = self.maxSticksNum - 1;
             }
+            //设置选中的index
+            self.selectedStickIndex = index;
         }
     }
-
 }
 
 - (void)setSelectedPointAddReDraw:(CGPoint)point {

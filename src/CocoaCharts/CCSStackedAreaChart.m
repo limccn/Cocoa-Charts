@@ -5,6 +5,18 @@
 //  Created by limc on 11/14/13.
 //  Copyright (c) 2013 limc. All rights reserved.
 //
+//  Licensed under the Apache License, Version 2.0 (the "License");
+//  you may not use this file except in compliance with the License.
+//  You may obtain a copy of the License at
+//
+//  http://www.apache.org/licenses/LICENSE-2.0
+//
+//  Unless required by applicable law or agreed to in writing, software
+//  distributed under the License is distributed on an "AS IS" BASIS,
+//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//  See the License for the specific language governing permissions and
+//  limitations under the License.
+//
 
 #import "CCSStackedAreaChart.h"
 #import "CCSTitledLine.h"
@@ -151,7 +163,7 @@
 - (void)drawData:(CGRect)rect {
 
     // 起始位置
-    float startX;
+    CGFloat startX;
 
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSetLineWidth(context, self.lineWidth);
@@ -171,9 +183,9 @@
                 if (self.axisYPosition == CCSGridChartYAxisPositionLeft) {
                     //TODO:自左向右绘图未对应
                     // 点线距离
-                    float lineLength = ((rect.size.width - self.axisMarginLeft - 2 * self.axisMarginRight) / ([line.data count] - 1));
+                    CGFloat lineLength = ([self dataQuadrantPaddingWidth:rect] / ([line.data count] - 1));
                     //起始点
-                    startX = super.axisMarginLeft;
+                    startX = [self dataQuadrantPaddingStartX:rect];
                     //遍历并绘制线条
                     for (NSUInteger j = 0; j < [lineDatas count]; j++) {
                         CCSLineData *lineData = [lineDatas objectAtIndex:j];
@@ -187,7 +199,7 @@
                             }
                         }
                         //获取终点Y坐标
-                        float valueY = ((1 - (sumValue - self.minValue) / (self.maxValue - self.minValue)) * (rect.size.height - 2 * self.axisMarginTop - self.axisMarginBottom) + self.axisMarginTop);
+                        CGFloat valueY = ((1 - (sumValue - self.minValue) / (self.maxValue - self.minValue)) * [self dataQuadrantPaddingHeight:rect] + [self dataQuadrantPaddingStartY:rect]);
                         //绘制线条路径
                         if (j == 0) {
                             CGContextMoveToPoint(context, startX, valueY);
@@ -200,9 +212,9 @@
                 } else {
 
                     // 点线距离
-                    float lineLength = ((rect.size.width - 2 * self.axisMarginLeft - self.axisMarginRight) / ([line.data count] - 1));
+                    CGFloat lineLength = ([self dataQuadrantPaddingWidth:rect] / ([line.data count] - 1));
                     //起始点
-                    startX = rect.size.width - self.axisMarginRight - self.axisMarginLeft;
+                    startX = [self dataQuadrantPaddingEndX:rect];
 
                     //判断点的多少
                     if ([lineDatas count] == 0) {
@@ -212,22 +224,22 @@
                         //1根则绘制一条直线
                         CCSLineData *lineData = [lineDatas objectAtIndex:0];
                         //获取终点Y坐标
-                        float valueY = ((1 - (lineData.value - self.minValue) / (self.maxValue - self.minValue)) * (rect.size.height - 2 * self.axisMarginTop - self.axisMarginBottom) + self.axisMarginTop);
+                        CGFloat valueY = ((1 - (lineData.value - self.minValue) / (self.maxValue - self.minValue)) * [self dataQuadrantPaddingHeight:rect] + [self dataQuadrantPaddingStartY:rect]);
 
                         CGContextMoveToPoint(context, startX, valueY);
-                        CGContextAddLineToPoint(context, self.axisMarginLeft, valueY);
+                        CGContextAddLineToPoint(context, [self dataQuadrantPaddingStartX:rect], valueY);
 
                     } else {
                         //遍历并绘制线条
                         for (NSInteger j = [lineDatas count] - 1; j >= 0; j--) {
                             CCSLineData *lineData = [lineDatas objectAtIndex:j];
                             //获取终点Y坐标
-                            float valueY = ((1 - (lineData.value - self.minValue) / (self.maxValue - self.minValue)) * (rect.size.height - 2 * self.axisMarginTop - self.axisMarginBottom) + self.axisMarginTop);
+                            CGFloat valueY = ((1 - (lineData.value - self.minValue) / (self.maxValue - self.minValue)) * [self dataQuadrantPaddingHeight:rect] + [self dataQuadrantPaddingStartY:rect]);
                             //绘制线条路径
                             if (j == [lineDatas count] - 1) {
                                 CGContextMoveToPoint(context, startX, valueY);
                             } else if (j == 0) {
-                                CGContextAddLineToPoint(context, self.axisMarginLeft, valueY);
+                                CGContextAddLineToPoint(context, [self dataQuadrantPaddingStartX:rect], valueY);
                             } else {
                                 CGContextAddLineToPoint(context, startX, valueY);
                             }
@@ -244,8 +256,14 @@
                 CGContextStrokePath(context);
 
                 CGContextAddPath(context, path);
-                CGContextAddLineToPoint(context, rect.size.width - self.axisMarginRight, rect.size.height - self.axisMarginBottom - self.axisMarginTop);
-                CGContextAddLineToPoint(context, self.axisMarginLeft + self.axisMarginRight, rect.size.height - self.axisMarginBottom - self.axisMarginTop);
+                if (self.axisYPosition == CCSGridChartYAxisPositionLeft) {
+                    CGContextAddLineToPoint(context, [self dataQuadrantPaddingEndX:rect], [self dataQuadrantPaddingEndY:rect]);
+                    CGContextAddLineToPoint(context, [self dataQuadrantPaddingStartX:rect], [self dataQuadrantPaddingEndY:rect]);
+                }else{
+                    CGContextAddLineToPoint(context, [self dataQuadrantPaddingStartX:rect], [self dataQuadrantPaddingEndY:rect]);
+                    CGContextAddLineToPoint(context, [self dataQuadrantPaddingEndX:rect], [self dataQuadrantPaddingEndY:rect]);
+                    
+                }
 
                 CGContextClosePath(context);
                 CGContextSetAlpha(context, self.areaAlpha);
