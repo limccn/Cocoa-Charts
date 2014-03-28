@@ -45,7 +45,7 @@
     self.selectedIndex = 0;
     self.lineWidth = 1.0f;
     self.axisCalc = 1;
-    self.lineAlignType = CCSLineAlignTypeJustify;
+    self.lineAlignType = CCSLineAlignTypeCenter;
 
     self.linesData = nil;
 }
@@ -238,8 +238,8 @@
                 // 点线距离
                 lineLength= ([self dataQuadrantPaddingWidth:rect] / [line.data count]);
                 //起始点
-                startX = [self dataQuadrantStartX:rect] + lineLength / 2;
-            }else if (self.lineAlignType == CCSLineAlignTypeJustify) {
+                startX = [self dataQuadrantPaddingStartX:rect] + lineLength / 2;
+            }else {
                 // 点线距离
                 lineLength= ([self dataQuadrantPaddingWidth:rect] / ([line.data count] - 1));
                 //起始点
@@ -271,12 +271,12 @@
 
             if (self.lineAlignType == CCSLineAlignTypeCenter) {
                 // 点线距离
-                CGFloat lineLength = ([self dataQuadrantPaddingWidth:rect] / [line.data count] - 1);
+                lineLength = ([self dataQuadrantPaddingWidth:rect] / [line.data count]);
                 //起始点
                 startX = [self dataQuadrantPaddingEndX:rect] - lineLength / 2;
-            }else if (self.lineAlignType == CCSLineAlignTypeJustify) {
+            }else{
                 // 点线距离
-                lineLength= ([self dataQuadrantPaddingWidth:rect] / [line.data count]);
+                lineLength= ([self dataQuadrantPaddingWidth:rect] / ([line.data count] - 1));
                 //起始点
                 startX = [self dataQuadrantPaddingEndX:rect];
             }
@@ -304,13 +304,6 @@
                     if (j == [lineDatas count] - 1) {
                         CGContextMoveToPoint(context, startX, valueY);
                         lastY = valueY;
-                    } else if (j == 0) {
-                        if (lineData.value == 0) {
-                            CGContextAddLineToPoint(context, [self dataQuadrantPaddingStartX:rect], lastY);
-                        } else {
-                            CGContextAddLineToPoint(context, [self dataQuadrantPaddingStartX:rect], valueY);
-                            lastY = valueY;
-                        }
                     } else {
                         if (lineData.value == 0) {
                             CGContextMoveToPoint(context, startX, lastY);
@@ -331,104 +324,240 @@
 }
 
 - (void)drawLongitudeLines:(CGRect)rect {
-    if (self.lineAlignType == CCSLineAlignTypeJustify) {
-        [super drawLongitudeLines:rect];
+    if (self.displayLongitude == NO) {
         return;
     }
-
+    
+    if ([self.longitudeTitles count] <= 0) {
+        return;
+    }
+    
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSetLineWidth(context, 0.5f);
     CGContextSetStrokeColorWithColor(context, self.longitudeColor.CGColor);
     CGContextSetFillColorWithColor(context, self.longitudeFontColor.CGColor);
-
-    if (self.displayLongitude == NO) {
-        return;
-    }
-
-    if ([self.longitudeTitles count] <= 0) {
-        return;
-    }
+    
     //设置线条为点线
     if (self.dashLongitude) {
         CGFloat lengths[] = {3.0, 3.0};
         CGContextSetLineDash(context, 0.0, lengths, 2);
     }
-    CGFloat postOffset;
-    CGFloat offset;
-
-    if (self.axisYPosition == CCSGridChartYAxisPositionLeft) {
-        postOffset = [self dataQuadrantPaddingWidth:rect] / ([self.longitudeTitles count]);
-        offset = [self dataQuadrantPaddingStartX:rect] + postOffset / 2;
+    
+    CGFloat postOffset,offset;
+    CGFloat lineLength=0;
+    
+    if (self.linesData != nil && [self.linesData count] >0) {
+        CCSTitledLine *line = [self.linesData objectAtIndex:0];
+        //line为空
+        if (line != nil) {
+            lineLength= ([self dataQuadrantPaddingWidth:rect] / [line.data count]);
+        }
     }
-    else {
-        postOffset = [self dataQuadrantPaddingWidth:rect] / ([self.longitudeTitles count]);
-        offset = [self dataQuadrantStartX:rect];
+    if (self.lineAlignType == CCSLineAlignTypeCenter) {
+        postOffset= ([self dataQuadrantPaddingWidth:rect] - lineLength) / ([self.longitudeTitles count] - 1);
+        offset = [self dataQuadrantPaddingStartX:rect] + lineLength/2;
+    }else{
+        postOffset= [self dataQuadrantPaddingWidth:rect] / ([self.longitudeTitles count] - 1);
+        offset = [self dataQuadrantPaddingStartX:rect];
     }
-
+    
     for (NSUInteger i = 0; i < [self.longitudeTitles count]; i++) {
         CGContextMoveToPoint(context, offset + i * postOffset, [self dataQuadrantStartY:rect]);
         CGContextAddLineToPoint(context, offset + i * postOffset, [self dataQuadrantEndY:rect]);
     }
-
+    
     CGContextStrokePath(context);
     CGContextSetLineDash(context, 0, nil, 0);
 }
 
 - (void)drawXAxisTitles:(CGRect)rect {
-    if (self.lineAlignType == CCSLineAlignTypeJustify) {
-        [super drawXAxisTitles:rect];
-        return;
-    }
-
+    
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSetLineWidth(context, 0.5f);
     CGContextSetStrokeColorWithColor(context, self.longitudeColor.CGColor);
     CGContextSetFillColorWithColor(context, self.longitudeFontColor.CGColor);
-
+    
     if (self.displayLongitude == NO) {
         return;
     }
-
+    
     if (self.displayLongitudeTitle == NO) {
         return;
     }
-
+    
     if ([self.longitudeTitles count] <= 0) {
         return;
     }
-
-    CGFloat postOffset;
-    CGFloat offset;
-
-    if (self.axisYPosition == CCSGridChartYAxisPositionLeft) {
-        postOffset = [self dataQuadrantPaddingWidth:rect] / ([self.longitudeTitles count]);
-        offset = [self dataQuadrantPaddingStartX:rect] + postOffset / 2;
-    } else {
-        //TODO
-        postOffset = [self dataQuadrantPaddingWidth:rect] / ([self.longitudeTitles count]);
-        offset = [self dataQuadrantStartX:rect];
+    
+    CGFloat postOffset,offset;
+    CGFloat lineLength=0;
+    
+    if (self.linesData != nil && [self.linesData count] >0) {
+        CCSTitledLine *line = [self.linesData objectAtIndex:0];
+        //line为空
+        if (line != nil) {
+            lineLength= ([self dataQuadrantPaddingWidth:rect] / [line.data count]);
+        }
     }
-
+    
+    if (self.lineAlignType == CCSLineAlignTypeCenter) {
+        postOffset= ([self dataQuadrantPaddingWidth:rect] - lineLength) / ([self.longitudeTitles count] - 1);
+        offset = [self dataQuadrantPaddingStartX:rect] + lineLength/2;
+    }else{
+        postOffset= [self dataQuadrantPaddingWidth:rect] / ([self.longitudeTitles count] - 1);
+        offset = [self dataQuadrantPaddingStartX:rect];
+    }
+    
     for (NSUInteger i = 0; i < [self.longitudeTitles count]; i++) {
+        CGFloat startY;
         if (self.axisXPosition == CCSGridChartXAxisPositionBottom) {
-            NSString *str = (NSString *) [self.longitudeTitles objectAtIndex:i];
-
-            //调整X轴坐标位置
-            [str drawInRect:CGRectMake(offset + (i - 0.5) * postOffset, [self dataQuadrantEndY:rect] + [self axisWidth], postOffset, self.longitudeFontSize)
+            startY = [self dataQuadrantEndY:rect] + [self axisWidth];
+        }else{
+            startY = [self borderWidth];
+        }
+        
+        NSString *str = (NSString *) [self.longitudeTitles objectAtIndex:i];
+        
+        //调整X轴坐标位置
+        if (i == 0) {
+            [str drawInRect:CGRectMake([self dataQuadrantPaddingStartX:rect], startY, postOffset, self.longitudeFontSize)
                    withFont:self.longitudeFont
               lineBreakMode:NSLineBreakByWordWrapping
-                  alignment:NSTextAlignmentCenter];
+                  alignment:NSTextAlignmentLeft];
+            
+        } else if (i == [self.longitudeTitles count] - 1) {
+            if (self.axisYPosition == CCSGridChartYAxisPositionLeft) {
+                [str drawInRect:CGRectMake(rect.size.width - postOffset, startY, postOffset, self.longitudeFontSize)
+                       withFont:self.longitudeFont
+                  lineBreakMode:NSLineBreakByWordWrapping
+                      alignment:NSTextAlignmentRight];
+            } else {
+                [str drawInRect:CGRectMake(offset + (i - 0.5) * postOffset, startY, postOffset, self.longitudeFontSize)
+                       withFont:self.longitudeFont
+                  lineBreakMode:NSLineBreakByWordWrapping
+                      alignment:NSTextAlignmentCenter];
+            }
+            
         } else {
-            NSString *str = (NSString *) [self.longitudeTitles objectAtIndex:i];
-
-            //调整X轴坐标位置
-            [str drawInRect:CGRectMake(offset + (i - 0.5) * postOffset, 0, postOffset, self.longitudeFontSize)
+            [str drawInRect:CGRectMake(offset + (i - 0.5) * postOffset, startY, postOffset, self.longitudeFontSize)
                    withFont:self.longitudeFont
               lineBreakMode:NSLineBreakByWordWrapping
                   alignment:NSTextAlignmentCenter];
         }
     }
 }
+
+
+//- (void)drawLongitudeLines:(CGRect)rect {
+//    if (self.lineAlignType == CCSLineAlignTypeJustify) {
+//        [super drawLongitudeLines:rect];
+//        return;
+//    }
+//
+//    CGContextRef context = UIGraphicsGetCurrentContext();
+//    CGContextSetLineWidth(context, 0.5f);
+//    CGContextSetStrokeColorWithColor(context, self.longitudeColor.CGColor);
+//    CGContextSetFillColorWithColor(context, self.longitudeFontColor.CGColor);
+//
+//    if (self.displayLongitude == NO) {
+//        return;
+//    }
+//
+//    if ([self.longitudeTitles count] <= 0) {
+//        return;
+//    }
+//    //设置线条为点线
+//    if (self.dashLongitude) {
+//        CGFloat lengths[] = {3.0, 3.0};
+//        CGContextSetLineDash(context, 0.0, lengths, 2);
+//    }
+//    CGFloat postOffset;
+//    CGFloat offset;
+//    CGFloat lineLength = 0;
+//    
+//    if (self.linesData != nil && [self.linesData count] >0) {
+//        CCSTitledLine *line = [self.linesData objectAtIndex:0];
+//        //line为空
+//        if (line != nil) {
+//            lineLength= ([self dataQuadrantPaddingWidth:rect] / [line.data count]);
+//        }
+//    }
+//
+//    postOffset = ([self dataQuadrantPaddingWidth:rect]) / ([self.longitudeTitles count]);
+//    offset = [self dataQuadrantPaddingStartX:rect] + lineLength / 2;
+//
+//    for (NSUInteger i = 0; i < [self.longitudeTitles count]; i++) {
+//        CGContextMoveToPoint(context, offset + i * postOffset, [self dataQuadrantStartY:rect]);
+//        CGContextAddLineToPoint(context, offset + i * postOffset, [self dataQuadrantEndY:rect]);
+//    }
+//
+//    CGContextStrokePath(context);
+//    CGContextSetLineDash(context, 0, nil, 0);
+//}
+//
+//- (void)drawXAxisTitles:(CGRect)rect {
+//    if (self.lineAlignType == CCSLineAlignTypeJustify) {
+//        [super drawXAxisTitles:rect];
+//        return;
+//    }
+//
+//    CGContextRef context = UIGraphicsGetCurrentContext();
+//    CGContextSetLineWidth(context, 0.5f);
+//    CGContextSetStrokeColorWithColor(context, self.longitudeColor.CGColor);
+//    CGContextSetFillColorWithColor(context, self.longitudeFontColor.CGColor);
+//
+//    if (self.displayLongitude == NO) {
+//        return;
+//    }
+//
+//    if (self.displayLongitudeTitle == NO) {
+//        return;
+//    }
+//
+//    if ([self.longitudeTitles count] <= 0) {
+//        return;
+//    }
+//
+//    CGFloat postOffset;
+//    CGFloat offset;
+//    CGFloat lineLength;
+//
+//    if (self.linesData != nil && [self.linesData count] >0) {
+//        CCSTitledLine *line = [self.linesData objectAtIndex:0];
+//        //line为空
+//        if (line != nil) {
+//            lineLength= ([self dataQuadrantPaddingWidth:rect] / [line.data count]);
+//        }
+//    }
+//    
+//    if (self.axisYPosition == CCSGridChartYAxisPositionLeft) {
+//        postOffset = ([self dataQuadrantPaddingWidth:rect]) / ([self.longitudeTitles count]);
+//        offset = [self dataQuadrantPaddingStartX:rect] + lineLength / 2;
+//    } else {
+//        postOffset = ([self dataQuadrantPaddingWidth:rect])/ ([self.longitudeTitles count]);
+//        offset = [self dataQuadrantPaddingStartX:rect] + lineLength / 2;
+//    }
+//
+//    for (NSUInteger i = 0; i < [self.longitudeTitles count]; i++) {
+//        if (self.axisXPosition == CCSGridChartXAxisPositionBottom) {
+//            NSString *str = (NSString *) [self.longitudeTitles objectAtIndex:i];
+//
+//            //调整X轴坐标位置
+//            [str drawInRect:CGRectMake(offset + (i - 0.5) * postOffset, [self dataQuadrantEndY:rect] + [self axisWidth], postOffset, self.longitudeFontSize)
+//                   withFont:self.longitudeFont
+//              lineBreakMode:NSLineBreakByWordWrapping
+//                  alignment:NSTextAlignmentCenter];
+//        } else {
+//            NSString *str = (NSString *) [self.longitudeTitles objectAtIndex:i];
+//
+//            //调整X轴坐标位置
+//            [str drawInRect:CGRectMake(offset + (i - 0.5) * postOffset, 0, postOffset, self.longitudeFontSize)
+//                   withFont:self.longitudeFont
+//              lineBreakMode:NSLineBreakByWordWrapping
+//                  alignment:NSTextAlignmentCenter];
+//        }
+//    }
+//}
 
 
 - (void)initAxisY {

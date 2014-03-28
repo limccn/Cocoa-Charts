@@ -139,53 +139,6 @@
     }
 }
 
-//- (void) drawLinesData:(CGRect)rect
-//{
-//    // 点线距离
-//    CGFloat lineLength = ((rect.size.width - self.axisMarginLeft-self.axisMarginRight) / self.maxSticksNum) - 1;
-//    // 起始位置
-//    CGFloat startX;
-//
-//    CGContextRef context = UIGraphicsGetCurrentContext();
-//    CGContextSetLineWidth(context, 1.0f);
-//
-//    if(self.linesData != NULL)
-//    {
-//        //逐条输出MA线
-//        for (int i = 0; i < [self.linesData count]; i++)
-//        {
-//            CCSTitledLine *line = [self.linesData objectAtIndex:i];
-//            //起始点
-//            startX = super.axisMarginLeft + lineLength / 2;
-//            if(line != NULL)
-//            {
-//                //设置线条颜色
-//                CGContextSetStrokeColorWithColor(context,line.color.CGColor);
-//                //获取线条数据
-//                NSArray *lineDatas = line.data;
-//                //遍历并绘制线条
-//                for(int j=0 ; j <[lineDatas count];j++){
-//                    CCSLineData *lineData = [lineDatas objectAtIndex:j];
-//                    //获取终点Y坐标
-//                    CGFloat valueY =  (CGFloat) ((1 - (lineData.value - self.minValue) / (self.maxValue - self.minValue)) * (rect.size.height - 2 *self.axisMarginTop - self.axisMarginBottom) + self.axisMarginTop);
-//                    //绘制线条路径
-//                    if (j == 0){
-//                        CGContextMoveToPoint(context, startX, valueY);
-//                    }else
-//                    {
-//                        CGContextAddLineToPoint(context, startX, valueY);
-//                    }
-//                    //X位移
-//                    startX = startX + 1 + lineLength;
-//                }
-//
-//                //绘制路径
-//                CGContextStrokePath(context);
-//            }
-//        }
-//    }
-//}
-
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     
 }

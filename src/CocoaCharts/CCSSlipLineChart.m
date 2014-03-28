@@ -122,6 +122,7 @@
         return;
     }
     // 起始位置
+    CGFloat lineLength;
     CGFloat startX;
     CGFloat lastY = 0;
     
@@ -139,17 +140,25 @@
         if ([line.data count] == 0) {
             continue;
         }
+
         //设置线条颜色
         CGContextSetStrokeColorWithColor(context, line.color.CGColor);
         //获取线条数据
         NSArray *lineDatas = line.data;
         //判断Y轴的位置设置从左往右还是从右往左绘制
         if (self.axisYPosition == CCSGridChartYAxisPositionLeft) {
-            //TODO:自左向右绘图未对应
-            // 点线距离
-            CGFloat lineLength = ([self dataQuadrantPaddingWidth:rect] / self.displayNumber);
-            //起始点
-            startX = [self dataQuadrantPaddingStartX:rect] + lineLength / 2;
+            if (self.lineAlignType == CCSLineAlignTypeCenter) {
+                // 点线距离
+                lineLength= ([self dataQuadrantPaddingWidth:rect] / self.displayNumber);
+                //起始点
+                startX = [self dataQuadrantPaddingStartX:rect] + lineLength / 2;
+            }else if (self.lineAlignType == CCSLineAlignTypeJustify) {
+                // 点线距离
+                lineLength= ([self dataQuadrantPaddingWidth:rect] / (self.displayNumber - 1));
+                //起始点
+                startX = [self dataQuadrantPaddingStartX:rect];
+            }
+            
             //遍历并绘制线条
             for (NSUInteger j = self.displayFrom; j < self.displayFrom + self.displayNumber; j++) {
                 CCSLineData *lineData = [lineDatas objectAtIndex:j];
@@ -172,10 +181,17 @@
             }
         } else {
             
-            // 点线距离
-            CGFloat lineLength = ([self dataQuadrantPaddingWidth:rect] / self.displayNumber);
-            //起始点
-            startX = [self dataQuadrantPaddingEndX:rect] - lineLength / 2;
+            if (self.lineAlignType == CCSLineAlignTypeCenter) {
+                // 点线距离
+                lineLength = ([self dataQuadrantPaddingWidth:rect] / self.displayNumber);
+                //起始点
+                startX = [self dataQuadrantPaddingEndX:rect] - lineLength / 2;
+            }else if (self.lineAlignType == CCSLineAlignTypeJustify) {
+                // 点线距离
+                lineLength= ([self dataQuadrantPaddingWidth:rect] / (self.displayNumber - 1));
+                //起始点
+                startX = [self dataQuadrantPaddingEndX:rect];
+            }
             
             //判断点的多少
             if ([lineDatas count] == 0) {
@@ -220,6 +236,113 @@
     }
 }
 
+
+- (void)drawLongitudeLines:(CGRect)rect {
+    if (self.displayLongitude == NO) {
+        return;
+    }
+    
+    if ([self.longitudeTitles count] <= 0) {
+        return;
+    }
+    
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSetLineWidth(context, 0.5f);
+    CGContextSetStrokeColorWithColor(context, self.longitudeColor.CGColor);
+    CGContextSetFillColorWithColor(context, self.longitudeFontColor.CGColor);
+    
+    //设置线条为点线
+    if (self.dashLongitude) {
+        CGFloat lengths[] = {3.0, 3.0};
+        CGContextSetLineDash(context, 0.0, lengths, 2);
+    }
+    
+    CGFloat postOffset,offset;
+    CGFloat lineLength = ([self dataQuadrantPaddingWidth:rect] / self.displayNumber);
+    if (self.lineAlignType == CCSLineAlignTypeCenter) {
+        postOffset= ([self dataQuadrantPaddingWidth:rect] - lineLength) / ([self.longitudeTitles count] - 1);
+        offset = [self dataQuadrantPaddingStartX:rect] + lineLength/2;
+    }else{
+        postOffset= [self dataQuadrantPaddingWidth:rect] / ([self.longitudeTitles count] - 1);
+        offset = [self dataQuadrantPaddingStartX:rect];
+    }
+    
+    for (NSUInteger i = 0; i < [self.longitudeTitles count]; i++) {
+        CGContextMoveToPoint(context, offset + i * postOffset, [self dataQuadrantStartY:rect]);
+        CGContextAddLineToPoint(context, offset + i * postOffset, [self dataQuadrantEndY:rect]);
+    }
+    
+    CGContextStrokePath(context);
+    CGContextSetLineDash(context, 0, nil, 0);
+}
+
+- (void)drawXAxisTitles:(CGRect)rect {
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSetLineWidth(context, 0.5f);
+    CGContextSetStrokeColorWithColor(context, self.longitudeColor.CGColor);
+    CGContextSetFillColorWithColor(context, self.longitudeFontColor.CGColor);
+    
+    if (self.displayLongitude == NO) {
+        return;
+    }
+    
+    if (self.displayLongitudeTitle == NO) {
+        return;
+    }
+    
+    if ([self.longitudeTitles count] <= 0) {
+        return;
+    }
+    
+    CGFloat postOffset,offset;
+    CGFloat lineLength = ([self dataQuadrantPaddingWidth:rect] / self.displayNumber);
+    if (self.lineAlignType == CCSLineAlignTypeCenter) {
+        postOffset= ([self dataQuadrantPaddingWidth:rect] - lineLength) / ([self.longitudeTitles count] - 1);
+        offset = [self dataQuadrantPaddingStartX:rect] + lineLength/2;
+    }else{
+        postOffset= [self dataQuadrantPaddingWidth:rect] / ([self.longitudeTitles count] - 1);
+        offset = [self dataQuadrantPaddingStartX:rect];
+    }
+    
+    for (NSUInteger i = 0; i < [self.longitudeTitles count]; i++) {
+        CGFloat startY;
+        if (self.axisXPosition == CCSGridChartXAxisPositionBottom) {
+            startY = [self dataQuadrantEndY:rect] + [self axisWidth];
+        }else{
+            startY = [self borderWidth];
+        }
+        
+        NSString *str = (NSString *) [self.longitudeTitles objectAtIndex:i];
+        
+        //调整X轴坐标位置
+        if (i == 0) {
+            [str drawInRect:CGRectMake([self dataQuadrantPaddingStartX:rect], startY, postOffset, self.longitudeFontSize)
+                   withFont:self.longitudeFont
+              lineBreakMode:NSLineBreakByWordWrapping
+                  alignment:NSTextAlignmentLeft];
+            
+        } else if (i == [self.longitudeTitles count] - 1) {
+            if (self.axisYPosition == CCSGridChartYAxisPositionLeft) {
+                [str drawInRect:CGRectMake(rect.size.width - postOffset, startY, postOffset, self.longitudeFontSize)
+                       withFont:self.longitudeFont
+                  lineBreakMode:NSLineBreakByWordWrapping
+                      alignment:NSTextAlignmentRight];
+            } else {
+                [str drawInRect:CGRectMake(offset + (i - 0.5) * postOffset, startY, postOffset, self.longitudeFontSize)
+                       withFont:self.longitudeFont
+                  lineBreakMode:NSLineBreakByWordWrapping
+                      alignment:NSTextAlignmentCenter];
+            }
+            
+        } else {
+            [str drawInRect:CGRectMake(offset + (i - 0.5) * postOffset, startY, postOffset, self.longitudeFontSize)
+                   withFont:self.longitudeFont
+              lineBreakMode:NSLineBreakByWordWrapping
+                  alignment:NSTextAlignmentCenter];
+        }
+    }
+}
+
 - (void)initAxisX {
     if (self.linesData == nil) {
         return;
@@ -238,7 +361,7 @@
     if ([line.data count] == 0) {
         return;
     }
-    CGFloat average = [line.data count] / self.longitudeNum;
+    CGFloat average = self.displayNumber / self.longitudeNum;
     //处理刻度
     for (NSUInteger i = 0; i < self.longitudeNum; i++) {
         NSUInteger index = self.displayFrom + (NSUInteger) floor(i * average);
@@ -306,13 +429,13 @@
     if ([allTouches count] == 1) {
         if (_flag == 0) {
             CGPoint pt1 = [[allTouches objectAtIndex:0] locationInView:self];
-            CGFloat stickWidth = ([self dataQuadrantPaddingWidth:self.frame] / self.displayNumber) - 1;
+            CGFloat lineLength = ([self dataQuadrantPaddingWidth:self.frame] / self.displayNumber) - 1;
             
-            if (pt1.x - _firstX > stickWidth) {
+            if (pt1.x - _firstX > lineLength) {
                 if (self.displayFrom > 1) {
                     self.displayFrom = self.displayFrom - 2;
                 }
-            } else if (pt1.x - _firstX < -stickWidth) {
+            } else if (pt1.x - _firstX < -lineLength) {
                 
                 CCSTitledLine *line = [self.linesData objectAtIndex:0];
                 if (self.displayFrom < [line.data count] - 2 - self.displayNumber) {

@@ -169,6 +169,7 @@
     linechart.userInteractionEnabled = YES;
     linechart.displayFrom = 0;
     linechart.displayNumber = 20;
+    linechart.lineAlignType = CCSLineAlignTypeCenter;
     //linechart.axisYPosition = CCSGridChartYAxisPositionRight;
 
     [self.view addSubview:linechart];

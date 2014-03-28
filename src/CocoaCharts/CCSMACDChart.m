@@ -45,7 +45,6 @@
     //初始化父类的熟悉
     [super initProperty];
     //去除轴对称属性
-    self.axisMarginTop = 0;
     self.axisCalc = 1000000;
     
     //初始化颜色
@@ -109,7 +108,7 @@
         CGFloat stickWidth = ([self dataQuadrantPaddingWidth:rect] / self.displayNumber) - 1;
         
         // 蜡烛棒起始绘制位置
-        CGFloat stickX = self.axisMarginLeft + 1;
+        CGFloat stickX = [self dataQuadrantPaddingStartX:rect] + 1;
         //判断显示为方柱或显示为线条
         for (NSUInteger i = self.displayFrom; i < self.displayFrom + self.displayNumber; i++) {
             CCSMACDData *stick = [self.stickData objectAtIndex:i];
@@ -167,7 +166,7 @@
     } else {
         CGFloat stickWidth = ([self dataQuadrantPaddingWidth:rect] / self.displayNumber) - 1;
         // 蜡烛棒起始绘制位置
-        CGFloat stickX = rect.size.width - self.axisMarginRight - 1 - stickWidth;
+        CGFloat stickX = [self dataQuadrantPaddingEndX:rect] - 1 - stickWidth;
         //判断显示为方柱或显示为线条
         for (NSUInteger i = 0; i < self.displayNumber; i++) {
             NSUInteger index = self.displayFrom + self.displayNumber - 1 - i;
@@ -259,7 +258,7 @@
     }
     
     //起始点
-    startX = super.axisMarginLeft + lineLength / 2;
+    startX = [self dataQuadrantPaddingStartX:rect] + lineLength / 2;
     
     //判断点的多少
     if ([self.stickData count] == 0) {
@@ -272,7 +271,7 @@
         CGFloat valueY = [self calcValueY:lineData.dea inRect:rect];
         
         CGContextMoveToPoint(context, startX, valueY);
-        CGContextAddLineToPoint(context, self.axisMarginLeft, valueY);
+        CGContextAddLineToPoint(context, [self dataQuadrantPaddingStartX:rect], valueY);
         
     } else {
         //遍历并绘制线条
@@ -316,9 +315,7 @@
     CGContextSetStrokeColorWithColor(context, self.diffLineColor.CGColor);
     
     //起始点
-    //startX = self.axisMarginLeft + 1;
-    //起始点
-    startX = super.axisMarginLeft + lineLength / 2;
+    startX = [self dataQuadrantPaddingStartX:rect] + lineLength / 2;
     
     //判断点的多少
     if ([self.stickData count] == 0) {
@@ -331,7 +328,7 @@
         CGFloat valueY = [self calcValueY:lineData.diff inRect:rect];
         
         CGContextMoveToPoint(context, startX, valueY);
-        CGContextAddLineToPoint(context, self.axisMarginLeft, valueY);
+        CGContextAddLineToPoint(context, [self dataQuadrantPaddingStartX:rect], valueY);
         
     } else {
         //遍历并绘制线条
