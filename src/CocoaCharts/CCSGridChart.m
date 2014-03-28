@@ -607,7 +607,7 @@ CGFloat _minDistance = 8;
 }
 
 - (CGFloat) dataQuadrantPaddingEndY:(CGRect)rect{
-    return [self dataQuadrantEndY:rect] - [self dataQuadrantPaddingTop];
+    return [self dataQuadrantEndY:rect] - [self dataQuadrantPaddingBottom];
 }
 
 - (CGFloat) dataQuadrantPaddingWidth:(CGRect)rect{
