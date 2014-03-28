@@ -273,11 +273,14 @@
     
     for (NSUInteger i = 0; i < [self.latitudeTitles count]; i++) {
         CGFloat startX;
+        NSInteger alignment;
         // 绘制线条
         if (self.axisYPosition == CCSGridChartYAxisPositionLeft) {
             startX = [self borderWidth];
+            alignment = NSTextAlignmentRight;
         }else{
             startX = rect.size.width - [self borderWidth] - [self axisYTitleQuadrantWidth];
+            alignment = NSTextAlignmentLeft;
         }
         NSString *str = (NSString *) [self.latitudeTitles objectAtIndex:i];
         
@@ -292,19 +295,19 @@
             [str drawInRect:CGRectMake(startX, offset - i * postOffset - self.latitudeFontSize, [self axisYTitleQuadrantWidth], self.latitudeFontSize)
                    withFont:self.latitudeFont
               lineBreakMode:NSLineBreakByWordWrapping
-                  alignment:NSTextAlignmentRight];
+                  alignment:alignment];
             
         } else if (i == [self.latitudeTitles count] - 1) {
             [str drawInRect:CGRectMake(startX, offset - i * postOffset, [self axisYTitleQuadrantWidth], self.latitudeFontSize)
                    withFont:self.latitudeFont
               lineBreakMode:NSLineBreakByWordWrapping
-                  alignment:NSTextAlignmentRight];
+                  alignment:alignment];
             
         } else {
             [str drawInRect:CGRectMake(startX, offset - i * postOffset - self.latitudeFontSize / 2.0, [self axisYTitleQuadrantWidth], self.latitudeFontSize)
                    withFont:self.latitudeFont
               lineBreakMode:NSLineBreakByWordWrapping
-                  alignment:NSTextAlignmentRight];
+                  alignment:alignment];
         }
     }
 }

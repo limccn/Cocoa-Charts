@@ -91,7 +91,7 @@
             for (NSUInteger j = 0; j < [lineDatas count]; j++) {
                 CCSLineData *lineData = [lineDatas objectAtIndex:j];
                 //获取终点Y坐标
-                CGFloat valueY = ((1 - (lineData.value - self.minValue) / (self.maxValue - self.minValue)) * [self dataQuadrantPaddingHeight:rect] + [self dataQuadrantPaddingStartY:rect]);
+                CGFloat valueY =[self calcValueY:lineData.value inRect:rect];
                 //绘制线条路径
                 if (j == 0) {
                     CGContextMoveToPoint(context, startX, valueY);
@@ -116,7 +116,7 @@
             for (NSInteger j = [lineDatas count] - 1; j >= 0; j--) {
                 CCSLineData *lineData = [lineDatas objectAtIndex:j];
                 //获取终点Y坐标
-                CGFloat valueY = ((1 - (lineData.value - self.minValue) / (self.maxValue - self.minValue)) * [self dataQuadrantPaddingHeight:rect] + [self dataQuadrantPaddingStartY:rect]);
+                CGFloat valueY = [self calcValueY:lineData.value inRect:rect];
                 //绘制线条路径
                 if (j == [lineDatas count] - 1) {
                     CGContextMoveToPoint(context, startX, valueY);

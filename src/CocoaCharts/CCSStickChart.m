@@ -293,8 +293,8 @@
             for (NSUInteger i = 0; i < [self.stickData count]; i++) {
                 CCSStickChartData *stick = [self.stickData objectAtIndex:i];
 
-                CGFloat highY = ((1 - (stick.high - self.minValue) / (self.maxValue - self.minValue)) * [self dataQuadrantPaddingHeight:rect] +[self dataQuadrantPaddingStartY:rect]);
-                CGFloat lowY = ((1 - (stick.low - self.minValue) / (self.maxValue - self.minValue)) * [self dataQuadrantPaddingHeight:rect] +[self dataQuadrantPaddingStartY:rect]);
+                CGFloat highY = [self calcValueY:stick.high inRect:rect];
+                CGFloat lowY = [self calcValueY:stick.low inRect:rect];
 
                 if (stick.high == 0) {
                     //没有值的情况下不绘制
@@ -322,8 +322,8 @@
             for (NSInteger i = [self.stickData count] - 1; i >= 0; i--) {
                 CCSStickChartData *stick = [self.stickData objectAtIndex:i];
 
-                CGFloat highY = ((1 - (stick.high - self.minValue) / (self.maxValue - self.minValue)) * [self dataQuadrantPaddingHeight:rect] +[self dataQuadrantPaddingStartY:rect]);
-                CGFloat lowY = ((1 - (stick.low - self.minValue) / (self.maxValue - self.minValue)) * [self dataQuadrantPaddingHeight:rect] +[self dataQuadrantPaddingStartY:rect]);
+                CGFloat highY = [self calcValueY:stick.high inRect:rect];
+                CGFloat lowY = [self calcValueY:stick.low inRect:rect];
 
                 if (stick.high == 0) {
                     //没有值的情况下不绘制
@@ -526,5 +526,9 @@
     if (self.chartDelegate && [self.chartDelegate respondsToSelector:@selector(CCSChartBeTouchedOn:indexAt:)]) {
         [self.chartDelegate CCSChartBeTouchedOn:point indexAt:self.selectedStickIndex];
     }
+}
+
+- (CGFloat) calcValueY:(CGFloat)value inRect:(CGRect) rect{
+    return (1 - (value - [self minValue]) / ([self maxValue] - [self minValue])) * [self dataQuadrantPaddingHeight:rect] + [self dataQuadrantPaddingStartY:rect];
 }
 @end

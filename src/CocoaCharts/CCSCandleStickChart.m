@@ -273,10 +273,10 @@
             CGFloat stickX = [self dataQuadrantPaddingStartX:rect] + 1;
             for (NSUInteger i = 0; i < [self.stickData count]; i++) {
                 CCSCandleStickChartData *data = [self.stickData objectAtIndex:i];
-                CGFloat openY = ((1 - (data.open - self.minValue) / (self.maxValue - self.minValue)) * [self dataQuadrantPaddingHeight:rect]+[self dataQuadrantPaddingStartX:rect]);
-                CGFloat highY = ((1 - (data.high - self.minValue) / (self.maxValue - self.minValue)) * [self dataQuadrantPaddingHeight:rect]+[self dataQuadrantPaddingStartX:rect]);
-                CGFloat lowY = ((1 - (data.low - self.minValue) / (self.maxValue - self.minValue)) * [self dataQuadrantPaddingHeight:rect]+[self dataQuadrantPaddingStartX:rect]);
-                CGFloat closeY = ((1 - (data.close - self.minValue) / (self.maxValue - self.minValue)) * [self dataQuadrantPaddingHeight:rect]+[self dataQuadrantPaddingStartX:rect]);
+                CGFloat openY = [self calcValueY:data.open inRect:rect];
+                CGFloat highY = [self calcValueY:data.high inRect:rect];
+                CGFloat lowY = [self calcValueY:data.low inRect:rect];
+                CGFloat closeY = [self calcValueY:data.close inRect:rect];
 
                 // 处理和生产K线中的阴线和阳线
                 if (data.open == 0 && data.high == 0 && data.low == 0) {
@@ -371,10 +371,10 @@
             CGFloat stickX = [self dataQuadrantPaddingEndX:rect] - 1 - stickWidth;
             for (NSInteger i = [self.stickData count] - 1; i >= 0; i--) {
                 CCSCandleStickChartData *data = [self.stickData objectAtIndex:i];
-                CGFloat openY = ((1 - (data.open - self.minValue) / (self.maxValue - self.minValue)) * [self dataQuadrantPaddingHeight:rect]+[self dataQuadrantPaddingStartX:rect]);
-                CGFloat highY = ((1 - (data.high - self.minValue) / (self.maxValue - self.minValue)) * [self dataQuadrantPaddingHeight:rect]+[self dataQuadrantPaddingStartX:rect]);
-                CGFloat lowY = ((1 - (data.low - self.minValue) / (self.maxValue - self.minValue)) * [self dataQuadrantPaddingHeight:rect]+[self dataQuadrantPaddingStartX:rect]);
-                CGFloat closeY = ((1 - (data.close - self.minValue) / (self.maxValue - self.minValue)) * [self dataQuadrantPaddingHeight:rect]+[self dataQuadrantPaddingStartX:rect]);
+                CGFloat openY = [self calcValueY:data.open inRect:rect];
+                CGFloat highY = [self calcValueY:data.high inRect:rect];
+                CGFloat lowY = [self calcValueY:data.low inRect:rect];
+                CGFloat closeY = [self calcValueY:data.close inRect:rect];
 
                 // 处理和生产K线中的阴线和阳线
                 if (data.open == 0 && data.high == 0 && data.low == 0) {

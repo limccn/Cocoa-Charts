@@ -114,8 +114,8 @@
         for (NSUInteger i = self.displayFrom; i < self.displayFrom + self.displayNumber; i++) {
             CCSMACDData *stick = [self.stickData objectAtIndex:i];
             
-            CGFloat highY = ((1 - (stick.macd - self.minValue) / (self.maxValue - self.minValue)) * [self dataQuadrantPaddingHeight:rect] +[self dataQuadrantPaddingStartY:rect]);
-            CGFloat lowY = ((1 - (0 - self.minValue) / (self.maxValue - self.minValue)) * (rect.size.height - self.axisMarginBottom) - self.axisMarginTop);
+            CGFloat highY = [self calcValueY:stick.macd inRect:rect];
+            CGFloat lowY = [self calcValueY:0 inRect:rect];
             
             if (stick.macd == 0) {
                 //没有值的情况下不绘制
@@ -173,8 +173,8 @@
             NSUInteger index = self.displayFrom + self.displayNumber - 1 - i;
             CCSMACDData *stick = [self.stickData objectAtIndex:index];
             
-            CGFloat highY = ((1 - (stick.macd - self.minValue) / (self.maxValue - self.minValue)) * [self dataQuadrantPaddingHeight:rect] +[self dataQuadrantPaddingStartY:rect]);
-            CGFloat lowY = ((1 - (0 - self.minValue) / (self.maxValue - self.minValue)) * (rect.size.height - self.axisMarginBottom) - self.axisMarginTop);
+            CGFloat highY = [self calcValueY:stick.macd inRect:rect];
+            CGFloat lowY = [self calcValueY:0 inRect:rect];
             
             if (stick.macd == 0) {
                 //没有值的情况下不绘制
@@ -269,7 +269,7 @@
         //1根则绘制一条直线
         CCSMACDData *lineData = [self.stickData objectAtIndex:0];
         //获取终点Y坐标
-        CGFloat valueY = ((1 - (lineData.dea - self.minValue) / (self.maxValue - self.minValue)) * [self dataQuadrantPaddingHeight:rect] +[self dataQuadrantPaddingStartY:rect]);
+        CGFloat valueY = [self calcValueY:lineData.dea inRect:rect];
         
         CGContextMoveToPoint(context, startX, valueY);
         CGContextAddLineToPoint(context, self.axisMarginLeft, valueY);
@@ -279,7 +279,7 @@
         for (NSInteger j = self.displayFrom; j < self.displayFrom + self.displayNumber; j++) {
             CCSMACDData *lineData = [self.stickData objectAtIndex:j];
             
-            CGFloat valueY = ((1 - (lineData.dea - self.minValue) / (self.maxValue - self.minValue)) * [self dataQuadrantPaddingHeight:rect] +[self dataQuadrantPaddingStartY:rect]);
+            CGFloat valueY = [self calcValueY:lineData.dea inRect:rect];
             //绘制线条路径
             if (j == self.displayFrom || j == 0) {
                 if (lineData.dea == 0) {
@@ -328,7 +328,7 @@
         //1根则绘制一条直线
         CCSMACDData *lineData = [self.stickData objectAtIndex:0];
         //获取终点Y坐标
-        CGFloat valueY = ((1 - (lineData.diff - self.minValue) / (self.maxValue - self.minValue)) * [self dataQuadrantPaddingHeight:rect] +[self dataQuadrantPaddingStartY:rect]);
+        CGFloat valueY = [self calcValueY:lineData.diff inRect:rect];
         
         CGContextMoveToPoint(context, startX, valueY);
         CGContextAddLineToPoint(context, self.axisMarginLeft, valueY);
@@ -338,7 +338,7 @@
         for (NSInteger j = self.displayFrom; j < self.displayFrom + self.displayNumber; j++) {
             CCSMACDData *lineData = [self.stickData objectAtIndex:j];
             
-            CGFloat valueY = ((1 - (lineData.diff - self.minValue) / (self.maxValue - self.minValue)) * [self dataQuadrantPaddingHeight:rect] +[self dataQuadrantPaddingStartY:rect]);
+            CGFloat valueY = [self calcValueY:lineData.diff inRect:rect];
             //绘制线条路径
             if (j == self.displayFrom || j == 0) {
                 if (lineData.diff == 0) {

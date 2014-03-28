@@ -178,4 +178,6 @@
 
 - (void)calcValueRange;
 
+- (CGFloat) calcValueY:(CGFloat)value inRect:(CGRect) rect;
+
 @end

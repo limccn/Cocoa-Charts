@@ -60,8 +60,8 @@
             for (NSUInteger i = self.displayFrom; i < self.displayFrom + self.displayNumber; i++) {
                 CCSColoredStickChartData *stick = [self.stickData objectAtIndex:i];
 
-                CGFloat highY = ((1 - (stick.high - self.minValue) / (self.maxValue - self.minValue)) * [self dataQuadrantPaddingHeight:rect] +[self dataQuadrantPaddingStartY:rect]);
-                CGFloat lowY = ((1 - (stick.low - self.minValue) / (self.maxValue - self.minValue)) * [self dataQuadrantPaddingHeight:rect] +[self dataQuadrantPaddingStartY:rect]);
+                CGFloat highY = [self calcValueY:stick.high inRect:rect];
+                CGFloat lowY = [self calcValueY:stick.low inRect:rect];
 
                 if (stick.high == 0) {
                     //没有值的情况下不绘制
@@ -99,9 +99,9 @@
                 NSUInteger index = self.displayFrom + self.displayNumber - 1 - i;
                 CCSColoredStickChartData *stick = [self.stickData objectAtIndex:index];
 
-                CGFloat highY = ((1 - (stick.high - self.minValue) / (self.maxValue - self.minValue)) * [self dataQuadrantPaddingHeight:rect] +[self dataQuadrantPaddingStartY:rect]);
-                CGFloat lowY = ((1 - (stick.low - self.minValue) / (self.maxValue - self.minValue)) * [self dataQuadrantPaddingHeight:rect] +[self dataQuadrantPaddingStartY:rect]);
-
+                CGFloat highY = [self calcValueY:stick.high inRect:rect];
+                CGFloat lowY = [self calcValueY:stick.low inRect:rect];
+                
                 if (stick.high == 0) {
                     //没有值的情况下不绘制
                 } else {

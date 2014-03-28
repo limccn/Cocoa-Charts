@@ -251,7 +251,7 @@
             for (NSUInteger j = 0; j < [lineDatas count]; j++) {
                 CCSLineData *lineData = [lineDatas objectAtIndex:j];
                 //获取终点Y坐标
-                CGFloat valueY = ((1 - (lineData.value - self.minValue) / (self.maxValue - self.minValue)) * [self dataQuadrantPaddingHeight:rect] + [self dataQuadrantPaddingStartY:rect]);
+                CGFloat valueY = [self calcValueY:lineData.value inRect:rect];
                 //绘制线条路径
                 if (j == 0) {
                     CGContextMoveToPoint(context, startX, valueY);
@@ -289,7 +289,7 @@
                 //1根则绘制一条直线
                 CCSLineData *lineData = [lineDatas objectAtIndex:0];
                 //获取终点Y坐标
-                CGFloat valueY = ((1 - (lineData.value - self.minValue) / (self.maxValue - self.minValue)) * [self dataQuadrantPaddingHeight:rect] + [self dataQuadrantPaddingStartY:rect]);
+                CGFloat valueY =  [self calcValueY:lineData.value inRect:rect];
 
                 CGContextMoveToPoint(context, startX, valueY);
                 CGContextAddLineToPoint(context, [self dataQuadrantPaddingStartX:rect], valueY);
@@ -299,7 +299,7 @@
                 for (NSInteger j = [lineDatas count] - 1; j >= 0; j--) {
                     CCSLineData *lineData = [lineDatas objectAtIndex:j];
                     //获取终点Y坐标
-                    CGFloat valueY = ((1 - (lineData.value - self.minValue) / (self.maxValue - self.minValue)) * [self dataQuadrantPaddingHeight:rect] + [self dataQuadrantPaddingStartY:rect]);
+                    CGFloat valueY = [self calcValueY:lineData.value inRect:rect];
                     //绘制线条路径
                     if (j == [lineDatas count] - 1) {
                         CGContextMoveToPoint(context, startX, valueY);
@@ -432,7 +432,7 @@
 
 
 - (void)initAxisY {
-    //隶｡邂怜叙蛟ｼ闌�峩
+    //计算值幅范围
     [self calcValueRange];
 
     if (self.maxValue == 0. && self.minValue == 0.) {
@@ -442,7 +442,7 @@
 
     NSMutableArray *TitleY = [[[NSMutableArray alloc] init] autorelease];
     CGFloat average = (NSUInteger) ((self.maxValue - self.minValue) / self.latitudeNum);
-    //螟�炊蛻ｻ蠎ｦ
+    //计算title
     for (NSUInteger i = 0; i < self.latitudeNum; i++) {
         if (self.axisCalc == 1) {
             NSUInteger degree = floor(self.minValue + i * average) / self.axisCalc;
@@ -453,7 +453,7 @@
             [TitleY addObject:value];
         }
     }
-    //螟�炊譛\螟ｧ蛟ｼ
+    //最后一个title
     if (self.axisCalc == 1) {
         NSUInteger degree = (NSInteger) (self.maxValue) / self.axisCalc;
         NSString *value = [[NSNumber numberWithUnsignedInteger:degree]stringValue];
@@ -558,6 +558,10 @@
     
     self.maxValue = NSIntegerMin;
     self.minValue = NSIntegerMax;
+}
+
+- (CGFloat) calcValueY:(CGFloat)value inRect:(CGRect) rect{
+    return (1 - (value - [self minValue]) / ([self maxValue] - [self minValue])) * [self dataQuadrantPaddingHeight:rect] + [self dataQuadrantPaddingStartY:rect];
 }
 
 //-(void) calcSelectedIndex
