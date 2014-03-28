@@ -179,8 +179,13 @@
 }
 
 - (void)initAxisX {
+    if (self.stickData == nil) {
+        return;
+    }
+    if([self.stickData count] == 0){
+        return;
+    }
     NSMutableArray *TitleX = [[[NSMutableArray alloc] init] autorelease];
-    if (self.stickData != NULL && [self.stickData count] > 0) {
         CGFloat average = self.maxSticksNum / self.longitudeNum;
         CCSStickChartData *chartdata = nil;
         if (self.axisYPosition == CCSGridChartYAxisPositionLeft) {
@@ -213,8 +218,6 @@
             //追加标题
             [TitleX addObject:[NSString stringWithFormat:@"%@", chartdata.date]];
         }
-
-    }
     self.longitudeTitles = TitleX;
 }
 
@@ -267,6 +270,12 @@
 }
 
 - (void)drawData:(CGRect)rect {
+    if (self.stickData == nil) {
+        return;
+    }
+    if([self.stickData count] == 0){
+        return;
+    }
     // 蜡烛棒宽度
     CGFloat stickWidth = ([self dataQuadrantPaddingWidth:rect] / self.maxSticksNum) - 1;
 
@@ -276,7 +285,6 @@
     CGContextSetStrokeColorWithColor(context, self.stickBorderColor.CGColor);
     CGContextSetFillColorWithColor(context, self.stickFillColor.CGColor);
 
-    if (self.stickData != NULL && [self.stickData count] > 0) {
 
         if (self.axisYPosition == CCSGridChartYAxisPositionLeft) {
             // 蜡烛棒起始绘制位置
@@ -337,13 +345,17 @@
             }
         }
 
-    }
 }
 
 - (NSString *)calcAxisXGraduate:(CGRect)rect {
+    if (self.stickData == nil) {
+        return @"";
+    }
+    if([self.stickData count] == 0){
+        return @"";
+    }
     CGFloat value = [self touchPointAxisXValue:rect];
     NSString *result = @"";
-    if (self.stickData != NULL && [self.stickData count] > 0) {
         if (self.axisYPosition == CCSGridChartYAxisPositionLeft) {
             if (value >= 1) {
                 result = ((CCSStickChartData *) [self.stickData objectAtIndex:self.maxSticksNum]).date;
@@ -366,7 +378,6 @@
                 result = ((CCSStickChartData *) [self.stickData objectAtIndex:index]).date;
             }
         }
-    }
     return result;
 }
 

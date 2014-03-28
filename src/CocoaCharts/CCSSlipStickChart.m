@@ -51,7 +51,7 @@
 - (void)initProperty {
     //初始化父类的熟悉
     [super initProperty];
-
+    
     self.displayFrom = 0;
     self.displayNumber = 10;
     self.minDisplayNumber = 20;
@@ -61,70 +61,74 @@
 - (void)calcDataValueRange {
     double maxValue = 0;
     double minValue = NSIntegerMax;
-
+    
     CCSStickChartData *first = [self.stickData objectAtIndex:self.displayFrom];
     //第一个stick为停盘的情况
     if (first.high == 0 && first.low == 0) {
-
+        
     } else {
         maxValue = first.high;
         minValue = first.low;
     }
-
+    
     //判断显示为方柱或显示为线条
     for (NSUInteger i = self.displayFrom; i < self.displayFrom + self.displayNumber; i++) {
         CCSStickChartData *stick = [self.stickData objectAtIndex:i];
         if (stick.low < minValue) {
             minValue = stick.low;
         }
-
+        
         if (stick.high > maxValue) {
             maxValue = stick.high;
         }
-
+        
     }
-
+    
     self.maxValue = maxValue;
     self.minValue = minValue;
 }
 
 - (void)initAxisX {
-    NSMutableArray *TitleX = [[[NSMutableArray alloc] init] autorelease];
-    if (self.stickData != NULL && [self.stickData count] > 0) {
-        CGFloat average = self.displayNumber / self.longitudeNum;
-        CCSStickChartData *chartdata = nil;
-        if (self.axisYPosition == CCSGridChartYAxisPositionLeft) {
-            //处理刻度
-            for (NSUInteger i = 0; i < self.longitudeNum; i++) {
-                NSUInteger index = self.displayFrom + (NSUInteger) floor(i * average);
-                if (index > self.displayFrom + self.displayNumber - 1) {
-                    index = self.displayFrom + self.displayNumber - 1;
-                }
-                chartdata = [self.stickData objectAtIndex:index];
-                //追加标题
-                [TitleX addObject:[NSString stringWithFormat:@"%@", chartdata.date]];
-            }
-            chartdata = [self.stickData objectAtIndex:self.displayFrom + self.displayNumber - 1];
-            //追加标题
-            [TitleX addObject:[NSString stringWithFormat:@"%@", chartdata.date]];
-        }
-        else {
-            //处理刻度
-            for (NSUInteger i = 0; i < self.longitudeNum; i++) {
-                NSUInteger index = self.displayFrom + (NSUInteger) floor(i * average);
-                if (index > self.displayFrom + self.displayNumber - 1) {
-                    index = self.displayFrom + self.displayNumber - 1;
-                }
-                chartdata = [self.stickData objectAtIndex:index];
-                //追加标题
-                [TitleX addObject:[NSString stringWithFormat:@"%@", chartdata.date]];
-            }
-            chartdata = [self.stickData objectAtIndex:self.displayFrom + self.displayNumber - 1];
-            //追加标题
-            [TitleX addObject:[NSString stringWithFormat:@"%@", chartdata.date]];
-        }
-
+    if (self.stickData == nil) {
+        return;
     }
+    if([self.stickData count] == 0){
+        return;
+    }
+    NSMutableArray *TitleX = [[[NSMutableArray alloc] init] autorelease];
+    CGFloat average = self.displayNumber / self.longitudeNum;
+    CCSStickChartData *chartdata = nil;
+    if (self.axisYPosition == CCSGridChartYAxisPositionLeft) {
+        //处理刻度
+        for (NSUInteger i = 0; i < self.longitudeNum; i++) {
+            NSUInteger index = self.displayFrom + (NSUInteger) floor(i * average);
+            if (index > self.displayFrom + self.displayNumber - 1) {
+                index = self.displayFrom + self.displayNumber - 1;
+            }
+            chartdata = [self.stickData objectAtIndex:index];
+            //追加标题
+            [TitleX addObject:[NSString stringWithFormat:@"%@", chartdata.date]];
+        }
+        chartdata = [self.stickData objectAtIndex:self.displayFrom + self.displayNumber - 1];
+        //追加标题
+        [TitleX addObject:[NSString stringWithFormat:@"%@", chartdata.date]];
+    }
+    else {
+        //处理刻度
+        for (NSUInteger i = 0; i < self.longitudeNum; i++) {
+            NSUInteger index = self.displayFrom + (NSUInteger) floor(i * average);
+            if (index > self.displayFrom + self.displayNumber - 1) {
+                index = self.displayFrom + self.displayNumber - 1;
+            }
+            chartdata = [self.stickData objectAtIndex:index];
+            //追加标题
+            [TitleX addObject:[NSString stringWithFormat:@"%@", chartdata.date]];
+        }
+        chartdata = [self.stickData objectAtIndex:self.displayFrom + self.displayNumber - 1];
+        //追加标题
+        [TitleX addObject:[NSString stringWithFormat:@"%@", chartdata.date]];
+    }
+    
     self.longitudeTitles = TitleX;
 }
 
@@ -165,9 +169,14 @@
 }
 
 - (NSString *)calcAxisXGraduate:(CGRect)rect {
+    if (self.stickData == nil) {
+        return @"";
+    }
+    if([self.stickData count] == 0){
+        return @"";
+    }
     CGFloat value = [self touchPointAxisXValue:rect];
     NSString *result = @"";
-    if (self.stickData != NULL && [self.stickData count] > 0) {
         if (self.axisYPosition == CCSGridChartYAxisPositionLeft) {
             if (value >= 1) {
                 result = ((CCSStickChartData *) [self.stickData objectAtIndex:self.displayFrom + self.displayNumber - 1]).date;
@@ -193,18 +202,17 @@
                 result = ((CCSStickChartData *) [self.stickData objectAtIndex:index]).date;
             }
         }
-    }
     return result;
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-
-
+    
+    
     NSArray *allTouches = [touches allObjects];
     //处理点击事件
     if ([allTouches count] == 1) {
         CGPoint pt1 = [[allTouches objectAtIndex:0] locationInView:self];
-
+        
         if (_flag == 0) {
             _firstX = pt1.x;
         } else {
@@ -214,7 +222,7 @@
                 [self setNeedsDisplay];
                 self.singleTouchPoint = CGPointZero;
                 _flag = 0;
-
+                
             } else {
                 //获取选中点
                 self.singleTouchPoint = [[allTouches objectAtIndex:0] locationInView:self];
@@ -222,18 +230,18 @@
                 self.displayCrossXOnTouch = YES;
                 self.displayCrossYOnTouch = YES;
                 [self setNeedsDisplay];
-
+                
                 _flag = 1;
             }
         }
-
+        
     } else if ([allTouches count] == 2) {
         CGPoint pt1 = [[allTouches objectAtIndex:0] locationInView:self];
         CGPoint pt2 = [[allTouches objectAtIndex:1] locationInView:self];
-
+        
         _startDistance1 = fabsf(pt1.x - pt2.x);
     } else {
-
+        
     }
     
     //调用父类的触摸事件
@@ -241,15 +249,15 @@
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
-
-
+    
+    
     NSArray *allTouches = [touches allObjects];
     //处理点击事件
     if ([allTouches count] == 1) {
         if (_flag == 0) {
             CGPoint pt1 = [[allTouches objectAtIndex:0] locationInView:self];
             CGFloat stickWidth = ([self dataQuadrantPaddingWidth:self.frame]/ self.displayNumber) - 1;
-
+            
             if (pt1.x - _firstX > stickWidth) {
                 if (self.displayFrom > 2) {
                     self.displayFrom = self.displayFrom - 2;
@@ -259,9 +267,9 @@
                     self.displayFrom = self.displayFrom + 2;
                 }
             }
-
+            
             _firstX = pt1.x;
-
+            
             [self setNeedsDisplay];
             //设置可滚动
             //[self performSelector:@selector(setNeedsDisplay) withObject:nil afterDelay:0];
@@ -282,115 +290,119 @@
     } else if ([allTouches count] == 2) {
         CGPoint pt1 = [[allTouches objectAtIndex:0] locationInView:self];
         CGPoint pt2 = [[allTouches objectAtIndex:1] locationInView:self];
-
+        
         CGFloat endDistance = fabsf(pt1.x - pt2.x);
         //放大
         if (endDistance - _startDistance1 > _minDistance1) {
             [self zoomOut];
             _startDistance1 = endDistance;
-
+            
             [self setNeedsDisplay];
         } else if (endDistance - _startDistance1 < -_minDistance1) {
             [self zoomIn];
             _startDistance1 = endDistance;
-
+            
             [self setNeedsDisplay];
         }
-
+        
     } else {
-
+        
     }
     
     //调用父类的触摸事件
     [super touchesMoved:touches withEvent:event];
-
+    
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
     //调用父类的触摸事件
     [super touchesEnded:touches withEvent:event];
-
+    
     _startDistance1 = 0;
-
+    
     _flag = 1;
-
+    
     [self setNeedsDisplay];
 }
 
 - (void)drawData:(CGRect)rect {
+    if (self.stickData == nil) {
+        return;
+    }
+    if([self.stickData count] == 0){
+        return;
+    }
     // 蜡烛棒宽度
     CGFloat stickWidth = ([self dataQuadrantPaddingWidth:rect] / self.displayNumber) - 1;
-
+    
     CGContextRef context = UIGraphicsGetCurrentContext();
-
+    
     CGContextSetLineWidth(context, 1.0f);
     CGContextSetStrokeColorWithColor(context, self.stickBorderColor.CGColor);
     CGContextSetFillColorWithColor(context, self.stickFillColor.CGColor);
-
-    if (self.stickData != NULL && [self.stickData count] > 0) {
-
-        if (self.axisYPosition == CCSGridChartYAxisPositionLeft) {
-            // 蜡烛棒起始绘制位置
-            CGFloat stickX = [self dataQuadrantPaddingStartX:rect] + 1;
-            //判断显示为方柱或显示为线条
-            for (NSUInteger i = self.displayFrom; i < self.displayFrom + self.displayNumber; i++) {
-                CCSStickChartData *stick = [self.stickData objectAtIndex:i];
-
-                CGFloat highY = ((1 - (stick.high - self.minValue) / (self.maxValue - self.minValue)) * [self dataQuadrantPaddingHeight:rect] +[self dataQuadrantPaddingStartY:rect]);
-                CGFloat lowY = ((1 - (stick.low - self.minValue) / (self.maxValue - self.minValue)) * [self dataQuadrantPaddingHeight:rect] +[self dataQuadrantPaddingStartY:rect]);
-
-                if (stick.high == 0) {
-                    //没有值的情况下不绘制
+    
+    
+    if (self.axisYPosition == CCSGridChartYAxisPositionLeft) {
+        // 蜡烛棒起始绘制位置
+        CGFloat stickX = [self dataQuadrantPaddingStartX:rect] + 1;
+        //判断显示为方柱或显示为线条
+        for (NSUInteger i = self.displayFrom; i < self.displayFrom + self.displayNumber; i++) {
+            CCSStickChartData *stick = [self.stickData objectAtIndex:i];
+            
+            CGFloat highY = ((1 - (stick.high - self.minValue) / (self.maxValue - self.minValue)) * [self dataQuadrantPaddingHeight:rect] +[self dataQuadrantPaddingStartY:rect]);
+            CGFloat lowY = ((1 - (stick.low - self.minValue) / (self.maxValue - self.minValue)) * [self dataQuadrantPaddingHeight:rect] +[self dataQuadrantPaddingStartY:rect]);
+            
+            if (stick.high == 0) {
+                //没有值的情况下不绘制
+            } else {
+                //绘制数据，根据宽度判断绘制直线或方柱
+                if (stickWidth >= 2) {
+                    CGContextAddRect(context, CGRectMake(stickX, highY, stickWidth, lowY - highY));
+                    //填充路径
+                    CGContextFillPath(context);
                 } else {
-                    //绘制数据，根据宽度判断绘制直线或方柱
-                    if (stickWidth >= 2) {
-                        CGContextAddRect(context, CGRectMake(stickX, highY, stickWidth, lowY - highY));
-                        //填充路径
-                        CGContextFillPath(context);
-                    } else {
-                        CGContextMoveToPoint(context, stickX, highY);
-                        CGContextAddLineToPoint(context, stickX, lowY);
-                        //绘制线条
-                        CGContextStrokePath(context);
-                    }
+                    CGContextMoveToPoint(context, stickX, highY);
+                    CGContextAddLineToPoint(context, stickX, lowY);
+                    //绘制线条
+                    CGContextStrokePath(context);
                 }
-
-                //X位移
-                stickX = stickX + 1 + stickWidth;
             }
-        } else {
-            // 蜡烛棒起始绘制位置
-            CGFloat stickX = [self dataQuadrantPaddingEndX:rect] - 1 - stickWidth;
-            //判断显示为方柱或显示为线条
-            for (NSUInteger i = 0; i < self.displayNumber; i++) {
-                //获取index
-                NSUInteger index = self.displayFrom + self.displayNumber - 1 - i;
-                CCSStickChartData *stick = [self.stickData objectAtIndex:index];
-
-                CGFloat highY = ((1 - (stick.high - self.minValue) / (self.maxValue - self.minValue)) * [self dataQuadrantPaddingHeight:rect] +[self dataQuadrantPaddingStartY:rect]);
-                CGFloat lowY = ((1 - (stick.low - self.minValue) / (self.maxValue - self.minValue)) * [self dataQuadrantPaddingHeight:rect] +[self dataQuadrantPaddingStartY:rect]);
-
-                if (stick.high == 0) {
-                    //没有值的情况下不绘制
-                } else {
-                    //绘制数据，根据宽度判断绘制直线或方柱
-                    if (stickWidth >= 2) {
-                        CGContextAddRect(context, CGRectMake(stickX, highY, stickWidth, lowY - highY));
-                        //填充路径
-                        CGContextFillPath(context);
-                    } else {
-                        CGContextMoveToPoint(context, stickX, highY);
-                        CGContextAddLineToPoint(context, stickX, lowY);
-                        //绘制线条
-                        CGContextStrokePath(context);
-                    }
-                }
-                //X位移
-                stickX = stickX - 1 - stickWidth;
-            }
+            
+            //X位移
+            stickX = stickX + 1 + stickWidth;
         }
-
+    } else {
+        // 蜡烛棒起始绘制位置
+        CGFloat stickX = [self dataQuadrantPaddingEndX:rect] - 1 - stickWidth;
+        //判断显示为方柱或显示为线条
+        for (NSUInteger i = 0; i < self.displayNumber; i++) {
+            //获取index
+            NSUInteger index = self.displayFrom + self.displayNumber - 1 - i;
+            CCSStickChartData *stick = [self.stickData objectAtIndex:index];
+            
+            CGFloat highY = ((1 - (stick.high - self.minValue) / (self.maxValue - self.minValue)) * [self dataQuadrantPaddingHeight:rect] +[self dataQuadrantPaddingStartY:rect]);
+            CGFloat lowY = ((1 - (stick.low - self.minValue) / (self.maxValue - self.minValue)) * [self dataQuadrantPaddingHeight:rect] +[self dataQuadrantPaddingStartY:rect]);
+            
+            if (stick.high == 0) {
+                //没有值的情况下不绘制
+            } else {
+                //绘制数据，根据宽度判断绘制直线或方柱
+                if (stickWidth >= 2) {
+                    CGContextAddRect(context, CGRectMake(stickX, highY, stickWidth, lowY - highY));
+                    //填充路径
+                    CGContextFillPath(context);
+                } else {
+                    CGContextMoveToPoint(context, stickX, highY);
+                    CGContextAddLineToPoint(context, stickX, lowY);
+                    //绘制线条
+                    CGContextStrokePath(context);
+                }
+            }
+            //X位移
+            stickX = stickX - 1 - stickWidth;
+        }
     }
+    
 }
 
 - (void)calcSelectedIndex {
@@ -413,7 +425,7 @@
 
 - (void)zoomOut {
     if (self.displayNumber > self.minDisplayNumber) {
-
+        
         //区分缩放方向
         if (self.zoomBaseLine == CCSStickZoomBaseLineCenter) {
             self.displayNumber = self.displayNumber - 2;
@@ -424,17 +436,17 @@
             self.displayNumber = self.displayNumber - 2;
             self.displayFrom = self.displayFrom + 2;
         }
-
+        
         //处理displayNumber越界
         if (self.displayNumber < self.minDisplayNumber) {
             self.displayNumber = self.minDisplayNumber;
         }
-
+        
         //处理displayFrom越界
         if (self.displayFrom + self.displayNumber >= [self.stickData count]) {
             self.displayFrom = [self.stickData count] - self.displayNumber;
         }
-
+        
         if (self.coChart) {
             ((CCSSlipStickChart *)self.coChart).displayFrom = self.displayFrom;
             ((CCSSlipStickChart *)self.coChart).displayNumber = self.displayNumber;
@@ -468,11 +480,11 @@
                 }
             }
         }
-
+        
         if (self.displayFrom + self.displayNumber >= [self.stickData count]) {
             self.displayNumber = [self.stickData count] - self.displayFrom;
         }
-
+        
         if (self.coChart) {
             ((CCSSlipStickChart *)self.coChart).displayFrom = self.displayFrom;
             ((CCSSlipStickChart *)self.coChart).displayNumber = self.displayNumber;

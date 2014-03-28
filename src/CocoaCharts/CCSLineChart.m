@@ -470,52 +470,68 @@
 
 
 - (void)initAxisX {
+    if(self.linesData == nil){
+        return;
+    }
+    if([self.linesData count] == 0){
+        return;
+    }
+    
     NSMutableArray *TitleX = [[[NSMutableArray alloc] init] autorelease];
-    if (self.linesData != NULL && [self.linesData count] > 0) {
-        //以第1条线作为X轴的标示
-        CCSTitledLine *line = [self.linesData objectAtIndex:0];
-        if ([line.data count] > 0) {
-            CGFloat average = [line.data count] / self.longitudeNum;
-            //处理刻度
-            for (NSUInteger i = 0; i < self.longitudeNum; i++) {
-                NSUInteger index = (NSUInteger) floor(i * average);
-                if (index >= [line.data count] - 1) {
-                    index = [line.data count] - 1;
-                }
-                CCSLineData *lineData = [line.data objectAtIndex:index];
-                //追加标题
-                [TitleX addObject:[NSString stringWithFormat:@"%@", lineData.date]];
+    //以第1条线作为X轴的标示
+    CCSTitledLine *line = [self.linesData objectAtIndex:0];
+    if ([line.data count] > 0) {
+        CGFloat average = [line.data count] / self.longitudeNum;
+        //处理刻度
+        for (NSUInteger i = 0; i < self.longitudeNum; i++) {
+            NSUInteger index = (NSUInteger) floor(i * average);
+            if (index >= [line.data count] - 1) {
+                index = [line.data count] - 1;
             }
-            CCSLineData *lineData = [line.data objectAtIndex:[line.data count] - 1];
+            CCSLineData *lineData = [line.data objectAtIndex:index];
             //追加标题
             [TitleX addObject:[NSString stringWithFormat:@"%@", lineData.date]];
         }
+        CCSLineData *lineData = [line.data objectAtIndex:[line.data count] - 1];
+        //追加标题
+        [TitleX addObject:[NSString stringWithFormat:@"%@", lineData.date]];
     }
     self.longitudeTitles = TitleX;
 }
 
 - (NSString *)calcAxisXGraduate:(CGRect)rect {
+    if(self.linesData == nil){
+        return @"";
+    }
+    if([self.linesData count] == 0){
+        return @"";
+    }
+    
     CGFloat value = [self touchPointAxisXValue:rect];
     NSString *result = @"";
-    if (self.linesData != NULL) {
-        CCSTitledLine *line = [self.linesData objectAtIndex:0];
-        if (line != NULL && [line.data count] > 0) {
-            if (value >= 1) {
-                result = ((CCSLineData *) [line.data objectAtIndex:[line.data count] - 1]).date;
-            } else if (value <= 0) {
-                result = ((CCSLineData *) [line.data objectAtIndex:0]).date;
-            } else {
-                NSUInteger index = (NSUInteger) round([line.data count] * value);
-
-                if (index < [line.data count]) {
-                    self.displayCrossXOnTouch = YES;
-                    self.displayCrossYOnTouch = YES;
-                    result = ((CCSLineData *) [line.data objectAtIndex:index]).date;
-                } else {
-                    self.displayCrossXOnTouch = NO;
-                    self.displayCrossYOnTouch = NO;
-                }
-            }
+    
+    CCSTitledLine *line = [self.linesData objectAtIndex:0];
+    if (line == nil){
+        return @"";
+    }
+    if([line.data count] == 0) {
+        return @"";
+    }
+    
+    if (value >= 1) {
+        result = ((CCSLineData *) [line.data objectAtIndex:[line.data count] - 1]).date;
+    } else if (value <= 0) {
+        result = ((CCSLineData *) [line.data objectAtIndex:0]).date;
+    } else {
+        NSUInteger index = (NSUInteger) round([line.data count] * value);
+        
+        if (index < [line.data count]) {
+            self.displayCrossXOnTouch = YES;
+            self.displayCrossYOnTouch = YES;
+            result = ((CCSLineData *) [line.data objectAtIndex:index]).date;
+        } else {
+            self.displayCrossXOnTouch = NO;
+            self.displayCrossYOnTouch = NO;
         }
     }
     return result;

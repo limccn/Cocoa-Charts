@@ -138,7 +138,7 @@
     CCSTitledLine *line2 = [self.linesData objectAtIndex:1];
     
     
-    if (line1 == nil || line2 == NULL) {
+    if (line1 == nil || line2 == nil) {
         return;
     }
     

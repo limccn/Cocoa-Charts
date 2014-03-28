@@ -35,11 +35,11 @@
 - (void)initProperty {
     //初始化父类的熟悉
     [super initProperty];
-
+    
     //初始化相关属性
     self.selectedIndex = 0;
     self.offsetLength = self.radius * 0.11f;
-
+    
     //不显示标题
     self.displayValueTitle = NO;
 }
@@ -51,84 +51,85 @@
 }
 
 - (void)drawData:(CGRect)rect {
+    if (self.data == nil) {
+        return;
+    }
+    
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSetLineWidth(context, 2.0f);
     CGContextSetAllowsAntialiasing(context, YES);
     CGContextSetStrokeColorWithColor(context, self.circleBorderColor.CGColor);
-
-    if (self.data != NULL) {
-
-        //获得总数
-        CGFloat sum = 0;
-        for (NSUInteger i = 0; i < [self.data count]; i++) {
-            sum = sum + ((CCSTitleValueColor *) [self.data objectAtIndex:i]).value;
-        }
-
-        CGFloat offset = 0;
-        // 遍历每一条数据列表
-        for (NSUInteger j = 0; j < [self.data count]; j++) {
-
-            NSUInteger index = j + self.selectedIndex;
-            index %= ([self.data count]);
-
-            CCSTitleValueColor *entity = [self.data objectAtIndex:index];
-
-            //圆弧填充色
-            CGContextSetFillColorWithColor(context, entity.color.CGColor);
-
-            //角度
-            CGFloat sweep = entity.value * 2 * PI / sum;
-            //如果是选中的数据
-            if (j == 0) {
-                //初始化偏移值
-                offset = -0.5f * sweep;
-                CGFloat realOffset;
-                if (offset != -PI / 2 && offset != 0 && offset != -PI) {
-                    if (offset > 0) {
-                        realOffset = self.offsetLength / sin(offset);
-                    } else {
-                        realOffset = self.offsetLength / sin(-offset);
-                    }
+    
+    //获得总数
+    CGFloat sum = 0;
+    for (NSUInteger i = 0; i < [self.data count]; i++) {
+        sum = sum + ((CCSTitleValueColor *) [self.data objectAtIndex:i]).value;
+    }
+    
+    CGFloat offset = 0;
+    // 遍历每一条数据列表
+    for (NSUInteger j = 0; j < [self.data count]; j++) {
+        
+        NSUInteger index = j + self.selectedIndex;
+        index %= ([self.data count]);
+        
+        CCSTitleValueColor *entity = [self.data objectAtIndex:index];
+        
+        //圆弧填充色
+        CGContextSetFillColorWithColor(context, entity.color.CGColor);
+        
+        //角度
+        CGFloat sweep = entity.value * 2 * PI / sum;
+        //如果是选中的数据
+        if (j == 0) {
+            //初始化偏移值
+            offset = -0.5f * sweep;
+            CGFloat realOffset;
+            if (offset != -PI / 2 && offset != 0 && offset != -PI) {
+                if (offset > 0) {
+                    realOffset = self.offsetLength / sin(offset);
                 } else {
-                    realOffset = self.offsetLength;
+                    realOffset = self.offsetLength / sin(-offset);
                 }
-
-                //移动到圆心偏移点
-                CGContextMoveToPoint(context, self.position.x + realOffset, self.position.y);
-
-                CGContextAddArc(context, self.position.x + realOffset, self.position.y, self.radius, offset, offset + sweep, 0);
-                CGContextClosePath(context);
-
-                CGContextFillPath(context);
-
-                //绘制外边框
-                CGContextMoveToPoint(context, self.position.x + realOffset, self.position.y);
-                CGContextAddArc(context, self.position.x + realOffset, self.position.y, self.radius, offset, offset + sweep, 0);
-                CGContextClosePath(context);
-
-                CGContextStrokePath(context);
             } else {
-                //移动到圆心
-                CGContextMoveToPoint(context, self.position.x, self.position.y);
-
-                CGContextAddArc(context, self.position.x, self.position.y, self.radius, offset, offset + sweep, 0);
-                CGContextClosePath(context);
-
-                CGContextFillPath(context);
-
-                //绘制外边框
-                CGContextMoveToPoint(context, self.position.x, self.position.y);
-                CGContextAddArc(context, self.position.x, self.position.y, self.radius, offset, offset + sweep, 0);
-                CGContextClosePath(context);
-
-                CGContextStrokePath(context);
-
+                realOffset = self.offsetLength;
             }
-
-            //调整偏移
-            offset = offset + sweep;
-
+            
+            //移动到圆心偏移点
+            CGContextMoveToPoint(context, self.position.x + realOffset, self.position.y);
+            
+            CGContextAddArc(context, self.position.x + realOffset, self.position.y, self.radius, offset, offset + sweep, 0);
+            CGContextClosePath(context);
+            
+            CGContextFillPath(context);
+            
+            //绘制外边框
+            CGContextMoveToPoint(context, self.position.x + realOffset, self.position.y);
+            CGContextAddArc(context, self.position.x + realOffset, self.position.y, self.radius, offset, offset + sweep, 0);
+            CGContextClosePath(context);
+            
+            CGContextStrokePath(context);
+        } else {
+            //移动到圆心
+            CGContextMoveToPoint(context, self.position.x, self.position.y);
+            
+            CGContextAddArc(context, self.position.x, self.position.y, self.radius, offset, offset + sweep, 0);
+            CGContextClosePath(context);
+            
+            CGContextFillPath(context);
+            
+            //绘制外边框
+            CGContextMoveToPoint(context, self.position.x, self.position.y);
+            CGContextAddArc(context, self.position.x, self.position.y, self.radius, offset, offset + sweep, 0);
+            CGContextClosePath(context);
+            
+            CGContextStrokePath(context);
+            
         }
+        
+        //调整偏移
+        offset = offset + sweep;
+        
     }
 }
 
@@ -139,7 +140,7 @@
     } else {
         self.selectedIndex = index % [self.data count];
     }
-
+    
     [self setNeedsDisplay];
 }
 

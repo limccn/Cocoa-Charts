@@ -28,7 +28,7 @@
 @synthesize linesData = _linesData;
 
 - (void)initProperty {
-
+    
     [super initProperty];
     //初始化颜色
     self.linesData = nil;
@@ -46,90 +46,98 @@
 - (void)drawData:(CGRect)rect {
     //调用父类的绘制方法
     [super drawData:rect];
-
+    
     //在K线图上增加均线
     [self drawLinesData:rect];
 }
 
 - (void)drawLinesData:(CGRect)rect {
+    
+    if (self.linesData == nil) {
+        return;
+    }
+    if ([self.linesData count] == 0) {
+        return;
+    }
+    
     //起始点
     CGFloat lineLength;
     // 起始位置
     CGFloat startX;
-
+    
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSetLineWidth(context, 1.0f);
-
-    if (self.linesData != NULL) {
-        //逐条输出MA线
-        for (NSUInteger i = 0; i < [self.linesData count]; i++) {
-            CCSTitledLine *line = [self.linesData objectAtIndex:i];
-            if (line != NULL) {
-                //设置线条颜色
-                CGContextSetStrokeColorWithColor(context, line.color.CGColor);
-                //获取线条数据
-                NSArray *lineDatas = line.data;
-                if ([line.data count] > 0) {
-
-                    //判断Y轴的位置设置从左往右还是从右往左绘制
-                    if (self.axisYPosition == CCSGridChartYAxisPositionLeft) {
-                        // 点线距离
-                        lineLength = ([self dataQuadrantPaddingWidth:rect] / self.maxSticksNum) - 1;
-                        //起始点
-                        startX = [self dataQuadrantPaddingStartX:rect] + lineLength / 2;
-                        //遍历并绘制线条
-                        for (NSUInteger j = 0; j < [lineDatas count]; j++) {
-                            CCSLineData *lineData = [lineDatas objectAtIndex:j];
-                            //获取终点Y坐标
-                            CGFloat valueY = ((1 - (lineData.value - self.minValue) / (self.maxValue - self.minValue)) * [self dataQuadrantPaddingHeight:rect] + [self dataQuadrantPaddingStartY:rect]);
-                            //绘制线条路径
-                            if (j == 0) {
-                                CGContextMoveToPoint(context, startX, valueY);
-                            } else {
-                                if (((CCSLineData *) [lineDatas objectAtIndex:j - 1]).value != 0) {
-                                    CGContextAddLineToPoint(context, startX, valueY);
-                                } else {
-                                    CGContextMoveToPoint(context, startX - lineLength / 2, valueY);
-                                    CGContextAddLineToPoint(context, startX, valueY);
-                                }
-                            }
-
-                            //X位移
-                            startX = startX + 1 + lineLength;
-                        }
+    
+    //逐条输出MA线
+    for (NSUInteger i = 0; i < [self.linesData count]; i++) {
+        CCSTitledLine *line = [self.linesData objectAtIndex:i];
+        if (line == nil) {
+            continue;
+        }
+        if ([line.data count] == 0) {
+            continue;
+        }
+        //设置线条颜色
+        CGContextSetStrokeColorWithColor(context, line.color.CGColor);
+        //获取线条数据
+        NSArray *lineDatas = line.data;
+        
+        //判断Y轴的位置设置从左往右还是从右往左绘制
+        if (self.axisYPosition == CCSGridChartYAxisPositionLeft) {
+            // 点线距离
+            lineLength = ([self dataQuadrantPaddingWidth:rect] / self.maxSticksNum) - 1;
+            //起始点
+            startX = [self dataQuadrantPaddingStartX:rect] + lineLength / 2;
+            //遍历并绘制线条
+            for (NSUInteger j = 0; j < [lineDatas count]; j++) {
+                CCSLineData *lineData = [lineDatas objectAtIndex:j];
+                //获取终点Y坐标
+                CGFloat valueY = ((1 - (lineData.value - self.minValue) / (self.maxValue - self.minValue)) * [self dataQuadrantPaddingHeight:rect] + [self dataQuadrantPaddingStartY:rect]);
+                //绘制线条路径
+                if (j == 0) {
+                    CGContextMoveToPoint(context, startX, valueY);
+                } else {
+                    if (((CCSLineData *) [lineDatas objectAtIndex:j - 1]).value != 0) {
+                        CGContextAddLineToPoint(context, startX, valueY);
                     } else {
-                        // 点线距离
-                        lineLength = ([self dataQuadrantPaddingWidth:rect] * 1.0 / self.maxSticksNum);
-                        //起始点
-                        startX = [self dataQuadrantPaddingEndX:rect] - lineLength / 2;
-                        //遍历并绘制线条
-                        for (NSInteger j = [lineDatas count] - 1; j >= 0; j--) {
-                            CCSLineData *lineData = [lineDatas objectAtIndex:j];
-                            //获取终点Y坐标
-                            CGFloat valueY = ((1 - (lineData.value - self.minValue) / (self.maxValue - self.minValue)) * [self dataQuadrantPaddingHeight:rect] + [self dataQuadrantPaddingStartY:rect]);
-                            //绘制线条路径
-                            if (j == [lineDatas count] - 1) {
-                                CGContextMoveToPoint(context, startX, valueY);
-                            } else {
-                                //TODO:BUG待修正
-                                if (((CCSLineData *) [lineDatas objectAtIndex:j]).value != 0) {
-                                    CGContextAddLineToPoint(context, startX, valueY);
-                                } else {
-                                    CGContextMoveToPoint(context, startX - lineLength / 2, valueY);
-                                    CGContextAddLineToPoint(context, startX, valueY);
-                                }
-                            }
-                            //X位移
-                            startX = startX - lineLength;
-                        }
+                        CGContextMoveToPoint(context, startX - lineLength / 2, valueY);
+                        CGContextAddLineToPoint(context, startX, valueY);
                     }
                 }
-
-                //绘制路径
-                CGContextStrokePath(context);
+                
+                //X位移
+                startX = startX + 1 + lineLength;
+            }
+        } else {
+            // 点线距离
+            lineLength = ([self dataQuadrantPaddingWidth:rect] * 1.0 / self.maxSticksNum);
+            //起始点
+            startX = [self dataQuadrantPaddingEndX:rect] - lineLength / 2;
+            //遍历并绘制线条
+            for (NSInteger j = [lineDatas count] - 1; j >= 0; j--) {
+                CCSLineData *lineData = [lineDatas objectAtIndex:j];
+                //获取终点Y坐标
+                CGFloat valueY = ((1 - (lineData.value - self.minValue) / (self.maxValue - self.minValue)) * [self dataQuadrantPaddingHeight:rect] + [self dataQuadrantPaddingStartY:rect]);
+                //绘制线条路径
+                if (j == [lineDatas count] - 1) {
+                    CGContextMoveToPoint(context, startX, valueY);
+                } else {
+                    //TODO:BUG待修正
+                    if (((CCSLineData *) [lineDatas objectAtIndex:j]).value != 0) {
+                        CGContextAddLineToPoint(context, startX, valueY);
+                    } else {
+                        CGContextMoveToPoint(context, startX - lineLength / 2, valueY);
+                        CGContextAddLineToPoint(context, startX, valueY);
+                    }
+                }
+                //X位移
+                startX = startX - lineLength;
             }
         }
     }
+    
+    //绘制路径
+    CGContextStrokePath(context);
 }
 
 @end

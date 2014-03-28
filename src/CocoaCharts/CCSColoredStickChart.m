@@ -39,6 +39,12 @@
 }
 
 - (void)drawData:(CGRect)rect {
+    if (self.stickData == nil) {
+        return;
+    }
+    if([self.stickData count] == 0){
+        return;
+    }
     // 蜡烛棒宽度
     CGFloat stickWidth = ([self dataQuadrantPaddingWidth:rect] / self.displayNumber) - 1;
 
@@ -46,7 +52,6 @@
 
     CGContextSetLineWidth(context, 1.0f);
 
-    if (self.stickData != NULL && [self.stickData count] > 0) {
 
         if (self.axisYPosition == CCSGridChartYAxisPositionLeft) {
             // 蜡烛棒起始绘制位置
@@ -124,7 +129,6 @@
             }
         }
 
-    }
 }
 
 
