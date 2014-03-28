@@ -21,6 +21,11 @@
 #import <Foundation/Foundation.h>
 #import "CCSGridChart.h"
 
+typedef enum {
+    CCSStickAlignTypeCenter,
+    CCSStickAlignTypeJustify
+} CCSStickAlignType;
+
 /*!
  CCSStickChart
  
@@ -46,6 +51,7 @@
     CGFloat _minValue;
     NSUInteger _axisCalc;
     CCSStickChart *_coChart;
+    CCSStickAlignType _stickAlignType;
 }
 
 /*!
@@ -125,6 +131,7 @@
  两个相同类型图表之间传值用对象
  */
 @property(assign, nonatomic) CCSStickChart *coChart;
+@property(assign, nonatomic) CCSStickAlignType stickAlignType;
 
 
 /*!

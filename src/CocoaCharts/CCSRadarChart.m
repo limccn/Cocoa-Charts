@@ -82,7 +82,6 @@
     path = nil;
 }
 
-
 - (void)drawSpiderWeb:(CGRect)rect {
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSetLineWidth(context, 1.0f);

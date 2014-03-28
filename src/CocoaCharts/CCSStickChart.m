@@ -35,6 +35,7 @@
 @synthesize minValue = _minValue;
 @synthesize coChart = _coChart;
 @synthesize axisCalc = _axisCalc;
+@synthesize stickAlignType = _stickAlignType;
 
 - (void)initProperty {
     //初始化父类的熟悉
@@ -53,6 +54,7 @@
     self.stickData = nil;
     self.coChart = nil;
     self.axisCalc = 1;
+    self.stickAlignType =CCSStickAlignTypeCenter;
 }
 
 - (void)dealloc {
@@ -219,6 +221,113 @@
             [TitleX addObject:[NSString stringWithFormat:@"%@", chartdata.date]];
         }
     self.longitudeTitles = TitleX;
+}
+
+- (void)drawLongitudeLines:(CGRect)rect {
+    if (self.displayLongitude == NO) {
+        return;
+    }
+    
+    if ([self.longitudeTitles count] <= 0) {
+        return;
+    }
+    
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSetLineWidth(context, 0.5f);
+    CGContextSetStrokeColorWithColor(context, self.longitudeColor.CGColor);
+    CGContextSetFillColorWithColor(context, self.longitudeFontColor.CGColor);
+    
+    //设置线条为点线
+    if (self.dashLongitude) {
+        CGFloat lengths[] = {3.0, 3.0};
+        CGContextSetLineDash(context, 0.0, lengths, 2);
+    }
+    
+    CGFloat postOffset,offset;
+    CGFloat stickWidth = ([self dataQuadrantPaddingWidth:rect] / self.maxSticksNum);
+    if (self.stickAlignType == CCSStickAlignTypeCenter) {
+        postOffset= ([self dataQuadrantPaddingWidth:rect] - stickWidth) / ([self.longitudeTitles count] - 1);
+        offset = [self dataQuadrantPaddingStartX:rect] + stickWidth/2;
+    }else{
+        postOffset= [self dataQuadrantPaddingWidth:rect] / ([self.longitudeTitles count] - 1);
+        offset = [self dataQuadrantPaddingStartX:rect];
+    }
+    
+    for (NSUInteger i = 0; i < [self.longitudeTitles count]; i++) {
+        CGContextMoveToPoint(context, offset + i * postOffset, [self dataQuadrantStartY:rect]);
+        CGContextAddLineToPoint(context, offset + i * postOffset, [self dataQuadrantEndY:rect]);
+    }
+    
+    CGContextStrokePath(context);
+    CGContextSetLineDash(context, 0, nil, 0);
+}
+
+- (void)drawXAxisTitles:(CGRect)rect {
+    
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSetLineWidth(context, 0.5f);
+    CGContextSetStrokeColorWithColor(context, self.longitudeColor.CGColor);
+    CGContextSetFillColorWithColor(context, self.longitudeFontColor.CGColor);
+    
+    if (self.displayLongitude == NO) {
+        return;
+    }
+    
+    if (self.displayLongitudeTitle == NO) {
+        return;
+    }
+    
+    if ([self.longitudeTitles count] <= 0) {
+        return;
+    }
+    
+    CGFloat postOffset,offset;
+    CGFloat stickWidth = ([self dataQuadrantPaddingWidth:rect] / self.maxSticksNum);
+    if (self.stickAlignType == CCSStickAlignTypeCenter) {
+        postOffset= ([self dataQuadrantPaddingWidth:rect] - stickWidth) / ([self.longitudeTitles count] - 1);
+        offset = [self dataQuadrantPaddingStartX:rect] + stickWidth/2;
+    }else{
+        postOffset= [self dataQuadrantPaddingWidth:rect] / ([self.longitudeTitles count] - 1);
+        offset = [self dataQuadrantPaddingStartX:rect];
+    }
+    
+    for (NSUInteger i = 0; i < [self.longitudeTitles count]; i++) {
+        CGFloat startY;
+        if (self.axisXPosition == CCSGridChartXAxisPositionBottom) {
+            startY = [self dataQuadrantEndY:rect] + [self axisWidth];
+        }else{
+            startY = [self borderWidth];
+        }
+        
+        NSString *str = (NSString *) [self.longitudeTitles objectAtIndex:i];
+        
+        //调整X轴坐标位置
+        if (i == 0) {
+            [str drawInRect:CGRectMake([self dataQuadrantPaddingStartX:rect], startY, postOffset, self.longitudeFontSize)
+                   withFont:self.longitudeFont
+              lineBreakMode:NSLineBreakByWordWrapping
+                  alignment:NSTextAlignmentLeft];
+            
+        } else if (i == [self.longitudeTitles count] - 1) {
+            if (self.axisYPosition == CCSGridChartYAxisPositionLeft) {
+                [str drawInRect:CGRectMake(rect.size.width - postOffset, startY, postOffset, self.longitudeFontSize)
+                       withFont:self.longitudeFont
+                  lineBreakMode:NSLineBreakByWordWrapping
+                      alignment:NSTextAlignmentRight];
+            } else {
+                [str drawInRect:CGRectMake(offset + (i - 0.5) * postOffset, startY, postOffset, self.longitudeFontSize)
+                       withFont:self.longitudeFont
+                  lineBreakMode:NSLineBreakByWordWrapping
+                      alignment:NSTextAlignmentCenter];
+            }
+            
+        } else {
+            [str drawInRect:CGRectMake(offset + (i - 0.5) * postOffset, startY, postOffset, self.longitudeFontSize)
+                   withFont:self.longitudeFont
+              lineBreakMode:NSLineBreakByWordWrapping
+                  alignment:NSTextAlignmentCenter];
+        }
+    }
 }
 
 - (void)initAxisY {
