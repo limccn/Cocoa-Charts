@@ -48,7 +48,7 @@
     //去除轴对称属性
     self.bollingerBandAlpha = 0.1;
     self.bollingerBandColor = [UIColor yellowColor];
-    self.bollingerBandStyle = CCSBollingerBandStyleLane;
+    self.bollingerBandStyle = CCSBollingerBandStyleBand;
 }
 
 

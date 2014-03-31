@@ -24,6 +24,7 @@
 
 @implementation CCSBandAreaChart
 @synthesize areaAlpha = _areaAlpha;
+@synthesize bandColor = _bandColor;
 
 - (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
@@ -37,7 +38,8 @@
     //初始化父类的熟悉
     [super initProperty];
     //去除轴对称属性
-    self.areaAlpha = 0.2;
+    self.areaAlpha = 0.5;
+    self.bandColor = [UIColor yellowColor];
     self.lineAlignType = CCSLineAlignTypeJustify;
 }
 
@@ -145,28 +147,25 @@
         return;
     }
     
-    //设置线条颜色
-    CGContextSetStrokeColorWithColor(context, [UIColor greenColor].CGColor);
     //获取线条数据
     NSArray *line1Datas = line1.data;
     NSArray *line2Datas = line2.data;
     
     //判断Y轴的位置设置从左往右还是从右往左绘制
     if (self.axisYPosition == CCSGridChartYAxisPositionLeft) {
+        //TODO:自左向右绘图未对应
         // 点线距离
         CGFloat lineLength = ([self dataQuadrantPaddingWidth:rect] / ([line1.data count] - 1));
         //起始点
         startX = [self dataQuadrantPaddingStartX:rect];
         //遍历并绘制线条
-        for (NSUInteger j = 0; j < [line1Datas count]; j++) {
+        for (NSUInteger j = 0; j < ([line1.data count] - 1); j++) {
             CCSLineData *line1Data = [line1Datas objectAtIndex:j];
             CCSLineData *line2Data = [line2Datas objectAtIndex:j];
             
             //获取终点Y坐标
-            CGFloat valueY1 =  [self calcValueY:line1Data.value inRect:rect];
-
-            CGFloat valueY2 =  [self calcValueY:line2Data.value inRect:rect];
-
+            CGFloat valueY1 = [self calcValueY:line1Data.value inRect:rect];
+            CGFloat valueY2 = [self calcValueY:line2Data.value inRect:rect];
             
             //绘制线条路径
             if (j == 0) {
@@ -187,11 +186,51 @@
             startX = startX + lineLength;
         }
     } else {
-        //TODO:自右向左绘图未对应
+        // 点线距离
+        CGFloat lineLength = ([self dataQuadrantPaddingWidth:rect] / ([line1.data count] - 1));
+        //起始点
+        startX = [self dataQuadrantPaddingEndX:rect];
+        
+        //判断点的多少
+        if ([line1Datas count] == 0 || [line2Datas count] == 0) {
+            return;
+        } else if ([line1Datas count] == 1 || [line2Datas count] == 1) {
+            return;
+        } else {
+            //遍历并绘制线条
+            for (NSUInteger j = 0; j < [line1.data count]; j++) {
+                NSUInteger index = [line1.data count] - 1 - j;
+                CCSLineData *line1Data = [line1Datas objectAtIndex:index];
+                CCSLineData *line2Data = [line2Datas objectAtIndex:index];
+                
+                //获取终点Y坐标
+                CGFloat valueY1 = [self calcValueY:line1Data.value inRect:rect];
+                CGFloat valueY2 = [self calcValueY:line2Data.value inRect:rect];
+                //绘制线条路径
+                if (index == [line1.data count] - 1) {
+                    CGContextMoveToPoint(context, startX, valueY1);
+                    CGContextAddLineToPoint(context, startX, valueY2);
+                    CGContextMoveToPoint(context, startX, valueY1);
+                } else {
+                    CGContextAddLineToPoint(context, startX, valueY1);
+                    CGContextAddLineToPoint(context, startX, valueY2);
+                    CGContextAddLineToPoint(context, lastX, lastY);
+                    
+                    CGContextClosePath(context);
+                    CGContextMoveToPoint(context, startX, valueY1);
+                }
+                
+                lastX = startX;
+                lastY = valueY2;
+                //X位移
+                startX = startX - lineLength;
+            }
+        }
     }
+
     CGContextClosePath(context);
     CGContextSetAlpha(context, self.areaAlpha);
-    CGContextSetFillColorWithColor(context, [UIColor yellowColor].CGColor);
+    CGContextSetFillColorWithColor(context, self.bandColor.CGColor);
     CGContextFillPath(context);
     
 }

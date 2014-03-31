@@ -22,8 +22,10 @@
 
 @interface CCSBandAreaChart : CCSLineChart {
     CGFloat _areaAlpha;
+    UIColor *_bandColor;
 }
 
 @property(assign, nonatomic) CGFloat areaAlpha;
+@property(retain, nonatomic) UIColor *bandColor;
 
 @end
