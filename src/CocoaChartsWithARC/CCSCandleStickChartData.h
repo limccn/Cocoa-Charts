@@ -32,11 +32,11 @@
  保存蜡烛线表示用的OHLC四个值的实体对象
  */
 @interface CCSCandleStickChartData : CCSBaseData {
-    float _open;
-    float _high;
-    float _low;
-    float _close;
-    float _change;
+    CCFloat _open;
+    CCFloat _high;
+    CCFloat _low;
+    CCFloat _close;
+    CCFloat _change;
     NSString *_date;
 }
 
@@ -45,35 +45,35 @@
  始値
  开盘价
  */
-@property(assign, nonatomic) float open;
+@property(assign, nonatomic) CCFloat open;
 
 /*!
  High Value
  高値
  最高价
  */
-@property(assign, nonatomic) float high;
+@property(assign, nonatomic) CCFloat high;
 
 /*!
  Low Value
  低値
  最低价
  */
-@property(assign, nonatomic) float low;
+@property(assign, nonatomic) CCFloat low;
 
 /*!
  Close Value
  終値
  收盘价
  */
-@property(assign, nonatomic) float close;
+@property(assign, nonatomic) CCFloat close;
 
 /*!
  Change
  変動値
  涨跌数
  */
-@property(assign, nonatomic) float change;
+@property(assign, nonatomic) CCFloat change;
 
 /*!
  Date
@@ -112,6 +112,6 @@
  初期化完成对象
  
  */
-- (id)initWithOpen:(float)open high:(float)high low:(float)low close:(float)close date:(NSString *)date;
+- (id)initWithOpen:(CCFloat)open high:(CCFloat)high low:(CCFloat)low close:(CCFloat)close date:(NSString *)date;
 
 @end

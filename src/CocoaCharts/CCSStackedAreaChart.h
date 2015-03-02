@@ -21,9 +21,9 @@
 #import "CCSLineChart.h"
 
 @interface CCSStackedAreaChart : CCSLineChart {
-    CGFloat _areaAlpha;
+    CCFloat _areaAlpha;
 }
 
-@property(assign, nonatomic) CGFloat areaAlpha;
+@property(assign, nonatomic) CCFloat areaAlpha;
 
 @end

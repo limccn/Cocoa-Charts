@@ -9,9 +9,9 @@
 #import "CCSLineChart.h"
 
 @interface CCSBandAreaChart : CCSLineChart {
-    CGFloat _areaAlpha;
+    CCFloat _areaAlpha;
 }
 
-@property(assign, nonatomic) CGFloat areaAlpha;
+@property(assign, nonatomic) CCFloat areaAlpha;
 
 @end

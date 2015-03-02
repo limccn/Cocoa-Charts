@@ -21,11 +21,11 @@
 #import "CCSLineChart.h"
 
 @interface CCSBandAreaChart : CCSLineChart {
-    CGFloat _areaAlpha;
+    CCFloat _areaAlpha;
     UIColor *_bandColor;
 }
 
-@property(assign, nonatomic) CGFloat areaAlpha;
+@property(assign, nonatomic) CCFloat areaAlpha;
 @property(retain, nonatomic) UIColor *bandColor;
 
 @end

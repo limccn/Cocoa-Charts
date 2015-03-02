@@ -25,7 +25,6 @@
 		A69DD0B8174CCB870012B2A0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A69DD0B7174CCB870012B2A0 /* UIKit.framework */; };
 		A69DD0BA174CCB870012B2A0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A69DD0B9174CCB870012B2A0 /* Foundation.framework */; };
 		A69DD0BC174CCB870012B2A0 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A69DD0BB174CCB870012B2A0 /* CoreGraphics.framework */; };
-		A69DD0DC174CCB880012B2A0 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A69DD0DB174CCB880012B2A0 /* SenTestingKit.framework */; };
 		A69DD0DD174CCB880012B2A0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A69DD0B7174CCB870012B2A0 /* UIKit.framework */; };
 		A69DD0DE174CCB880012B2A0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A69DD0B9174CCB870012B2A0 /* Foundation.framework */; };
 		A69DD141174CCC6C0012B2A0 /* CCSAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A69DD0F4174CCC6C0012B2A0 /* CCSAppDelegate.m */; };
@@ -261,6 +260,7 @@
 /* Begin PBXFileReference section */
 		3BB5DEF018C960AF00288894 /* CCSStringUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSStringUtils.h; sourceTree = "<group>"; };
 		3BB5DEF118C960AF00288894 /* CCSStringUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSStringUtils.m; sourceTree = "<group>"; };
+		3BFA651B1AA3F804009897C9 /* CCSHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CCSHeader.h; sourceTree = "<group>"; };
 		A63AD43A1831F641007A0C07 /* CCSMinusStickChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSMinusStickChart.h; sourceTree = "<group>"; };
 		A63AD43B1831F641007A0C07 /* CCSMinusStickChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSMinusStickChart.m; sourceTree = "<group>"; };
 		A63AD43D1831F6CC007A0C07 /* CCSMinusStickChartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSMinusStickChartViewController.h; sourceTree = "<group>"; };
@@ -293,8 +293,7 @@
 		A69DD0B7174CCB870012B2A0 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		A69DD0B9174CCB870012B2A0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		A69DD0BB174CCB870012B2A0 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		A69DD0DA174CCB880012B2A0 /* CocoaChartsSampleTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CocoaChartsSampleTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
-		A69DD0DB174CCB880012B2A0 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		A69DD0DA174CCB880012B2A0 /* CocoaChartsSampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CocoaChartsSampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A69DD0F3174CCC6C0012B2A0 /* CCSAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSAppDelegate.h; sourceTree = "<group>"; };
 		A69DD0F4174CCC6C0012B2A0 /* CCSAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSAppDelegate.m; sourceTree = "<group>"; };
 		A69DD0F5174CCC6C0012B2A0 /* CCSCandleStickChartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSCandleStickChartViewController.h; sourceTree = "<group>"; };
@@ -590,7 +589,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A69DD0DC174CCB880012B2A0 /* SenTestingKit.framework in Frameworks */,
 				A69DD0DD174CCB880012B2A0 /* UIKit.framework in Frameworks */,
 				A69DD0DE174CCB880012B2A0 /* Foundation.framework in Frameworks */,
 			);
@@ -616,7 +614,7 @@
 			isa = PBXGroup;
 			children = (
 				A69DD0B4174CCB870012B2A0 /* CocoaChartsSample.app */,
-				A69DD0DA174CCB880012B2A0 /* CocoaChartsSampleTests.octest */,
+				A69DD0DA174CCB880012B2A0 /* CocoaChartsSampleTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -627,7 +625,6 @@
 				A69DD0B7174CCB870012B2A0 /* UIKit.framework */,
 				A69DD0B9174CCB870012B2A0 /* Foundation.framework */,
 				A69DD0BB174CCB870012B2A0 /* CoreGraphics.framework */,
-				A69DD0DB174CCB880012B2A0 /* SenTestingKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -797,6 +794,7 @@
 				A69DD190174CCCCE0012B2A0 /* CCSTitleValues.m */,
 				A69DD191174CCCCE0012B2A0 /* CCSTitleValuesColor.h */,
 				A69DD192174CCCCE0012B2A0 /* CCSTitleValuesColor.m */,
+				3BFA651B1AA3F804009897C9 /* CCSHeader.h */,
 			);
 			name = CocoaCharts;
 			path = ../CocoaCharts;
@@ -1052,8 +1050,8 @@
 			);
 			name = CocoaChartsSampleTests;
 			productName = CocoaChartsSampleTests;
-			productReference = A69DD0DA174CCB880012B2A0 /* CocoaChartsSampleTests.octest */;
-			productType = "com.apple.product-type.bundle";
+			productReference = A69DD0DA174CCB880012B2A0 /* CocoaChartsSampleTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -1062,7 +1060,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = CCS;
-				LastTestingUpgradeCheck = 0510;
+				LastTestingUpgradeCheck = 0610;
 				LastUpgradeCheck = 0460;
 				ORGANIZATIONNAME = limc;
 			};
@@ -1420,7 +1418,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 			};
@@ -1444,7 +1442,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -1457,7 +1455,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CocoaChartsSample/CocoaChartsSample-Prefix.pch";
 				INFOPLIST_FILE = "CocoaChartsSample/CocoaChartsSample-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = CocoaChartsSample;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1471,7 +1469,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CocoaChartsSample/CocoaChartsSample-Prefix.pch";
 				INFOPLIST_FILE = "CocoaChartsSample/CocoaChartsSample-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = CocoaChartsSample;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1486,13 +1484,13 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
 					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+					"$(inherited)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CocoaChartsSample/CocoaChartsSample-Prefix.pch";
 				INFOPLIST_FILE = "CocoaChartsSampleTests/CocoaChartsSampleTests-Info.plist";
 				PRODUCT_NAME = CocoaChartsSampleTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = octest;
 			};
 			name = Debug;
 		};
@@ -1503,13 +1501,13 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
 					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+					"$(inherited)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CocoaChartsSample/CocoaChartsSample-Prefix.pch";
 				INFOPLIST_FILE = "CocoaChartsSampleTests/CocoaChartsSampleTests-Info.plist";
 				PRODUCT_NAME = CocoaChartsSampleTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = octest;
 			};
 			name = Release;
 		};

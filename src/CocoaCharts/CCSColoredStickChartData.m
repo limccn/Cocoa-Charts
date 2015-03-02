@@ -33,7 +33,7 @@
     return self;
 }
 
-- (id)initWithHigh:(CGFloat)high low:(CGFloat)low date:(NSString *)date color:(UIColor *)color {
+- (id)initWithHigh:(CCFloat)high low:(CCFloat)low date:(NSString *)date color:(UIColor *)color {
     self = [self init];
 
     if (self) {
@@ -46,7 +46,7 @@
     return self;
 }
 
-- (id)initWithHigh:(CGFloat)high low:(CGFloat)low date:(NSString *)date fill:(UIColor *)fill border:(UIColor *)border {
+- (id)initWithHigh:(CCFloat)high low:(CCFloat)low date:(NSString *)date fill:(UIColor *)fill border:(UIColor *)border {
     self = [self init];
 
     if (self) {

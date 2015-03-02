@@ -238,10 +238,10 @@
         CGContextSetLineDash(context, 0.0, lengths, 2);
     }
     
-    CGFloat postOffset = [self dataQuadrantPaddingHeight:rect] / ([self.latitudeTitles count] - 1);
-    CGFloat offset = [self dataQuadrantPaddingEndY:rect];
+    CCFloat postOffset = [self dataQuadrantPaddingHeight:rect] / ([self.latitudeTitles count] - 1);
+    CCFloat offset = [self dataQuadrantPaddingEndY:rect];
     
-    for (NSUInteger i = 0; i < [self.latitudeTitles count]; i++) {
+    for (CCUInt i = 0; i < [self.latitudeTitles count]; i++) {
         CGContextMoveToPoint(context,[self dataQuadrantStartX:rect], offset - i * postOffset);
         CGContextAddLineToPoint(context, [self dataQuadrantEndX:rect], offset - i * postOffset);
     }
@@ -268,11 +268,11 @@
     CGContextSetStrokeColorWithColor(context, self.latitudeColor.CGColor);
     CGContextSetFillColorWithColor(context, self.latitudeFontColor.CGColor);
     
-    CGFloat postOffset = [self dataQuadrantPaddingHeight:rect] / ([self.latitudeTitles count] - 1);
-    CGFloat offset = [self dataQuadrantPaddingEndY:rect];
+    CCFloat postOffset = [self dataQuadrantPaddingHeight:rect] / ([self.latitudeTitles count] - 1);
+    CCFloat offset = [self dataQuadrantPaddingEndY:rect];
     
-    for (NSUInteger i = 0; i < [self.latitudeTitles count]; i++) {
-        CGFloat startX;
+    for (CCUInt i = 0; i < [self.latitudeTitles count]; i++) {
+        CCFloat startX;
         NSInteger alignment;
         // 绘制线条
         if (self.axisYPosition == CCSGridChartYAxisPositionLeft) {
@@ -292,22 +292,46 @@
         
         //调整Y轴坐标位置
         if (i == 0) {
-            [str drawInRect:CGRectMake(startX, offset - i * postOffset - self.latitudeFontSize, [self axisYTitleQuadrantWidth], self.latitudeFontSize)
-                   withFont:self.latitudeFont
-              lineBreakMode:NSLineBreakByWordWrapping
-                  alignment:alignment];
+//            [str drawInRect:CGRectMake(startX, offset - i * postOffset - self.latitudeFontSize, [self axisYTitleQuadrantWidth], self.latitudeFontSize)
+//                   withFont:self.latitudeFont
+//              lineBreakMode:NSLineBreakByWordWrapping
+//                  alignment:alignment];
+            
+            CGRect textRect= CGRectMake(startX, offset - i * postOffset - self.latitudeFontSize, [self axisYTitleQuadrantWidth], self.latitudeFontSize);
+            UIFont *textFont= self.latitudeFont; //设置字体
+            NSMutableParagraphStyle *textStyle=[[[NSMutableParagraphStyle alloc]init]autorelease];//段落样式
+            textStyle.alignment=alignment;
+            textStyle.lineBreakMode = NSLineBreakByWordWrapping;
+            //绘制字体
+            [str drawInRect:textRect withAttributes:@{NSFontAttributeName:textFont,NSParagraphStyleAttributeName:textStyle}];
             
         } else if (i == [self.latitudeTitles count] - 1) {
-            [str drawInRect:CGRectMake(startX, offset - i * postOffset, [self axisYTitleQuadrantWidth], self.latitudeFontSize)
-                   withFont:self.latitudeFont
-              lineBreakMode:NSLineBreakByWordWrapping
-                  alignment:alignment];
+//            [str drawInRect:CGRectMake(startX, offset - i * postOffset, [self axisYTitleQuadrantWidth], self.latitudeFontSize)
+//                   withFont:self.latitudeFont
+//              lineBreakMode:NSLineBreakByWordWrapping
+//                  alignment:alignment];
+            
+            CGRect textRect= CGRectMake(startX, offset - i * postOffset, [self axisYTitleQuadrantWidth], self.latitudeFontSize);
+            UIFont *textFont= self.latitudeFont; //设置字体
+            NSMutableParagraphStyle *textStyle=[[[NSMutableParagraphStyle alloc]init]autorelease];//段落样式
+            textStyle.alignment=alignment;
+            textStyle.lineBreakMode = NSLineBreakByWordWrapping;
+            //绘制字体
+            [str drawInRect:textRect withAttributes:@{NSFontAttributeName:textFont,NSParagraphStyleAttributeName:textStyle}];
             
         } else {
-            [str drawInRect:CGRectMake(startX, offset - i * postOffset - self.latitudeFontSize / 2.0, [self axisYTitleQuadrantWidth], self.latitudeFontSize)
-                   withFont:self.latitudeFont
-              lineBreakMode:NSLineBreakByWordWrapping
-                  alignment:alignment];
+//            [str drawInRect:CGRectMake(startX, offset - i * postOffset - self.latitudeFontSize / 2.0, [self axisYTitleQuadrantWidth], self.latitudeFontSize)
+//                   withFont:self.latitudeFont
+//              lineBreakMode:NSLineBreakByWordWrapping
+//                  alignment:alignment];
+            
+            CGRect textRect= CGRectMake(startX, offset - i * postOffset - self.latitudeFontSize / 2.0, [self axisYTitleQuadrantWidth], self.latitudeFontSize);
+            UIFont *textFont= self.latitudeFont; //设置字体
+            NSMutableParagraphStyle *textStyle=[[[NSMutableParagraphStyle alloc]init]autorelease];//段落样式
+            textStyle.alignment=alignment;
+            textStyle.lineBreakMode = NSLineBreakByWordWrapping;
+            //绘制字体
+            [str drawInRect:textRect withAttributes:@{NSFontAttributeName:textFont,NSParagraphStyleAttributeName:textStyle}];
         }
     }
 }
@@ -332,10 +356,10 @@
         CGContextSetLineDash(context, 0.0, lengths, 2);
     }
     
-    CGFloat postOffset= [self dataQuadrantPaddingWidth:rect] / ([self.longitudeTitles count] - 1);
-    CGFloat offset = [self dataQuadrantPaddingStartX:rect];
+    CCFloat postOffset= [self dataQuadrantPaddingWidth:rect] / ([self.longitudeTitles count] - 1);
+    CCFloat offset = [self dataQuadrantPaddingStartX:rect];
     
-    for (NSUInteger i = 0; i < [self.longitudeTitles count]; i++) {
+    for (CCUInt i = 0; i < [self.longitudeTitles count]; i++) {
         CGContextMoveToPoint(context, offset + i * postOffset, [self dataQuadrantStartY:rect]);
         CGContextAddLineToPoint(context, offset + i * postOffset, [self dataQuadrantEndY:rect]);
     }
@@ -363,11 +387,11 @@
         return;
     }
     
-    CGFloat postOffset= [self dataQuadrantPaddingWidth:rect] / ([self.longitudeTitles count] - 1);
-    CGFloat offset = [self dataQuadrantPaddingStartX:rect];
+    CCFloat postOffset= [self dataQuadrantPaddingWidth:rect] / ([self.longitudeTitles count] - 1);
+    CCFloat offset = [self dataQuadrantPaddingStartX:rect];
     
-    for (NSUInteger i = 0; i < [self.longitudeTitles count]; i++) {
-        CGFloat startY;
+    for (CCUInt i = 0; i < [self.longitudeTitles count]; i++) {
+        CCFloat startY;
         if (self.axisXPosition == CCSGridChartXAxisPositionBottom) {
             startY = [self dataQuadrantEndY:rect] + [self axisWidth];
         }else{
@@ -378,29 +402,62 @@
         
         //调整X轴坐标位置
         if (i == 0) {
-            [str drawInRect:CGRectMake([self dataQuadrantPaddingStartX:rect], startY, postOffset, self.longitudeFontSize)
-                   withFont:self.longitudeFont
-              lineBreakMode:NSLineBreakByWordWrapping
-                  alignment:NSTextAlignmentLeft];
+//            [str drawInRect:CGRectMake([self dataQuadrantPaddingStartX:rect], startY, postOffset, self.longitudeFontSize)
+//                   withFont:self.longitudeFont
+//              lineBreakMode:NSLineBreakByWordWrapping
+//                  alignment:NSTextAlignmentLeft];
+            
+            CGRect textRect= CGRectMake([self dataQuadrantPaddingStartX:rect], startY, postOffset, self.longitudeFontSize);
+            UIFont *textFont= self.longitudeFont; //设置字体
+            NSMutableParagraphStyle *textStyle=[[[NSMutableParagraphStyle alloc]init]autorelease];//段落样式
+            textStyle.alignment=NSTextAlignmentLeft;
+            textStyle.lineBreakMode = NSLineBreakByWordWrapping;
+            //绘制字体
+            [str drawInRect:textRect withAttributes:@{NSFontAttributeName:textFont,NSParagraphStyleAttributeName:textStyle}];
             
         } else if (i == [self.longitudeTitles count] - 1) {
             if (self.axisYPosition == CCSGridChartYAxisPositionLeft) {
-                [str drawInRect:CGRectMake(rect.size.width - postOffset, startY, postOffset, self.longitudeFontSize)
-                       withFont:self.longitudeFont
-                  lineBreakMode:NSLineBreakByWordWrapping
-                      alignment:NSTextAlignmentRight];
+//                [str drawInRect:CGRectMake(rect.size.width - postOffset, startY, postOffset, self.longitudeFontSize)
+//                       withFont:self.longitudeFont
+//                  lineBreakMode:NSLineBreakByWordWrapping
+//                      alignment:NSTextAlignmentRight];
+                
+                CGRect textRect= CGRectMake(rect.size.width - postOffset, startY, postOffset, self.longitudeFontSize);
+                UIFont *textFont= self.longitudeFont; //设置字体
+                NSMutableParagraphStyle *textStyle=[[[NSMutableParagraphStyle alloc]init]autorelease];//段落样式
+                textStyle.alignment=NSTextAlignmentRight;
+                textStyle.lineBreakMode = NSLineBreakByWordWrapping;
+                //绘制字体
+                [str drawInRect:textRect withAttributes:@{NSFontAttributeName:textFont,NSParagraphStyleAttributeName:textStyle}];
+                
             } else {
-                [str drawInRect:CGRectMake(offset + (i - 0.5) * postOffset, startY, postOffset, self.longitudeFontSize)
-                       withFont:self.longitudeFont
-                  lineBreakMode:NSLineBreakByWordWrapping
-                      alignment:NSTextAlignmentCenter];
+//                [str drawInRect:CGRectMake(offset + (i - 0.5) * postOffset, startY, postOffset, self.longitudeFontSize)
+//                       withFont:self.longitudeFont
+//                  lineBreakMode:NSLineBreakByWordWrapping
+//                      alignment:NSTextAlignmentCenter];
+                
+                CGRect textRect= CGRectMake(offset + (i - 0.5) * postOffset, startY, postOffset, self.longitudeFontSize);
+                UIFont *textFont= self.longitudeFont; //设置字体
+                NSMutableParagraphStyle *textStyle=[[[NSMutableParagraphStyle alloc]init]autorelease];//段落样式
+                textStyle.alignment=NSTextAlignmentCenter;
+                textStyle.lineBreakMode = NSLineBreakByWordWrapping;
+                //绘制字体
+                [str drawInRect:textRect withAttributes:@{NSFontAttributeName:textFont,NSParagraphStyleAttributeName:textStyle}];
             }
             
         } else {
-            [str drawInRect:CGRectMake(offset + (i - 0.5) * postOffset, startY, postOffset, self.longitudeFontSize)
-                   withFont:self.longitudeFont
-              lineBreakMode:NSLineBreakByWordWrapping
-                  alignment:NSTextAlignmentCenter];
+//            [str drawInRect:CGRectMake(offset + (i - 0.5) * postOffset, startY, postOffset, self.longitudeFontSize)
+//                   withFont:self.longitudeFont
+//              lineBreakMode:NSLineBreakByWordWrapping
+//                  alignment:NSTextAlignmentCenter];
+            
+            CGRect textRect= CGRectMake(offset + (i - 0.5) * postOffset, startY, postOffset, self.longitudeFontSize);
+            UIFont *textFont= self.longitudeFont; //设置字体
+            NSMutableParagraphStyle *textStyle=[[[NSMutableParagraphStyle alloc]init]autorelease];//段落样式
+            textStyle.alignment=NSTextAlignmentCenter;
+            textStyle.lineBreakMode = NSLineBreakByWordWrapping;
+            //绘制字体
+            [str drawInRect:textRect withAttributes:@{NSFontAttributeName:textFont,NSParagraphStyleAttributeName:textStyle}];
         }
     }
 }
@@ -475,20 +532,20 @@
 }
 
 
-- (CGFloat)touchPointAxisXValue:(CGRect)rect {
-    CGFloat length = [self dataQuadrantPaddingWidth:rect];
-    CGFloat valueLength = self.singleTouchPoint.x - [self dataQuadrantPaddingStartX:rect];;
+- (CCFloat)touchPointAxisXValue:(CGRect)rect {
+    CCFloat length = [self dataQuadrantPaddingWidth:rect];
+    CCFloat valueLength = self.singleTouchPoint.x - [self dataQuadrantPaddingStartX:rect];;
     return valueLength / length;
 }
 
-- (CGFloat)touchPointAxisYValue:(CGRect)rect {
-    CGFloat length = [self dataQuadrantPaddingHeight:rect];
-    CGFloat valueLength = length - self.singleTouchPoint.y + [self dataQuadrantPaddingStartY:rect];
+- (CCFloat)touchPointAxisYValue:(CGRect)rect {
+    CCFloat length = [self dataQuadrantPaddingHeight:rect];
+    CCFloat valueLength = length - self.singleTouchPoint.y + [self dataQuadrantPaddingStartY:rect];
     return valueLength / length;
 }
 
-CGFloat _startDistance = 0;
-CGFloat _minDistance = 8;
+CCFloat _startDistance = 0;
+CCFloat _minDistance = 8;
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     //调用父类的触摸事件
@@ -529,7 +586,7 @@ CGFloat _minDistance = 8;
         CGPoint pt1 = [[allTouches objectAtIndex:0] locationInView:self];
         CGPoint pt2 = [[allTouches objectAtIndex:1] locationInView:self];
 
-        CGFloat endDistance = fabsf(pt1.x - pt2.x);
+        CCFloat endDistance = fabsf(pt1.x - pt2.x);
         //放大
         if (endDistance - _startDistance > _minDistance) {
             [self zoomOut];
@@ -550,17 +607,17 @@ CGFloat _minDistance = 8;
 }
 
 
-- (CGFloat) dataQuadrantWidth:(CGRect)rect{
+- (CCFloat) dataQuadrantWidth:(CGRect)rect{
     return rect.size.width - [self axisYTitleQuadrantWidth] - 2 * [self borderWidth]
             - [self axisWidth];
 }
 
-- (CGFloat) dataQuadrantHeight:(CGRect)rect{
+- (CCFloat) dataQuadrantHeight:(CGRect)rect{
     return rect.size.height - [self axisXTitleQuadrantHeight] - 2 * [self borderWidth]
             - [self axisWidth];
 }
 
-- (CGFloat) dataQuadrantStartX:(CGRect)rect{
+- (CCFloat) dataQuadrantStartX:(CGRect)rect{
     if ([self axisYPosition] == CCSGridChartYAxisPositionLeft) {
         return [self borderWidth] + [self axisYTitleQuadrantWidth] + [self axisWidth];
     } else {
@@ -568,11 +625,11 @@ CGFloat _minDistance = 8;
     }
 }
 
-- (CGFloat) dataQuadrantPaddingStartX:(CGRect)rect{
+- (CCFloat) dataQuadrantPaddingStartX:(CGRect)rect{
     return [self dataQuadrantStartX:rect] + [self dataQuadrantPaddingLeft];
 }
 
-- (CGFloat) dataQuadrantEndX:(CGRect)rect{
+- (CCFloat) dataQuadrantEndX:(CGRect)rect{
     if ([self axisYPosition] == CCSGridChartYAxisPositionLeft) {
         return rect.size.width - [self borderWidth];
     } else {
@@ -581,11 +638,11 @@ CGFloat _minDistance = 8;
     }
 }
 
-- (CGFloat) dataQuadrantPaddingEndX:(CGRect)rect{
+- (CCFloat) dataQuadrantPaddingEndX:(CGRect)rect{
     return [self dataQuadrantEndX:rect] - [self dataQuadrantPaddingRight];
 }
 
-- (CGFloat) dataQuadrantStartY:(CGRect)rect{
+- (CCFloat) dataQuadrantStartY:(CGRect)rect{
     if ([self axisXPosition] == CCSGridChartXAxisPositionBottom) {
         return [self borderWidth];
     }else{
@@ -593,11 +650,11 @@ CGFloat _minDistance = 8;
     }
 }
 
-- (CGFloat) dataQuadrantPaddingStartY:(CGRect)rect{
+- (CCFloat) dataQuadrantPaddingStartY:(CGRect)rect{
     return [self dataQuadrantStartY:rect] + [self dataQuadrantPaddingTop];
 }
 
-- (CGFloat) dataQuadrantEndY:(CGRect)rect{
+- (CCFloat) dataQuadrantEndY:(CGRect)rect{
     if ([self axisXPosition] == CCSGridChartXAxisPositionBottom) {
         return rect.size.height - [self borderWidth] - [self axisXTitleQuadrantHeight]
             - [self axisWidth];
@@ -606,16 +663,16 @@ CGFloat _minDistance = 8;
     }
 }
 
-- (CGFloat) dataQuadrantPaddingEndY:(CGRect)rect{
+- (CCFloat) dataQuadrantPaddingEndY:(CGRect)rect{
     return [self dataQuadrantEndY:rect] - [self dataQuadrantPaddingBottom];
 }
 
-- (CGFloat) dataQuadrantPaddingWidth:(CGRect)rect{
+- (CCFloat) dataQuadrantPaddingWidth:(CGRect)rect{
     return [self dataQuadrantWidth:rect] - [self dataQuadrantPaddingLeft]
             - [self dataQuadrantPaddingRight];
 }
 
-- (CGFloat) dataQuadrantPaddingHeight:(CGRect)rect{
+- (CCFloat) dataQuadrantPaddingHeight:(CGRect)rect{
     return [self dataQuadrantHeight:rect] - [self dataQuadrantPaddingTop]
             - [self dataQuadrantPaddingBottom];
 }
@@ -648,48 +705,48 @@ CGFloat _minDistance = 8;
 }
 
 
-- (void) setAxisMarginLeft:(CGFloat)val{
+- (void) setAxisMarginLeft:(CCFloat)val{
     self.axisYTitleQuadrantWidth = val;
 }
 
-- (CGFloat) getAxisMarginLeft {
+- (CCFloat) getAxisMarginLeft {
     return [self axisYTitleQuadrantWidth];
 }
 
-- (void) setAxisMarginRight:(CGFloat)val{
+- (void) setAxisMarginRight:(CCFloat)val{
     self.dataQuadrantPaddingLeft = val;
     self.dataQuadrantPaddingRight = val;
 }
 
-- (CGFloat) getAxisMarginRight {
+- (CCFloat) getAxisMarginRight {
     return [self dataQuadrantPaddingLeft];
 }
 
-- (void) setAxisMarginBottom:(CGFloat)val{
+- (void) setAxisMarginBottom:(CCFloat)val{
     self.axisXTitleQuadrantHeight = val;
 }
 
-- (CGFloat) getAxisMarginBottom {
+- (CCFloat) getAxisMarginBottom {
     return [self axisXTitleQuadrantHeight];
 }
 
-- (void) setAxisMarginTop:(CGFloat)val{
+- (void) setAxisMarginTop:(CCFloat)val{
     self.dataQuadrantPaddingTop = val;
     self.dataQuadrantPaddingBottom = val;
 }
 
-- (CGFloat) getAxisMarginTop {
+- (CCFloat) getAxisMarginTop {
     return [self dataQuadrantPaddingTop];
 }
 
-- (void) setDataQuadrantPadding:(CGFloat)val {
+- (void) setDataQuadrantPadding:(CCFloat)val {
     self.dataQuadrantPaddingTop = val;
     self.dataQuadrantPaddingBottom = val;
     self.dataQuadrantPaddingLeft = val;
     self.dataQuadrantPaddingRight = val;
 }
 
-- (CGFloat) getDataQuadrantPadding {
+- (CCFloat) getDataQuadrantPadding {
     return MAX(MAX([self dataQuadrantPaddingTop],[self dataQuadrantPaddingBottom]),MAX([self dataQuadrantPaddingLeft],[self dataQuadrantPaddingRight]));
 }
 

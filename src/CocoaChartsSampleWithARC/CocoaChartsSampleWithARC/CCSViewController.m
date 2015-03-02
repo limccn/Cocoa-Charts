@@ -59,7 +59,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
 
-    self.title = @"Cocoa-Charts v0.2";
+    self.title = @"Cocoa-Charts v0.21";
     self.navigationController.navigationBarHidden = NO;
 }
 

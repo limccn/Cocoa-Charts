@@ -23,8 +23,8 @@
 
 @protocol CCSChartDelegate <NSObject>
 @optional
-- (void)CCSChartBeTouchedOn:(CGPoint)point indexAt:(NSUInteger) index;
-- (void)CCSChartDisplayChangedFrom:(NSUInteger)from number:(NSUInteger) number;
+- (void)CCSChartBeTouchedOn:(CGPoint)point indexAt:(CCUInt) index;
+- (void)CCSChartDisplayChangedFrom:(CCUInt)from number:(CCUInt) number;
 @end
 
 /*!
@@ -74,20 +74,20 @@ typedef enum {
     UIColor *_crossLinesFontColor;
     UIFont *_longitudeFont;
     UIFont *_latitudeFont;
-//    CGFloat _axisMarginLeft;
-//    CGFloat _axisMarginBottom;
-//    CGFloat _axisMarginTop;
-//    CGFloat _axisMarginRight;
-    CGFloat _axisYTitleQuadrantWidth;
-    CGFloat _axisXTitleQuadrantHeight;
-    CGFloat _dataQuadrantPaddingTop;
-    CGFloat _dataQuadrantPaddingLeft;
-    CGFloat _dataQuadrantPaddingBottom;
-    CGFloat _dataQuadrantPaddingRight;
-    CGFloat _axisWidth;
-    CGFloat _borderWidth;
-    NSUInteger _longitudeFontSize;
-    NSUInteger _latitudeFontSize;
+//    CCFloat _axisMarginLeft;
+//    CCFloat _axisMarginBottom;
+//    CCFloat _axisMarginTop;
+//    CCFloat _axisMarginRight;
+    CCFloat _axisYTitleQuadrantWidth;
+    CCFloat _axisXTitleQuadrantHeight;
+    CCFloat _dataQuadrantPaddingTop;
+    CCFloat _dataQuadrantPaddingLeft;
+    CCFloat _dataQuadrantPaddingBottom;
+    CCFloat _dataQuadrantPaddingRight;
+    CCFloat _axisWidth;
+    CCFloat _borderWidth;
+    CCUInt _longitudeFontSize;
+    CCUInt _latitudeFontSize;
     CCSGridChartXAxisPosition _axisXPosition;
     CCSGridChartYAxisPosition _axisYPosition;
     BOOL _displayLatitudeTitle;
@@ -189,51 +189,51 @@ typedef enum {
  轴線より左枠線の距離
  轴线左边距
  */
-@property(assign, nonatomic , setter = setAxisMarginLeft:,getter = getAxisMarginLeft) CGFloat axisMarginLeft;
+@property(assign, nonatomic , setter = setAxisMarginLeft:,getter = getAxisMarginLeft) CCFloat axisMarginLeft;
 
 /*!
  Margin of the axis to the bottom border
  轴線より下枠線の距離
  轴线下边距
  */
-@property(assign, nonatomic, setter = setAxisMarginBottom:,getter = getAxisMarginBottom) CGFloat axisMarginBottom;
+@property(assign, nonatomic, setter = setAxisMarginBottom:,getter = getAxisMarginBottom) CCFloat axisMarginBottom;
 
 /*!
  Margin of the axis to the top border
  轴線より上枠線の距離
  轴线上边距
  */
-@property(assign, nonatomic, setter = setAxisMarginTop:,getter = getAxisMarginTop) CGFloat axisMarginTop;
+@property(assign, nonatomic, setter = setAxisMarginTop:,getter = getAxisMarginTop) CCFloat axisMarginTop;
 
 /*!
  Margin of the axis to the top border
  轴線より右枠線の距離
  轴线右边距
  */
-@property(assign, nonatomic,  setter = setAxisMarginRight:,getter = getAxisMarginRight) CGFloat axisMarginRight;
+@property(assign, nonatomic,  setter = setAxisMarginRight:,getter = getAxisMarginRight) CCFloat axisMarginRight;
 
-@property(assign, nonatomic) CGFloat axisYTitleQuadrantWidth;
-@property(assign, nonatomic) CGFloat axisXTitleQuadrantHeight;
-@property(assign, nonatomic) CGFloat dataQuadrantPaddingTop;
-@property(assign, nonatomic) CGFloat dataQuadrantPaddingLeft;
-@property(assign, nonatomic) CGFloat dataQuadrantPaddingBottom;
-@property(assign, nonatomic) CGFloat dataQuadrantPaddingRight;
-@property(assign, nonatomic) CGFloat axisWidth;
-@property(assign, nonatomic) CGFloat borderWidth;
+@property(assign, nonatomic) CCFloat axisYTitleQuadrantWidth;
+@property(assign, nonatomic) CCFloat axisXTitleQuadrantHeight;
+@property(assign, nonatomic) CCFloat dataQuadrantPaddingTop;
+@property(assign, nonatomic) CCFloat dataQuadrantPaddingLeft;
+@property(assign, nonatomic) CCFloat dataQuadrantPaddingBottom;
+@property(assign, nonatomic) CCFloat dataQuadrantPaddingRight;
+@property(assign, nonatomic) CCFloat axisWidth;
+@property(assign, nonatomic) CCFloat borderWidth;
 
 /*!
  Font size of text for the longitude　degrees display
  経度のタイトルの文字サイズ
  经线刻度字体大小
  */
-@property(assign, nonatomic) NSUInteger longitudeFontSize;
+@property(assign, nonatomic) CCUInt longitudeFontSize;
 
 /*!
  Font size of text for the latitude　degrees display
  緯度のタイトルの文字サイズ
  纬线刻度字体大小
  */
-@property(assign, nonatomic) NSUInteger latitudeFontSize;
+@property(assign, nonatomic) CCUInt latitudeFontSize;
 
 /*!
  The position of X axis(top,bottom) reference:CCSGridChartAxisPosition
@@ -456,12 +456,12 @@ typedef enum {
  グリドのrect
  图表的rect
  
- @result CGFloat the calculated value
+ @result CCFloat the calculated value
  計算出した度数
  经度计算结果
  
  */
-- (CGFloat)touchPointAxisXValue:(CGRect)rect;
+- (CCFloat)touchPointAxisXValue:(CGRect)rect;
 
 /*!
  @abstract calculate the y axis display value of touched point (value:0.0～1.0)
@@ -472,11 +472,11 @@ typedef enum {
  グリドのrect
  图表的rect
  
- @result CGFloat the calculated value
+ @result CCFloat the calculated value
  計算出した度数］
  纬度计算结果
  */
-- (CGFloat)touchPointAxisYValue:(CGRect)rect;
+- (CCFloat)touchPointAxisYValue:(CGRect)rect;
 
 /*!
  @abstract Zoom out the grid
@@ -492,17 +492,17 @@ typedef enum {
  */
 - (void)zoomIn;
 
-- (CGFloat) dataQuadrantWidth:(CGRect)rect;
-- (CGFloat) dataQuadrantHeight:(CGRect)rect;
-- (CGFloat) dataQuadrantStartX:(CGRect)rect;
-- (CGFloat) dataQuadrantPaddingStartX:(CGRect)rect;
-- (CGFloat) dataQuadrantEndX:(CGRect)rect;
-- (CGFloat) dataQuadrantPaddingEndX:(CGRect)rect;
-- (CGFloat) dataQuadrantStartY:(CGRect)rect;
-- (CGFloat) dataQuadrantPaddingStartY:(CGRect)rect;
-- (CGFloat) dataQuadrantEndY:(CGRect)rect;
-- (CGFloat) dataQuadrantPaddingEndY:(CGRect)rect;
-- (CGFloat) dataQuadrantPaddingWidth:(CGRect)rect;
-- (CGFloat) dataQuadrantPaddingHeight:(CGRect)rect;
+- (CCFloat) dataQuadrantWidth:(CGRect)rect;
+- (CCFloat) dataQuadrantHeight:(CGRect)rect;
+- (CCFloat) dataQuadrantStartX:(CGRect)rect;
+- (CCFloat) dataQuadrantPaddingStartX:(CGRect)rect;
+- (CCFloat) dataQuadrantEndX:(CGRect)rect;
+- (CCFloat) dataQuadrantPaddingEndX:(CGRect)rect;
+- (CCFloat) dataQuadrantStartY:(CGRect)rect;
+- (CCFloat) dataQuadrantPaddingStartY:(CGRect)rect;
+- (CCFloat) dataQuadrantEndY:(CGRect)rect;
+- (CCFloat) dataQuadrantPaddingEndY:(CGRect)rect;
+- (CCFloat) dataQuadrantPaddingWidth:(CGRect)rect;
+- (CCFloat) dataQuadrantPaddingHeight:(CGRect)rect;
 
 @end

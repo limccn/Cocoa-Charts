@@ -46,7 +46,7 @@
         return;
     }
     // 蜡烛棒宽度
-    CGFloat stickWidth = ([self dataQuadrantPaddingWidth:rect] / self.displayNumber) - 1;
+    CCFloat stickWidth = ([self dataQuadrantPaddingWidth:rect] / self.displayNumber) - 1;
 
     CGContextRef context = UIGraphicsGetCurrentContext();
 
@@ -55,13 +55,13 @@
 
         if (self.axisYPosition == CCSGridChartYAxisPositionLeft) {
             // 蜡烛棒起始绘制位置
-            CGFloat stickX = [self dataQuadrantPaddingStartX:rect] + 1;
+            CCFloat stickX = [self dataQuadrantPaddingStartX:rect] + 1;
             //判断显示为方柱或显示为线条
-            for (NSUInteger i = self.displayFrom; i < self.displayFrom + self.displayNumber; i++) {
+            for (CCUInt i = self.displayFrom; i < self.displayFrom + self.displayNumber; i++) {
                 CCSColoredStickChartData *stick = [self.stickData objectAtIndex:i];
 
-                CGFloat highY = [self calcValueY:stick.high inRect:rect];
-                CGFloat lowY = [self calcValueY:stick.low inRect:rect];
+                CCFloat highY = [self calcValueY:stick.high inRect:rect];
+                CCFloat lowY = [self calcValueY:stick.low inRect:rect];
 
                 if (stick.high == 0) {
                     //没有值的情况下不绘制
@@ -92,15 +92,15 @@
             }
         } else {
             // 蜡烛棒起始绘制位置
-            CGFloat stickX = [self dataQuadrantPaddingEndX:rect] - 1 - stickWidth;
+            CCFloat stickX = [self dataQuadrantPaddingEndX:rect] - 1 - stickWidth;
             //判断显示为方柱或显示为线条
-            for (NSUInteger i = 0; i < self.displayNumber; i++) {
+            for (CCUInt i = 0; i < self.displayNumber; i++) {
                 //获取index
-                NSUInteger index = self.displayFrom + self.displayNumber - 1 - i;
+                CCUInt index = self.displayFrom + self.displayNumber - 1 - i;
                 CCSColoredStickChartData *stick = [self.stickData objectAtIndex:index];
 
-                CGFloat highY = [self calcValueY:stick.high inRect:rect];
-                CGFloat lowY = [self calcValueY:stick.low inRect:rect];
+                CCFloat highY = [self calcValueY:stick.high inRect:rect];
+                CCFloat lowY = [self calcValueY:stick.low inRect:rect];
                 
                 if (stick.high == 0) {
                     //没有值的情况下不绘制

@@ -37,9 +37,9 @@
     UIColor *_longitudeColor;
     UIColor *_latitudeColor;
     UIColor *_spiderWebFillColor;
-    NSUInteger _longitudeLength;
-    NSUInteger _latitudeNum;
-    NSUInteger _longitudeNum;
+    CCUInt _longitudeLength;
+    CCUInt _latitudeNum;
+    CCUInt _longitudeNum;
     BOOL _displayLatitude;
     BOOL _displayLongitude;
     CGPoint _position;
@@ -83,21 +83,21 @@
  ワッブの半径
  蛛网图经线半径长度
  */
-@property(assign, nonatomic) NSUInteger longitudeLength;
+@property(assign, nonatomic) CCUInt longitudeLength;
 
 /*!
  Numbers of latitude
  緯線数量
  纬线数
  */
-@property(assign, nonatomic) NSUInteger latitudeNum;
+@property(assign, nonatomic) CCUInt latitudeNum;
 
 /*!
  Numbers of longitude
  経線数量
  经线数
  */
-@property(assign, nonatomic) NSUInteger longitudeNum;
+@property(assign, nonatomic) CCUInt longitudeNum;
 
 /*!
  Should display latitude line？

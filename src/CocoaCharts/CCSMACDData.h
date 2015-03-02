@@ -21,17 +21,17 @@
 #import "CCSBaseData.h"
 
 @interface CCSMACDData : CCSBaseData {
-    CGFloat _dea;
-    CGFloat _diff;
-    CGFloat _macd;
+    CCFloat _dea;
+    CCFloat _diff;
+    CCFloat _macd;
     NSString *_date;
 }
 
-@property(assign, nonatomic) CGFloat dea;
-@property(assign, nonatomic) CGFloat diff;
-@property(assign, nonatomic) CGFloat macd;
+@property(assign, nonatomic) CCFloat dea;
+@property(assign, nonatomic) CCFloat diff;
+@property(assign, nonatomic) CCFloat macd;
 @property(retain, nonatomic) NSString *date;
 
-- (id)initWithDea:(CGFloat)dea diff:(CGFloat)diff macd:(CGFloat)macd date:(NSString *)date;
+- (id)initWithDea:(CCFloat)dea diff:(CCFloat)diff macd:(CCFloat)macd date:(NSString *)date;
 
 @end

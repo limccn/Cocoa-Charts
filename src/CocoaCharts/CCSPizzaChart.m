@@ -61,16 +61,16 @@
     CGContextSetStrokeColorWithColor(context, self.circleBorderColor.CGColor);
     
     //获得总数
-    CGFloat sum = 0;
-    for (NSUInteger i = 0; i < [self.data count]; i++) {
+    CCFloat sum = 0;
+    for (CCUInt i = 0; i < [self.data count]; i++) {
         sum = sum + ((CCSTitleValueColor *) [self.data objectAtIndex:i]).value;
     }
     
-    CGFloat offset = 0;
+    CCFloat offset = 0;
     // 遍历每一条数据列表
-    for (NSUInteger j = 0; j < [self.data count]; j++) {
+    for (CCUInt j = 0; j < [self.data count]; j++) {
         
-        NSUInteger index = j + self.selectedIndex;
+        CCUInt index = j + self.selectedIndex;
         index %= ([self.data count]);
         
         CCSTitleValueColor *entity = [self.data objectAtIndex:index];
@@ -79,12 +79,12 @@
         CGContextSetFillColorWithColor(context, entity.color.CGColor);
         
         //角度
-        CGFloat sweep = entity.value * 2 * PI / sum;
+        CCFloat sweep = entity.value * 2 * PI / sum;
         //如果是选中的数据
         if (j == 0) {
             //初始化偏移值
             offset = -0.5f * sweep;
-            CGFloat realOffset;
+            CCFloat realOffset;
             if (offset != -PI / 2 && offset != 0 && offset != -PI) {
                 if (offset > 0) {
                     realOffset = self.offsetLength / sin(offset);
@@ -133,7 +133,7 @@
     }
 }
 
-- (void)selectPartByIndex:(NSUInteger)index {
+- (void)selectPartByIndex:(CCUInt)index {
     //判断是否符合条件
     if (index < [self.data count]) {
         self.selectedIndex = index;

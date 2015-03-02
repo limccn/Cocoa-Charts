@@ -28,8 +28,8 @@
 @property(retain, nonatomic) UIColor *fillColor;
 @property(retain, nonatomic) UIColor *borderColor;
 
-- (id)initWithHigh:(CGFloat)high low:(CGFloat)low date:(NSString *)date color:(UIColor *)color;
+- (id)initWithHigh:(CCFloat)high low:(CCFloat)low date:(NSString *)date color:(UIColor *)color;
 
-- (id)initWithHigh:(CGFloat)high low:(CGFloat)low date:(NSString *)date fill:(UIColor *)fill border:(UIColor *)border;
+- (id)initWithHigh:(CCFloat)high low:(CCFloat)low date:(NSString *)date fill:(UIColor *)fill border:(UIColor *)border;
 
 @end

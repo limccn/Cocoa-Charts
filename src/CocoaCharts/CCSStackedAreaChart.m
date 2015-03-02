@@ -43,18 +43,18 @@
 
 - (void)calcValueRange {
     if (self.linesData != NULL && [self.linesData count] > 0) {
-        double maxValue = 0;
-        double minValue = NSIntegerMax;
+        CCFloat maxValue = 0;
+        CCFloat minValue = CCIntMax;
         
-        for (NSUInteger i = 0; i < [self.linesData count]; i++) {
+        for (CCUInt i = 0; i < [self.linesData count]; i++) {
             CCSTitledLine *line = [self.linesData objectAtIndex:i];
             if (line != NULL && [line.data count] > 0) {
                 //判断显示为方柱或显示为线条
-                for (NSUInteger j = 0; j < [line.data count]; j++) {
+                for (CCUInt j = 0; j < [line.data count]; j++) {
                     
                     CCSLineData *lineData = [line.data objectAtIndex:j];
-                    CGFloat sumValue = lineData.value;
-                    for (NSUInteger k = 0; k < i; k++) {
+                    CCFloat sumValue = lineData.value;
+                    for (CCUInt k = 0; k < i; k++) {
                         CCSTitledLine *preLine = [self.linesData objectAtIndex:k];
                         if (preLine != NULL) {
                             CCSLineData *lineDataForSum = [preLine.data objectAtIndex:j];
@@ -74,19 +74,19 @@
             }
         }
         
-        if ((long) maxValue > (long) minValue) {
+        if ((CCInt) maxValue > (CCInt) minValue) {
             if ((maxValue - minValue) < 10. && minValue > 1.) {
-                self.maxValue = (long) (maxValue + 1);
-                self.minValue = (long) (minValue - 1);
+                self.maxValue = (CCInt) (maxValue + 1);
+                self.minValue = (CCInt) (minValue - 1);
             } else {
-                self.maxValue = (long) (maxValue + (maxValue - minValue) * 0.1);
-                self.minValue = (long) (minValue - (maxValue - minValue) * 0.1);
+                self.maxValue = (CCInt) (maxValue + (maxValue - minValue) * 0.1);
+                self.minValue = (CCInt) (minValue - (maxValue - minValue) * 0.1);
                 
                 if (self.minValue < 0) {
                     self.minValue = 0;
                 }
             }
-        } else if ((long) maxValue == (long) minValue) {
+        } else if ((CCInt) maxValue == (CCInt) minValue) {
             if (maxValue <= 10 && maxValue > 1) {
                 self.maxValue = maxValue + 1;
                 self.minValue = minValue - 1;
@@ -122,7 +122,7 @@
         self.minValue = 0;
     }
     
-    int rate;
+    CCInt rate;
     
     if (self.maxValue < 3000) {
         rate = 1;
@@ -149,14 +149,14 @@
     }
     
     //等分轴修正
-    if (self.latitudeNum > 0 && rate > 1 && (long) (self.minValue) % rate != 0) {
+    if (self.latitudeNum > 0 && rate > 1 && (CCInt) (self.minValue) % rate != 0) {
         //最大值加上轴差
-        self.minValue = (long) self.minValue - ((long) (self.minValue) % rate);
+        self.minValue = (CCInt) self.minValue - ((CCInt) (self.minValue) % rate);
     }
     //等分轴修正
-    if (self.latitudeNum > 0 && (long) (self.maxValue - self.minValue) % (self.latitudeNum * rate) != 0) {
+    if (self.latitudeNum > 0 && (CCInt) (self.maxValue - self.minValue) % (self.latitudeNum * rate) != 0) {
         //最大值加上轴差
-        self.maxValue = (long) self.maxValue + (self.latitudeNum * rate) - ((long) (self.maxValue - self.minValue) % (self.latitudeNum * rate));
+        self.maxValue = (CCInt) self.maxValue + (self.latitudeNum * rate) - ((CCInt) (self.maxValue - self.minValue) % (self.latitudeNum * rate));
     }
 }
 
@@ -169,14 +169,14 @@
         return;
     }
     // 起始位置
-    CGFloat startX;
+    CCFloat startX;
     
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSetLineWidth(context, self.lineWidth);
     CGContextSetAllowsAntialiasing(context, YES);
     
     //逐条输出MA线
-    for (NSInteger i = [self.linesData count] - 1; i >= 0; i--) {
+    for (CCInt i = [self.linesData count] - 1; i >= 0; i--) {
         CCSTitledLine *line = [self.linesData objectAtIndex:i];
         
         if (line== nil) {
@@ -193,15 +193,15 @@
         if (self.axisYPosition == CCSGridChartYAxisPositionLeft) {
             //TODO:自左向右绘图未对应
             // 点线距离
-            CGFloat lineLength = ([self dataQuadrantPaddingWidth:rect] / ([line.data count] - 1));
+            CCFloat lineLength = ([self dataQuadrantPaddingWidth:rect] / ([line.data count] - 1));
             //起始点
             startX = [self dataQuadrantPaddingStartX:rect];
             //遍历并绘制线条
-            for (NSUInteger j = 0; j < [lineDatas count]; j++) {
+            for (CCUInt j = 0; j < [lineDatas count]; j++) {
                 CCSLineData *lineData = [lineDatas objectAtIndex:j];
                 //计算Stack的数据和
-                CGFloat sumValue = lineData.value;
-                for (NSUInteger k = 0; k < i; k++) {
+                CCFloat sumValue = lineData.value;
+                for (CCUInt k = 0; k < i; k++) {
                     CCSTitledLine *preLine = [self.linesData objectAtIndex:k];
                     if (preLine != NULL) {
                         CCSLineData *lineDataForSum = [preLine.data objectAtIndex:j];
@@ -209,7 +209,7 @@
                     }
                 }
                 //获取终点Y坐标
-                CGFloat valueY = [self calcValueY:sumValue inRect:rect];
+                CCFloat valueY = [self calcValueY:sumValue inRect:rect];
                 //绘制线条路径
                 if (j == 0) {
                     CGContextMoveToPoint(context, startX, valueY);
@@ -222,7 +222,7 @@
         } else {
             
             // 点线距离
-            CGFloat lineLength = ([self dataQuadrantPaddingWidth:rect] / ([line.data count] - 1));
+            CCFloat lineLength = ([self dataQuadrantPaddingWidth:rect] / ([line.data count] - 1));
             //起始点
             startX = [self dataQuadrantPaddingEndX:rect];
             
@@ -234,17 +234,17 @@
                 //1根则绘制一条直线
                 CCSLineData *lineData = [lineDatas objectAtIndex:0];
                 //获取终点Y坐标
-                CGFloat valueY = [self calcValueY:lineData.value inRect:rect];
+                CCFloat valueY = [self calcValueY:lineData.value inRect:rect];
                 
                 CGContextMoveToPoint(context, startX, valueY);
                 CGContextAddLineToPoint(context, [self dataQuadrantPaddingStartX:rect], valueY);
                 
             } else {
                 //遍历并绘制线条
-                for (NSInteger j = [lineDatas count] - 1; j >= 0; j--) {
+                for (CCInt j = [lineDatas count] - 1; j >= 0; j--) {
                     CCSLineData *lineData = [lineDatas objectAtIndex:j];
                     //获取终点Y坐标
-                    CGFloat valueY = [self calcValueY:lineData.value inRect:rect];
+                    CCFloat valueY = [self calcValueY:lineData.value inRect:rect];
                     //绘制线条路径
                     if (j == [lineDatas count] - 1) {
                         CGContextMoveToPoint(context, startX, valueY);

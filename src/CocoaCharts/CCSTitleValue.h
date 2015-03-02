@@ -32,7 +32,7 @@
  */
 @interface CCSTitleValue : CCSBaseData {
     NSString *_title;
-    CGFloat _value;
+    CCFloat _value;
 }
 
 /*!
@@ -47,7 +47,7 @@
  値
  数据的值
  */
-@property(assign, nonatomic) CGFloat value;
+@property(assign, nonatomic) CCFloat value;
 
 /*!
  @abstract Initialize This Object
@@ -67,6 +67,6 @@
  初期化完成对象
  
  */
-- (id)initWithTitle:(NSString *)title value:(CGFloat)value;
+- (id)initWithTitle:(NSString *)title value:(CCFloat)value;
 
 @end

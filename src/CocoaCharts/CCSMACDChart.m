@@ -67,15 +67,15 @@
 - (void)calcValueRange {
     if (self.stickData != NULL && [self.stickData count] > 0) {
         
-        double maxValue = 0;
-        double minValue = 0;
+        CCFloat maxValue = 0;
+        CCFloat minValue = 0;
         
         CCSMACDData *first = [self.stickData objectAtIndex:self.displayFrom];
         maxValue = MAX(first.dea, MAX(first.diff, first.macd));
         minValue = MIN(first.dea, MIN(first.diff, first.macd));
         
         //判断显示为方柱或显示为线条
-        for (NSUInteger i = self.displayFrom; i < self.displayFrom + self.displayNumber; i++) {
+        for (CCUInt i = self.displayFrom; i < self.displayFrom + self.displayNumber; i++) {
             CCSMACDData *stick = [self.stickData objectAtIndex:i];
             maxValue = MAX(maxValue, MAX(stick.dea, MAX(stick.diff, stick.macd)));
             minValue = MIN(minValue, MIN(stick.dea, MIN(stick.diff, stick.macd)));
@@ -105,16 +105,16 @@
     
     if (self.axisYPosition == CCSGridChartYAxisPositionLeft) {
         // 蜡烛棒宽度
-        CGFloat stickWidth = ([self dataQuadrantPaddingWidth:rect] / self.displayNumber) - 1;
+        CCFloat stickWidth = ([self dataQuadrantPaddingWidth:rect] / self.displayNumber) - 1;
         
         // 蜡烛棒起始绘制位置
-        CGFloat stickX = [self dataQuadrantPaddingStartX:rect] + 1;
+        CCFloat stickX = [self dataQuadrantPaddingStartX:rect] + 1;
         //判断显示为方柱或显示为线条
-        for (NSUInteger i = self.displayFrom; i < self.displayFrom + self.displayNumber; i++) {
+        for (CCUInt i = self.displayFrom; i < self.displayFrom + self.displayNumber; i++) {
             CCSMACDData *stick = [self.stickData objectAtIndex:i];
             
-            CGFloat highY = [self calcValueY:stick.macd inRect:rect];
-            CGFloat lowY = [self calcValueY:0 inRect:rect];
+            CCFloat highY = [self calcValueY:stick.macd inRect:rect];
+            CCFloat lowY = [self calcValueY:0 inRect:rect];
             
             if (stick.macd == 0) {
                 //没有值的情况下不绘制
@@ -164,16 +164,16 @@
             stickX = stickX + 1 + stickWidth;
         }
     } else {
-        CGFloat stickWidth = ([self dataQuadrantPaddingWidth:rect] / self.displayNumber) - 1;
+        CCFloat stickWidth = ([self dataQuadrantPaddingWidth:rect] / self.displayNumber) - 1;
         // 蜡烛棒起始绘制位置
-        CGFloat stickX = [self dataQuadrantPaddingEndX:rect] - 1 - stickWidth;
+        CCFloat stickX = [self dataQuadrantPaddingEndX:rect] - 1 - stickWidth;
         //判断显示为方柱或显示为线条
-        for (NSUInteger i = 0; i < self.displayNumber; i++) {
-            NSUInteger index = self.displayFrom + self.displayNumber - 1 - i;
+        for (CCUInt i = 0; i < self.displayNumber; i++) {
+            CCUInt index = self.displayFrom + self.displayNumber - 1 - i;
             CCSMACDData *stick = [self.stickData objectAtIndex:index];
             
-            CGFloat highY = [self calcValueY:stick.macd inRect:rect];
-            CGFloat lowY = [self calcValueY:0 inRect:rect];
+            CCFloat highY = [self calcValueY:stick.macd inRect:rect];
+            CCFloat lowY = [self calcValueY:0 inRect:rect];
             
             if (stick.macd == 0) {
                 //没有值的情况下不绘制
@@ -238,8 +238,8 @@
     }
     
     // 起始位置
-    CGFloat startX;
-    CGFloat lastY = 0;
+    CCFloat startX;
+    CCFloat lastY = 0;
     
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSetLineWidth(context, 1.0f);
@@ -249,7 +249,7 @@
     CGContextSetStrokeColorWithColor(context, self.deaLineColor.CGColor);
     
     // 点线距离
-    CGFloat lineLength;
+    CCFloat lineLength;
     
     if (self.axisYPosition == CCSGridChartYAxisPositionLeft) {
         lineLength = ([self dataQuadrantPaddingWidth:rect] / self.displayNumber);
@@ -268,17 +268,17 @@
         //1根则绘制一条直线
         CCSMACDData *lineData = [self.stickData objectAtIndex:0];
         //获取终点Y坐标
-        CGFloat valueY = [self calcValueY:lineData.dea inRect:rect];
+        CCFloat valueY = [self calcValueY:lineData.dea inRect:rect];
         
         CGContextMoveToPoint(context, startX, valueY);
         CGContextAddLineToPoint(context, [self dataQuadrantPaddingStartX:rect], valueY);
         
     } else {
         //遍历并绘制线条
-        for (NSInteger j = self.displayFrom; j < self.displayFrom + self.displayNumber; j++) {
+        for (CCInt j = self.displayFrom; j < self.displayFrom + self.displayNumber; j++) {
             CCSMACDData *lineData = [self.stickData objectAtIndex:j];
             
-            CGFloat valueY = [self calcValueY:lineData.dea inRect:rect];
+            CCFloat valueY = [self calcValueY:lineData.dea inRect:rect];
             //绘制线条路径
             if (j == self.displayFrom || j == 0) {
                 if (lineData.dea == 0) {
@@ -325,17 +325,17 @@
         //1根则绘制一条直线
         CCSMACDData *lineData = [self.stickData objectAtIndex:0];
         //获取终点Y坐标
-        CGFloat valueY = [self calcValueY:lineData.diff inRect:rect];
+        CCFloat valueY = [self calcValueY:lineData.diff inRect:rect];
         
         CGContextMoveToPoint(context, startX, valueY);
         CGContextAddLineToPoint(context, [self dataQuadrantPaddingStartX:rect], valueY);
         
     } else {
         //遍历并绘制线条
-        for (NSInteger j = self.displayFrom; j < self.displayFrom + self.displayNumber; j++) {
+        for (CCInt j = self.displayFrom; j < self.displayFrom + self.displayNumber; j++) {
             CCSMACDData *lineData = [self.stickData objectAtIndex:j];
             
-            CGFloat valueY = [self calcValueY:lineData.diff inRect:rect];
+            CCFloat valueY = [self calcValueY:lineData.diff inRect:rect];
             //绘制线条路径
             if (j == self.displayFrom || j == 0) {
                 if (lineData.diff == 0) {

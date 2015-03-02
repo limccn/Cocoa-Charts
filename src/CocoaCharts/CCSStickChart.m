@@ -65,8 +65,8 @@
 }
 
 - (void)calcDataValueRange {
-    double maxValue = 0;
-    double minValue = NSIntegerMax;
+    CCFloat maxValue = 0;
+    CCFloat minValue = CCIntMax;
 
     CCSStickChartData *first = [self.stickData objectAtIndex:0];
     //第一个stick为停盘的情况
@@ -78,7 +78,7 @@
     }
 
     //判断显示为方柱或显示为线条
-    for (NSUInteger i = 0; i < [self.stickData count]; i++) {
+    for (CCUInt i = 0; i < [self.stickData count]; i++) {
         CCSStickChartData *stick = [self.stickData objectAtIndex:i];
         if (stick.low < minValue) {
             minValue = stick.low;
@@ -96,21 +96,21 @@
 
 - (void)calcValueRangePaddingZero {
 
-    double maxValue = self.maxValue;
-    double minValue = self.minValue;
+    CCFloat maxValue = self.maxValue;
+    CCFloat minValue = self.minValue;
 
-    if ((long) maxValue > (long) minValue) {
+    if ((CCInt) maxValue > (CCInt) minValue) {
         if ((maxValue - minValue) < 10 && minValue > 1) {
-            self.maxValue = (long) (maxValue + 1);
-            self.minValue = (long) (minValue - 1);
+            self.maxValue = (CCInt) (maxValue + 1);
+            self.minValue = (CCInt) (minValue - 1);
         } else {
-            self.maxValue = (long) (maxValue + (maxValue - minValue) * 0.1);
-            self.minValue = (long) (minValue - (maxValue - minValue) * 0.1);
+            self.maxValue = (CCInt) (maxValue + (maxValue - minValue) * 0.1);
+            self.minValue = (CCInt) (minValue - (maxValue - minValue) * 0.1);
             if (self.minValue < 0) {
                 self.minValue = 0;
             }
         }
-    } else if ((long) maxValue == (long) minValue) {
+    } else if ((CCInt) maxValue == (CCInt) minValue) {
         if (maxValue <= 10 && maxValue > 1) {
             self.maxValue = maxValue + 1;
             self.minValue = minValue - 1;
@@ -144,11 +144,11 @@
 
 - (void)calcValueRangeFormatForAxis {
     //修正最大值和最小值
-    long rate = (self.maxValue - self.minValue) / (self.latitudeNum);
+    CCInt rate = (self.maxValue - self.minValue) / (self.latitudeNum);
     NSString *strRate = [NSString stringWithFormat:@"%ld", rate];
-    CGFloat first = [[strRate substringToIndex:1] intValue] + 1.0f;
+    CCFloat first = [[strRate substringToIndex:1] intValue] + 1.0f;
     if (first > 0 && strRate.length > 1) {
-        CGFloat second = [[[strRate substringToIndex:2] substringFromIndex:1] intValue];
+        CCFloat second = [[[strRate substringToIndex:2] substringFromIndex:1] intValue];
         if (second < 5) {
             first = first - 0.5;
         }
@@ -157,9 +157,9 @@
         rate = 1;
     }
     //等分轴修正
-    if (self.latitudeNum > 0 && (long) (self.maxValue - self.minValue) % (self.latitudeNum * rate) != 0) {
+    if (self.latitudeNum > 0 && (CCInt) (self.maxValue - self.minValue) % (self.latitudeNum * rate) != 0) {
         //最大值加上轴差
-        self.maxValue = (long) self.maxValue + (self.latitudeNum * rate) - ((long) (self.maxValue - self.minValue) % (self.latitudeNum * rate));
+        self.maxValue = (CCInt) self.maxValue + (self.latitudeNum * rate) - ((CCInt) (self.maxValue - self.minValue) % (self.latitudeNum * rate));
     }
 }
 
@@ -188,12 +188,12 @@
         return;
     }
     NSMutableArray *TitleX = [[[NSMutableArray alloc] init] autorelease];
-        CGFloat average = self.maxSticksNum / self.longitudeNum;
+        CCFloat average = self.maxSticksNum / self.longitudeNum;
         CCSStickChartData *chartdata = nil;
         if (self.axisYPosition == CCSGridChartYAxisPositionLeft) {
             //处理刻度
-            for (NSUInteger i = 0; i < self.longitudeNum; i++) {
-                NSUInteger index = (NSUInteger) floor(i * average);
+            for (CCUInt i = 0; i < self.longitudeNum; i++) {
+                CCUInt index = (CCUInt) floor(i * average);
                 if (index > self.maxSticksNum - 1) {
                     index = self.maxSticksNum - 1;
                 }
@@ -207,8 +207,8 @@
         }
         else {
             //处理刻度
-            for (NSUInteger i = 0; i < self.longitudeNum; i++) {
-                NSUInteger index = [self.stickData count] - self.maxSticksNum + (NSUInteger) floor(i * average);
+            for (CCUInt i = 0; i < self.longitudeNum; i++) {
+                CCUInt index = [self.stickData count] - self.maxSticksNum + (CCUInt) floor(i * average);
                 if (index > [self.stickData count] - 1) {
                     index = [self.stickData count] - 1;
                 }
@@ -243,8 +243,8 @@
         CGContextSetLineDash(context, 0.0, lengths, 2);
     }
     
-    CGFloat postOffset,offset;
-    CGFloat stickWidth = ([self dataQuadrantPaddingWidth:rect] / self.maxSticksNum);
+    CCFloat postOffset,offset;
+    CCFloat stickWidth = ([self dataQuadrantPaddingWidth:rect] / self.maxSticksNum);
     if (self.stickAlignType == CCSStickAlignTypeCenter) {
         postOffset= ([self dataQuadrantPaddingWidth:rect] - stickWidth) / ([self.longitudeTitles count] - 1);
         offset = [self dataQuadrantPaddingStartX:rect] + stickWidth/2;
@@ -253,7 +253,7 @@
         offset = [self dataQuadrantPaddingStartX:rect];
     }
     
-    for (NSUInteger i = 0; i < [self.longitudeTitles count]; i++) {
+    for (CCUInt i = 0; i < [self.longitudeTitles count]; i++) {
         CGContextMoveToPoint(context, offset + i * postOffset, [self dataQuadrantStartY:rect]);
         CGContextAddLineToPoint(context, offset + i * postOffset, [self dataQuadrantEndY:rect]);
     }
@@ -281,8 +281,8 @@
         return;
     }
     
-    CGFloat postOffset,offset;
-    CGFloat stickWidth = ([self dataQuadrantPaddingWidth:rect] / self.maxSticksNum);
+    CCFloat postOffset,offset;
+    CCFloat stickWidth = ([self dataQuadrantPaddingWidth:rect] / self.maxSticksNum);
     if (self.stickAlignType == CCSStickAlignTypeCenter) {
         postOffset= ([self dataQuadrantPaddingWidth:rect] - stickWidth) / ([self.longitudeTitles count] - 1);
         offset = [self dataQuadrantPaddingStartX:rect] + stickWidth/2;
@@ -291,8 +291,8 @@
         offset = [self dataQuadrantPaddingStartX:rect];
     }
     
-    for (NSUInteger i = 0; i < [self.longitudeTitles count]; i++) {
-        CGFloat startY;
+    for (CCUInt i = 0; i < [self.longitudeTitles count]; i++) {
+        CCFloat startY;
         if (self.axisXPosition == CCSGridChartXAxisPositionBottom) {
             startY = [self dataQuadrantEndY:rect] + [self axisWidth];
         }else{
@@ -302,30 +302,64 @@
         NSString *str = (NSString *) [self.longitudeTitles objectAtIndex:i];
         
         //调整X轴坐标位置
+        //调整X轴坐标位置
         if (i == 0) {
-            [str drawInRect:CGRectMake([self dataQuadrantPaddingStartX:rect], startY, postOffset, self.longitudeFontSize)
-                   withFont:self.longitudeFont
-              lineBreakMode:NSLineBreakByWordWrapping
-                  alignment:NSTextAlignmentLeft];
+            //            [str drawInRect:CGRectMake([self dataQuadrantPaddingStartX:rect], startY, postOffset, self.longitudeFontSize)
+            //                   withFont:self.longitudeFont
+            //              lineBreakMode:NSLineBreakByWordWrapping
+            //                  alignment:NSTextAlignmentLeft];
+            
+            CGRect textRect= CGRectMake([self dataQuadrantPaddingStartX:rect], startY, postOffset, self.longitudeFontSize);
+            UIFont *textFont= self.longitudeFont; //设置字体
+            NSMutableParagraphStyle *textStyle=[[[NSMutableParagraphStyle alloc]init]autorelease];//段落样式
+            textStyle.alignment=NSTextAlignmentLeft;
+            textStyle.lineBreakMode = NSLineBreakByWordWrapping;
+            //绘制字体
+            [str drawInRect:textRect withAttributes:@{NSFontAttributeName:textFont,NSParagraphStyleAttributeName:textStyle}];
             
         } else if (i == [self.longitudeTitles count] - 1) {
             if (self.axisYPosition == CCSGridChartYAxisPositionLeft) {
-                [str drawInRect:CGRectMake(rect.size.width - postOffset, startY, postOffset, self.longitudeFontSize)
-                       withFont:self.longitudeFont
-                  lineBreakMode:NSLineBreakByWordWrapping
-                      alignment:NSTextAlignmentRight];
+                //                [str drawInRect:CGRectMake(rect.size.width - postOffset, startY, postOffset, self.longitudeFontSize)
+                //                       withFont:self.longitudeFont
+                //                  lineBreakMode:NSLineBreakByWordWrapping
+                //                      alignment:NSTextAlignmentRight];
+                
+                CGRect textRect= CGRectMake(rect.size.width - postOffset, startY, postOffset, self.longitudeFontSize);
+                UIFont *textFont= self.longitudeFont; //设置字体
+                NSMutableParagraphStyle *textStyle=[[[NSMutableParagraphStyle alloc]init]autorelease];//段落样式
+                textStyle.alignment=NSTextAlignmentRight;
+                textStyle.lineBreakMode = NSLineBreakByWordWrapping;
+                //绘制字体
+                [str drawInRect:textRect withAttributes:@{NSFontAttributeName:textFont,NSParagraphStyleAttributeName:textStyle}];
+                
             } else {
-                [str drawInRect:CGRectMake(offset + (i - 0.5) * postOffset, startY, postOffset, self.longitudeFontSize)
-                       withFont:self.longitudeFont
-                  lineBreakMode:NSLineBreakByWordWrapping
-                      alignment:NSTextAlignmentCenter];
+                //                [str drawInRect:CGRectMake(offset + (i - 0.5) * postOffset, startY, postOffset, self.longitudeFontSize)
+                //                       withFont:self.longitudeFont
+                //                  lineBreakMode:NSLineBreakByWordWrapping
+                //                      alignment:NSTextAlignmentCenter];
+                
+                CGRect textRect= CGRectMake(offset + (i - 0.5) * postOffset, startY, postOffset, self.longitudeFontSize);
+                UIFont *textFont= self.longitudeFont; //设置字体
+                NSMutableParagraphStyle *textStyle=[[[NSMutableParagraphStyle alloc]init]autorelease];//段落样式
+                textStyle.alignment=NSTextAlignmentCenter;
+                textStyle.lineBreakMode = NSLineBreakByWordWrapping;
+                //绘制字体
+                [str drawInRect:textRect withAttributes:@{NSFontAttributeName:textFont,NSParagraphStyleAttributeName:textStyle}];
             }
             
         } else {
-            [str drawInRect:CGRectMake(offset + (i - 0.5) * postOffset, startY, postOffset, self.longitudeFontSize)
-                   withFont:self.longitudeFont
-              lineBreakMode:NSLineBreakByWordWrapping
-                  alignment:NSTextAlignmentCenter];
+            //            [str drawInRect:CGRectMake(offset + (i - 0.5) * postOffset, startY, postOffset, self.longitudeFontSize)
+            //                   withFont:self.longitudeFont
+            //              lineBreakMode:NSLineBreakByWordWrapping
+            //                  alignment:NSTextAlignmentCenter];
+            
+            CGRect textRect= CGRectMake(offset + (i - 0.5) * postOffset, startY, postOffset, self.longitudeFontSize);
+            UIFont *textFont= self.longitudeFont; //设置字体
+            NSMutableParagraphStyle *textStyle=[[[NSMutableParagraphStyle alloc]init]autorelease];//段落样式
+            textStyle.alignment=NSTextAlignmentCenter;
+            textStyle.lineBreakMode = NSLineBreakByWordWrapping;
+            //绘制字体
+            [str drawInRect:textRect withAttributes:@{NSFontAttributeName:textFont,NSParagraphStyleAttributeName:textStyle}];
         }
     }
 }
@@ -340,11 +374,11 @@
     }
     
     NSMutableArray *TitleY = [[[NSMutableArray alloc] init]autorelease];
-    CGFloat average = (NSUInteger) ((self.maxValue - self.minValue) / self.latitudeNum);
+    CCFloat average = (CCUInt) ((self.maxValue - self.minValue) / self.latitudeNum);
     //处理刻度
-    for (NSUInteger i = 0; i < self.latitudeNum; i++) {
+    for (CCUInt i = 0; i < self.latitudeNum; i++) {
         if (self.axisCalc == 1) {
-            NSUInteger degree = floor(self.minValue + i * average) / self.axisCalc;
+            CCUInt degree = floor(self.minValue + i * average) / self.axisCalc;
             NSString *value = [[NSNumber numberWithUnsignedInteger:degree]stringValue];
             [TitleY addObject:value];
         } else {
@@ -354,7 +388,7 @@
     }
     //处理最大值
     if (self.axisCalc == 1) {
-        NSUInteger degree = (NSInteger) (self.maxValue) / self.axisCalc;
+        CCUInt degree = (NSInteger) (self.maxValue) / self.axisCalc;
         NSString *value = [[NSNumber numberWithUnsignedInteger:degree]stringValue];
         [TitleY addObject:value];
     }
@@ -386,7 +420,7 @@
         return;
     }
     // 蜡烛棒宽度
-    CGFloat stickWidth = ([self dataQuadrantPaddingWidth:rect] / self.maxSticksNum) - 1;
+    CCFloat stickWidth = ([self dataQuadrantPaddingWidth:rect] / self.maxSticksNum) - 1;
 
     CGContextRef context = UIGraphicsGetCurrentContext();
 
@@ -397,13 +431,13 @@
 
         if (self.axisYPosition == CCSGridChartYAxisPositionLeft) {
             // 蜡烛棒起始绘制位置
-            CGFloat stickX = [self dataQuadrantPaddingStartX:rect] + 1;
+            CCFloat stickX = [self dataQuadrantPaddingStartX:rect] + 1;
             //判断显示为方柱或显示为线条
-            for (NSUInteger i = 0; i < [self.stickData count]; i++) {
+            for (CCUInt i = 0; i < [self.stickData count]; i++) {
                 CCSStickChartData *stick = [self.stickData objectAtIndex:i];
 
-                CGFloat highY = [self calcValueY:stick.high inRect:rect];
-                CGFloat lowY = [self calcValueY:stick.low inRect:rect];
+                CCFloat highY = [self calcValueY:stick.high inRect:rect];
+                CCFloat lowY = [self calcValueY:stick.low inRect:rect];
 
                 if (stick.high == 0) {
                     //没有值的情况下不绘制
@@ -426,13 +460,13 @@
             }
         } else {
             // 蜡烛棒起始绘制位置
-            CGFloat stickX = [self dataQuadrantPaddingEndX:rect] - 1 - stickWidth;
+            CCFloat stickX = [self dataQuadrantPaddingEndX:rect] - 1 - stickWidth;
             //判断显示为方柱或显示为线条
             for (NSInteger i = [self.stickData count] - 1; i >= 0; i--) {
                 CCSStickChartData *stick = [self.stickData objectAtIndex:i];
 
-                CGFloat highY = [self calcValueY:stick.high inRect:rect];
-                CGFloat lowY = [self calcValueY:stick.low inRect:rect];
+                CCFloat highY = [self calcValueY:stick.high inRect:rect];
+                CCFloat lowY = [self calcValueY:stick.low inRect:rect];
 
                 if (stick.high == 0) {
                     //没有值的情况下不绘制
@@ -463,7 +497,7 @@
     if([self.stickData count] == 0){
         return @"";
     }
-    CGFloat value = [self touchPointAxisXValue:rect];
+    CCFloat value = [self touchPointAxisXValue:rect];
     NSString *result = @"";
         if (self.axisYPosition == CCSGridChartYAxisPositionLeft) {
             if (value >= 1) {
@@ -471,7 +505,7 @@
             } else if (value <= 0) {
                 result = ((CCSStickChartData *) [self.stickData objectAtIndex:0]).date;
             } else {
-                NSUInteger index = (NSUInteger) (self.maxSticksNum * value);
+                CCUInt index = (CCUInt) (self.maxSticksNum * value);
                 result = ((CCSStickChartData *) [self.stickData objectAtIndex:index]).date;
             }
         } else {
@@ -480,7 +514,7 @@
             } else if (value <= 0) {
                 result = ((CCSStickChartData *) [self.stickData objectAtIndex:[self.stickData count] - self.maxSticksNum]).date;
             } else {
-                NSUInteger index = [self.stickData count] - self.maxSticksNum + (NSUInteger) (self.maxSticksNum * value);
+                CCUInt index = [self.stickData count] - self.maxSticksNum + (CCUInt) (self.maxSticksNum * value);
                 if (index > [self.stickData count] - 1) {
                     index = [self.stickData count] - 1;
                 }
@@ -491,7 +525,7 @@
 }
 
 - (NSString *)calcAxisYGraduate:(CGRect)rect {
-    CGFloat value = [self touchPointAxisYValue:rect];
+    CCFloat value = [self touchPointAxisYValue:rect];
 
     if (self.maxValue == 0. && self.minValue == 0.) {
         return @"";
@@ -538,14 +572,14 @@
     //X在系统范围内、进行计算
     if (self.singleTouchPoint.x >= [self dataQuadrantPaddingStartX:self.frame]
         && self.singleTouchPoint.x < [self dataQuadrantPaddingEndX:self.frame]) {
-        CGFloat stickWidth = ([self dataQuadrantPaddingWidth:self.frame] / self.maxSticksNum);
-        CGFloat valueWidth = self.singleTouchPoint.x - [self dataQuadrantPaddingStartX:self.frame] ;
+        CCFloat stickWidth = ([self dataQuadrantPaddingWidth:self.frame] / self.maxSticksNum);
+        CCFloat valueWidth = self.singleTouchPoint.x - [self dataQuadrantPaddingStartX:self.frame] ;
         if (valueWidth > 0) {
-            NSUInteger index;
+            CCUInt index;
             if (self.axisYPosition == CCSGridChartYAxisPositionLeft) {
-                index = (NSUInteger) (valueWidth / stickWidth);
+                index = (CCUInt) (valueWidth / stickWidth);
             }else{
-                index = (NSUInteger) ([self.stickData count] - self.maxSticksNum + (valueWidth / stickWidth));
+                index = (CCUInt) ([self.stickData count] - self.maxSticksNum + (valueWidth / stickWidth));
             }
             //如果超过则设置位最大
             if (index >= self.maxSticksNum) {
@@ -637,7 +671,7 @@
     }
 }
 
-- (CGFloat) calcValueY:(CGFloat)value inRect:(CGRect) rect{
+- (CCFloat) calcValueY:(CCFloat)value inRect:(CGRect) rect{
     return (1 - (value - [self minValue]) / ([self maxValue] - [self minValue])) * [self dataQuadrantPaddingHeight:rect] + [self dataQuadrantPaddingStartY:rect];
 }
 @end

@@ -53,22 +53,22 @@
     self.data = nil;
     
     //获得安全高度宽度
-    NSUInteger height = (NSUInteger) (self.frame.size.width > self.frame.size.height ? self.frame.size.height : self.frame.size.width);
+    CCUInt height = (CCUInt) (self.frame.size.width > self.frame.size.height ? self.frame.size.height : self.frame.size.width);
     //绘图高宽度
-    self.radius = (NSUInteger) ((height / 2.0f) * 0.9);
+    self.radius = (CCUInt) ((height / 2.0f) * 0.9);
     //初始化绘图位置
-    self.position = CGPointMake((NSUInteger) (self.frame.size.width / 2.0f), (NSUInteger) (self.frame.size.height / 2.0f));
+    self.position = CGPointMake((CCUInt) (self.frame.size.width / 2.0f), (CCUInt) (self.frame.size.height / 2.0f));
     
 }
 
 
 - (void)drawRect:(CGRect)rect {
     //获得安全高度宽度
-    NSUInteger height = (NSUInteger) (self.frame.size.width > self.frame.size.height ? self.frame.size.height : self.frame.size.width);
+    CCUInt height = (CCUInt) (self.frame.size.width > self.frame.size.height ? self.frame.size.height : self.frame.size.width);
     //绘图高宽度
-    self.radius = (NSUInteger) ((height / 2.0f) * 0.9);
+    self.radius = (CCUInt) ((height / 2.0f) * 0.9);
     //初始化绘图位置
-    self.position = CGPointMake((NSUInteger) (self.frame.size.width / 2.0f), (NSUInteger) (self.frame.size.height / 2.0f));
+    self.position = CGPointMake((CCUInt) (self.frame.size.width / 2.0f), (CCUInt) (self.frame.size.height / 2.0f));
     
     //绘制数据
     [self drawData:rect];
@@ -85,21 +85,21 @@
     CGContextSetStrokeColorWithColor(context, self.circleBorderColor.CGColor);
     
     //获得总数
-    CGFloat sum = 0;
-    for (NSUInteger i = 0; i < [self.data count]; i++) {
+    CCFloat sum = 0;
+    for (CCUInt i = 0; i < [self.data count]; i++) {
         sum = sum + ((CCSTitleValueColor *) [self.data objectAtIndex:i]).value;
     }
     
-    CGFloat offset = PI * -0.5f;
+    CCFloat offset = PI * -0.5f;
     // 遍历每一条数据列表
-    for (NSUInteger j = 0; j < [self.data count]; j++) {
+    for (CCUInt j = 0; j < [self.data count]; j++) {
         CCSTitleValueColor *entity = [self.data objectAtIndex:j];
         
         //圆弧填充色
         CGContextSetFillColorWithColor(context, entity.color.CGColor);
         
         //角度
-        CGFloat sweep = entity.value * 2 * PI / sum;
+        CCFloat sweep = entity.value * 2 * PI / sum;
         
         //移动到圆心
         CGContextMoveToPoint(context, self.position.x, self.position.y);
@@ -127,19 +127,19 @@
     if (self.displayValueTitle == NO) {
         return;
     }
-    CGFloat sumvalue = 0.0;
+    CCFloat sumvalue = 0.0;
     //
-    for (NSUInteger k = 0; k < [self.data count]; k++) {
+    for (CCUInt k = 0; k < [self.data count]; k++) {
         CCSTitleValueColor *entity = [self.data objectAtIndex:k];
         //值
-        CGFloat value = entity.value;
+        CCFloat value = entity.value;
         //添加偏移
         sumvalue = sumvalue + value;
         //比例
-        CGFloat rate = (sumvalue - value / 2.0f) / sum;
+        CCFloat rate = (sumvalue - value / 2.0f) / sum;
         
-        CGFloat offsetX = (CGFloat) (self.position.x - self.radius * 0.8 * sin(rate * -2 * PI));
-        CGFloat offsetY = (CGFloat) (self.position.y - self.radius * 0.8 * cos(rate * -2 * PI));
+        CCFloat offsetX = (CCFloat) (self.position.x - self.radius * 0.8 * sin(rate * -2 * PI));
+        CCFloat offsetY = (CCFloat) (self.position.y - self.radius * 0.8 * cos(rate * -2 * PI));
         
         //绘制标题
         NSString *title = entity.title;
@@ -152,17 +152,33 @@
         //文字
         UIFont *font = [UIFont fontWithName:@"Arial" size:11];
         
-        //调整X轴坐标位置
-        [title drawInRect:CGRectMake(offsetX, offsetY, 100, 11)
-                 withFont:font
-            lineBreakMode:NSLineBreakByWordWrapping
-                alignment:NSTextAlignmentLeft];
+//        //调整X轴坐标位置
+//        [title drawInRect:CGRectMake(offsetX, offsetY, 100, 11)
+//                 withFont:font
+//            lineBreakMode:NSLineBreakByWordWrapping
+//                alignment:NSTextAlignmentLeft];
         
-        //调整X轴坐标位置
-        [percentage drawInRect:CGRectMake(offsetX, offsetY + 8, 100, 11)
-                      withFont:font
-                 lineBreakMode:NSLineBreakByWordWrapping
-                     alignment:NSTextAlignmentLeft];
+        CGRect textRect= CGRectMake(offsetX, offsetY, 100, 11);
+        UIFont *textFont= font; //设置字体
+        NSMutableParagraphStyle *textStyle=[[[NSMutableParagraphStyle alloc]init]autorelease];//段落样式
+        textStyle.alignment=NSTextAlignmentLeft;
+        textStyle.lineBreakMode = NSLineBreakByWordWrapping;
+        //绘制字体
+        [title drawInRect:textRect withAttributes:@{NSFontAttributeName:textFont,NSParagraphStyleAttributeName:textStyle}];
+        
+//        //调整X轴坐标位置
+//        [percentage drawInRect:CGRectMake(offsetX, offsetY + 8, 100, 11)
+//                      withFont:font
+//                 lineBreakMode:NSLineBreakByWordWrapping
+//                     alignment:NSTextAlignmentLeft];
+        
+        CGRect textRectPer= CGRectMake(offsetX, offsetY + 8, 100, 11);
+        UIFont *textFontPer= font; //设置字体
+        NSMutableParagraphStyle *textStylePer=[[[NSMutableParagraphStyle alloc]init]autorelease];//段落样式
+        textStylePer.alignment=NSTextAlignmentLeft;
+        textStylePer.lineBreakMode = NSLineBreakByWordWrapping;
+        //绘制字体
+        [percentage drawInRect:textRectPer withAttributes:@{NSFontAttributeName:textFontPer,NSParagraphStyleAttributeName:textStylePer}];
         
     }
 }

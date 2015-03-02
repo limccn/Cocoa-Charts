@@ -31,8 +31,8 @@
  CCSStickChart保存柱条表示用的高低值的实体对象
  */
 @interface CCSStickChartData : CCSBaseData {
-    CGFloat _high;
-    CGFloat _low;
+    CCFloat _high;
+    CCFloat _low;
     NSString *_date;
 }
 
@@ -41,14 +41,14 @@
  高値
  最高价
  */
-@property(assign, nonatomic) CGFloat high;
+@property(assign, nonatomic) CCFloat high;
 
 /*!
  Low Value
  低値
  最低价
  */
-@property(assign, nonatomic) CGFloat low;
+@property(assign, nonatomic) CCFloat low;
 
 /*!
  Date
@@ -79,6 +79,6 @@
  初期化完成对象
  
  */
-- (id)initWithHigh:(CGFloat)high low:(CGFloat)low date:(NSString *)date;
+- (id)initWithHigh:(CCFloat)high low:(CCFloat)low date:(NSString *)date;
 
 @end

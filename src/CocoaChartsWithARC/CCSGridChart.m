@@ -219,7 +219,7 @@
         CGContextSetLineDash(context, 0.0, lengths, 2);
     }
     
-    float postOffset;
+    CCFloat postOffset;
     if (self.axisXPosition == CCSGridChartXAxisPositionBottom) {
         postOffset = (rect.size.height - self.axisMarginBottom - 2 * self.axisMarginTop) * 1.0 / ([self.latitudeTitles count] - 1);
     }
@@ -227,9 +227,9 @@
         postOffset = (rect.size.height - 2 * self.axisMarginBottom - self.axisMarginTop) * 1.0 / ([self.latitudeTitles count] - 1);
     }
     
-    float offset = rect.size.height - self.axisMarginBottom - self.axisMarginTop;
+    CCFloat offset = rect.size.height - self.axisMarginBottom - self.axisMarginTop;
     
-    for (NSUInteger i = 0; i <= [self.latitudeTitles count]; i++) {
+    for (CCUInt i = 0; i <= [self.latitudeTitles count]; i++) {
         if (self.axisYPosition == CCSGridChartYAxisPositionLeft) {
             CGContextMoveToPoint(context, self.axisMarginLeft, offset - i * postOffset);
             CGContextAddLineToPoint(context, rect.size.width, offset - i * postOffset);
@@ -262,16 +262,16 @@
         return;
     }
     
-    float postOffset;
+    CCFloat postOffset;
     if (self.axisXPosition == CCSGridChartXAxisPositionBottom) {
         postOffset = (rect.size.height - self.axisMarginBottom - 2 * self.axisMarginTop) * 1.0 / ([self.latitudeTitles count] - 1);
     } else {
         postOffset = (rect.size.height - 2 * self.axisMarginBottom - self.axisMarginTop) * 1.0 / ([self.latitudeTitles count] - 1);
     }
     
-    float offset = rect.size.height - self.axisMarginBottom - self.axisMarginTop;
+    CCFloat offset = rect.size.height - self.axisMarginBottom - self.axisMarginTop;
     
-    for (NSUInteger i = 0; i <= [self.latitudeTitles count]; i++) {
+    for (CCUInt i = 0; i <= [self.latitudeTitles count]; i++) {
         // 绘制线条
         if (self.axisYPosition == CCSGridChartYAxisPositionLeft) {
             if (i < [self.latitudeTitles count]) {
@@ -285,22 +285,46 @@
                 
                 //调整Y轴坐标位置
                 if (i == 0) {
-                    [str drawInRect:CGRectMake(0, offset - i * postOffset - self.latitudeFontSize, self.axisMarginLeft, self.latitudeFontSize)
-                           withFont:self.latitudeFont
-                      lineBreakMode:NSLineBreakByWordWrapping
-                          alignment:NSTextAlignmentRight];
+//                    [str drawInRect:CGRectMake(0, offset - i * postOffset - self.latitudeFontSize, self.axisMarginLeft, self.latitudeFontSize)
+//                           withFont:self.latitudeFont
+//                      lineBreakMode:NSLineBreakByWordWrapping
+//                          alignment:NSTextAlignmentRight];
+                    
+                    CGRect textRect= CGRectMake(0, offset - i * postOffset - self.latitudeFontSize, self.axisMarginLeft, self.latitudeFontSize);
+                    UIFont *textFont= self.latitudeFont; //设置字体
+                    NSMutableParagraphStyle *textStyle=[[NSMutableParagraphStyle alloc]init];//段落样式
+                    textStyle.alignment=NSTextAlignmentRight;
+                    textStyle.lineBreakMode = NSLineBreakByWordWrapping;
+                    //绘制字体
+                    [str drawInRect:textRect withAttributes:@{NSFontAttributeName:textFont,NSParagraphStyleAttributeName:textStyle}];
                     
                 } else if (i == [self.latitudeTitles count] - 1) {
-                    [str drawInRect:CGRectMake(0, offset - i * postOffset, self.axisMarginLeft, self.latitudeFontSize)
-                           withFont:self.latitudeFont
-                      lineBreakMode:NSLineBreakByWordWrapping
-                          alignment:NSTextAlignmentRight];
+//                    [str drawInRect:CGRectMake(0, offset - i * postOffset, self.axisMarginLeft, self.latitudeFontSize)
+//                           withFont:self.latitudeFont
+//                      lineBreakMode:NSLineBreakByWordWrapping
+//                          alignment:NSTextAlignmentRight];
+                    
+                    CGRect textRect= CGRectMake(0, offset - i * postOffset, self.axisMarginLeft, self.latitudeFontSize);
+                    UIFont *textFont= self.latitudeFont; //设置字体
+                    NSMutableParagraphStyle *textStyle=[[NSMutableParagraphStyle alloc]init];//段落样式
+                    textStyle.alignment=NSTextAlignmentRight;
+                    textStyle.lineBreakMode = NSLineBreakByWordWrapping;
+                    //绘制字体
+                    [str drawInRect:textRect withAttributes:@{NSFontAttributeName:textFont,NSParagraphStyleAttributeName:textStyle}];
                     
                 } else {
-                    [str drawInRect:CGRectMake(0, offset - i * postOffset - self.latitudeFontSize / 2.0, self.axisMarginLeft, self.latitudeFontSize)
-                           withFont:self.latitudeFont
-                      lineBreakMode:NSLineBreakByWordWrapping
-                          alignment:NSTextAlignmentRight];
+//                    [str drawInRect:CGRectMake(0, offset - i * postOffset - self.latitudeFontSize / 2.0, self.axisMarginLeft, self.latitudeFontSize)
+//                           withFont:self.latitudeFont
+//                      lineBreakMode:NSLineBreakByWordWrapping
+//                          alignment:NSTextAlignmentRight];
+                    
+                    CGRect textRect= CGRectMake(0, offset - i * postOffset - self.latitudeFontSize / 2.0, self.axisMarginLeft, self.latitudeFontSize);
+                    UIFont *textFont= self.latitudeFont; //设置字体
+                    NSMutableParagraphStyle *textStyle=[[NSMutableParagraphStyle alloc]init];//段落样式
+                    textStyle.alignment=NSTextAlignmentRight;
+                    textStyle.lineBreakMode = NSLineBreakByWordWrapping;
+                    //绘制字体
+                    [str drawInRect:textRect withAttributes:@{NSFontAttributeName:textFont,NSParagraphStyleAttributeName:textStyle}];
                 }
                 
             }
@@ -317,22 +341,48 @@
                 
                 //调整Y轴坐标位置
                 if (i == 0) {
-                    [str drawInRect:CGRectMake(rect.size.width - self.axisMarginRight, offset - i * postOffset - self.latitudeFontSize, self.axisMarginRight, self.latitudeFontSize)
-                           withFont:self.latitudeFont
-                      lineBreakMode:NSLineBreakByWordWrapping
-                          alignment:NSTextAlignmentLeft];
+//                    [str drawInRect:CGRectMake(rect.size.width - self.axisMarginRight, offset - i * postOffset - self.latitudeFontSize, self.axisMarginRight, self.latitudeFontSize)
+//                           withFont:self.latitudeFont
+//                      lineBreakMode:NSLineBreakByWordWrapping
+//                          alignment:NSTextAlignmentLeft];
+                    
+                    CGRect textRect= CGRectMake(rect.size.width - self.axisMarginRight, offset - i * postOffset - self.latitudeFontSize, self.axisMarginRight, self.latitudeFontSize);
+                    UIFont *textFont= self.latitudeFont; //设置字体
+                    NSMutableParagraphStyle *textStyle=[[NSMutableParagraphStyle alloc]init];//段落样式
+                    textStyle.alignment=NSTextAlignmentLeft;
+                    textStyle.lineBreakMode = NSLineBreakByWordWrapping;
+                    //绘制字体
+                    [str drawInRect:textRect withAttributes:@{NSFontAttributeName:textFont,NSParagraphStyleAttributeName:textStyle}];
+                    
                     
                 } else if (i == [self.latitudeTitles count] - 1) {
-                    [str drawInRect:CGRectMake(rect.size.width - self.axisMarginRight, offset - i * postOffset, self.axisMarginRight, self.latitudeFontSize)
-                           withFont:self.latitudeFont
-                      lineBreakMode:NSLineBreakByWordWrapping
-                          alignment:NSTextAlignmentLeft];
+//                    [str drawInRect:CGRectMake(rect.size.width - self.axisMarginRight, offset - i * postOffset, self.axisMarginRight, self.latitudeFontSize)
+//                           withFont:self.latitudeFont
+//                      lineBreakMode:NSLineBreakByWordWrapping
+//                          alignment:NSTextAlignmentLeft];
+                    
+                    CGRect textRect= CGRectMake(rect.size.width - self.axisMarginRight, offset - i * postOffset, self.axisMarginRight, self.latitudeFontSize);
+                    UIFont *textFont= self.latitudeFont; //设置字体
+                    NSMutableParagraphStyle *textStyle=[[NSMutableParagraphStyle alloc]init];//段落样式
+                    textStyle.alignment=NSTextAlignmentLeft;
+                    textStyle.lineBreakMode = NSLineBreakByWordWrapping;
+                    //绘制字体
+                    [str drawInRect:textRect withAttributes:@{NSFontAttributeName:textFont,NSParagraphStyleAttributeName:textStyle}];
+                    
                     
                 } else {
-                    [str drawInRect:CGRectMake(rect.size.width - self.axisMarginRight, offset - i * postOffset - self.latitudeFontSize / 2.0, self.axisMarginRight, self.latitudeFontSize)
-                           withFont:self.latitudeFont
-                      lineBreakMode:NSLineBreakByWordWrapping
-                          alignment:NSTextAlignmentLeft];
+//                    [str drawInRect:CGRectMake(rect.size.width - self.axisMarginRight, offset - i * postOffset - self.latitudeFontSize / 2.0, self.axisMarginRight, self.latitudeFontSize)
+//                           withFont:self.latitudeFont
+//                      lineBreakMode:NSLineBreakByWordWrapping
+//                          alignment:NSTextAlignmentLeft];
+                    
+                    CGRect textRect= CGRectMake(rect.size.width - self.axisMarginRight, offset - i * postOffset - self.latitudeFontSize / 2.0, self.axisMarginRight, self.latitudeFontSize);
+                    UIFont *textFont= self.latitudeFont; //设置字体
+                    NSMutableParagraphStyle *textStyle=[[NSMutableParagraphStyle alloc]init];//段落样式
+                    textStyle.alignment=NSTextAlignmentLeft;
+                    textStyle.lineBreakMode = NSLineBreakByWordWrapping;
+                    //绘制字体
+                    [str drawInRect:textRect withAttributes:@{NSFontAttributeName:textFont,NSParagraphStyleAttributeName:textStyle}];
                 }
             }
         }
@@ -357,8 +407,8 @@
         CGFloat lengths[] = {3.0, 3.0};
         CGContextSetLineDash(context, 0.0, lengths, 2);
     }
-    float postOffset;
-    float offset;
+    CCFloat postOffset;
+    CCFloat offset;
     
     if (self.axisYPosition == CCSGridChartYAxisPositionLeft) {
         postOffset = (rect.size.width - self.axisMarginLeft - 2 * self.axisMarginRight) / ([self.longitudeTitles count] - 1);
@@ -369,7 +419,7 @@
         offset = self.axisMarginLeft;
     }
     
-    for (NSUInteger i = 0; i <= [self.longitudeTitles count]; i++) {
+    for (CCUInt i = 0; i <= [self.longitudeTitles count]; i++) {
         if (self.axisXPosition == CCSGridChartXAxisPositionBottom) {
                 CGContextMoveToPoint(context, offset + i * postOffset, 0);
                 CGContextAddLineToPoint(context, offset + i * postOffset, rect.size.height - self.axisMarginBottom);
@@ -402,8 +452,8 @@
         return;
     }
     
-    float postOffset;
-    float offset;
+    CCFloat postOffset;
+    CCFloat offset;
     
     if (self.axisYPosition == CCSGridChartYAxisPositionLeft) {
         postOffset = (rect.size.width - self.axisMarginLeft - 2 * self.axisMarginRight) / ([self.longitudeTitles count] - 1);
@@ -413,36 +463,69 @@
         offset = self.axisMarginLeft;
     }
         
-    for (NSUInteger i = 0; i <= [self.longitudeTitles count]; i++) {
+    for (CCUInt i = 0; i <= [self.longitudeTitles count]; i++) {
         if (self.axisXPosition == CCSGridChartXAxisPositionBottom) {
             if (i < [self.longitudeTitles count]) {
                 NSString *str = (NSString *) [self.longitudeTitles objectAtIndex:i];
                 
                 //调整X轴坐标位置
                 if (i == 0) {
-                    [str drawInRect:CGRectMake(self.axisMarginLeft, rect.size.height - self.axisMarginBottom, postOffset, self.longitudeFontSize)
-                           withFont:self.longitudeFont
-                      lineBreakMode:NSLineBreakByWordWrapping
-                          alignment:NSTextAlignmentLeft];
+//                    [str drawInRect:CGRectMake(self.axisMarginLeft, rect.size.height - self.axisMarginBottom, postOffset, self.longitudeFontSize)
+//                           withFont:self.longitudeFont
+//                      lineBreakMode:NSLineBreakByWordWrapping
+//                          alignment:NSTextAlignmentLeft];
+                    
+                    CGRect textRect= CGRectMake(self.axisMarginLeft, rect.size.height - self.axisMarginBottom, postOffset, self.longitudeFontSize);
+                    UIFont *textFont= self.longitudeFont; //设置字体
+                    NSMutableParagraphStyle *textStyle=[[NSMutableParagraphStyle alloc]init];//段落样式
+                    textStyle.alignment=NSTextAlignmentLeft;
+                    textStyle.lineBreakMode = NSLineBreakByWordWrapping;
+                    //绘制字体
+                    [str drawInRect:textRect withAttributes:@{NSFontAttributeName:textFont,NSParagraphStyleAttributeName:textStyle}];
                     
                 } else if (i == [self.longitudeTitles count] - 1) {
                     if (self.axisYPosition == CCSGridChartYAxisPositionLeft) {
-                        [str drawInRect:CGRectMake(rect.size.width - postOffset, rect.size.height - self.axisMarginBottom, postOffset, self.longitudeFontSize)
-                               withFont:self.longitudeFont
-                          lineBreakMode:NSLineBreakByWordWrapping
-                              alignment:NSTextAlignmentRight];
+//                        [str drawInRect:CGRectMake(rect.size.width - postOffset, rect.size.height - self.axisMarginBottom, postOffset, self.longitudeFontSize)
+//                               withFont:self.longitudeFont
+//                          lineBreakMode:NSLineBreakByWordWrapping
+//                              alignment:NSTextAlignmentRight];
+                        
+                        CGRect textRect= CGRectMake(rect.size.width - postOffset, rect.size.height - self.axisMarginBottom, postOffset, self.longitudeFontSize);
+                        UIFont *textFont= self.longitudeFont; //设置字体
+                        NSMutableParagraphStyle *textStyle=[[NSMutableParagraphStyle alloc]init];//段落样式
+                        textStyle.alignment=NSTextAlignmentRight;
+                        textStyle.lineBreakMode = NSLineBreakByWordWrapping;
+                        //绘制字体
+                        [str drawInRect:textRect withAttributes:@{NSFontAttributeName:textFont,NSParagraphStyleAttributeName:textStyle}];
+                        
                     } else {
-                        [str drawInRect:CGRectMake(offset + (i - 0.5) * postOffset, rect.size.height - self.axisMarginBottom, postOffset, self.longitudeFontSize)
-                               withFont:self.longitudeFont
-                          lineBreakMode:NSLineBreakByWordWrapping
-                              alignment:NSTextAlignmentCenter];
+//                        [str drawInRect:CGRectMake(offset + (i - 0.5) * postOffset, rect.size.height - self.axisMarginBottom, postOffset, self.longitudeFontSize)
+//                               withFont:self.longitudeFont
+//                          lineBreakMode:NSLineBreakByWordWrapping
+//                              alignment:NSTextAlignmentCenter];
+                        
+                        CGRect textRect= CGRectMake(offset + (i - 0.5) * postOffset, rect.size.height - self.axisMarginBottom, postOffset, self.longitudeFontSize);
+                        UIFont *textFont= self.longitudeFont; //设置字体
+                        NSMutableParagraphStyle *textStyle=[[NSMutableParagraphStyle alloc]init];//段落样式
+                        textStyle.alignment=NSTextAlignmentCenter;
+                        textStyle.lineBreakMode = NSLineBreakByWordWrapping;
+                        //绘制字体
+                        [str drawInRect:textRect withAttributes:@{NSFontAttributeName:textFont,NSParagraphStyleAttributeName:textStyle}];
                     }
                     
                 } else {
-                    [str drawInRect:CGRectMake(offset + (i - 0.5) * postOffset, rect.size.height - self.axisMarginBottom, postOffset, self.longitudeFontSize)
-                           withFont:self.longitudeFont
-                      lineBreakMode:NSLineBreakByWordWrapping
-                          alignment:NSTextAlignmentCenter];
+//                    [str drawInRect:CGRectMake(offset + (i - 0.5) * postOffset, rect.size.height - self.axisMarginBottom, postOffset, self.longitudeFontSize)
+//                           withFont:self.longitudeFont
+//                      lineBreakMode:NSLineBreakByWordWrapping
+//                          alignment:NSTextAlignmentCenter];
+                    
+                    CGRect textRect= CGRectMake(offset + (i - 0.5) * postOffset, rect.size.height - self.axisMarginBottom, postOffset, self.longitudeFontSize);
+                    UIFont *textFont= self.longitudeFont; //设置字体
+                    NSMutableParagraphStyle *textStyle=[[NSMutableParagraphStyle alloc]init];//段落样式
+                    textStyle.alignment=NSTextAlignmentCenter;
+                    textStyle.lineBreakMode = NSLineBreakByWordWrapping;
+                    //绘制字体
+                    [str drawInRect:textRect withAttributes:@{NSFontAttributeName:textFont,NSParagraphStyleAttributeName:textStyle}];
                 }
             }
         } else {
@@ -452,28 +535,61 @@
                 
                 //调整X轴坐标位置
                 if (i == 0) {
-                    [str drawInRect:CGRectMake(self.axisMarginLeft, 0, postOffset, self.longitudeFontSize)
-                           withFont:self.longitudeFont
-                      lineBreakMode:NSLineBreakByWordWrapping
-                          alignment:NSTextAlignmentLeft];
+//                    [str drawInRect:CGRectMake(self.axisMarginLeft, 0, postOffset, self.longitudeFontSize)
+//                           withFont:self.longitudeFont
+//                      lineBreakMode:NSLineBreakByWordWrapping
+//                          alignment:NSTextAlignmentLeft];
+                    
+                    CGRect textRect= CGRectMake(self.axisMarginLeft, 0, postOffset, self.longitudeFontSize);
+                    UIFont *textFont= self.longitudeFont; //设置字体
+                    NSMutableParagraphStyle *textStyle=[[NSMutableParagraphStyle alloc]init];//段落样式
+                    textStyle.alignment=NSTextAlignmentLeft;
+                    textStyle.lineBreakMode = NSLineBreakByWordWrapping;
+                    //绘制字体
+                    [str drawInRect:textRect withAttributes:@{NSFontAttributeName:textFont,NSParagraphStyleAttributeName:textStyle}];
                     
                 } else if (i == [self.longitudeTitles count] - 1) {
                     if (self.axisYPosition == CCSGridChartYAxisPositionLeft) {
-                        [str drawInRect:CGRectMake(rect.size.width - postOffset, 0, postOffset, self.longitudeFontSize)
-                               withFont:self.longitudeFont
-                          lineBreakMode:NSLineBreakByWordWrapping
-                              alignment:NSTextAlignmentRight];
+//                        [str drawInRect:CGRectMake(rect.size.width - postOffset, 0, postOffset, self.longitudeFontSize)
+//                               withFont:self.longitudeFont
+//                          lineBreakMode:NSLineBreakByWordWrapping
+//                              alignment:NSTextAlignmentRight];
+                        
+                        CGRect textRect= CGRectMake(rect.size.width - postOffset, 0, postOffset, self.longitudeFontSize);
+                        UIFont *textFont= self.longitudeFont; //设置字体
+                        NSMutableParagraphStyle *textStyle=[[NSMutableParagraphStyle alloc]init];//段落样式
+                        textStyle.alignment=NSTextAlignmentRight;
+                        textStyle.lineBreakMode = NSLineBreakByWordWrapping;
+                        //绘制字体
+                        [str drawInRect:textRect withAttributes:@{NSFontAttributeName:textFont,NSParagraphStyleAttributeName:textStyle}];
+                        
                     } else {
-                        [str drawInRect:CGRectMake(offset + (i - 0.5) * postOffset, 0, postOffset, self.longitudeFontSize)
-                               withFont:self.longitudeFont
-                          lineBreakMode:NSLineBreakByWordWrapping
-                              alignment:NSTextAlignmentCenter];
+//                        [str drawInRect:CGRectMake(offset + (i - 0.5) * postOffset, 0, postOffset, self.longitudeFontSize)
+//                               withFont:self.longitudeFont
+//                          lineBreakMode:NSLineBreakByWordWrapping
+//                              alignment:NSTextAlignmentCenter];
+                        
+                        CGRect textRect= CGRectMake(offset + (i - 0.5) * postOffset, 0, postOffset, self.longitudeFontSize);
+                        UIFont *textFont= self.longitudeFont; //设置字体
+                        NSMutableParagraphStyle *textStyle=[[NSMutableParagraphStyle alloc]init];//段落样式
+                        textStyle.alignment=NSTextAlignmentCenter;
+                        textStyle.lineBreakMode = NSLineBreakByWordWrapping;
+                        //绘制字体
+                        [str drawInRect:textRect withAttributes:@{NSFontAttributeName:textFont,NSParagraphStyleAttributeName:textStyle}];
                     }
                 } else {
-                    [str drawInRect:CGRectMake(offset + (i - 0.5) * postOffset, 0, postOffset, self.longitudeFontSize)
-                           withFont:self.longitudeFont
-                      lineBreakMode:NSLineBreakByWordWrapping
-                          alignment:NSTextAlignmentCenter];
+//                    [str drawInRect:CGRectMake(offset + (i - 0.5) * postOffset, 0, postOffset, self.longitudeFontSize)
+//                           withFont:self.longitudeFont
+//                      lineBreakMode:NSLineBreakByWordWrapping
+//                          alignment:NSTextAlignmentCenter];
+                    
+                    CGRect textRect= CGRectMake(offset + (i - 0.5) * postOffset, 0, postOffset, self.longitudeFontSize);
+                    UIFont *textFont= self.longitudeFont; //设置字体
+                    NSMutableParagraphStyle *textStyle=[[NSMutableParagraphStyle alloc]init];//段落样式
+                    textStyle.alignment=NSTextAlignmentCenter;
+                    textStyle.lineBreakMode = NSLineBreakByWordWrapping;
+                    //绘制字体
+                    [str drawInRect:textRect withAttributes:@{NSFontAttributeName:textFont,NSParagraphStyleAttributeName:textStyle}];
                 }
             }
         }
@@ -834,38 +950,38 @@
 }
 
 
-- (CGFloat)touchPointAxisXValue:(CGRect)rect {
+- (CCFloat )touchPointAxisXValue:(CGRect)rect {
     if (self.axisYPosition == CCSGridChartYAxisPositionLeft) {
-        float length = rect.size.width - self.axisMarginLeft - 2 * self.axisMarginRight;
-        float valueLength = self.singleTouchPoint.x - self.axisMarginLeft - self.axisMarginRight;
+        CCFloat length = rect.size.width - self.axisMarginLeft - 2 * self.axisMarginRight;
+        CCFloat valueLength = self.singleTouchPoint.x - self.axisMarginLeft - self.axisMarginRight;
 
         return valueLength / length;
     } else {
-        float length = rect.size.width - 2 * self.axisMarginLeft - self.axisMarginRight;
-        float valueLength = self.singleTouchPoint.x - self.axisMarginLeft;
+        CCFloat length = rect.size.width - 2 * self.axisMarginLeft - self.axisMarginRight;
+        CCFloat valueLength = self.singleTouchPoint.x - self.axisMarginLeft;
 
         return valueLength / length;
     }
 }
 
-- (CGFloat)touchPointAxisYValue:(CGRect)rect {
+- (CCFloat )touchPointAxisYValue:(CGRect)rect {
     if (self.axisXPosition == CCSGridChartXAxisPositionBottom) {
-        float length = rect.size.height - self.axisMarginBottom - 2 * self.axisMarginTop;
-        float valueLength = length - self.singleTouchPoint.y + self.axisMarginTop;
+        CCFloat length = rect.size.height - self.axisMarginBottom - 2 * self.axisMarginTop;
+        CCFloat valueLength = length - self.singleTouchPoint.y + self.axisMarginTop;
 
         return valueLength / length;
     }
     else {
-        float length = rect.size.height - 2 * self.axisMarginBottom - self.axisMarginTop;
-        float valueLength = length - self.singleTouchPoint.y - self.axisMarginBottom;
+        CCFloat length = rect.size.height - 2 * self.axisMarginBottom - self.axisMarginTop;
+        CCFloat valueLength = length - self.singleTouchPoint.y - self.axisMarginBottom;
 
         return valueLength / length;
     }
 }
 
 
-float _startDistance = 0;
-float _minDistance = 8;
+CCFloat _startDistance = 0;
+CCFloat _minDistance = 8;
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     //调用父类的触摸事件
@@ -906,7 +1022,7 @@ float _minDistance = 8;
         CGPoint pt1 = [[allTouches objectAtIndex:0] locationInView:self];
         CGPoint pt2 = [[allTouches objectAtIndex:1] locationInView:self];
 
-        float endDistance = fabsf(pt1.x - pt2.x);
+        CCFloat endDistance = fabsf(pt1.x - pt2.x);
         //放大
         if (endDistance - _startDistance > _minDistance) {
             [self zoomOut];

@@ -34,7 +34,7 @@
     return self;
 }
 
-- (id)initWithValue:(CGFloat)value date:(NSString *)date {
+- (id)initWithValue:(CCFloat)value date:(NSString *)date {
     self = [self init];
 
     if (self) {

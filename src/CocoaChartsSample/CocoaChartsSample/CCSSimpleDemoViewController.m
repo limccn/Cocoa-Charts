@@ -222,12 +222,12 @@
 - (void)initControllers {
     UISegmentedControl *segChartType = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"Candle", @"Bar", @"Line", nil]];
     segChartType.frame = CGRectMake(0, MARGIN_TOP + DEVICE_HEIGHT * 3 + 5, 200, 33);
-    segChartType.segmentedControlStyle = UISegmentedControlStyleBar;
+    //segChartType.segmentedControlStyle = UISegmentedControlStyleBar;
     [segChartType addTarget:self action:@selector(segChartTypeValueChaged:) forControlEvents:UIControlEventValueChanged];
 
     UISegmentedControl *segBottomChartType = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"VOL", @"MACD", @"KDJ", @"RSI", @"WR", @"CCI", @"BOLL", nil]];
     segBottomChartType.frame = CGRectMake(0, MARGIN_TOP + DEVICE_HEIGHT * 3 + 40, 320, 33);
-    segBottomChartType.segmentedControlStyle = UISegmentedControlStyleBar;
+    //segBottomChartType.segmentedControlStyle = UISegmentedControlStyleBar;
     [segBottomChartType addTarget:self action:@selector(segBottomChartTypeTypeValueChaged:) forControlEvents:UIControlEventValueChanged];
 
     UIScrollView *scrollViewBottomChart = [[UIScrollView alloc] init];
@@ -404,7 +404,7 @@
     self.lblSubTitle10.textColor = [UIColor blackColor];
 
     // 得到每页宽度
-    CGFloat pageWidth = self.scrollViewBottomChart.frame.size.width;
+    CCFloat pageWidth = self.scrollViewBottomChart.frame.size.width;
     // 根据当前的x坐标和页宽度计算出当前页数
     int page = (int) floor((self.scrollViewBottomChart.contentOffset.x - pageWidth / 2) / pageWidth) + 1;
     if (segmentedControl.selectedSegmentIndex != page) {
@@ -1648,7 +1648,7 @@
     return bollBanddata;
 }
 
-- (void)CCSChartBeTouchedOn:(CGPoint)point indexAt:(NSUInteger)index {
+- (void)CCSChartBeTouchedOn:(CGPoint)point indexAt:(CCUInt)index {
     if (0 == self.segBottomChartType.selectedSegmentIndex) {
         self.stickChart.singleTouchPoint = point;
         self.stickChart.selectedStickIndex = index;
@@ -1675,7 +1675,7 @@
     }
 }
 
-- (void)CCSChartDisplayChangedFrom:(NSUInteger)from number:(NSUInteger)number; {
+- (void)CCSChartDisplayChangedFrom:(CCUInt)from number:(CCUInt)number; {
     if (0 == self.segBottomChartType.selectedSegmentIndex) {
         self.stickChart.displayFrom = from;
         self.stickChart.displayNumber = number;
@@ -1709,7 +1709,7 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)sender {
     // 得到每页宽度
-    CGFloat pageWidth = sender.frame.size.width;
+    CCFloat pageWidth = sender.frame.size.width;
     // 根据当前的x坐标和页宽度计算出当前页数
     int page = (int) floor((sender.contentOffset.x - pageWidth / 2) / pageWidth) + 1;
 

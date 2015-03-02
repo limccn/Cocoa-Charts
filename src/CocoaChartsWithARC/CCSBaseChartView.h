@@ -19,8 +19,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
-#define PI 3.141592653f
+#import "CCSHeader.h"
 
 /*!
  CCSBaseChartView

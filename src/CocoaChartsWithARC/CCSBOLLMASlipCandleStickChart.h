@@ -21,13 +21,13 @@ typedef enum {
 @interface CCSBOLLMASlipCandleStickChart : CCSMASlipCandleStickChart {
     NSArray *_bollingerBandData;
     UIColor *_bollingerBandColor;
-    CGFloat _bollingerBandAlpha;
-    NSUInteger _bollingerBandStyle;
+    CCFloat _bollingerBandAlpha;
+    CCUInt _bollingerBandStyle;
 }
 
 @property(strong, nonatomic) NSArray *bollingerBandData;
 @property(strong, nonatomic) UIColor *bollingerBandColor;
-@property(assign, nonatomic) CGFloat bollingerBandAlpha;
-@property(assign, nonatomic) NSUInteger bollingerBandStyle;
+@property(assign, nonatomic) CCFloat bollingerBandAlpha;
+@property(assign, nonatomic) CCUInt bollingerBandStyle;
 
 @end

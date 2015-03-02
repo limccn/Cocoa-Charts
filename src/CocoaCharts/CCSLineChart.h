@@ -39,13 +39,13 @@ typedef enum {
  */
 @interface CCSLineChart : CCSGridChart {
     NSArray *_linesData;
-    NSUInteger _latitudeNum;
-    NSUInteger _longitudeNum;
-    NSUInteger _selectedIndex;
-    CGFloat _lineWidth;
-    CGFloat _maxValue;
-    CGFloat _minValue;
-    NSUInteger _axisCalc;
+    CCUInt _latitudeNum;
+    CCUInt _longitudeNum;
+    CCUInt _selectedIndex;
+    CCFloat _lineWidth;
+    CCFloat _maxValue;
+    CCFloat _minValue;
+    CCUInt _axisCalc;
     CCSLineAlignType _lineAlignType;
 }
 
@@ -60,47 +60,47 @@ typedef enum {
  Number of latitude lines
  显示纬线数 
  */
-@property(assign, nonatomic) NSUInteger latitudeNum;
+@property(assign, nonatomic) CCUInt latitudeNum;
 
 /*!
  Number of longitude lines
  显示经线数 
  */
-@property(assign, nonatomic) NSUInteger longitudeNum;
+@property(assign, nonatomic) CCUInt longitudeNum;
 
 /*! 
  Selected data's index
  选中的方柱位置
  */
-@property(assign, nonatomic) NSUInteger selectedIndex;
+@property(assign, nonatomic) CCUInt selectedIndex;
 
 /*! 
  Displayed line's width
  ラインのサイズ
  线宽
  */
-@property(assign, nonatomic) CGFloat lineWidth;
+@property(assign, nonatomic) CCFloat lineWidth;
 
 /*! 
  Max display value of axis Y
  Y軸の最大値
  Y轴显示最大值
  */
-@property(assign, nonatomic) CGFloat maxValue;
+@property(assign, nonatomic) CCFloat maxValue;
 
 /*! 
  Min display value of axis Y
  Y軸の最小値
  Y轴显示最小值
  */
-@property(assign, nonatomic) CGFloat minValue;
+@property(assign, nonatomic) CCFloat minValue;
 
 /*!
  fast calculator for axis Y degrees （display degrees＝degrees/axisCalc）
  Y軸目盛りの快速計算子，（表示目盛り＝計算目盛り/axisCalc）
  Y轴显示值的快速计算子（表示刻度＝ 计算刻度/axisCalc）
  */
-@property(assign, nonatomic) NSUInteger axisCalc;
+@property(assign, nonatomic) CCUInt axisCalc;
 
 @property(assign, nonatomic) CCSLineAlignType lineAlignType;
 
@@ -138,6 +138,6 @@ typedef enum {
 
 - (void)calcValueRange;
 
-- (CGFloat) calcValueY:(CGFloat)value inRect:(CGRect) rect;
+- (CCFloat) calcValueY:(CCFloat)value inRect:(CGRect) rect;
 
 @end

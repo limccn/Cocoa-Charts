@@ -36,7 +36,7 @@
     NSArray *_data;
     UIColor *_radiusColor;
     UIColor *_circleBorderColor;
-    NSUInteger _radius;
+    CCUInt _radius;
     BOOL _displayRadius;
     BOOL _displayValueTitle;
     CGPoint _position;
@@ -68,7 +68,7 @@
  丸の半径
  饼图的半径
  */
-@property(assign, nonatomic) NSUInteger radius;
+@property(assign, nonatomic) CCUInt radius;
 
 /*!
  Display the division lines?

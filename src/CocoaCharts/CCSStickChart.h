@@ -43,13 +43,13 @@ typedef enum {
     NSArray *_stickData;
     UIColor *_stickBorderColor;
     UIColor *_stickFillColor;
-    NSUInteger _latitudeNum;
-    NSUInteger _longitudeNum;
-    NSUInteger _maxSticksNum;
-    NSUInteger _selectedStickIndex;
-    CGFloat _maxValue;
-    CGFloat _minValue;
-    NSUInteger _axisCalc;
+    CCUInt _latitudeNum;
+    CCUInt _longitudeNum;
+    CCUInt _maxSticksNum;
+    CCUInt _selectedStickIndex;
+    CCFloat _maxValue;
+    CCFloat _minValue;
+    CCUInt _axisCalc;
     CCSStickChart *_coChart;
     CCSStickAlignType _stickAlignType;
 }
@@ -80,49 +80,49 @@ typedef enum {
  緯線の数量
  网格纬线的数量
  */
-@property(assign, nonatomic) NSUInteger latitudeNum;
+@property(assign, nonatomic) CCUInt latitudeNum;
 
 /*!
  Numbers of grid‘s longitude line
  経線の数量
  网格经线的数量
  */
-@property(assign, nonatomic) NSUInteger longitudeNum;
+@property(assign, nonatomic) CCUInt longitudeNum;
 
 /*!
  Max number of sticks
  スティックの最大数量
  表示柱条的最大数量
  */
-@property(assign, nonatomic) NSUInteger maxSticksNum;
+@property(assign, nonatomic) CCUInt maxSticksNum;
 
 /*!
  Selected index of sticks
  選べたスティック
  被选中的柱条
  */
-@property(assign, nonatomic) NSUInteger selectedStickIndex;
+@property(assign, nonatomic) CCUInt selectedStickIndex;
 
 /*!
  Max display value of axis Y
  Y軸の最大値
  Y轴显示最大值
  */
-@property(assign, nonatomic) CGFloat maxValue;
+@property(assign, nonatomic) CCFloat maxValue;
 
 /*!
  Min display value of axis Y
  Y軸の最小値
  Y轴显示最小值
  */
-@property(assign, nonatomic) CGFloat minValue;
+@property(assign, nonatomic) CCFloat minValue;
 
 /*!
  fast calculator for axis Y degrees （display degrees＝degrees/axisCalc）
  Y軸目盛りの快速計算子，（表示目盛り＝計算目盛り/axisCalc）
  Y轴显示值的快速计算子（表示刻度＝ 计算刻度/axisCalc）
  */
-@property(assign, nonatomic) NSUInteger axisCalc;
+@property(assign, nonatomic) CCUInt axisCalc;
 
 
 /*!
@@ -185,6 +185,6 @@ typedef enum {
 
 - (void)calcValueRange;
 
-- (CGFloat) calcValueY:(CGFloat)value inRect:(CGRect) rect;
+- (CCFloat) calcValueY:(CCFloat)value inRect:(CGRect) rect;
 
 @end

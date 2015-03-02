@@ -23,8 +23,8 @@
 
 @protocol CCSChartDelegate <NSObject>
 @optional
-- (void)CCSChartBeTouchedOn:(CGPoint)point indexAt:(NSUInteger) index;
-- (void)CCSChartDisplayChangedFrom:(NSUInteger)from number:(NSUInteger) number;
+- (void)CCSChartBeTouchedOn:(CGPoint)point indexAt:(CCUInt) index;
+- (void)CCSChartDisplayChangedFrom:(CCUInt)from number:(CCUInt) number;
 @end
 
 /*!
@@ -74,12 +74,12 @@ typedef enum {
     UIColor *_crossLinesFontColor;
     UIFont *_longitudeFont;
     UIFont *_latitudeFont;
-    CGFloat _axisMarginLeft;
-    CGFloat _axisMarginBottom;
-    CGFloat _axisMarginTop;
-    CGFloat _axisMarginRight;
-    NSUInteger _longitudeFontSize;
-    NSUInteger _latitudeFontSize;
+    CCFloat _axisMarginLeft;
+    CCFloat _axisMarginBottom;
+    CCFloat _axisMarginTop;
+    CCFloat _axisMarginRight;
+    CCUInt _longitudeFontSize;
+    CCUInt _latitudeFontSize;
     CCSGridChartXAxisPosition _axisXPosition;
     CCSGridChartYAxisPosition _axisYPosition;
     BOOL _displayLatitudeTitle;
@@ -181,42 +181,42 @@ typedef enum {
  轴線より左枠線の距離
  轴线左边距
  */
-@property(assign, nonatomic) CGFloat axisMarginLeft;
+@property(assign, nonatomic) CCFloat axisMarginLeft;
 
 /*!
  Margin of the axis to the bottom border
  轴線より下枠線の距離
  轴线下边距
  */
-@property(assign, nonatomic) CGFloat axisMarginBottom;
+@property(assign, nonatomic) CCFloat axisMarginBottom;
 
 /*!
  Margin of the axis to the top border
  轴線より上枠線の距離
  轴线上边距
  */
-@property(assign, nonatomic) CGFloat axisMarginTop;
+@property(assign, nonatomic) CCFloat axisMarginTop;
 
 /*!
  Margin of the axis to the top border
  轴線より右枠線の距離
  轴线右边距
  */
-@property(assign, nonatomic) CGFloat axisMarginRight;
+@property(assign, nonatomic) CCFloat axisMarginRight;
 
 /*!
  Font size of text for the longitude　degrees display
  経度のタイトルの文字サイズ
  经线刻度字体大小
  */
-@property(assign, nonatomic) NSUInteger longitudeFontSize;
+@property(assign, nonatomic) CCUInt longitudeFontSize;
 
 /*!
  Font size of text for the latitude　degrees display
  緯度のタイトルの文字サイズ
  纬线刻度字体大小
  */
-@property(assign, nonatomic) NSUInteger latitudeFontSize;
+@property(assign, nonatomic) CCUInt latitudeFontSize;
 
 /*!
  The position of X axis(top,bottom) reference:CCSGridChartAxisPosition
@@ -439,12 +439,12 @@ typedef enum {
  グリドのrect
  图表的rect
  
- @result CGFloat the calculated value
+ @result CCFloat the calculated value
  計算出した度数
  经度计算结果
  
  */
-- (CGFloat)touchPointAxisXValue:(CGRect)rect;
+- (CCFloat )touchPointAxisXValue:(CGRect)rect;
 
 /*!
  @abstract calculate the y axis display value of touched point (value:0.0～1.0)
@@ -455,11 +455,11 @@ typedef enum {
  グリドのrect
  图表的rect
  
- @result CGFloat the calculated value
+ @result CCFloat the calculated value
  計算出した度数］
  纬度计算结果
  */
-- (CGFloat)touchPointAxisYValue:(CGRect)rect;
+- (CCFloat )touchPointAxisYValue:(CGRect)rect;
 
 /*!
  @abstract Zoom out the grid

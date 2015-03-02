@@ -18,6 +18,8 @@
 //  limitations under the License.
 //
 
+#import "CCSHeader.h"
+
 //Ver0.1
 #import "CCSBaseChartView.h"
 #import "CCSGridChart.h"

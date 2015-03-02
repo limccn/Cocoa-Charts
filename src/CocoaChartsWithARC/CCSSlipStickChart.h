@@ -16,16 +16,16 @@ typedef enum {
 
 
 @interface CCSSlipStickChart : CCSStickChart {
-    NSUInteger _displayNumber;
-    NSUInteger _displayFrom;
-    NSUInteger _minDisplayNumber;
-    NSUInteger _zoomBaseLine;
+    CCUInt _displayNumber;
+    CCUInt _displayFrom;
+    CCUInt _minDisplayNumber;
+    CCUInt _zoomBaseLine;
 }
 
-@property(assign, nonatomic, setter = setDisplayNumber:) NSUInteger displayNumber;
-@property(assign, nonatomic, setter = setDisplayFrom:) NSUInteger displayFrom;
-@property(assign, nonatomic) NSUInteger minDisplayNumber;
+@property(assign, nonatomic, setter = setDisplayNumber:) CCUInt displayNumber;
+@property(assign, nonatomic, setter = setDisplayFrom:) CCUInt displayFrom;
+@property(assign, nonatomic) CCUInt minDisplayNumber;
 
-@property(assign, nonatomic) NSUInteger zoomBaseLine;
+@property(assign, nonatomic) CCUInt zoomBaseLine;
 
 @end

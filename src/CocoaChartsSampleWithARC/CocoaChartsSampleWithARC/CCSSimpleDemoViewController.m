@@ -159,12 +159,12 @@
 - (void)initControllers {
     UISegmentedControl *segChartType = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"Candle", @"Bar", @"Line", nil]];
     segChartType.frame = CGRectMake(0, MARGIN_TOP + DEVICE_HEIGHT * 3 + 5, 200, 33);
-    segChartType.segmentedControlStyle = UISegmentedControlStyleBar;
+    //segChartType.segmentedControlStyle = UISegmentedControlStyleBar;
     [segChartType addTarget:self action:@selector(segChartTypeValueChaged:) forControlEvents:UIControlEventValueChanged];
 
     UISegmentedControl *segBottomChartType = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"VOL", @"MACD", @"KDJ", @"RSI", @"WR", @"CCI", @"BOLL", nil]];
     segBottomChartType.frame = CGRectMake(0, MARGIN_TOP + DEVICE_HEIGHT * 3 + 40, 320, 33);
-    segBottomChartType.segmentedControlStyle = UISegmentedControlStyleBar;
+    //segBottomChartType.segmentedControlStyle = UISegmentedControlStyleBar;
     [segBottomChartType addTarget:self action:@selector(segBottomChartTypeTypeValueChaged:) forControlEvents:UIControlEventValueChanged];
 
     UIScrollView *scrollViewBottomChart = [[UIScrollView alloc] init];

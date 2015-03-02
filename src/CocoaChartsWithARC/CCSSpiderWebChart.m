@@ -53,9 +53,9 @@
     self.data = nil;
 
     //获得安全高度宽度
-    NSUInteger height = self.frame.size.height;
+    CCUInt height = self.frame.size.height;
     //绘图高宽度
-    self.longitudeLength = (NSUInteger) ((height / 2.0f) * 0.9);
+    self.longitudeLength = (CCUInt) ((height / 2.0f) * 0.9);
     //绘制点
     self.position = CGPointMake((self.frame.size.width / 2.0f), (int) (self.frame.size.height / 2.0f + 0.2 * self.longitudeLength));
 }
@@ -63,9 +63,9 @@
 
 - (void)drawRect:(CGRect)rect {
     //获得安全高度宽度
-    NSUInteger height = (NSUInteger) rect.size.height;
+    CCUInt height = (CCUInt) rect.size.height;
     //绘图高宽度
-    self.longitudeLength = (NSUInteger) ((height / 2.0f) * 0.9);
+    self.longitudeLength = (CCUInt) ((height / 2.0f) * 0.9);
     //绘制点
     self.position = CGPointMake((self.frame.size.width / 2.0f), (int) (self.frame.size.height / 2.0f + 0.2 * self.longitudeLength));
 
@@ -84,7 +84,7 @@
 
     if (self.data != NULL) {
         // 遍历每一条数据列表
-        for (NSUInteger j = 0; j < [self.data count]; j++) {
+        for (CCUInt j = 0; j < [self.data count]; j++) {
             CCSTitleValuesColor *entity = [self.data objectAtIndex:j];
 
             CGContextSetFillColorWithColor(context, entity.color.CGColor);
@@ -94,12 +94,12 @@
             NSArray *values = entity.values;
             // 获取Path
             //绘制Web图
-            for (NSUInteger i = 0; i < self.longitudeNum; i++) {
+            for (CCUInt i = 0; i < self.longitudeNum; i++) {
                 //获取值
-                float value = [((NSNumber *) [values objectAtIndex:i]) floatValue];
+                CCFloat value = [((NSNumber *) [values objectAtIndex:i]) doubleValue];
 
-                float ptX = (float) (self.position.x - self.longitudeLength * value / self.latitudeNum * sin(i * 2 * PI / self.longitudeNum));
-                float ptY = (float) (self.position.y - self.longitudeLength * value / self.latitudeNum * cos(i * 2 * PI / self.longitudeNum));
+                CCFloat ptX = (CCFloat) (self.position.x - self.longitudeLength * value / self.latitudeNum * sin(i * 2 * PI / self.longitudeNum));
+                CCFloat ptY = (CCFloat) (self.position.y - self.longitudeLength * value / self.latitudeNum * cos(i * 2 * PI / self.longitudeNum));
 
                 if (i == 0) {
                     CGContextMoveToPoint(context, ptX, ptY);
@@ -132,10 +132,10 @@
     CGContextSetFillColorWithColor(context, self.spiderWebFillColor.CGColor);
 
     //绘制蛛网图外围边框与填充
-    for (NSUInteger i = 0; i < self.longitudeNum; i++) {
+    for (CCUInt i = 0; i < self.longitudeNum; i++) {
 
-        float ptX = (float) (self.position.x - self.longitudeLength * sin(i * 2 * PI / self.longitudeNum));
-        float ptY = (float) (self.position.y - self.longitudeLength * cos(i * 2 * PI / self.longitudeNum));
+        CCFloat ptX = (CCFloat) (self.position.x - self.longitudeLength * sin(i * 2 * PI / self.longitudeNum));
+        CCFloat ptY = (CCFloat) (self.position.y - self.longitudeLength * cos(i * 2 * PI / self.longitudeNum));
 
         if (i == 0) {
             CGContextMoveToPoint(context, ptX, ptY);
@@ -145,8 +145,8 @@
 
         //绘制标题
         NSString *title = [self.titles objectAtIndex:i];
-        float realx = 0;
-        float realy = 0;
+        CCFloat realx = 0;
+        CCFloat realy = 0;
 
         //重新计算坐标
         //TODO 计算算法日后完善
@@ -171,10 +171,19 @@
         UIFont *font = [UIFont fontWithName:@"Arial" size:11];
 
         //调整X轴坐标位置
-        [title drawInRect:CGRectMake(realx, realy, 44, 11)
-                 withFont:font
-            lineBreakMode:NSLineBreakByWordWrapping
-                alignment:NSTextAlignmentCenter];
+//        [title drawInRect:CGRectMake(realx, realy, 44, 11)
+//                 withFont:font
+//            lineBreakMode:NSLineBreakByWordWrapping
+//                alignment:NSTextAlignmentCenter];
+        
+        CGRect textRect= CGRectMake(realx, realy, 44, 11);
+        UIFont *textFont= font; //设置字体
+        NSMutableParagraphStyle *textStyle=[[NSMutableParagraphStyle alloc]init];//段落样式
+        textStyle.alignment=NSTextAlignmentCenter;
+        textStyle.lineBreakMode = NSLineBreakByWordWrapping;
+        //绘制字体
+        [title drawInRect:textRect withAttributes:@{NSFontAttributeName:textFont,NSParagraphStyleAttributeName:textStyle}];
+        
         CGContextSetFillColorWithColor(context, self.spiderWebFillColor.CGColor);
     }
     CGContextClosePath(context);
@@ -194,12 +203,12 @@
 
     CGContextSetLineWidth(context, 1.0f);
     //绘制内部蜘蛛网
-    for (NSUInteger j = 1; j < self.latitudeNum; j++) {
+    for (CCUInt j = 1; j < self.latitudeNum; j++) {
 
         //绘制Web图
-        for (int i = 0; i < self.longitudeNum; i++) {
-            float ptX = (float) (self.position.x - self.longitudeLength * j * 1.0f / self.latitudeNum * sin(i * 2 * PI / self.longitudeNum));
-            float ptY = (float) (self.position.y - self.longitudeLength * j * 1.0f / self.latitudeNum * cos(i * 2 * PI / self.longitudeNum));
+        for (CCInt i = 0; i < self.longitudeNum; i++) {
+            CCFloat ptX = (CCFloat) (self.position.x - self.longitudeLength * j * 1.0f / self.latitudeNum * sin(i * 2 * PI / self.longitudeNum));
+            CCFloat ptY = (CCFloat) (self.position.y - self.longitudeLength * j * 1.0f / self.latitudeNum * cos(i * 2 * PI / self.longitudeNum));
 
             if (i == 0) {
                 CGContextMoveToPoint(context, ptX, ptY);
@@ -213,10 +222,10 @@
 
     CGContextSetStrokeColorWithColor(context, self.longitudeColor.CGColor);
     //绘制蛛网经线
-    for (NSUInteger i = 0; i < self.longitudeNum; i++) {
+    for (CCUInt i = 0; i < self.longitudeNum; i++) {
 
-        float ptX = (float) (self.position.x - self.longitudeLength * sin(i * 2 * PI / self.longitudeNum));
-        float ptY = (float) (self.position.y - self.longitudeLength * cos(i * 2 * PI / self.longitudeNum));
+        CCFloat ptX = (CCFloat) (self.position.x - self.longitudeLength * sin(i * 2 * PI / self.longitudeNum));
+        CCFloat ptY = (CCFloat) (self.position.y - self.longitudeLength * cos(i * 2 * PI / self.longitudeNum));
 
         CGContextMoveToPoint(context, self.position.x, self.position.y);
         CGContextAddLineToPoint(context, ptX, ptY);

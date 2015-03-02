@@ -59,8 +59,8 @@
 - (void)calcValueRange {
     if (self.stickData != NULL && [self.stickData count] > 0) {
 
-        double maxValue = 0;
-        double minValue = NSIntegerMax;
+        CCFloat maxValue = 0;
+        CCFloat minValue = CCIntMax;
 
         CCSCandleStickChartData *first = [self.stickData objectAtIndex:0];
 
@@ -75,7 +75,7 @@
 
         //判断显示为方柱或显示为线条
         if (self.axisYPosition == CCSGridChartYAxisPositionLeft) {
-            for (NSUInteger i = 0; i < self.maxSticksNum; i++) {
+            for (CCUInt i = 0; i < self.maxSticksNum; i++) {
                 CCSCandleStickChartData *stick = [self.stickData objectAtIndex:i];
                 if (stick.open == 0 && stick.high == 0 && stick.low == 0) {
                     //停盘期间计算收盘价
@@ -124,18 +124,18 @@
             }
         }
 
-        if ((long) maxValue > (long) minValue) {
-            if (((long) maxValue - (long) minValue) < 10 && minValue > 1) {
-                self.maxValue = (long) (maxValue + 1);
-                self.minValue = (long) (minValue - 1);
+        if ((CCInt) maxValue > (CCInt) minValue) {
+            if (((CCInt) maxValue - (CCInt) minValue) < 10 && minValue > 1) {
+                self.maxValue = (CCInt) (maxValue + 1);
+                self.minValue = (CCInt) (minValue - 1);
             } else {
-                self.maxValue = (long) (maxValue + (maxValue - minValue) * 0.1);
-                self.minValue = (long) (minValue - (maxValue - minValue) * 0.1);
+                self.maxValue = (CCInt) (maxValue + (maxValue - minValue) * 0.1);
+                self.minValue = (CCInt) (minValue - (maxValue - minValue) * 0.1);
                 if (self.minValue < 0) {
                     self.minValue = 0;
                 }
             }
-        } else if ((long) maxValue == (long) minValue) {
+        } else if ((CCInt) maxValue == (CCInt) minValue) {
             if (maxValue <= 10 && maxValue > 1) {
                 self.maxValue = maxValue + 1;
                 self.minValue = minValue - 1;
@@ -170,7 +170,7 @@
         self.minValue = 0;
     }
 
-    int rate = 1;
+    CCInt rate = 1;
 
     if (self.maxValue < 3000) {
         rate = 1;
@@ -197,26 +197,26 @@
     }
 
     //等分轴修正
-    if (self.latitudeNum > 0 && rate > 1 && (long) (self.minValue) % rate != 0) {
+    if (self.latitudeNum > 0 && rate > 1 && (CCInt) (self.minValue) % rate != 0) {
         //最大值加上轴差
-        self.minValue = (long) self.minValue - ((long) (self.minValue) % rate);
+        self.minValue = (CCInt) self.minValue - ((CCInt) (self.minValue) % rate);
     }
     //等分轴修正
-    if (self.latitudeNum > 0 && (long) (self.maxValue - self.minValue) % (self.latitudeNum * rate) != 0) {
+    if (self.latitudeNum > 0 && (CCInt) (self.maxValue - self.minValue) % (self.latitudeNum * rate) != 0) {
         //最大值加上轴差
-        self.maxValue = (long) self.maxValue + (self.latitudeNum * rate) - ((long) (self.maxValue - self.minValue) % (self.latitudeNum * rate));
+        self.maxValue = (CCInt) self.maxValue + (self.latitudeNum * rate) - ((CCInt) (self.maxValue - self.minValue) % (self.latitudeNum * rate));
     }
 }
 
 - (void)initAxisX {
     NSMutableArray *TitleX = [[[NSMutableArray alloc] init] autorelease];
     if (self.stickData != NULL && [self.stickData count] > 0) {
-        CGFloat average = 1.0 * self.maxSticksNum / self.longitudeNum;
+        CCFloat average = 1.0 * self.maxSticksNum / self.longitudeNum;
         if (self.axisYPosition == CCSGridChartYAxisPositionLeft) {
             CCSCandleStickChartData *chartdata = nil;
             //处理刻度
-            for (NSUInteger i = 0; i < self.longitudeNum; i++) {
-                NSUInteger index = (NSUInteger) floor(i * average);
+            for (CCUInt i = 0; i < self.longitudeNum; i++) {
+                CCUInt index = (CCUInt) floor(i * average);
                 if (index > self.maxSticksNum - 1) {
                     index = self.maxSticksNum - 1;
                 }
@@ -230,8 +230,8 @@
         } else {
             CCSCandleStickChartData *chartdata = nil;
             //处理刻度
-            for (NSUInteger i = 0; i < self.longitudeNum; i++) {
-                NSUInteger index = [self.stickData count] - self.maxSticksNum + (NSUInteger) floor(i * average);
+            for (CCUInt i = 0; i < self.longitudeNum; i++) {
+                CCUInt index = [self.stickData count] - self.maxSticksNum + (CCUInt) floor(i * average);
                 if (index > [self.stickData count] - 1) {
                     index = [self.stickData count] - 1;
                 }
@@ -261,7 +261,7 @@
 
 - (void)drawData:(CGRect)rect {
     // 蜡烛棒宽度
-    CGFloat stickWidth = ([self dataQuadrantPaddingWidth:rect] / self.maxSticksNum) - 1;
+    CCFloat stickWidth = ([self dataQuadrantPaddingWidth:rect] / self.maxSticksNum) - 1;
 
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSetLineWidth(context, 1.0f);
@@ -270,13 +270,13 @@
         //判断Y轴的位置设置从左往右还是从右往左绘制
         if (self.axisYPosition == CCSGridChartYAxisPositionLeft) {
             // 蜡烛棒起始绘制位置
-            CGFloat stickX = [self dataQuadrantPaddingStartX:rect] + 1;
-            for (NSUInteger i = 0; i < [self.stickData count]; i++) {
+            CCFloat stickX = [self dataQuadrantPaddingStartX:rect] + 1;
+            for (CCUInt i = 0; i < [self.stickData count]; i++) {
                 CCSCandleStickChartData *data = [self.stickData objectAtIndex:i];
-                CGFloat openY = [self calcValueY:data.open inRect:rect];
-                CGFloat highY = [self calcValueY:data.high inRect:rect];
-                CGFloat lowY = [self calcValueY:data.low inRect:rect];
-                CGFloat closeY = [self calcValueY:data.close inRect:rect];
+                CCFloat openY = [self calcValueY:data.open inRect:rect];
+                CCFloat highY = [self calcValueY:data.high inRect:rect];
+                CCFloat lowY = [self calcValueY:data.low inRect:rect];
+                CCFloat closeY = [self calcValueY:data.close inRect:rect];
 
                 // 处理和生产K线中的阴线和阳线
                 if (data.open == 0 && data.high == 0 && data.low == 0) {
@@ -368,13 +368,13 @@
             }
         } else {
             // 蜡烛棒起始绘制位置
-            CGFloat stickX = [self dataQuadrantPaddingEndX:rect] - 1 - stickWidth;
+            CCFloat stickX = [self dataQuadrantPaddingEndX:rect] - 1 - stickWidth;
             for (NSInteger i = [self.stickData count] - 1; i >= 0; i--) {
                 CCSCandleStickChartData *data = [self.stickData objectAtIndex:i];
-                CGFloat openY = [self calcValueY:data.open inRect:rect];
-                CGFloat highY = [self calcValueY:data.high inRect:rect];
-                CGFloat lowY = [self calcValueY:data.low inRect:rect];
-                CGFloat closeY = [self calcValueY:data.close inRect:rect];
+                CCFloat openY = [self calcValueY:data.open inRect:rect];
+                CCFloat highY = [self calcValueY:data.high inRect:rect];
+                CCFloat lowY = [self calcValueY:data.low inRect:rect];
+                CCFloat closeY = [self calcValueY:data.close inRect:rect];
 
                 // 处理和生产K线中的阴线和阳线
                 if (data.open == 0 && data.high == 0 && data.low == 0) {

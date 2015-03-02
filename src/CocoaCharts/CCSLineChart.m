@@ -40,8 +40,8 @@
 
     self.latitudeNum = 3;
     self.longitudeNum = 3;
-    self.maxValue = NSIntegerMin;
-    self.minValue = NSIntegerMax;
+    self.maxValue = CCIntMin;
+    self.minValue = CCIntMax;
     self.selectedIndex = 0;
     self.lineWidth = 1.0f;
     self.axisCalc = 1;
@@ -57,14 +57,14 @@
 
 - (void)calcDataValueRange
 {
-    double maxValue = 0;
-    double minValue = NSIntegerMax;
+    CCFloat maxValue = 0;
+    CCFloat minValue = CCIntMax;
     //逐条输出MA线
-    for (NSUInteger i = 0; i < [self.linesData count]; i++) {
+    for (CCUInt i = 0; i < [self.linesData count]; i++) {
         CCSTitledLine *line = [self.linesData objectAtIndex:i];
         if (line != NULL && [line.data count] > 0) {
             //判断显示为方柱或显示为线条
-            for (NSUInteger j = 0; j < [line.data count]; j++) {
+            for (CCUInt j = 0; j < [line.data count]; j++) {
                 CCSLineData *lineData = [line.data objectAtIndex:j];
                 if (lineData.value < minValue) {
                     minValue = lineData.value;
@@ -84,22 +84,22 @@
 
 - (void)calcValueRangePaddingZero
 {
-    double maxValue = self.maxValue;
-    double minValue = self.minValue;
+    CCFloat maxValue = self.maxValue;
+    CCFloat minValue = self.minValue;
     
-    if ((long) maxValue > (long) minValue) {
+    if ((CCInt) maxValue > (CCInt) minValue) {
         if ((maxValue - minValue) < 10. && minValue > 1.) {
-            self.maxValue = (long) (maxValue + 1);
-            self.minValue = (long) (minValue - 1);
+            self.maxValue = (CCInt) (maxValue + 1);
+            self.minValue = (CCInt) (minValue - 1);
         } else {
-            self.maxValue = (long) (maxValue + (maxValue - minValue) * 0.1);
-            self.minValue = (long) (minValue - (maxValue - minValue) * 0.1);
+            self.maxValue = (CCInt) (maxValue + (maxValue - minValue) * 0.1);
+            self.minValue = (CCInt) (minValue - (maxValue - minValue) * 0.1);
             
             if (self.minValue < 0) {
                 self.minValue = 0;
             }
         }
-    } else if ((long) maxValue == (long) minValue) {
+    } else if ((CCInt) maxValue == (CCInt) minValue) {
         if (maxValue <= 10 && maxValue > 1) {
             self.maxValue = maxValue + 1;
             self.minValue = minValue - 1;
@@ -133,7 +133,7 @@
 
 - (void)calcValueRangeFormatForAxis
 {
-    int rate = 1;
+    CCInt rate = 1;
     
     if (self.maxValue < 3000) {
         rate = 1;
@@ -160,14 +160,14 @@
     }
     
     //等分轴修正
-    if (self.latitudeNum > 0 && rate > 1 && (long) (self.minValue) % rate != 0) {
+    if (self.latitudeNum > 0 && rate > 1 && (CCInt) (self.minValue) % rate != 0) {
         //最大值加上轴差
-        self.minValue = (long) self.minValue - ((long) (self.minValue) % rate);
+        self.minValue = (CCInt) self.minValue - ((CCInt) (self.minValue) % rate);
     }
     //等分轴修正
-    if (self.latitudeNum > 0 && (long) (self.maxValue - self.minValue) % (self.latitudeNum * rate) != 0) {
+    if (self.latitudeNum > 0 && (CCInt) (self.maxValue - self.minValue) % (self.latitudeNum * rate) != 0) {
         //最大值加上轴差
-        self.maxValue = (long) self.maxValue + (self.latitudeNum * rate) - ((long) (self.maxValue - self.minValue) % (self.latitudeNum * rate));
+        self.maxValue = (CCInt) self.maxValue + (self.latitudeNum * rate) - ((CCInt) (self.maxValue - self.minValue) % (self.latitudeNum * rate));
     }
     
     //    //等分轴修正
@@ -205,9 +205,9 @@
 - (void)drawData:(CGRect)rect {
 
     // 起始位置
-    CGFloat startX = 0;
-    CGFloat lastY = 0;
-    CGFloat lineLength = 0;
+    CCFloat startX = 0;
+    CCFloat lastY = 0;
+    CCFloat lineLength = 0;
 
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSetLineWidth(context, self.lineWidth);
@@ -219,7 +219,7 @@
     }
 
     //逐条输出
-    for (NSUInteger i = 0; i < [self.linesData count]; i++) {
+    for (CCUInt i = 0; i < [self.linesData count]; i++) {
         CCSTitledLine *line = [self.linesData objectAtIndex:i];
         //line为空
         if (line == NULL) {
@@ -248,10 +248,10 @@
 
 
             //遍历并绘制线条
-            for (NSUInteger j = 0; j < [lineDatas count]; j++) {
+            for (CCUInt j = 0; j < [lineDatas count]; j++) {
                 CCSLineData *lineData = [lineDatas objectAtIndex:j];
                 //获取终点Y坐标
-                CGFloat valueY = [self calcValueY:lineData.value inRect:rect];
+                CCFloat valueY = [self calcValueY:lineData.value inRect:rect];
                 //绘制线条路径
                 if (j == 0) {
                     CGContextMoveToPoint(context, startX, valueY);
@@ -289,17 +289,17 @@
                 //1根则绘制一条直线
                 CCSLineData *lineData = [lineDatas objectAtIndex:0];
                 //获取终点Y坐标
-                CGFloat valueY =  [self calcValueY:lineData.value inRect:rect];
+                CCFloat valueY =  [self calcValueY:lineData.value inRect:rect];
 
                 CGContextMoveToPoint(context, startX, valueY);
                 CGContextAddLineToPoint(context, [self dataQuadrantPaddingStartX:rect], valueY);
 
             } else {
                 //遍历并绘制线条
-                for (NSInteger j = [lineDatas count] - 1; j >= 0; j--) {
+                for (CCInt j = [lineDatas count] - 1; j >= 0; j--) {
                     CCSLineData *lineData = [lineDatas objectAtIndex:j];
                     //获取终点Y坐标
-                    CGFloat valueY = [self calcValueY:lineData.value inRect:rect];
+                    CCFloat valueY = [self calcValueY:lineData.value inRect:rect];
                     //绘制线条路径
                     if (j == [lineDatas count] - 1) {
                         CGContextMoveToPoint(context, startX, valueY);
@@ -343,8 +343,8 @@
         CGContextSetLineDash(context, 0.0, lengths, 2);
     }
     
-    CGFloat postOffset,offset;
-    CGFloat lineLength=0;
+    CCFloat postOffset,offset;
+    CCFloat lineLength=0;
     
     if (self.linesData != nil && [self.linesData count] >0) {
         CCSTitledLine *line = [self.linesData objectAtIndex:0];
@@ -361,7 +361,7 @@
         offset = [self dataQuadrantPaddingStartX:rect];
     }
     
-    for (NSUInteger i = 0; i < [self.longitudeTitles count]; i++) {
+    for (CCUInt i = 0; i < [self.longitudeTitles count]; i++) {
         CGContextMoveToPoint(context, offset + i * postOffset, [self dataQuadrantStartY:rect]);
         CGContextAddLineToPoint(context, offset + i * postOffset, [self dataQuadrantEndY:rect]);
     }
@@ -389,8 +389,8 @@
         return;
     }
     
-    CGFloat postOffset,offset;
-    CGFloat lineLength=0;
+    CCFloat postOffset,offset;
+    CCFloat lineLength=0;
     
     if (self.linesData != nil && [self.linesData count] >0) {
         CCSTitledLine *line = [self.linesData objectAtIndex:0];
@@ -408,8 +408,8 @@
         offset = [self dataQuadrantPaddingStartX:rect];
     }
     
-    for (NSUInteger i = 0; i < [self.longitudeTitles count]; i++) {
-        CGFloat startY;
+    for (CCUInt i = 0; i < [self.longitudeTitles count]; i++) {
+        CCFloat startY;
         if (self.axisXPosition == CCSGridChartXAxisPositionBottom) {
             startY = [self dataQuadrantEndY:rect] + [self axisWidth];
         }else{
@@ -419,30 +419,64 @@
         NSString *str = (NSString *) [self.longitudeTitles objectAtIndex:i];
         
         //调整X轴坐标位置
+        //调整X轴坐标位置
         if (i == 0) {
-            [str drawInRect:CGRectMake([self dataQuadrantPaddingStartX:rect], startY, postOffset, self.longitudeFontSize)
-                   withFont:self.longitudeFont
-              lineBreakMode:NSLineBreakByWordWrapping
-                  alignment:NSTextAlignmentLeft];
+            //            [str drawInRect:CGRectMake([self dataQuadrantPaddingStartX:rect], startY, postOffset, self.longitudeFontSize)
+            //                   withFont:self.longitudeFont
+            //              lineBreakMode:NSLineBreakByWordWrapping
+            //                  alignment:NSTextAlignmentLeft];
+            
+            CGRect textRect= CGRectMake([self dataQuadrantPaddingStartX:rect], startY, postOffset, self.longitudeFontSize);
+            UIFont *textFont= self.longitudeFont; //设置字体
+            NSMutableParagraphStyle *textStyle=[[[NSMutableParagraphStyle alloc]init]autorelease];//段落样式
+            textStyle.alignment=NSTextAlignmentLeft;
+            textStyle.lineBreakMode = NSLineBreakByWordWrapping;
+            //绘制字体
+            [str drawInRect:textRect withAttributes:@{NSFontAttributeName:textFont,NSParagraphStyleAttributeName:textStyle}];
             
         } else if (i == [self.longitudeTitles count] - 1) {
             if (self.axisYPosition == CCSGridChartYAxisPositionLeft) {
-                [str drawInRect:CGRectMake(rect.size.width - postOffset, startY, postOffset, self.longitudeFontSize)
-                       withFont:self.longitudeFont
-                  lineBreakMode:NSLineBreakByWordWrapping
-                      alignment:NSTextAlignmentRight];
+                //                [str drawInRect:CGRectMake(rect.size.width - postOffset, startY, postOffset, self.longitudeFontSize)
+                //                       withFont:self.longitudeFont
+                //                  lineBreakMode:NSLineBreakByWordWrapping
+                //                      alignment:NSTextAlignmentRight];
+                
+                CGRect textRect= CGRectMake(rect.size.width - postOffset, startY, postOffset, self.longitudeFontSize);
+                UIFont *textFont= self.longitudeFont; //设置字体
+                NSMutableParagraphStyle *textStyle=[[[NSMutableParagraphStyle alloc]init]autorelease];//段落样式
+                textStyle.alignment=NSTextAlignmentRight;
+                textStyle.lineBreakMode = NSLineBreakByWordWrapping;
+                //绘制字体
+                [str drawInRect:textRect withAttributes:@{NSFontAttributeName:textFont,NSParagraphStyleAttributeName:textStyle}];
+                
             } else {
-                [str drawInRect:CGRectMake(offset + (i - 0.5) * postOffset, startY, postOffset, self.longitudeFontSize)
-                       withFont:self.longitudeFont
-                  lineBreakMode:NSLineBreakByWordWrapping
-                      alignment:NSTextAlignmentCenter];
+                //                [str drawInRect:CGRectMake(offset + (i - 0.5) * postOffset, startY, postOffset, self.longitudeFontSize)
+                //                       withFont:self.longitudeFont
+                //                  lineBreakMode:NSLineBreakByWordWrapping
+                //                      alignment:NSTextAlignmentCenter];
+                
+                CGRect textRect= CGRectMake(offset + (i - 0.5) * postOffset, startY, postOffset, self.longitudeFontSize);
+                UIFont *textFont= self.longitudeFont; //设置字体
+                NSMutableParagraphStyle *textStyle=[[[NSMutableParagraphStyle alloc]init]autorelease];//段落样式
+                textStyle.alignment=NSTextAlignmentCenter;
+                textStyle.lineBreakMode = NSLineBreakByWordWrapping;
+                //绘制字体
+                [str drawInRect:textRect withAttributes:@{NSFontAttributeName:textFont,NSParagraphStyleAttributeName:textStyle}];
             }
             
         } else {
-            [str drawInRect:CGRectMake(offset + (i - 0.5) * postOffset, startY, postOffset, self.longitudeFontSize)
-                   withFont:self.longitudeFont
-              lineBreakMode:NSLineBreakByWordWrapping
-                  alignment:NSTextAlignmentCenter];
+            //            [str drawInRect:CGRectMake(offset + (i - 0.5) * postOffset, startY, postOffset, self.longitudeFontSize)
+            //                   withFont:self.longitudeFont
+            //              lineBreakMode:NSLineBreakByWordWrapping
+            //                  alignment:NSTextAlignmentCenter];
+            
+            CGRect textRect= CGRectMake(offset + (i - 0.5) * postOffset, startY, postOffset, self.longitudeFontSize);
+            UIFont *textFont= self.longitudeFont; //设置字体
+            NSMutableParagraphStyle *textStyle=[[[NSMutableParagraphStyle alloc]init]autorelease];//段落样式
+            textStyle.alignment=NSTextAlignmentCenter;
+            textStyle.lineBreakMode = NSLineBreakByWordWrapping;
+            //绘制字体
+            [str drawInRect:textRect withAttributes:@{NSFontAttributeName:textFont,NSParagraphStyleAttributeName:textStyle}];
         }
     }
 }
@@ -468,12 +502,12 @@
 //    }
 //    //设置线条为点线
 //    if (self.dashLongitude) {
-//        CGFloat lengths[] = {3.0, 3.0};
+//        CCFloat lengths[] = {3.0, 3.0};
 //        CGContextSetLineDash(context, 0.0, lengths, 2);
 //    }
-//    CGFloat postOffset;
-//    CGFloat offset;
-//    CGFloat lineLength = 0;
+//    CCFloat postOffset;
+//    CCFloat offset;
+//    CCFloat lineLength = 0;
 //    
 //    if (self.linesData != nil && [self.linesData count] >0) {
 //        CCSTitledLine *line = [self.linesData objectAtIndex:0];
@@ -486,7 +520,7 @@
 //    postOffset = ([self dataQuadrantPaddingWidth:rect]) / ([self.longitudeTitles count]);
 //    offset = [self dataQuadrantPaddingStartX:rect] + lineLength / 2;
 //
-//    for (NSUInteger i = 0; i < [self.longitudeTitles count]; i++) {
+//    for (CCUInt i = 0; i < [self.longitudeTitles count]; i++) {
 //        CGContextMoveToPoint(context, offset + i * postOffset, [self dataQuadrantStartY:rect]);
 //        CGContextAddLineToPoint(context, offset + i * postOffset, [self dataQuadrantEndY:rect]);
 //    }
@@ -518,9 +552,9 @@
 //        return;
 //    }
 //
-//    CGFloat postOffset;
-//    CGFloat offset;
-//    CGFloat lineLength;
+//    CCFloat postOffset;
+//    CCFloat offset;
+//    CCFloat lineLength;
 //
 //    if (self.linesData != nil && [self.linesData count] >0) {
 //        CCSTitledLine *line = [self.linesData objectAtIndex:0];
@@ -538,7 +572,7 @@
 //        offset = [self dataQuadrantPaddingStartX:rect] + lineLength / 2;
 //    }
 //
-//    for (NSUInteger i = 0; i < [self.longitudeTitles count]; i++) {
+//    for (CCUInt i = 0; i < [self.longitudeTitles count]; i++) {
 //        if (self.axisXPosition == CCSGridChartXAxisPositionBottom) {
 //            NSString *str = (NSString *) [self.longitudeTitles objectAtIndex:i];
 //
@@ -570,11 +604,11 @@
     }
 
     NSMutableArray *TitleY = [[[NSMutableArray alloc] init] autorelease];
-    CGFloat average = (NSUInteger) ((self.maxValue - self.minValue) / self.latitudeNum);
+    CCFloat average = (CCUInt) ((self.maxValue - self.minValue) / self.latitudeNum);
     //计算title
-    for (NSUInteger i = 0; i < self.latitudeNum; i++) {
+    for (CCUInt i = 0; i < self.latitudeNum; i++) {
         if (self.axisCalc == 1) {
-            NSUInteger degree = floor(self.minValue + i * average) / self.axisCalc;
+            CCUInt degree = floor(self.minValue + i * average) / self.axisCalc;
             NSString *value = [[NSNumber numberWithUnsignedInteger:degree]stringValue];
             [TitleY addObject:value];
         } else {
@@ -584,7 +618,7 @@
     }
     //最后一个title
     if (self.axisCalc == 1) {
-        NSUInteger degree = (NSInteger) (self.maxValue) / self.axisCalc;
+        CCUInt degree = (CCInt) (self.maxValue) / self.axisCalc;
         NSString *value = [[NSNumber numberWithUnsignedInteger:degree]stringValue];
         [TitleY addObject:value];
     }
@@ -610,10 +644,10 @@
     //以第1条线作为X轴的标示
     CCSTitledLine *line = [self.linesData objectAtIndex:0];
     if ([line.data count] > 0) {
-        CGFloat average = [line.data count] / self.longitudeNum;
+        CCFloat average = [line.data count] / self.longitudeNum;
         //处理刻度
-        for (NSUInteger i = 0; i < self.longitudeNum; i++) {
-            NSUInteger index = (NSUInteger) floor(i * average);
+        for (CCUInt i = 0; i < self.longitudeNum; i++) {
+            CCUInt index = (CCUInt) floor(i * average);
             if (index >= [line.data count] - 1) {
                 index = [line.data count] - 1;
             }
@@ -636,7 +670,7 @@
         return @"";
     }
     
-    CGFloat value = [self touchPointAxisXValue:rect];
+    CCFloat value = [self touchPointAxisXValue:rect];
     NSString *result = @"";
     
     CCSTitledLine *line = [self.linesData objectAtIndex:0];
@@ -652,7 +686,7 @@
     } else if (value <= 0) {
         result = ((CCSLineData *) [line.data objectAtIndex:0]).date;
     } else {
-        NSUInteger index = (NSUInteger) round([line.data count] * value);
+        CCUInt index = (CCUInt) round([line.data count] * value);
         
         if (index < [line.data count]) {
             self.displayCrossXOnTouch = YES;
@@ -667,12 +701,12 @@
 }
 
 - (NSString *)calcAxisYGraduate:(CGRect)rect {
-    CGFloat value = [self touchPointAxisYValue:rect];
+    CCFloat value = [self touchPointAxisYValue:rect];
     if (self.maxValue == 0. && self.minValue == 0.) {
         return @"";
     }
     if (self.axisCalc == 1) {
-        NSUInteger degree = (value * (self.maxValue - self.minValue) + self.minValue) / self.axisCalc;
+        CCUInt degree = (value * (self.maxValue - self.minValue) + self.minValue) / self.axisCalc;
         return [[NSNumber numberWithUnsignedInteger:degree]stringValue];
     } else {
         return [NSString stringWithFormat:@"%-.2f", (value * (self.maxValue - self.minValue) + self.minValue) / self.axisCalc];
@@ -685,11 +719,11 @@
     [_linesData autorelease];
     _linesData = [linesData retain];
     
-    self.maxValue = NSIntegerMin;
-    self.minValue = NSIntegerMax;
+    self.maxValue = CCIntMin;
+    self.minValue = CCIntMax;
 }
 
-- (CGFloat) calcValueY:(CGFloat)value inRect:(CGRect) rect{
+- (CCFloat) calcValueY:(CCFloat)value inRect:(CGRect) rect{
     return (1 - (value - [self minValue]) / ([self maxValue] - [self minValue])) * [self dataQuadrantPaddingHeight:rect] + [self dataQuadrantPaddingStartY:rect];
 }
 

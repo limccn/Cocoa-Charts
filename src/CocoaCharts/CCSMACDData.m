@@ -35,7 +35,7 @@
     return self;
 }
 
-- (id)initWithDea:(CGFloat)dea diff:(CGFloat)diff macd:(CGFloat)macd date:(NSString *)date; {
+- (id)initWithDea:(CCFloat)dea diff:(CCFloat)diff macd:(CCFloat)macd date:(NSString *)date; {
     self = [self init];
 
     if (self) {

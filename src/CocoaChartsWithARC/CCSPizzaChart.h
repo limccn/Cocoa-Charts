@@ -32,8 +32,8 @@
  CCSPizzaChart继承于CCSPieChart的，可以在CCSPieChart基础上将选中的部分单独抽出表示的图
  */
 @interface CCSPizzaChart : CCSPieChart {
-    NSUInteger _selectedIndex;
-    CGFloat _offsetLength;
+    CCUInt _selectedIndex;
+    CCFloat _offsetLength;
 }
 
 /*!
@@ -41,14 +41,14 @@
  選べた、分割表示されているデータのインデクス
  被选中的饼图的部分，这部分会从饼中切出
  */
-@property(assign, nonatomic) NSUInteger selectedIndex;
+@property(assign, nonatomic) CCUInt selectedIndex;
 
 /*!
  Offset length what is the distance from the center of the pie to the selected part
  丸の中心から、選べた部分の距離
  圆心与被分割出来的那部分的距离
  */
-@property(assign, nonatomic) CGFloat offsetLength;
+@property(assign, nonatomic) CCFloat offsetLength;
 
 
 /*!
@@ -60,6 +60,6 @@
  選べた部分のインデクス
  选中的index
  */
-- (void)selectPartByIndex:(NSUInteger)index;
+- (void)selectPartByIndex:(CCUInt)index;
 
 @end

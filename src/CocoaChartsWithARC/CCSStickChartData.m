@@ -35,7 +35,7 @@
     return self;
 }
 
-- (id)initWithHigh:(float)high low:(float)low date:(NSString *)date {
+- (id)initWithHigh:(CCFloat)high low:(CCFloat)low date:(NSString *)date {
     self = [self init];
 
     if (self) {

@@ -34,7 +34,7 @@
     return self;
 }
 
-- (id)initWithTitle:(NSString *)title value:(float)value {
+- (id)initWithTitle:(NSString *)title value:(CCFloat)value {
     self = [self init];
 
     if (self) {

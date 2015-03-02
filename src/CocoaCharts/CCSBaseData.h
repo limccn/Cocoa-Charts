@@ -19,6 +19,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "CCSHeader.h"
 
 /*!
  CCSBaseData

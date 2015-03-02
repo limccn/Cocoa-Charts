@@ -33,7 +33,7 @@
     return self;
 }
 
-- (id)initWithTitle:(NSString *)title value:(float)value color:(UIColor *)color {
+- (id)initWithTitle:(NSString *)title value:(CCFloat)value color:(UIColor *)color {
     self = [super initWithTitle:title value:value];
 
     if (self) {

@@ -11,10 +11,10 @@
 #import "CCSLineData.h"
 
 @interface CCSSlipLineChart () {
-    float _startDistance1;
-    float _minDistance1;
-    int _flag;
-    float _firstX;
+    CCFloat _startDistance1;
+    CCFloat _minDistance1;
+    CCInt _flag;
+    CCFloat _firstX;
 }
 @end
 
@@ -52,15 +52,15 @@
     //调用父类
     //[super calcDataValueRange];
     
-    double maxValue = -NSIntegerMax;
-    double minValue = NSIntegerMax;
+    CCFloat maxValue = -CCIntMax;
+    CCFloat minValue = CCIntMax;
     
-    for (NSInteger i = [self.linesData count] - 1; i >= 0; i--) {
+    for (CCInt i = [self.linesData count] - 1; i >= 0; i--) {
         CCSTitledLine *line = [self.linesData objectAtIndex:i];
         
         //获取线条数据
         NSArray *lineDatas = line.data;
-        for (NSUInteger j = self.displayFrom; j < self.displayFrom + self.displayNumber; j++) {
+        for (CCUInt j = self.displayFrom; j < self.displayFrom + self.displayNumber; j++) {
             CCSLineData *lineData = [lineDatas objectAtIndex:j];
             
             //忽略不显示值的情况
@@ -103,8 +103,8 @@
 - (void)drawData:(CGRect)rect {
     
     // 起始位置
-    float startX;
-    float lastY = 0;
+    CCFloat startX;
+    CCFloat lastY = 0;
     
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSetLineWidth(context, self.lineWidth);
@@ -112,7 +112,7 @@
     
     if (self.linesData != NULL) {
         //逐条输出MA线
-        for (NSUInteger i = 0; i < [self.linesData count]; i++) {
+        for (CCUInt i = 0; i < [self.linesData count]; i++) {
             CCSTitledLine *line = [self.linesData objectAtIndex:i];
             
             if (line != NULL) {
@@ -124,14 +124,14 @@
                 if (self.axisYPosition == CCSGridChartYAxisPositionLeft) {
                     //TODO:自左向右绘图未对应
                     // 点线距离
-                    float lineLength = ((rect.size.width - self.axisMarginLeft - 2 * self.axisMarginRight) / self.displayNumber);
+                    CCFloat lineLength = ((rect.size.width - self.axisMarginLeft - 2 * self.axisMarginRight) / self.displayNumber);
                     //起始点
                     startX = super.axisMarginLeft + lineLength / 2;
                     //遍历并绘制线条
-                    for (NSUInteger j = self.displayFrom; j < self.displayFrom + self.displayNumber; j++) {
+                    for (CCUInt j = self.displayFrom; j < self.displayFrom + self.displayNumber; j++) {
                         CCSLineData *lineData = [lineDatas objectAtIndex:j];
                         //获取终点Y坐标
-                        float valueY = ((1 - (lineData.value - self.minValue) / (self.maxValue - self.minValue)) * (rect.size.height - 2 * self.axisMarginTop - self.axisMarginBottom) + self.axisMarginTop);
+                        CCFloat valueY = ((1 - (lineData.value - self.minValue) / (self.maxValue - self.minValue)) * (rect.size.height - 2 * self.axisMarginTop - self.axisMarginBottom) + self.axisMarginTop);
                         //绘制线条路径
                         if (j == self.displayFrom) {
                             CGContextMoveToPoint(context, startX, valueY);
@@ -150,7 +150,7 @@
                 } else {
                     
                     // 点线距离
-                    float lineLength = ((rect.size.width - 2 * self.axisMarginLeft - self.axisMarginRight) / self.displayNumber);
+                    CCFloat lineLength = ((rect.size.width - 2 * self.axisMarginLeft - self.axisMarginRight) / self.displayNumber);
                     //起始点
                     startX = rect.size.width - self.axisMarginRight - self.axisMarginLeft - lineLength / 2;
                     
@@ -162,18 +162,18 @@
                         //1根则绘制一条直线
                         CCSLineData *lineData = [lineDatas objectAtIndex:0];
                         //获取终点Y坐标
-                        float valueY = ((1 - (lineData.value - self.minValue) / (self.maxValue - self.minValue)) * (rect.size.height - 2 * self.axisMarginTop - self.axisMarginBottom) + self.axisMarginTop);
+                        CCFloat valueY = ((1 - (lineData.value - self.minValue) / (self.maxValue - self.minValue)) * (rect.size.height - 2 * self.axisMarginTop - self.axisMarginBottom) + self.axisMarginTop);
                         
                         CGContextMoveToPoint(context, startX, valueY);
                         CGContextAddLineToPoint(context, self.axisMarginLeft, valueY);
                         
                     } else {
                         //遍历并绘制线条
-                        for (NSUInteger j = 0; j < self.displayNumber; j++) {
-                            NSUInteger index = self.displayFrom + self.displayNumber - 1 - j;
+                        for (CCUInt j = 0; j < self.displayNumber; j++) {
+                            CCUInt index = self.displayFrom + self.displayNumber - 1 - j;
                             CCSLineData *lineData = [lineDatas objectAtIndex:index];
                             //获取终点Y坐标
-                            float valueY = ((1 - (lineData.value - self.minValue) / (self.maxValue - self.minValue)) * (rect.size.height - 2 * self.axisMarginTop - self.axisMarginBottom) + self.axisMarginTop);
+                            CCFloat valueY = ((1 - (lineData.value - self.minValue) / (self.maxValue - self.minValue)) * (rect.size.height - 2 * self.axisMarginTop - self.axisMarginBottom) + self.axisMarginTop);
                             //绘制线条路径
                             if (index == self.displayFrom + self.displayNumber - 1) {
                                 CGContextMoveToPoint(context, startX, valueY);
@@ -205,10 +205,10 @@
         //以第1条线作为X轴的标示
         CCSTitledLine *line = [self.linesData objectAtIndex:0];
         if ([line.data count] > 0) {
-            float average = [line.data count] / self.longitudeNum;            
+            CCFloat average = [line.data count] / self.longitudeNum;            
             //处理刻度
-            for (NSUInteger i = 0; i < self.longitudeNum; i++) {
-                NSUInteger index = self.displayFrom + (NSUInteger) floor(i * average);
+            for (CCUInt i = 0; i < self.longitudeNum; i++) {
+                CCUInt index = self.displayFrom + (CCUInt) floor(i * average);
                 if (index > self.displayFrom + self.displayNumber - 1) {
                     index = self.displayFrom + self.displayNumber - 1;
                 }
@@ -274,7 +274,7 @@
     if ([allTouches count] == 1) {
         if (_flag == 0) {
             CGPoint pt1 = [[allTouches objectAtIndex:0] locationInView:self];
-            float stickWidth = ((self.frame.size.width - self.axisMarginLeft - self.axisMarginRight) / self.displayNumber) - 1;
+            CCFloat stickWidth = ((self.frame.size.width - self.axisMarginLeft - self.axisMarginRight) / self.displayNumber) - 1;
             
             if (pt1.x - _firstX > stickWidth) {
                 if (self.displayFrom > 1) {
@@ -305,7 +305,7 @@
         CGPoint pt1 = [[allTouches objectAtIndex:0] locationInView:self];
         CGPoint pt2 = [[allTouches objectAtIndex:1] locationInView:self];
         
-        float endDistance = fabsf(pt1.x - pt2.x);
+        CCFloat endDistance = fabsf(pt1.x - pt2.x);
         //放大
         if (endDistance - _startDistance1 > _minDistance1) {
             [self zoomOut];

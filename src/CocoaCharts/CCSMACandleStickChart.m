@@ -61,15 +61,15 @@
     }
     
     //起始点
-    CGFloat lineLength;
+    CCFloat lineLength;
     // 起始位置
-    CGFloat startX;
+    CCFloat startX;
     
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSetLineWidth(context, 1.0f);
     
     //逐条输出MA线
-    for (NSUInteger i = 0; i < [self.linesData count]; i++) {
+    for (CCUInt i = 0; i < [self.linesData count]; i++) {
         CCSTitledLine *line = [self.linesData objectAtIndex:i];
         if (line == nil) {
             continue;
@@ -89,10 +89,10 @@
             //起始点
             startX = [self dataQuadrantPaddingStartX:rect] + lineLength / 2;
             //遍历并绘制线条
-            for (NSUInteger j = 0; j < [lineDatas count]; j++) {
+            for (CCUInt j = 0; j < [lineDatas count]; j++) {
                 CCSLineData *lineData = [lineDatas objectAtIndex:j];
                 //获取终点Y坐标
-                CGFloat valueY = [self calcValueY:lineData.value inRect:rect];
+                CCFloat valueY = [self calcValueY:lineData.value inRect:rect];
                 //绘制线条路径
                 if (j == 0) {
                     CGContextMoveToPoint(context, startX, valueY);
@@ -114,10 +114,10 @@
             //起始点
             startX = [self dataQuadrantPaddingEndX:rect] - lineLength / 2;
             //遍历并绘制线条
-            for (NSInteger j = [lineDatas count] - 1; j >= 0; j--) {
+            for (CCInt j = [lineDatas count] - 1; j >= 0; j--) {
                 CCSLineData *lineData = [lineDatas objectAtIndex:j];
                 //获取终点Y坐标
-                CGFloat valueY = [self calcValueY:lineData.value inRect:rect];
+                CCFloat valueY = [self calcValueY:lineData.value inRect:rect];
                 //绘制线条路径
                 if (j == [lineDatas count] - 1) {
                     CGContextMoveToPoint(context, startX, valueY);
