@@ -30,6 +30,7 @@ typedef enum {
     CCSChartTypeMASlipCandleStickChart = 18,
     CCSChartTypeBOLLMASlipCandleStickChart = 19,
     CCSChartTypeSlipLineChart = 20,
+    CCSChartTypeDonutChart = 21,
 
 
 } CCSChartType;

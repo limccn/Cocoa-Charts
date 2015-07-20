@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3B27DEDF1B5C8D930045DCED /* CCSDonutChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B27DEDE1B5C8D930045DCED /* CCSDonutChart.m */; };
+		3B27DEE31B5C95750045DCED /* CCSDonutChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B27DEE21B5C95750045DCED /* CCSDonutChartViewController.m */; };
 		3BB5DF0018C9624800288894 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BB5DEFF18C9624800288894 /* Foundation.framework */; };
 		3BB5DF0218C9624800288894 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BB5DF0118C9624800288894 /* CoreGraphics.framework */; };
 		3BB5DF0418C9624800288894 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BB5DF0318C9624800288894 /* UIKit.framework */; };
@@ -257,6 +259,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3B27DEDE1B5C8D930045DCED /* CCSDonutChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSDonutChart.m; sourceTree = "<group>"; };
+		3B27DEE01B5C8DA70045DCED /* CCSDonutChart.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CCSDonutChart.h; sourceTree = "<group>"; };
+		3B27DEE11B5C95750045DCED /* CCSDonutChartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSDonutChartViewController.h; sourceTree = "<group>"; };
+		3B27DEE21B5C95750045DCED /* CCSDonutChartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSDonutChartViewController.m; sourceTree = "<group>"; };
 		3BB5DEFC18C9624800288894 /* CocoaChartsSampleWithARC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CocoaChartsSampleWithARC.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BB5DEFF18C9624800288894 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		3BB5DF0118C9624800288894 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -631,6 +637,8 @@
 		3BB5DF0518C9624800288894 /* CocoaChartsSampleWithARC */ = {
 			isa = PBXGroup;
 			children = (
+				3B27DEE11B5C95750045DCED /* CCSDonutChartViewController.h */,
+				3B27DEE21B5C95750045DCED /* CCSDonutChartViewController.m */,
 				3BB5DF9318C96BDA00288894 /* CCSAreaChartViewController.h */,
 				3BB5DF9418C96BDA00288894 /* CCSAreaChartViewController.m */,
 				3BB5DF9518C96BDA00288894 /* CCSBandAreaChartViewController.h */,
@@ -763,6 +771,8 @@
 				3BB5DF5318C962AA00288894 /* CCSMinusStickChart.m */,
 				3BB5DF5418C962AA00288894 /* CCSPieChart.h */,
 				3BB5DF5518C962AA00288894 /* CCSPieChart.m */,
+				3B27DEE01B5C8DA70045DCED /* CCSDonutChart.h */,
+				3B27DEDE1B5C8D930045DCED /* CCSDonutChart.m */,
 				3BB5DF5618C962AA00288894 /* CCSPizzaChart.h */,
 				3BB5DF5718C962AA00288894 /* CCSPizzaChart.m */,
 				3BB5DF5818C962AA00288894 /* CCSRadarChart.h */,
@@ -1251,6 +1261,7 @@
 				3BB5DFD118C96BDA00288894 /* CCSMASlipCandleStickChartViewController.m in Sources */,
 				3BB5E0C118C984F600288894 /* ta_CDLGAPSIDESIDEWHITE.c in Sources */,
 				3BB5E0B518C984F600288894 /* ta_CDLBELTHOLD.c in Sources */,
+				3B27DEDF1B5C8D930045DCED /* CCSDonutChart.m in Sources */,
 				3BB5DF8518C962AA00288894 /* CCSPizzaChart.m in Sources */,
 				3BB5E0AB18C984F600288894 /* ta_CCI.c in Sources */,
 				3BB5E0D718C984F600288894 /* ta_CDLMORNINGSTAR.c in Sources */,
@@ -1287,6 +1298,7 @@
 				3BB5E09D18C984F600288894 /* ta_ADD.c in Sources */,
 				3BB5E0C818C984F600288894 /* ta_CDLHIKKAKE.c in Sources */,
 				3BB5E13918C984F600288894 /* ta_WCLPRICE.c in Sources */,
+				3B27DEE31B5C95750045DCED /* CCSDonutChartViewController.m in Sources */,
 				3BB5E0DA18C984F600288894 /* ta_CDLRICKSHAWMAN.c in Sources */,
 				3BB5E12918C984F600288894 /* ta_STOCHF.c in Sources */,
 				3BB5DFDB18C96BDA00288894 /* CCSSpiderWebChartViewController.m in Sources */,

@@ -30,6 +30,8 @@
 #import "CCSBOLLMASlipCandleStickChartViewController.h"
 #import "CCSSlipLineChartViewController.h"
 #import "CCSSimpleDemoViewController.h"
+#import "CCSDonutChartViewController.h"
+
 
 @interface CCSViewController () {
 }
@@ -76,7 +78,7 @@
     if (section == 0) {
         return 1;
     } else if (section == 1) {
-        return 21;
+        return 22;
     }
 
     return 0;
@@ -193,6 +195,9 @@
         else if (CCSChartTypeSlipLineChart == row) {
             cell.textLabel.text = @"SlipLineChart";
         }
+        else if (CCSChartTypeDonutChart == row) {
+            cell.textLabel.text = @"DonutChart";
+        }
         else {
         }
 
@@ -276,6 +281,9 @@
         }
         else if (CCSChartTypeSlipLineChart == row) {
             viewController = [[CCSSlipLineChartViewController alloc] init];
+        }
+        else if (CCSChartTypeDonutChart == row) {
+            viewController = [[CCSDonutChartViewController alloc] init];
         }
         else {
 

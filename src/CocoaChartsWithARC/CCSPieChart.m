@@ -27,6 +27,8 @@
 @synthesize data = _data;
 @synthesize radiusColor = _radiusColor;
 @synthesize circleBorderColor = _circleBorderColor;
+@synthesize titleFont = _titleFont;
+@synthesize titleTextColor = _titleTextColor;
 @synthesize radius = _radius;
 @synthesize displayRadius = _displayRadius;
 @synthesize displayValueTitle = _displayValueTitle;
@@ -40,6 +42,8 @@
     //初始化相关属性
     self.radiusColor = [UIColor whiteColor];
     self.circleBorderColor = [UIColor whiteColor];
+    self.titleFont = [UIFont systemFontOfSize:12];
+    self.titleTextColor = [UIColor lightGrayColor];
     self.displayRadius = YES;
     self.displayValueTitle = YES;
 
@@ -113,9 +117,6 @@
 
         }
 
-
-        CGContextSetFillColorWithColor(context, [UIColor lightGrayColor].CGColor);
-
         if (self.displayValueTitle) {
             CCFloat sumvalue = 0.0;
             //
@@ -138,37 +139,21 @@
                 NSMutableString *percentage = [[NSMutableString alloc] initWithCapacity:8];
                 [percentage appendString:[[NSString stringWithFormat:@"%f", (int) (value / sum * 10000) / 100.0f] substringToIndex:5]];
                 [percentage appendString:@"%"];
-
-                //文字
-                UIFont *font = [UIFont fontWithName:@"Arial" size:11];
-
-                //调整X轴坐标位置
-//                [title drawInRect:CGRectMake(offsetX, offsetY, 100, 11)
-//                         withFont:font
-//                    lineBreakMode:NSLineBreakByWordWrapping
-//                        alignment:NSTextAlignmentLeft];
                 
-                CGRect textRect= CGRectMake(offsetX, offsetY, 100, 11);
-                UIFont *textFont= font; //设置字体
+                CGRect textRect= CGRectMake(offsetX, offsetY, 100, self.titleFont.pointSize);
                 NSMutableParagraphStyle *textStyle=[[NSMutableParagraphStyle alloc]init];//段落样式
                 textStyle.alignment=NSTextAlignmentLeft;
                 textStyle.lineBreakMode = NSLineBreakByWordWrapping;
                 //绘制字体
-                [title drawInRect:textRect withAttributes:@{NSFontAttributeName:textFont,NSParagraphStyleAttributeName:textStyle}];
+                [title drawInRect:textRect withAttributes:@{NSFontAttributeName:self.titleFont,NSParagraphStyleAttributeName:textStyle,NSForegroundColorAttributeName:self.titleTextColor}];
 
-                //调整X轴坐标位置
-//                [percentage drawInRect:CGRectMake(offsetX, offsetY + 8, 100, 11)
-//                              withFont:font
-//                         lineBreakMode:NSLineBreakByWordWrapping
-//                             alignment:NSTextAlignmentLeft];
                 
-                CGRect textRectPer= CGRectMake(offsetX, offsetY + 8, 100, 11);
-                UIFont *textFontPer= font; //设置字体
+                CGRect textRectPer= CGRectMake(offsetX, offsetY + self.titleFont.pointSize , 100, self.titleFont.pointSize);
                 NSMutableParagraphStyle *textStylePer=[[NSMutableParagraphStyle alloc]init];//段落样式
                 textStylePer.alignment=NSTextAlignmentLeft;
                 textStylePer.lineBreakMode = NSLineBreakByWordWrapping;
                 //绘制字体
-                [percentage drawInRect:textRectPer withAttributes:@{NSFontAttributeName:textFontPer,NSParagraphStyleAttributeName:textStylePer}];
+                [percentage drawInRect:textRectPer withAttributes:@{NSFontAttributeName:self.titleFont,NSParagraphStyleAttributeName:textStylePer,NSForegroundColorAttributeName:self.titleTextColor}];
 
             }
         }

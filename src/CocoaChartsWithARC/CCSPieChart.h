@@ -36,6 +36,8 @@
     NSArray *_data;
     UIColor *_radiusColor;
     UIColor *_circleBorderColor;
+    UIFont *_titleFont;
+    UIColor *_titleTextColor;
     CCUInt _radius;
     BOOL _displayRadius;
     BOOL _displayValueTitle;
@@ -62,6 +64,20 @@
  饼图的弧线颜色
  */
 @property(strong, nonatomic) UIColor *circleBorderColor;
+
+/*!
+ Title Font
+ タイトルのフォント
+ 标签的字体
+ */
+@property(strong, nonatomic) UIFont *titleFont;
+
+/*!
+ Title text color
+ タイトルの色
+ 标签的字体的颜色
+ */
+@property(strong, nonatomic) UIColor *titleTextColor;
 
 /*!
  Radius of the pie circle
