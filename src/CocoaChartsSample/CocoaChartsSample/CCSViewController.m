@@ -78,6 +78,18 @@
 
     self.title = @"Cocoa-Charts v0.21";
     self.navigationController.navigationBarHidden = NO;
+    
+    // Index path for selected row
+    NSIndexPath *selectedRow = [_tableView indexPathForSelectedRow];
+    
+    // Deselet the row with animation
+    [_tableView deselectRowAtIndexPath:selectedRow animated:YES];
+    
+    // Scroll the selected row to the center
+    [_tableView scrollToRowAtIndexPath:selectedRow
+                      atScrollPosition:UITableViewScrollPositionMiddle
+                              animated:YES];
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -222,6 +234,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 
+//    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
     UIViewController *viewController = nil;
 
     if (indexPath.section == 0) {
