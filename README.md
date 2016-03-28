@@ -4,25 +4,34 @@ Welcome to `Cocoa-Charts` project page on github.com. We just moved from Google 
 Cocoa-Charts is an open-source iOS developing framework written in Objective-c on Apple Cocoa SDK.<br />
 Cocoa-Charts includes a set of very useful graphs/charts you need for developing iPhone/iPad Application.<br />
 
-###Released Charts
+For user in China:<br />
+Android-Charts/Cocoa-Charts技术交流QQ群现已开通，欢迎加入。群号：`170987350`
+
+### Released Charts
 - `gird chart`
 - `line chart`
 - `stick chart`
 - `candlestick chart`
+- `macd chart`
 - `pie chart`
 - `spider web chart`
-
-###Under developing Charts
 - `area chart`
 - `separated stick chart`
 - `pizza chart`
 - `round radar chart`
+- `rose chart`
+
+### Under developing Charts
+- `stacked stick chart`
+
+
+
     
 ###More About Cocoa-Charts
 
 If you need further information of Cocoa-Charts, you can visit the web site of Cocoa-Charts.
 
-- [http://www.limc.cn/cocoacharts](http://www.limc.cn/cocoacharts).
+- [http://www.limc.cn/cocoacharts](http://www.limc.cn/osf/cocoacharts).
 
 Or Contact us by follow
 
@@ -84,3 +93,7 @@ Cocoa-Charts is released under the [Apache License 2.0](http://www.apache.org/li
         WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
         See the License for the specific language governing permissions and
         limitations under the License.
+ 
+ 
+## Donation
+If you like Cocoa-Charts feel free to support Cocoa-Charts. By making donation you invest in the project's future, helping it to be compatible with latest Android versions and to have less bugs and more features.
