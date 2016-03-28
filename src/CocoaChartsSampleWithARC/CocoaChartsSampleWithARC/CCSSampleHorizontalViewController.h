@@ -42,7 +42,7 @@
     UISegmentedControl *_segBottomChartType;
     UIScrollView *_scrollViewBottomChart;
     
-    CandleStickChartType _topChartType;
+    CCSCandleStickStyle _topChartType;
     ChartViewType _bottomChartType;
     NSMutableArray *_chartData;
     OHLCVDData *_oHLCVDData;
@@ -80,7 +80,7 @@
 @property(strong, nonatomic) UISegmentedControl *segBottomChartType;
 @property(strong, nonatomic) UIScrollView *scrollViewBottomChart;
 
-@property(assign, nonatomic) CandleStickChartType topChartType;
+@property(assign, nonatomic) CCSCandleStickStyle topChartType;
 @property(assign, nonatomic) ChartViewType bottomChartType;
 @property(strong, nonatomic) NSMutableArray *chartData;
 @property(strong, nonatomic) OHLCVDData *oHLCVDData;

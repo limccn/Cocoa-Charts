@@ -481,18 +481,24 @@
             CCFloat stickWidth = ((self.frame.size.width - self.axisMarginLeft - self.axisMarginRight) / self.displayNumber) - 1;
             
             
-            CCSTitledLine *line = [self.linesData objectAtIndex:0];
+//            CCSTitledLine *line = [self.linesData objectAtIndex:0];
+//            
+//            if (pt1.x - _firstX > stickWidth) {
+//                if (self.displayFrom > 2) {
+//                    self.displayFrom = self.displayFrom - 2;
+//                }
+//            } else if (pt1.x - _firstX < -stickWidth) {
+//                if (self.displayFrom + self.displayNumber + 2 < [line.data count]) {
+//                    self.displayFrom = self.displayFrom + 2;
+//                }
+//            }
             
             if (pt1.x - _firstX > stickWidth) {
-                if (self.displayFrom > 2) {
-                    self.displayFrom = self.displayFrom - 2;
-                }
+                [self moveLeft];
             } else if (pt1.x - _firstX < -stickWidth) {
-                if (self.displayFrom + self.displayNumber + 2 < [line.data count]) {
-                    self.displayFrom = self.displayFrom + 2;
-                }
+                [self moveRight];
             }
-            
+
             
             _firstX = pt1.x;
             
@@ -640,6 +646,37 @@
     
 }
 
+- (void) moveLeft {
+    
+    if (self.displayFrom > 2) {
+        self.displayFrom = self.displayFrom - 2;
+    }
+    
+    if (self.chartDelegate && [self.chartDelegate respondsToSelector:@selector(CCSChartDisplayChangedFrom:from:number:)]) {
+        [self.chartDelegate CCSChartDisplayChangedFrom:self from:self.displayFrom number:self.displayNumber];
+    }
+    
+    if (self.chartDelegate && [self.chartDelegate respondsToSelector:@selector(CCSChartDisplayChangedFrom:from:number:)]) {
+        [self.chartDelegate CCSChartDisplayChangedFrom:self from:self.displayFrom number:self.displayNumber];
+    }
+}
+
+- (void) moveRight {
+    
+    CCSTitledLine *line = [self.linesData objectAtIndex:0];
+    
+    if (self.displayFrom + self.displayNumber + 2 < [line.data count]) {
+        self.displayFrom = self.displayFrom + 2;
+    }
+    
+    if (self.chartDelegate && [self.chartDelegate respondsToSelector:@selector(CCSChartDisplayChangedFrom:from:number:)]) {
+        [self.chartDelegate CCSChartDisplayChangedFrom:self from:self.displayFrom number:self.displayNumber];
+    }
+    
+    if (self.chartDelegate && [self.chartDelegate respondsToSelector:@selector(CCSChartDisplayChangedFrom:from:number:)]) {
+        [self.chartDelegate CCSChartDisplayChangedFrom:self from:self.displayFrom number:self.displayNumber];
+    }
+}
 
 
 - (void)zoomOut {
@@ -666,6 +703,14 @@
         //处理displayFrom越界
         if (self.displayFrom + self.displayNumber >= [line.data count]) {
             self.displayFrom = [line.data count] - self.displayNumber;
+        }
+        
+        if (self.chartDelegate && [self.chartDelegate respondsToSelector:@selector(CCSChartDisplayChangedFrom:from:number:)]) {
+            [self.chartDelegate CCSChartDisplayChangedFrom:self from:self.displayFrom number:self.displayNumber];
+        }
+        
+        if (self.chartDelegate && [self.chartDelegate respondsToSelector:@selector(CCSChartDisplayChangedFrom:from:number:)]) {
+            [self.chartDelegate CCSChartDisplayChangedFrom:self from:self.displayFrom number:self.displayNumber];
         }
         
     }
@@ -701,6 +746,14 @@
         
         if (self.displayFrom + self.displayNumber >= [line.data count]) {
             self.displayNumber = [line.data count] - self.displayFrom;
+        }
+        
+        if (self.chartDelegate && [self.chartDelegate respondsToSelector:@selector(CCSChartDisplayChangedFrom:from:number:)]) {
+            [self.chartDelegate CCSChartDisplayChangedFrom:self from:self.displayFrom number:self.displayNumber];
+        }
+        
+        if (self.chartDelegate && [self.chartDelegate respondsToSelector:@selector(CCSChartDisplayChangedFrom:from:number:)]) {
+            [self.chartDelegate CCSChartDisplayChangedFrom:self from:self.displayFrom number:self.displayNumber];
         }
     }
 }

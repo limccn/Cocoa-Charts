@@ -23,8 +23,8 @@
 
 @protocol CCSChartDelegate <NSObject>
 @optional
-- (void)CCSChartBeTouchedOn:(CGPoint)point indexAt:(CCUInt) index;
-- (void)CCSChartDisplayChangedFrom:(CCUInt)from number:(CCUInt) number;
+- (void)CCSChartBeTouchedOn:(id)chart point:(CGPoint)point indexAt:(CCUInt) index;
+- (void)CCSChartDisplayChangedFrom:(id)chart from:(CCUInt)from number:(CCUInt) number;
 @end
 
 /*!

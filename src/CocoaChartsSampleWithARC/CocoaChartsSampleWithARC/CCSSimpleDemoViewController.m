@@ -827,13 +827,14 @@
             stickData.high = [item.vol doubleValue];
             stickData.low = 0;
             stickData.date = [item.date dateWithFormat:@"yyyy-MM-ddHH:mm:ss" target:@"yy-MM-dd"];
-
+            
             if ([item.close doubleValue] > [item.open doubleValue]) {
-                stickData.fillColor = [UIColor clearColor];
-                stickData.borderColor = [UIColor redColor];
-            } else if ([item.close doubleValue] < [item.open doubleValue]) {
                 stickData.fillColor = [UIColor greenColor];
                 stickData.borderColor = [UIColor clearColor];
+            } else if ([item.close doubleValue] < [item.open doubleValue]) {
+                stickData.fillColor = [UIColor clearColor];
+                stickData.borderColor = [UIColor redColor];
+                
             } else {
                 stickData.fillColor = [UIColor lightGrayColor];
                 stickData.borderColor = [UIColor clearColor];
@@ -880,6 +881,8 @@
     self.stickChart.displayFrom = 0;
     self.stickChart.displayLongitudeTitle = NO;
     self.stickChart.axisMarginBottom = 3;
+    
+    self.stickChart.chartDelegate = self;
     
     self.stickChart.backgroundColor = [UIColor clearColor];
 
@@ -954,6 +957,8 @@
     self.macdChart.displayLongitudeTitle = NO;
     self.macdChart.axisMarginBottom = 3;
     
+    self.macdChart.chartDelegate = self;
+    
     self.macdChart.backgroundColor = [UIColor clearColor];
 
     [self.scrollViewBottomChart addSubview:self.macdChart];
@@ -997,6 +1002,7 @@
     self.kdjChart.displayLongitudeTitle = NO;
     self.kdjChart.axisMarginBottom = 3;
     
+    self.kdjChart.chartDelegate = self;
     
     self.kdjChart.backgroundColor = [UIColor clearColor];
 
@@ -1029,6 +1035,8 @@
     self.rsiChart.displayFrom = 0;
     self.rsiChart.displayLongitudeTitle = NO;
     self.rsiChart.axisMarginBottom = 3;
+    
+    self.rsiChart.chartDelegate = self;
     
     self.rsiChart.backgroundColor = [UIColor clearColor];
 
@@ -1078,6 +1086,8 @@
     self.wrChart.displayLongitudeTitle = NO;
     self.wrChart.axisMarginBottom = 3;
     
+    self.wrChart.chartDelegate = self;
+    
     self.wrChart.backgroundColor = [UIColor clearColor];
     // self.wrChart.noneDisplayValue = 9999;
 
@@ -1120,6 +1130,8 @@
     self.cciChart.displayLongitudeTitle = NO;
     self.cciChart.axisMarginBottom = 3;
     
+    self.cciChart.chartDelegate = self;
+    
     self.cciChart.backgroundColor = [UIColor clearColor];
 
     [self.scrollViewBottomChart addSubview:self.cciChart];
@@ -1161,6 +1173,8 @@
     self.bollChart.displayFrom = 0;
     self.bollChart.displayLongitudeTitle = NO;
     self.bollChart.axisMarginBottom = 3;
+    
+    self.bollChart.chartDelegate = self;
     
     self.bollChart.backgroundColor = [UIColor clearColor];
     self.bollChart.axisCalc = AXIS_CALC_PARM;
@@ -1224,7 +1238,7 @@
 //    candleStickChart.axisMarginLeft = 50;
     candleStickChart.userInteractionEnabled = YES;
 
-    candleStickChart.candleStickStyle = CandleStickChartTypeBar;
+//    candleStickChart.candleStickStyle = CandleStickChartTypeBar;
 //    candleStickChart.axisXColor = [UIColor lightGrayColor];
 //    candleStickChart.axisYColor = [UIColor lightGrayColor];
 //    candleStickChart.latitudeColor = [UIColor lightGrayColor];
@@ -1770,62 +1784,78 @@
     return bollBanddata;
 }
 
-- (void)CCSChartBeTouchedOn:(CGPoint)point indexAt:(NSUInteger)index {
-    if (0 == self.segBottomChartType.selectedSegmentIndex) {
+- (void)CCSChartBeTouchedOn:(id)chart point:(CGPoint)point indexAt:(NSUInteger)index {
+    
+    if ([chart isKindOfClass:[self.candleStickChart class]]) {
+        
+        if (0 == self.segBottomChartType.selectedSegmentIndex) {
+            self.stickChart.singleTouchPoint = point;
+            self.stickChart.selectedStickIndex = index;
+            [self.stickChart performSelector:@selector(setNeedsDisplay) withObject:nil];
+        } else if (1 == self.segBottomChartType.selectedSegmentIndex) {
+            self.macdChart.singleTouchPoint = point;
+            self.macdChart.selectedStickIndex = index;
+            [self.macdChart performSelector:@selector(setNeedsDisplay) withObject:nil];
+        } else if (2 == self.segBottomChartType.selectedSegmentIndex) {
+            self.kdjChart.singleTouchPoint = point;
+            [self.kdjChart performSelector:@selector(setNeedsDisplay) withObject:nil];
+        } else if (3 == self.segBottomChartType.selectedSegmentIndex) {
+            self.rsiChart.singleTouchPoint = point;
+            [self.rsiChart performSelector:@selector(setNeedsDisplay) withObject:nil];
+        } else if (4 == self.segBottomChartType.selectedSegmentIndex) {
+            self.wrChart.singleTouchPoint = point;
+            [self.wrChart performSelector:@selector(setNeedsDisplay) withObject:nil];
+        } else if (5 == self.segBottomChartType.selectedSegmentIndex) {
+            self.cciChart.singleTouchPoint = point;
+            [self.cciChart performSelector:@selector(setNeedsDisplay) withObject:nil];
+        } else if (6 == self.segBottomChartType.selectedSegmentIndex) {
+            self.bollChart.singleTouchPoint = point;
+            [self.bollChart performSelector:@selector(setNeedsDisplay) withObject:nil];
+        }
+    }else{
         self.stickChart.singleTouchPoint = point;
         self.stickChart.selectedStickIndex = index;
-        [self.stickChart performSelector:@selector(setNeedsDisplay) withObject:nil];
-    } else if (1 == self.segBottomChartType.selectedSegmentIndex) {
-        self.macdChart.singleTouchPoint = point;
-        self.macdChart.selectedStickIndex = index;
-        [self.macdChart performSelector:@selector(setNeedsDisplay) withObject:nil];
-    } else if (2 == self.segBottomChartType.selectedSegmentIndex) {
-        self.kdjChart.singleTouchPoint = point;
-        [self.kdjChart performSelector:@selector(setNeedsDisplay) withObject:nil];
-    } else if (3 == self.segBottomChartType.selectedSegmentIndex) {
-        self.rsiChart.singleTouchPoint = point;
-        [self.rsiChart performSelector:@selector(setNeedsDisplay) withObject:nil];
-    } else if (4 == self.segBottomChartType.selectedSegmentIndex) {
-        self.wrChart.singleTouchPoint = point;
-        [self.wrChart performSelector:@selector(setNeedsDisplay) withObject:nil];
-    } else if (5 == self.segBottomChartType.selectedSegmentIndex) {
-        self.cciChart.singleTouchPoint = point;
-        [self.cciChart performSelector:@selector(setNeedsDisplay) withObject:nil];
-    } else if (6 == self.segBottomChartType.selectedSegmentIndex) {
-        self.bollChart.singleTouchPoint = point;
-        [self.bollChart performSelector:@selector(setNeedsDisplay) withObject:nil];
+        [self.candleStickChart performSelector:@selector(setNeedsDisplay) withObject:nil];
     }
 }
 
-- (void)CCSChartDisplayChangedFrom:(NSUInteger)from number:(NSUInteger)number; {
-    if (0 == self.segBottomChartType.selectedSegmentIndex) {
-        self.stickChart.displayFrom = from;
-        self.stickChart.displayNumber = number;
-        [self.stickChart performSelector:@selector(setNeedsDisplay) withObject:nil];
-    } else if (1 == self.segBottomChartType.selectedSegmentIndex) {
-        self.macdChart.displayFrom = from;
-        self.macdChart.displayNumber = number;
-        [self.macdChart performSelector:@selector(setNeedsDisplay) withObject:nil];
-    } else if (2 == self.segBottomChartType.selectedSegmentIndex) {
-        self.kdjChart.displayFrom = from;
-        self.kdjChart.displayNumber = number;
-        [self.kdjChart performSelector:@selector(setNeedsDisplay) withObject:nil];
-    } else if (3 == self.segBottomChartType.selectedSegmentIndex) {
-        self.rsiChart.displayFrom = from;
-        self.rsiChart.displayNumber = number;
-        [self.rsiChart performSelector:@selector(setNeedsDisplay) withObject:nil];
-    } else if (4 == self.segBottomChartType.selectedSegmentIndex) {
-        self.wrChart.displayFrom = from;
-        self.wrChart.displayNumber = number;
-        [self.wrChart performSelector:@selector(setNeedsDisplay) withObject:nil];
-    } else if (5 == self.segBottomChartType.selectedSegmentIndex) {
-        self.cciChart.displayFrom = from;
-        self.cciChart.displayNumber = number;
-        [self.cciChart performSelector:@selector(setNeedsDisplay) withObject:nil];
-    } else if (6 == self.segBottomChartType.selectedSegmentIndex) {
-        self.bollChart.displayFrom = from;
-        self.bollChart.displayNumber = number;
-        [self.bollChart performSelector:@selector(setNeedsDisplay) withObject:nil];
+- (void)CCSChartDisplayChangedFrom:(id)chart from:(NSUInteger)from number:(NSUInteger)number{
+    
+    if ([chart isKindOfClass:[self.candleStickChart class]]) {
+        if (0 == self.segBottomChartType.selectedSegmentIndex) {
+            self.stickChart.displayFrom = from;
+            self.stickChart.displayNumber = number;
+            [self.stickChart performSelector:@selector(setNeedsDisplay) withObject:nil];
+        } else if (1 == self.segBottomChartType.selectedSegmentIndex) {
+            self.macdChart.displayFrom = from;
+            self.macdChart.displayNumber = number;
+            [self.macdChart performSelector:@selector(setNeedsDisplay) withObject:nil];
+        } else if (2 == self.segBottomChartType.selectedSegmentIndex) {
+            self.kdjChart.displayFrom = from;
+            self.kdjChart.displayNumber = number;
+            [self.kdjChart performSelector:@selector(setNeedsDisplay) withObject:nil];
+        } else if (3 == self.segBottomChartType.selectedSegmentIndex) {
+            self.rsiChart.displayFrom = from;
+            self.rsiChart.displayNumber = number;
+            [self.rsiChart performSelector:@selector(setNeedsDisplay) withObject:nil];
+        } else if (4 == self.segBottomChartType.selectedSegmentIndex) {
+            self.wrChart.displayFrom = from;
+            self.wrChart.displayNumber = number;
+            [self.wrChart performSelector:@selector(setNeedsDisplay) withObject:nil];
+        } else if (5 == self.segBottomChartType.selectedSegmentIndex) {
+            self.cciChart.displayFrom = from;
+            self.cciChart.displayNumber = number;
+            [self.cciChart performSelector:@selector(setNeedsDisplay) withObject:nil];
+        } else if (6 == self.segBottomChartType.selectedSegmentIndex) {
+            self.bollChart.displayFrom = from;
+            self.bollChart.displayNumber = number;
+            [self.bollChart performSelector:@selector(setNeedsDisplay) withObject:nil];
+        }
+        
+    }else{
+        self.candleStickChart.displayFrom = from;
+        self.candleStickChart.displayNumber = number;
+        [self.candleStickChart performSelector:@selector(setNeedsDisplay) withObject:nil];
     }
 }
 

@@ -325,13 +325,9 @@
             CCFloat stickWidth = ((self.frame.size.width - self.axisMarginLeft - self.axisMarginRight) / self.displayNumber) - 1;
 
             if (pt1.x - _firstX > stickWidth) {
-                if (self.displayFrom > 2) {
-                    self.displayFrom = self.displayFrom - 2;
-                }
+                [self moveLeft];
             } else if (pt1.x - _firstX < -stickWidth) {
-                if (self.displayFrom + self.displayNumber + 2 < [self.stickData count]) {
-                    self.displayFrom = self.displayFrom + 2;
-                }
+                [self moveRight];
             }
 
             
@@ -557,6 +553,36 @@
     
 }
 
+- (void) moveLeft {
+    
+    if (self.displayFrom > 2) {
+        self.displayFrom = self.displayFrom - 2;
+    }
+    
+    if (self.chartDelegate && [self.chartDelegate respondsToSelector:@selector(CCSChartDisplayChangedFrom:from:number:)]) {
+        [self.chartDelegate CCSChartDisplayChangedFrom:self from:self.displayFrom number:self.displayNumber];
+    }
+    
+    if (self.chartDelegate && [self.chartDelegate respondsToSelector:@selector(CCSChartDisplayChangedFrom:from:number:)]) {
+        [self.chartDelegate CCSChartDisplayChangedFrom:self from:self.displayFrom number:self.displayNumber];
+    }
+}
+
+- (void) moveRight {
+    
+    if (self.displayFrom + self.displayNumber + 2 < [self.stickData count]) {
+        self.displayFrom = self.displayFrom + 2;
+    }
+    
+    if (self.chartDelegate && [self.chartDelegate respondsToSelector:@selector(CCSChartDisplayChangedFrom:from:number:)]) {
+        [self.chartDelegate CCSChartDisplayChangedFrom:self from:self.displayFrom number:self.displayNumber];
+    }
+    
+    if (self.chartDelegate && [self.chartDelegate respondsToSelector:@selector(CCSChartDisplayChangedFrom:from:number:)]) {
+        [self.chartDelegate CCSChartDisplayChangedFrom:self from:self.displayFrom number:self.displayNumber];
+    }
+}
+
 - (void)zoomOut {
     if (self.displayNumber > self.minDisplayNumber) {
 
@@ -580,12 +606,20 @@
         if (self.displayFrom + self.displayNumber >= [self.stickData count]) {
             self.displayFrom = [self.stickData count] - self.displayNumber;
         }
-
-        if (self.coChart) {
-            ((CCSSlipStickChart *)self.coChart).displayFrom = self.displayFrom;
-            ((CCSSlipStickChart *)self.coChart).displayNumber = self.displayNumber;
-            [self.coChart setNeedsDisplay];
+        
+        if (self.chartDelegate && [self.chartDelegate respondsToSelector:@selector(CCSChartDisplayChangedFrom:from:number:)]) {
+            [self.chartDelegate CCSChartDisplayChangedFrom:self from:self.displayFrom number:self.displayNumber];
         }
+        
+        if (self.chartDelegate && [self.chartDelegate respondsToSelector:@selector(CCSChartDisplayChangedFrom:from:number:)]) {
+            [self.chartDelegate CCSChartDisplayChangedFrom:self from:self.displayFrom number:self.displayNumber];
+        }
+
+//        if (self.coChart) {
+//            ((CCSSlipStickChart *)self.coChart).displayFrom = self.displayFrom;
+//            ((CCSSlipStickChart *)self.coChart).displayNumber = self.displayNumber;
+//            [self.coChart setNeedsDisplay];
+//        }
     }
 }
 
@@ -618,31 +652,34 @@
         if (self.displayFrom + self.displayNumber >= [self.stickData count]) {
             self.displayNumber = [self.stickData count] - self.displayFrom;
         }
-
-        if (self.coChart) {
-            ((CCSSlipStickChart *)self.coChart).displayFrom = self.displayFrom;
-            ((CCSSlipStickChart *)self.coChart).displayNumber = self.displayNumber;
-            [self.coChart setNeedsDisplay];
+        
+        if (self.chartDelegate && [self.chartDelegate respondsToSelector:@selector(CCSChartDisplayChangedFrom:from:number:)]) {
+            [self.chartDelegate CCSChartDisplayChangedFrom:self from:self.displayFrom number:self.displayNumber];
         }
+    
+        if (self.chartDelegate && [self.chartDelegate respondsToSelector:@selector(CCSChartDisplayChangedFrom:from:number:)]) {
+            [self.chartDelegate CCSChartDisplayChangedFrom:self from:self.displayFrom number:self.displayNumber];
+        }
+        
+
+//        if (self.coChart) {
+//            ((CCSSlipStickChart *)self.coChart).displayFrom = self.displayFrom;
+//            ((CCSSlipStickChart *)self.coChart).displayNumber = self.displayNumber;
+//            [self.coChart setNeedsDisplay];
+//        }
     }
 }
 
 - (void) setDisplayFrom:(CCUInt)displayFrom
 {
     _displayFrom = displayFrom;
-    
-    if (self.chartDelegate && [self.chartDelegate respondsToSelector:@selector(CCSChartDisplayChangedFrom:number:)]) {
-        [self.chartDelegate CCSChartDisplayChangedFrom:displayFrom number:self.displayNumber];
-    }
 }
 
 -(void) setDisplayNumber:(CCUInt)displayNumber
 {
     _displayNumber = displayNumber;
     
-    if (self.chartDelegate && [self.chartDelegate respondsToSelector:@selector(CCSChartDisplayChangedFrom: number:)]) {
-        [self.chartDelegate CCSChartDisplayChangedFrom:self.displayFrom number:displayNumber];
-    }
+
 }
 
 -(void) bindSelectedIndex

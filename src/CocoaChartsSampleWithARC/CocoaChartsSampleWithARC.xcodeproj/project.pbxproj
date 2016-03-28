@@ -262,6 +262,9 @@
 		F86FE2AF1CA2A100003E0DC6 /* JSONKeyMapper.m in Sources */ = {isa = PBXBuildFile; fileRef = F86FE2A41CA2A100003E0DC6 /* JSONKeyMapper.m */; };
 		F86FE2B01CA2A100003E0DC6 /* JSONValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = F86FE2A61CA2A100003E0DC6 /* JSONValueTransformer.m */; };
 		F86FE2B31CA2A5AC003E0DC6 /* CCSJSONData.m in Sources */ = {isa = PBXBuildFile; fileRef = F86FE2B21CA2A5AC003E0DC6 /* CCSJSONData.m */; };
+		F873862C1CA8B99F00630753 /* CCSGroupChart.m in Sources */ = {isa = PBXBuildFile; fileRef = F873862B1CA8B99F00630753 /* CCSGroupChart.m */; };
+		F873862F1CA8C59E00630753 /* CCSSampleGroupChartDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F873862E1CA8C59E00630753 /* CCSSampleGroupChartDemoViewController.m */; };
+		F87386311CA8D47100630753 /* CCSSampleGroupChartDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F87386301CA8D47100630753 /* CCSSampleGroupChartDemoViewController.xib */; };
 		F884AA291CA7CDCA0027E0A0 /* CCSSampleHorizontalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F884AA281CA7CDCA0027E0A0 /* CCSSampleHorizontalViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -620,6 +623,11 @@
 		F86FE2A61CA2A100003E0DC6 /* JSONValueTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONValueTransformer.m; sourceTree = "<group>"; };
 		F86FE2B11CA2A5AC003E0DC6 /* CCSJSONData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSJSONData.h; sourceTree = "<group>"; };
 		F86FE2B21CA2A5AC003E0DC6 /* CCSJSONData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSJSONData.m; sourceTree = "<group>"; };
+		F873862A1CA8B99F00630753 /* CCSGroupChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSGroupChart.h; sourceTree = "<group>"; };
+		F873862B1CA8B99F00630753 /* CCSGroupChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSGroupChart.m; sourceTree = "<group>"; };
+		F873862D1CA8C59E00630753 /* CCSSampleGroupChartDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSSampleGroupChartDemoViewController.h; sourceTree = "<group>"; };
+		F873862E1CA8C59E00630753 /* CCSSampleGroupChartDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSSampleGroupChartDemoViewController.m; sourceTree = "<group>"; };
+		F87386301CA8D47100630753 /* CCSSampleGroupChartDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CCSSampleGroupChartDemoViewController.xib; sourceTree = "<group>"; };
 		F884AA271CA7CDCA0027E0A0 /* CCSSampleHorizontalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSSampleHorizontalViewController.h; sourceTree = "<group>"; };
 		F884AA281CA7CDCA0027E0A0 /* CCSSampleHorizontalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSSampleHorizontalViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -694,6 +702,9 @@
 				3BB5DFB418C96BDA00288894 /* CCSSimpleDemoViewController.m */,
 				F884AA271CA7CDCA0027E0A0 /* CCSSampleHorizontalViewController.h */,
 				F884AA281CA7CDCA0027E0A0 /* CCSSampleHorizontalViewController.m */,
+				F873862D1CA8C59E00630753 /* CCSSampleGroupChartDemoViewController.h */,
+				F873862E1CA8C59E00630753 /* CCSSampleGroupChartDemoViewController.m */,
+				F87386301CA8D47100630753 /* CCSSampleGroupChartDemoViewController.xib */,
 				3B27DEE11B5C95750045DCED /* CCSDonutChartViewController.h */,
 				3B27DEE21B5C95750045DCED /* CCSDonutChartViewController.m */,
 				3BB5DF9318C96BDA00288894 /* CCSAreaChartViewController.h */,
@@ -787,6 +798,8 @@
 			isa = PBXGroup;
 			children = (
 				3BFA651D1AA40D68009897C9 /* CCSHeader.h */,
+				F873862A1CA8B99F00630753 /* CCSGroupChart.h */,
+				F873862B1CA8B99F00630753 /* CCSGroupChart.m */,
 				3BB5DF2F18C962AA00288894 /* CCSAreaChart.h */,
 				3BB5DF3018C962AA00288894 /* CCSAreaChart.m */,
 				3BB5DF3118C962AA00288894 /* CCSBandAreaChart.h */,
@@ -1225,6 +1238,7 @@
 				3BB5DF1218C9624800288894 /* Images.xcassets in Resources */,
 				F86FE2851CA29CC9003E0DC6 /* time.txt in Resources */,
 				F86FE2821CA29CC9003E0DC6 /* 1min.txt in Resources */,
+				F87386311CA8D47100630753 /* CCSSampleGroupChartDemoViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1245,6 +1259,7 @@
 			files = (
 				3BB5E0C918C984F600288894 /* ta_CDLHIKKAKEMOD.c in Sources */,
 				3BB5E10718C984F600288894 /* ta_MAX.c in Sources */,
+				F873862C1CA8B99F00630753 /* CCSGroupChart.m in Sources */,
 				F86FE2AF1CA2A100003E0DC6 /* JSONKeyMapper.m in Sources */,
 				3BB5DFC918C96BDA00288894 /* CCSBOLLMASlipCandleStickChartViewController.m in Sources */,
 				3BB5E0A118C984F600288894 /* ta_APO.c in Sources */,
@@ -1445,6 +1460,7 @@
 				3BB5E0ED18C984F600288894 /* ta_COSH.c in Sources */,
 				3BB5E13618C984F600288894 /* ta_ULTOSC.c in Sources */,
 				F86FE2A81CA2A100003E0DC6 /* JSONModelArray.m in Sources */,
+				F873862F1CA8C59E00630753 /* CCSSampleGroupChartDemoViewController.m in Sources */,
 				3BB5E0C318C984F600288894 /* ta_CDLHAMMER.c in Sources */,
 				3BB5E12A18C984F600288894 /* ta_STOCHRSI.c in Sources */,
 				3BB5E0CE18C984F600288894 /* ta_CDLKICKING.c in Sources */,

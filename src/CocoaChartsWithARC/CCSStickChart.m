@@ -393,10 +393,10 @@
     //处理点击事件
     if ([allTouches count] == 1) {
 
-        CGPoint pt = CGPointMake(self.singleTouchPoint.x, self.coChart.singleTouchPoint.y);
-        //获取选中点
-        self.coChart.singleTouchPoint = pt;
-        [self.coChart performSelector:@selector(setNeedsDisplay) withObject:nil afterDelay:0];
+//        CGPoint pt = CGPointMake(self.singleTouchPoint.x, self.coChart.singleTouchPoint.y);
+//        //获取选中点
+//        self.coChart.singleTouchPoint = pt;
+//        [self.coChart performSelector:@selector(setNeedsDisplay) withObject:nil afterDelay:0];
 
     } else if ([allTouches count] == 2) {
 
@@ -488,10 +488,10 @@
             } else {
                 self.maxSticksNum = self.maxSticksNum + 2;
             }
-            if (self.coChart) {
-                self.coChart.maxSticksNum = self.maxSticksNum;
-                [self.coChart setNeedsDisplay];
-            }
+//            if (self.coChart) {
+//                self.coChart.maxSticksNum = self.maxSticksNum;
+//                [self.coChart setNeedsDisplay];
+//            }
         }
     }
     else {
@@ -502,10 +502,10 @@
             } else {
                 self.maxSticksNum = self.maxSticksNum + 4;
             }
-            if (self.coChart) {
-                self.coChart.maxSticksNum = self.maxSticksNum;
-                [self.coChart setNeedsDisplay];
-            }
+//            if (self.coChart) {
+//                self.coChart.maxSticksNum = self.maxSticksNum;
+//                [self.coChart setNeedsDisplay];
+//            }
         }
     }
 }
@@ -522,9 +522,9 @@
     [self calcSelectedIndex];
     
     [self bindSelectedIndex];
-    
-    if (self.chartDelegate && [self.chartDelegate respondsToSelector:@selector(CCSChartBeTouchedOn:indexAt:)]) {
-        [self.chartDelegate CCSChartBeTouchedOn:point indexAt:self.selectedStickIndex];
-    }
+//    
+//    if (self.chartDelegate && [self.chartDelegate respondsToSelector:@selector(CCSChartBeTouchedOn:point:indexAt:)]) {
+//        [self.chartDelegate CCSChartBeTouchedOn:self point:point indexAt:self.selectedStickIndex];
+//    }
 }
 @end

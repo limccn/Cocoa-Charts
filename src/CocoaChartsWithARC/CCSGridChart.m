@@ -850,8 +850,8 @@ CCFloat _minDistance = 8;
 {
     _singleTouchPoint = point;
     
-    if (self.chartDelegate && [self.chartDelegate respondsToSelector:@selector(CCSChartBeTouchedOn:indexAt:)]) {
-        [self.chartDelegate CCSChartBeTouchedOn:point indexAt:0];
+    if (self.chartDelegate && [self.chartDelegate respondsToSelector:@selector(CCSChartBeTouchedOn:point:indexAt:)]) {
+        [self.chartDelegate CCSChartBeTouchedOn:self point:point indexAt:0];
     }
 }
 

@@ -33,6 +33,7 @@
 #import "CCSDonutChartViewController.h"
 
 #import "CCSSampleHorizontalViewController.h"
+#import "CCSSampleGroupChartDemoViewController.h"
 
 @interface CCSViewController () {
 }
@@ -88,7 +89,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == 0) {
-        return 2;
+        return 3;
     } else if (section == 1) {
         return 22;
     }
@@ -141,10 +142,11 @@
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
             cell.textLabel.text = @"Simple Demo";
-        }else{
+        }else if(indexPath.row == 1){
             cell.textLabel.text = @"Simple Horizontal Demo";
+        }else{
+            cell.textLabel.text = @"Simple GroupChart Demo";
         }
-        
     } else {
         NSUInteger row = indexPath.row;
         //    NSLog(@"%d",row);
@@ -233,8 +235,10 @@
         NSUInteger row = indexPath.row;
         if (row == 0) {
             viewController = [[CCSSimpleDemoViewController alloc] init];
-        }else{
+        }else if(row == 1){
             viewController = [[CCSSampleHorizontalViewController alloc] init];
+        }else{
+            viewController = [[CCSSampleGroupChartDemoViewController alloc] init];
         }
     } else if (indexPath.section == 1) {
         NSUInteger row = indexPath.row;
@@ -315,7 +319,6 @@
         UINavigationController *navigationController = (UINavigationController *) appDelegate.viewController;
         if ([viewController isKindOfClass:[CCSSampleHorizontalViewController class]]) {
             [[navigationController.viewControllers lastObject] presentViewController:viewController animated:YES completion:^{
-                
             }];
         }else{
             [navigationController pushViewController:viewController animated:YES];
