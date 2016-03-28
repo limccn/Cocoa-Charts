@@ -89,6 +89,7 @@ typedef enum {
     BOOL _displayLatitude;
     BOOL _dashLatitude;
     BOOL _displayBorder;
+    BOOL _dashCrossLines;
     BOOL _displayCrossXOnTouch;
     BOOL _displayCrossYOnTouch;
     CGPoint _singleTouchPoint;
@@ -165,6 +166,8 @@ typedef enum {
  十字交叉线颜色
  */
 @property(strong, nonatomic) UIColor *crossLinesColor;
+
+@property(assign, nonatomic) BOOL dashCrossLines;
 
 /*!
  Color of cross line degree text when touched

@@ -32,6 +32,9 @@
     self.macdLineColor = [UIColor blueColor];
     self.deaLineColor = [UIColor yellowColor];
     self.diffLineColor = [UIColor cyanColor];
+    
+    self.displayCrossXOnTouch = NO;
+    self.displayCrossYOnTouch = NO;
 
 }
 
@@ -54,7 +57,7 @@
         minValue = MIN(first.dea, MIN(first.diff, first.macd));
 
         //判断显示为方柱或显示为线条
-        for (CCUInt i = self.displayFrom; i < self.displayFrom + self.displayNumber; i++) {
+        for (CCUInt i = self.displayFrom; i < self.displayFrom + self.displayNumber - 1; i++) {
             CCSMACDData *stick = [self.stickData objectAtIndex:i];
             maxValue = MAX(maxValue, MAX(stick.dea, MAX(stick.diff, stick.macd)));
             minValue = MIN(minValue, MIN(stick.dea, MIN(stick.diff, stick.macd)));

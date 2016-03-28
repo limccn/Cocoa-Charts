@@ -12,6 +12,8 @@
 #import "CCSSlipLineChart.h"
 #import "CCSBOLLMASlipCandleStickChart.h"
 
+#import "JSONModelLib.h"
+
 typedef enum {
     CandleStickChartTypeCandle = 101,
     CandleStickChartTypeBar = 102,
@@ -28,6 +30,12 @@ typedef enum {
     ChartViewTypeBOLL = 107
 } ChartViewType;
 
+typedef enum {
+    Chart1minData = 0,
+    Chart15minData = 1,
+    ChartTimesData = 2
+} ChartDataType;
+
 @interface OHLCVDData : NSObject {
     NSString *_open;
     NSString *_high;
@@ -38,8 +46,8 @@ typedef enum {
     NSString *_current;
     NSString *_change;
     NSString *_preclose;
-
 }
+
 @property(strong, nonatomic) NSString *open;
 @property(strong, nonatomic) NSString *high;
 @property(strong, nonatomic) NSString *low;

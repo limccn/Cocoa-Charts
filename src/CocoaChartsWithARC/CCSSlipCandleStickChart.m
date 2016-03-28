@@ -36,9 +36,9 @@
     [super initProperty];
     //初始化颜色
     self.positiveStickBorderColor = [UIColor redColor];
-    self.positiveStickFillColor = [UIColor redColor];
-    self.negativeStickBorderColor = [UIColor blueColor];
-    self.negativeStickFillColor = [UIColor blueColor];
+    self.positiveStickFillColor = [UIColor clearColor];
+    self.negativeStickBorderColor = [UIColor greenColor];
+    self.negativeStickFillColor = [UIColor greenColor];
     self.crossStarColor = [UIColor blackColor];
 
     self.candleStickStyle = CCSCandleStickStyleStandard;
@@ -117,43 +117,45 @@
 }
 
 - (void)calcValueRangeFormatForAxis {
+    
+    return;
 
-    CCInt rate = 1;
-
-    if (self.maxValue < 3000) {
-        rate = 1;
-    } else if (self.maxValue >= 3000 && self.maxValue < 5000) {
-        rate = 5;
-    } else if (self.maxValue >= 5000 && self.maxValue < 30000) {
-        rate = 10;
-    } else if (self.maxValue >= 30000 && self.maxValue < 50000) {
-        rate = 50;
-    } else if (self.maxValue >= 50000 && self.maxValue < 300000) {
-        rate = 100;
-    } else if (self.maxValue >= 300000 && self.maxValue < 500000) {
-        rate = 500;
-    } else if (self.maxValue >= 500000 && self.maxValue < 3000000) {
-        rate = 1000;
-    } else if (self.maxValue >= 3000000 && self.maxValue < 5000000) {
-        rate = 5000;
-    } else if (self.maxValue >= 5000000 && self.maxValue < 30000000) {
-        rate = 10000;
-    } else if (self.maxValue >= 30000000 && self.maxValue < 50000000) {
-        rate = 50000;
-    } else {
-        rate = 100000;
-    }
-
-    //等分轴修正
-    if (self.latitudeNum > 0 && rate > 1 && (CCInt) (self.minValue) % rate != 0) {
-        //最大值加上轴差
-        self.minValue = (CCInt) self.minValue - ((CCInt) (self.minValue) % rate);
-    }
-    //等分轴修正
-    if (self.latitudeNum > 0 && (CCInt) (self.maxValue - self.minValue) % (self.latitudeNum * rate) != 0) {
-        //最大值加上轴差
-        self.maxValue = (CCInt) self.maxValue + (self.latitudeNum * rate) - ((CCInt) (self.maxValue - self.minValue) % (self.latitudeNum * rate));
-    }
+//    CCInt rate = 1;
+//
+//    if (self.maxValue < 3000) {
+//        rate = 1;
+//    } else if (self.maxValue >= 3000 && self.maxValue < 5000) {
+//        rate = 5;
+//    } else if (self.maxValue >= 5000 && self.maxValue < 30000) {
+//        rate = 10;
+//    } else if (self.maxValue >= 30000 && self.maxValue < 50000) {
+//        rate = 50;
+//    } else if (self.maxValue >= 50000 && self.maxValue < 300000) {
+//        rate = 100;
+//    } else if (self.maxValue >= 300000 && self.maxValue < 500000) {
+//        rate = 500;
+//    } else if (self.maxValue >= 500000 && self.maxValue < 3000000) {
+//        rate = 1000;
+//    } else if (self.maxValue >= 3000000 && self.maxValue < 5000000) {
+//        rate = 5000;
+//    } else if (self.maxValue >= 5000000 && self.maxValue < 30000000) {
+//        rate = 10000;
+//    } else if (self.maxValue >= 30000000 && self.maxValue < 50000000) {
+//        rate = 50000;
+//    } else {
+//        rate = 100000;
+//    }
+//
+//    //等分轴修正
+//    if (self.latitudeNum > 0 && rate > 1 && (CCInt) (self.minValue) % rate != 0) {
+//        //最大值加上轴差
+//        self.minValue = (CCInt) self.minValue - ((CCInt) (self.minValue) % rate);
+//    }
+//    //等分轴修正
+//    if (self.latitudeNum > 0 && (CCInt) (self.maxValue - self.minValue) % (self.latitudeNum * rate) != 0) {
+//        //最大值加上轴差
+//        self.maxValue = (CCInt) self.maxValue + (self.latitudeNum * rate) - ((CCInt) (self.maxValue - self.minValue) % (self.latitudeNum * rate));
+//    }
 }
 
 - (void)initAxisX {
@@ -215,7 +217,7 @@
     CCFloat stickWidth = ((rect.size.width - self.axisMarginLeft - self.axisMarginRight) / self.displayNumber) - 1;
 
     CGContextRef context = UIGraphicsGetCurrentContext();
-    CGContextSetLineWidth(context, 1.0f);
+    CGContextSetLineWidth(context, 0.5f);
 
     if (self.stickData != NULL && [self.stickData count] > 0) {
         //判断Y轴的位置设置从左往右还是从右往左绘制
@@ -239,15 +241,24 @@
                     CGContextSetFillColorWithColor(context, self.positiveStickFillColor.CGColor);
 
                     if (self.candleStickStyle == CCSCandleStickStyleStandard) {
-                        if (stickWidth >= 2) {
-                            CGContextAddRect(context, CGRectMake(stickX, closeY, stickWidth, openY - closeY));
-                            CGContextFillPath(context);
-                        }
+                        
                         //绘制上下影线
                         CGContextMoveToPoint(context, stickX + stickWidth / 2, highY);
-                        CGContextAddLineToPoint(context, stickX + stickWidth / 2, lowY);
+                        CGContextAddLineToPoint(context, stickX + stickWidth / 2, closeY);
 
                         CGContextStrokePath(context);
+                        
+                        CGContextMoveToPoint(context, stickX + stickWidth / 2, openY);
+                        CGContextAddLineToPoint(context, stickX + stickWidth / 2, lowY);
+                        
+                        CGContextStrokePath(context);
+                        
+                        if (stickWidth >= 1) {
+                            CGContextAddRect(context, CGRectMake(stickX, closeY, stickWidth, openY - closeY));
+                            CGContextFillPath(context);
+                            CGContextAddRect(context, CGRectMake(stickX, closeY, stickWidth, openY - closeY));
+                            CGContextStrokePath(context);
+                        }
 
                     } else if (self.candleStickStyle == CCSCandleStickStyleBar) {
                         //绘制上下影线
@@ -269,19 +280,30 @@
                     //阴线
                     //根据宽度判断是否绘制立柱
                     CGContextSetStrokeColorWithColor(context, self.negativeStickBorderColor.CGColor);
-                    CGContextSetFillColorWithColor(context, self.negativeStickBorderColor.CGColor);
+                    CGContextSetFillColorWithColor(context, self.negativeStickFillColor.CGColor);
 
                     if (self.candleStickStyle == CCSCandleStickStyleStandard) {
-                        if (stickWidth >= 2) {
-                            CGContextAddRect(context, CGRectMake(stickX, openY, stickWidth, closeY - openY));
-                            CGContextFillPath(context);
-                        }
-
+                        
                         //绘制上下影线
                         CGContextMoveToPoint(context, stickX + stickWidth / 2, highY);
-                        CGContextAddLineToPoint(context, stickX + stickWidth / 2, lowY);
+                        CGContextAddLineToPoint(context, stickX + stickWidth / 2, openY);
 
                         CGContextStrokePath(context);
+                        
+                        
+                        CGContextMoveToPoint(context, stickX + stickWidth / 2, closeY);
+                        CGContextAddLineToPoint(context, stickX + stickWidth / 2, lowY);
+                        
+                        CGContextStrokePath(context);
+                        
+                        
+                        if (stickWidth >= 1) {
+                            CGContextAddRect(context, CGRectMake(stickX, openY, stickWidth, closeY - openY));
+                            CGContextFillPath(context);
+                            
+                            CGContextAddRect(context, CGRectMake(stickX, closeY, stickWidth, openY - closeY));
+                            CGContextStrokePath(context);
+                        }
 
                     } else if (self.candleStickStyle == CCSCandleStickStyleBar) {
                         //绘制上下影线
@@ -303,7 +325,7 @@
                     //根据宽度判断是否绘制横线
                     CGContextSetStrokeColorWithColor(context, self.crossStarColor.CGColor);
                     CGContextSetFillColorWithColor(context, self.crossStarColor.CGColor);
-                    if (stickWidth >= 2) {
+                    if (stickWidth >= 1) {
                         CGContextMoveToPoint(context, stickX, closeY);
                         CGContextAddLineToPoint(context, stickX + stickWidth, openY);
                     }
@@ -338,30 +360,51 @@
                     //根据宽度判断是否绘制立柱
                     CGContextSetStrokeColorWithColor(context, self.positiveStickBorderColor.CGColor);
                     CGContextSetFillColorWithColor(context, self.positiveStickFillColor.CGColor);
+                    
+                    //绘制上下影线
+                    CGContextMoveToPoint(context, stickX + stickWidth / 2, openY);
+                    CGContextAddLineToPoint(context, stickX + stickWidth / 2, lowY);
+                    CGContextStrokePath(context);
+                    
+                    
+                    CGContextMoveToPoint(context, stickX + stickWidth / 2, highY);
+                    CGContextAddLineToPoint(context, stickX + stickWidth / 2, closeY);
+                    CGContextStrokePath(context);
+                    
+                    
                     if (stickWidth >= 2) {
                         CGContextAddRect(context, CGRectMake(stickX, closeY, stickWidth, openY - closeY));
                         CGContextFillPath(context);
+                        
+                        CGContextAddRect(context, CGRectMake(stickX, closeY, stickWidth, openY - closeY));
+                        CGContextStrokePath(context);
                     }
-                    //绘制上下影线
-                    CGContextMoveToPoint(context, stickX + stickWidth / 2, highY);
-                    CGContextAddLineToPoint(context, stickX + stickWidth / 2, lowY);
-
-                    CGContextStrokePath(context);
+                   
 
                 } else if (data.open > data.close) {
                     //阴线
                     //根据宽度判断是否绘制立柱
                     CGContextSetStrokeColorWithColor(context, self.negativeStickBorderColor.CGColor);
-                    CGContextSetFillColorWithColor(context, self.negativeStickBorderColor.CGColor);
+                    CGContextSetFillColorWithColor(context, self.negativeStickFillColor.CGColor);
+
+                    //绘制上下影线
+                    CGContextMoveToPoint(context, stickX + stickWidth / 2, highY);
+                    CGContextAddLineToPoint(context, stickX + stickWidth / 2, openY);
+
+                    CGContextStrokePath(context);
+                    
+                    CGContextMoveToPoint(context, stickX + stickWidth / 2, closeY);
+                    CGContextAddLineToPoint(context, stickX + stickWidth / 2, lowY);
+                    
+                    CGContextStrokePath(context);
+
+                    
                     if (stickWidth >= 2) {
                         CGContextAddRect(context, CGRectMake(stickX, openY, stickWidth, closeY - openY));
                         CGContextFillPath(context);
+                        CGContextAddRect(context, CGRectMake(stickX, closeY, stickWidth, openY - closeY));
+                        CGContextStrokePath(context);
                     }
-                    //绘制上下影线
-                    CGContextMoveToPoint(context, stickX + stickWidth / 2, highY);
-                    CGContextAddLineToPoint(context, stickX + stickWidth / 2, lowY);
-
-                    CGContextStrokePath(context);
                 } else {
                     //十字线
                     //根据宽度判断是否绘制横线

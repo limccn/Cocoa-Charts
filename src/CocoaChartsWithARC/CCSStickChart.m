@@ -43,7 +43,7 @@
     self.stickBorderColor = [UIColor yellowColor];
     self.stickFillColor = [UIColor yellowColor];
 
-    self.latitudeNum = 3;
+    self.latitudeNum = 2;
     self.longitudeNum = 3;
     self.maxSticksNum = 26;
     self.maxValue = 100;
@@ -439,7 +439,6 @@
             }
         }
     }
-
 }
 
 - (void)setSelectedPointAddReDraw:(CGPoint)point {
@@ -511,11 +510,18 @@
     }
 }
 
+-(void) bindSelectedIndex
+{
+    
+}
+
 - (void) setSingleTouchPoint:(CGPoint) point
 {
     _singleTouchPoint = point;
     
     [self calcSelectedIndex];
+    
+    [self bindSelectedIndex];
     
     if (self.chartDelegate && [self.chartDelegate respondsToSelector:@selector(CCSChartBeTouchedOn:indexAt:)]) {
         [self.chartDelegate CCSChartBeTouchedOn:point indexAt:self.selectedStickIndex];

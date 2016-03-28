@@ -23,7 +23,7 @@
 - (void)initProperty {
     //初始化父类的熟悉
     [super initProperty];
-    self.coloredStickStyle = CCSColoredStickStyleNoBorder;
+    self.coloredStickStyle = CCSColoredStickStyleWithBorder;
 }
 
 - (void)drawData:(CGRect)rect {
@@ -32,7 +32,7 @@
 
     CGContextRef context = UIGraphicsGetCurrentContext();
 
-    CGContextSetLineWidth(context, 1.0f);
+    CGContextSetLineWidth(context, 0.5f);
 
     if (self.stickData != NULL && [self.stickData count] > 0) {
 

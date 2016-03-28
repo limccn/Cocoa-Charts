@@ -137,4 +137,6 @@ typedef enum {
 
 - (void)calcValueRange;
 
+- (void)setSelectedPointAddReDraw:(CGPoint)point;
+
 @end

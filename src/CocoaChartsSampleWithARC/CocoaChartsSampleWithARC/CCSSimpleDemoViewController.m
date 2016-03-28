@@ -7,6 +7,7 @@
 //
 
 #import "CCSSimpleDemoViewController.h"
+
 #import "CCSColoredStickChartData.h"
 #import "CCSCandleStickChartData.h"
 #import "CCSTitledLine.h"
@@ -18,6 +19,8 @@
 #import "CCSStringUtils.h"
 
 #define WR_NONE_DISPLAY 101
+
+#define AXIS_CALC_PARM  1000
 
 @implementation OHLCVDData
 @synthesize open = _open;
@@ -91,8 +94,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     [self initControllers];
-    [self loadData];
+//    [self loadData];
+//    [self loadData2];
+    [self loadDataJSON: Chart15minData];
+    
     [self initCandleStickChart];
     [self initStickChart];
     [self initMACDChart];
@@ -111,6 +118,110 @@
     }
 
     //[self clearChart];
+}
+
+- (void)loadDataJSON: (ChartDataType) chartDataType{
+//    NSString *strAllPdts = [self findJSONStringWithName:@"allpdts"];
+    
+    CCSJSONData *jsonData = nil;
+    
+    if (chartDataType == Chart1minData) {
+        jsonData = [[CCSJSONData alloc] initWithData:[[self findJSONStringWithName:@"1min"] dataUsingEncoding:NSUTF8StringEncoding] error:nil];
+    }else if (chartDataType == Chart15minData){
+        jsonData = [[CCSJSONData alloc] initWithData:[[self findJSONStringWithName:@"15min"] dataUsingEncoding:NSUTF8StringEncoding] error:nil];
+    }else{
+        jsonData = [[CCSJSONData alloc] initWithData:[[self findJSONStringWithName:@"time"] dataUsingEncoding:NSUTF8StringEncoding] error:nil];
+    }
+    
+    NSArray *arrData = nil;
+    if (jsonData.kqn !=nil) {
+        arrData = jsonData.kqn;
+    }else if (jsonData.ct !=nil){
+        arrData = jsonData.ct;
+    }else if (jsonData.ctt !=nil){
+        arrData = jsonData.ctt;
+    }
+    
+    if (self.chartData == nil) {
+        self.chartData = [[NSMutableArray alloc] init];
+    }
+    
+//    data.open = [dict objectForKey:@"openPrice"];
+//    data.high = [dict objectForKey:@"upPrice"];
+//    data.low = [dict objectForKey:@"lowPrice"];
+//    data.close = [dict objectForKey:@"closePrice"];
+//    data.vol = [dict objectForKey:@"totalNum"];
+//    data.date = [dict objectForKey:@"tradeDate"];
+//    data.current = [dict objectForKey:@"currentPrice"];
+//    data.preclose = nil;
+//    data.change = [dict objectForKey:@"changesPercent"];
+    for (NSDictionary *dict in arrData) {
+        if (dict != nil) {
+            OHLCVDData *data = [[OHLCVDData alloc] init];
+            
+            data.open = [dict objectForKey:@"o"];
+            data.high = [dict objectForKey:@"h"];
+            data.low = [dict objectForKey:@"l"];
+            data.close = [dict objectForKey:@"c"];
+            data.vol = [dict objectForKey:@"tr"];
+            data.date = [dict objectForKey:@"qt"];
+            data.current = [dict objectForKey:@"n"];
+            data.preclose = nil;
+            data.change = [dict objectForKey:@"changesPercent"];
+            [self.chartData addObject:data];
+        }
+    }
+    
+    [self dataPreProcess];
+}
+
+- (void) loadData2 {
+    NSMutableArray *arr = [NSMutableArray arrayWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"test" ofType:@".plist"]];
+    
+    if (arr ==nil) {
+        return;
+    }
+    
+    if (self.chartData == nil) {
+        self.chartData = [[NSMutableArray alloc] init];
+    }
+    
+    for (int i=0; i<[arr count]; i++) {
+        NSDictionary *dict = [arr objectAtIndex:i];
+        if (dict != nil) {
+            OHLCVDData *data = [[OHLCVDData alloc] init];
+            
+            data.open = [dict objectForKey:@"openPrice"];
+            data.high = [dict objectForKey:@"upPrice"];
+            data.low = [dict objectForKey:@"lowPrice"];
+            data.close = [dict objectForKey:@"closePrice"];
+            data.vol = [dict objectForKey:@"totalNum"];
+            data.date = [dict objectForKey:@"tradeDate"];
+            data.current = [dict objectForKey:@"currentPrice"];
+            data.preclose = nil;
+            data.change = [dict objectForKey:@"changesPercent"];
+            
+            [self.chartData addObject:data];
+            
+        }
+    }
+    
+    [self dataPreProcess];
+}
+
+- (void) dataPreProcess{
+    
+    if (self.chartData == nil) {
+        return;
+    }
+    
+    for (int i=0; i< [self.chartData count];  i++) {
+        OHLCVDData *data = [self.chartData objectAtIndex:i];
+        data.open = [NSString stringWithFormat:@"%f",[data.open doubleValue] * AXIS_CALC_PARM];
+        data.high = [NSString stringWithFormat:@"%f",[data.high doubleValue] * AXIS_CALC_PARM];
+        data.low = [NSString stringWithFormat:@"%f",[data.low doubleValue] * AXIS_CALC_PARM];
+        data.close = [NSString stringWithFormat:@"%f",[data.close doubleValue] * AXIS_CALC_PARM];
+    }
 }
 
 - (void)loadData {
@@ -157,27 +268,42 @@
 }
 
 - (void)initControllers {
-    UISegmentedControl *segChartType = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"Candle", @"Bar", @"Line", nil]];
-    segChartType.frame = CGRectMake(0, MARGIN_TOP + DEVICE_HEIGHT * 3 + 5, 200, 33);
-    //segChartType.segmentedControlStyle = UISegmentedControlStyleBar;
-    [segChartType addTarget:self action:@selector(segChartTypeValueChaged:) forControlEvents:UIControlEventValueChanged];
+//    UISegmentedControl *segChartType = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"Candle", @"Bar", @"Line", nil]];
+//    segChartType.frame = CGRectMake(0, MARGIN_TOP + DEVICE_HEIGHT * 3 + 5, 200, 33);
+//    //segChartType.segmentedControlStyle = UISegmentedControlStyleBar;
+//    [segChartType addTarget:self action:@selector(segChartTypeValueChaged:) forControlEvents:UIControlEventValueChanged];
 
+    UISegmentedControl *segTopChartType = [[UISegmentedControl alloc] initWithItems:@[@"分时", @"15分", @"30分", @"日", @"周", @"月"]];
+    segTopChartType.frame = CGRectMake(8.0f, MARGIN_TOP, DEVICE_WIDTH - 16.0f, 33);
+    //segBottomChartType.segmentedControlStyle = UISegmentedControlStyleBar;
+    [segTopChartType addTarget:self action:@selector(segTopChartTypeTypeValueChaged:) forControlEvents:UIControlEventValueChanged];
+    [segTopChartType setSelectedSegmentIndex:1];
+    
     UISegmentedControl *segBottomChartType = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"VOL", @"MACD", @"KDJ", @"RSI", @"WR", @"CCI", @"BOLL", nil]];
-    segBottomChartType.frame = CGRectMake(0, MARGIN_TOP + DEVICE_HEIGHT * 3 + 40, 320, 33);
+    segBottomChartType.frame = CGRectMake(8.0f, MARGIN_TOP + DEVICE_HEIGHT * 3 + 40, DEVICE_WIDTH - 16.0f, 33);
     //segBottomChartType.segmentedControlStyle = UISegmentedControlStyleBar;
     [segBottomChartType addTarget:self action:@selector(segBottomChartTypeTypeValueChaged:) forControlEvents:UIControlEventValueChanged];
+    [segBottomChartType setSelectedSegmentIndex:0];
 
     UIScrollView *scrollViewBottomChart = [[UIScrollView alloc] init];
-    scrollViewBottomChart.frame = CGRectMake(0, DEVICE_HEIGHT * 2 + MARGIN_TOP, DEVICE_WIDTH, DEVICE_HEIGHT);
+    scrollViewBottomChart.frame = CGRectMake(8.0f, DEVICE_HEIGHT * 2 + MARGIN_TOP + 32.0f, DEVICE_WIDTH - 16.0f, DEVICE_HEIGHT);
     scrollViewBottomChart.bounces = NO;
-    scrollViewBottomChart.contentSize = CGSizeMake(DEVICE_WIDTH * 6, DEVICE_HEIGHT);
+    scrollViewBottomChart.contentSize = CGSizeMake((DEVICE_WIDTH - 16.0f) * 6, DEVICE_HEIGHT);
     scrollViewBottomChart.pagingEnabled = YES;
     scrollViewBottomChart.delegate = self;
-
-    self.segChartType = segChartType;
+    [scrollViewBottomChart setScrollEnabled:NO];
+    
+    // 设置单击手势
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(handleTap:)];
+    tap.numberOfTapsRequired = 1;
+    tap.numberOfTouchesRequired = 1;
+    [scrollViewBottomChart addGestureRecognizer:tap];
+    
+//    self.segChartType = segChartType;
     self.segBottomChartType = segBottomChartType;
     self.scrollViewBottomChart = scrollViewBottomChart;
-    [self.view addSubview:segChartType];
+//    [self.view addSubview:segChartType];
+    [self.view addSubview:segTopChartType];
     [self.view addSubview:segBottomChartType];
     [self.view addSubview:scrollViewBottomChart];
 }
@@ -320,6 +446,20 @@
         self.candleStickChart.candleStickStyle = CCSCandleStickStyleLine;
         [self.candleStickChart setNeedsDisplay];
     }
+}
+
+- (void)segTopChartTypeTypeValueChaged:(UISegmentedControl *)segmentedControl {
+    if (segmentedControl.selectedSegmentIndex == 0) {
+        [self loadDataJSON:Chart1minData];
+    }else if (segmentedControl.selectedSegmentIndex == 1){
+        [self loadDataJSON:Chart15minData];
+    }else{
+        [self loadDataJSON:ChartTimesData];
+    }
+    
+    [self initCandleStickChartData];
+    
+//    [self.candleStickChart performSelector:@selector(setNeedsDisplay) withObject:nil];
 }
 
 - (void)segBottomChartTypeTypeValueChaged:(UISegmentedControl *)segmentedControl {
@@ -686,17 +826,17 @@
             CCSColoredStickChartData *stickData = [[CCSColoredStickChartData alloc] init];
             stickData.high = [item.vol doubleValue];
             stickData.low = 0;
-            stickData.date = [item.date dateWithFormat:@"yyyyMMdd" target:@"yyyy/MM/dd"];
+            stickData.date = [item.date dateWithFormat:@"yyyy-MM-ddHH:mm:ss" target:@"yy-MM-dd"];
 
             if ([item.close doubleValue] > [item.open doubleValue]) {
-                stickData.fillColor = [UIColor redColor];
+                stickData.fillColor = [UIColor clearColor];
                 stickData.borderColor = [UIColor redColor];
             } else if ([item.close doubleValue] < [item.open doubleValue]) {
-                stickData.fillColor = [UIColor blueColor];
-                stickData.borderColor = [UIColor blueColor];
+                stickData.fillColor = [UIColor greenColor];
+                stickData.borderColor = [UIColor clearColor];
             } else {
-                stickData.fillColor = [UIColor blackColor];
-                stickData.borderColor = [UIColor blackColor];
+                stickData.fillColor = [UIColor lightGrayColor];
+                stickData.borderColor = [UIColor clearColor];
             }
             //增加数据
             [stickDatas addObject:stickData];
@@ -718,28 +858,29 @@
     [self initStickChartData];
 
     //设置stickData
-    self.stickChart.minDisplayNumber = 25;
+//    self.stickChart.minDisplayNumber = 25;
     self.stickChart.maxValue = 800000;
     self.stickChart.minValue = 0;
-    self.stickChart.axisMarginLeft = 50;
-    self.stickChart.displayCrossYOnTouch = YES;
-    self.stickChart.displayCrossXOnTouch = YES;
+//    self.stickChart.axisMarginLeft = 50;
+//    self.stickChart.displayCrossYOnTouch = YES;
+//    self.stickChart.displayCrossXOnTouch = YES;
     self.stickChart.stickFillColor = [UIColor colorWithRed:0.7 green:0.7 blue:0 alpha:0.8];
 
-    self.stickChart.axisXColor = [UIColor darkGrayColor];
-    self.stickChart.axisYColor = [UIColor darkGrayColor];
-    self.stickChart.latitudeColor = [UIColor darkGrayColor];
-    self.stickChart.longitudeColor = [UIColor darkGrayColor];
-    self.stickChart.latitudeFontColor = [UIColor darkGrayColor];
-    self.stickChart.longitudeFontColor = [UIColor darkGrayColor];
-    self.stickChart.axisMarginLeft = 2;
-    self.stickChart.axisMarginRight = 58;
-    self.stickChart.axisMarginTop = 1;
-    self.stickChart.axisYPosition = CCSGridChartYAxisPositionRight;
+//    self.stickChart.axisXColor = [UIColor darkGrayColor];
+//    self.stickChart.axisYColor = [UIColor darkGrayColor];
+//    self.stickChart.latitudeColor = [UIColor darkGrayColor];
+//    self.stickChart.longitudeColor = [UIColor darkGrayColor];
+//    self.stickChart.latitudeFontColor = [UIColor darkGrayColor];
+//    self.stickChart.longitudeFontColor = [UIColor darkGrayColor];
+//    self.stickChart.axisMarginLeft = 2;
+//    self.stickChart.axisMarginRight = 0;
+//    self.stickChart.axisMarginTop = 1;
+//    self.stickChart.axisYPosition = CCSGridChartYAxisPositionRight;
     self.stickChart.displayNumber = 50;
-    self.stickChart.displayFrom = 99;
-
-
+    self.stickChart.displayFrom = 0;
+    self.stickChart.displayLongitudeTitle = NO;
+    self.stickChart.axisMarginBottom = 3;
+    
     self.stickChart.backgroundColor = [UIColor clearColor];
 
     [self.scrollViewBottomChart addSubview:self.stickChart];
@@ -756,7 +897,7 @@
             stickData.low = [item.low doubleValue];
             stickData.close = [item.close doubleValue];
             stickData.change = 0;
-            stickData.date = [item.date dateWithFormat:@"yyyyMMdd" target:@"yyyy/MM/dd"];
+            stickData.date = [item.date dateWithFormat:@"yyyy-MM-ddHH:mm:ss" target:@"yy-MM-dd"];
             //增加数据
             [stickDatas addObject:stickData];
         }
@@ -769,7 +910,7 @@
 }
 
 - (void)initMACDChart {
-    CCSMACDChart *macdchart = [[CCSMACDChart alloc] initWithFrame:CGRectMake(self.scrollViewBottomChart.frame.size.width, 0, DEVICE_WIDTH, DEVICE_HEIGHT)];
+    CCSMACDChart *macdchart = [[CCSMACDChart alloc] initWithFrame:CGRectMake(self.scrollViewBottomChart.frame.size.width, 0, self.scrollViewBottomChart.frame.size.width, self.scrollViewBottomChart.frame.size.height)];
     macdchart.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     self.macdChart = macdchart;
 
@@ -777,43 +918,42 @@
     [self initMACDChartData];
 
     //设置stickData
-    self.macdChart.minDisplayNumber = 25;
-    self.macdChart.maxValue = 800000;
-    self.macdChart.minValue = 0;
-    self.macdChart.axisMarginLeft = 50;
-    self.macdChart.displayCrossYOnTouch = YES;
-    self.macdChart.displayCrossXOnTouch = YES;
+//    self.macdChart.minDisplayNumber = 25;
+//    self.macdChart.maxValue = 800000;
+//    self.macdChart.minValue = 0;
+//    self.macdChart.axisMarginLeft = 50;
+//    self.macdChart.displayCrossYOnTouch = YES;
+//    self.macdChart.displayCrossXOnTouch = YES;
     self.macdChart.stickFillColor = [UIColor colorWithRed:0.7 green:0.7 blue:0 alpha:0.8];
 
-    self.macdChart.axisXColor = [UIColor darkGrayColor];
-    self.macdChart.axisYColor = [UIColor darkGrayColor];
-    self.macdChart.latitudeColor = [UIColor darkGrayColor];
-    self.macdChart.longitudeColor = [UIColor darkGrayColor];
-    self.macdChart.latitudeFontColor = [UIColor darkGrayColor];
-    self.macdChart.longitudeFontColor = [UIColor darkGrayColor];
-    self.macdChart.axisMarginLeft = 2;
-    self.macdChart.axisMarginRight = 58;
-    self.macdChart.axisMarginTop = 1;
-    self.macdChart.axisYPosition = CCSGridChartYAxisPositionRight;
+//    self.macdChart.axisXColor = [UIColor darkGrayColor];
+//    self.macdChart.axisYColor = [UIColor darkGrayColor];
+//    self.macdChart.latitudeColor = [UIColor darkGrayColor];
+//    self.macdChart.longitudeColor = [UIColor darkGrayColor];
+//    self.macdChart.latitudeFontColor = [UIColor darkGrayColor];
+//    self.macdChart.longitudeFontColor = [UIColor darkGrayColor];
+//    self.macdChart.axisMarginLeft = 2;
+//    self.macdChart.axisMarginRight = 0;
+//    self.macdChart.axisMarginTop = 1;
+//    self.macdChart.axisYPosition = CCSGridChartYAxisPositionRight;
 
     self.macdChart.maxValue = 300000;
     self.macdChart.minValue = -300000;
     self.macdChart.maxSticksNum = 100;
-    self.macdChart.displayCrossXOnTouch = YES;
-    self.macdChart.displayCrossYOnTouch = YES;
-    self.macdChart.latitudeNum = 2;
-    self.macdChart.longitudeNum = 3;
-    self.macdChart.backgroundColor = [UIColor blackColor];
+//    self.macdChart.displayCrossXOnTouch = YES;
+//    self.macdChart.displayCrossYOnTouch = YES;
     self.macdChart.macdDisplayType = CCSMACDChartDisplayTypeLineStick;
     self.macdChart.positiveStickColor = [UIColor redColor];
-    self.macdChart.negativeStickColor = [UIColor blueColor];
+    self.macdChart.negativeStickColor = [UIColor greenColor];
     self.macdChart.macdLineColor = [UIColor cyanColor];
-    self.macdChart.deaLineColor = [UIColor greenColor];
-    self.macdChart.diffLineColor = [UIColor purpleColor];
+    self.macdChart.deaLineColor = [UIColor blueColor];
+    self.macdChart.diffLineColor = [UIColor orangeColor];
     self.macdChart.displayNumber = 50;
-    self.macdChart.displayFrom = 99;
+    self.macdChart.displayFrom = 0;
     self.macdChart.axisCalc = 1000000;
-
+    self.macdChart.displayLongitudeTitle = NO;
+    self.macdChart.axisMarginBottom = 3;
+    
     self.macdChart.backgroundColor = [UIColor clearColor];
 
     [self.scrollViewBottomChart addSubview:self.macdChart];
@@ -830,7 +970,7 @@
 }
 
 - (void)initKDJChart {
-    CCSSlipLineChart *kdjchart = [[CCSSlipLineChart alloc] initWithFrame:CGRectMake(self.scrollViewBottomChart.frame.size.width * 2, 0, DEVICE_WIDTH, DEVICE_HEIGHT)];
+    CCSSlipLineChart *kdjchart = [[CCSSlipLineChart alloc] initWithFrame:CGRectMake(self.scrollViewBottomChart.frame.size.width * 2, 0, self.scrollViewBottomChart.frame.size.width, self.scrollViewBottomChart.frame.size.height)];
     kdjchart.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     self.kdjChart = kdjchart;
 
@@ -838,30 +978,33 @@
     [self initKDJChartData];
 
     //设置stickData
-    self.kdjChart.minDisplayNumber = 25;
-    self.kdjChart.axisXColor = [UIColor darkGrayColor];
-    self.kdjChart.axisYColor = [UIColor darkGrayColor];
-    self.kdjChart.latitudeColor = [UIColor darkGrayColor];
-    self.kdjChart.longitudeColor = [UIColor darkGrayColor];
-    self.kdjChart.latitudeFontColor = [UIColor darkGrayColor];
-    self.kdjChart.longitudeFontColor = [UIColor darkGrayColor];
-    self.kdjChart.axisMarginLeft = 2;
-    self.kdjChart.axisMarginRight = 58;
-    self.kdjChart.axisMarginTop = 1;
-    self.kdjChart.axisYPosition = CCSGridChartYAxisPositionRight;
-    self.kdjChart.displayCrossXOnTouch = YES;
-    self.kdjChart.displayCrossYOnTouch = YES;
-    self.kdjChart.latitudeNum = 2;
-    self.kdjChart.longitudeNum = 3;
+//    self.kdjChart.minDisplayNumber = 25;
+//    self.kdjChart.axisXColor = [UIColor darkGrayColor];
+//    self.kdjChart.axisYColor = [UIColor darkGrayColor];
+//    self.kdjChart.latitudeColor = [UIColor darkGrayColor];
+//    self.kdjChart.longitudeColor = [UIColor darkGrayColor];
+//    self.kdjChart.latitudeFontColor = [UIColor darkGrayColor];
+//    self.kdjChart.longitudeFontColor = [UIColor darkGrayColor];
+//    self.kdjChart.axisMarginLeft = 2;
+//    self.kdjChart.axisMarginRight = 0;
+//    self.kdjChart.axisMarginTop = 1;
+//    self.kdjChart.axisYPosition = CCSGridChartYAxisPositionRight;
+//    self.kdjChart.displayCrossXOnTouch = YES;
+//    self.kdjChart.displayCrossYOnTouch = YES;
     self.kdjChart.displayNumber = 50;
-    self.kdjChart.displayFrom = 99;
+    self.kdjChart.displayFrom = 0;
+    self.kdjChart.latitudeNum = 2;
+    self.kdjChart.displayLongitudeTitle = NO;
+    self.kdjChart.axisMarginBottom = 3;
+    
+    
     self.kdjChart.backgroundColor = [UIColor clearColor];
 
     [self.scrollViewBottomChart addSubview:self.kdjChart];
 }
 
 - (void)initRSIChart {
-    CCSSlipLineChart *rsiChart = [[CCSSlipLineChart alloc] initWithFrame:CGRectMake(self.scrollViewBottomChart.frame.size.width * 3, 0, DEVICE_WIDTH, DEVICE_HEIGHT)];
+    CCSSlipLineChart *rsiChart = [[CCSSlipLineChart alloc] initWithFrame:CGRectMake(self.scrollViewBottomChart.frame.size.width * 3, 0, self.scrollViewBottomChart.frame.size.width, self.scrollViewBottomChart.frame.size.height)];
     rsiChart.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     self.rsiChart = rsiChart;
 
@@ -869,23 +1012,24 @@
     [self initRSIChartData];
 
     //设置stickData
-    self.rsiChart.minDisplayNumber = 25;
-    self.rsiChart.axisXColor = [UIColor darkGrayColor];
-    self.rsiChart.axisYColor = [UIColor darkGrayColor];
-    self.rsiChart.latitudeColor = [UIColor darkGrayColor];
-    self.rsiChart.longitudeColor = [UIColor darkGrayColor];
-    self.rsiChart.latitudeFontColor = [UIColor darkGrayColor];
-    self.rsiChart.longitudeFontColor = [UIColor darkGrayColor];
-    self.rsiChart.axisMarginLeft = 2;
-    self.rsiChart.axisMarginRight = 58;
-    self.rsiChart.axisMarginTop = 1;
-    self.rsiChart.axisYPosition = CCSGridChartYAxisPositionRight;
-    self.rsiChart.displayCrossXOnTouch = YES;
-    self.rsiChart.displayCrossYOnTouch = YES;
-    self.rsiChart.latitudeNum = 2;
-    self.rsiChart.longitudeNum = 3;
+//    self.rsiChart.minDisplayNumber = 25;
+//    self.rsiChart.axisXColor = [UIColor darkGrayColor];
+//    self.rsiChart.axisYColor = [UIColor darkGrayColor];
+//    self.rsiChart.latitudeColor = [UIColor darkGrayColor];
+//    self.rsiChart.longitudeColor = [UIColor darkGrayColor];
+//    self.rsiChart.latitudeFontColor = [UIColor darkGrayColor];
+//    self.rsiChart.longitudeFontColor = [UIColor darkGrayColor];
+//    self.rsiChart.axisMarginLeft = 2;
+//    self.rsiChart.axisMarginRight = 0;
+//    self.rsiChart.axisMarginTop = 1;
+//    self.rsiChart.axisYPosition = CCSGridChartYAxisPositionRight;
+//    self.rsiChart.displayCrossXOnTouch = YES;
+//    self.rsiChart.displayCrossYOnTouch = YES;
     self.rsiChart.displayNumber = 50;
-    self.rsiChart.displayFrom = 99;
+    self.rsiChart.displayFrom = 0;
+    self.rsiChart.displayLongitudeTitle = NO;
+    self.rsiChart.axisMarginBottom = 3;
+    
     self.rsiChart.backgroundColor = [UIColor clearColor];
 
     [self.scrollViewBottomChart addSubview:self.rsiChart];
@@ -907,7 +1051,7 @@
 }
 
 - (void)initWRChart {
-    CCSSlipLineChart *wrChart = [[CCSSlipLineChart alloc] initWithFrame:CGRectMake(self.scrollViewBottomChart.frame.size.width * 4, 0, DEVICE_WIDTH, DEVICE_HEIGHT)];
+    CCSSlipLineChart *wrChart = [[CCSSlipLineChart alloc] initWithFrame:CGRectMake(self.scrollViewBottomChart.frame.size.width * 4, 0, self.scrollViewBottomChart.frame.size.width, self.scrollViewBottomChart.frame.size.height)];
     wrChart.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     self.wrChart = wrChart;
 
@@ -915,24 +1059,25 @@
     [self initWRChartData];
 
     //设置stickData
-    self.wrChart.minDisplayNumber = 25;
-    self.wrChart.axisXColor = [UIColor darkGrayColor];
-    self.wrChart.axisYColor = [UIColor darkGrayColor];
-    self.wrChart.latitudeColor = [UIColor darkGrayColor];
-    self.wrChart.longitudeColor = [UIColor darkGrayColor];
-    self.wrChart.latitudeFontColor = [UIColor darkGrayColor];
-    self.wrChart.longitudeFontColor = [UIColor darkGrayColor];
-    self.wrChart.axisMarginLeft = 2;
-    self.wrChart.axisMarginRight = 58;
-    self.wrChart.axisMarginTop = 1;
-    self.wrChart.axisYPosition = CCSGridChartYAxisPositionRight;
-    self.wrChart.displayCrossXOnTouch = YES;
-    self.wrChart.displayCrossYOnTouch = YES;
-    self.wrChart.latitudeNum = 2;
-    self.wrChart.longitudeNum = 3;
+//    self.wrChart.minDisplayNumber = 25;
+//    self.wrChart.axisXColor = [UIColor darkGrayColor];
+//    self.wrChart.axisYColor = [UIColor darkGrayColor];
+//    self.wrChart.latitudeColor = [UIColor darkGrayColor];
+//    self.wrChart.longitudeColor = [UIColor darkGrayColor];
+//    self.wrChart.latitudeFontColor = [UIColor darkGrayColor];
+//    self.wrChart.longitudeFontColor = [UIColor darkGrayColor];
+//    self.wrChart.axisMarginLeft = 2;
+//    self.wrChart.axisMarginRight = 0;
+//    self.wrChart.axisMarginTop = 1;
+//    self.wrChart.axisYPosition = CCSGridChartYAxisPositionRight;
+//    self.wrChart.displayCrossXOnTouch = YES;
+//    self.wrChart.displayCrossYOnTouch = YES;
     self.wrChart.displayNumber = 50;
-    self.wrChart.displayFrom = 99;
+    self.wrChart.displayFrom = 0;
     self.wrChart.noneDisplayValue = WR_NONE_DISPLAY;
+    self.wrChart.displayLongitudeTitle = NO;
+    self.wrChart.axisMarginBottom = 3;
+    
     self.wrChart.backgroundColor = [UIColor clearColor];
     // self.wrChart.noneDisplayValue = 9999;
 
@@ -949,7 +1094,7 @@
 }
 
 - (void)initCCIChart {
-    CCSSlipLineChart *cciChart = [[CCSSlipLineChart alloc] initWithFrame:CGRectMake(self.scrollViewBottomChart.frame.size.width * 5, 0, DEVICE_WIDTH, DEVICE_HEIGHT)];
+    CCSSlipLineChart *cciChart = [[CCSSlipLineChart alloc] initWithFrame:CGRectMake(self.scrollViewBottomChart.frame.size.width * 5, 0, self.scrollViewBottomChart.frame.size.width, self.scrollViewBottomChart.frame.size.height)];
     cciChart.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     self.cciChart = cciChart;
 
@@ -957,23 +1102,24 @@
     [self initCCIChartData];
 
     //设置stickData
-    self.cciChart.minDisplayNumber = 25;
-    self.cciChart.axisXColor = [UIColor darkGrayColor];
-    self.cciChart.axisYColor = [UIColor darkGrayColor];
-    self.cciChart.latitudeColor = [UIColor darkGrayColor];
-    self.cciChart.longitudeColor = [UIColor darkGrayColor];
-    self.cciChart.latitudeFontColor = [UIColor darkGrayColor];
-    self.cciChart.longitudeFontColor = [UIColor darkGrayColor];
-    self.cciChart.axisMarginLeft = 2;
-    self.cciChart.axisMarginRight = 58;
-    self.cciChart.axisMarginTop = 1;
-    self.cciChart.axisYPosition = CCSGridChartYAxisPositionRight;
-    self.cciChart.displayCrossXOnTouch = YES;
-    self.cciChart.displayCrossYOnTouch = YES;
-    self.cciChart.latitudeNum = 2;
-    self.cciChart.longitudeNum = 3;
+//    self.cciChart.minDisplayNumber = 25;
+//    self.cciChart.axisXColor = [UIColor darkGrayColor];
+//    self.cciChart.axisYColor = [UIColor darkGrayColor];
+//    self.cciChart.latitudeColor = [UIColor darkGrayColor];
+//    self.cciChart.longitudeColor = [UIColor darkGrayColor];
+//    self.cciChart.latitudeFontColor = [UIColor darkGrayColor];
+//    self.cciChart.longitudeFontColor = [UIColor darkGrayColor];
+//    self.cciChart.axisMarginLeft = 2;
+//    self.cciChart.axisMarginRight = 0;
+//    self.cciChart.axisMarginTop = 1;
+//    self.cciChart.axisYPosition = CCSGridChartYAxisPositionRight;
+//    self.cciChart.displayCrossXOnTouch = YES;
+//    self.cciChart.displayCrossYOnTouch = YES;
     self.cciChart.displayNumber = 50;
-    self.cciChart.displayFrom = 99;
+    self.cciChart.displayFrom = 0;
+    self.cciChart.displayLongitudeTitle = NO;
+    self.cciChart.axisMarginBottom = 3;
+    
     self.cciChart.backgroundColor = [UIColor clearColor];
 
     [self.scrollViewBottomChart addSubview:self.cciChart];
@@ -990,7 +1136,7 @@
 }
 
 - (void)initBOLLChart {
-    CCSSlipLineChart *bollChart = [[CCSSlipLineChart alloc] initWithFrame:CGRectMake(self.scrollViewBottomChart.frame.size.width * 6, 0, DEVICE_WIDTH, DEVICE_HEIGHT)];
+    CCSSlipLineChart *bollChart = [[CCSSlipLineChart alloc] initWithFrame:CGRectMake(self.scrollViewBottomChart.frame.size.width * 6, 0, self.scrollViewBottomChart.frame.size.width, self.scrollViewBottomChart.frame.size.height)];
     bollChart.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     self.bollChart = bollChart;
 
@@ -998,24 +1144,26 @@
     [self initBOLLChartData];
 
     //设置stickData
-    self.bollChart.minDisplayNumber = 25;
-    self.bollChart.axisXColor = [UIColor darkGrayColor];
-    self.bollChart.axisYColor = [UIColor darkGrayColor];
-    self.bollChart.latitudeColor = [UIColor darkGrayColor];
-    self.bollChart.longitudeColor = [UIColor darkGrayColor];
-    self.bollChart.latitudeFontColor = [UIColor darkGrayColor];
-    self.bollChart.longitudeFontColor = [UIColor darkGrayColor];
-    self.bollChart.axisMarginLeft = 2;
-    self.bollChart.axisMarginRight = 58;
-    self.bollChart.axisMarginTop = 1;
-    self.bollChart.axisYPosition = CCSGridChartYAxisPositionRight;
-    self.bollChart.displayCrossXOnTouch = YES;
-    self.bollChart.displayCrossYOnTouch = YES;
-    self.bollChart.latitudeNum = 2;
-    self.bollChart.longitudeNum = 3;
+//    self.bollChart.minDisplayNumber = 25;
+//    self.bollChart.axisXColor = [UIColor darkGrayColor];
+//    self.bollChart.axisYColor = [UIColor darkGrayColor];
+//    self.bollChart.latitudeColor = [UIColor darkGrayColor];
+//    self.bollChart.longitudeColor = [UIColor darkGrayColor];
+//    self.bollChart.latitudeFontColor = [UIColor darkGrayColor];
+//    self.bollChart.longitudeFontColor = [UIColor darkGrayColor];
+//    self.bollChart.axisMarginLeft = 2;
+//    self.bollChart.axisMarginRight = 0;
+//    self.bollChart.axisMarginTop = 1;
+//    self.bollChart.axisYPosition = CCSGridChartYAxisPositionRight;
+//    self.bollChart.displayCrossXOnTouch = YES;
+//    self.bollChart.displayCrossYOnTouch = YES;
     self.bollChart.displayNumber = 50;
-    self.bollChart.displayFrom = 99;
+    self.bollChart.displayFrom = 0;
+    self.bollChart.displayLongitudeTitle = NO;
+    self.bollChart.axisMarginBottom = 3;
+    
     self.bollChart.backgroundColor = [UIColor clearColor];
+    self.bollChart.axisCalc = AXIS_CALC_PARM;
 
     [self.scrollViewBottomChart addSubview:self.bollChart];
 }
@@ -1041,7 +1189,7 @@
             stickData.low = [item.low doubleValue];
             stickData.close = [item.close doubleValue];
             stickData.change = 0;
-            stickData.date = [item.date dateWithFormat:@"yyyyMMdd" target:@"yyyy/MM/dd"];
+            stickData.date = [item.date dateWithFormat:@"yyyy-MM-ddHH: mm: ss" target:@"yy-MM-dd"];
             //增加数据
             [stickDatas addObject:stickData];
         }
@@ -1060,8 +1208,8 @@
 }
 
 - (void)initCandleStickChart {
-    CCSBOLLMASlipCandleStickChart *candleStickChart = [[CCSBOLLMASlipCandleStickChart alloc] initWithFrame:CGRectMake(0, MARGIN_TOP, DEVICE_WIDTH, DEVICE_HEIGHT * 2)];
-
+    CCSBOLLMASlipCandleStickChart *candleStickChart = [[CCSBOLLMASlipCandleStickChart alloc] initWithFrame:CGRectMake(8.0f, MARGIN_TOP + 33.0f, DEVICE_WIDTH - 16.0f, DEVICE_HEIGHT * 2)];
+    
     self.candleStickChart = candleStickChart;
     [self initCandleStickChartData];
 
@@ -1069,32 +1217,40 @@
     candleStickChart.maxValue = 340;
     candleStickChart.minValue = 240;
     candleStickChart.axisCalc = 1;
-    candleStickChart.displayLongitudeTitle = NO;
-    candleStickChart.axisMarginBottom = 0;
-    candleStickChart.minDisplayNumber = 25;
-    candleStickChart.axisMarginLeft = 50;
+    candleStickChart.displayLongitudeTitle = YES;
+    candleStickChart.displayLatitudeTitle  = YES;
+//    candleStickChart.axisMarginBottom = 0;
+//    candleStickChart.minDisplayNumber = 25;
+//    candleStickChart.axisMarginLeft = 50;
     candleStickChart.userInteractionEnabled = YES;
 
-    candleStickChart.axisXColor = [UIColor darkGrayColor];
-    candleStickChart.axisYColor = [UIColor darkGrayColor];
-    candleStickChart.latitudeColor = [UIColor darkGrayColor];
-    candleStickChart.longitudeColor = [UIColor darkGrayColor];
-    candleStickChart.latitudeFontColor = [UIColor darkGrayColor];
-    candleStickChart.longitudeFontColor = [UIColor darkGrayColor];
-    candleStickChart.axisMarginLeft = 2;
-    candleStickChart.axisMarginRight = 58;
-    candleStickChart.axisMarginBottom = 0;
-    candleStickChart.axisMarginTop = 1;
+    candleStickChart.candleStickStyle = CandleStickChartTypeBar;
+//    candleStickChart.axisXColor = [UIColor lightGrayColor];
+//    candleStickChart.axisYColor = [UIColor lightGrayColor];
+//    candleStickChart.latitudeColor = [UIColor lightGrayColor];
+//    candleStickChart.longitudeColor = [UIColor lightGrayColor];
+//    candleStickChart.latitudeFontColor = [UIColor lightGrayColor];
+//    candleStickChart.longitudeFontColor = [UIColor lightGrayColor];
+//    candleStickChart.axisMarginLeft = 2;
+//    candleStickChart.axisMarginRight = 0;
+//    candleStickChart.axisMarginBottom = 0;
+//    candleStickChart.axisMarginTop = 1;
     candleStickChart.axisYPosition = CCSGridChartYAxisPositionRight;
     candleStickChart.displayNumber = 50;
-    candleStickChart.displayFrom = 99;
+    candleStickChart.displayFrom = 0;
     candleStickChart.bollingerBandStyle = CCSBollingerBandStyleNone;
-
+    candleStickChart.axisCalc = AXIS_CALC_PARM;
+    candleStickChart.latitudeNum = 3;
+    
+    // 边框颜色
+    candleStickChart.displayLongitudeTitle = YES;
+    candleStickChart.axisMarginBottom = 15.0f;
+    
     candleStickChart.chartDelegate = self;
 
-    [candleStickChart addTarget:self action:@selector(candleStickChartTouch:) forControlEvents:UIControlEventAllTouchEvents];
-
     self.candleStickChart.backgroundColor = [UIColor clearColor];
+    
+    [candleStickChart addTarget:self action:@selector(candleStickChartTouch:) forControlEvents:UIControlEventAllTouchEvents];
 
     [self.view addSubview:candleStickChart];
 }
@@ -1191,7 +1347,7 @@
 
         for (NSInteger index = 0; index < arrCls.count; index++) {
             OHLCVDData *item = [items objectAtIndex:items.count - 1 - index];
-            [maData addObject:[[CCSLineData alloc] initWithValue:[[arr objectAtIndex:index] doubleValue] date:item.date]];
+            [maData addObject:[[CCSLineData alloc] initWithValue:[[arr objectAtIndex:index] doubleValue] date:[item.date dateWithFormat:@"yyyy-MM-ddHH:mm:ss" target:@"yy-MM-dd"]]];
         }
     }
 
@@ -1257,7 +1413,7 @@
             [MACDData addObject:[[CCSMACDData alloc] initWithDea:[(NSString *) [arrMACDSignal objectAtIndex:index] doubleValue] * 1000000
                                                             diff:[(NSString *) [arrMACD objectAtIndex:index] doubleValue] * 1000000
                                                             macd:[(NSString *) [arrMACDHist objectAtIndex:index] doubleValue] * 2 * 1000000
-                                                            date:item.date]];
+                                                            date:[item.date dateWithFormat:@"yyyy-MM-ddHH:mm:ss" target:@"yy-MM-dd"]]];
         }
     }
 
@@ -1323,11 +1479,11 @@
 
         for (NSInteger index = 0; index < arrCls.count; index++) {
             OHLCVDData *item = [items objectAtIndex:items.count - 1 - index];
-            [slowKLineData addObject:[[CCSLineData alloc] initWithValue:[[arrSlowK objectAtIndex:index] doubleValue] date:item.date]];
-            [slowDLineData addObject:[[CCSLineData alloc] initWithValue:[[arrSlowD objectAtIndex:index] doubleValue] date:item.date]];
+            [slowKLineData addObject:[[CCSLineData alloc] initWithValue:[[arrSlowK objectAtIndex:index] doubleValue] date:[item.date dateWithFormat:@"yyyy-MM-ddHH:mm:ss" target:@"yy-MM-dd"]]];
+            [slowDLineData addObject:[[CCSLineData alloc] initWithValue:[[arrSlowD objectAtIndex:index] doubleValue] date:[item.date dateWithFormat:@"yyyy-MM-ddHH:mm:ss" target:@"yy-MM-dd"]]];
 
             double slowKLine3k2d = 3 * [[arrSlowK objectAtIndex:index] doubleValue] - 2 * [[arrSlowD objectAtIndex:index] doubleValue];
-            [slow3K2DLineData addObject:[[CCSLineData alloc] initWithValue:slowKLine3k2d date:item.date]];
+            [slow3K2DLineData addObject:[[CCSLineData alloc] initWithValue:slowKLine3k2d date:[item.date dateWithFormat:@"yyyy-MM-ddHH:mm:ss" target:@"yy-MM-dd"]]];
         }
     }
 
@@ -1387,7 +1543,7 @@
 
         for (NSInteger index = 0; index < arrCls.count; index++) {
             OHLCVDData *item = [items objectAtIndex:items.count - 1 - index];
-            [rsiLineData addObject:[[CCSLineData alloc] initWithValue:[[arr objectAtIndex:index] doubleValue] date:item.date]];
+            [rsiLineData addObject:[[CCSLineData alloc] initWithValue:[[arr objectAtIndex:index] doubleValue] date:[item.date dateWithFormat:@"yyyy-MM-ddHH:mm:ss" target:@"yy-MM-dd"]]];
         }
     }
 
@@ -1455,7 +1611,7 @@
 
         for (NSInteger index = 0; index < arrCls.count; index++) {
             OHLCVDData *item = [items objectAtIndex:items.count - 1 - index];
-            [wrLineData addObject:[[CCSLineData alloc] initWithValue:-([[arrWR objectAtIndex:index] doubleValue]) date:item.date]];
+            [wrLineData addObject:[[CCSLineData alloc] initWithValue:-([[arrWR objectAtIndex:index] doubleValue]) date:[item.date dateWithFormat:@"yyyy-MM-ddHH:mm:ss" target:@"yy-MM-dd"]]];
         }
     }
 
@@ -1521,7 +1677,7 @@
 
         for (NSInteger index = 0; index < arrCls.count; index++) {
             OHLCVDData *item = [items objectAtIndex:items.count - 1 - index];
-            [cciLineData addObject:[[CCSLineData alloc] initWithValue:[[arrCCI objectAtIndex:index] doubleValue] date:item.date]];
+            [cciLineData addObject:[[CCSLineData alloc] initWithValue:[[arrCCI objectAtIndex:index] doubleValue] date:[item.date dateWithFormat:@"yyyy-MM-ddHH:mm:ss" target:@"yy-MM-dd"]]];
         }
     }
 
@@ -1579,9 +1735,9 @@
 
         for (NSInteger index = 0; index < arrCls.count; index++) {
             OHLCVDData *item = [items objectAtIndex:items.count - 1 - index];
-            [bollLinedataUPPER addObject:[[CCSLineData alloc] initWithValue:[[arrUPPER objectAtIndex:index] doubleValue] date:item.date]];
-            [bollLinedataLOWER addObject:[[CCSLineData alloc] initWithValue:[[arrLOWER objectAtIndex:index] doubleValue] date:item.date]];
-            [bollLinedataBOLL addObject:[[CCSLineData alloc] initWithValue:[[arrBOLL objectAtIndex:index] doubleValue] date:item.date]];
+            [bollLinedataUPPER addObject:[[CCSLineData alloc] initWithValue:[[arrUPPER objectAtIndex:index] doubleValue] date:[item.date dateWithFormat:@"yyyy-MM-ddHH:mm:ss" target:@"yy-MM-dd"]]];
+            [bollLinedataLOWER addObject:[[CCSLineData alloc] initWithValue:[[arrLOWER objectAtIndex:index] doubleValue] date:[item.date dateWithFormat:@"yyyy-MM-ddHH:mm:ss" target:@"yy-MM-dd"]]];
+            [bollLinedataBOLL addObject:[[CCSLineData alloc] initWithValue:[[arrBOLL objectAtIndex:index] doubleValue] date:[item.date dateWithFormat:@"yyyy-MM-ddHH:mm:ss" target:@"yy-MM-dd"]]];
         }
     }
 
@@ -1685,6 +1841,25 @@
         self.segBottomChartType.selectedSegmentIndex = page;
         [self.segBottomChartType setNeedsDisplay];
     }
+}
+
+#pragma mark 单击手势
+-(void)handleTap:(UITapGestureRecognizer*)sender
+{
+    if (self.segBottomChartType.selectedSegmentIndex == 6) {
+        self.segBottomChartType.selectedSegmentIndex = 0;
+    }else{
+        self.segBottomChartType.selectedSegmentIndex = self.segBottomChartType.selectedSegmentIndex + 1;
+    }
+    
+    [self segBottomChartTypeTypeValueChaged:self.segBottomChartType];
+}
+
+- (NSString *)findJSONStringWithName:(NSString *)name{
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:name ofType:@"txt"];
+    //UTF-8编码
+    NSString *str = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
+    return str;
 }
 
 @end

@@ -15,6 +15,13 @@
     CCFloat _doubleTouchInterval;
     CCInt _flag;
     CCFloat _firstX;
+    
+    
+    BOOL _isLongPress;
+    BOOL _isMoved;
+    BOOL _waitForLongPress;
+    
+    CGPoint _firstTouchPoint;
 }
 @end
 
@@ -32,6 +39,12 @@
         _doubleTouchInterval = 100;
         _flag = 1;
         _firstX = 0;
+        
+        
+         _isLongPress = NO;
+         _isMoved = NO;
+         _waitForLongPress = NO;
+
     }
     return self;
 }
@@ -42,7 +55,7 @@
 
     self.displayFrom = 0;
     self.displayNumber = 10;
-    self.minDisplayNumber = 20;
+    self.minDisplayNumber = 10;
     self.zoomBaseLine = CCSStickZoomBaseLineCenter;
 }
 
@@ -185,6 +198,28 @@
     return result;
 }
 
+
+- (void) changeLongPressState:(BOOL)state {
+    _waitForLongPress = NO;
+    
+    if (_isLongPress == NO) {
+        _isLongPress = YES;
+        
+        self.displayCrossXOnTouch = NO;
+        self.displayCrossYOnTouch = NO;
+        //获取选中点
+        self.singleTouchPoint = _firstTouchPoint;
+        [self setNeedsDisplay];
+        
+    }else{
+        self.displayCrossXOnTouch = YES;
+        self.displayCrossYOnTouch = YES;
+        [self setNeedsDisplay];
+    }
+    
+    [self canPerformAction:@selector(changeLongPressState:) withSender:nil];
+}
+
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
 
 
@@ -193,33 +228,48 @@
     if ([allTouches count] == 1) {
         CGPoint pt1 = [[allTouches objectAtIndex:0] locationInView:self];
 
-        if (_flag == 0) {
-            _firstX = pt1.x;
-        } else {
-            if (fabs(pt1.x - self.singleTouchPoint.x) < 10) {
-                self.displayCrossXOnTouch = NO;
-                self.displayCrossYOnTouch = NO;
-                [self setNeedsDisplay];
-                self.singleTouchPoint = CGPointZero;
-                _flag = 0;
+        
+        self.displayCrossXOnTouch = NO;
+        self.displayCrossYOnTouch = NO;
+        
+         _firstX = pt1.x;
+        
+        _firstTouchPoint = pt1;
+        
+        _isLongPress = NO;
+        _isMoved = NO;
+        _waitForLongPress = YES;
+        [self performSelector:@selector(changeLongPressState:) withObject:nil afterDelay:0.5];
 
-            } else {
-                //获取选中点
-                self.singleTouchPoint = [[allTouches objectAtIndex:0] locationInView:self];
-                //重绘
-                self.displayCrossXOnTouch = YES;
-                self.displayCrossYOnTouch = YES;
-                [self setNeedsDisplay];
-
-                _flag = 1;
-            }
-        }
+        
+//        if (_flag == 0) {
+//            _firstX = pt1.x;
+//            
+//        } else {
+//            if (fabs(pt1.x - self.singleTouchPoint.x) < 10) {
+//                self.displayCrossXOnTouch = NO;
+//                self.displayCrossYOnTouch = NO;
+//                [self setNeedsDisplay];
+//                self.singleTouchPoint = CGPointZero;
+//                _flag = 0;
+//
+//            } else {
+//                //获取选中点
+//                self.singleTouchPoint = [[allTouches objectAtIndex:0] locationInView:self];
+//                //重绘
+//                self.displayCrossXOnTouch = YES;
+//                self.displayCrossYOnTouch = YES;
+//                [self setNeedsDisplay];
+//
+//                _flag = 1;
+//            }
+//        }
 
     } else if ([allTouches count] == 2) {
         CGPoint pt1 = [[allTouches objectAtIndex:0] locationInView:self];
         CGPoint pt2 = [[allTouches objectAtIndex:1] locationInView:self];
 
-        _startDistance1 = fabsf(pt1.x - pt2.x);
+        _startDistance1 = fabs(pt1.x - pt2.x);
     } else {
 
     }
@@ -234,7 +284,43 @@
     NSArray *allTouches = [touches allObjects];
     //处理点击事件
     if ([allTouches count] == 1) {
-        if (_flag == 0) {
+        
+        
+        CGPoint pt1 = [[allTouches objectAtIndex:0] locationInView:self];
+        
+        if (_isLongPress == NO) {
+            if (fabs(pt1.x - _firstTouchPoint.x) < 4) {
+                //            _firstX = pt1.x;
+                if (_waitForLongPress) {
+                    NSLog(@"Waiting for LongPress");
+                }else{
+                    _isLongPress = YES;
+                    NSLog(@"LongPress");
+                }
+            }else{
+                NSLog(@"Moved");
+//                _firstX = pt1.x;
+                _waitForLongPress = NO;
+                _isMoved = YES;
+                [self canPerformAction:@selector(changeLongPressState:) withSender:nil];
+                //            _isLongPress = NO;
+            }
+            self.displayCrossXOnTouch = NO;
+            self.displayCrossYOnTouch = NO;
+            [self setNeedsDisplay];
+            
+        }else if(_isMoved == NO){
+            self.displayCrossXOnTouch = YES;
+            self.displayCrossYOnTouch = YES;
+            [self setNeedsDisplay];
+
+        }
+        
+        if (_isMoved) {
+            
+            self.displayCrossXOnTouch = NO;
+            self.displayCrossYOnTouch = NO;
+            
             CGPoint pt1 = [[allTouches objectAtIndex:0] locationInView:self];
             CCFloat stickWidth = ((self.frame.size.width - self.axisMarginLeft - self.axisMarginRight) / self.displayNumber) - 1;
 
@@ -248,30 +334,71 @@
                 }
             }
 
-            _firstX = pt1.x;
-
-            [self setNeedsDisplay];
-            //设置可滚动
-            //[self performSelector:@selector(setNeedsDisplay) withObject:nil afterDelay:0];
             
-            if (self.coChart) {
-                ((CCSSlipStickChart *)self.coChart).displayFrom = self.displayFrom;
-                ((CCSSlipStickChart *)self.coChart).displayNumber = self.displayNumber;
-                [self.coChart setNeedsDisplay];
-            }
-        } else {
+            _firstX = pt1.x;
+            
             //获取选中点
             self.singleTouchPoint = [[allTouches objectAtIndex:0] locationInView:self];
+            
+            [self setNeedsDisplay];
+            
             //设置可滚动
             //[self performSelector:@selector(setNeedsDisplay) withObject:nil afterDelay:0];
-            [self setNeedsDisplay];
+
+//            if (self.coChart) {
+//                ((CCSSlipStickChart *)self.coChart).displayFrom = self.displayFrom;
+//                ((CCSSlipStickChart *)self.coChart).displayNumber = self.displayNumber;
+//                [self.coChart setNeedsDisplay];
+//            }
+
         }
+        
+        
+//        if (_flag == 0) {
+////            CGPoint pt1 = [[allTouches objectAtIndex:0] locationInView:self];
+////            CCFloat stickWidth = ((self.frame.size.width - self.axisMarginLeft - self.axisMarginRight) / self.displayNumber) - 1;
+////
+////            
+////            if (_isLongPress) {
+////                if (pt1.x - _firstX < 15) {
+////                    NSLog(@"LongPress");
+////                }
+////            }
+////            
+////            if (pt1.x - _firstX > stickWidth) {
+////                if (self.displayFrom > 2) {
+////                    self.displayFrom = self.displayFrom - 2;
+////                }
+////            } else if (pt1.x - _firstX < -stickWidth) {
+////                if (self.displayFrom + self.displayNumber + 2 < [self.stickData count]) {
+////                    self.displayFrom = self.displayFrom + 2;
+////                }
+////            }
+////
+////            _firstX = pt1.x;
+////
+////            [self setNeedsDisplay];
+////            //设置可滚动
+////            //[self performSelector:@selector(setNeedsDisplay) withObject:nil afterDelay:0];
+////            
+////            if (self.coChart) {
+////                ((CCSSlipStickChart *)self.coChart).displayFrom = self.displayFrom;
+////                ((CCSSlipStickChart *)self.coChart).displayNumber = self.displayNumber;
+////                [self.coChart setNeedsDisplay];
+////            }
+//        } else {
+//            //获取选中点
+//            self.singleTouchPoint = [[allTouches objectAtIndex:0] locationInView:self];
+//            //设置可滚动
+//            //[self performSelector:@selector(setNeedsDisplay) withObject:nil afterDelay:0];
+//            [self setNeedsDisplay];
+//        }
         //        }
     } else if ([allTouches count] == 2) {
         CGPoint pt1 = [[allTouches objectAtIndex:0] locationInView:self];
         CGPoint pt2 = [[allTouches objectAtIndex:1] locationInView:self];
 
-        CCFloat endDistance = fabsf(pt1.x - pt2.x);
+        CCFloat endDistance = fabs(pt1.x - pt2.x);
         //放大
         if (endDistance - _startDistance1 > _minDistance1) {
             [self zoomOut];
@@ -297,10 +424,21 @@
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
     //调用父类的触摸事件
     [super touchesEnded:touches withEvent:event];
+    
+    [self canPerformAction:@selector(changeLongPressState:) withSender:nil];
 
     _startDistance1 = 0;
 
     _flag = 1;
+    
+    NSLog(@"end");
+    _isLongPress = NO;
+    _isMoved = NO;
+    _waitForLongPress = YES;
+    
+    self.displayCrossXOnTouch = NO;
+    self.displayCrossYOnTouch = NO;
+    
 
     [self setNeedsDisplay];
 }
@@ -396,6 +534,7 @@
                 }
                 //设置选中的index
                 self.selectedStickIndex = self.displayFrom + index;
+                
             }
         }
     } else {
@@ -411,6 +550,7 @@
                 }
                 //设置选中的index
                 self.selectedStickIndex = self.displayFrom + index;
+
             }
         }
     }
@@ -503,6 +643,12 @@
     if (self.chartDelegate && [self.chartDelegate respondsToSelector:@selector(CCSChartDisplayChangedFrom: number:)]) {
         [self.chartDelegate CCSChartDisplayChangedFrom:self.displayFrom number:displayNumber];
     }
+}
+
+-(void) bindSelectedIndex
+{
+    CCFloat stickWidth = ((self.frame.size.width - self.axisMarginLeft - self.axisMarginRight) / self.displayNumber);
+    _singleTouchPoint = CGPointMake(self.axisMarginLeft +(self.selectedStickIndex - self.displayFrom + 0.5) * stickWidth, self.singleTouchPoint.y);
 }
 
 @end

@@ -246,6 +246,23 @@
 		3BB5E13918C984F600288894 /* ta_WCLPRICE.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E09318C984F600288894 /* ta_WCLPRICE.c */; };
 		3BB5E13A18C984F600288894 /* ta_WILLR.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E09418C984F600288894 /* ta_WILLR.c */; };
 		3BB5E13B18C984F600288894 /* ta_WMA.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E09518C984F600288894 /* ta_WMA.c */; };
+		3BDAD3991BDE12F9000AC06C /* test.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3BDAD3981BDE12F9000AC06C /* test.plist */; };
+		F86FE2821CA29CC9003E0DC6 /* 1min.txt in Resources */ = {isa = PBXBuildFile; fileRef = F86FE27E1CA29CC9003E0DC6 /* 1min.txt */; };
+		F86FE2831CA29CC9003E0DC6 /* 15min.txt in Resources */ = {isa = PBXBuildFile; fileRef = F86FE27F1CA29CC9003E0DC6 /* 15min.txt */; };
+		F86FE2841CA29CC9003E0DC6 /* allpdts.txt in Resources */ = {isa = PBXBuildFile; fileRef = F86FE2801CA29CC9003E0DC6 /* allpdts.txt */; };
+		F86FE2851CA29CC9003E0DC6 /* time.txt in Resources */ = {isa = PBXBuildFile; fileRef = F86FE2811CA29CC9003E0DC6 /* time.txt */; };
+		F86FE2A71CA2A100003E0DC6 /* JSONModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F86FE2901CA2A100003E0DC6 /* JSONModel.m */; };
+		F86FE2A81CA2A100003E0DC6 /* JSONModelArray.m in Sources */ = {isa = PBXBuildFile; fileRef = F86FE2921CA2A100003E0DC6 /* JSONModelArray.m */; };
+		F86FE2A91CA2A100003E0DC6 /* JSONModelClassProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = F86FE2941CA2A100003E0DC6 /* JSONModelClassProperty.m */; };
+		F86FE2AA1CA2A100003E0DC6 /* JSONModelError.m in Sources */ = {isa = PBXBuildFile; fileRef = F86FE2961CA2A100003E0DC6 /* JSONModelError.m */; };
+		F86FE2AB1CA2A100003E0DC6 /* NSArray+JSONModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F86FE2991CA2A100003E0DC6 /* NSArray+JSONModel.m */; };
+		F86FE2AC1CA2A100003E0DC6 /* JSONAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = F86FE29D1CA2A100003E0DC6 /* JSONAPI.m */; };
+		F86FE2AD1CA2A100003E0DC6 /* JSONHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = F86FE29F1CA2A100003E0DC6 /* JSONHTTPClient.m */; };
+		F86FE2AE1CA2A100003E0DC6 /* JSONModel+networking.m in Sources */ = {isa = PBXBuildFile; fileRef = F86FE2A11CA2A100003E0DC6 /* JSONModel+networking.m */; };
+		F86FE2AF1CA2A100003E0DC6 /* JSONKeyMapper.m in Sources */ = {isa = PBXBuildFile; fileRef = F86FE2A41CA2A100003E0DC6 /* JSONKeyMapper.m */; };
+		F86FE2B01CA2A100003E0DC6 /* JSONValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = F86FE2A61CA2A100003E0DC6 /* JSONValueTransformer.m */; };
+		F86FE2B31CA2A5AC003E0DC6 /* CCSJSONData.m in Sources */ = {isa = PBXBuildFile; fileRef = F86FE2B21CA2A5AC003E0DC6 /* CCSJSONData.m */; };
+		F884AA291CA7CDCA0027E0A0 /* CCSSampleHorizontalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F884AA281CA7CDCA0027E0A0 /* CCSSampleHorizontalViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -574,7 +591,37 @@
 		3BB5E09318C984F600288894 /* ta_WCLPRICE.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_WCLPRICE.c; sourceTree = "<group>"; };
 		3BB5E09418C984F600288894 /* ta_WILLR.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_WILLR.c; sourceTree = "<group>"; };
 		3BB5E09518C984F600288894 /* ta_WMA.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_WMA.c; sourceTree = "<group>"; };
+		3BDAD3981BDE12F9000AC06C /* test.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = test.plist; sourceTree = "<group>"; };
 		3BFA651D1AA40D68009897C9 /* CCSHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSHeader.h; sourceTree = "<group>"; };
+		F86FE27E1CA29CC9003E0DC6 /* 1min.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 1min.txt; sourceTree = "<group>"; };
+		F86FE27F1CA29CC9003E0DC6 /* 15min.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 15min.txt; sourceTree = "<group>"; };
+		F86FE2801CA29CC9003E0DC6 /* allpdts.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = allpdts.txt; sourceTree = "<group>"; };
+		F86FE2811CA29CC9003E0DC6 /* time.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = time.txt; sourceTree = "<group>"; };
+		F86FE28F1CA2A100003E0DC6 /* JSONModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONModel.h; sourceTree = "<group>"; };
+		F86FE2901CA2A100003E0DC6 /* JSONModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONModel.m; sourceTree = "<group>"; };
+		F86FE2911CA2A100003E0DC6 /* JSONModelArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONModelArray.h; sourceTree = "<group>"; };
+		F86FE2921CA2A100003E0DC6 /* JSONModelArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONModelArray.m; sourceTree = "<group>"; };
+		F86FE2931CA2A100003E0DC6 /* JSONModelClassProperty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONModelClassProperty.h; sourceTree = "<group>"; };
+		F86FE2941CA2A100003E0DC6 /* JSONModelClassProperty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONModelClassProperty.m; sourceTree = "<group>"; };
+		F86FE2951CA2A100003E0DC6 /* JSONModelError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONModelError.h; sourceTree = "<group>"; };
+		F86FE2961CA2A100003E0DC6 /* JSONModelError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONModelError.m; sourceTree = "<group>"; };
+		F86FE2981CA2A100003E0DC6 /* NSArray+JSONModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+JSONModel.h"; sourceTree = "<group>"; };
+		F86FE2991CA2A100003E0DC6 /* NSArray+JSONModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+JSONModel.m"; sourceTree = "<group>"; };
+		F86FE29A1CA2A100003E0DC6 /* JSONModelLib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONModelLib.h; sourceTree = "<group>"; };
+		F86FE29C1CA2A100003E0DC6 /* JSONAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONAPI.h; sourceTree = "<group>"; };
+		F86FE29D1CA2A100003E0DC6 /* JSONAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONAPI.m; sourceTree = "<group>"; };
+		F86FE29E1CA2A100003E0DC6 /* JSONHTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONHTTPClient.h; sourceTree = "<group>"; };
+		F86FE29F1CA2A100003E0DC6 /* JSONHTTPClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONHTTPClient.m; sourceTree = "<group>"; };
+		F86FE2A01CA2A100003E0DC6 /* JSONModel+networking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "JSONModel+networking.h"; sourceTree = "<group>"; };
+		F86FE2A11CA2A100003E0DC6 /* JSONModel+networking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "JSONModel+networking.m"; sourceTree = "<group>"; };
+		F86FE2A31CA2A100003E0DC6 /* JSONKeyMapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKeyMapper.h; sourceTree = "<group>"; };
+		F86FE2A41CA2A100003E0DC6 /* JSONKeyMapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKeyMapper.m; sourceTree = "<group>"; };
+		F86FE2A51CA2A100003E0DC6 /* JSONValueTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONValueTransformer.h; sourceTree = "<group>"; };
+		F86FE2A61CA2A100003E0DC6 /* JSONValueTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONValueTransformer.m; sourceTree = "<group>"; };
+		F86FE2B11CA2A5AC003E0DC6 /* CCSJSONData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSJSONData.h; sourceTree = "<group>"; };
+		F86FE2B21CA2A5AC003E0DC6 /* CCSJSONData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSJSONData.m; sourceTree = "<group>"; };
+		F884AA271CA7CDCA0027E0A0 /* CCSSampleHorizontalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSSampleHorizontalViewController.h; sourceTree = "<group>"; };
+		F884AA281CA7CDCA0027E0A0 /* CCSSampleHorizontalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSSampleHorizontalViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -604,6 +651,12 @@
 		3BB5DEF318C9624800288894 = {
 			isa = PBXGroup;
 			children = (
+				F86FE28D1CA2A100003E0DC6 /* JSONModel */,
+				F86FE27E1CA29CC9003E0DC6 /* 1min.txt */,
+				F86FE27F1CA29CC9003E0DC6 /* 15min.txt */,
+				F86FE2801CA29CC9003E0DC6 /* allpdts.txt */,
+				F86FE2811CA29CC9003E0DC6 /* time.txt */,
+				3BDAD3981BDE12F9000AC06C /* test.plist */,
 				3BB5DF0518C9624800288894 /* CocoaChartsSampleWithARC */,
 				3BB5DF1E18C9624800288894 /* CocoaChartsSampleWithARCTests */,
 				3BB5DF2E18C962AA00288894 /* CocoaChartsWithARC */,
@@ -637,6 +690,10 @@
 		3BB5DF0518C9624800288894 /* CocoaChartsSampleWithARC */ = {
 			isa = PBXGroup;
 			children = (
+				3BB5DFB318C96BDA00288894 /* CCSSimpleDemoViewController.h */,
+				3BB5DFB418C96BDA00288894 /* CCSSimpleDemoViewController.m */,
+				F884AA271CA7CDCA0027E0A0 /* CCSSampleHorizontalViewController.h */,
+				F884AA281CA7CDCA0027E0A0 /* CCSSampleHorizontalViewController.m */,
 				3B27DEE11B5C95750045DCED /* CCSDonutChartViewController.h */,
 				3B27DEE21B5C95750045DCED /* CCSDonutChartViewController.m */,
 				3BB5DF9318C96BDA00288894 /* CCSAreaChartViewController.h */,
@@ -671,8 +728,6 @@
 				3BB5DFB018C96BDA00288894 /* CCSPizzaChartViewController.m */,
 				3BB5DFB118C96BDA00288894 /* CCSRadarChartViewController.h */,
 				3BB5DFB218C96BDA00288894 /* CCSRadarChartViewController.m */,
-				3BB5DFB318C96BDA00288894 /* CCSSimpleDemoViewController.h */,
-				3BB5DFB418C96BDA00288894 /* CCSSimpleDemoViewController.m */,
 				3BB5DFB518C96BDA00288894 /* CCSSlipCandleStickChartViewController.h */,
 				3BB5DFB618C96BDA00288894 /* CCSSlipCandleStickChartViewController.m */,
 				3BB5DFB718C96BDA00288894 /* CCSSlipLineChartViewController.h */,
@@ -1020,6 +1075,68 @@
 			path = ta_func;
 			sourceTree = "<group>";
 		};
+		F86FE28D1CA2A100003E0DC6 /* JSONModel */ = {
+			isa = PBXGroup;
+			children = (
+				F86FE28E1CA2A100003E0DC6 /* JSONModel */,
+				F86FE2971CA2A100003E0DC6 /* JSONModelCategories */,
+				F86FE29A1CA2A100003E0DC6 /* JSONModelLib.h */,
+				F86FE29B1CA2A100003E0DC6 /* JSONModelNetworking */,
+				F86FE2A21CA2A100003E0DC6 /* JSONModelTransformations */,
+				F86FE2B11CA2A5AC003E0DC6 /* CCSJSONData.h */,
+				F86FE2B21CA2A5AC003E0DC6 /* CCSJSONData.m */,
+			);
+			path = JSONModel;
+			sourceTree = "<group>";
+		};
+		F86FE28E1CA2A100003E0DC6 /* JSONModel */ = {
+			isa = PBXGroup;
+			children = (
+				F86FE28F1CA2A100003E0DC6 /* JSONModel.h */,
+				F86FE2901CA2A100003E0DC6 /* JSONModel.m */,
+				F86FE2911CA2A100003E0DC6 /* JSONModelArray.h */,
+				F86FE2921CA2A100003E0DC6 /* JSONModelArray.m */,
+				F86FE2931CA2A100003E0DC6 /* JSONModelClassProperty.h */,
+				F86FE2941CA2A100003E0DC6 /* JSONModelClassProperty.m */,
+				F86FE2951CA2A100003E0DC6 /* JSONModelError.h */,
+				F86FE2961CA2A100003E0DC6 /* JSONModelError.m */,
+			);
+			path = JSONModel;
+			sourceTree = "<group>";
+		};
+		F86FE2971CA2A100003E0DC6 /* JSONModelCategories */ = {
+			isa = PBXGroup;
+			children = (
+				F86FE2981CA2A100003E0DC6 /* NSArray+JSONModel.h */,
+				F86FE2991CA2A100003E0DC6 /* NSArray+JSONModel.m */,
+			);
+			path = JSONModelCategories;
+			sourceTree = "<group>";
+		};
+		F86FE29B1CA2A100003E0DC6 /* JSONModelNetworking */ = {
+			isa = PBXGroup;
+			children = (
+				F86FE29C1CA2A100003E0DC6 /* JSONAPI.h */,
+				F86FE29D1CA2A100003E0DC6 /* JSONAPI.m */,
+				F86FE29E1CA2A100003E0DC6 /* JSONHTTPClient.h */,
+				F86FE29F1CA2A100003E0DC6 /* JSONHTTPClient.m */,
+				F86FE2A01CA2A100003E0DC6 /* JSONModel+networking.h */,
+				F86FE2A11CA2A100003E0DC6 /* JSONModel+networking.m */,
+			);
+			path = JSONModelNetworking;
+			sourceTree = "<group>";
+		};
+		F86FE2A21CA2A100003E0DC6 /* JSONModelTransformations */ = {
+			isa = PBXGroup;
+			children = (
+				F86FE2A31CA2A100003E0DC6 /* JSONKeyMapper.h */,
+				F86FE2A41CA2A100003E0DC6 /* JSONKeyMapper.m */,
+				F86FE2A51CA2A100003E0DC6 /* JSONValueTransformer.h */,
+				F86FE2A61CA2A100003E0DC6 /* JSONValueTransformer.m */,
+			);
+			path = JSONModelTransformations;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1068,6 +1185,9 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = limc;
 				TargetAttributes = {
+					3BB5DEFB18C9624800288894 = {
+						DevelopmentTeam = ATMPA4PSH3;
+					};
 					3BB5DF1618C9624800288894 = {
 						TestTargetID = 3BB5DEFB18C9624800288894;
 					};
@@ -1099,7 +1219,12 @@
 				3BB5DF0A18C9624800288894 /* InfoPlist.strings in Resources */,
 				3BB5E09618C984F600288894 /* N225.xml in Resources */,
 				3BB5E09918C984F600288894 /* ta_retcode.csv in Resources */,
+				3BDAD3991BDE12F9000AC06C /* test.plist in Resources */,
+				F86FE2831CA29CC9003E0DC6 /* 15min.txt in Resources */,
+				F86FE2841CA29CC9003E0DC6 /* allpdts.txt in Resources */,
 				3BB5DF1218C9624800288894 /* Images.xcassets in Resources */,
+				F86FE2851CA29CC9003E0DC6 /* time.txt in Resources */,
+				F86FE2821CA29CC9003E0DC6 /* 1min.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1120,6 +1245,7 @@
 			files = (
 				3BB5E0C918C984F600288894 /* ta_CDLHIKKAKEMOD.c in Sources */,
 				3BB5E10718C984F600288894 /* ta_MAX.c in Sources */,
+				F86FE2AF1CA2A100003E0DC6 /* JSONKeyMapper.m in Sources */,
 				3BB5DFC918C96BDA00288894 /* CCSBOLLMASlipCandleStickChartViewController.m in Sources */,
 				3BB5E0A118C984F600288894 /* ta_APO.c in Sources */,
 				3BB5E11E18C984F600288894 /* ta_ROCR.c in Sources */,
@@ -1190,10 +1316,13 @@
 				3BB5E0B418C984F600288894 /* ta_CDLADVANCEBLOCK.c in Sources */,
 				3BB5E11A18C984F600288894 /* ta_PPO.c in Sources */,
 				3BB5E0CB18C984F600288894 /* ta_CDLIDENTICAL3CROWS.c in Sources */,
+				F86FE2AD1CA2A100003E0DC6 /* JSONHTTPClient.m in Sources */,
 				3BB5E0F318C984F600288894 /* ta_FLOOR.c in Sources */,
 				3BB5E0BD18C984F600288894 /* ta_CDLDRAGONFLYDOJI.c in Sources */,
 				3BB5DF8618C962AA00288894 /* CCSRadarChart.m in Sources */,
+				F86FE2B01CA2A100003E0DC6 /* JSONValueTransformer.m in Sources */,
 				3BB5E11018C984F600288894 /* ta_MINMAXINDEX.c in Sources */,
+				F86FE2AB1CA2A100003E0DC6 /* NSArray+JSONModel.m in Sources */,
 				3BB5E11918C984F600288894 /* ta_PLUS_DM.c in Sources */,
 				3BB5E0DB18C984F600288894 /* ta_CDLRISEFALL3METHODS.c in Sources */,
 				3BB5E0AD18C984F600288894 /* ta_CDL3BLACKCROWS.c in Sources */,
@@ -1269,6 +1398,7 @@
 				3BB5E10818C984F600288894 /* ta_MAXINDEX.c in Sources */,
 				3BB5E09718C984F600288894 /* ta_global.c in Sources */,
 				3BB5E12018C984F600288894 /* ta_RSI.c in Sources */,
+				F86FE2AC1CA2A100003E0DC6 /* JSONAPI.m in Sources */,
 				3BB5E0EE18C984F600288894 /* ta_DEMA.c in Sources */,
 				3BB5E13418C984F600288894 /* ta_TSF.c in Sources */,
 				3BB5E12618C984F600288894 /* ta_SQRT.c in Sources */,
@@ -1295,8 +1425,10 @@
 				3BB5E09F18C984F600288894 /* ta_ADX.c in Sources */,
 				3BB5E0DF18C984F600288894 /* ta_CDLSPINNINGTOP.c in Sources */,
 				3BB5DFDF18C96BDA00288894 /* CCSTALibUtils.m in Sources */,
+				F86FE2A91CA2A100003E0DC6 /* JSONModelClassProperty.m in Sources */,
 				3BB5E09D18C984F600288894 /* ta_ADD.c in Sources */,
 				3BB5E0C818C984F600288894 /* ta_CDLHIKKAKE.c in Sources */,
+				F884AA291CA7CDCA0027E0A0 /* CCSSampleHorizontalViewController.m in Sources */,
 				3BB5E13918C984F600288894 /* ta_WCLPRICE.c in Sources */,
 				3B27DEE31B5C95750045DCED /* CCSDonutChartViewController.m in Sources */,
 				3BB5E0DA18C984F600288894 /* ta_CDLRICKSHAWMAN.c in Sources */,
@@ -1312,13 +1444,16 @@
 				3BB5E0D918C984F600288894 /* ta_CDLPIERCING.c in Sources */,
 				3BB5E0ED18C984F600288894 /* ta_COSH.c in Sources */,
 				3BB5E13618C984F600288894 /* ta_ULTOSC.c in Sources */,
+				F86FE2A81CA2A100003E0DC6 /* JSONModelArray.m in Sources */,
 				3BB5E0C318C984F600288894 /* ta_CDLHAMMER.c in Sources */,
 				3BB5E12A18C984F600288894 /* ta_STOCHRSI.c in Sources */,
 				3BB5E0CE18C984F600288894 /* ta_CDLKICKING.c in Sources */,
 				3BB5DF8D18C962AA00288894 /* CCSStickChartData.m in Sources */,
+				F86FE2B31CA2A5AC003E0DC6 /* CCSJSONData.m in Sources */,
 				3BB5E12818C984F600288894 /* ta_STOCH.c in Sources */,
 				3BB5E12118C984F600288894 /* ta_SAR.c in Sources */,
 				3BB5E0FD18C984F600288894 /* ta_LINEARREG_INTERCEPT.c in Sources */,
+				F86FE2A71CA2A100003E0DC6 /* JSONModel.m in Sources */,
 				3BB5DFD818C96BDA00288894 /* CCSSlipCandleStickChartViewController.m in Sources */,
 				3BB5E0B118C984F600288894 /* ta_CDL3STARSINSOUTH.c in Sources */,
 				3BB5E0AC18C984F600288894 /* ta_CDL2CROWS.c in Sources */,
@@ -1329,6 +1464,7 @@
 				3BB5E12F18C984F600288894 /* ta_TANH.c in Sources */,
 				3BB5E11618C984F600288894 /* ta_NVI.c in Sources */,
 				3BB5DFCB18C96BDA00288894 /* CCSColoredStickChartViewController.m in Sources */,
+				F86FE2AE1CA2A100003E0DC6 /* JSONModel+networking.m in Sources */,
 				3BB5E0E518C984F600288894 /* ta_CDLTRISTAR.c in Sources */,
 				3BB5E10E18C984F600288894 /* ta_MININDEX.c in Sources */,
 				3BB5DF8318C962AA00288894 /* CCSMinusStickChart.m in Sources */,
@@ -1340,6 +1476,7 @@
 				3BB5DF8818C962AA00288894 /* CCSSlipLineChart.m in Sources */,
 				3BB5DF7318C962AA00288894 /* CCSBandAreaChart.m in Sources */,
 				3BB5E0D818C984F600288894 /* ta_CDLONNECK.c in Sources */,
+				F86FE2AA1CA2A100003E0DC6 /* JSONModelError.m in Sources */,
 				3BB5E11118C984F600288894 /* ta_MINUS_DI.c in Sources */,
 				3BB5DF7818C962AA00288894 /* CCSCandleStickChartData.m in Sources */,
 				3BB5E0DE18C984F600288894 /* ta_CDLSHORTLINE.c in Sources */,
@@ -1403,6 +1540,7 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer: 明成 李 (493479K5WB)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -1421,6 +1559,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "2d48e41b-f93e-4d22-a374-101358f10bf4";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1443,6 +1582,7 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer: 明成 李 (493479K5WB)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
@@ -1454,6 +1594,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				PROVISIONING_PROFILE = "2d48e41b-f93e-4d22-a374-101358f10bf4";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -1465,11 +1606,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CocoaChartsSampleWithARC/CocoaChartsSampleWithARC-Prefix.pch";
 				INFOPLIST_FILE = "CocoaChartsSampleWithARC/CocoaChartsSampleWithARC-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1479,11 +1623,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CocoaChartsSampleWithARC/CocoaChartsSampleWithARC-Prefix.pch";
 				INFOPLIST_FILE = "CocoaChartsSampleWithARC/CocoaChartsSampleWithARC-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

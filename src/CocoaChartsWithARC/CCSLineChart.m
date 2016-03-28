@@ -38,7 +38,7 @@
 
     [super initProperty];
 
-    self.latitudeNum = 3;
+    self.latitudeNum = 2;
     self.longitudeNum = 3;
     self.maxValue = CCIntMin;
     self.minValue = CCIntMax;
@@ -48,6 +48,9 @@
     self.lineAlignType = CCSLineAlignTypeJustify;
 
     self.linesData = nil;
+    
+    self.displayCrossXOnTouch = NO;
+    self.displayCrossYOnTouch = NO;
 }
 
 
@@ -560,6 +563,69 @@
     self.maxValue = CCIntMin;
     self.minValue = CCIntMax;
 }
+
+-(void) calcSelectedIndex{
+}
+
+-(void) bindSelectedIndex
+{
+    
+}
+
+- (void)setSelectedPointAddReDraw:(CGPoint)point {
+    point.y = 1;
+    self.singleTouchPoint = point;
+    [self calcSelectedIndex];
+    
+    [self setNeedsDisplay];
+}
+
+
+- (void) setSingleTouchPoint:(CGPoint) point
+{
+    _singleTouchPoint = point;
+    
+    [self calcSelectedIndex];
+    
+    [self bindSelectedIndex];
+    
+//    if (self.chartDelegate && [self.chartDelegate respondsToSelector:@selector(CCSChartBeTouchedOn:indexAt:)]) {
+//        [self.chartDelegate CCSChartBeTouchedOn:point indexAt:self.selectedIndex];
+//    }
+}
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    //父类的点击事件
+    [super touchesBegan:touches withEvent:event];
+    //计算选中的索引
+    [self calcSelectedIndex];
+}
+
+- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
+    //调用父类的触摸事件
+    [super touchesMoved:touches withEvent:event];
+    //计算选中的索引
+    [self calcSelectedIndex];
+    
+    NSArray *allTouches = [touches allObjects];
+    //处理点击事件
+    if ([allTouches count] == 1) {
+        
+//        CGPoint pt = CGPointMake(self.singleTouchPoint.x, self.coChart.singleTouchPoint.y);
+//        //获取选中点
+//        self.coChart.singleTouchPoint = pt;
+//        [self.coChart performSelector:@selector(setNeedsDisplay) withObject:nil afterDelay:0];
+        
+    } else if ([allTouches count] == 2) {
+        
+    } else {
+        
+    }
+    
+}
+
+
+
 
 //-(void) calcSelectedIndex
 //{

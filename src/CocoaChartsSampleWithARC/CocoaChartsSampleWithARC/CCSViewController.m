@@ -32,6 +32,7 @@
 #import "CCSSimpleDemoViewController.h"
 #import "CCSDonutChartViewController.h"
 
+#import "CCSSampleHorizontalViewController.h"
 
 @interface CCSViewController () {
 }
@@ -63,6 +64,17 @@
 
     self.title = @"Cocoa-Charts v0.21";
     self.navigationController.navigationBarHidden = NO;
+    
+    // Index path for selected row
+    NSIndexPath *selectedRow = [self.tableView indexPathForSelectedRow];
+    
+    // Deselet the row with animation
+    [self.tableView deselectRowAtIndexPath:selectedRow animated:YES];
+    
+    // Scroll the selected row to the center
+    [self.tableView scrollToRowAtIndexPath:selectedRow
+                          atScrollPosition:UITableViewScrollPositionMiddle
+                                  animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -76,7 +88,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == 0) {
-        return 1;
+        return 2;
     } else if (section == 1) {
         return 22;
     }
@@ -127,7 +139,12 @@
     }
 
     if (indexPath.section == 0) {
-        cell.textLabel.text = @"Simple Demo";
+        if (indexPath.row == 0) {
+            cell.textLabel.text = @"Simple Demo";
+        }else{
+            cell.textLabel.text = @"Simple Horizontal Demo";
+        }
+        
     } else {
         NSUInteger row = indexPath.row;
         //    NSLog(@"%d",row);
@@ -216,6 +233,8 @@
         NSUInteger row = indexPath.row;
         if (row == 0) {
             viewController = [[CCSSimpleDemoViewController alloc] init];
+        }else{
+            viewController = [[CCSSampleHorizontalViewController alloc] init];
         }
     } else if (indexPath.section == 1) {
         NSUInteger row = indexPath.row;
@@ -294,7 +313,13 @@
     CCSAppDelegate *appDelegate = (CCSAppDelegate *) [UIApplication sharedApplication].delegate;
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
         UINavigationController *navigationController = (UINavigationController *) appDelegate.viewController;
-        [navigationController pushViewController:viewController animated:YES];
+        if ([viewController isKindOfClass:[CCSSampleHorizontalViewController class]]) {
+            [[navigationController.viewControllers lastObject] presentViewController:viewController animated:YES completion:^{
+                
+            }];
+        }else{
+            [navigationController pushViewController:viewController animated:YES];
+        }
     } else if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
         UISplitViewController *splitViewController = (UISplitViewController *) appDelegate.viewController;
         UINavigationController *navigationController = [splitViewController.viewControllers objectAtIndex:1];
