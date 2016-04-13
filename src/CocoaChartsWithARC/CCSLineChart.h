@@ -45,6 +45,8 @@ typedef enum {
     CCFloat _maxValue;
     CCFloat _minValue;
     CCUInt _axisCalc;
+    BOOL _autoCalcRange;
+    BOOL _balanceRange;
     CCSLineAlignType _lineAlignType;
 }
 
@@ -101,6 +103,9 @@ typedef enum {
  */
 @property(assign, nonatomic) CCUInt axisCalc;
 
+@property(assign, nonatomic) BOOL autoCalcRange;
+@property(assign, nonatomic) BOOL balanceRange;
+
 @property(assign, nonatomic) CCSLineAlignType lineAlignType;
 
 
@@ -136,5 +141,11 @@ typedef enum {
 - (void)calcValueRangeFormatForAxis;
 
 - (void)calcValueRange;
+
+- (void)calcBalanceRange;
+
+- (void)setSelectedPointAddReDraw:(CGPoint)point;
+
+-(CGFloat) computeValueY:(CGFloat)value inRect:(CGRect)rect;
 
 @end

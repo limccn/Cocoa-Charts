@@ -15,19 +15,26 @@ typedef enum {
 } CCSLineZoomBaseLine;
 
 @interface CCSSlipLineChart : CCSLineChart  {
-    CCUInt _displayNumber;
-    CCUInt _displayFrom;
-    CCUInt _minDisplayNumber;
-    CCUInt _zoomBaseLine;
+    CCInt _displayNumber;
+    CCInt _displayFrom;
+    CCInt _minDisplayNumber;
+    CCInt _maxDisplayNumber;
+//    CCUInt _zoomBaseLine;
     
-    CCFloat _noneDisplayValue;
+//    CCFloat _noneDisplayValue;
 }
 
-@property(assign, nonatomic) CCUInt displayNumber;
-@property(assign, nonatomic) CCUInt displayFrom;
-@property(assign, nonatomic) CCUInt minDisplayNumber;
-@property(assign, nonatomic) CCUInt zoomBaseLine;
+@property(assign, nonatomic) CCInt displayNumber;
+@property(assign, nonatomic) CCInt displayFrom;
+@property(assign, nonatomic) CCInt minDisplayNumber;
+@property(assign, nonatomic) CCInt maxDisplayNumber;
+//@property(assign, nonatomic) CCUInt zoomBaseLine;
+//@property(assign, nonatomic) CCFloat noneDisplayValue;
 
-@property(assign, nonatomic) CCFloat noneDisplayValue;
+-(CCInt) getDataDisplayNumber;
+-(CCInt) getDisplayTo;
+-(CGFloat) getStickWidth;
+-(CGFloat) getDataStickWidth;
+
 
 @end

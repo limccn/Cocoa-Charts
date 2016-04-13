@@ -45,6 +45,7 @@
     CCFloat _maxValue;
     CCFloat _minValue;
     CCUInt _axisCalc;
+    BOOL _autoCalcRange;
     __unsafe_unretained CCSStickChart *_coChart;
 }
 
@@ -117,6 +118,7 @@
  Y轴显示值的快速计算子（表示刻度＝ 计算刻度/axisCalc）
  */
 @property(assign, nonatomic) CCUInt axisCalc;
+@property(assign, nonatomic) BOOL autoCalcRange;
 
 
 /*!
@@ -177,5 +179,9 @@
 - (void)calcValueRangeFormatForAxis;
 
 - (void)calcValueRange;
+
+-(CGFloat) computeValueY:(CGFloat)value inRect:(CGRect)rect;
+
+-(CCInt) getSelectedIndex;
 
 @end

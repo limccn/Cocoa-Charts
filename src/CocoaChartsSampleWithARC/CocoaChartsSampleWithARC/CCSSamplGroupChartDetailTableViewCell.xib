@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="118" id="KGk-i7-Jjw" customClass="CCSSamplGroupChartDetailTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="118"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="117"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bS5-wi-bVa">
+                        <rect key="frame" x="0.0" y="0.0" width="107" height="117"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FXd-a5-Iib">
+                        <rect key="frame" x="107" y="0.0" width="107" height="117"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bhv-YN-GfX">
+                        <rect key="frame" x="214" y="0.0" width="106" height="117"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                <constraints>
+                    <constraint firstItem="bS5-wi-bVa" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="1:3" id="25E-Vl-NK6"/>
+                    <constraint firstItem="FXd-a5-Iib" firstAttribute="leading" secondItem="bS5-wi-bVa" secondAttribute="trailing" id="5hp-SS-Y6w"/>
+                    <constraint firstItem="Bhv-YN-GfX" firstAttribute="leading" secondItem="FXd-a5-Iib" secondAttribute="trailing" id="Abk-PG-Iv6"/>
+                    <constraint firstItem="FXd-a5-Iib" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="GFH-HN-g7m"/>
+                    <constraint firstAttribute="bottom" secondItem="FXd-a5-Iib" secondAttribute="bottom" id="KU2-Kd-4Db"/>
+                    <constraint firstAttribute="bottom" secondItem="Bhv-YN-GfX" secondAttribute="bottom" id="LOq-su-giD"/>
+                    <constraint firstItem="FXd-a5-Iib" firstAttribute="width" secondItem="bS5-wi-bVa" secondAttribute="width" id="MpJ-RB-enL"/>
+                    <constraint firstAttribute="bottom" secondItem="bS5-wi-bVa" secondAttribute="bottom" id="Z39-QR-APW"/>
+                    <constraint firstAttribute="trailing" secondItem="Bhv-YN-GfX" secondAttribute="trailing" id="d4p-u5-BXd"/>
+                    <constraint firstItem="bS5-wi-bVa" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="dnP-Id-tWS"/>
+                    <constraint firstItem="Bhv-YN-GfX" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="gn0-mB-b6A"/>
+                    <constraint firstItem="bS5-wi-bVa" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="m6B-GV-Qj6"/>
+                </constraints>
+            </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <connections>
+                <outlet property="lblCount" destination="Bhv-YN-GfX" id="hsG-VQ-VMh"/>
+                <outlet property="lblPrice" destination="FXd-a5-Iib" id="JZm-tL-OqJ"/>
+                <outlet property="lblTime" destination="bS5-wi-bVa" id="smy-gk-FXA"/>
+            </connections>
+            <point key="canvasLocation" x="192" y="366"/>
+        </tableViewCell>
+    </objects>
+</document>

@@ -23,8 +23,8 @@
 
 @protocol CCSChartDelegate <NSObject>
 @optional
-- (void)CCSChartBeTouchedOn:(CGPoint)point indexAt:(CCUInt) index;
-- (void)CCSChartDisplayChangedFrom:(CCUInt)from number:(CCUInt) number;
+- (void)CCSChartBeTouchedOn:(id)chart point:(CGPoint)point indexAt:(CCUInt) index;
+- (void)CCSChartDisplayChangedFrom:(id)chart from:(CCUInt)from number:(CCUInt) number;
 @end
 
 /*!
@@ -89,9 +89,12 @@ typedef enum {
     BOOL _displayLatitude;
     BOOL _dashLatitude;
     BOOL _displayBorder;
+    BOOL _dashCrossLines;
     BOOL _displayCrossXOnTouch;
     BOOL _displayCrossYOnTouch;
     CGPoint _singleTouchPoint;
+    
+    NSMutableArray *_noneDisplayValues;
     
     __unsafe_unretained UIViewController<CCSChartDelegate> *_chartDelegate;
 }
@@ -165,6 +168,8 @@ typedef enum {
  十字交叉线颜色
  */
 @property(strong, nonatomic) UIColor *crossLinesColor;
+
+@property(assign, nonatomic) BOOL dashCrossLines;
 
 /*!
  Color of cross line degree text when touched
@@ -302,6 +307,7 @@ typedef enum {
  */
 @property(assign, nonatomic ,setter = setSingleTouchPoint:) CGPoint singleTouchPoint;
 
+@property(strong, nonatomic) NSMutableArray *noneDisplayValues;
 
 /*!
  Touched point inside of grid
@@ -474,5 +480,9 @@ typedef enum {
  放大表示
  */
 - (void)zoomIn;
+
+- (void) drawData:(CGRect)rect;
+
+-(BOOL) isNoneDisplayValue:(CGFloat)value;
 
 @end

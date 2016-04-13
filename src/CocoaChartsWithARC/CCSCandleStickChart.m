@@ -251,7 +251,7 @@
     [super drawRect:rect];
 }
 
-- (void)drawData:(CGRect)rect {
+- (void)drawSticks:(CGRect)rect {
     // 蜡烛棒宽度
     CCFloat stickWidth = ((rect.size.width - self.axisMarginLeft - self.axisMarginRight) / self.maxSticksNum) - 1;
 
@@ -265,10 +265,10 @@
             CCFloat stickX = self.axisMarginLeft + 1;
             for (CCUInt i = 0; i < [self.stickData count]; i++) {
                 CCSCandleStickChartData *data = [self.stickData objectAtIndex:i];
-                CCFloat openY = ((1 - (data.open - self.minValue) / (self.maxValue - self.minValue)) * (rect.size.height - self.axisMarginBottom) - self.axisMarginTop);
-                CCFloat highY = ((1 - (data.high - self.minValue) / (self.maxValue - self.minValue)) * (rect.size.height - self.axisMarginBottom) - self.axisMarginTop);
-                CCFloat lowY = ((1 - (data.low - self.minValue) / (self.maxValue - self.minValue)) * (rect.size.height - self.axisMarginBottom) - self.axisMarginTop);
-                CCFloat closeY = ((1 - (data.close - self.minValue) / (self.maxValue - self.minValue)) * (rect.size.height - self.axisMarginBottom) - self.axisMarginTop);
+                CCFloat openY = [self computeValueY:data.open inRect:rect];
+                CCFloat highY = [self computeValueY:data.high inRect:rect];
+                CCFloat lowY = [self computeValueY:data.low inRect:rect];
+                CCFloat closeY = [self computeValueY:data.close inRect:rect];
 
                 // 处理和生产K线中的阴线和阳线
                 if (data.open == 0 && data.high == 0 && data.low == 0) {
@@ -280,7 +280,7 @@
                     CGContextSetFillColorWithColor(context, self.positiveStickFillColor.CGColor);
 
                     if (self.candleStickStyle == CCSCandleStickStyleStandard) {
-                        if (stickWidth >= 2) {
+                        if (stickWidth >= 1) {
                             CGContextAddRect(context, CGRectMake(stickX, closeY, stickWidth, openY - closeY));
                             CGContextFillPath(context);
                         }
@@ -313,7 +313,7 @@
                     CGContextSetFillColorWithColor(context, self.negativeStickBorderColor.CGColor);
 
                     if (self.candleStickStyle == CCSCandleStickStyleStandard) {
-                        if (stickWidth >= 2) {
+                        if (stickWidth >= 1) {
                             CGContextAddRect(context, CGRectMake(stickX, openY, stickWidth, closeY - openY));
                             CGContextFillPath(context);
                         }
@@ -344,7 +344,7 @@
                     //根据宽度判断是否绘制横线
                     CGContextSetStrokeColorWithColor(context, self.crossStarColor.CGColor);
                     CGContextSetFillColorWithColor(context, self.crossStarColor.CGColor);
-                    if (stickWidth >= 2) {
+                    if (stickWidth >= 1) {
                         CGContextMoveToPoint(context, stickX, closeY);
                         CGContextAddLineToPoint(context, stickX + stickWidth, openY);
                     }
@@ -363,10 +363,11 @@
             CCFloat stickX = rect.size.width - self.axisMarginRight - 1 - stickWidth;
             for (CCInt i = [self.stickData count] - 1; i >= 0; i--) {
                 CCSCandleStickChartData *data = [self.stickData objectAtIndex:i];
-                CCFloat openY = ((1 - (data.open - self.minValue) / (self.maxValue - self.minValue)) * (rect.size.height - self.axisMarginBottom) - self.axisMarginTop);
-                CCFloat highY = ((1 - (data.high - self.minValue) / (self.maxValue - self.minValue)) * (rect.size.height - self.axisMarginBottom) - self.axisMarginTop);
-                CCFloat lowY = ((1 - (data.low - self.minValue) / (self.maxValue - self.minValue)) * (rect.size.height - self.axisMarginBottom) - self.axisMarginTop);
-                CCFloat closeY = ((1 - (data.close - self.minValue) / (self.maxValue - self.minValue)) * (rect.size.height - self.axisMarginBottom) - self.axisMarginTop);
+                
+                CCFloat openY = [self computeValueY:data.open inRect:rect];
+                CCFloat highY = [self computeValueY:data.high inRect:rect];
+                CCFloat lowY = [self computeValueY:data.low inRect:rect];
+                CCFloat closeY = [self computeValueY:data.close inRect:rect];
 
                 // 处理和生产K线中的阴线和阳线
                 if (data.open == 0 && data.high == 0 && data.low == 0) {
@@ -376,7 +377,7 @@
                     //根据宽度判断是否绘制立柱
                     CGContextSetStrokeColorWithColor(context, self.positiveStickBorderColor.CGColor);
                     CGContextSetFillColorWithColor(context, self.positiveStickFillColor.CGColor);
-                    if (stickWidth >= 2) {
+                    if (stickWidth >= 1) {
                         CGContextAddRect(context, CGRectMake(stickX, closeY, stickWidth, openY - closeY));
                         CGContextFillPath(context);
                     }
@@ -391,7 +392,7 @@
                     //根据宽度判断是否绘制立柱
                     CGContextSetStrokeColorWithColor(context, self.negativeStickBorderColor.CGColor);
                     CGContextSetFillColorWithColor(context, self.negativeStickBorderColor.CGColor);
-                    if (stickWidth >= 2) {
+                    if (stickWidth >= 1) {
                         CGContextAddRect(context, CGRectMake(stickX, openY, stickWidth, closeY - openY));
                         CGContextFillPath(context);
                     }
@@ -405,7 +406,7 @@
                     //根据宽度判断是否绘制横线
                     CGContextSetStrokeColorWithColor(context, self.crossStarColor.CGColor);
                     CGContextSetFillColorWithColor(context, self.crossStarColor.CGColor);
-                    if (stickWidth >= 2) {
+                    if (stickWidth >= 1) {
                         CGContextMoveToPoint(context, stickX, closeY);
                         CGContextAddLineToPoint(context, stickX + stickWidth, openY);
                     }

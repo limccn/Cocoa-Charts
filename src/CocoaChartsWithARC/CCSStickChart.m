@@ -35,6 +35,8 @@
 @synthesize minValue = _minValue;
 @synthesize coChart = _coChart;
 @synthesize axisCalc = _axisCalc;
+@synthesize autoCalcRange = _autoCalcRange;
+
 
 - (void)initProperty {
     //初始化父类的熟悉
@@ -43,7 +45,7 @@
     self.stickBorderColor = [UIColor yellowColor];
     self.stickFillColor = [UIColor yellowColor];
 
-    self.latitudeNum = 3;
+    self.latitudeNum = 2;
     self.longitudeNum = 3;
     self.maxSticksNum = 26;
     self.maxValue = 100;
@@ -53,9 +55,12 @@
     self.stickData = nil;
     self.coChart = nil;
     self.axisCalc = 1;
+    self.autoCalcRange = YES;
 }
 
 - (void)calcDataValueRange {
+    
+    
     CCFloat maxValue = 0;
     CCFloat minValue = CCIntMax;
 
@@ -212,8 +217,10 @@
 }
 
 - (void)initAxisY {
-    //计算取值范围
-    [self calcValueRange];
+    if ([self autoCalcRange]) {
+        //计算取值范围
+        [self calcValueRange];
+    }
 
     if (self.maxValue == 0. && self.minValue == 0.) {
         self.latitudeTitles = nil;
@@ -247,18 +254,21 @@
     self.latitudeTitles = TitleY;
 }
 
+-(void) drawData:(CGRect)rect{
+    [super drawData:rect];
+    //绘制数据
+    [self drawSticks:rect];
+}
+
 - (void)drawRect:(CGRect)rect {
     //初始化XY轴
     [self initAxisY];
     [self initAxisX];
 
     [super drawRect:rect];
-
-    //绘制数据
-    [self drawData:rect];
 }
 
-- (void)drawData:(CGRect)rect {
+- (void)drawSticks:(CGRect)rect {
     // 蜡烛棒宽度
     CCFloat stickWidth = ((rect.size.width - self.axisMarginLeft - self.axisMarginRight) / self.maxSticksNum) - 1;
 
@@ -284,7 +294,7 @@
                     //没有值的情况下不绘制
                 } else {
                     //绘制数据，根据宽度判断绘制直线或方柱
-                    if (stickWidth >= 2) {
+                    if (stickWidth >= 1) {
                         CGContextAddRect(context, CGRectMake(stickX, highY, stickWidth, lowY - highY));
                         //填充路径
                         CGContextFillPath(context);
@@ -313,7 +323,7 @@
                     //没有值的情况下不绘制
                 } else {
                     //绘制数据，根据宽度判断绘制直线或方柱
-                    if (stickWidth >= 2) {
+                    if (stickWidth >= 1) {
                         CGContextAddRect(context, CGRectMake(stickX, highY, stickWidth, lowY - highY));
                         //填充路径
                         CGContextFillPath(context);
@@ -393,10 +403,10 @@
     //处理点击事件
     if ([allTouches count] == 1) {
 
-        CGPoint pt = CGPointMake(self.singleTouchPoint.x, self.coChart.singleTouchPoint.y);
-        //获取选中点
-        self.coChart.singleTouchPoint = pt;
-        [self.coChart performSelector:@selector(setNeedsDisplay) withObject:nil afterDelay:0];
+//        CGPoint pt = CGPointMake(self.singleTouchPoint.x, self.coChart.singleTouchPoint.y);
+//        //获取选中点
+//        self.coChart.singleTouchPoint = pt;
+//        [self.coChart performSelector:@selector(setNeedsDisplay) withObject:nil afterDelay:0];
 
     } else if ([allTouches count] == 2) {
 
@@ -439,7 +449,6 @@
             }
         }
     }
-
 }
 
 - (void)setSelectedPointAddReDraw:(CGPoint)point {
@@ -489,10 +498,10 @@
             } else {
                 self.maxSticksNum = self.maxSticksNum + 2;
             }
-            if (self.coChart) {
-                self.coChart.maxSticksNum = self.maxSticksNum;
-                [self.coChart setNeedsDisplay];
-            }
+//            if (self.coChart) {
+//                self.coChart.maxSticksNum = self.maxSticksNum;
+//                [self.coChart setNeedsDisplay];
+//            }
         }
     }
     else {
@@ -503,12 +512,28 @@
             } else {
                 self.maxSticksNum = self.maxSticksNum + 4;
             }
-            if (self.coChart) {
-                self.coChart.maxSticksNum = self.maxSticksNum;
-                [self.coChart setNeedsDisplay];
-            }
+//            if (self.coChart) {
+//                self.coChart.maxSticksNum = self.maxSticksNum;
+//                [self.coChart setNeedsDisplay];
+//            }
         }
     }
+}
+
+
+-(CGFloat) computeValueY:(CGFloat)value inRect:(CGRect)rect{
+    return (1 - (value - self.minValue) / (self.maxValue - self.minValue)) * (rect.size.height - self.axisMarginBottom) - self.axisMarginTop;
+}
+
+
+-(CCInt) getSelectedIndex
+{
+    return [self selectedStickIndex];
+}
+
+-(void) bindSelectedIndex
+{
+    
 }
 
 - (void) setSingleTouchPoint:(CGPoint) point
@@ -517,8 +542,10 @@
     
     [self calcSelectedIndex];
     
-    if (self.chartDelegate && [self.chartDelegate respondsToSelector:@selector(CCSChartBeTouchedOn:indexAt:)]) {
-        [self.chartDelegate CCSChartBeTouchedOn:point indexAt:self.selectedStickIndex];
-    }
+    [self bindSelectedIndex];
+//    
+//    if (self.chartDelegate && [self.chartDelegate respondsToSelector:@selector(CCSChartBeTouchedOn:point:indexAt:)]) {
+//        [self.chartDelegate CCSChartBeTouchedOn:self point:point indexAt:self.selectedStickIndex];
+//    }
 }
 @end

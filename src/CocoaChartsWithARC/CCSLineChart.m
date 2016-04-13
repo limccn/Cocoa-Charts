@@ -32,13 +32,15 @@
 @synthesize maxValue = _maxValue;
 @synthesize minValue = _minValue;
 @synthesize axisCalc = _axisCalc;
+@synthesize autoCalcRange = _autoCalcRange;
+@synthesize balanceRange = _balanceRange;
 @synthesize lineAlignType = _lineAlignType;
 
 - (void)initProperty {
 
     [super initProperty];
 
-    self.latitudeNum = 3;
+    self.latitudeNum = 2;
     self.longitudeNum = 3;
     self.maxValue = CCIntMin;
     self.minValue = CCIntMax;
@@ -48,6 +50,11 @@
     self.lineAlignType = CCSLineAlignTypeJustify;
 
     self.linesData = nil;
+    self.autoCalcRange = YES;
+    self.balanceRange = NO;
+    
+    self.displayCrossXOnTouch = NO;
+    self.displayCrossYOnTouch = NO;
 }
 
 
@@ -173,6 +180,10 @@
     //    }
 }
 
+- (void) calcBalanceRange{
+    self.maxValue = MAX(fabs(self.maxValue),fabs(self.minValue));
+    self.minValue = -MAX(fabs(self.maxValue),fabs(self.minValue));
+}
 
 - (void)calcValueRange {
     if (self.linesData != NULL && [self.linesData count] > 0) {
@@ -184,6 +195,16 @@
     }
     
     [self calcValueRangeFormatForAxis];
+    
+    if (self.balanceRange) {
+        [self calcBalanceRange];
+    }
+}
+
+-(void) drawData:(CGRect)rect{
+    [super drawData:rect];
+    //绘制数据
+    [self drawLines:rect];
 }
 
 - (void)drawRect:(CGRect)rect {
@@ -194,11 +215,9 @@
 
     [super drawRect:rect];
 
-    //绘制数据
-    [self drawData:rect];
 }
 
-- (void)drawData:(CGRect)rect {
+- (void)drawLines:(CGRect)rect {
 
     // 起始位置
     CCFloat startX = 0;
@@ -452,8 +471,11 @@
 
 
 - (void)initAxisY {
-    //计算取值范围
-    [self calcValueRange];
+    
+    if (self.autoCalcRange) {
+        //计算取值范围
+        [self calcValueRange];
+    }
 
     if (self.maxValue == 0. && self.minValue == 0.) {
         self.latitudeTitles = nil;
@@ -466,7 +488,7 @@
     for (CCUInt i = 0; i < self.latitudeNum; i++) {
         if (self.axisCalc == 1) {
             CCUInt degree = floor(self.minValue + i * average) / self.axisCalc;
-            NSString *value = [[NSNumber numberWithUnsignedInteger:degree]stringValue];
+            NSString *value = [[NSNumber numberWithInteger:degree]stringValue];
             [TitleY addObject:value];
         } else {
             NSString *value = [NSString stringWithFormat:@"%-.2f", floor(self.minValue + i * average) / self.axisCalc];
@@ -476,7 +498,7 @@
     //处理最大值
     if (self.axisCalc == 1) {
         CCUInt degree = (CCInt) (self.maxValue) / self.axisCalc;
-        NSString *value = [[NSNumber numberWithUnsignedInteger:degree]stringValue];
+        NSString *value = [[NSNumber numberWithInteger:degree]stringValue];
         [TitleY addObject:value];
     }
     else {
@@ -559,6 +581,71 @@
     
     self.maxValue = CCIntMin;
     self.minValue = CCIntMax;
+}
+
+-(void) calcSelectedIndex{
+}
+
+-(void) bindSelectedIndex
+{
+    
+}
+
+- (void)setSelectedPointAddReDraw:(CGPoint)point {
+    point.y = 1;
+    self.singleTouchPoint = point;
+    [self calcSelectedIndex];
+    
+    [self setNeedsDisplay];
+}
+
+
+- (void) setSingleTouchPoint:(CGPoint) point
+{
+    _singleTouchPoint = point;
+    
+    [self calcSelectedIndex];
+    
+    [self bindSelectedIndex];
+    
+//    if (self.chartDelegate && [self.chartDelegate respondsToSelector:@selector(CCSChartBeTouchedOn:indexAt:)]) {
+//        [self.chartDelegate CCSChartBeTouchedOn:point indexAt:self.selectedIndex];
+//    }
+}
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    //父类的点击事件
+    [super touchesBegan:touches withEvent:event];
+    //计算选中的索引
+    [self calcSelectedIndex];
+}
+
+- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
+    //调用父类的触摸事件
+    [super touchesMoved:touches withEvent:event];
+    //计算选中的索引
+    [self calcSelectedIndex];
+    
+    NSArray *allTouches = [touches allObjects];
+    //处理点击事件
+    if ([allTouches count] == 1) {
+        
+//        CGPoint pt = CGPointMake(self.singleTouchPoint.x, self.coChart.singleTouchPoint.y);
+//        //获取选中点
+//        self.coChart.singleTouchPoint = pt;
+//        [self.coChart performSelector:@selector(setNeedsDisplay) withObject:nil afterDelay:0];
+        
+    } else if ([allTouches count] == 2) {
+        
+    } else {
+        
+    }
+    
+}
+
+
+-(CGFloat) computeValueY:(CGFloat)value inRect:(CGRect)rect{
+    return (1 - (value - self.minValue) / (self.maxValue - self.minValue)) * (rect.size.height - self.axisMarginBottom) - self.axisMarginTop;
 }
 
 //-(void) calcSelectedIndex

@@ -152,9 +152,11 @@
     stickchart.latitudeNum = 4;
     stickchart.longitudeNum = 3;
     stickchart.backgroundColor = [UIColor blackColor];
-    stickchart.macdDisplayType = CCSMACDChartDisplayTypeLineStick;
-    stickchart.positiveStickColor = [UIColor redColor];
-    stickchart.negativeStickColor = [UIColor cyanColor];
+    stickchart.macdDisplayType = CCSMACDChartDisplayTypeStick;
+//    stickchart.positiveStickFillColor = [UIColor redColor];
+//    stickchart.negativeStickFillColor = [UIColor cyanColor];
+//    stickchart.positiveStickStrokeColor = [UIColor redColor];
+//    stickchart.negativeStickStrokeColor = [UIColor cyanColor];
     stickchart.macdLineColor = [UIColor cyanColor];
     stickchart.deaLineColor = [UIColor yellowColor];
     stickchart.diffLineColor = [UIColor whiteColor];

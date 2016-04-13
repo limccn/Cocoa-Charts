@@ -42,7 +42,6 @@
     UIColor *_negativeStickBorderColor;
     UIColor *_negativeStickFillColor;
     UIColor *_crossStarColor;
-
     CCInt _candleStickStyle;
 }
 
@@ -83,6 +82,7 @@
 
 
 @property(assign, nonatomic) CCInt candleStickStyle;
+
 
 
 @end

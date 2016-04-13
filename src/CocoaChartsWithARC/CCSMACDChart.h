@@ -19,8 +19,10 @@ typedef enum {
 @interface CCSMACDChart : CCSSlipStickChart {
     CCSMACDChartDisplayType _macdDisplayType;
     
-    UIColor *_positiveStickColor;
-    UIColor *_negativeStickColor;
+    UIColor *_positiveStickStrokeColor;
+    UIColor *_negativeStickStrokeColor;
+    UIColor *_positiveStickFillColor;
+    UIColor *_negativeStickFillColor;
     UIColor *_macdLineColor;
     UIColor *_diffLineColor;
     UIColor *_deaLineColor;
@@ -30,8 +32,10 @@ typedef enum {
 
 @property(assign, nonatomic) CCSMACDChartDisplayType macdDisplayType;
 
-@property(strong, nonatomic) UIColor *positiveStickColor;
-@property(strong, nonatomic) UIColor *negativeStickColor;
+@property(strong, nonatomic) UIColor *positiveStickStrokeColor;
+@property(strong, nonatomic) UIColor *negativeStickStrokeColor;
+@property(strong, nonatomic) UIColor *positiveStickFillColor;
+@property(strong, nonatomic) UIColor *negativeStickFillColor;
 @property(strong, nonatomic) UIColor *macdLineColor;
 @property(strong, nonatomic) UIColor *diffLineColor;
 @property(strong, nonatomic) UIColor *deaLineColor;

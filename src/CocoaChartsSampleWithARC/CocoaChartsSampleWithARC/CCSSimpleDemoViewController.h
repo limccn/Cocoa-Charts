@@ -10,13 +10,10 @@
 #import "CCSColoredStickChart.h"
 #import "CCSMACDChart.h"
 #import "CCSSlipLineChart.h"
+#import "CCSCandleStickChart.h"
 #import "CCSBOLLMASlipCandleStickChart.h"
 
-typedef enum {
-    CandleStickChartTypeCandle = 101,
-    CandleStickChartTypeBar = 102,
-    CandleStickChartTypeLine = 103
-} CandleStickChartType;
+#import "JSONModelLib.h"
 
 typedef enum {
     ChartViewTypeVOL = 101,
@@ -28,6 +25,12 @@ typedef enum {
     ChartViewTypeBOLL = 107
 } ChartViewType;
 
+typedef enum {
+    Chart1minData = 0,
+    Chart15minData = 1,
+    ChartTimesData = 2
+} ChartDataType;
+
 @interface OHLCVDData : NSObject {
     NSString *_open;
     NSString *_high;
@@ -38,8 +41,8 @@ typedef enum {
     NSString *_current;
     NSString *_change;
     NSString *_preclose;
-
 }
+
 @property(strong, nonatomic) NSString *open;
 @property(strong, nonatomic) NSString *high;
 @property(strong, nonatomic) NSString *low;
@@ -84,7 +87,7 @@ typedef enum {
     UISegmentedControl *_segBottomChartType;
     UIScrollView *_scrollViewBottomChart;
 
-    CandleStickChartType _topChartType;
+    CCSCandleStickStyle _topChartType;
     ChartViewType _bottomChartType;
     NSMutableArray *_chartData;
     OHLCVDData *_oHLCVDData;
@@ -121,7 +124,7 @@ typedef enum {
 @property(strong, nonatomic) UISegmentedControl *segBottomChartType;
 @property(strong, nonatomic) UIScrollView *scrollViewBottomChart;
 
-@property(assign, nonatomic) CandleStickChartType topChartType;
+@property(assign, nonatomic) CCSCandleStickStyle topChartType;
 @property(assign, nonatomic) ChartViewType bottomChartType;
 @property(strong, nonatomic) NSMutableArray *chartData;
 @property(strong, nonatomic) OHLCVDData *oHLCVDData;
