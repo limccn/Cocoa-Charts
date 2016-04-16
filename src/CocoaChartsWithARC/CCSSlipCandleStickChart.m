@@ -66,7 +66,7 @@
 
     //判断显示为方柱或显示为线条
 //    if (self.axisYPosition == CCSGridChartYAxisPositionLeft) {
-        for (CCUInt i = self.displayFrom; i < [self getDisplayTo] - 1; i++) {
+        for (CCUInt i = self.displayFrom; i < [self getDisplayTo]; i++) {
             CCSCandleStickChartData *stick = [self.stickData objectAtIndex:i];
             if (stick.open == 0 && stick.high == 0 && stick.low == 0) {
                 //停盘期间计算收盘价
