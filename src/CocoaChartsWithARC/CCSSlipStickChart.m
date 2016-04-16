@@ -147,29 +147,57 @@
 
     NSMutableArray *TitleY = [[NSMutableArray alloc] init];
     CCFloat average = (CCUInt) ((self.maxValue - self.minValue) / self.latitudeNum);
+//    //处理刻度
+//    for (CCUInt i = 0; i < self.latitudeNum; i++) {
+//        if (self.axisCalc == 1) {
+//            CCUInt degree = floor(self.minValue + i * average) / self.axisCalc;
+//            NSString *value = [[NSNumber numberWithUnsignedInteger:degree]stringValue];
+//            [TitleY addObject:value];
+//        } else {
+//            NSString *value = [NSString stringWithFormat:@"%-.2f", floor(self.minValue + i * average) / self.axisCalc];
+//            [TitleY addObject:value];
+//        }
+//    }
+//    //处理最大值
+//    if (self.axisCalc == 1) {
+//        CCUInt degree = (CCInt) (self.maxValue) / self.axisCalc;
+//        NSString *value = [[NSNumber numberWithUnsignedInteger:degree]stringValue];
+//        [TitleY addObject:value];
+//    }
+//    else {
+//        NSString *value = [NSString stringWithFormat:@"%-.2f", (self.maxValue) / self.axisCalc];
+//        [TitleY addObject:value];
+//    }
+
     //处理刻度
     for (CCUInt i = 0; i < self.latitudeNum; i++) {
-        if (self.axisCalc == 1) {
-            CCUInt degree = floor(self.minValue + i * average) / self.axisCalc;
-            NSString *value = [[NSNumber numberWithUnsignedInteger:degree]stringValue];
-            [TitleY addObject:value];
-        } else {
-            NSString *value = [NSString stringWithFormat:@"%-.2f", floor(self.minValue + i * average) / self.axisCalc];
-            [TitleY addObject:value];
-        }
-    }
-    //处理最大值
-    if (self.axisCalc == 1) {
-        CCUInt degree = (CCInt) (self.maxValue) / self.axisCalc;
-        NSString *value = [[NSNumber numberWithUnsignedInteger:degree]stringValue];
+        CCUInt degree =  self.minValue + i * average;
+        NSString *value = [self formatAxisYDegree:degree];
         [TitleY addObject:value];
     }
-    else {
-        NSString *value = [NSString stringWithFormat:@"%-.2f", (self.maxValue) / self.axisCalc];
-        [TitleY addObject:value];
-    }
-
+   
+    CCUInt degree =  self.maxValue;
+    NSString *value = [self formatAxisYDegree:degree];
+    [TitleY addObject:value];
+    
     self.latitudeTitles = TitleY;
+}
+
+-(NSString*) formatAxisYDegree:(CGFloat)value {
+    //数据
+    CGFloat displayValue = floor(value) / self.axisCalc;
+    //处理成千分数形式
+    NSNumberFormatter *decimalformatter = [[NSNumberFormatter alloc] init];
+    decimalformatter.positiveFormat = @"###,##0;";
+    if(displayValue < 10000){
+        return [decimalformatter stringFromNumber:[NSNumber numberWithInteger:(CCInt)displayValue]];
+    }else if(displayValue < 100000000){
+        decimalformatter.positiveFormat = @"###,##0.00;";
+        return [NSString stringWithFormat:@"%@万",[decimalformatter stringFromNumber:[NSNumber numberWithDouble:displayValue/10000]]];
+    }else {
+        decimalformatter.positiveFormat = @"###,##0.00;";
+        return [NSString stringWithFormat:@"%@亿",[decimalformatter stringFromNumber:[NSNumber numberWithDouble:displayValue/100000000]]];
+    }
 }
 
 - (NSString *)calcAxisXGraduate:(CGRect)rect {
@@ -224,7 +252,8 @@
         [self setNeedsDisplay];
     }
     
-    [self canPerformAction:@selector(changeLongPressState:) withSender:nil];
+//    [self canPerformAction:@selector(changeLongPressState:) withSender:nil];
+     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(changeLongPressState:) object:nil];
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -246,7 +275,7 @@
         _isLongPress = NO;
         _isMoved = NO;
         _waitForLongPress = YES;
-        [self performSelector:@selector(changeLongPressState:) withObject:nil afterDelay:0.5];
+        [self performSelector:@selector(changeLongPressState:) withObject:nil afterDelay:1.5];
 
         
 //        if (_flag == 0) {
@@ -312,7 +341,8 @@
 //                _firstX = pt1.x;
                 _waitForLongPress = NO;
                 _isMoved = YES;
-                [self canPerformAction:@selector(changeLongPressState:) withSender:nil];
+//                [self canPerformAction:@selector(changeLongPressState:) withSender:nil];
+                [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(changeLongPressState:) object:nil];
                 //            _isLongPress = NO;
             }
             self.displayCrossXOnTouch = NO;
@@ -445,7 +475,8 @@
     //调用父类的触摸事件
     [super touchesEnded:touches withEvent:event];
     
-    [self canPerformAction:@selector(changeLongPressState:) withSender:nil];
+//    [self canPerformAction:@selector(changeLongPressState:) withSender:nil];
+     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(changeLongPressState:) object:nil];
 
     _startDistance1 = 0;
 
@@ -772,7 +803,7 @@
 //        }
 //    }
     
-    if(displayFrom > 0){
+    if(displayFrom >= 0){
         _displayFrom = displayFrom;
     }
 }
@@ -788,7 +819,7 @@
 //            _displayNumber = displayNumber;
 //        }
 //    }
-    if(displayNumber > 0){
+    if(displayNumber >= 0){
         _displayNumber = displayNumber;
     }
     
@@ -808,7 +839,7 @@
     
     _stickData = stickData;
     
-    if (self.minDisplayNumber > datasize) {
+    if (self.minDisplayNumber >= datasize) {
         self.maxDisplayNumber = datasize;
         self.displayFrom = 0;
         self.displayNumber = datasize;

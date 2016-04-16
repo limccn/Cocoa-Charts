@@ -15,8 +15,6 @@
 #import "CCSBOLLMASlipCandleStickChart.h"
 #import "CCSOHLCVDData.h"
 
-#import "JSONModelLib.h"
-
 typedef enum {
     GroupChartViewTypeVOL = 101,
     GroupChartViewTypeMACD = 102,

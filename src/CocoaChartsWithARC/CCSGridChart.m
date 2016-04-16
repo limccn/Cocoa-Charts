@@ -289,11 +289,11 @@
             if (i < [self.latitudeTitles count]) {
                 NSString *str = (NSString *) [self.latitudeTitles objectAtIndex:i];
                 
-                //处理成千分数形式
-                NSNumberFormatter *decimalformatter = [[NSNumberFormatter alloc] init];
-                decimalformatter.numberStyle = NSNumberFormatterDecimalStyle;
-                
-                str = [decimalformatter stringFromNumber:[NSNumber numberWithDouble:[str doubleValue]]];
+//                //处理成千分数形式
+//                NSNumberFormatter *decimalformatter = [[NSNumberFormatter alloc] init];
+//                decimalformatter.numberStyle = NSNumberFormatterDecimalStyle;
+//                
+//                str = [decimalformatter stringFromNumber:[NSNumber numberWithDouble:[str doubleValue]]];
                 
                 //调整Y轴坐标位置
                 if (i == 0) {
@@ -338,11 +338,11 @@
             if (i < [self.latitudeTitles count]) {
                 NSString *str = (NSString *) [self.latitudeTitles objectAtIndex:i];
                 
-                //处理成千分数形式
-                NSNumberFormatter *decimalformatter = [[NSNumberFormatter alloc] init];
-                decimalformatter.numberStyle = NSNumberFormatterDecimalStyle;
-                
-                str = [decimalformatter stringFromNumber:[NSNumber numberWithDouble:[str doubleValue]]];
+//                //处理成千分数形式
+//                NSNumberFormatter *decimalformatter = [[NSNumberFormatter alloc] init];
+//                decimalformatter.numberStyle = NSNumberFormatterDecimalStyle;
+//                
+//                str = [decimalformatter stringFromNumber:[NSNumber numberWithDouble:[str doubleValue]]];
                 
                 //调整Y轴坐标位置
                 if (i == 0) {

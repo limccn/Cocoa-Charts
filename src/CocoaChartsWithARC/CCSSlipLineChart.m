@@ -422,7 +422,9 @@
         [self setNeedsDisplay];
     }
     
-    [self canPerformAction:@selector(changeLongPressState:) withSender:nil];
+//    [self canPerformAction:@selector(changeLongPressState:) withSender:nil];
+     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(changeLongPressState:) object:nil];
+    
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -444,7 +446,7 @@
         _isLongPress = NO;
         _isMoved = NO;
         _waitForLongPress = YES;
-        [self performSelector:@selector(changeLongPressState:) withObject:nil afterDelay:0.5];
+        [self performSelector:@selector(changeLongPressState:) withObject:nil afterDelay:1.5];
         
         
         //        if (_flag == 0) {
@@ -510,7 +512,8 @@
                 //                _firstX = pt1.x;
                 _waitForLongPress = NO;
                 _isMoved = YES;
-                [self canPerformAction:@selector(changeLongPressState:) withSender:nil];
+//                [self   :@selector(changeLongPressState:) withSender:nil];
+                 [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(changeLongPressState:) object:nil];
                 //            _isLongPress = NO;
             }
             self.displayCrossXOnTouch = NO;
@@ -656,7 +659,8 @@
     //调用父类的触摸事件
     [super touchesEnded:touches withEvent:event];
     
-    [self canPerformAction:@selector(changeLongPressState:) withSender:nil];
+//    [self canPerformAction:@selector(changeLongPressState:) withSender:nil];
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(changeLongPressState:) object:nil];
     
     _startDistance1 = 0;
     
@@ -852,7 +856,7 @@
 //       }
 //    }
     
-    if(displayFrom > 0){
+    if(displayFrom >= 0){
         _displayFrom = displayFrom;
     }
 }
@@ -866,7 +870,7 @@
 //        }
 //    }
     
-    if(displayNumber > 0){
+    if(displayNumber >= 0){
         _displayNumber = displayNumber;
     }
 }
@@ -896,7 +900,7 @@
     
      _linesData = linesData;
     
-    if (self.minDisplayNumber > datasize) {
+    if (self.minDisplayNumber >= datasize) {
         self.maxDisplayNumber = datasize;
         self.displayFrom = 0;
         self.displayNumber = datasize;

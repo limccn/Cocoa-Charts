@@ -484,8 +484,8 @@
     
 //    candleStickChart.candleStickStyle = GroupCandleStickChartTypeBar;
 //    candleStickChart.axisYPosition = CCSGridChartYAxisPositionRight;
-    candleStickChart.displayNumber = 50;
-    candleStickChart.displayFrom = 0;
+//    candleStickChart.displayNumber = 50;
+//    candleStickChart.displayFrom = 0;
     candleStickChart.bollingerBandStyle = CCSBollingerBandStyleNone;
     candleStickChart.axisCalc = AXIS_CALC_PARM;
     candleStickChart.latitudeNum = 3;
@@ -558,8 +558,8 @@
     self.stickChart.minValue = 0;
     self.stickChart.stickFillColor = [UIColor colorWithRed:0.7 green:0.7 blue:0 alpha:0.8];
     
-    self.stickChart.displayNumber = 50;
-    self.stickChart.displayFrom = 0;
+//    self.stickChart.displayNumber = 50;
+//    self.stickChart.displayFrom = 0;
     self.stickChart.displayLongitudeTitle = NO;
     self.stickChart.axisMarginBottom = 3;
     
@@ -630,8 +630,8 @@
     self.macdChart.macdLineColor = [UIColor cyanColor];
     self.macdChart.deaLineColor = [UIColor blueColor];
     self.macdChart.diffLineColor = [UIColor orangeColor];
-    self.macdChart.displayNumber = 50;
-    self.macdChart.displayFrom = 0;
+//    self.macdChart.displayNumber = 50;
+//    self.macdChart.displayFrom = 0;
     self.macdChart.axisCalc = AXIS_CALC_PARM;
     self.macdChart.displayLongitudeTitle = NO;
     self.macdChart.axisMarginBottom = 3;
@@ -682,8 +682,8 @@
     [self initKDJChartData];
     
     //设置stickData
-    self.kdjChart.displayNumber = 50;
-    self.kdjChart.displayFrom = 0;
+//    self.kdjChart.displayNumber = 50;
+//    self.kdjChart.displayFrom = 0;
     self.kdjChart.latitudeNum = 2;
     self.kdjChart.displayLongitudeTitle = NO;
     self.kdjChart.axisMarginBottom = 3;
@@ -732,8 +732,8 @@
     [self initRSIChartData];
     
     //设置stickData
-    self.rsiChart.displayNumber = 50;
-    self.rsiChart.displayFrom = 0;
+//    self.rsiChart.displayNumber = 50;
+//    self.rsiChart.displayFrom = 0;
     self.rsiChart.displayLongitudeTitle = NO;
     self.rsiChart.axisMarginBottom = 3;
     
@@ -786,9 +786,9 @@
     [self initWRChartData];
     
     //设置stickData
-    self.wrChart.displayNumber = 50;
-    self.wrChart.displayFrom = 0;
-    self.wrChart.noneDisplayValues = [NSMutableArray arrayWithObjects:WR_NONE_DISPLAY,nil];;
+//    self.wrChart.displayNumber = 50;
+//    self.wrChart.displayFrom = 0;
+    self.wrChart.noneDisplayValues = [NSMutableArray arrayWithObjects:WR_NONE_DISPLAY,nil];
     self.wrChart.displayLongitudeTitle = NO;
     self.wrChart.axisMarginBottom = 3;
     
@@ -836,8 +836,8 @@
     [self initCCIChartData];
     
     //设置stickData
-    self.cciChart.displayNumber = 50;
-    self.cciChart.displayFrom = 0;
+//    self.cciChart.displayNumber = 50;
+//    self.cciChart.displayFrom = 0;
     self.cciChart.displayLongitudeTitle = NO;
     self.cciChart.axisMarginBottom = 3;
     
@@ -875,8 +875,8 @@
     [self initBOLLChartData];
     
     //设置stickData
-    self.bollChart.displayNumber = 50;
-    self.bollChart.displayFrom = 0;
+//    self.bollChart.displayNumber = 50;
+//    self.bollChart.displayFrom = 0;
     self.bollChart.displayLongitudeTitle = NO;
     self.bollChart.axisMarginBottom = 3;
     
