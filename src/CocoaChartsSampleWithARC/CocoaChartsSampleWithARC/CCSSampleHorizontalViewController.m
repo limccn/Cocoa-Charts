@@ -17,6 +17,7 @@
 #import "CCSTitledLine.h"
 
 #import "CCSOHLCVDData.h"
+#import "CCSJSONData.h"
 
 #import "CCSStringUtils.h"
 
@@ -627,15 +628,15 @@ typedef enum {
         if (dict != nil) {
             CCSOHLCVDData *data = [[CCSOHLCVDData alloc] init];
             
-            data.open = [dict objectForKey:@"o"];
-            data.high = [dict objectForKey:@"h"];
-            data.low = [dict objectForKey:@"l"];
-            data.close = [dict objectForKey:@"c"];
-            data.vol = [dict objectForKey:@"tr"];
+            data.open = [[dict objectForKey:@"o"] doubleValue];
+            data.high = [[dict objectForKey:@"h"] doubleValue];
+            data.low = [[dict objectForKey:@"l"] doubleValue];
+            data.close = [[dict objectForKey:@"c"] doubleValue];
+            data.vol = [[dict objectForKey:@"tr"] doubleValue];
             data.date = [dict objectForKey:@"qt"];
-            data.current = [dict objectForKey:@"n"];
-            data.preclose = nil;
-            data.change = [dict objectForKey:@"changesPercent"];
+            data.current = [[dict objectForKey:@"n"] doubleValue];
+            data.preclose = 0;
+            data.change = [[dict objectForKey:@"changesPercent"] doubleValue];
             [_chartData addObject:data];
         }
     }
@@ -652,10 +653,10 @@ typedef enum {
     
     for (int i=0; i< [_chartData count];  i++) {
         CCSOHLCVDData *data = _chartData[i];
-        data.open = [NSString stringWithFormat:@"%f",[data.open doubleValue] * AXIS_CALC_PARM];
-        data.high = [NSString stringWithFormat:@"%f",[data.high doubleValue] * AXIS_CALC_PARM];
-        data.low = [NSString stringWithFormat:@"%f",[data.low doubleValue] * AXIS_CALC_PARM];
-        data.close = [NSString stringWithFormat:@"%f",[data.close doubleValue] * AXIS_CALC_PARM];
+        data.open = data.open * AXIS_CALC_PARM;
+        data.high = data.high * AXIS_CALC_PARM;
+        data.low = data.low * AXIS_CALC_PARM;
+        data.close = data.close * AXIS_CALC_PARM;
     }
 }
 

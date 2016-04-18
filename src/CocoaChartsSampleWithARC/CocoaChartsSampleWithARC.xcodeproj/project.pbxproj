@@ -78,8 +78,6 @@
 		3BB5DFDB18C96BDA00288894 /* CCSSpiderWebChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5DFBC18C96BDA00288894 /* CCSSpiderWebChartViewController.m */; };
 		3BB5DFDC18C96BDA00288894 /* CCSStackedAreaChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5DFBE18C96BDA00288894 /* CCSStackedAreaChartViewController.m */; };
 		3BB5DFDD18C96BDA00288894 /* CCSStickChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5DFC018C96BDA00288894 /* CCSStickChartViewController.m */; };
-		3BB5DFDE18C96BDA00288894 /* CCSStringUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5DFC218C96BDA00288894 /* CCSStringUtils.m */; };
-		3BB5DFDF18C96BDA00288894 /* CCSTALibUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5DFC418C96BDA00288894 /* CCSTALibUtils.m */; };
 		3BB5DFE018C96BDA00288894 /* CCSViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5DFC618C96BDA00288894 /* CCSViewController.m */; };
 		3BB5E09618C984F600288894 /* N225.xml in Resources */ = {isa = PBXBuildFile; fileRef = 3BB5DFE118C984F600288894 /* N225.xml */; };
 		3BB5E09718C984F600288894 /* ta_global.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5DFEB18C984F600288894 /* ta_global.c */; };
@@ -247,13 +245,12 @@
 		3BB5E13918C984F600288894 /* ta_WCLPRICE.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E09318C984F600288894 /* ta_WCLPRICE.c */; };
 		3BB5E13A18C984F600288894 /* ta_WILLR.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E09418C984F600288894 /* ta_WILLR.c */; };
 		3BB5E13B18C984F600288894 /* ta_WMA.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E09518C984F600288894 /* ta_WMA.c */; };
+		3BB873421CC4BBF500DEAE92 /* NSArray+CCSTACompute.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BB873411CC4BBF500DEAE92 /* NSArray+CCSTACompute.m */; };
 		3BDAD3991BDE12F9000AC06C /* test.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3BDAD3981BDE12F9000AC06C /* test.plist */; };
 		3BE4865B1CC39CEF00A3E4FB /* CCSStringUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BE486521CC39CEF00A3E4FB /* CCSStringUtils.m */; };
 		3BE4865C1CC39CEF00A3E4FB /* CCSTALibUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BE486541CC39CEF00A3E4FB /* CCSTALibUtils.m */; };
-		3BE4865D1CC39CEF00A3E4FB /* NSArray+CCSTACompute.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BE486561CC39CEF00A3E4FB /* NSArray+CCSTACompute.m */; };
 		3BE4865E1CC39CEF00A3E4FB /* NSString+UIColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BE486581CC39CEF00A3E4FB /* NSString+UIColor.m */; };
 		3BE4865F1CC39CEF00A3E4FB /* NSString+UserDefault.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BE4865A1CC39CEF00A3E4FB /* NSString+UserDefault.m */; };
-		F827594C1CBCB6B200E654FC /* NSString+UserDefault.m in Sources */ = {isa = PBXBuildFile; fileRef = F827594B1CBCB6B200E654FC /* NSString+UserDefault.m */; };
 		F83A4E131CBB387F00053284 /* CCSChartsSettingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F83A4E111CBB387F00053284 /* CCSChartsSettingTableViewCell.m */; };
 		F83A4E141CBB387F00053284 /* CCSChartsSettingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F83A4E121CBB387F00053284 /* CCSChartsSettingTableViewCell.xib */; };
 		F86509881CBB2F3E00D9CC23 /* CCSChartsSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F86509861CBB2F3E00D9CC23 /* CCSChartsSettingViewController.m */; };
@@ -276,7 +273,6 @@
 		F873862C1CA8B99F00630753 /* CCSGroupChart.m in Sources */ = {isa = PBXBuildFile; fileRef = F873862B1CA8B99F00630753 /* CCSGroupChart.m */; };
 		F873862F1CA8C59E00630753 /* CCSSampleGroupChartDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F873862E1CA8C59E00630753 /* CCSSampleGroupChartDemoViewController.m */; };
 		F87386311CA8D47100630753 /* CCSSampleGroupChartDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F87386301CA8D47100630753 /* CCSSampleGroupChartDemoViewController.xib */; };
-		F87818A81CAE038F005DC9AD /* NSArray+CCSTACompute.m in Sources */ = {isa = PBXBuildFile; fileRef = F87818A71CAE038F005DC9AD /* NSArray+CCSTACompute.m */; };
 		F884AA291CA7CDCA0027E0A0 /* CCSSampleHorizontalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F884AA281CA7CDCA0027E0A0 /* CCSSampleHorizontalViewController.m */; };
 		F897D6701CB7BBC800D939AF /* CCSOHLCVDData.m in Sources */ = {isa = PBXBuildFile; fileRef = F897D66F1CB7BBC800D939AF /* CCSOHLCVDData.m */; };
 		F8B237951CBB4C9D00A39068 /* CCSSettingResetTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F8B237931CBB4C9D00A39068 /* CCSSettingResetTableViewCell.m */; };
@@ -434,10 +430,6 @@
 		3BB5DFBE18C96BDA00288894 /* CCSStackedAreaChartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSStackedAreaChartViewController.m; sourceTree = "<group>"; };
 		3BB5DFBF18C96BDA00288894 /* CCSStickChartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSStickChartViewController.h; sourceTree = "<group>"; };
 		3BB5DFC018C96BDA00288894 /* CCSStickChartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSStickChartViewController.m; sourceTree = "<group>"; };
-		3BB5DFC118C96BDA00288894 /* CCSStringUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSStringUtils.h; sourceTree = "<group>"; };
-		3BB5DFC218C96BDA00288894 /* CCSStringUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSStringUtils.m; sourceTree = "<group>"; };
-		3BB5DFC318C96BDA00288894 /* CCSTALibUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSTALibUtils.h; sourceTree = "<group>"; };
-		3BB5DFC418C96BDA00288894 /* CCSTALibUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSTALibUtils.m; sourceTree = "<group>"; };
 		3BB5DFC518C96BDA00288894 /* CCSViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSViewController.h; sourceTree = "<group>"; };
 		3BB5DFC618C96BDA00288894 /* CCSViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSViewController.m; sourceTree = "<group>"; };
 		3BB5DFE118C984F600288894 /* N225.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = N225.xml; sourceTree = "<group>"; };
@@ -616,20 +608,18 @@
 		3BB5E09318C984F600288894 /* ta_WCLPRICE.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_WCLPRICE.c; sourceTree = "<group>"; };
 		3BB5E09418C984F600288894 /* ta_WILLR.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_WILLR.c; sourceTree = "<group>"; };
 		3BB5E09518C984F600288894 /* ta_WMA.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_WMA.c; sourceTree = "<group>"; };
+		3BB873401CC4BBF500DEAE92 /* NSArray+CCSTACompute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+CCSTACompute.h"; sourceTree = "<group>"; };
+		3BB873411CC4BBF500DEAE92 /* NSArray+CCSTACompute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+CCSTACompute.m"; sourceTree = "<group>"; };
 		3BDAD3981BDE12F9000AC06C /* test.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = test.plist; sourceTree = "<group>"; };
 		3BE486511CC39CEF00A3E4FB /* CCSStringUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSStringUtils.h; sourceTree = "<group>"; };
 		3BE486521CC39CEF00A3E4FB /* CCSStringUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSStringUtils.m; sourceTree = "<group>"; };
 		3BE486531CC39CEF00A3E4FB /* CCSTALibUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSTALibUtils.h; sourceTree = "<group>"; };
 		3BE486541CC39CEF00A3E4FB /* CCSTALibUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSTALibUtils.m; sourceTree = "<group>"; };
-		3BE486551CC39CEF00A3E4FB /* NSArray+CCSTACompute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+CCSTACompute.h"; sourceTree = "<group>"; };
-		3BE486561CC39CEF00A3E4FB /* NSArray+CCSTACompute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+CCSTACompute.m"; sourceTree = "<group>"; };
 		3BE486571CC39CEF00A3E4FB /* NSString+UIColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+UIColor.h"; sourceTree = "<group>"; };
 		3BE486581CC39CEF00A3E4FB /* NSString+UIColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+UIColor.m"; sourceTree = "<group>"; };
 		3BE486591CC39CEF00A3E4FB /* NSString+UserDefault.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+UserDefault.h"; sourceTree = "<group>"; };
 		3BE4865A1CC39CEF00A3E4FB /* NSString+UserDefault.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+UserDefault.m"; sourceTree = "<group>"; };
 		3BFA651D1AA40D68009897C9 /* CCSHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSHeader.h; sourceTree = "<group>"; };
-		F827594A1CBCB6B200E654FC /* NSString+UserDefault.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+UserDefault.h"; sourceTree = "<group>"; };
-		F827594B1CBCB6B200E654FC /* NSString+UserDefault.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+UserDefault.m"; sourceTree = "<group>"; };
 		F83A4E101CBB387F00053284 /* CCSChartsSettingTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSChartsSettingTableViewCell.h; sourceTree = "<group>"; };
 		F83A4E111CBB387F00053284 /* CCSChartsSettingTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSChartsSettingTableViewCell.m; sourceTree = "<group>"; };
 		F83A4E121CBB387F00053284 /* CCSChartsSettingTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CCSChartsSettingTableViewCell.xib; sourceTree = "<group>"; };
@@ -668,8 +658,6 @@
 		F873862D1CA8C59E00630753 /* CCSSampleGroupChartDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSSampleGroupChartDemoViewController.h; sourceTree = "<group>"; };
 		F873862E1CA8C59E00630753 /* CCSSampleGroupChartDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSSampleGroupChartDemoViewController.m; sourceTree = "<group>"; };
 		F87386301CA8D47100630753 /* CCSSampleGroupChartDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CCSSampleGroupChartDemoViewController.xib; sourceTree = "<group>"; };
-		F87818A61CAE038F005DC9AD /* NSArray+CCSTACompute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+CCSTACompute.h"; sourceTree = "<group>"; };
-		F87818A71CAE038F005DC9AD /* NSArray+CCSTACompute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+CCSTACompute.m"; sourceTree = "<group>"; };
 		F884AA271CA7CDCA0027E0A0 /* CCSSampleHorizontalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSSampleHorizontalViewController.h; sourceTree = "<group>"; };
 		F884AA281CA7CDCA0027E0A0 /* CCSSampleHorizontalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSSampleHorizontalViewController.m; sourceTree = "<group>"; };
 		F897D66E1CB7BBC800D939AF /* CCSOHLCVDData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSOHLCVDData.h; sourceTree = "<group>"; };
@@ -803,16 +791,10 @@
 				3BB5DFBE18C96BDA00288894 /* CCSStackedAreaChartViewController.m */,
 				3BB5DFBF18C96BDA00288894 /* CCSStickChartViewController.h */,
 				3BB5DFC018C96BDA00288894 /* CCSStickChartViewController.m */,
-				3BB5DFC118C96BDA00288894 /* CCSStringUtils.h */,
-				3BB5DFC218C96BDA00288894 /* CCSStringUtils.m */,
-				3BB5DFC318C96BDA00288894 /* CCSTALibUtils.h */,
-				3BB5DFC418C96BDA00288894 /* CCSTALibUtils.m */,
 				3BB5DFC518C96BDA00288894 /* CCSViewController.h */,
 				3BB5DFC618C96BDA00288894 /* CCSViewController.m */,
 				3BB5DF0E18C9624800288894 /* CCSAppDelegate.h */,
 				3BB5DF0F18C9624800288894 /* CCSAppDelegate.m */,
-				F87818A61CAE038F005DC9AD /* NSArray+CCSTACompute.h */,
-				F87818A71CAE038F005DC9AD /* NSArray+CCSTACompute.m */,
 				3BB5DF1118C9624800288894 /* Images.xcassets */,
 				3BB5DF0618C9624800288894 /* Supporting Files */,
 			);
@@ -1149,12 +1131,12 @@
 		3BE486501CC39CEF00A3E4FB /* CocoaChartsUtils */ = {
 			isa = PBXGroup;
 			children = (
+				3BB873401CC4BBF500DEAE92 /* NSArray+CCSTACompute.h */,
+				3BB873411CC4BBF500DEAE92 /* NSArray+CCSTACompute.m */,
 				3BE486511CC39CEF00A3E4FB /* CCSStringUtils.h */,
 				3BE486521CC39CEF00A3E4FB /* CCSStringUtils.m */,
 				3BE486531CC39CEF00A3E4FB /* CCSTALibUtils.h */,
 				3BE486541CC39CEF00A3E4FB /* CCSTALibUtils.m */,
-				3BE486551CC39CEF00A3E4FB /* NSArray+CCSTACompute.h */,
-				3BE486561CC39CEF00A3E4FB /* NSArray+CCSTACompute.m */,
 				3BE486571CC39CEF00A3E4FB /* NSString+UIColor.h */,
 				3BE486581CC39CEF00A3E4FB /* NSString+UIColor.m */,
 				3BE486591CC39CEF00A3E4FB /* NSString+UserDefault.h */,
@@ -1249,8 +1231,6 @@
 				F8B2379D1CBB648D00A39068 /* CCSSettingDetailViewController.h */,
 				F8B2379E1CBB648D00A39068 /* CCSSettingDetailViewController.m */,
 				F8B2379F1CBB648D00A39068 /* CCSSettingDetailViewController.xib */,
-				F827594A1CBCB6B200E654FC /* NSString+UserDefault.h */,
-				F827594B1CBCB6B200E654FC /* NSString+UserDefault.m */,
 			);
 			name = SampleDemo;
 			sourceTree = "<group>";
@@ -1433,9 +1413,7 @@
 				3BB5E12318C984F600288894 /* ta_SIN.c in Sources */,
 				3BB5E13A18C984F600288894 /* ta_WILLR.c in Sources */,
 				3BB5E0A318C984F600288894 /* ta_AROONOSC.c in Sources */,
-				3BE4865D1CC39CEF00A3E4FB /* NSArray+CCSTACompute.m in Sources */,
 				F8B237A01CBB648D00A39068 /* CCSSettingDetailViewController.m in Sources */,
-				3BB5DFDE18C96BDA00288894 /* CCSStringUtils.m in Sources */,
 				3BB5DF7918C962AA00288894 /* CCSColoredStickChart.m in Sources */,
 				F897D6701CB7BBC800D939AF /* CCSOHLCVDData.m in Sources */,
 				3BB5E13818C984F600288894 /* ta_VAR.c in Sources */,
@@ -1456,7 +1434,6 @@
 				3BB5DF8618C962AA00288894 /* CCSRadarChart.m in Sources */,
 				F86FE2B01CA2A100003E0DC6 /* JSONValueTransformer.m in Sources */,
 				3BB5E11018C984F600288894 /* ta_MINMAXINDEX.c in Sources */,
-				F827594C1CBCB6B200E654FC /* NSString+UserDefault.m in Sources */,
 				F86FE2AB1CA2A100003E0DC6 /* NSArray+JSONModel.m in Sources */,
 				3BB5E11918C984F600288894 /* ta_PLUS_DM.c in Sources */,
 				3BB5E0DB18C984F600288894 /* ta_CDLRISEFALL3METHODS.c in Sources */,
@@ -1548,6 +1525,7 @@
 				3BB5E0E318C984F600288894 /* ta_CDLTASUKIGAP.c in Sources */,
 				3BB5E13018C984F600288894 /* ta_TEMA.c in Sources */,
 				3BB5E0A918C984F600288894 /* ta_BETA.c in Sources */,
+				3BB873421CC4BBF500DEAE92 /* NSArray+CCSTACompute.m in Sources */,
 				3BB5DFD418C96BDA00288894 /* CCSPieChartViewController.m in Sources */,
 				3BB5E11218C984F600288894 /* ta_MINUS_DM.c in Sources */,
 				3BB5E12B18C984F600288894 /* ta_SUB.c in Sources */,
@@ -1561,7 +1539,6 @@
 				3BB5E10C18C984F600288894 /* ta_MIDPRICE.c in Sources */,
 				3BB5E09F18C984F600288894 /* ta_ADX.c in Sources */,
 				3BB5E0DF18C984F600288894 /* ta_CDLSPINNINGTOP.c in Sources */,
-				3BB5DFDF18C96BDA00288894 /* CCSTALibUtils.m in Sources */,
 				F86FE2A91CA2A100003E0DC6 /* JSONModelClassProperty.m in Sources */,
 				3BB5E09D18C984F600288894 /* ta_ADD.c in Sources */,
 				3BB5E0C818C984F600288894 /* ta_CDLHIKKAKE.c in Sources */,
@@ -1600,7 +1577,6 @@
 				3BB5E0A418C984F600288894 /* ta_ASIN.c in Sources */,
 				3BB5E11C18C984F600288894 /* ta_ROC.c in Sources */,
 				3BB5E0D518C984F600288894 /* ta_CDLMATHOLD.c in Sources */,
-				F87818A81CAE038F005DC9AD /* NSArray+CCSTACompute.m in Sources */,
 				3BB5DFD218C96BDA00288894 /* CCSMAStickChartViewController.m in Sources */,
 				3BB5E12F18C984F600288894 /* ta_TANH.c in Sources */,
 				3BB5E11618C984F600288894 /* ta_NVI.c in Sources */,

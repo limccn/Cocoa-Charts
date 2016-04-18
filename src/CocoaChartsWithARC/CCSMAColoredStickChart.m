@@ -80,12 +80,6 @@
     [super drawRect:rect];
 }
 
-//- (void)drawData:(CGRect)rect {
-//    //调用父类的绘制方法
-//    [super drawData:rect];
-//
-//
-//}
 -(void) drawData:(CGRect)rect{
     [super drawData:rect];
     if (self.displayNumber > self.maxDisplayNumberToLine) {
