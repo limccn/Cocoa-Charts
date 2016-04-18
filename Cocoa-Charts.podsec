@@ -1,18 +1,14 @@
 Pod::Spec.new do |s|
-  s.name = "Cocoa-Charts"
-  s.version = "0.2"
-  s.summary = "Cocoa-Charts is an open-source iOS developing framework written in Objective-c on Apple Cocoa SDK."
-  s.homepage = "https://github.com/limccn/Cocoa-Charts"
-  s.license = { :type => "Apache License, Version 2.0", :file => "LICENSE" }
-  s.authors = "Limc"
-  s.ios.deployment_target = "7.0"
-  s.tvos.deployment_target = "9.0"
-  s.osx.deployment_target = "10.11"
-  s.source = { :git => "https://github.com/limccn/Cocoa-Charts", :tag => "v#{s.version}" }
-  s.default_subspec = "Core"
-  s.prepare_command = "sed -i '' -e 's/import Charts//g' ChartsRealm/Classes/**/*.swift"
-
-  s.subspec "Core" do |ss|
-    ss.source_files  = "Charts/Classes/**/*.swift"
-  end
+  s.name = 'Cocoa-Charts'
+  s.version = '0.2'
+  s.summary = 'Cocoa-Charts is an open-source iOS developing framework written in Objective-c on Apple Cocoa SDK.'
+  s.homepage = 'https://github.com/limccn/Cocoa-Charts'
+  s.license = { :type => 'Apache License, Version 2.0', :file => 'LICENSE.txt' }
+  s.authors = {'limc' => 'limc.cn@me.com'}
+  s.platform = :ios, '7.0'
+  s.ios.deployment_target = '7.0'
+  s.source = { :git => 'https://github.com/limccn/Cocoa-Charts', :tag => 'v#{s.version}' }
+  s.requires_arc = true
+  s.public_header_files = 'src/CocoaCharts/CCSCocoaCharts.h'
+  s.source_files = 'src/CocoaCharts/*.{h,m}'
 end
