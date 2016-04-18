@@ -1,0 +1,14 @@
+License rules for contributors
+
+The “Cocoa-Charts Apache License 2.0” is before all intended to protect all the contributors from any liabilities and should be found at the top of every files where an individual or legal entity put their name.
+
+The “Cocoa-Charts Apache License 2.0” is also intended to keep the project accessible to a large audience, including commercial and/or closed-source projects.
+
+Consequently:
+GPL / LGPL contribution cannot be part of the Cocoa-Charts package.
+
+Cocoa-Charts package must remain entirely BSD-Like.
+
+Individual BSD-Like License for contribution to Cocoa-Charts are not accepted. They do not give additional benefit to the Cocoa-Charts users or to the contributors. All contributions should fall under the same "Cocoa-Charts Apache License 2.0".
+
+List of contributors is preserved at the top of the source code in the "Contributors/History" sections. Contributors can mention an e-mail or website in the contributors section.
