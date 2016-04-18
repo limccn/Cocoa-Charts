@@ -39,7 +39,7 @@
  色
  颜色
  */
-@property(retain, nonatomic) UIColor *color;
+@property(strong, nonatomic) UIColor *color;
 
 /*!
  @abstract Initialize This Object

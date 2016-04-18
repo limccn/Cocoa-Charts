@@ -35,7 +35,6 @@
 @synthesize minValue = _minValue;
 @synthesize coChart = _coChart;
 @synthesize axisCalc = _axisCalc;
-@synthesize stickAlignType = _stickAlignType;
 
 - (void)initProperty {
     //初始化父类的熟悉
@@ -44,7 +43,7 @@
     self.stickBorderColor = [UIColor yellowColor];
     self.stickFillColor = [UIColor yellowColor];
 
-    self.latitudeNum = 3;
+    self.latitudeNum = 2;
     self.longitudeNum = 3;
     self.maxSticksNum = 26;
     self.maxValue = 100;
@@ -54,14 +53,6 @@
     self.stickData = nil;
     self.coChart = nil;
     self.axisCalc = 1;
-    self.stickAlignType =CCSStickAlignTypeCenter;
-}
-
-- (void)dealloc {
-    [_stickData release];
-    [_stickBorderColor release];
-    [_stickFillColor release];
-    [super dealloc];
 }
 
 - (void)calcDataValueRange {
@@ -181,13 +172,8 @@
 }
 
 - (void)initAxisX {
-    if (self.stickData == nil) {
-        return;
-    }
-    if([self.stickData count] == 0){
-        return;
-    }
-    NSMutableArray *TitleX = [[[NSMutableArray alloc] init] autorelease];
+    NSMutableArray *TitleX = [[NSMutableArray alloc] init];
+    if (self.stickData != NULL && [self.stickData count] > 0) {
         CCFloat average = self.maxSticksNum / self.longitudeNum;
         CCSStickChartData *chartdata = nil;
         if (self.axisYPosition == CCSGridChartYAxisPositionLeft) {
@@ -220,160 +206,21 @@
             //追加标题
             [TitleX addObject:[NSString stringWithFormat:@"%@", chartdata.date]];
         }
+
+    }
     self.longitudeTitles = TitleX;
-}
-
-- (void)drawLongitudeLines:(CGRect)rect {
-    if (self.displayLongitude == NO) {
-        return;
-    }
-    
-    if ([self.longitudeTitles count] <= 0) {
-        return;
-    }
-    
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    CGContextSetLineWidth(context, 0.5f);
-    CGContextSetStrokeColorWithColor(context, self.longitudeColor.CGColor);
-    CGContextSetFillColorWithColor(context, self.longitudeFontColor.CGColor);
-    
-    //设置线条为点线
-    if (self.dashLongitude) {
-        CGFloat lengths[] = {3.0, 3.0};
-        CGContextSetLineDash(context, 0.0, lengths, 2);
-    }
-    
-    CCFloat postOffset,offset;
-    CCFloat stickWidth = ([self dataQuadrantPaddingWidth:rect] / self.maxSticksNum);
-    if (self.stickAlignType == CCSStickAlignTypeCenter) {
-        postOffset= ([self dataQuadrantPaddingWidth:rect] - stickWidth) / ([self.longitudeTitles count] - 1);
-        offset = [self dataQuadrantPaddingStartX:rect] + stickWidth/2;
-    }else{
-        postOffset= [self dataQuadrantPaddingWidth:rect] / ([self.longitudeTitles count] - 1);
-        offset = [self dataQuadrantPaddingStartX:rect];
-    }
-    
-    for (CCUInt i = 0; i < [self.longitudeTitles count]; i++) {
-        CGContextMoveToPoint(context, offset + i * postOffset, [self dataQuadrantStartY:rect]);
-        CGContextAddLineToPoint(context, offset + i * postOffset, [self dataQuadrantEndY:rect]);
-    }
-    
-    CGContextStrokePath(context);
-    CGContextSetLineDash(context, 0, nil, 0);
-}
-
-- (void)drawXAxisTitles:(CGRect)rect {
-    
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    CGContextSetLineWidth(context, 0.5f);
-    CGContextSetStrokeColorWithColor(context, self.longitudeColor.CGColor);
-    CGContextSetFillColorWithColor(context, self.longitudeFontColor.CGColor);
-    
-    if (self.displayLongitude == NO) {
-        return;
-    }
-    
-    if (self.displayLongitudeTitle == NO) {
-        return;
-    }
-    
-    if ([self.longitudeTitles count] <= 0) {
-        return;
-    }
-    
-    CCFloat postOffset,offset;
-    CCFloat stickWidth = ([self dataQuadrantPaddingWidth:rect] / self.maxSticksNum);
-    if (self.stickAlignType == CCSStickAlignTypeCenter) {
-        postOffset= ([self dataQuadrantPaddingWidth:rect] - stickWidth) / ([self.longitudeTitles count] - 1);
-        offset = [self dataQuadrantPaddingStartX:rect] + stickWidth/2;
-    }else{
-        postOffset= [self dataQuadrantPaddingWidth:rect] / ([self.longitudeTitles count] - 1);
-        offset = [self dataQuadrantPaddingStartX:rect];
-    }
-    
-    for (CCUInt i = 0; i < [self.longitudeTitles count]; i++) {
-        CCFloat startY;
-        if (self.axisXPosition == CCSGridChartXAxisPositionBottom) {
-            startY = [self dataQuadrantEndY:rect] + [self axisWidth];
-        }else{
-            startY = [self borderWidth];
-        }
-        
-        NSString *str = (NSString *) [self.longitudeTitles objectAtIndex:i];
-        
-        //调整X轴坐标位置
-        //调整X轴坐标位置
-        if (i == 0) {
-            //            [str drawInRect:CGRectMake([self dataQuadrantPaddingStartX:rect], startY, postOffset, self.longitudeFontSize)
-            //                   withFont:self.longitudeFont
-            //              lineBreakMode:NSLineBreakByWordWrapping
-            //                  alignment:NSTextAlignmentLeft];
-            
-            CGRect textRect= CGRectMake([self dataQuadrantPaddingStartX:rect], startY, postOffset, self.longitudeFontSize);
-            UIFont *textFont= self.longitudeFont; //设置字体
-            NSMutableParagraphStyle *textStyle=[[[NSMutableParagraphStyle alloc]init]autorelease];//段落样式
-            textStyle.alignment=NSTextAlignmentLeft;
-            textStyle.lineBreakMode = NSLineBreakByWordWrapping;
-            //绘制字体
-            [str drawInRect:textRect withAttributes:@{NSFontAttributeName:textFont,NSParagraphStyleAttributeName:textStyle}];
-            
-        } else if (i == [self.longitudeTitles count] - 1) {
-            if (self.axisYPosition == CCSGridChartYAxisPositionLeft) {
-                //                [str drawInRect:CGRectMake(rect.size.width - postOffset, startY, postOffset, self.longitudeFontSize)
-                //                       withFont:self.longitudeFont
-                //                  lineBreakMode:NSLineBreakByWordWrapping
-                //                      alignment:NSTextAlignmentRight];
-                
-                CGRect textRect= CGRectMake(rect.size.width - postOffset, startY, postOffset, self.longitudeFontSize);
-                UIFont *textFont= self.longitudeFont; //设置字体
-                NSMutableParagraphStyle *textStyle=[[[NSMutableParagraphStyle alloc]init]autorelease];//段落样式
-                textStyle.alignment=NSTextAlignmentRight;
-                textStyle.lineBreakMode = NSLineBreakByWordWrapping;
-                //绘制字体
-                [str drawInRect:textRect withAttributes:@{NSFontAttributeName:textFont,NSParagraphStyleAttributeName:textStyle}];
-                
-            } else {
-                //                [str drawInRect:CGRectMake(offset + (i - 0.5) * postOffset, startY, postOffset, self.longitudeFontSize)
-                //                       withFont:self.longitudeFont
-                //                  lineBreakMode:NSLineBreakByWordWrapping
-                //                      alignment:NSTextAlignmentCenter];
-                
-                CGRect textRect= CGRectMake(offset + (i - 0.5) * postOffset, startY, postOffset, self.longitudeFontSize);
-                UIFont *textFont= self.longitudeFont; //设置字体
-                NSMutableParagraphStyle *textStyle=[[[NSMutableParagraphStyle alloc]init]autorelease];//段落样式
-                textStyle.alignment=NSTextAlignmentCenter;
-                textStyle.lineBreakMode = NSLineBreakByWordWrapping;
-                //绘制字体
-                [str drawInRect:textRect withAttributes:@{NSFontAttributeName:textFont,NSParagraphStyleAttributeName:textStyle}];
-            }
-            
-        } else {
-            //            [str drawInRect:CGRectMake(offset + (i - 0.5) * postOffset, startY, postOffset, self.longitudeFontSize)
-            //                   withFont:self.longitudeFont
-            //              lineBreakMode:NSLineBreakByWordWrapping
-            //                  alignment:NSTextAlignmentCenter];
-            
-            CGRect textRect= CGRectMake(offset + (i - 0.5) * postOffset, startY, postOffset, self.longitudeFontSize);
-            UIFont *textFont= self.longitudeFont; //设置字体
-            NSMutableParagraphStyle *textStyle=[[[NSMutableParagraphStyle alloc]init]autorelease];//段落样式
-            textStyle.alignment=NSTextAlignmentCenter;
-            textStyle.lineBreakMode = NSLineBreakByWordWrapping;
-            //绘制字体
-            [str drawInRect:textRect withAttributes:@{NSFontAttributeName:textFont,NSParagraphStyleAttributeName:textStyle}];
-        }
-    }
 }
 
 - (void)initAxisY {
     //计算取值范围
     [self calcValueRange];
-    
+
     if (self.maxValue == 0. && self.minValue == 0.) {
         self.latitudeTitles = nil;
         return;
     }
-    
-    NSMutableArray *TitleY = [[[NSMutableArray alloc] init]autorelease];
+
+    NSMutableArray *TitleY = [[NSMutableArray alloc] init];
     CCFloat average = (CCUInt) ((self.maxValue - self.minValue) / self.latitudeNum);
     //处理刻度
     for (CCUInt i = 0; i < self.latitudeNum; i++) {
@@ -388,7 +235,7 @@
     }
     //处理最大值
     if (self.axisCalc == 1) {
-        CCUInt degree = (NSInteger) (self.maxValue) / self.axisCalc;
+        CCUInt degree = (CCInt) (self.maxValue) / self.axisCalc;
         NSString *value = [[NSNumber numberWithUnsignedInteger:degree]stringValue];
         [TitleY addObject:value];
     }
@@ -396,7 +243,7 @@
         NSString *value = [NSString stringWithFormat:@"%-.2f", (self.maxValue) / self.axisCalc];
         [TitleY addObject:value];
     }
-    
+
     self.latitudeTitles = TitleY;
 }
 
@@ -405,7 +252,6 @@
     [self initAxisY];
     [self initAxisX];
 
-
     [super drawRect:rect];
 
     //绘制数据
@@ -413,14 +259,8 @@
 }
 
 - (void)drawData:(CGRect)rect {
-    if (self.stickData == nil) {
-        return;
-    }
-    if([self.stickData count] == 0){
-        return;
-    }
     // 蜡烛棒宽度
-    CCFloat stickWidth = ([self dataQuadrantPaddingWidth:rect] / self.maxSticksNum) - 1;
+    CCFloat stickWidth = ((rect.size.width - self.axisMarginLeft - self.axisMarginRight) / self.maxSticksNum) - 1;
 
     CGContextRef context = UIGraphicsGetCurrentContext();
 
@@ -428,16 +268,17 @@
     CGContextSetStrokeColorWithColor(context, self.stickBorderColor.CGColor);
     CGContextSetFillColorWithColor(context, self.stickFillColor.CGColor);
 
+    if (self.stickData != NULL && [self.stickData count] > 0) {
 
         if (self.axisYPosition == CCSGridChartYAxisPositionLeft) {
             // 蜡烛棒起始绘制位置
-            CCFloat stickX = [self dataQuadrantPaddingStartX:rect] + 1;
+            CCFloat stickX = self.axisMarginLeft + 1;
             //判断显示为方柱或显示为线条
             for (CCUInt i = 0; i < [self.stickData count]; i++) {
                 CCSStickChartData *stick = [self.stickData objectAtIndex:i];
 
-                CCFloat highY = [self calcValueY:stick.high inRect:rect];
-                CCFloat lowY = [self calcValueY:stick.low inRect:rect];
+                CCFloat highY = ((1 - (stick.high - self.minValue) / (self.maxValue - self.minValue)) * (rect.size.height - self.axisMarginBottom) - super.axisMarginTop);
+                CCFloat lowY = ((1 - (stick.low - self.minValue) / (self.maxValue - self.minValue)) * (rect.size.height - self.axisMarginBottom) - self.axisMarginTop);
 
                 if (stick.high == 0) {
                     //没有值的情况下不绘制
@@ -460,13 +301,13 @@
             }
         } else {
             // 蜡烛棒起始绘制位置
-            CCFloat stickX = [self dataQuadrantPaddingEndX:rect] - 1 - stickWidth;
+            CCFloat stickX = rect.size.width - self.axisMarginRight - 1 - stickWidth;
             //判断显示为方柱或显示为线条
-            for (NSInteger i = [self.stickData count] - 1; i >= 0; i--) {
+            for (CCInt i = [self.stickData count] - 1; i >= 0; i--) {
                 CCSStickChartData *stick = [self.stickData objectAtIndex:i];
 
-                CCFloat highY = [self calcValueY:stick.high inRect:rect];
-                CCFloat lowY = [self calcValueY:stick.low inRect:rect];
+                CCFloat highY = ((1 - (stick.high - self.minValue) / (self.maxValue - self.minValue)) * (rect.size.height - self.axisMarginBottom) - super.axisMarginTop);
+                CCFloat lowY = ((1 - (stick.low - self.minValue) / (self.maxValue - self.minValue)) * (rect.size.height - self.axisMarginBottom) - self.axisMarginTop);
 
                 if (stick.high == 0) {
                     //没有值的情况下不绘制
@@ -488,17 +329,13 @@
             }
         }
 
+    }
 }
 
 - (NSString *)calcAxisXGraduate:(CGRect)rect {
-    if (self.stickData == nil) {
-        return @"";
-    }
-    if([self.stickData count] == 0){
-        return @"";
-    }
     CCFloat value = [self touchPointAxisXValue:rect];
     NSString *result = @"";
+    if (self.stickData != NULL && [self.stickData count] > 0) {
         if (self.axisYPosition == CCSGridChartYAxisPositionLeft) {
             if (value >= 1) {
                 result = ((CCSStickChartData *) [self.stickData objectAtIndex:self.maxSticksNum]).date;
@@ -521,6 +358,7 @@
                 result = ((CCSStickChartData *) [self.stickData objectAtIndex:index]).date;
             }
         }
+    }
     return result;
 }
 
@@ -555,10 +393,10 @@
     //处理点击事件
     if ([allTouches count] == 1) {
 
-        CGPoint pt = CGPointMake(self.singleTouchPoint.x, self.coChart.singleTouchPoint.y);
-        //获取选中点
-        self.coChart.singleTouchPoint = pt;
-        [self.coChart performSelector:@selector(setNeedsDisplay) withObject:nil afterDelay:0];
+//        CGPoint pt = CGPointMake(self.singleTouchPoint.x, self.coChart.singleTouchPoint.y);
+//        //获取选中点
+//        self.coChart.singleTouchPoint = pt;
+//        [self.coChart performSelector:@selector(setNeedsDisplay) withObject:nil afterDelay:0];
 
     } else if ([allTouches count] == 2) {
 
@@ -570,23 +408,35 @@
 
 - (void)calcSelectedIndex {
     //X在系统范围内、进行计算
-    if (self.singleTouchPoint.x >= [self dataQuadrantPaddingStartX:self.frame]
-        && self.singleTouchPoint.x < [self dataQuadrantPaddingEndX:self.frame]) {
-        CCFloat stickWidth = ([self dataQuadrantPaddingWidth:self.frame] / self.maxSticksNum);
-        CCFloat valueWidth = self.singleTouchPoint.x - [self dataQuadrantPaddingStartX:self.frame] ;
-        if (valueWidth > 0) {
-            CCUInt index;
-            if (self.axisYPosition == CCSGridChartYAxisPositionLeft) {
-                index = (CCUInt) (valueWidth / stickWidth);
-            }else{
-                index = (CCUInt) ([self.stickData count] - self.maxSticksNum + (valueWidth / stickWidth));
+    if (self.axisYPosition == CCSGridChartYAxisPositionLeft) {
+        if (self.singleTouchPoint.x > self.axisMarginLeft
+                && self.singleTouchPoint.x < self.frame.size.width) {
+            CCFloat stickWidth = ((self.frame.size.width - self.axisMarginLeft - self.axisMarginRight) / self.maxSticksNum);
+            CCFloat valueWidth = self.singleTouchPoint.x - self.axisMarginLeft;
+            if (valueWidth > 0) {
+                CCUInt index = (CCUInt) (valueWidth / stickWidth);
+                //如果超过则设置位最大
+                if (index >= self.maxSticksNum) {
+                    index = self.maxSticksNum - 1;
+                }
+                //设置选中的index
+                self.selectedStickIndex = index;
             }
-            //如果超过则设置位最大
-            if (index >= self.maxSticksNum) {
-                index = self.maxSticksNum - 1;
+        }
+    } else {
+        if (self.singleTouchPoint.x > self.axisMarginLeft
+                && self.singleTouchPoint.x < self.frame.size.width - self.axisMarginRight) {
+            CCFloat stickWidth = 1.0 * ((self.frame.size.width - self.axisMarginLeft - self.axisMarginRight) / self.maxSticksNum);
+            CCFloat valueWidth = self.singleTouchPoint.x - self.axisMarginLeft;
+            if (valueWidth > 0) {
+                CCUInt index = (CCUInt) ([self.stickData count] - self.maxSticksNum + (valueWidth / stickWidth));
+                //如果超过则设置位最大
+                if (index >= [self.stickData count]) {
+                    index = [self.stickData count] - 1;
+                }
+                //设置选中的index
+                self.selectedStickIndex = index;
             }
-            //设置选中的index
-            self.selectedStickIndex = index;
         }
     }
 }
@@ -638,10 +488,10 @@
             } else {
                 self.maxSticksNum = self.maxSticksNum + 2;
             }
-            if (self.coChart) {
-                self.coChart.maxSticksNum = self.maxSticksNum;
-                [self.coChart setNeedsDisplay];
-            }
+//            if (self.coChart) {
+//                self.coChart.maxSticksNum = self.maxSticksNum;
+//                [self.coChart setNeedsDisplay];
+//            }
         }
     }
     else {
@@ -652,12 +502,17 @@
             } else {
                 self.maxSticksNum = self.maxSticksNum + 4;
             }
-            if (self.coChart) {
-                self.coChart.maxSticksNum = self.maxSticksNum;
-                [self.coChart setNeedsDisplay];
-            }
+//            if (self.coChart) {
+//                self.coChart.maxSticksNum = self.maxSticksNum;
+//                [self.coChart setNeedsDisplay];
+//            }
         }
     }
+}
+
+-(void) bindSelectedIndex
+{
+    
 }
 
 - (void) setSingleTouchPoint:(CGPoint) point
@@ -666,12 +521,10 @@
     
     [self calcSelectedIndex];
     
-    if (self.chartDelegate && [self.chartDelegate respondsToSelector:@selector(CCSChartBeTouchedOn:indexAt:)]) {
-        [self.chartDelegate CCSChartBeTouchedOn:point indexAt:self.selectedStickIndex];
-    }
-}
-
-- (CCFloat) calcValueY:(CCFloat)value inRect:(CGRect) rect{
-    return (1 - (value - [self minValue]) / ([self maxValue] - [self minValue])) * [self dataQuadrantPaddingHeight:rect] + [self dataQuadrantPaddingStartY:rect];
+    [self bindSelectedIndex];
+//    
+//    if (self.chartDelegate && [self.chartDelegate respondsToSelector:@selector(CCSChartBeTouchedOn:point:indexAt:)]) {
+//        [self.chartDelegate CCSChartBeTouchedOn:self point:point indexAt:self.selectedStickIndex];
+//    }
 }
 @end

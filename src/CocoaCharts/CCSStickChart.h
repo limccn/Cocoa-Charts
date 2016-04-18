@@ -21,11 +21,6 @@
 #import <Foundation/Foundation.h>
 #import "CCSGridChart.h"
 
-typedef enum {
-    CCSStickAlignTypeCenter,
-    CCSStickAlignTypeJustify
-} CCSStickAlignType;
-
 /*!
  CCSStickChart
  
@@ -50,8 +45,7 @@ typedef enum {
     CCFloat _maxValue;
     CCFloat _minValue;
     CCUInt _axisCalc;
-    CCSStickChart *_coChart;
-    CCSStickAlignType _stickAlignType;
+    __unsafe_unretained CCSStickChart *_coChart;
 }
 
 /*!
@@ -59,21 +53,21 @@ typedef enum {
  スティックを表示用データ
  表示柱条用的数据
  */
-@property(retain, nonatomic) NSArray *stickData;
+@property(strong, nonatomic) NSArray *stickData;
 
 /*!
  Color for display stick boder
  表示スティックのボーダーの色
  表示柱条的边框颜色
  */
-@property(retain, nonatomic) UIColor *stickBorderColor;
+@property(strong, nonatomic) UIColor *stickBorderColor;
 
 /*!
  Color for display stick
  表示スティックの色
  表示柱条的填充颜色
  */
-@property(retain, nonatomic) UIColor *stickFillColor;
+@property(strong, nonatomic) UIColor *stickFillColor;
 
 /*!
  Numbers of grid‘s latitude line
@@ -131,7 +125,6 @@ typedef enum {
  两个相同类型图表之间传值用对象
  */
 @property(assign, nonatomic) CCSStickChart *coChart;
-@property(assign, nonatomic) CCSStickAlignType stickAlignType;
 
 
 /*!
@@ -150,14 +143,14 @@ typedef enum {
  初期化X軸の目盛
  初始化X轴的刻度
  */
-- (void)initAxisX;
+- (void)initAxisY;
 
 /*!
  @abstract Init Y axis degrees
  初期化Y軸の目盛
  初始化Y轴的刻度
  */
-- (void)initAxisY;
+- (void)initAxisX;
 
 /*!
  calculate the selected index from selected point 
@@ -184,7 +177,5 @@ typedef enum {
 - (void)calcValueRangeFormatForAxis;
 
 - (void)calcValueRange;
-
-- (CCFloat) calcValueY:(CCFloat)value inRect:(CGRect) rect;
 
 @end

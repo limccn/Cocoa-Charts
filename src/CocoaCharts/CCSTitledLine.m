@@ -46,11 +46,5 @@
     return self;
 }
 
-- (void)dealloc {
-    [_data release];
-    [_color release];
-    [_title release];
-    [super dealloc];
-}
 
 @end

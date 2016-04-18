@@ -36,6 +36,8 @@
     NSArray *_data;
     UIColor *_radiusColor;
     UIColor *_circleBorderColor;
+    UIFont *_titleFont;
+    UIColor *_titleTextColor;
     CCUInt _radius;
     BOOL _displayRadius;
     BOOL _displayValueTitle;
@@ -47,21 +49,35 @@
  表示用データ
  表示用的数据
  */
-@property(retain, nonatomic) NSArray *data;
+@property(strong, nonatomic) NSArray *data;
 
 /*!
  Color for the division lines inside the chart
  丸の分割線の色
  饼图的分割线的颜色
  */
-@property(retain, nonatomic) UIColor *radiusColor;
+@property(strong, nonatomic) UIColor *radiusColor;
 
 /*!
  Color for the border of the pie circle
  丸のボーダーの色
  饼图的弧线颜色
  */
-@property(retain, nonatomic) UIColor *circleBorderColor;
+@property(strong, nonatomic) UIColor *circleBorderColor;
+
+/*!
+ Title Font
+ タイトルのフォント
+ 标签的字体
+ */
+@property(strong, nonatomic) UIFont *titleFont;
+
+/*!
+ Title text color
+ タイトルの色
+ 标签的字体的颜色
+ */
+@property(strong, nonatomic) UIColor *titleTextColor;
 
 /*!
  Radius of the pie circle

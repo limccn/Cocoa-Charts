@@ -27,7 +27,6 @@ typedef enum {
     CCSLineAlignTypeJustify
 } CCSLineAlignType;
 
-
 /*!
  CCSLineChart
  
@@ -54,7 +53,7 @@ typedef enum {
  ラインを表示用データ
  表示线条用的数据
  */
-@property(retain, nonatomic, setter = setLinesData:) NSArray *linesData;
+@property(strong, nonatomic, setter = setLinesData:) NSArray *linesData;
 
 /*!
  Number of latitude lines
@@ -121,14 +120,14 @@ typedef enum {
  初期化X軸の目盛
  初始化X轴的刻度
  */
-- (void)initAxisX;
+- (void)initAxisY;
 
 /*!
  @abstract Init Y axis degrees
  初期化Y軸の目盛
  初始化Y轴的刻度
  */
-- (void)initAxisY;
+- (void)initAxisX;
 
 - (void)calcDataValueRange;
 
@@ -138,6 +137,6 @@ typedef enum {
 
 - (void)calcValueRange;
 
-- (CCFloat) calcValueY:(CCFloat)value inRect:(CGRect) rect;
+- (void)setSelectedPointAddReDraw:(CGPoint)point;
 
 @end

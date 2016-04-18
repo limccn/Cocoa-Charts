@@ -1,51 +1,31 @@
 //
 //  CCSAppDelegate.m
-//  Cocoa-Charts
+//  CocoaChartsSample
 //
-//  Created by limc on 13-05-22.
-//  Copyright (c) 2012 limc. All rights reserved.
-//
-//  Licensed under the Apache License, Version 2.0 (the "License");
-//  you may not use this file except in compliance with the License.
-//  You may obtain a copy of the License at
-//
-//  http://www.apache.org/licenses/LICENSE-2.0
-//
-//  Unless required by applicable law or agreed to in writing, software
-//  distributed under the License is distributed on an "AS IS" BASIS,
-//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-//  See the License for the specific language governing permissions and
-//  limitations under the License.
+//  Created by limc on 2014/03/07.
+//  Copyright (c) 2014年 limc. All rights reserved.
 //
 
 #import "CCSAppDelegate.h"
-
 #import "CCSViewController.h"
 #import "CCSDetailViewController.h"
 
 @implementation CCSAppDelegate
 
-- (void)dealloc {
-    [_window release];
-    [_viewController release];
-    [super dealloc];
-}
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
-
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-        self.viewController = [[[UINavigationController alloc] initWithRootViewController:[[[CCSViewController alloc] init] autorelease]] autorelease];
+        self.viewController = [[UINavigationController alloc] initWithRootViewController:[[CCSViewController alloc] init]];
     } else if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-        UISplitViewController *splitViewController = [[[UISplitViewController alloc] init] autorelease];
-        UINavigationController *leftNavigationController = [[[UINavigationController alloc] initWithRootViewController:[[[CCSViewController alloc] init] autorelease]] autorelease];
-        UINavigationController *rightNavigationController = [[[UINavigationController alloc] initWithRootViewController:[[[CCSDetailViewController alloc] init] autorelease]] autorelease];
+        UISplitViewController *splitViewController = [[UISplitViewController alloc] init];
+        UINavigationController *leftNavigationController = [[UINavigationController alloc] initWithRootViewController:[[CCSViewController alloc] init]];
+        UINavigationController *rightNavigationController = [[UINavigationController alloc] initWithRootViewController:[[CCSDetailViewController alloc] init]];
         splitViewController.viewControllers = [NSArray arrayWithObjects:leftNavigationController, rightNavigationController, nil];
         self.viewController = splitViewController;
     }
-
     self.window.rootViewController = self.viewController;
+    self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     return YES;
 }

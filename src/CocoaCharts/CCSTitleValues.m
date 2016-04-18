@@ -44,9 +44,4 @@
     return self;
 }
 
-- (void)dealloc {
-    [_title release];
-    [_values release];
-    [super dealloc];
-}
 @end

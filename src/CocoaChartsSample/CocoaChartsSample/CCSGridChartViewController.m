@@ -5,18 +5,6 @@
 //  Created by limc on 13-05-22.
 //  Copyright (c) 2012 limc.cn All rights reserved.
 //
-//  Licensed under the Apache License, Version 2.0 (the "License");
-//  you may not use this file except in compliance with the License.
-//  You may obtain a copy of the License at
-//
-//  http://www.apache.org/licenses/LICENSE-2.0
-//
-//  Unless required by applicable law or agreed to in writing, software
-//  distributed under the License is distributed on an "AS IS" BASIS,
-//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-//  See the License for the specific language governing permissions and
-//  limitations under the License.
-//
 
 #import "CCSGridChartViewController.h"
 #import "CCSGridChart.h"
@@ -45,13 +33,13 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
 
-    CCSGridChart *gridchart = [[[CCSGridChart alloc] initWithFrame:CGRectMake(0, MARGIN_TOP, 320, 320)] autorelease];
+    CCSGridChart *gridchart = [[CCSGridChart alloc] initWithFrame:CGRectMake(0, MARGIN_TOP, 320, 320)];
 
     gridchart.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
 
     gridchart.backgroundColor = [UIColor clearColor];
 
-    NSMutableArray *TitleX = [[[NSMutableArray alloc] init] autorelease];
+    NSMutableArray *TitleX = [[NSMutableArray alloc] init];
 
     [TitleX addObject:@"11/26"];
     [TitleX addObject:@"12/3"];
@@ -64,7 +52,7 @@
 
     gridchart.longitudeTitles = TitleX;
 
-    NSMutableArray *TitleY = [[[NSMutableArray alloc] init] autorelease];
+    NSMutableArray *TitleY = [[NSMutableArray alloc] init];
 
     [TitleY addObject:@"0"];
     [TitleY addObject:@"1000"];
