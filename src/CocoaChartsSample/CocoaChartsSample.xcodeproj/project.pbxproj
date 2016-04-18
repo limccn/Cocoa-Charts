@@ -1,0 +1,1634 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		3B697CD21CC4CCBB0098C1A8 /* CCSJSONData.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B697CCF1CC4CCBA0098C1A8 /* CCSJSONData.m */; };
+		3B697CD31CC4CCBB0098C1A8 /* CCSSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B697CD11CC4CCBA0098C1A8 /* CCSSegmentedControl.m */; };
+		3B8C01B81CC4CA84007914C4 /* CCSAreaChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B8C01691CC4CA84007914C4 /* CCSAreaChart.m */; };
+		3B8C01B91CC4CA84007914C4 /* CCSBandAreaChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B8C016B1CC4CA84007914C4 /* CCSBandAreaChart.m */; };
+		3B8C01BA1CC4CA84007914C4 /* CCSBaseChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B8C016D1CC4CA84007914C4 /* CCSBaseChartView.m */; };
+		3B8C01BB1CC4CA84007914C4 /* CCSBaseData.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B8C016F1CC4CA84007914C4 /* CCSBaseData.m */; };
+		3B8C01BC1CC4CA84007914C4 /* CCSBOLLMASlipCandleStickChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B8C01711CC4CA84007914C4 /* CCSBOLLMASlipCandleStickChart.m */; };
+		3B8C01BD1CC4CA84007914C4 /* CCSCandleStickChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B8C01731CC4CA84007914C4 /* CCSCandleStickChart.m */; };
+		3B8C01BE1CC4CA84007914C4 /* CCSCandleStickChartData.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B8C01751CC4CA84007914C4 /* CCSCandleStickChartData.m */; };
+		3B8C01BF1CC4CA84007914C4 /* CCSColoredStickChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B8C01781CC4CA84007914C4 /* CCSColoredStickChart.m */; };
+		3B8C01C01CC4CA84007914C4 /* CCSColoredStickChartData.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B8C017A1CC4CA84007914C4 /* CCSColoredStickChartData.m */; };
+		3B8C01C11CC4CA84007914C4 /* CCSDonutChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B8C017C1CC4CA84007914C4 /* CCSDonutChart.m */; };
+		3B8C01C21CC4CA84007914C4 /* CCSGridChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B8C017E1CC4CA84007914C4 /* CCSGridChart.m */; };
+		3B8C01C31CC4CA84007914C4 /* CCSGroupChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B8C01801CC4CA84007914C4 /* CCSGroupChart.m */; };
+		3B8C01C41CC4CA84007914C4 /* CCSLineChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B8C01831CC4CA84007914C4 /* CCSLineChart.m */; };
+		3B8C01C51CC4CA84007914C4 /* CCSLineData.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B8C01851CC4CA84007914C4 /* CCSLineData.m */; };
+		3B8C01C61CC4CA84007914C4 /* CCSMACandleStickChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B8C01871CC4CA84007914C4 /* CCSMACandleStickChart.m */; };
+		3B8C01C71CC4CA84007914C4 /* CCSMACDChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B8C01891CC4CA84007914C4 /* CCSMACDChart.m */; };
+		3B8C01C81CC4CA84007914C4 /* CCSMACDData.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B8C018B1CC4CA84007914C4 /* CCSMACDData.m */; };
+		3B8C01C91CC4CA84007914C4 /* CCSMAColoredStickChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B8C018D1CC4CA84007914C4 /* CCSMAColoredStickChart.m */; };
+		3B8C01CA1CC4CA84007914C4 /* CCSMASlipCandleStickChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B8C018F1CC4CA84007914C4 /* CCSMASlipCandleStickChart.m */; };
+		3B8C01CB1CC4CA84007914C4 /* CCSMAStickChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B8C01911CC4CA84007914C4 /* CCSMAStickChart.m */; };
+		3B8C01CC1CC4CA84007914C4 /* CCSMinusStickChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B8C01931CC4CA84007914C4 /* CCSMinusStickChart.m */; };
+		3B8C01CD1CC4CA84007914C4 /* CCSOHLCVDData.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B8C01951CC4CA84007914C4 /* CCSOHLCVDData.m */; };
+		3B8C01CE1CC4CA84007914C4 /* CCSPieChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B8C01971CC4CA84007914C4 /* CCSPieChart.m */; };
+		3B8C01CF1CC4CA84007914C4 /* CCSPizzaChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B8C01991CC4CA84007914C4 /* CCSPizzaChart.m */; };
+		3B8C01D01CC4CA84007914C4 /* CCSRadarChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B8C019B1CC4CA84007914C4 /* CCSRadarChart.m */; };
+		3B8C01D31CC4CA84007914C4 /* CCSSlipCandleStickChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B8C01A11CC4CA84007914C4 /* CCSSlipCandleStickChart.m */; };
+		3B8C01D41CC4CA84007914C4 /* CCSSlipLineChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B8C01A31CC4CA84007914C4 /* CCSSlipLineChart.m */; };
+		3B8C01D51CC4CA84007914C4 /* CCSSlipStickChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B8C01A51CC4CA84007914C4 /* CCSSlipStickChart.m */; };
+		3B8C01D61CC4CA84007914C4 /* CCSSpiderWebChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B8C01A71CC4CA84007914C4 /* CCSSpiderWebChart.m */; };
+		3B8C01D71CC4CA84007914C4 /* CCSStackedAreaChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B8C01A91CC4CA84007914C4 /* CCSStackedAreaChart.m */; };
+		3B8C01D81CC4CA84007914C4 /* CCSStickChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B8C01AB1CC4CA84007914C4 /* CCSStickChart.m */; };
+		3B8C01D91CC4CA84007914C4 /* CCSStickChartData.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B8C01AD1CC4CA84007914C4 /* CCSStickChartData.m */; };
+		3B8C01DA1CC4CA84007914C4 /* CCSTitledLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B8C01AF1CC4CA84007914C4 /* CCSTitledLine.m */; };
+		3B8C01DB1CC4CA84007914C4 /* CCSTitleValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B8C01B11CC4CA84007914C4 /* CCSTitleValue.m */; };
+		3B8C01DC1CC4CA84007914C4 /* CCSTitleValueColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B8C01B31CC4CA84007914C4 /* CCSTitleValueColor.m */; };
+		3B8C01DD1CC4CA84007914C4 /* CCSTitleValues.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B8C01B51CC4CA84007914C4 /* CCSTitleValues.m */; };
+		3B8C01DE1CC4CA84007914C4 /* CCSTitleValuesColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B8C01B71CC4CA84007914C4 /* CCSTitleValuesColor.m */; };
+		3B8C02331CC4CAB8007914C4 /* CCSAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B8C01E11CC4CAB8007914C4 /* CCSAppDelegate.m */; };
+		3B8C02341CC4CAB8007914C4 /* CCSAreaChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B8C01E31CC4CAB8007914C4 /* CCSAreaChartViewController.m */; };
+		3B8C02351CC4CAB8007914C4 /* CCSBandAreaChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B8C01E51CC4CAB8007914C4 /* CCSBandAreaChartViewController.m */; };
+		3B8C02361CC4CAB8007914C4 /* CCSBOLLMASlipCandleStickChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B8C01E71CC4CAB8007914C4 /* CCSBOLLMASlipCandleStickChartViewController.m */; };
+		3B8C02371CC4CAB8007914C4 /* CCSCandleStickChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B8C01E91CC4CAB8007914C4 /* CCSCandleStickChartViewController.m */; };
+		3B8C02381CC4CAB8007914C4 /* CCSChartsSettingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B8C01EB1CC4CAB8007914C4 /* CCSChartsSettingTableViewCell.m */; };
+		3B8C02391CC4CAB8007914C4 /* CCSChartsSettingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B8C01EC1CC4CAB8007914C4 /* CCSChartsSettingTableViewCell.xib */; };
+		3B8C023A1CC4CAB8007914C4 /* CCSChartsSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B8C01EE1CC4CAB8007914C4 /* CCSChartsSettingViewController.m */; };
+		3B8C023B1CC4CAB8007914C4 /* CCSChartsSettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B8C01EF1CC4CAB8007914C4 /* CCSChartsSettingViewController.xib */; };
+		3B8C023C1CC4CAB8007914C4 /* CCSColoredStickChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B8C01F11CC4CAB8007914C4 /* CCSColoredStickChartViewController.m */; };
+		3B8C023D1CC4CAB8007914C4 /* CCSDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B8C01F31CC4CAB8007914C4 /* CCSDetailViewController.m */; };
+		3B8C023E1CC4CAB8007914C4 /* CCSDonutChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B8C01F51CC4CAB8007914C4 /* CCSDonutChartViewController.m */; };
+		3B8C023F1CC4CAB8007914C4 /* CCSGridChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B8C01F71CC4CAB8007914C4 /* CCSGridChartViewController.m */; };
+		3B8C02401CC4CAB8007914C4 /* CCSLineChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B8C01F91CC4CAB8007914C4 /* CCSLineChartViewController.m */; };
+		3B8C02411CC4CAB8007914C4 /* CCSMACandleStickChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B8C01FB1CC4CAB8007914C4 /* CCSMACandleStickChartViewController.m */; };
+		3B8C02421CC4CAB8007914C4 /* CCSMACDChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B8C01FD1CC4CAB8007914C4 /* CCSMACDChartViewController.m */; };
+		3B8C02431CC4CAB8007914C4 /* CCSMASlipCandleStickChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B8C01FF1CC4CAB8007914C4 /* CCSMASlipCandleStickChartViewController.m */; };
+		3B8C02441CC4CAB8007914C4 /* CCSMAStickChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B8C02011CC4CAB8007914C4 /* CCSMAStickChartViewController.m */; };
+		3B8C02451CC4CAB8007914C4 /* CCSMinusStickChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B8C02031CC4CAB8007914C4 /* CCSMinusStickChartViewController.m */; };
+		3B8C02461CC4CAB8007914C4 /* CCSPieChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B8C02051CC4CAB8007914C4 /* CCSPieChartViewController.m */; };
+		3B8C02471CC4CAB8007914C4 /* CCSPizzaChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B8C02071CC4CAB8007914C4 /* CCSPizzaChartViewController.m */; };
+		3B8C02481CC4CAB8007914C4 /* CCSRadarChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B8C02091CC4CAB8007914C4 /* CCSRadarChartViewController.m */; };
+		3B8C02491CC4CAB8007914C4 /* CCSSampleGroupChartDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B8C020B1CC4CAB8007914C4 /* CCSSampleGroupChartDemoViewController.m */; };
+		3B8C024A1CC4CAB8007914C4 /* CCSSampleGroupChartDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B8C020C1CC4CAB8007914C4 /* CCSSampleGroupChartDemoViewController.xib */; };
+		3B8C024B1CC4CAB8007914C4 /* CCSSampleHorizontalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B8C020E1CC4CAB8007914C4 /* CCSSampleHorizontalViewController.m */; };
+		3B8C024C1CC4CAB8007914C4 /* CCSSamplGroupChartDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B8C02101CC4CAB8007914C4 /* CCSSamplGroupChartDetailTableViewCell.m */; };
+		3B8C024D1CC4CAB8007914C4 /* CCSSamplGroupChartDetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B8C02111CC4CAB8007914C4 /* CCSSamplGroupChartDetailTableViewCell.xib */; };
+		3B8C024E1CC4CAB8007914C4 /* CCSSettingDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B8C02131CC4CAB8007914C4 /* CCSSettingDetailViewController.m */; };
+		3B8C024F1CC4CAB8007914C4 /* CCSSettingDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B8C02141CC4CAB8007914C4 /* CCSSettingDetailViewController.xib */; };
+		3B8C02501CC4CAB8007914C4 /* CCSSettingResetTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B8C02161CC4CAB8007914C4 /* CCSSettingResetTableViewCell.m */; };
+		3B8C02511CC4CAB8007914C4 /* CCSSettingResetTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B8C02171CC4CAB8007914C4 /* CCSSettingResetTableViewCell.xib */; };
+		3B8C02521CC4CAB8007914C4 /* CCSSimpleDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B8C02191CC4CAB8007914C4 /* CCSSimpleDemoViewController.m */; };
+		3B8C02531CC4CAB8007914C4 /* CCSSlipCandleStickChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B8C021B1CC4CAB8007914C4 /* CCSSlipCandleStickChartViewController.m */; };
+		3B8C02541CC4CAB8007914C4 /* CCSSlipLineChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B8C021D1CC4CAB8007914C4 /* CCSSlipLineChartViewController.m */; };
+		3B8C02551CC4CAB8007914C4 /* CCSSlipStickChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B8C021F1CC4CAB8007914C4 /* CCSSlipStickChartViewController.m */; };
+		3B8C02561CC4CAB8007914C4 /* CCSSpiderWebChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B8C02211CC4CAB8007914C4 /* CCSSpiderWebChartViewController.m */; };
+		3B8C02571CC4CAB8007914C4 /* CCSStackedAreaChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B8C02231CC4CAB8007914C4 /* CCSStackedAreaChartViewController.m */; };
+		3B8C02581CC4CAB8007914C4 /* CCSStickChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B8C02251CC4CAB8007914C4 /* CCSStickChartViewController.m */; };
+		3B8C02591CC4CAB8007914C4 /* CCSViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B8C02271CC4CAB8007914C4 /* CCSViewController.m */; };
+		3B8C025B1CC4CAB8007914C4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3B8C022A1CC4CAB8007914C4 /* InfoPlist.strings */; };
+		3B8C025C1CC4CAB8007914C4 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3B8C022C1CC4CAB8007914C4 /* Images.xcassets */; };
+		3B8C025D1CC4CAB8007914C4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B8C022D1CC4CAB8007914C4 /* main.m */; };
+		3BB5DF0018C9624800288894 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BB5DEFF18C9624800288894 /* Foundation.framework */; };
+		3BB5DF0218C9624800288894 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BB5DF0118C9624800288894 /* CoreGraphics.framework */; };
+		3BB5DF0418C9624800288894 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BB5DF0318C9624800288894 /* UIKit.framework */; };
+		3BB5E09618C984F600288894 /* N225.xml in Resources */ = {isa = PBXBuildFile; fileRef = 3BB5DFE118C984F600288894 /* N225.xml */; };
+		3BB5E09718C984F600288894 /* ta_global.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5DFEB18C984F600288894 /* ta_global.c */; };
+		3BB5E09818C984F600288894 /* ta_retcode.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5DFF018C984F600288894 /* ta_retcode.c */; };
+		3BB5E09918C984F600288894 /* ta_retcode.csv in Resources */ = {isa = PBXBuildFile; fileRef = 3BB5DFF118C984F600288894 /* ta_retcode.csv */; };
+		3BB5E09A18C984F600288894 /* ta_version.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5DFF218C984F600288894 /* ta_version.c */; };
+		3BB5E09B18C984F600288894 /* ta_ACOS.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5DFF418C984F600288894 /* ta_ACOS.c */; };
+		3BB5E09C18C984F600288894 /* ta_AD.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5DFF518C984F600288894 /* ta_AD.c */; };
+		3BB5E09D18C984F600288894 /* ta_ADD.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5DFF618C984F600288894 /* ta_ADD.c */; };
+		3BB5E09E18C984F600288894 /* ta_ADOSC.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5DFF718C984F600288894 /* ta_ADOSC.c */; };
+		3BB5E09F18C984F600288894 /* ta_ADX.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5DFF818C984F600288894 /* ta_ADX.c */; };
+		3BB5E0A018C984F600288894 /* ta_ADXR.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5DFF918C984F600288894 /* ta_ADXR.c */; };
+		3BB5E0A118C984F600288894 /* ta_APO.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5DFFA18C984F600288894 /* ta_APO.c */; };
+		3BB5E0A218C984F600288894 /* ta_AROON.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5DFFB18C984F600288894 /* ta_AROON.c */; };
+		3BB5E0A318C984F600288894 /* ta_AROONOSC.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5DFFC18C984F600288894 /* ta_AROONOSC.c */; };
+		3BB5E0A418C984F600288894 /* ta_ASIN.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5DFFD18C984F600288894 /* ta_ASIN.c */; };
+		3BB5E0A518C984F600288894 /* ta_ATAN.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5DFFE18C984F600288894 /* ta_ATAN.c */; };
+		3BB5E0A618C984F600288894 /* ta_ATR.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5DFFF18C984F600288894 /* ta_ATR.c */; };
+		3BB5E0A718C984F600288894 /* ta_AVGPRICE.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E00018C984F600288894 /* ta_AVGPRICE.c */; };
+		3BB5E0A818C984F600288894 /* ta_BBANDS.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E00118C984F600288894 /* ta_BBANDS.c */; };
+		3BB5E0A918C984F600288894 /* ta_BETA.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E00218C984F600288894 /* ta_BETA.c */; };
+		3BB5E0AA18C984F600288894 /* ta_BOP.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E00318C984F600288894 /* ta_BOP.c */; };
+		3BB5E0AB18C984F600288894 /* ta_CCI.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E00418C984F600288894 /* ta_CCI.c */; };
+		3BB5E0AC18C984F600288894 /* ta_CDL2CROWS.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E00518C984F600288894 /* ta_CDL2CROWS.c */; };
+		3BB5E0AD18C984F600288894 /* ta_CDL3BLACKCROWS.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E00618C984F600288894 /* ta_CDL3BLACKCROWS.c */; };
+		3BB5E0AE18C984F600288894 /* ta_CDL3INSIDE.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E00718C984F600288894 /* ta_CDL3INSIDE.c */; };
+		3BB5E0AF18C984F600288894 /* ta_CDL3LINESTRIKE.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E00818C984F600288894 /* ta_CDL3LINESTRIKE.c */; };
+		3BB5E0B018C984F600288894 /* ta_CDL3OUTSIDE.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E00918C984F600288894 /* ta_CDL3OUTSIDE.c */; };
+		3BB5E0B118C984F600288894 /* ta_CDL3STARSINSOUTH.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E00A18C984F600288894 /* ta_CDL3STARSINSOUTH.c */; };
+		3BB5E0B218C984F600288894 /* ta_CDL3WHITESOLDIERS.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E00B18C984F600288894 /* ta_CDL3WHITESOLDIERS.c */; };
+		3BB5E0B318C984F600288894 /* ta_CDLABANDONEDBABY.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E00C18C984F600288894 /* ta_CDLABANDONEDBABY.c */; };
+		3BB5E0B418C984F600288894 /* ta_CDLADVANCEBLOCK.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E00D18C984F600288894 /* ta_CDLADVANCEBLOCK.c */; };
+		3BB5E0B518C984F600288894 /* ta_CDLBELTHOLD.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E00E18C984F600288894 /* ta_CDLBELTHOLD.c */; };
+		3BB5E0B618C984F600288894 /* ta_CDLBREAKAWAY.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E00F18C984F600288894 /* ta_CDLBREAKAWAY.c */; };
+		3BB5E0B718C984F600288894 /* ta_CDLCLOSINGMARUBOZU.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E01018C984F600288894 /* ta_CDLCLOSINGMARUBOZU.c */; };
+		3BB5E0B818C984F600288894 /* ta_CDLCONCEALBABYSWALL.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E01118C984F600288894 /* ta_CDLCONCEALBABYSWALL.c */; };
+		3BB5E0B918C984F600288894 /* ta_CDLCOUNTERATTACK.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E01218C984F600288894 /* ta_CDLCOUNTERATTACK.c */; };
+		3BB5E0BA18C984F600288894 /* ta_CDLDARKCLOUDCOVER.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E01318C984F600288894 /* ta_CDLDARKCLOUDCOVER.c */; };
+		3BB5E0BB18C984F600288894 /* ta_CDLDOJI.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E01418C984F600288894 /* ta_CDLDOJI.c */; };
+		3BB5E0BC18C984F600288894 /* ta_CDLDOJISTAR.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E01518C984F600288894 /* ta_CDLDOJISTAR.c */; };
+		3BB5E0BD18C984F600288894 /* ta_CDLDRAGONFLYDOJI.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E01618C984F600288894 /* ta_CDLDRAGONFLYDOJI.c */; };
+		3BB5E0BE18C984F600288894 /* ta_CDLENGULFING.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E01718C984F600288894 /* ta_CDLENGULFING.c */; };
+		3BB5E0BF18C984F600288894 /* ta_CDLEVENINGDOJISTAR.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E01818C984F600288894 /* ta_CDLEVENINGDOJISTAR.c */; };
+		3BB5E0C018C984F600288894 /* ta_CDLEVENINGSTAR.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E01918C984F600288894 /* ta_CDLEVENINGSTAR.c */; };
+		3BB5E0C118C984F600288894 /* ta_CDLGAPSIDESIDEWHITE.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E01A18C984F600288894 /* ta_CDLGAPSIDESIDEWHITE.c */; };
+		3BB5E0C218C984F600288894 /* ta_CDLGRAVESTONEDOJI.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E01B18C984F600288894 /* ta_CDLGRAVESTONEDOJI.c */; };
+		3BB5E0C318C984F600288894 /* ta_CDLHAMMER.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E01C18C984F600288894 /* ta_CDLHAMMER.c */; };
+		3BB5E0C418C984F600288894 /* ta_CDLHANGINGMAN.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E01D18C984F600288894 /* ta_CDLHANGINGMAN.c */; };
+		3BB5E0C518C984F600288894 /* ta_CDLHARAMI.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E01E18C984F600288894 /* ta_CDLHARAMI.c */; };
+		3BB5E0C618C984F600288894 /* ta_CDLHARAMICROSS.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E01F18C984F600288894 /* ta_CDLHARAMICROSS.c */; };
+		3BB5E0C718C984F600288894 /* ta_CDLHIGHWAVE.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E02018C984F600288894 /* ta_CDLHIGHWAVE.c */; };
+		3BB5E0C818C984F600288894 /* ta_CDLHIKKAKE.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E02118C984F600288894 /* ta_CDLHIKKAKE.c */; };
+		3BB5E0C918C984F600288894 /* ta_CDLHIKKAKEMOD.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E02218C984F600288894 /* ta_CDLHIKKAKEMOD.c */; };
+		3BB5E0CA18C984F600288894 /* ta_CDLHOMINGPIGEON.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E02318C984F600288894 /* ta_CDLHOMINGPIGEON.c */; };
+		3BB5E0CB18C984F600288894 /* ta_CDLIDENTICAL3CROWS.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E02418C984F600288894 /* ta_CDLIDENTICAL3CROWS.c */; };
+		3BB5E0CC18C984F600288894 /* ta_CDLINNECK.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E02518C984F600288894 /* ta_CDLINNECK.c */; };
+		3BB5E0CD18C984F600288894 /* ta_CDLINVERTEDHAMMER.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E02618C984F600288894 /* ta_CDLINVERTEDHAMMER.c */; };
+		3BB5E0CE18C984F600288894 /* ta_CDLKICKING.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E02718C984F600288894 /* ta_CDLKICKING.c */; };
+		3BB5E0CF18C984F600288894 /* ta_CDLKICKINGBYLENGTH.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E02818C984F600288894 /* ta_CDLKICKINGBYLENGTH.c */; };
+		3BB5E0D018C984F600288894 /* ta_CDLLADDERBOTTOM.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E02918C984F600288894 /* ta_CDLLADDERBOTTOM.c */; };
+		3BB5E0D118C984F600288894 /* ta_CDLLONGLEGGEDDOJI.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E02A18C984F600288894 /* ta_CDLLONGLEGGEDDOJI.c */; };
+		3BB5E0D218C984F600288894 /* ta_CDLLONGLINE.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E02B18C984F600288894 /* ta_CDLLONGLINE.c */; };
+		3BB5E0D318C984F600288894 /* ta_CDLMARUBOZU.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E02C18C984F600288894 /* ta_CDLMARUBOZU.c */; };
+		3BB5E0D418C984F600288894 /* ta_CDLMATCHINGLOW.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E02D18C984F600288894 /* ta_CDLMATCHINGLOW.c */; };
+		3BB5E0D518C984F600288894 /* ta_CDLMATHOLD.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E02E18C984F600288894 /* ta_CDLMATHOLD.c */; };
+		3BB5E0D618C984F600288894 /* ta_CDLMORNINGDOJISTAR.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E02F18C984F600288894 /* ta_CDLMORNINGDOJISTAR.c */; };
+		3BB5E0D718C984F600288894 /* ta_CDLMORNINGSTAR.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E03018C984F600288894 /* ta_CDLMORNINGSTAR.c */; };
+		3BB5E0D818C984F600288894 /* ta_CDLONNECK.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E03118C984F600288894 /* ta_CDLONNECK.c */; };
+		3BB5E0D918C984F600288894 /* ta_CDLPIERCING.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E03218C984F600288894 /* ta_CDLPIERCING.c */; };
+		3BB5E0DA18C984F600288894 /* ta_CDLRICKSHAWMAN.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E03318C984F600288894 /* ta_CDLRICKSHAWMAN.c */; };
+		3BB5E0DB18C984F600288894 /* ta_CDLRISEFALL3METHODS.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E03418C984F600288894 /* ta_CDLRISEFALL3METHODS.c */; };
+		3BB5E0DC18C984F600288894 /* ta_CDLSEPARATINGLINES.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E03518C984F600288894 /* ta_CDLSEPARATINGLINES.c */; };
+		3BB5E0DD18C984F600288894 /* ta_CDLSHOOTINGSTAR.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E03618C984F600288894 /* ta_CDLSHOOTINGSTAR.c */; };
+		3BB5E0DE18C984F600288894 /* ta_CDLSHORTLINE.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E03718C984F600288894 /* ta_CDLSHORTLINE.c */; };
+		3BB5E0DF18C984F600288894 /* ta_CDLSPINNINGTOP.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E03818C984F600288894 /* ta_CDLSPINNINGTOP.c */; };
+		3BB5E0E018C984F600288894 /* ta_CDLSTALLEDPATTERN.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E03918C984F600288894 /* ta_CDLSTALLEDPATTERN.c */; };
+		3BB5E0E118C984F600288894 /* ta_CDLSTICKSANDWICH.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E03A18C984F600288894 /* ta_CDLSTICKSANDWICH.c */; };
+		3BB5E0E218C984F600288894 /* ta_CDLTAKURI.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E03B18C984F600288894 /* ta_CDLTAKURI.c */; };
+		3BB5E0E318C984F600288894 /* ta_CDLTASUKIGAP.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E03C18C984F600288894 /* ta_CDLTASUKIGAP.c */; };
+		3BB5E0E418C984F600288894 /* ta_CDLTHRUSTING.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E03D18C984F600288894 /* ta_CDLTHRUSTING.c */; };
+		3BB5E0E518C984F600288894 /* ta_CDLTRISTAR.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E03E18C984F600288894 /* ta_CDLTRISTAR.c */; };
+		3BB5E0E618C984F600288894 /* ta_CDLUNIQUE3RIVER.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E03F18C984F600288894 /* ta_CDLUNIQUE3RIVER.c */; };
+		3BB5E0E718C984F600288894 /* ta_CDLUPSIDEGAP2CROWS.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E04018C984F600288894 /* ta_CDLUPSIDEGAP2CROWS.c */; };
+		3BB5E0E818C984F600288894 /* ta_CDLXSIDEGAP3METHODS.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E04118C984F600288894 /* ta_CDLXSIDEGAP3METHODS.c */; };
+		3BB5E0E918C984F600288894 /* ta_CEIL.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E04218C984F600288894 /* ta_CEIL.c */; };
+		3BB5E0EA18C984F600288894 /* ta_CMO.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E04318C984F600288894 /* ta_CMO.c */; };
+		3BB5E0EB18C984F600288894 /* ta_CORREL.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E04418C984F600288894 /* ta_CORREL.c */; };
+		3BB5E0EC18C984F600288894 /* ta_COS.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E04518C984F600288894 /* ta_COS.c */; };
+		3BB5E0ED18C984F600288894 /* ta_COSH.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E04618C984F600288894 /* ta_COSH.c */; };
+		3BB5E0EE18C984F600288894 /* ta_DEMA.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E04718C984F600288894 /* ta_DEMA.c */; };
+		3BB5E0EF18C984F600288894 /* ta_DIV.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E04818C984F600288894 /* ta_DIV.c */; };
+		3BB5E0F018C984F600288894 /* ta_DX.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E04918C984F600288894 /* ta_DX.c */; };
+		3BB5E0F118C984F600288894 /* ta_EMA.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E04A18C984F600288894 /* ta_EMA.c */; };
+		3BB5E0F218C984F600288894 /* ta_EXP.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E04B18C984F600288894 /* ta_EXP.c */; };
+		3BB5E0F318C984F600288894 /* ta_FLOOR.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E04C18C984F600288894 /* ta_FLOOR.c */; };
+		3BB5E0F418C984F600288894 /* ta_HT_DCPERIOD.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E04D18C984F600288894 /* ta_HT_DCPERIOD.c */; };
+		3BB5E0F518C984F600288894 /* ta_HT_DCPHASE.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E04E18C984F600288894 /* ta_HT_DCPHASE.c */; };
+		3BB5E0F618C984F600288894 /* ta_HT_PHASOR.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E04F18C984F600288894 /* ta_HT_PHASOR.c */; };
+		3BB5E0F718C984F600288894 /* ta_HT_SINE.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E05018C984F600288894 /* ta_HT_SINE.c */; };
+		3BB5E0F818C984F600288894 /* ta_HT_TRENDLINE.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E05118C984F600288894 /* ta_HT_TRENDLINE.c */; };
+		3BB5E0F918C984F600288894 /* ta_HT_TRENDMODE.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E05218C984F600288894 /* ta_HT_TRENDMODE.c */; };
+		3BB5E0FA18C984F600288894 /* ta_KAMA.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E05318C984F600288894 /* ta_KAMA.c */; };
+		3BB5E0FB18C984F600288894 /* ta_LINEARREG.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E05418C984F600288894 /* ta_LINEARREG.c */; };
+		3BB5E0FC18C984F600288894 /* ta_LINEARREG_ANGLE.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E05518C984F600288894 /* ta_LINEARREG_ANGLE.c */; };
+		3BB5E0FD18C984F600288894 /* ta_LINEARREG_INTERCEPT.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E05618C984F600288894 /* ta_LINEARREG_INTERCEPT.c */; };
+		3BB5E0FE18C984F600288894 /* ta_LINEARREG_SLOPE.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E05718C984F600288894 /* ta_LINEARREG_SLOPE.c */; };
+		3BB5E0FF18C984F600288894 /* ta_LN.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E05818C984F600288894 /* ta_LN.c */; };
+		3BB5E10018C984F600288894 /* ta_LOG10.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E05918C984F600288894 /* ta_LOG10.c */; };
+		3BB5E10118C984F600288894 /* ta_MA.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E05A18C984F600288894 /* ta_MA.c */; };
+		3BB5E10218C984F600288894 /* ta_MACD.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E05B18C984F600288894 /* ta_MACD.c */; };
+		3BB5E10318C984F600288894 /* ta_MACDEXT.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E05C18C984F600288894 /* ta_MACDEXT.c */; };
+		3BB5E10418C984F600288894 /* ta_MACDFIX.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E05D18C984F600288894 /* ta_MACDFIX.c */; };
+		3BB5E10518C984F600288894 /* ta_MAMA.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E05E18C984F600288894 /* ta_MAMA.c */; };
+		3BB5E10618C984F600288894 /* ta_MAVP.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E05F18C984F600288894 /* ta_MAVP.c */; };
+		3BB5E10718C984F600288894 /* ta_MAX.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E06018C984F600288894 /* ta_MAX.c */; };
+		3BB5E10818C984F600288894 /* ta_MAXINDEX.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E06118C984F600288894 /* ta_MAXINDEX.c */; };
+		3BB5E10918C984F600288894 /* ta_MEDPRICE.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E06218C984F600288894 /* ta_MEDPRICE.c */; };
+		3BB5E10A18C984F600288894 /* ta_MFI.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E06318C984F600288894 /* ta_MFI.c */; };
+		3BB5E10B18C984F600288894 /* ta_MIDPOINT.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E06418C984F600288894 /* ta_MIDPOINT.c */; };
+		3BB5E10C18C984F600288894 /* ta_MIDPRICE.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E06518C984F600288894 /* ta_MIDPRICE.c */; };
+		3BB5E10D18C984F600288894 /* ta_MIN.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E06618C984F600288894 /* ta_MIN.c */; };
+		3BB5E10E18C984F600288894 /* ta_MININDEX.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E06718C984F600288894 /* ta_MININDEX.c */; };
+		3BB5E10F18C984F600288894 /* ta_MINMAX.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E06818C984F600288894 /* ta_MINMAX.c */; };
+		3BB5E11018C984F600288894 /* ta_MINMAXINDEX.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E06918C984F600288894 /* ta_MINMAXINDEX.c */; };
+		3BB5E11118C984F600288894 /* ta_MINUS_DI.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E06A18C984F600288894 /* ta_MINUS_DI.c */; };
+		3BB5E11218C984F600288894 /* ta_MINUS_DM.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E06B18C984F600288894 /* ta_MINUS_DM.c */; };
+		3BB5E11318C984F600288894 /* ta_MOM.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E06C18C984F600288894 /* ta_MOM.c */; };
+		3BB5E11418C984F600288894 /* ta_MULT.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E06D18C984F600288894 /* ta_MULT.c */; };
+		3BB5E11518C984F600288894 /* ta_NATR.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E06E18C984F600288894 /* ta_NATR.c */; };
+		3BB5E11618C984F600288894 /* ta_NVI.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E06F18C984F600288894 /* ta_NVI.c */; };
+		3BB5E11718C984F600288894 /* ta_OBV.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E07018C984F600288894 /* ta_OBV.c */; };
+		3BB5E11818C984F600288894 /* ta_PLUS_DI.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E07118C984F600288894 /* ta_PLUS_DI.c */; };
+		3BB5E11918C984F600288894 /* ta_PLUS_DM.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E07218C984F600288894 /* ta_PLUS_DM.c */; };
+		3BB5E11A18C984F600288894 /* ta_PPO.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E07318C984F600288894 /* ta_PPO.c */; };
+		3BB5E11B18C984F600288894 /* ta_PVI.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E07418C984F600288894 /* ta_PVI.c */; };
+		3BB5E11C18C984F600288894 /* ta_ROC.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E07518C984F600288894 /* ta_ROC.c */; };
+		3BB5E11D18C984F600288894 /* ta_ROCP.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E07618C984F600288894 /* ta_ROCP.c */; };
+		3BB5E11E18C984F600288894 /* ta_ROCR.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E07718C984F600288894 /* ta_ROCR.c */; };
+		3BB5E11F18C984F600288894 /* ta_ROCR100.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E07818C984F600288894 /* ta_ROCR100.c */; };
+		3BB5E12018C984F600288894 /* ta_RSI.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E07918C984F600288894 /* ta_RSI.c */; };
+		3BB5E12118C984F600288894 /* ta_SAR.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E07A18C984F600288894 /* ta_SAR.c */; };
+		3BB5E12218C984F600288894 /* ta_SAREXT.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E07B18C984F600288894 /* ta_SAREXT.c */; };
+		3BB5E12318C984F600288894 /* ta_SIN.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E07C18C984F600288894 /* ta_SIN.c */; };
+		3BB5E12418C984F600288894 /* ta_SINH.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E07D18C984F600288894 /* ta_SINH.c */; };
+		3BB5E12518C984F600288894 /* ta_SMA.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E07E18C984F600288894 /* ta_SMA.c */; };
+		3BB5E12618C984F600288894 /* ta_SQRT.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E07F18C984F600288894 /* ta_SQRT.c */; };
+		3BB5E12718C984F600288894 /* ta_STDDEV.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E08018C984F600288894 /* ta_STDDEV.c */; };
+		3BB5E12818C984F600288894 /* ta_STOCH.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E08118C984F600288894 /* ta_STOCH.c */; };
+		3BB5E12918C984F600288894 /* ta_STOCHF.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E08218C984F600288894 /* ta_STOCHF.c */; };
+		3BB5E12A18C984F600288894 /* ta_STOCHRSI.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E08318C984F600288894 /* ta_STOCHRSI.c */; };
+		3BB5E12B18C984F600288894 /* ta_SUB.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E08418C984F600288894 /* ta_SUB.c */; };
+		3BB5E12C18C984F600288894 /* ta_SUM.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E08518C984F600288894 /* ta_SUM.c */; };
+		3BB5E12D18C984F600288894 /* ta_T3.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E08618C984F600288894 /* ta_T3.c */; };
+		3BB5E12E18C984F600288894 /* ta_TAN.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E08718C984F600288894 /* ta_TAN.c */; };
+		3BB5E12F18C984F600288894 /* ta_TANH.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E08818C984F600288894 /* ta_TANH.c */; };
+		3BB5E13018C984F600288894 /* ta_TEMA.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E08918C984F600288894 /* ta_TEMA.c */; };
+		3BB5E13118C984F600288894 /* ta_TRANGE.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E08A18C984F600288894 /* ta_TRANGE.c */; };
+		3BB5E13218C984F600288894 /* ta_TRIMA.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E08B18C984F600288894 /* ta_TRIMA.c */; };
+		3BB5E13318C984F600288894 /* ta_TRIX.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E08C18C984F600288894 /* ta_TRIX.c */; };
+		3BB5E13418C984F600288894 /* ta_TSF.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E08D18C984F600288894 /* ta_TSF.c */; };
+		3BB5E13518C984F600288894 /* ta_TYPPRICE.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E08E18C984F600288894 /* ta_TYPPRICE.c */; };
+		3BB5E13618C984F600288894 /* ta_ULTOSC.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E08F18C984F600288894 /* ta_ULTOSC.c */; };
+		3BB5E13718C984F600288894 /* ta_utility.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E09018C984F600288894 /* ta_utility.c */; };
+		3BB5E13818C984F600288894 /* ta_VAR.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E09218C984F600288894 /* ta_VAR.c */; };
+		3BB5E13918C984F600288894 /* ta_WCLPRICE.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E09318C984F600288894 /* ta_WCLPRICE.c */; };
+		3BB5E13A18C984F600288894 /* ta_WILLR.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E09418C984F600288894 /* ta_WILLR.c */; };
+		3BB5E13B18C984F600288894 /* ta_WMA.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E09518C984F600288894 /* ta_WMA.c */; };
+		3BB873421CC4BBF500DEAE92 /* NSArray+CCSTACompute.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BB873411CC4BBF500DEAE92 /* NSArray+CCSTACompute.m */; };
+		3BDAD3991BDE12F9000AC06C /* test.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3BDAD3981BDE12F9000AC06C /* test.plist */; };
+		3BE4865B1CC39CEF00A3E4FB /* CCSStringUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BE486521CC39CEF00A3E4FB /* CCSStringUtils.m */; };
+		3BE4865C1CC39CEF00A3E4FB /* CCSTALibUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BE486541CC39CEF00A3E4FB /* CCSTALibUtils.m */; };
+		3BE4865E1CC39CEF00A3E4FB /* NSString+UIColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BE486581CC39CEF00A3E4FB /* NSString+UIColor.m */; };
+		3BE4865F1CC39CEF00A3E4FB /* NSString+UserDefault.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BE4865A1CC39CEF00A3E4FB /* NSString+UserDefault.m */; };
+		B9D9486EC13AC2EB4A9B76F0 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 69441982625698A57CC7DB46 /* libPods.a */; };
+		F86FE2821CA29CC9003E0DC6 /* 1min.txt in Resources */ = {isa = PBXBuildFile; fileRef = F86FE27E1CA29CC9003E0DC6 /* 1min.txt */; };
+		F86FE2831CA29CC9003E0DC6 /* 15min.txt in Resources */ = {isa = PBXBuildFile; fileRef = F86FE27F1CA29CC9003E0DC6 /* 15min.txt */; };
+		F86FE2841CA29CC9003E0DC6 /* allpdts.txt in Resources */ = {isa = PBXBuildFile; fileRef = F86FE2801CA29CC9003E0DC6 /* allpdts.txt */; };
+		F86FE2851CA29CC9003E0DC6 /* time.txt in Resources */ = {isa = PBXBuildFile; fileRef = F86FE2811CA29CC9003E0DC6 /* time.txt */; };
+		F8C2EDD41CAE672A00D72985 /* KLineData.txt in Resources */ = {isa = PBXBuildFile; fileRef = F8C2EDD31CAE672A00D72985 /* KLineData.txt */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		3B697CCE1CC4CCBA0098C1A8 /* CCSJSONData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSJSONData.h; sourceTree = "<group>"; };
+		3B697CCF1CC4CCBA0098C1A8 /* CCSJSONData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSJSONData.m; sourceTree = "<group>"; };
+		3B697CD01CC4CCBA0098C1A8 /* CCSSegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSSegmentedControl.h; sourceTree = "<group>"; };
+		3B697CD11CC4CCBA0098C1A8 /* CCSSegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSSegmentedControl.m; sourceTree = "<group>"; };
+		3B8C01681CC4CA84007914C4 /* CCSAreaChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSAreaChart.h; sourceTree = "<group>"; };
+		3B8C01691CC4CA84007914C4 /* CCSAreaChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSAreaChart.m; sourceTree = "<group>"; };
+		3B8C016A1CC4CA84007914C4 /* CCSBandAreaChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSBandAreaChart.h; sourceTree = "<group>"; };
+		3B8C016B1CC4CA84007914C4 /* CCSBandAreaChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSBandAreaChart.m; sourceTree = "<group>"; };
+		3B8C016C1CC4CA84007914C4 /* CCSBaseChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSBaseChartView.h; sourceTree = "<group>"; };
+		3B8C016D1CC4CA84007914C4 /* CCSBaseChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSBaseChartView.m; sourceTree = "<group>"; };
+		3B8C016E1CC4CA84007914C4 /* CCSBaseData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSBaseData.h; sourceTree = "<group>"; };
+		3B8C016F1CC4CA84007914C4 /* CCSBaseData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSBaseData.m; sourceTree = "<group>"; };
+		3B8C01701CC4CA84007914C4 /* CCSBOLLMASlipCandleStickChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSBOLLMASlipCandleStickChart.h; sourceTree = "<group>"; };
+		3B8C01711CC4CA84007914C4 /* CCSBOLLMASlipCandleStickChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSBOLLMASlipCandleStickChart.m; sourceTree = "<group>"; };
+		3B8C01721CC4CA84007914C4 /* CCSCandleStickChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSCandleStickChart.h; sourceTree = "<group>"; };
+		3B8C01731CC4CA84007914C4 /* CCSCandleStickChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSCandleStickChart.m; sourceTree = "<group>"; };
+		3B8C01741CC4CA84007914C4 /* CCSCandleStickChartData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSCandleStickChartData.h; sourceTree = "<group>"; };
+		3B8C01751CC4CA84007914C4 /* CCSCandleStickChartData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSCandleStickChartData.m; sourceTree = "<group>"; };
+		3B8C01761CC4CA84007914C4 /* CCSCocoaCharts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSCocoaCharts.h; sourceTree = "<group>"; };
+		3B8C01771CC4CA84007914C4 /* CCSColoredStickChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSColoredStickChart.h; sourceTree = "<group>"; };
+		3B8C01781CC4CA84007914C4 /* CCSColoredStickChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSColoredStickChart.m; sourceTree = "<group>"; };
+		3B8C01791CC4CA84007914C4 /* CCSColoredStickChartData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSColoredStickChartData.h; sourceTree = "<group>"; };
+		3B8C017A1CC4CA84007914C4 /* CCSColoredStickChartData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSColoredStickChartData.m; sourceTree = "<group>"; };
+		3B8C017B1CC4CA84007914C4 /* CCSDonutChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSDonutChart.h; sourceTree = "<group>"; };
+		3B8C017C1CC4CA84007914C4 /* CCSDonutChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSDonutChart.m; sourceTree = "<group>"; };
+		3B8C017D1CC4CA84007914C4 /* CCSGridChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSGridChart.h; sourceTree = "<group>"; };
+		3B8C017E1CC4CA84007914C4 /* CCSGridChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSGridChart.m; sourceTree = "<group>"; };
+		3B8C017F1CC4CA84007914C4 /* CCSGroupChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSGroupChart.h; sourceTree = "<group>"; };
+		3B8C01801CC4CA84007914C4 /* CCSGroupChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSGroupChart.m; sourceTree = "<group>"; };
+		3B8C01811CC4CA84007914C4 /* CCSHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSHeader.h; sourceTree = "<group>"; };
+		3B8C01821CC4CA84007914C4 /* CCSLineChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSLineChart.h; sourceTree = "<group>"; };
+		3B8C01831CC4CA84007914C4 /* CCSLineChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSLineChart.m; sourceTree = "<group>"; };
+		3B8C01841CC4CA84007914C4 /* CCSLineData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSLineData.h; sourceTree = "<group>"; };
+		3B8C01851CC4CA84007914C4 /* CCSLineData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSLineData.m; sourceTree = "<group>"; };
+		3B8C01861CC4CA84007914C4 /* CCSMACandleStickChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSMACandleStickChart.h; sourceTree = "<group>"; };
+		3B8C01871CC4CA84007914C4 /* CCSMACandleStickChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSMACandleStickChart.m; sourceTree = "<group>"; };
+		3B8C01881CC4CA84007914C4 /* CCSMACDChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSMACDChart.h; sourceTree = "<group>"; };
+		3B8C01891CC4CA84007914C4 /* CCSMACDChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSMACDChart.m; sourceTree = "<group>"; };
+		3B8C018A1CC4CA84007914C4 /* CCSMACDData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSMACDData.h; sourceTree = "<group>"; };
+		3B8C018B1CC4CA84007914C4 /* CCSMACDData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSMACDData.m; sourceTree = "<group>"; };
+		3B8C018C1CC4CA84007914C4 /* CCSMAColoredStickChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSMAColoredStickChart.h; sourceTree = "<group>"; };
+		3B8C018D1CC4CA84007914C4 /* CCSMAColoredStickChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSMAColoredStickChart.m; sourceTree = "<group>"; };
+		3B8C018E1CC4CA84007914C4 /* CCSMASlipCandleStickChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSMASlipCandleStickChart.h; sourceTree = "<group>"; };
+		3B8C018F1CC4CA84007914C4 /* CCSMASlipCandleStickChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSMASlipCandleStickChart.m; sourceTree = "<group>"; };
+		3B8C01901CC4CA84007914C4 /* CCSMAStickChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSMAStickChart.h; sourceTree = "<group>"; };
+		3B8C01911CC4CA84007914C4 /* CCSMAStickChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSMAStickChart.m; sourceTree = "<group>"; };
+		3B8C01921CC4CA84007914C4 /* CCSMinusStickChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSMinusStickChart.h; sourceTree = "<group>"; };
+		3B8C01931CC4CA84007914C4 /* CCSMinusStickChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSMinusStickChart.m; sourceTree = "<group>"; };
+		3B8C01941CC4CA84007914C4 /* CCSOHLCVDData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSOHLCVDData.h; sourceTree = "<group>"; };
+		3B8C01951CC4CA84007914C4 /* CCSOHLCVDData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSOHLCVDData.m; sourceTree = "<group>"; };
+		3B8C01961CC4CA84007914C4 /* CCSPieChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSPieChart.h; sourceTree = "<group>"; };
+		3B8C01971CC4CA84007914C4 /* CCSPieChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSPieChart.m; sourceTree = "<group>"; };
+		3B8C01981CC4CA84007914C4 /* CCSPizzaChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSPizzaChart.h; sourceTree = "<group>"; };
+		3B8C01991CC4CA84007914C4 /* CCSPizzaChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSPizzaChart.m; sourceTree = "<group>"; };
+		3B8C019A1CC4CA84007914C4 /* CCSRadarChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSRadarChart.h; sourceTree = "<group>"; };
+		3B8C019B1CC4CA84007914C4 /* CCSRadarChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSRadarChart.m; sourceTree = "<group>"; };
+		3B8C01A01CC4CA84007914C4 /* CCSSlipCandleStickChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSSlipCandleStickChart.h; sourceTree = "<group>"; };
+		3B8C01A11CC4CA84007914C4 /* CCSSlipCandleStickChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSSlipCandleStickChart.m; sourceTree = "<group>"; };
+		3B8C01A21CC4CA84007914C4 /* CCSSlipLineChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSSlipLineChart.h; sourceTree = "<group>"; };
+		3B8C01A31CC4CA84007914C4 /* CCSSlipLineChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSSlipLineChart.m; sourceTree = "<group>"; };
+		3B8C01A41CC4CA84007914C4 /* CCSSlipStickChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSSlipStickChart.h; sourceTree = "<group>"; };
+		3B8C01A51CC4CA84007914C4 /* CCSSlipStickChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSSlipStickChart.m; sourceTree = "<group>"; };
+		3B8C01A61CC4CA84007914C4 /* CCSSpiderWebChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSSpiderWebChart.h; sourceTree = "<group>"; };
+		3B8C01A71CC4CA84007914C4 /* CCSSpiderWebChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSSpiderWebChart.m; sourceTree = "<group>"; };
+		3B8C01A81CC4CA84007914C4 /* CCSStackedAreaChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSStackedAreaChart.h; sourceTree = "<group>"; };
+		3B8C01A91CC4CA84007914C4 /* CCSStackedAreaChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSStackedAreaChart.m; sourceTree = "<group>"; };
+		3B8C01AA1CC4CA84007914C4 /* CCSStickChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSStickChart.h; sourceTree = "<group>"; };
+		3B8C01AB1CC4CA84007914C4 /* CCSStickChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSStickChart.m; sourceTree = "<group>"; };
+		3B8C01AC1CC4CA84007914C4 /* CCSStickChartData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSStickChartData.h; sourceTree = "<group>"; };
+		3B8C01AD1CC4CA84007914C4 /* CCSStickChartData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSStickChartData.m; sourceTree = "<group>"; };
+		3B8C01AE1CC4CA84007914C4 /* CCSTitledLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSTitledLine.h; sourceTree = "<group>"; };
+		3B8C01AF1CC4CA84007914C4 /* CCSTitledLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSTitledLine.m; sourceTree = "<group>"; };
+		3B8C01B01CC4CA84007914C4 /* CCSTitleValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSTitleValue.h; sourceTree = "<group>"; };
+		3B8C01B11CC4CA84007914C4 /* CCSTitleValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSTitleValue.m; sourceTree = "<group>"; };
+		3B8C01B21CC4CA84007914C4 /* CCSTitleValueColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSTitleValueColor.h; sourceTree = "<group>"; };
+		3B8C01B31CC4CA84007914C4 /* CCSTitleValueColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSTitleValueColor.m; sourceTree = "<group>"; };
+		3B8C01B41CC4CA84007914C4 /* CCSTitleValues.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSTitleValues.h; sourceTree = "<group>"; };
+		3B8C01B51CC4CA84007914C4 /* CCSTitleValues.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSTitleValues.m; sourceTree = "<group>"; };
+		3B8C01B61CC4CA84007914C4 /* CCSTitleValuesColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSTitleValuesColor.h; sourceTree = "<group>"; };
+		3B8C01B71CC4CA84007914C4 /* CCSTitleValuesColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSTitleValuesColor.m; sourceTree = "<group>"; };
+		3B8C01E01CC4CAB8007914C4 /* CCSAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSAppDelegate.h; sourceTree = "<group>"; };
+		3B8C01E11CC4CAB8007914C4 /* CCSAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSAppDelegate.m; sourceTree = "<group>"; };
+		3B8C01E21CC4CAB8007914C4 /* CCSAreaChartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSAreaChartViewController.h; sourceTree = "<group>"; };
+		3B8C01E31CC4CAB8007914C4 /* CCSAreaChartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSAreaChartViewController.m; sourceTree = "<group>"; };
+		3B8C01E41CC4CAB8007914C4 /* CCSBandAreaChartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSBandAreaChartViewController.h; sourceTree = "<group>"; };
+		3B8C01E51CC4CAB8007914C4 /* CCSBandAreaChartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSBandAreaChartViewController.m; sourceTree = "<group>"; };
+		3B8C01E61CC4CAB8007914C4 /* CCSBOLLMASlipCandleStickChartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSBOLLMASlipCandleStickChartViewController.h; sourceTree = "<group>"; };
+		3B8C01E71CC4CAB8007914C4 /* CCSBOLLMASlipCandleStickChartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSBOLLMASlipCandleStickChartViewController.m; sourceTree = "<group>"; };
+		3B8C01E81CC4CAB8007914C4 /* CCSCandleStickChartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSCandleStickChartViewController.h; sourceTree = "<group>"; };
+		3B8C01E91CC4CAB8007914C4 /* CCSCandleStickChartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSCandleStickChartViewController.m; sourceTree = "<group>"; };
+		3B8C01EA1CC4CAB8007914C4 /* CCSChartsSettingTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSChartsSettingTableViewCell.h; sourceTree = "<group>"; };
+		3B8C01EB1CC4CAB8007914C4 /* CCSChartsSettingTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSChartsSettingTableViewCell.m; sourceTree = "<group>"; };
+		3B8C01EC1CC4CAB8007914C4 /* CCSChartsSettingTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CCSChartsSettingTableViewCell.xib; sourceTree = "<group>"; };
+		3B8C01ED1CC4CAB8007914C4 /* CCSChartsSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSChartsSettingViewController.h; sourceTree = "<group>"; };
+		3B8C01EE1CC4CAB8007914C4 /* CCSChartsSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSChartsSettingViewController.m; sourceTree = "<group>"; };
+		3B8C01EF1CC4CAB8007914C4 /* CCSChartsSettingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CCSChartsSettingViewController.xib; sourceTree = "<group>"; };
+		3B8C01F01CC4CAB8007914C4 /* CCSColoredStickChartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSColoredStickChartViewController.h; sourceTree = "<group>"; };
+		3B8C01F11CC4CAB8007914C4 /* CCSColoredStickChartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSColoredStickChartViewController.m; sourceTree = "<group>"; };
+		3B8C01F21CC4CAB8007914C4 /* CCSDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSDetailViewController.h; sourceTree = "<group>"; };
+		3B8C01F31CC4CAB8007914C4 /* CCSDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSDetailViewController.m; sourceTree = "<group>"; };
+		3B8C01F41CC4CAB8007914C4 /* CCSDonutChartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSDonutChartViewController.h; sourceTree = "<group>"; };
+		3B8C01F51CC4CAB8007914C4 /* CCSDonutChartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSDonutChartViewController.m; sourceTree = "<group>"; };
+		3B8C01F61CC4CAB8007914C4 /* CCSGridChartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSGridChartViewController.h; sourceTree = "<group>"; };
+		3B8C01F71CC4CAB8007914C4 /* CCSGridChartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSGridChartViewController.m; sourceTree = "<group>"; };
+		3B8C01F81CC4CAB8007914C4 /* CCSLineChartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSLineChartViewController.h; sourceTree = "<group>"; };
+		3B8C01F91CC4CAB8007914C4 /* CCSLineChartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSLineChartViewController.m; sourceTree = "<group>"; };
+		3B8C01FA1CC4CAB8007914C4 /* CCSMACandleStickChartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSMACandleStickChartViewController.h; sourceTree = "<group>"; };
+		3B8C01FB1CC4CAB8007914C4 /* CCSMACandleStickChartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSMACandleStickChartViewController.m; sourceTree = "<group>"; };
+		3B8C01FC1CC4CAB8007914C4 /* CCSMACDChartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSMACDChartViewController.h; sourceTree = "<group>"; };
+		3B8C01FD1CC4CAB8007914C4 /* CCSMACDChartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSMACDChartViewController.m; sourceTree = "<group>"; };
+		3B8C01FE1CC4CAB8007914C4 /* CCSMASlipCandleStickChartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSMASlipCandleStickChartViewController.h; sourceTree = "<group>"; };
+		3B8C01FF1CC4CAB8007914C4 /* CCSMASlipCandleStickChartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSMASlipCandleStickChartViewController.m; sourceTree = "<group>"; };
+		3B8C02001CC4CAB8007914C4 /* CCSMAStickChartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSMAStickChartViewController.h; sourceTree = "<group>"; };
+		3B8C02011CC4CAB8007914C4 /* CCSMAStickChartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSMAStickChartViewController.m; sourceTree = "<group>"; };
+		3B8C02021CC4CAB8007914C4 /* CCSMinusStickChartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSMinusStickChartViewController.h; sourceTree = "<group>"; };
+		3B8C02031CC4CAB8007914C4 /* CCSMinusStickChartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSMinusStickChartViewController.m; sourceTree = "<group>"; };
+		3B8C02041CC4CAB8007914C4 /* CCSPieChartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSPieChartViewController.h; sourceTree = "<group>"; };
+		3B8C02051CC4CAB8007914C4 /* CCSPieChartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSPieChartViewController.m; sourceTree = "<group>"; };
+		3B8C02061CC4CAB8007914C4 /* CCSPizzaChartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSPizzaChartViewController.h; sourceTree = "<group>"; };
+		3B8C02071CC4CAB8007914C4 /* CCSPizzaChartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSPizzaChartViewController.m; sourceTree = "<group>"; };
+		3B8C02081CC4CAB8007914C4 /* CCSRadarChartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSRadarChartViewController.h; sourceTree = "<group>"; };
+		3B8C02091CC4CAB8007914C4 /* CCSRadarChartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSRadarChartViewController.m; sourceTree = "<group>"; };
+		3B8C020A1CC4CAB8007914C4 /* CCSSampleGroupChartDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSSampleGroupChartDemoViewController.h; sourceTree = "<group>"; };
+		3B8C020B1CC4CAB8007914C4 /* CCSSampleGroupChartDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSSampleGroupChartDemoViewController.m; sourceTree = "<group>"; };
+		3B8C020C1CC4CAB8007914C4 /* CCSSampleGroupChartDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CCSSampleGroupChartDemoViewController.xib; sourceTree = "<group>"; };
+		3B8C020D1CC4CAB8007914C4 /* CCSSampleHorizontalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSSampleHorizontalViewController.h; sourceTree = "<group>"; };
+		3B8C020E1CC4CAB8007914C4 /* CCSSampleHorizontalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSSampleHorizontalViewController.m; sourceTree = "<group>"; };
+		3B8C020F1CC4CAB8007914C4 /* CCSSamplGroupChartDetailTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSSamplGroupChartDetailTableViewCell.h; sourceTree = "<group>"; };
+		3B8C02101CC4CAB8007914C4 /* CCSSamplGroupChartDetailTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSSamplGroupChartDetailTableViewCell.m; sourceTree = "<group>"; };
+		3B8C02111CC4CAB8007914C4 /* CCSSamplGroupChartDetailTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CCSSamplGroupChartDetailTableViewCell.xib; sourceTree = "<group>"; };
+		3B8C02121CC4CAB8007914C4 /* CCSSettingDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSSettingDetailViewController.h; sourceTree = "<group>"; };
+		3B8C02131CC4CAB8007914C4 /* CCSSettingDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSSettingDetailViewController.m; sourceTree = "<group>"; };
+		3B8C02141CC4CAB8007914C4 /* CCSSettingDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CCSSettingDetailViewController.xib; sourceTree = "<group>"; };
+		3B8C02151CC4CAB8007914C4 /* CCSSettingResetTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSSettingResetTableViewCell.h; sourceTree = "<group>"; };
+		3B8C02161CC4CAB8007914C4 /* CCSSettingResetTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSSettingResetTableViewCell.m; sourceTree = "<group>"; };
+		3B8C02171CC4CAB8007914C4 /* CCSSettingResetTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CCSSettingResetTableViewCell.xib; sourceTree = "<group>"; };
+		3B8C02181CC4CAB8007914C4 /* CCSSimpleDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSSimpleDemoViewController.h; sourceTree = "<group>"; };
+		3B8C02191CC4CAB8007914C4 /* CCSSimpleDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSSimpleDemoViewController.m; sourceTree = "<group>"; };
+		3B8C021A1CC4CAB8007914C4 /* CCSSlipCandleStickChartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSSlipCandleStickChartViewController.h; sourceTree = "<group>"; };
+		3B8C021B1CC4CAB8007914C4 /* CCSSlipCandleStickChartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSSlipCandleStickChartViewController.m; sourceTree = "<group>"; };
+		3B8C021C1CC4CAB8007914C4 /* CCSSlipLineChartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSSlipLineChartViewController.h; sourceTree = "<group>"; };
+		3B8C021D1CC4CAB8007914C4 /* CCSSlipLineChartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSSlipLineChartViewController.m; sourceTree = "<group>"; };
+		3B8C021E1CC4CAB8007914C4 /* CCSSlipStickChartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSSlipStickChartViewController.h; sourceTree = "<group>"; };
+		3B8C021F1CC4CAB8007914C4 /* CCSSlipStickChartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSSlipStickChartViewController.m; sourceTree = "<group>"; };
+		3B8C02201CC4CAB8007914C4 /* CCSSpiderWebChartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSSpiderWebChartViewController.h; sourceTree = "<group>"; };
+		3B8C02211CC4CAB8007914C4 /* CCSSpiderWebChartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSSpiderWebChartViewController.m; sourceTree = "<group>"; };
+		3B8C02221CC4CAB8007914C4 /* CCSStackedAreaChartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSStackedAreaChartViewController.h; sourceTree = "<group>"; };
+		3B8C02231CC4CAB8007914C4 /* CCSStackedAreaChartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSStackedAreaChartViewController.m; sourceTree = "<group>"; };
+		3B8C02241CC4CAB8007914C4 /* CCSStickChartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSStickChartViewController.h; sourceTree = "<group>"; };
+		3B8C02251CC4CAB8007914C4 /* CCSStickChartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSStickChartViewController.m; sourceTree = "<group>"; };
+		3B8C02261CC4CAB8007914C4 /* CCSViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSViewController.h; sourceTree = "<group>"; };
+		3B8C02271CC4CAB8007914C4 /* CCSViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSViewController.m; sourceTree = "<group>"; };
+		3B8C02281CC4CAB8007914C4 /* CocoaChartsSample-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "CocoaChartsSample-Info.plist"; sourceTree = "<group>"; };
+		3B8C02291CC4CAB8007914C4 /* CocoaChartsSample-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CocoaChartsSample-Prefix.pch"; sourceTree = "<group>"; };
+		3B8C022B1CC4CAB8007914C4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		3B8C022C1CC4CAB8007914C4 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		3B8C022D1CC4CAB8007914C4 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		3BB5DEFC18C9624800288894 /* CocoaChartsSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CocoaChartsSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3BB5DEFF18C9624800288894 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		3BB5DF0118C9624800288894 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		3BB5DF0318C9624800288894 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		3BB5DFE118C984F600288894 /* N225.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = N225.xml; sourceTree = "<group>"; };
+		3BB5DFE418C984F600288894 /* ta_abstract.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ta_abstract.h; sourceTree = "<group>"; };
+		3BB5DFE518C984F600288894 /* ta_common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ta_common.h; sourceTree = "<group>"; };
+		3BB5DFE618C984F600288894 /* ta_defs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ta_defs.h; sourceTree = "<group>"; };
+		3BB5DFE718C984F600288894 /* ta_func.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ta_func.h; sourceTree = "<group>"; };
+		3BB5DFE818C984F600288894 /* ta_libc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ta_libc.h; sourceTree = "<group>"; };
+		3BB5DFEB18C984F600288894 /* ta_global.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_global.c; sourceTree = "<group>"; };
+		3BB5DFEC18C984F600288894 /* ta_global.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ta_global.h; sourceTree = "<group>"; };
+		3BB5DFED18C984F600288894 /* ta_magic_nb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ta_magic_nb.h; sourceTree = "<group>"; };
+		3BB5DFEE18C984F600288894 /* ta_memory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ta_memory.h; sourceTree = "<group>"; };
+		3BB5DFEF18C984F600288894 /* ta_pragma.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ta_pragma.h; sourceTree = "<group>"; };
+		3BB5DFF018C984F600288894 /* ta_retcode.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_retcode.c; sourceTree = "<group>"; };
+		3BB5DFF118C984F600288894 /* ta_retcode.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ta_retcode.csv; sourceTree = "<group>"; };
+		3BB5DFF218C984F600288894 /* ta_version.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_version.c; sourceTree = "<group>"; };
+		3BB5DFF418C984F600288894 /* ta_ACOS.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_ACOS.c; sourceTree = "<group>"; };
+		3BB5DFF518C984F600288894 /* ta_AD.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_AD.c; sourceTree = "<group>"; };
+		3BB5DFF618C984F600288894 /* ta_ADD.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_ADD.c; sourceTree = "<group>"; };
+		3BB5DFF718C984F600288894 /* ta_ADOSC.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_ADOSC.c; sourceTree = "<group>"; };
+		3BB5DFF818C984F600288894 /* ta_ADX.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_ADX.c; sourceTree = "<group>"; };
+		3BB5DFF918C984F600288894 /* ta_ADXR.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_ADXR.c; sourceTree = "<group>"; };
+		3BB5DFFA18C984F600288894 /* ta_APO.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_APO.c; sourceTree = "<group>"; };
+		3BB5DFFB18C984F600288894 /* ta_AROON.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_AROON.c; sourceTree = "<group>"; };
+		3BB5DFFC18C984F600288894 /* ta_AROONOSC.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_AROONOSC.c; sourceTree = "<group>"; };
+		3BB5DFFD18C984F600288894 /* ta_ASIN.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_ASIN.c; sourceTree = "<group>"; };
+		3BB5DFFE18C984F600288894 /* ta_ATAN.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_ATAN.c; sourceTree = "<group>"; };
+		3BB5DFFF18C984F600288894 /* ta_ATR.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_ATR.c; sourceTree = "<group>"; };
+		3BB5E00018C984F600288894 /* ta_AVGPRICE.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_AVGPRICE.c; sourceTree = "<group>"; };
+		3BB5E00118C984F600288894 /* ta_BBANDS.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_BBANDS.c; sourceTree = "<group>"; };
+		3BB5E00218C984F600288894 /* ta_BETA.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_BETA.c; sourceTree = "<group>"; };
+		3BB5E00318C984F600288894 /* ta_BOP.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_BOP.c; sourceTree = "<group>"; };
+		3BB5E00418C984F600288894 /* ta_CCI.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_CCI.c; sourceTree = "<group>"; };
+		3BB5E00518C984F600288894 /* ta_CDL2CROWS.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_CDL2CROWS.c; sourceTree = "<group>"; };
+		3BB5E00618C984F600288894 /* ta_CDL3BLACKCROWS.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_CDL3BLACKCROWS.c; sourceTree = "<group>"; };
+		3BB5E00718C984F600288894 /* ta_CDL3INSIDE.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_CDL3INSIDE.c; sourceTree = "<group>"; };
+		3BB5E00818C984F600288894 /* ta_CDL3LINESTRIKE.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_CDL3LINESTRIKE.c; sourceTree = "<group>"; };
+		3BB5E00918C984F600288894 /* ta_CDL3OUTSIDE.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_CDL3OUTSIDE.c; sourceTree = "<group>"; };
+		3BB5E00A18C984F600288894 /* ta_CDL3STARSINSOUTH.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_CDL3STARSINSOUTH.c; sourceTree = "<group>"; };
+		3BB5E00B18C984F600288894 /* ta_CDL3WHITESOLDIERS.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_CDL3WHITESOLDIERS.c; sourceTree = "<group>"; };
+		3BB5E00C18C984F600288894 /* ta_CDLABANDONEDBABY.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_CDLABANDONEDBABY.c; sourceTree = "<group>"; };
+		3BB5E00D18C984F600288894 /* ta_CDLADVANCEBLOCK.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_CDLADVANCEBLOCK.c; sourceTree = "<group>"; };
+		3BB5E00E18C984F600288894 /* ta_CDLBELTHOLD.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_CDLBELTHOLD.c; sourceTree = "<group>"; };
+		3BB5E00F18C984F600288894 /* ta_CDLBREAKAWAY.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_CDLBREAKAWAY.c; sourceTree = "<group>"; };
+		3BB5E01018C984F600288894 /* ta_CDLCLOSINGMARUBOZU.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_CDLCLOSINGMARUBOZU.c; sourceTree = "<group>"; };
+		3BB5E01118C984F600288894 /* ta_CDLCONCEALBABYSWALL.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_CDLCONCEALBABYSWALL.c; sourceTree = "<group>"; };
+		3BB5E01218C984F600288894 /* ta_CDLCOUNTERATTACK.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_CDLCOUNTERATTACK.c; sourceTree = "<group>"; };
+		3BB5E01318C984F600288894 /* ta_CDLDARKCLOUDCOVER.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_CDLDARKCLOUDCOVER.c; sourceTree = "<group>"; };
+		3BB5E01418C984F600288894 /* ta_CDLDOJI.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_CDLDOJI.c; sourceTree = "<group>"; };
+		3BB5E01518C984F600288894 /* ta_CDLDOJISTAR.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_CDLDOJISTAR.c; sourceTree = "<group>"; };
+		3BB5E01618C984F600288894 /* ta_CDLDRAGONFLYDOJI.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_CDLDRAGONFLYDOJI.c; sourceTree = "<group>"; };
+		3BB5E01718C984F600288894 /* ta_CDLENGULFING.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_CDLENGULFING.c; sourceTree = "<group>"; };
+		3BB5E01818C984F600288894 /* ta_CDLEVENINGDOJISTAR.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_CDLEVENINGDOJISTAR.c; sourceTree = "<group>"; };
+		3BB5E01918C984F600288894 /* ta_CDLEVENINGSTAR.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_CDLEVENINGSTAR.c; sourceTree = "<group>"; };
+		3BB5E01A18C984F600288894 /* ta_CDLGAPSIDESIDEWHITE.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_CDLGAPSIDESIDEWHITE.c; sourceTree = "<group>"; };
+		3BB5E01B18C984F600288894 /* ta_CDLGRAVESTONEDOJI.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_CDLGRAVESTONEDOJI.c; sourceTree = "<group>"; };
+		3BB5E01C18C984F600288894 /* ta_CDLHAMMER.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_CDLHAMMER.c; sourceTree = "<group>"; };
+		3BB5E01D18C984F600288894 /* ta_CDLHANGINGMAN.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_CDLHANGINGMAN.c; sourceTree = "<group>"; };
+		3BB5E01E18C984F600288894 /* ta_CDLHARAMI.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_CDLHARAMI.c; sourceTree = "<group>"; };
+		3BB5E01F18C984F600288894 /* ta_CDLHARAMICROSS.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_CDLHARAMICROSS.c; sourceTree = "<group>"; };
+		3BB5E02018C984F600288894 /* ta_CDLHIGHWAVE.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_CDLHIGHWAVE.c; sourceTree = "<group>"; };
+		3BB5E02118C984F600288894 /* ta_CDLHIKKAKE.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_CDLHIKKAKE.c; sourceTree = "<group>"; };
+		3BB5E02218C984F600288894 /* ta_CDLHIKKAKEMOD.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_CDLHIKKAKEMOD.c; sourceTree = "<group>"; };
+		3BB5E02318C984F600288894 /* ta_CDLHOMINGPIGEON.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_CDLHOMINGPIGEON.c; sourceTree = "<group>"; };
+		3BB5E02418C984F600288894 /* ta_CDLIDENTICAL3CROWS.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_CDLIDENTICAL3CROWS.c; sourceTree = "<group>"; };
+		3BB5E02518C984F600288894 /* ta_CDLINNECK.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_CDLINNECK.c; sourceTree = "<group>"; };
+		3BB5E02618C984F600288894 /* ta_CDLINVERTEDHAMMER.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_CDLINVERTEDHAMMER.c; sourceTree = "<group>"; };
+		3BB5E02718C984F600288894 /* ta_CDLKICKING.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_CDLKICKING.c; sourceTree = "<group>"; };
+		3BB5E02818C984F600288894 /* ta_CDLKICKINGBYLENGTH.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_CDLKICKINGBYLENGTH.c; sourceTree = "<group>"; };
+		3BB5E02918C984F600288894 /* ta_CDLLADDERBOTTOM.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_CDLLADDERBOTTOM.c; sourceTree = "<group>"; };
+		3BB5E02A18C984F600288894 /* ta_CDLLONGLEGGEDDOJI.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_CDLLONGLEGGEDDOJI.c; sourceTree = "<group>"; };
+		3BB5E02B18C984F600288894 /* ta_CDLLONGLINE.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_CDLLONGLINE.c; sourceTree = "<group>"; };
+		3BB5E02C18C984F600288894 /* ta_CDLMARUBOZU.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_CDLMARUBOZU.c; sourceTree = "<group>"; };
+		3BB5E02D18C984F600288894 /* ta_CDLMATCHINGLOW.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_CDLMATCHINGLOW.c; sourceTree = "<group>"; };
+		3BB5E02E18C984F600288894 /* ta_CDLMATHOLD.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_CDLMATHOLD.c; sourceTree = "<group>"; };
+		3BB5E02F18C984F600288894 /* ta_CDLMORNINGDOJISTAR.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_CDLMORNINGDOJISTAR.c; sourceTree = "<group>"; };
+		3BB5E03018C984F600288894 /* ta_CDLMORNINGSTAR.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_CDLMORNINGSTAR.c; sourceTree = "<group>"; };
+		3BB5E03118C984F600288894 /* ta_CDLONNECK.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_CDLONNECK.c; sourceTree = "<group>"; };
+		3BB5E03218C984F600288894 /* ta_CDLPIERCING.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_CDLPIERCING.c; sourceTree = "<group>"; };
+		3BB5E03318C984F600288894 /* ta_CDLRICKSHAWMAN.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_CDLRICKSHAWMAN.c; sourceTree = "<group>"; };
+		3BB5E03418C984F600288894 /* ta_CDLRISEFALL3METHODS.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_CDLRISEFALL3METHODS.c; sourceTree = "<group>"; };
+		3BB5E03518C984F600288894 /* ta_CDLSEPARATINGLINES.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_CDLSEPARATINGLINES.c; sourceTree = "<group>"; };
+		3BB5E03618C984F600288894 /* ta_CDLSHOOTINGSTAR.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_CDLSHOOTINGSTAR.c; sourceTree = "<group>"; };
+		3BB5E03718C984F600288894 /* ta_CDLSHORTLINE.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_CDLSHORTLINE.c; sourceTree = "<group>"; };
+		3BB5E03818C984F600288894 /* ta_CDLSPINNINGTOP.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_CDLSPINNINGTOP.c; sourceTree = "<group>"; };
+		3BB5E03918C984F600288894 /* ta_CDLSTALLEDPATTERN.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_CDLSTALLEDPATTERN.c; sourceTree = "<group>"; };
+		3BB5E03A18C984F600288894 /* ta_CDLSTICKSANDWICH.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_CDLSTICKSANDWICH.c; sourceTree = "<group>"; };
+		3BB5E03B18C984F600288894 /* ta_CDLTAKURI.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_CDLTAKURI.c; sourceTree = "<group>"; };
+		3BB5E03C18C984F600288894 /* ta_CDLTASUKIGAP.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_CDLTASUKIGAP.c; sourceTree = "<group>"; };
+		3BB5E03D18C984F600288894 /* ta_CDLTHRUSTING.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_CDLTHRUSTING.c; sourceTree = "<group>"; };
+		3BB5E03E18C984F600288894 /* ta_CDLTRISTAR.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_CDLTRISTAR.c; sourceTree = "<group>"; };
+		3BB5E03F18C984F600288894 /* ta_CDLUNIQUE3RIVER.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_CDLUNIQUE3RIVER.c; sourceTree = "<group>"; };
+		3BB5E04018C984F600288894 /* ta_CDLUPSIDEGAP2CROWS.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_CDLUPSIDEGAP2CROWS.c; sourceTree = "<group>"; };
+		3BB5E04118C984F600288894 /* ta_CDLXSIDEGAP3METHODS.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_CDLXSIDEGAP3METHODS.c; sourceTree = "<group>"; };
+		3BB5E04218C984F600288894 /* ta_CEIL.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_CEIL.c; sourceTree = "<group>"; };
+		3BB5E04318C984F600288894 /* ta_CMO.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_CMO.c; sourceTree = "<group>"; };
+		3BB5E04418C984F600288894 /* ta_CORREL.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_CORREL.c; sourceTree = "<group>"; };
+		3BB5E04518C984F600288894 /* ta_COS.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_COS.c; sourceTree = "<group>"; };
+		3BB5E04618C984F600288894 /* ta_COSH.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_COSH.c; sourceTree = "<group>"; };
+		3BB5E04718C984F600288894 /* ta_DEMA.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_DEMA.c; sourceTree = "<group>"; };
+		3BB5E04818C984F600288894 /* ta_DIV.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_DIV.c; sourceTree = "<group>"; };
+		3BB5E04918C984F600288894 /* ta_DX.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_DX.c; sourceTree = "<group>"; };
+		3BB5E04A18C984F600288894 /* ta_EMA.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_EMA.c; sourceTree = "<group>"; };
+		3BB5E04B18C984F600288894 /* ta_EXP.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_EXP.c; sourceTree = "<group>"; };
+		3BB5E04C18C984F600288894 /* ta_FLOOR.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_FLOOR.c; sourceTree = "<group>"; };
+		3BB5E04D18C984F600288894 /* ta_HT_DCPERIOD.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_HT_DCPERIOD.c; sourceTree = "<group>"; };
+		3BB5E04E18C984F600288894 /* ta_HT_DCPHASE.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_HT_DCPHASE.c; sourceTree = "<group>"; };
+		3BB5E04F18C984F600288894 /* ta_HT_PHASOR.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_HT_PHASOR.c; sourceTree = "<group>"; };
+		3BB5E05018C984F600288894 /* ta_HT_SINE.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_HT_SINE.c; sourceTree = "<group>"; };
+		3BB5E05118C984F600288894 /* ta_HT_TRENDLINE.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_HT_TRENDLINE.c; sourceTree = "<group>"; };
+		3BB5E05218C984F600288894 /* ta_HT_TRENDMODE.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_HT_TRENDMODE.c; sourceTree = "<group>"; };
+		3BB5E05318C984F600288894 /* ta_KAMA.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_KAMA.c; sourceTree = "<group>"; };
+		3BB5E05418C984F600288894 /* ta_LINEARREG.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_LINEARREG.c; sourceTree = "<group>"; };
+		3BB5E05518C984F600288894 /* ta_LINEARREG_ANGLE.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_LINEARREG_ANGLE.c; sourceTree = "<group>"; };
+		3BB5E05618C984F600288894 /* ta_LINEARREG_INTERCEPT.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_LINEARREG_INTERCEPT.c; sourceTree = "<group>"; };
+		3BB5E05718C984F600288894 /* ta_LINEARREG_SLOPE.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_LINEARREG_SLOPE.c; sourceTree = "<group>"; };
+		3BB5E05818C984F600288894 /* ta_LN.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_LN.c; sourceTree = "<group>"; };
+		3BB5E05918C984F600288894 /* ta_LOG10.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_LOG10.c; sourceTree = "<group>"; };
+		3BB5E05A18C984F600288894 /* ta_MA.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_MA.c; sourceTree = "<group>"; };
+		3BB5E05B18C984F600288894 /* ta_MACD.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_MACD.c; sourceTree = "<group>"; };
+		3BB5E05C18C984F600288894 /* ta_MACDEXT.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_MACDEXT.c; sourceTree = "<group>"; };
+		3BB5E05D18C984F600288894 /* ta_MACDFIX.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_MACDFIX.c; sourceTree = "<group>"; };
+		3BB5E05E18C984F600288894 /* ta_MAMA.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_MAMA.c; sourceTree = "<group>"; };
+		3BB5E05F18C984F600288894 /* ta_MAVP.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_MAVP.c; sourceTree = "<group>"; };
+		3BB5E06018C984F600288894 /* ta_MAX.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_MAX.c; sourceTree = "<group>"; };
+		3BB5E06118C984F600288894 /* ta_MAXINDEX.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_MAXINDEX.c; sourceTree = "<group>"; };
+		3BB5E06218C984F600288894 /* ta_MEDPRICE.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_MEDPRICE.c; sourceTree = "<group>"; };
+		3BB5E06318C984F600288894 /* ta_MFI.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_MFI.c; sourceTree = "<group>"; };
+		3BB5E06418C984F600288894 /* ta_MIDPOINT.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_MIDPOINT.c; sourceTree = "<group>"; };
+		3BB5E06518C984F600288894 /* ta_MIDPRICE.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_MIDPRICE.c; sourceTree = "<group>"; };
+		3BB5E06618C984F600288894 /* ta_MIN.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_MIN.c; sourceTree = "<group>"; };
+		3BB5E06718C984F600288894 /* ta_MININDEX.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_MININDEX.c; sourceTree = "<group>"; };
+		3BB5E06818C984F600288894 /* ta_MINMAX.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_MINMAX.c; sourceTree = "<group>"; };
+		3BB5E06918C984F600288894 /* ta_MINMAXINDEX.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_MINMAXINDEX.c; sourceTree = "<group>"; };
+		3BB5E06A18C984F600288894 /* ta_MINUS_DI.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_MINUS_DI.c; sourceTree = "<group>"; };
+		3BB5E06B18C984F600288894 /* ta_MINUS_DM.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_MINUS_DM.c; sourceTree = "<group>"; };
+		3BB5E06C18C984F600288894 /* ta_MOM.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_MOM.c; sourceTree = "<group>"; };
+		3BB5E06D18C984F600288894 /* ta_MULT.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_MULT.c; sourceTree = "<group>"; };
+		3BB5E06E18C984F600288894 /* ta_NATR.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_NATR.c; sourceTree = "<group>"; };
+		3BB5E06F18C984F600288894 /* ta_NVI.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_NVI.c; sourceTree = "<group>"; };
+		3BB5E07018C984F600288894 /* ta_OBV.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_OBV.c; sourceTree = "<group>"; };
+		3BB5E07118C984F600288894 /* ta_PLUS_DI.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_PLUS_DI.c; sourceTree = "<group>"; };
+		3BB5E07218C984F600288894 /* ta_PLUS_DM.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_PLUS_DM.c; sourceTree = "<group>"; };
+		3BB5E07318C984F600288894 /* ta_PPO.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_PPO.c; sourceTree = "<group>"; };
+		3BB5E07418C984F600288894 /* ta_PVI.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_PVI.c; sourceTree = "<group>"; };
+		3BB5E07518C984F600288894 /* ta_ROC.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_ROC.c; sourceTree = "<group>"; };
+		3BB5E07618C984F600288894 /* ta_ROCP.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_ROCP.c; sourceTree = "<group>"; };
+		3BB5E07718C984F600288894 /* ta_ROCR.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_ROCR.c; sourceTree = "<group>"; };
+		3BB5E07818C984F600288894 /* ta_ROCR100.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_ROCR100.c; sourceTree = "<group>"; };
+		3BB5E07918C984F600288894 /* ta_RSI.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_RSI.c; sourceTree = "<group>"; };
+		3BB5E07A18C984F600288894 /* ta_SAR.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_SAR.c; sourceTree = "<group>"; };
+		3BB5E07B18C984F600288894 /* ta_SAREXT.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_SAREXT.c; sourceTree = "<group>"; };
+		3BB5E07C18C984F600288894 /* ta_SIN.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_SIN.c; sourceTree = "<group>"; };
+		3BB5E07D18C984F600288894 /* ta_SINH.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_SINH.c; sourceTree = "<group>"; };
+		3BB5E07E18C984F600288894 /* ta_SMA.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_SMA.c; sourceTree = "<group>"; };
+		3BB5E07F18C984F600288894 /* ta_SQRT.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_SQRT.c; sourceTree = "<group>"; };
+		3BB5E08018C984F600288894 /* ta_STDDEV.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_STDDEV.c; sourceTree = "<group>"; };
+		3BB5E08118C984F600288894 /* ta_STOCH.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_STOCH.c; sourceTree = "<group>"; };
+		3BB5E08218C984F600288894 /* ta_STOCHF.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_STOCHF.c; sourceTree = "<group>"; };
+		3BB5E08318C984F600288894 /* ta_STOCHRSI.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_STOCHRSI.c; sourceTree = "<group>"; };
+		3BB5E08418C984F600288894 /* ta_SUB.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_SUB.c; sourceTree = "<group>"; };
+		3BB5E08518C984F600288894 /* ta_SUM.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_SUM.c; sourceTree = "<group>"; };
+		3BB5E08618C984F600288894 /* ta_T3.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_T3.c; sourceTree = "<group>"; };
+		3BB5E08718C984F600288894 /* ta_TAN.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_TAN.c; sourceTree = "<group>"; };
+		3BB5E08818C984F600288894 /* ta_TANH.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_TANH.c; sourceTree = "<group>"; };
+		3BB5E08918C984F600288894 /* ta_TEMA.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_TEMA.c; sourceTree = "<group>"; };
+		3BB5E08A18C984F600288894 /* ta_TRANGE.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_TRANGE.c; sourceTree = "<group>"; };
+		3BB5E08B18C984F600288894 /* ta_TRIMA.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_TRIMA.c; sourceTree = "<group>"; };
+		3BB5E08C18C984F600288894 /* ta_TRIX.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_TRIX.c; sourceTree = "<group>"; };
+		3BB5E08D18C984F600288894 /* ta_TSF.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_TSF.c; sourceTree = "<group>"; };
+		3BB5E08E18C984F600288894 /* ta_TYPPRICE.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_TYPPRICE.c; sourceTree = "<group>"; };
+		3BB5E08F18C984F600288894 /* ta_ULTOSC.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_ULTOSC.c; sourceTree = "<group>"; };
+		3BB5E09018C984F600288894 /* ta_utility.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_utility.c; sourceTree = "<group>"; };
+		3BB5E09118C984F600288894 /* ta_utility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ta_utility.h; sourceTree = "<group>"; };
+		3BB5E09218C984F600288894 /* ta_VAR.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_VAR.c; sourceTree = "<group>"; };
+		3BB5E09318C984F600288894 /* ta_WCLPRICE.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_WCLPRICE.c; sourceTree = "<group>"; };
+		3BB5E09418C984F600288894 /* ta_WILLR.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_WILLR.c; sourceTree = "<group>"; };
+		3BB5E09518C984F600288894 /* ta_WMA.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_WMA.c; sourceTree = "<group>"; };
+		3BB873401CC4BBF500DEAE92 /* NSArray+CCSTACompute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+CCSTACompute.h"; sourceTree = "<group>"; };
+		3BB873411CC4BBF500DEAE92 /* NSArray+CCSTACompute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+CCSTACompute.m"; sourceTree = "<group>"; };
+		3BDAD3981BDE12F9000AC06C /* test.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = test.plist; sourceTree = "<group>"; };
+		3BE486511CC39CEF00A3E4FB /* CCSStringUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSStringUtils.h; sourceTree = "<group>"; };
+		3BE486521CC39CEF00A3E4FB /* CCSStringUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSStringUtils.m; sourceTree = "<group>"; };
+		3BE486531CC39CEF00A3E4FB /* CCSTALibUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSTALibUtils.h; sourceTree = "<group>"; };
+		3BE486541CC39CEF00A3E4FB /* CCSTALibUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSTALibUtils.m; sourceTree = "<group>"; };
+		3BE486571CC39CEF00A3E4FB /* NSString+UIColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+UIColor.h"; sourceTree = "<group>"; };
+		3BE486581CC39CEF00A3E4FB /* NSString+UIColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+UIColor.m"; sourceTree = "<group>"; };
+		3BE486591CC39CEF00A3E4FB /* NSString+UserDefault.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+UserDefault.h"; sourceTree = "<group>"; };
+		3BE4865A1CC39CEF00A3E4FB /* NSString+UserDefault.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+UserDefault.m"; sourceTree = "<group>"; };
+		5D2BD16ADA0618F467FDA75B /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		69441982625698A57CC7DB46 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		C7D9E0A0F1D6DCA8178C4E37 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		F86FE27E1CA29CC9003E0DC6 /* 1min.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 1min.txt; sourceTree = "<group>"; };
+		F86FE27F1CA29CC9003E0DC6 /* 15min.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 15min.txt; sourceTree = "<group>"; };
+		F86FE2801CA29CC9003E0DC6 /* allpdts.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = allpdts.txt; sourceTree = "<group>"; };
+		F86FE2811CA29CC9003E0DC6 /* time.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = time.txt; sourceTree = "<group>"; };
+		F8C2EDD31CAE672A00D72985 /* KLineData.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = KLineData.txt; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		3BB5DEF918C9624800288894 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3BB5DF0218C9624800288894 /* CoreGraphics.framework in Frameworks */,
+				3BB5DF0418C9624800288894 /* UIKit.framework in Frameworks */,
+				3BB5DF0018C9624800288894 /* Foundation.framework in Frameworks */,
+				B9D9486EC13AC2EB4A9B76F0 /* libPods.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		107FEE6D4E679D57EDCAF8B5 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C7D9E0A0F1D6DCA8178C4E37 /* Pods.debug.xcconfig */,
+				5D2BD16ADA0618F467FDA75B /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		3B8C01671CC4CA84007914C4 /* CocoaCharts */ = {
+			isa = PBXGroup;
+			children = (
+				3B8C01681CC4CA84007914C4 /* CCSAreaChart.h */,
+				3B8C01691CC4CA84007914C4 /* CCSAreaChart.m */,
+				3B8C016A1CC4CA84007914C4 /* CCSBandAreaChart.h */,
+				3B8C016B1CC4CA84007914C4 /* CCSBandAreaChart.m */,
+				3B8C016C1CC4CA84007914C4 /* CCSBaseChartView.h */,
+				3B8C016D1CC4CA84007914C4 /* CCSBaseChartView.m */,
+				3B8C016E1CC4CA84007914C4 /* CCSBaseData.h */,
+				3B8C016F1CC4CA84007914C4 /* CCSBaseData.m */,
+				3B8C01701CC4CA84007914C4 /* CCSBOLLMASlipCandleStickChart.h */,
+				3B8C01711CC4CA84007914C4 /* CCSBOLLMASlipCandleStickChart.m */,
+				3B8C01721CC4CA84007914C4 /* CCSCandleStickChart.h */,
+				3B8C01731CC4CA84007914C4 /* CCSCandleStickChart.m */,
+				3B8C01741CC4CA84007914C4 /* CCSCandleStickChartData.h */,
+				3B8C01751CC4CA84007914C4 /* CCSCandleStickChartData.m */,
+				3B8C01761CC4CA84007914C4 /* CCSCocoaCharts.h */,
+				3B8C01771CC4CA84007914C4 /* CCSColoredStickChart.h */,
+				3B8C01781CC4CA84007914C4 /* CCSColoredStickChart.m */,
+				3B8C01791CC4CA84007914C4 /* CCSColoredStickChartData.h */,
+				3B8C017A1CC4CA84007914C4 /* CCSColoredStickChartData.m */,
+				3B8C017B1CC4CA84007914C4 /* CCSDonutChart.h */,
+				3B8C017C1CC4CA84007914C4 /* CCSDonutChart.m */,
+				3B8C017D1CC4CA84007914C4 /* CCSGridChart.h */,
+				3B8C017E1CC4CA84007914C4 /* CCSGridChart.m */,
+				3B8C017F1CC4CA84007914C4 /* CCSGroupChart.h */,
+				3B8C01801CC4CA84007914C4 /* CCSGroupChart.m */,
+				3B8C01811CC4CA84007914C4 /* CCSHeader.h */,
+				3B8C01821CC4CA84007914C4 /* CCSLineChart.h */,
+				3B8C01831CC4CA84007914C4 /* CCSLineChart.m */,
+				3B8C01841CC4CA84007914C4 /* CCSLineData.h */,
+				3B8C01851CC4CA84007914C4 /* CCSLineData.m */,
+				3B8C01861CC4CA84007914C4 /* CCSMACandleStickChart.h */,
+				3B8C01871CC4CA84007914C4 /* CCSMACandleStickChart.m */,
+				3B8C01881CC4CA84007914C4 /* CCSMACDChart.h */,
+				3B8C01891CC4CA84007914C4 /* CCSMACDChart.m */,
+				3B8C018A1CC4CA84007914C4 /* CCSMACDData.h */,
+				3B8C018B1CC4CA84007914C4 /* CCSMACDData.m */,
+				3B8C018C1CC4CA84007914C4 /* CCSMAColoredStickChart.h */,
+				3B8C018D1CC4CA84007914C4 /* CCSMAColoredStickChart.m */,
+				3B8C018E1CC4CA84007914C4 /* CCSMASlipCandleStickChart.h */,
+				3B8C018F1CC4CA84007914C4 /* CCSMASlipCandleStickChart.m */,
+				3B8C01901CC4CA84007914C4 /* CCSMAStickChart.h */,
+				3B8C01911CC4CA84007914C4 /* CCSMAStickChart.m */,
+				3B8C01921CC4CA84007914C4 /* CCSMinusStickChart.h */,
+				3B8C01931CC4CA84007914C4 /* CCSMinusStickChart.m */,
+				3B8C01941CC4CA84007914C4 /* CCSOHLCVDData.h */,
+				3B8C01951CC4CA84007914C4 /* CCSOHLCVDData.m */,
+				3B8C01961CC4CA84007914C4 /* CCSPieChart.h */,
+				3B8C01971CC4CA84007914C4 /* CCSPieChart.m */,
+				3B8C01981CC4CA84007914C4 /* CCSPizzaChart.h */,
+				3B8C01991CC4CA84007914C4 /* CCSPizzaChart.m */,
+				3B8C019A1CC4CA84007914C4 /* CCSRadarChart.h */,
+				3B8C019B1CC4CA84007914C4 /* CCSRadarChart.m */,
+				3B8C01A01CC4CA84007914C4 /* CCSSlipCandleStickChart.h */,
+				3B8C01A11CC4CA84007914C4 /* CCSSlipCandleStickChart.m */,
+				3B8C01A21CC4CA84007914C4 /* CCSSlipLineChart.h */,
+				3B8C01A31CC4CA84007914C4 /* CCSSlipLineChart.m */,
+				3B8C01A41CC4CA84007914C4 /* CCSSlipStickChart.h */,
+				3B8C01A51CC4CA84007914C4 /* CCSSlipStickChart.m */,
+				3B8C01A61CC4CA84007914C4 /* CCSSpiderWebChart.h */,
+				3B8C01A71CC4CA84007914C4 /* CCSSpiderWebChart.m */,
+				3B8C01A81CC4CA84007914C4 /* CCSStackedAreaChart.h */,
+				3B8C01A91CC4CA84007914C4 /* CCSStackedAreaChart.m */,
+				3B8C01AA1CC4CA84007914C4 /* CCSStickChart.h */,
+				3B8C01AB1CC4CA84007914C4 /* CCSStickChart.m */,
+				3B8C01AC1CC4CA84007914C4 /* CCSStickChartData.h */,
+				3B8C01AD1CC4CA84007914C4 /* CCSStickChartData.m */,
+				3B8C01AE1CC4CA84007914C4 /* CCSTitledLine.h */,
+				3B8C01AF1CC4CA84007914C4 /* CCSTitledLine.m */,
+				3B8C01B01CC4CA84007914C4 /* CCSTitleValue.h */,
+				3B8C01B11CC4CA84007914C4 /* CCSTitleValue.m */,
+				3B8C01B21CC4CA84007914C4 /* CCSTitleValueColor.h */,
+				3B8C01B31CC4CA84007914C4 /* CCSTitleValueColor.m */,
+				3B8C01B41CC4CA84007914C4 /* CCSTitleValues.h */,
+				3B8C01B51CC4CA84007914C4 /* CCSTitleValues.m */,
+				3B8C01B61CC4CA84007914C4 /* CCSTitleValuesColor.h */,
+				3B8C01B71CC4CA84007914C4 /* CCSTitleValuesColor.m */,
+			);
+			name = CocoaCharts;
+			path = ../CocoaCharts;
+			sourceTree = "<group>";
+		};
+		3B8C01DF1CC4CAB8007914C4 /* CocoaChartsSample */ = {
+			isa = PBXGroup;
+			children = (
+				3B697CCE1CC4CCBA0098C1A8 /* CCSJSONData.h */,
+				3B697CCF1CC4CCBA0098C1A8 /* CCSJSONData.m */,
+				3B697CD01CC4CCBA0098C1A8 /* CCSSegmentedControl.h */,
+				3B697CD11CC4CCBA0098C1A8 /* CCSSegmentedControl.m */,
+				3B8C01E01CC4CAB8007914C4 /* CCSAppDelegate.h */,
+				3B8C01E11CC4CAB8007914C4 /* CCSAppDelegate.m */,
+				3B8C01E21CC4CAB8007914C4 /* CCSAreaChartViewController.h */,
+				3B8C01E31CC4CAB8007914C4 /* CCSAreaChartViewController.m */,
+				3B8C01E41CC4CAB8007914C4 /* CCSBandAreaChartViewController.h */,
+				3B8C01E51CC4CAB8007914C4 /* CCSBandAreaChartViewController.m */,
+				3B8C01E61CC4CAB8007914C4 /* CCSBOLLMASlipCandleStickChartViewController.h */,
+				3B8C01E71CC4CAB8007914C4 /* CCSBOLLMASlipCandleStickChartViewController.m */,
+				3B8C01E81CC4CAB8007914C4 /* CCSCandleStickChartViewController.h */,
+				3B8C01E91CC4CAB8007914C4 /* CCSCandleStickChartViewController.m */,
+				3B8C01EA1CC4CAB8007914C4 /* CCSChartsSettingTableViewCell.h */,
+				3B8C01EB1CC4CAB8007914C4 /* CCSChartsSettingTableViewCell.m */,
+				3B8C01EC1CC4CAB8007914C4 /* CCSChartsSettingTableViewCell.xib */,
+				3B8C01ED1CC4CAB8007914C4 /* CCSChartsSettingViewController.h */,
+				3B8C01EE1CC4CAB8007914C4 /* CCSChartsSettingViewController.m */,
+				3B8C01EF1CC4CAB8007914C4 /* CCSChartsSettingViewController.xib */,
+				3B8C01F01CC4CAB8007914C4 /* CCSColoredStickChartViewController.h */,
+				3B8C01F11CC4CAB8007914C4 /* CCSColoredStickChartViewController.m */,
+				3B8C01F21CC4CAB8007914C4 /* CCSDetailViewController.h */,
+				3B8C01F31CC4CAB8007914C4 /* CCSDetailViewController.m */,
+				3B8C01F41CC4CAB8007914C4 /* CCSDonutChartViewController.h */,
+				3B8C01F51CC4CAB8007914C4 /* CCSDonutChartViewController.m */,
+				3B8C01F61CC4CAB8007914C4 /* CCSGridChartViewController.h */,
+				3B8C01F71CC4CAB8007914C4 /* CCSGridChartViewController.m */,
+				3B8C01F81CC4CAB8007914C4 /* CCSLineChartViewController.h */,
+				3B8C01F91CC4CAB8007914C4 /* CCSLineChartViewController.m */,
+				3B8C01FA1CC4CAB8007914C4 /* CCSMACandleStickChartViewController.h */,
+				3B8C01FB1CC4CAB8007914C4 /* CCSMACandleStickChartViewController.m */,
+				3B8C01FC1CC4CAB8007914C4 /* CCSMACDChartViewController.h */,
+				3B8C01FD1CC4CAB8007914C4 /* CCSMACDChartViewController.m */,
+				3B8C01FE1CC4CAB8007914C4 /* CCSMASlipCandleStickChartViewController.h */,
+				3B8C01FF1CC4CAB8007914C4 /* CCSMASlipCandleStickChartViewController.m */,
+				3B8C02001CC4CAB8007914C4 /* CCSMAStickChartViewController.h */,
+				3B8C02011CC4CAB8007914C4 /* CCSMAStickChartViewController.m */,
+				3B8C02021CC4CAB8007914C4 /* CCSMinusStickChartViewController.h */,
+				3B8C02031CC4CAB8007914C4 /* CCSMinusStickChartViewController.m */,
+				3B8C02041CC4CAB8007914C4 /* CCSPieChartViewController.h */,
+				3B8C02051CC4CAB8007914C4 /* CCSPieChartViewController.m */,
+				3B8C02061CC4CAB8007914C4 /* CCSPizzaChartViewController.h */,
+				3B8C02071CC4CAB8007914C4 /* CCSPizzaChartViewController.m */,
+				3B8C02081CC4CAB8007914C4 /* CCSRadarChartViewController.h */,
+				3B8C02091CC4CAB8007914C4 /* CCSRadarChartViewController.m */,
+				3B8C020A1CC4CAB8007914C4 /* CCSSampleGroupChartDemoViewController.h */,
+				3B8C020B1CC4CAB8007914C4 /* CCSSampleGroupChartDemoViewController.m */,
+				3B8C020C1CC4CAB8007914C4 /* CCSSampleGroupChartDemoViewController.xib */,
+				3B8C020D1CC4CAB8007914C4 /* CCSSampleHorizontalViewController.h */,
+				3B8C020E1CC4CAB8007914C4 /* CCSSampleHorizontalViewController.m */,
+				3B8C020F1CC4CAB8007914C4 /* CCSSamplGroupChartDetailTableViewCell.h */,
+				3B8C02101CC4CAB8007914C4 /* CCSSamplGroupChartDetailTableViewCell.m */,
+				3B8C02111CC4CAB8007914C4 /* CCSSamplGroupChartDetailTableViewCell.xib */,
+				3B8C02121CC4CAB8007914C4 /* CCSSettingDetailViewController.h */,
+				3B8C02131CC4CAB8007914C4 /* CCSSettingDetailViewController.m */,
+				3B8C02141CC4CAB8007914C4 /* CCSSettingDetailViewController.xib */,
+				3B8C02151CC4CAB8007914C4 /* CCSSettingResetTableViewCell.h */,
+				3B8C02161CC4CAB8007914C4 /* CCSSettingResetTableViewCell.m */,
+				3B8C02171CC4CAB8007914C4 /* CCSSettingResetTableViewCell.xib */,
+				3B8C02181CC4CAB8007914C4 /* CCSSimpleDemoViewController.h */,
+				3B8C02191CC4CAB8007914C4 /* CCSSimpleDemoViewController.m */,
+				3B8C021A1CC4CAB8007914C4 /* CCSSlipCandleStickChartViewController.h */,
+				3B8C021B1CC4CAB8007914C4 /* CCSSlipCandleStickChartViewController.m */,
+				3B8C021C1CC4CAB8007914C4 /* CCSSlipLineChartViewController.h */,
+				3B8C021D1CC4CAB8007914C4 /* CCSSlipLineChartViewController.m */,
+				3B8C021E1CC4CAB8007914C4 /* CCSSlipStickChartViewController.h */,
+				3B8C021F1CC4CAB8007914C4 /* CCSSlipStickChartViewController.m */,
+				3B8C02201CC4CAB8007914C4 /* CCSSpiderWebChartViewController.h */,
+				3B8C02211CC4CAB8007914C4 /* CCSSpiderWebChartViewController.m */,
+				3B8C02221CC4CAB8007914C4 /* CCSStackedAreaChartViewController.h */,
+				3B8C02231CC4CAB8007914C4 /* CCSStackedAreaChartViewController.m */,
+				3B8C02241CC4CAB8007914C4 /* CCSStickChartViewController.h */,
+				3B8C02251CC4CAB8007914C4 /* CCSStickChartViewController.m */,
+				3B8C02261CC4CAB8007914C4 /* CCSViewController.h */,
+				3B8C02271CC4CAB8007914C4 /* CCSViewController.m */,
+				3B8C02281CC4CAB8007914C4 /* CocoaChartsSample-Info.plist */,
+				3B8C02291CC4CAB8007914C4 /* CocoaChartsSample-Prefix.pch */,
+				3B8C022A1CC4CAB8007914C4 /* InfoPlist.strings */,
+				3B8C022C1CC4CAB8007914C4 /* Images.xcassets */,
+				3B8C022D1CC4CAB8007914C4 /* main.m */,
+			);
+			path = CocoaChartsSample;
+			sourceTree = "<group>";
+		};
+		3BB5DEF318C9624800288894 = {
+			isa = PBXGroup;
+			children = (
+				3B8C01DF1CC4CAB8007914C4 /* CocoaChartsSample */,
+				3B8C01671CC4CA84007914C4 /* CocoaCharts */,
+				F8C2EDD31CAE672A00D72985 /* KLineData.txt */,
+				F86FE27E1CA29CC9003E0DC6 /* 1min.txt */,
+				F86FE27F1CA29CC9003E0DC6 /* 15min.txt */,
+				F86FE2801CA29CC9003E0DC6 /* allpdts.txt */,
+				F86FE2811CA29CC9003E0DC6 /* time.txt */,
+				3BDAD3981BDE12F9000AC06C /* test.plist */,
+				3BE486501CC39CEF00A3E4FB /* CocoaChartsUtils */,
+				3BB5DFE118C984F600288894 /* N225.xml */,
+				3BB5DFE218C984F600288894 /* TALib */,
+				3BB5DEFE18C9624800288894 /* Frameworks */,
+				3BB5DEFD18C9624800288894 /* Products */,
+				107FEE6D4E679D57EDCAF8B5 /* Pods */,
+			);
+			sourceTree = "<group>";
+		};
+		3BB5DEFD18C9624800288894 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3BB5DEFC18C9624800288894 /* CocoaChartsSample.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		3BB5DEFE18C9624800288894 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3BB5DEFF18C9624800288894 /* Foundation.framework */,
+				3BB5DF0118C9624800288894 /* CoreGraphics.framework */,
+				3BB5DF0318C9624800288894 /* UIKit.framework */,
+				69441982625698A57CC7DB46 /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		3BB5DFE218C984F600288894 /* TALib */ = {
+			isa = PBXGroup;
+			children = (
+				3BB5DFE318C984F600288894 /* include */,
+				3BB5DFE918C984F600288894 /* src */,
+			);
+			path = TALib;
+			sourceTree = "<group>";
+		};
+		3BB5DFE318C984F600288894 /* include */ = {
+			isa = PBXGroup;
+			children = (
+				3BB5DFE418C984F600288894 /* ta_abstract.h */,
+				3BB5DFE518C984F600288894 /* ta_common.h */,
+				3BB5DFE618C984F600288894 /* ta_defs.h */,
+				3BB5DFE718C984F600288894 /* ta_func.h */,
+				3BB5DFE818C984F600288894 /* ta_libc.h */,
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
+		3BB5DFE918C984F600288894 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				3BB5DFEA18C984F600288894 /* ta_common */,
+				3BB5DFF318C984F600288894 /* ta_func */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
+		3BB5DFEA18C984F600288894 /* ta_common */ = {
+			isa = PBXGroup;
+			children = (
+				3BB5DFEB18C984F600288894 /* ta_global.c */,
+				3BB5DFEC18C984F600288894 /* ta_global.h */,
+				3BB5DFED18C984F600288894 /* ta_magic_nb.h */,
+				3BB5DFEE18C984F600288894 /* ta_memory.h */,
+				3BB5DFEF18C984F600288894 /* ta_pragma.h */,
+				3BB5DFF018C984F600288894 /* ta_retcode.c */,
+				3BB5DFF118C984F600288894 /* ta_retcode.csv */,
+				3BB5DFF218C984F600288894 /* ta_version.c */,
+			);
+			path = ta_common;
+			sourceTree = "<group>";
+		};
+		3BB5DFF318C984F600288894 /* ta_func */ = {
+			isa = PBXGroup;
+			children = (
+				3BB5DFF418C984F600288894 /* ta_ACOS.c */,
+				3BB5DFF518C984F600288894 /* ta_AD.c */,
+				3BB5DFF618C984F600288894 /* ta_ADD.c */,
+				3BB5DFF718C984F600288894 /* ta_ADOSC.c */,
+				3BB5DFF818C984F600288894 /* ta_ADX.c */,
+				3BB5DFF918C984F600288894 /* ta_ADXR.c */,
+				3BB5DFFA18C984F600288894 /* ta_APO.c */,
+				3BB5DFFB18C984F600288894 /* ta_AROON.c */,
+				3BB5DFFC18C984F600288894 /* ta_AROONOSC.c */,
+				3BB5DFFD18C984F600288894 /* ta_ASIN.c */,
+				3BB5DFFE18C984F600288894 /* ta_ATAN.c */,
+				3BB5DFFF18C984F600288894 /* ta_ATR.c */,
+				3BB5E00018C984F600288894 /* ta_AVGPRICE.c */,
+				3BB5E00118C984F600288894 /* ta_BBANDS.c */,
+				3BB5E00218C984F600288894 /* ta_BETA.c */,
+				3BB5E00318C984F600288894 /* ta_BOP.c */,
+				3BB5E00418C984F600288894 /* ta_CCI.c */,
+				3BB5E00518C984F600288894 /* ta_CDL2CROWS.c */,
+				3BB5E00618C984F600288894 /* ta_CDL3BLACKCROWS.c */,
+				3BB5E00718C984F600288894 /* ta_CDL3INSIDE.c */,
+				3BB5E00818C984F600288894 /* ta_CDL3LINESTRIKE.c */,
+				3BB5E00918C984F600288894 /* ta_CDL3OUTSIDE.c */,
+				3BB5E00A18C984F600288894 /* ta_CDL3STARSINSOUTH.c */,
+				3BB5E00B18C984F600288894 /* ta_CDL3WHITESOLDIERS.c */,
+				3BB5E00C18C984F600288894 /* ta_CDLABANDONEDBABY.c */,
+				3BB5E00D18C984F600288894 /* ta_CDLADVANCEBLOCK.c */,
+				3BB5E00E18C984F600288894 /* ta_CDLBELTHOLD.c */,
+				3BB5E00F18C984F600288894 /* ta_CDLBREAKAWAY.c */,
+				3BB5E01018C984F600288894 /* ta_CDLCLOSINGMARUBOZU.c */,
+				3BB5E01118C984F600288894 /* ta_CDLCONCEALBABYSWALL.c */,
+				3BB5E01218C984F600288894 /* ta_CDLCOUNTERATTACK.c */,
+				3BB5E01318C984F600288894 /* ta_CDLDARKCLOUDCOVER.c */,
+				3BB5E01418C984F600288894 /* ta_CDLDOJI.c */,
+				3BB5E01518C984F600288894 /* ta_CDLDOJISTAR.c */,
+				3BB5E01618C984F600288894 /* ta_CDLDRAGONFLYDOJI.c */,
+				3BB5E01718C984F600288894 /* ta_CDLENGULFING.c */,
+				3BB5E01818C984F600288894 /* ta_CDLEVENINGDOJISTAR.c */,
+				3BB5E01918C984F600288894 /* ta_CDLEVENINGSTAR.c */,
+				3BB5E01A18C984F600288894 /* ta_CDLGAPSIDESIDEWHITE.c */,
+				3BB5E01B18C984F600288894 /* ta_CDLGRAVESTONEDOJI.c */,
+				3BB5E01C18C984F600288894 /* ta_CDLHAMMER.c */,
+				3BB5E01D18C984F600288894 /* ta_CDLHANGINGMAN.c */,
+				3BB5E01E18C984F600288894 /* ta_CDLHARAMI.c */,
+				3BB5E01F18C984F600288894 /* ta_CDLHARAMICROSS.c */,
+				3BB5E02018C984F600288894 /* ta_CDLHIGHWAVE.c */,
+				3BB5E02118C984F600288894 /* ta_CDLHIKKAKE.c */,
+				3BB5E02218C984F600288894 /* ta_CDLHIKKAKEMOD.c */,
+				3BB5E02318C984F600288894 /* ta_CDLHOMINGPIGEON.c */,
+				3BB5E02418C984F600288894 /* ta_CDLIDENTICAL3CROWS.c */,
+				3BB5E02518C984F600288894 /* ta_CDLINNECK.c */,
+				3BB5E02618C984F600288894 /* ta_CDLINVERTEDHAMMER.c */,
+				3BB5E02718C984F600288894 /* ta_CDLKICKING.c */,
+				3BB5E02818C984F600288894 /* ta_CDLKICKINGBYLENGTH.c */,
+				3BB5E02918C984F600288894 /* ta_CDLLADDERBOTTOM.c */,
+				3BB5E02A18C984F600288894 /* ta_CDLLONGLEGGEDDOJI.c */,
+				3BB5E02B18C984F600288894 /* ta_CDLLONGLINE.c */,
+				3BB5E02C18C984F600288894 /* ta_CDLMARUBOZU.c */,
+				3BB5E02D18C984F600288894 /* ta_CDLMATCHINGLOW.c */,
+				3BB5E02E18C984F600288894 /* ta_CDLMATHOLD.c */,
+				3BB5E02F18C984F600288894 /* ta_CDLMORNINGDOJISTAR.c */,
+				3BB5E03018C984F600288894 /* ta_CDLMORNINGSTAR.c */,
+				3BB5E03118C984F600288894 /* ta_CDLONNECK.c */,
+				3BB5E03218C984F600288894 /* ta_CDLPIERCING.c */,
+				3BB5E03318C984F600288894 /* ta_CDLRICKSHAWMAN.c */,
+				3BB5E03418C984F600288894 /* ta_CDLRISEFALL3METHODS.c */,
+				3BB5E03518C984F600288894 /* ta_CDLSEPARATINGLINES.c */,
+				3BB5E03618C984F600288894 /* ta_CDLSHOOTINGSTAR.c */,
+				3BB5E03718C984F600288894 /* ta_CDLSHORTLINE.c */,
+				3BB5E03818C984F600288894 /* ta_CDLSPINNINGTOP.c */,
+				3BB5E03918C984F600288894 /* ta_CDLSTALLEDPATTERN.c */,
+				3BB5E03A18C984F600288894 /* ta_CDLSTICKSANDWICH.c */,
+				3BB5E03B18C984F600288894 /* ta_CDLTAKURI.c */,
+				3BB5E03C18C984F600288894 /* ta_CDLTASUKIGAP.c */,
+				3BB5E03D18C984F600288894 /* ta_CDLTHRUSTING.c */,
+				3BB5E03E18C984F600288894 /* ta_CDLTRISTAR.c */,
+				3BB5E03F18C984F600288894 /* ta_CDLUNIQUE3RIVER.c */,
+				3BB5E04018C984F600288894 /* ta_CDLUPSIDEGAP2CROWS.c */,
+				3BB5E04118C984F600288894 /* ta_CDLXSIDEGAP3METHODS.c */,
+				3BB5E04218C984F600288894 /* ta_CEIL.c */,
+				3BB5E04318C984F600288894 /* ta_CMO.c */,
+				3BB5E04418C984F600288894 /* ta_CORREL.c */,
+				3BB5E04518C984F600288894 /* ta_COS.c */,
+				3BB5E04618C984F600288894 /* ta_COSH.c */,
+				3BB5E04718C984F600288894 /* ta_DEMA.c */,
+				3BB5E04818C984F600288894 /* ta_DIV.c */,
+				3BB5E04918C984F600288894 /* ta_DX.c */,
+				3BB5E04A18C984F600288894 /* ta_EMA.c */,
+				3BB5E04B18C984F600288894 /* ta_EXP.c */,
+				3BB5E04C18C984F600288894 /* ta_FLOOR.c */,
+				3BB5E04D18C984F600288894 /* ta_HT_DCPERIOD.c */,
+				3BB5E04E18C984F600288894 /* ta_HT_DCPHASE.c */,
+				3BB5E04F18C984F600288894 /* ta_HT_PHASOR.c */,
+				3BB5E05018C984F600288894 /* ta_HT_SINE.c */,
+				3BB5E05118C984F600288894 /* ta_HT_TRENDLINE.c */,
+				3BB5E05218C984F600288894 /* ta_HT_TRENDMODE.c */,
+				3BB5E05318C984F600288894 /* ta_KAMA.c */,
+				3BB5E05418C984F600288894 /* ta_LINEARREG.c */,
+				3BB5E05518C984F600288894 /* ta_LINEARREG_ANGLE.c */,
+				3BB5E05618C984F600288894 /* ta_LINEARREG_INTERCEPT.c */,
+				3BB5E05718C984F600288894 /* ta_LINEARREG_SLOPE.c */,
+				3BB5E05818C984F600288894 /* ta_LN.c */,
+				3BB5E05918C984F600288894 /* ta_LOG10.c */,
+				3BB5E05A18C984F600288894 /* ta_MA.c */,
+				3BB5E05B18C984F600288894 /* ta_MACD.c */,
+				3BB5E05C18C984F600288894 /* ta_MACDEXT.c */,
+				3BB5E05D18C984F600288894 /* ta_MACDFIX.c */,
+				3BB5E05E18C984F600288894 /* ta_MAMA.c */,
+				3BB5E05F18C984F600288894 /* ta_MAVP.c */,
+				3BB5E06018C984F600288894 /* ta_MAX.c */,
+				3BB5E06118C984F600288894 /* ta_MAXINDEX.c */,
+				3BB5E06218C984F600288894 /* ta_MEDPRICE.c */,
+				3BB5E06318C984F600288894 /* ta_MFI.c */,
+				3BB5E06418C984F600288894 /* ta_MIDPOINT.c */,
+				3BB5E06518C984F600288894 /* ta_MIDPRICE.c */,
+				3BB5E06618C984F600288894 /* ta_MIN.c */,
+				3BB5E06718C984F600288894 /* ta_MININDEX.c */,
+				3BB5E06818C984F600288894 /* ta_MINMAX.c */,
+				3BB5E06918C984F600288894 /* ta_MINMAXINDEX.c */,
+				3BB5E06A18C984F600288894 /* ta_MINUS_DI.c */,
+				3BB5E06B18C984F600288894 /* ta_MINUS_DM.c */,
+				3BB5E06C18C984F600288894 /* ta_MOM.c */,
+				3BB5E06D18C984F600288894 /* ta_MULT.c */,
+				3BB5E06E18C984F600288894 /* ta_NATR.c */,
+				3BB5E06F18C984F600288894 /* ta_NVI.c */,
+				3BB5E07018C984F600288894 /* ta_OBV.c */,
+				3BB5E07118C984F600288894 /* ta_PLUS_DI.c */,
+				3BB5E07218C984F600288894 /* ta_PLUS_DM.c */,
+				3BB5E07318C984F600288894 /* ta_PPO.c */,
+				3BB5E07418C984F600288894 /* ta_PVI.c */,
+				3BB5E07518C984F600288894 /* ta_ROC.c */,
+				3BB5E07618C984F600288894 /* ta_ROCP.c */,
+				3BB5E07718C984F600288894 /* ta_ROCR.c */,
+				3BB5E07818C984F600288894 /* ta_ROCR100.c */,
+				3BB5E07918C984F600288894 /* ta_RSI.c */,
+				3BB5E07A18C984F600288894 /* ta_SAR.c */,
+				3BB5E07B18C984F600288894 /* ta_SAREXT.c */,
+				3BB5E07C18C984F600288894 /* ta_SIN.c */,
+				3BB5E07D18C984F600288894 /* ta_SINH.c */,
+				3BB5E07E18C984F600288894 /* ta_SMA.c */,
+				3BB5E07F18C984F600288894 /* ta_SQRT.c */,
+				3BB5E08018C984F600288894 /* ta_STDDEV.c */,
+				3BB5E08118C984F600288894 /* ta_STOCH.c */,
+				3BB5E08218C984F600288894 /* ta_STOCHF.c */,
+				3BB5E08318C984F600288894 /* ta_STOCHRSI.c */,
+				3BB5E08418C984F600288894 /* ta_SUB.c */,
+				3BB5E08518C984F600288894 /* ta_SUM.c */,
+				3BB5E08618C984F600288894 /* ta_T3.c */,
+				3BB5E08718C984F600288894 /* ta_TAN.c */,
+				3BB5E08818C984F600288894 /* ta_TANH.c */,
+				3BB5E08918C984F600288894 /* ta_TEMA.c */,
+				3BB5E08A18C984F600288894 /* ta_TRANGE.c */,
+				3BB5E08B18C984F600288894 /* ta_TRIMA.c */,
+				3BB5E08C18C984F600288894 /* ta_TRIX.c */,
+				3BB5E08D18C984F600288894 /* ta_TSF.c */,
+				3BB5E08E18C984F600288894 /* ta_TYPPRICE.c */,
+				3BB5E08F18C984F600288894 /* ta_ULTOSC.c */,
+				3BB5E09018C984F600288894 /* ta_utility.c */,
+				3BB5E09118C984F600288894 /* ta_utility.h */,
+				3BB5E09218C984F600288894 /* ta_VAR.c */,
+				3BB5E09318C984F600288894 /* ta_WCLPRICE.c */,
+				3BB5E09418C984F600288894 /* ta_WILLR.c */,
+				3BB5E09518C984F600288894 /* ta_WMA.c */,
+			);
+			path = ta_func;
+			sourceTree = "<group>";
+		};
+		3BE486501CC39CEF00A3E4FB /* CocoaChartsUtils */ = {
+			isa = PBXGroup;
+			children = (
+				3BB873401CC4BBF500DEAE92 /* NSArray+CCSTACompute.h */,
+				3BB873411CC4BBF500DEAE92 /* NSArray+CCSTACompute.m */,
+				3BE486511CC39CEF00A3E4FB /* CCSStringUtils.h */,
+				3BE486521CC39CEF00A3E4FB /* CCSStringUtils.m */,
+				3BE486531CC39CEF00A3E4FB /* CCSTALibUtils.h */,
+				3BE486541CC39CEF00A3E4FB /* CCSTALibUtils.m */,
+				3BE486571CC39CEF00A3E4FB /* NSString+UIColor.h */,
+				3BE486581CC39CEF00A3E4FB /* NSString+UIColor.m */,
+				3BE486591CC39CEF00A3E4FB /* NSString+UserDefault.h */,
+				3BE4865A1CC39CEF00A3E4FB /* NSString+UserDefault.m */,
+			);
+			name = CocoaChartsUtils;
+			path = ../CocoaChartsUtils;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		3BB5DEFB18C9624800288894 /* CocoaChartsSample */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3BB5DF2818C9624800288894 /* Build configuration list for PBXNativeTarget "CocoaChartsSample" */;
+			buildPhases = (
+				E6E52B2ADB1B38D21BBBB97D /* Check Pods Manifest.lock */,
+				3BB5DEF818C9624800288894 /* Sources */,
+				3BB5DEF918C9624800288894 /* Frameworks */,
+				3BB5DEFA18C9624800288894 /* Resources */,
+				CE9E9AB180DB67F8C0974348 /* Embed Pods Frameworks */,
+				4046B6C0D5A430AC8147A602 /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CocoaChartsSample;
+			productName = CocoaChartsSampleWithARC;
+			productReference = 3BB5DEFC18C9624800288894 /* CocoaChartsSample.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		3BB5DEF418C9624800288894 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = CCS;
+				LastUpgradeCheck = 0720;
+				ORGANIZATIONNAME = limc;
+				TargetAttributes = {
+					3BB5DEFB18C9624800288894 = {
+						DevelopmentTeam = ATMPA4PSH3;
+					};
+				};
+			};
+			buildConfigurationList = 3BB5DEF718C9624800288894 /* Build configuration list for PBXProject "CocoaChartsSample" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 3BB5DEF318C9624800288894;
+			productRefGroup = 3BB5DEFD18C9624800288894 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				3BB5DEFB18C9624800288894 /* CocoaChartsSample */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		3BB5DEFA18C9624800288894 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3B8C023B1CC4CAB8007914C4 /* CCSChartsSettingViewController.xib in Resources */,
+				3B8C025B1CC4CAB8007914C4 /* InfoPlist.strings in Resources */,
+				3B8C024D1CC4CAB8007914C4 /* CCSSamplGroupChartDetailTableViewCell.xib in Resources */,
+				3B8C02391CC4CAB8007914C4 /* CCSChartsSettingTableViewCell.xib in Resources */,
+				3BB5E09618C984F600288894 /* N225.xml in Resources */,
+				3BB5E09918C984F600288894 /* ta_retcode.csv in Resources */,
+				3BDAD3991BDE12F9000AC06C /* test.plist in Resources */,
+				F86FE2831CA29CC9003E0DC6 /* 15min.txt in Resources */,
+				F86FE2841CA29CC9003E0DC6 /* allpdts.txt in Resources */,
+				F86FE2851CA29CC9003E0DC6 /* time.txt in Resources */,
+				F8C2EDD41CAE672A00D72985 /* KLineData.txt in Resources */,
+				3B8C025C1CC4CAB8007914C4 /* Images.xcassets in Resources */,
+				3B8C02511CC4CAB8007914C4 /* CCSSettingResetTableViewCell.xib in Resources */,
+				F86FE2821CA29CC9003E0DC6 /* 1min.txt in Resources */,
+				3B8C024A1CC4CAB8007914C4 /* CCSSampleGroupChartDemoViewController.xib in Resources */,
+				3B8C024F1CC4CAB8007914C4 /* CCSSettingDetailViewController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		4046B6C0D5A430AC8147A602 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CE9E9AB180DB67F8C0974348 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E6E52B2ADB1B38D21BBBB97D /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		3BB5DEF818C9624800288894 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3BB5E0C918C984F600288894 /* ta_CDLHIKKAKEMOD.c in Sources */,
+				3BB5E10718C984F600288894 /* ta_MAX.c in Sources */,
+				3BB5E0A118C984F600288894 /* ta_APO.c in Sources */,
+				3BB5E11E18C984F600288894 /* ta_ROCR.c in Sources */,
+				3BB5E09E18C984F600288894 /* ta_ADOSC.c in Sources */,
+				3BB5E12418C984F600288894 /* ta_SINH.c in Sources */,
+				3BB5E11318C984F600288894 /* ta_MOM.c in Sources */,
+				3BB5E11B18C984F600288894 /* ta_PVI.c in Sources */,
+				3BB5E0EC18C984F600288894 /* ta_COS.c in Sources */,
+				3B8C02541CC4CAB8007914C4 /* CCSSlipLineChartViewController.m in Sources */,
+				3BB5E10618C984F600288894 /* ta_MAVP.c in Sources */,
+				3B8C02521CC4CAB8007914C4 /* CCSSimpleDemoViewController.m in Sources */,
+				3BB5E0B618C984F600288894 /* ta_CDLBREAKAWAY.c in Sources */,
+				3BB5E0C718C984F600288894 /* ta_CDLHIGHWAVE.c in Sources */,
+				3BB5E0D118C984F600288894 /* ta_CDLLONGLEGGEDDOJI.c in Sources */,
+				3BB5E0A518C984F600288894 /* ta_ATAN.c in Sources */,
+				3BB5E0EF18C984F600288894 /* ta_DIV.c in Sources */,
+				3BB5E0F818C984F600288894 /* ta_HT_TRENDLINE.c in Sources */,
+				3B8C02451CC4CAB8007914C4 /* CCSMinusStickChartViewController.m in Sources */,
+				3BB5E0CD18C984F600288894 /* ta_CDLINVERTEDHAMMER.c in Sources */,
+				3BB5E0BE18C984F600288894 /* ta_CDLENGULFING.c in Sources */,
+				3BB5E10118C984F600288894 /* ta_MA.c in Sources */,
+				3BB5E10418C984F600288894 /* ta_MACDFIX.c in Sources */,
+				3BB5E0E918C984F600288894 /* ta_CEIL.c in Sources */,
+				3BB5E0AE18C984F600288894 /* ta_CDL3INSIDE.c in Sources */,
+				3BB5E0F718C984F600288894 /* ta_HT_SINE.c in Sources */,
+				3BB5E0EB18C984F600288894 /* ta_CORREL.c in Sources */,
+				3BE4865B1CC39CEF00A3E4FB /* CCSStringUtils.m in Sources */,
+				3B8C01D71CC4CA84007914C4 /* CCSStackedAreaChart.m in Sources */,
+				3BB5E12218C984F600288894 /* ta_SAREXT.c in Sources */,
+				3B8C01C21CC4CA84007914C4 /* CCSGridChart.m in Sources */,
+				3BB5E0CA18C984F600288894 /* ta_CDLHOMINGPIGEON.c in Sources */,
+				3BB5E0C418C984F600288894 /* ta_CDLHANGINGMAN.c in Sources */,
+				3B8C01CE1CC4CA84007914C4 /* CCSPieChart.m in Sources */,
+				3BB5E0F518C984F600288894 /* ta_HT_DCPHASE.c in Sources */,
+				3BB5E10918C984F600288894 /* ta_MEDPRICE.c in Sources */,
+				3BB5E0E218C984F600288894 /* ta_CDLTAKURI.c in Sources */,
+				3BB5E0AA18C984F600288894 /* ta_BOP.c in Sources */,
+				3BB5E0F018C984F600288894 /* ta_DX.c in Sources */,
+				3BB5E0D618C984F600288894 /* ta_CDLMORNINGDOJISTAR.c in Sources */,
+				3BB5E10D18C984F600288894 /* ta_MIN.c in Sources */,
+				3BB5E0F618C984F600288894 /* ta_HT_PHASOR.c in Sources */,
+				3BB5E09B18C984F600288894 /* ta_ACOS.c in Sources */,
+				3B8C02501CC4CAB8007914C4 /* CCSSettingResetTableViewCell.m in Sources */,
+				3BB5E0FA18C984F600288894 /* ta_KAMA.c in Sources */,
+				3BB5E11F18C984F600288894 /* ta_ROCR100.c in Sources */,
+				3BB5E0DC18C984F600288894 /* ta_CDLSEPARATINGLINES.c in Sources */,
+				3BB5E13318C984F600288894 /* ta_TRIX.c in Sources */,
+				3B697CD31CC4CCBB0098C1A8 /* CCSSegmentedControl.m in Sources */,
+				3BB5E0FB18C984F600288894 /* ta_LINEARREG.c in Sources */,
+				3B8C02591CC4CAB8007914C4 /* CCSViewController.m in Sources */,
+				3B8C02481CC4CAB8007914C4 /* CCSRadarChartViewController.m in Sources */,
+				3BB5E12318C984F600288894 /* ta_SIN.c in Sources */,
+				3BB5E13A18C984F600288894 /* ta_WILLR.c in Sources */,
+				3B8C01D81CC4CA84007914C4 /* CCSStickChart.m in Sources */,
+				3BB5E0A318C984F600288894 /* ta_AROONOSC.c in Sources */,
+				3BB5E13818C984F600288894 /* ta_VAR.c in Sources */,
+				3BB5E09818C984F600288894 /* ta_retcode.c in Sources */,
+				3BB5E0B718C984F600288894 /* ta_CDLCLOSINGMARUBOZU.c in Sources */,
+				3BB5E13118C984F600288894 /* ta_TRANGE.c in Sources */,
+				3BB5E0B418C984F600288894 /* ta_CDLADVANCEBLOCK.c in Sources */,
+				3BB5E11A18C984F600288894 /* ta_PPO.c in Sources */,
+				3B8C02561CC4CAB8007914C4 /* CCSSpiderWebChartViewController.m in Sources */,
+				3BB5E0CB18C984F600288894 /* ta_CDLIDENTICAL3CROWS.c in Sources */,
+				3BB5E0F318C984F600288894 /* ta_FLOOR.c in Sources */,
+				3BE4865E1CC39CEF00A3E4FB /* NSString+UIColor.m in Sources */,
+				3B8C01DB1CC4CA84007914C4 /* CCSTitleValue.m in Sources */,
+				3B8C01CC1CC4CA84007914C4 /* CCSMinusStickChart.m in Sources */,
+				3B8C02361CC4CAB8007914C4 /* CCSBOLLMASlipCandleStickChartViewController.m in Sources */,
+				3B8C02401CC4CAB8007914C4 /* CCSLineChartViewController.m in Sources */,
+				3B8C01D61CC4CA84007914C4 /* CCSSpiderWebChart.m in Sources */,
+				3BB5E0BD18C984F600288894 /* ta_CDLDRAGONFLYDOJI.c in Sources */,
+				3B8C01DD1CC4CA84007914C4 /* CCSTitleValues.m in Sources */,
+				3B8C01BB1CC4CA84007914C4 /* CCSBaseData.m in Sources */,
+				3BB5E11018C984F600288894 /* ta_MINMAXINDEX.c in Sources */,
+				3B8C02551CC4CAB8007914C4 /* CCSSlipStickChartViewController.m in Sources */,
+				3BB5E11918C984F600288894 /* ta_PLUS_DM.c in Sources */,
+				3BB5E0DB18C984F600288894 /* ta_CDLRISEFALL3METHODS.c in Sources */,
+				3BB5E0AD18C984F600288894 /* ta_CDL3BLACKCROWS.c in Sources */,
+				3BB5E09A18C984F600288894 /* ta_version.c in Sources */,
+				3BB5E12C18C984F600288894 /* ta_SUM.c in Sources */,
+				3BB5E0D318C984F600288894 /* ta_CDLMARUBOZU.c in Sources */,
+				3BB5E13518C984F600288894 /* ta_TYPPRICE.c in Sources */,
+				3BB5E0E418C984F600288894 /* ta_CDLTHRUSTING.c in Sources */,
+				3BB5E0A818C984F600288894 /* ta_BBANDS.c in Sources */,
+				3BB5E10F18C984F600288894 /* ta_MINMAX.c in Sources */,
+				3BB5E0A018C984F600288894 /* ta_ADXR.c in Sources */,
+				3BB5E0BC18C984F600288894 /* ta_CDLDOJISTAR.c in Sources */,
+				3B8C01DA1CC4CA84007914C4 /* CCSTitledLine.m in Sources */,
+				3B8C02381CC4CAB8007914C4 /* CCSChartsSettingTableViewCell.m in Sources */,
+				3BB5E12718C984F600288894 /* ta_STDDEV.c in Sources */,
+				3BB5E0E118C984F600288894 /* ta_CDLSTICKSANDWICH.c in Sources */,
+				3BB5E13B18C984F600288894 /* ta_WMA.c in Sources */,
+				3BB5E0C218C984F600288894 /* ta_CDLGRAVESTONEDOJI.c in Sources */,
+				3BB5E0EA18C984F600288894 /* ta_CMO.c in Sources */,
+				3BB5E0FE18C984F600288894 /* ta_LINEARREG_SLOPE.c in Sources */,
+				3BB5E0F118C984F600288894 /* ta_EMA.c in Sources */,
+				3BB5E0CF18C984F600288894 /* ta_CDLKICKINGBYLENGTH.c in Sources */,
+				3B8C01C61CC4CA84007914C4 /* CCSMACandleStickChart.m in Sources */,
+				3BB5E09C18C984F600288894 /* ta_AD.c in Sources */,
+				3BB5E11D18C984F600288894 /* ta_ROCP.c in Sources */,
+				3BB5E10018C984F600288894 /* ta_LOG10.c in Sources */,
+				3BB5E11718C984F600288894 /* ta_OBV.c in Sources */,
+				3B8C02461CC4CAB8007914C4 /* CCSPieChartViewController.m in Sources */,
+				3B8C024C1CC4CAB8007914C4 /* CCSSamplGroupChartDetailTableViewCell.m in Sources */,
+				3BB5E10218C984F600288894 /* ta_MACD.c in Sources */,
+				3B8C01BF1CC4CA84007914C4 /* CCSColoredStickChart.m in Sources */,
+				3BB5E0FF18C984F600288894 /* ta_LN.c in Sources */,
+				3B8C02571CC4CAB8007914C4 /* CCSStackedAreaChartViewController.m in Sources */,
+				3BB5E0E718C984F600288894 /* ta_CDLUPSIDEGAP2CROWS.c in Sources */,
+				3BB5E0DD18C984F600288894 /* ta_CDLSHOOTINGSTAR.c in Sources */,
+				3BB5E0E618C984F600288894 /* ta_CDLUNIQUE3RIVER.c in Sources */,
+				3BB5E10318C984F600288894 /* ta_MACDEXT.c in Sources */,
+				3BB5E13718C984F600288894 /* ta_utility.c in Sources */,
+				3BB5E12D18C984F600288894 /* ta_T3.c in Sources */,
+				3BB5E0F918C984F600288894 /* ta_HT_TRENDMODE.c in Sources */,
+				3B8C01D91CC4CA84007914C4 /* CCSStickChartData.m in Sources */,
+				3BB5E0B318C984F600288894 /* ta_CDLABANDONEDBABY.c in Sources */,
+				3B8C01D31CC4CA84007914C4 /* CCSSlipCandleStickChart.m in Sources */,
+				3BB5E10518C984F600288894 /* ta_MAMA.c in Sources */,
+				3BB5E0B018C984F600288894 /* ta_CDL3OUTSIDE.c in Sources */,
+				3BB5E0C018C984F600288894 /* ta_CDLEVENINGSTAR.c in Sources */,
+				3BB5E10A18C984F600288894 /* ta_MFI.c in Sources */,
+				3BB5E11818C984F600288894 /* ta_PLUS_DI.c in Sources */,
+				3B8C01B81CC4CA84007914C4 /* CCSAreaChart.m in Sources */,
+				3B8C02371CC4CAB8007914C4 /* CCSCandleStickChartViewController.m in Sources */,
+				3BB5E0B818C984F600288894 /* ta_CDLCONCEALBABYSWALL.c in Sources */,
+				3BB5E0B918C984F600288894 /* ta_CDLCOUNTERATTACK.c in Sources */,
+				3B8C01C31CC4CA84007914C4 /* CCSGroupChart.m in Sources */,
+				3BB5E0AF18C984F600288894 /* ta_CDL3LINESTRIKE.c in Sources */,
+				3B8C01DE1CC4CA84007914C4 /* CCSTitleValuesColor.m in Sources */,
+				3BB5E0F218C984F600288894 /* ta_EXP.c in Sources */,
+				3B8C01C11CC4CA84007914C4 /* CCSDonutChart.m in Sources */,
+				3B8C02531CC4CAB8007914C4 /* CCSSlipCandleStickChartViewController.m in Sources */,
+				3B8C02421CC4CAB8007914C4 /* CCSMACDChartViewController.m in Sources */,
+				3B8C01BC1CC4CA84007914C4 /* CCSBOLLMASlipCandleStickChart.m in Sources */,
+				3BB5E10B18C984F600288894 /* ta_MIDPOINT.c in Sources */,
+				3B8C01CF1CC4CA84007914C4 /* CCSPizzaChart.m in Sources */,
+				3B8C01D41CC4CA84007914C4 /* CCSSlipLineChart.m in Sources */,
+				3BB5E0A218C984F600288894 /* ta_AROON.c in Sources */,
+				3B8C02431CC4CAB8007914C4 /* CCSMASlipCandleStickChartViewController.m in Sources */,
+				3B8C02471CC4CAB8007914C4 /* CCSPizzaChartViewController.m in Sources */,
+				3BB5E13218C984F600288894 /* ta_TRIMA.c in Sources */,
+				3BB5E0C618C984F600288894 /* ta_CDLHARAMICROSS.c in Sources */,
+				3B697CD21CC4CCBB0098C1A8 /* CCSJSONData.m in Sources */,
+				3B8C01D51CC4CA84007914C4 /* CCSSlipStickChart.m in Sources */,
+				3BB5E0C118C984F600288894 /* ta_CDLGAPSIDESIDEWHITE.c in Sources */,
+				3BB5E0B518C984F600288894 /* ta_CDLBELTHOLD.c in Sources */,
+				3BB5E0AB18C984F600288894 /* ta_CCI.c in Sources */,
+				3BB5E0D718C984F600288894 /* ta_CDLMORNINGSTAR.c in Sources */,
+				3BB5E0D218C984F600288894 /* ta_CDLLONGLINE.c in Sources */,
+				3BB5E10818C984F600288894 /* ta_MAXINDEX.c in Sources */,
+				3BB5E09718C984F600288894 /* ta_global.c in Sources */,
+				3BB5E12018C984F600288894 /* ta_RSI.c in Sources */,
+				3BB5E0EE18C984F600288894 /* ta_DEMA.c in Sources */,
+				3BB5E13418C984F600288894 /* ta_TSF.c in Sources */,
+				3BB5E12618C984F600288894 /* ta_SQRT.c in Sources */,
+				3B8C01B91CC4CA84007914C4 /* CCSBandAreaChart.m in Sources */,
+				3BB5E12E18C984F600288894 /* ta_TAN.c in Sources */,
+				3BB5E0FC18C984F600288894 /* ta_LINEARREG_ANGLE.c in Sources */,
+				3B8C01C51CC4CA84007914C4 /* CCSLineData.m in Sources */,
+				3BE4865F1CC39CEF00A3E4FB /* NSString+UserDefault.m in Sources */,
+				3BB5E0A618C984F600288894 /* ta_ATR.c in Sources */,
+				3BB5E12518C984F600288894 /* ta_SMA.c in Sources */,
+				3B8C02581CC4CAB8007914C4 /* CCSStickChartViewController.m in Sources */,
+				3B8C02491CC4CAB8007914C4 /* CCSSampleGroupChartDemoViewController.m in Sources */,
+				3BB5E0CC18C984F600288894 /* ta_CDLINNECK.c in Sources */,
+				3B8C02341CC4CAB8007914C4 /* CCSAreaChartViewController.m in Sources */,
+				3BB5E0E318C984F600288894 /* ta_CDLTASUKIGAP.c in Sources */,
+				3BB5E13018C984F600288894 /* ta_TEMA.c in Sources */,
+				3BB5E0A918C984F600288894 /* ta_BETA.c in Sources */,
+				3BB873421CC4BBF500DEAE92 /* NSArray+CCSTACompute.m in Sources */,
+				3B8C01BE1CC4CA84007914C4 /* CCSCandleStickChartData.m in Sources */,
+				3B8C01BD1CC4CA84007914C4 /* CCSCandleStickChart.m in Sources */,
+				3B8C01BA1CC4CA84007914C4 /* CCSBaseChartView.m in Sources */,
+				3BB5E11218C984F600288894 /* ta_MINUS_DM.c in Sources */,
+				3BB5E12B18C984F600288894 /* ta_SUB.c in Sources */,
+				3B8C01D01CC4CA84007914C4 /* CCSRadarChart.m in Sources */,
+				3BB5E0BA18C984F600288894 /* ta_CDLDARKCLOUDCOVER.c in Sources */,
+				3BB5E0F418C984F600288894 /* ta_HT_DCPERIOD.c in Sources */,
+				3BB5E0B218C984F600288894 /* ta_CDL3WHITESOLDIERS.c in Sources */,
+				3B8C01DC1CC4CA84007914C4 /* CCSTitleValueColor.m in Sources */,
+				3BB5E0C518C984F600288894 /* ta_CDLHARAMI.c in Sources */,
+				3BB5E11418C984F600288894 /* ta_MULT.c in Sources */,
+				3BB5E10C18C984F600288894 /* ta_MIDPRICE.c in Sources */,
+				3BB5E09F18C984F600288894 /* ta_ADX.c in Sources */,
+				3BB5E0DF18C984F600288894 /* ta_CDLSPINNINGTOP.c in Sources */,
+				3BB5E09D18C984F600288894 /* ta_ADD.c in Sources */,
+				3BB5E0C818C984F600288894 /* ta_CDLHIKKAKE.c in Sources */,
+				3BB5E13918C984F600288894 /* ta_WCLPRICE.c in Sources */,
+				3BB5E0DA18C984F600288894 /* ta_CDLRICKSHAWMAN.c in Sources */,
+				3BB5E12918C984F600288894 /* ta_STOCHF.c in Sources */,
+				3B8C01C91CC4CA84007914C4 /* CCSMAColoredStickChart.m in Sources */,
+				3B8C023F1CC4CAB8007914C4 /* CCSGridChartViewController.m in Sources */,
+				3B8C023E1CC4CAB8007914C4 /* CCSDonutChartViewController.m in Sources */,
+				3BB5E0A718C984F600288894 /* ta_AVGPRICE.c in Sources */,
+				3B8C01CA1CC4CA84007914C4 /* CCSMASlipCandleStickChart.m in Sources */,
+				3BB5E0BF18C984F600288894 /* ta_CDLEVENINGDOJISTAR.c in Sources */,
+				3BB5E11518C984F600288894 /* ta_NATR.c in Sources */,
+				3BB5E0E018C984F600288894 /* ta_CDLSTALLEDPATTERN.c in Sources */,
+				3BB5E0E818C984F600288894 /* ta_CDLXSIDEGAP3METHODS.c in Sources */,
+				3B8C024B1CC4CAB8007914C4 /* CCSSampleHorizontalViewController.m in Sources */,
+				3B8C023D1CC4CAB8007914C4 /* CCSDetailViewController.m in Sources */,
+				3BB5E0D918C984F600288894 /* ta_CDLPIERCING.c in Sources */,
+				3BB5E0ED18C984F600288894 /* ta_COSH.c in Sources */,
+				3B8C01CD1CC4CA84007914C4 /* CCSOHLCVDData.m in Sources */,
+				3B8C023A1CC4CAB8007914C4 /* CCSChartsSettingViewController.m in Sources */,
+				3B8C01C41CC4CA84007914C4 /* CCSLineChart.m in Sources */,
+				3B8C01C71CC4CA84007914C4 /* CCSMACDChart.m in Sources */,
+				3BB5E13618C984F600288894 /* ta_ULTOSC.c in Sources */,
+				3B8C02351CC4CAB8007914C4 /* CCSBandAreaChartViewController.m in Sources */,
+				3B8C023C1CC4CAB8007914C4 /* CCSColoredStickChartViewController.m in Sources */,
+				3BE4865C1CC39CEF00A3E4FB /* CCSTALibUtils.m in Sources */,
+				3BB5E0C318C984F600288894 /* ta_CDLHAMMER.c in Sources */,
+				3BB5E12A18C984F600288894 /* ta_STOCHRSI.c in Sources */,
+				3BB5E0CE18C984F600288894 /* ta_CDLKICKING.c in Sources */,
+				3B8C02411CC4CAB8007914C4 /* CCSMACandleStickChartViewController.m in Sources */,
+				3BB5E12818C984F600288894 /* ta_STOCH.c in Sources */,
+				3BB5E12118C984F600288894 /* ta_SAR.c in Sources */,
+				3BB5E0FD18C984F600288894 /* ta_LINEARREG_INTERCEPT.c in Sources */,
+				3B8C01CB1CC4CA84007914C4 /* CCSMAStickChart.m in Sources */,
+				3BB5E0B118C984F600288894 /* ta_CDL3STARSINSOUTH.c in Sources */,
+				3BB5E0AC18C984F600288894 /* ta_CDL2CROWS.c in Sources */,
+				3BB5E0A418C984F600288894 /* ta_ASIN.c in Sources */,
+				3BB5E11C18C984F600288894 /* ta_ROC.c in Sources */,
+				3B8C02331CC4CAB8007914C4 /* CCSAppDelegate.m in Sources */,
+				3BB5E0D518C984F600288894 /* ta_CDLMATHOLD.c in Sources */,
+				3BB5E12F18C984F600288894 /* ta_TANH.c in Sources */,
+				3BB5E11618C984F600288894 /* ta_NVI.c in Sources */,
+				3BB5E0E518C984F600288894 /* ta_CDLTRISTAR.c in Sources */,
+				3B8C025D1CC4CAB8007914C4 /* main.m in Sources */,
+				3BB5E10E18C984F600288894 /* ta_MININDEX.c in Sources */,
+				3B8C02441CC4CAB8007914C4 /* CCSMAStickChartViewController.m in Sources */,
+				3BB5E0D418C984F600288894 /* ta_CDLMATCHINGLOW.c in Sources */,
+				3BB5E0BB18C984F600288894 /* ta_CDLDOJI.c in Sources */,
+				3BB5E0D018C984F600288894 /* ta_CDLLADDERBOTTOM.c in Sources */,
+				3B8C01C01CC4CA84007914C4 /* CCSColoredStickChartData.m in Sources */,
+				3BB5E0D818C984F600288894 /* ta_CDLONNECK.c in Sources */,
+				3BB5E11118C984F600288894 /* ta_MINUS_DI.c in Sources */,
+				3B8C01C81CC4CA84007914C4 /* CCSMACDData.m in Sources */,
+				3B8C024E1CC4CAB8007914C4 /* CCSSettingDetailViewController.m in Sources */,
+				3BB5E0DE18C984F600288894 /* ta_CDLSHORTLINE.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		3B8C022A1CC4CAB8007914C4 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3B8C022B1CC4CAB8007914C4 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		3BB5DF2618C9624800288894 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_SECURITY_FLOATLOOPCOUNTER = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer: 明成 李 (493479K5WB)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "2d48e41b-f93e-4d22-a374-101358f10bf4";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		3BB5DF2718C9624800288894 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_SECURITY_FLOATLOOPCOUNTER = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer: 明成 李 (493479K5WB)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				PROVISIONING_PROFILE = "2d48e41b-f93e-4d22-a374-101358f10bf4";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		3BB5DF2918C9624800288894 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C7D9E0A0F1D6DCA8178C4E37 /* Pods.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer: 明成 李 (493479K5WB)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CocoaChartsSample/CocoaChartsSample-Prefix.pch";
+				INFOPLIST_FILE = "CocoaChartsSample/CocoaChartsSample-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				PRODUCT_BUNDLE_IDENTIFIER = "cn.limc.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = CocoaChartsSample;
+				PROVISIONING_PROFILE = "ba9a2e38-8811-4ace-91fe-a82c52aebe88";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		3BB5DF2A18C9624800288894 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5D2BD16ADA0618F467FDA75B /* Pods.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer: 明成 李 (493479K5WB)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CocoaChartsSample/CocoaChartsSample-Prefix.pch";
+				INFOPLIST_FILE = "CocoaChartsSample/CocoaChartsSample-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				PRODUCT_BUNDLE_IDENTIFIER = "cn.limc.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = CocoaChartsSample;
+				PROVISIONING_PROFILE = "ba9a2e38-8811-4ace-91fe-a82c52aebe88";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		3BB5DEF718C9624800288894 /* Build configuration list for PBXProject "CocoaChartsSample" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3BB5DF2618C9624800288894 /* Debug */,
+				3BB5DF2718C9624800288894 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3BB5DF2818C9624800288894 /* Build configuration list for PBXNativeTarget "CocoaChartsSample" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3BB5DF2918C9624800288894 /* Debug */,
+				3BB5DF2A18C9624800288894 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 3BB5DEF418C9624800288894 /* Project object */;
+}
