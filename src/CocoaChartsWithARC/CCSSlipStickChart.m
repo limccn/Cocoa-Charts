@@ -1,9 +1,21 @@
 //
 //  CCSSlipStickChart.m
-//  CocoaChartsSample
+//  Cocoa-Charts
 //
-//  Created by limc on 11/21/13.
-//  Copyright (c) 2013 limc. All rights reserved.
+//  Created by limc on 11-10-24.
+//  Copyright 2011 limc.cn All rights reserved.
+//
+//  Licensed under the Apache License, Version 2.0 (the "License");
+//  you may not use this file except in compliance with the License.
+//  You may obtain a copy of the License at
+//
+//  http://www.apache.org/licenses/LICENSE-2.0
+//
+//  Unless required by applicable law or agreed to in writing, software
+//  distributed under the License is distributed on an "AS IS" BASIS,
+//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//  See the License for the specific language governing permissions and
+//  limitations under the License.
 //
 
 #import "CCSSlipStickChart.h"
@@ -275,7 +287,7 @@
         _isLongPress = NO;
         _isMoved = NO;
         _waitForLongPress = YES;
-        [self performSelector:@selector(changeLongPressState:) withObject:nil afterDelay:1.5];
+        [self performSelector:@selector(changeLongPressState:) withObject:nil afterDelay:1.0f];
 
         
 //        if (_flag == 0) {
@@ -352,6 +364,7 @@
         }else if(_isMoved == NO){
             self.displayCrossXOnTouch = YES;
             self.displayCrossYOnTouch = YES;
+            [self performSelector:@selector(calcSelectedIndex) withObject:nil afterDelay:0.2];
             [self setNeedsDisplay];
 
         }
@@ -477,6 +490,7 @@
     
 //    [self canPerformAction:@selector(changeLongPressState:) withSender:nil];
      [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(changeLongPressState:) object:nil];
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(calcSelectedIndex) object:nil];
 
     _startDistance1 = 0;
 
@@ -840,15 +854,18 @@
     _stickData = stickData;
     
     if (self.minDisplayNumber >= datasize) {
-        self.maxDisplayNumber = datasize;
-        self.displayFrom = 0;
         self.displayNumber = datasize;
+        self.displayFrom = 0;
+        self.maxDisplayNumber = datasize;
     }else{
+        self.displayNumber = self.minDisplayNumber;
         //右侧显示
         self.displayFrom = datasize - self.displayNumber;
         self.maxDisplayNumber = datasize;
         
     }
+    self.selectedStickIndex = 0;
+    
     
 //    self.maxValue = CCIntMin;
 //    self.minValue = CCIntMax;

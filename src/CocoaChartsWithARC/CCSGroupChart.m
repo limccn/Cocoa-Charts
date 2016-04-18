@@ -1,9 +1,21 @@
 //
-//  CCSGroupChart.m
-//  CocoaChartsSampleWithARC
+//  CCSGroupChart.h
+//  Cocoa-Charts
 //
-//  Created by zhourr_ on 16/3/28.
-//  Copyright © 2016年 limc. All rights reserved.
+//  Created by zhourr on 11-10-24.
+//  Copyright 2011 limc.cn All rights reserved.
+//
+//  Licensed under the Apache License, Version 2.0 (the "License");
+//  you may not use this file except in compliance with the License.
+//  You may obtain a copy of the License at
+//
+//  http://www.apache.org/licenses/LICENSE-2.0
+//
+//  Unless required by applicable law or agreed to in writing, software
+//  distributed under the License is distributed on an "AS IS" BASIS,
+//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//  See the License for the specific language governing permissions and
+//  limitations under the License.
 //
 
 #import "CCSGroupChart.h"
@@ -18,6 +30,7 @@
 #import "CCSTALibUtils.h"
 #import "CCSStringUtils.h"
 #import "NSString+UserDefault.h"
+#import "NSString+UIColor.h"
 
 #import "NSArray+CCSTACompute.h"
 
@@ -40,6 +53,7 @@
         self.candleStickLinesData = [ohlcvdDatas convertCandleStickLinesData];
         self.candleStickBollingerBandData = [ohlcvdDatas convertCandleStickBollingerBandData];
         self.stickData = [ohlcvdDatas convertStickData];
+        self.stickMAData = [ohlcvdDatas convertStickMAData];
         self.macdStickData = [ohlcvdDatas convertMacdStickData];
         self.kdjLinesData = [ohlcvdDatas convertKDJLinesData];
         self.rsiLinesData = [ohlcvdDatas convertRSILinesData];
@@ -126,6 +140,21 @@
     
     /** 图表背景色 */
     UIColor                 *_chartsBackgroundColor;
+    
+    UILabel                 *_lblOpen;
+    UILabel                 *_lblClose;
+    UILabel                 *_lblHigh;
+    UILabel                 *_lblLow;
+    
+    UILabel                 *_lblVOL;
+    UILabel                 *_lblMACDLabel;
+    UILabel                 *_lblMACD;
+    UILabel                 *_lblKDJLabel;
+    UILabel                 *_lblKDJ;
+    UILabel                 *_lblRSI;
+    UILabel                 *_lblWR;
+    UILabel                 *_lblCCI;
+    UILabel                 *_lblBOLL;
 }
 
 @end
@@ -199,11 +228,11 @@
         
         self.scrollViewBottomChart.contentSize = CGSizeMake(self.scrollViewBottomChart.frame.size.width * 7, self.self.scrollViewBottomChart.frame.size.height);
         
-        //如果k线中已有数据，显示最后一根
-        if ([self.candleStickChart.stickData count] > 0) {
-            self.candleStickChart.selectedStickIndex = [self.candleStickChart.stickData count] - 1;
-            [self candleStickChartTouch:self];
-        }
+//        //如果k线中已有数据，显示最后一根
+//        if ([self.candleStickChart.stickData count] > 0) {
+//            self.candleStickChart.selectedStickIndex = [self.candleStickChart.stickData count] - 1;
+//            [self candleStickChartTouch:self];
+//        }
     }
     // 刷新
     if (_needsReload) {
@@ -217,6 +246,106 @@
         [self initWRChartData];
         [self initCCIChartData];
         [self initBOLLChartData];
+        
+        CCSOHLCVDData *ohlcData = self.groupChartData.ohlcvdDatas[[self.groupChartData.ohlcvdDatas count] - 1];
+        
+        [_lblOpen setText: [[NSString stringWithFormat:@"%f", ohlcData.open/1000] decimal:0]];
+        [_lblClose setText: [[NSString stringWithFormat:@"%f", ohlcData.close/1000] decimal:0]];
+        [_lblHigh setText: [[NSString stringWithFormat:@"%f", ohlcData.high/1000] decimal:0]];
+        [_lblLow setText: [[NSString stringWithFormat:@"%f", ohlcData.low/1000] decimal:0]];
+        [_lblVOL setText:[[[NSString stringWithFormat:@"%f", ohlcData.vol/10000] decimal:2] append:@"万"]];
+        NSString *macdL = [MACD_L getUserDefaultString];
+        NSString *macdM = [MACD_M getUserDefaultString];
+        NSString *macdS = [MACD_S getUserDefaultString];
+        [_lblMACDLabel setText:[NSString stringWithFormat:@"MACD(%@,%@,%@):", macdL,macdM,macdS]];
+        CCSMACDData *macdData = nil;
+        @try {
+            macdData = self.groupChartData.macdStickData[[self.groupChartData.macdStickData count] - 1];
+        }
+        @catch (NSException *exception) {
+        }
+        if (macdData) {
+            NSString *strMACD = [NSString stringWithFormat:@"%@ DIF:%@ DEA:%@", [[NSString stringWithFormat:@"%f", macdData.macd] decimal:2], [[NSString stringWithFormat:@"%f", macdData.diff] decimal:2], [[NSString stringWithFormat:@"%f", macdData.dea] decimal:2]];
+//            NSMutableAttributedString *mutableStr = [[NSMutableAttributedString alloc] initWithString: strMACD];
+//            
+//            [mutableStr addAttribute:NSForegroundColorAttributeName value:LINE_COLORS[0] range:NSMakeRange(0, [strMACD rangeOfString:@"DIF:"].location)];
+//            
+//            [mutableStr addAttribute:NSForegroundColorAttributeName value:LINE_COLORS[1] range:NSMakeRange([strMACD rangeOfString:@"DIF:"].location, [strMACD rangeOfString:@"DEA:"].location - 5)];
+//            
+//            [mutableStr addAttribute:NSForegroundColorAttributeName value:LINE_COLORS[2] range:NSMakeRange([strMACD rangeOfString:@"DEA:"].location, [strMACD rangeOfString:@"DEA:"].location - 4)];
+            
+            [_lblMACD setText:strMACD];
+        }else{
+            [_lblMACD setText:[NSString stringWithFormat:@"0.0f DIF:%f DEA:%f", 0.0f, 0.0f]];
+        }
+        NSString *KDJN = [KDJ_N getUserDefaultString];
+        [_lblKDJLabel setText:[NSString stringWithFormat:@"KDJ(%@,3,3):", KDJN]];
+        
+        NSMutableArray *kdjData = [[NSMutableArray alloc] init];
+        [self.groupChartData.kdjLinesData enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            CCSTitledLine *line = self.groupChartData.kdjLinesData[idx];
+            CCSLineData *lineData = line.data[[[line data] count] - 1];
+            NSString *kdj = [[NSString stringWithFormat:@"%f", lineData.value] decimal:2];
+            [kdjData addObject:kdj];
+        }];
+        if (kdjData && [kdjData count] == 3) {
+            [_lblKDJ setText:[NSString stringWithFormat:@"K:%@ D:%@ J:%@", kdjData[0], kdjData[1], kdjData[2]]];
+        }else{
+            [_lblKDJ setText:[NSString stringWithFormat:@"K:%@ D:%@ J:%@", @"0.00", @"0.00", @"0.00"]];
+        }
+        
+        NSString *rsiN1 = [RSI_N1 getUserDefaultString];
+        NSString *rsiN2 = [RSI_N2 getUserDefaultString];
+        
+        NSMutableArray *rsiData = [[NSMutableArray alloc] init];
+        [self.groupChartData.rsiLinesData enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            CCSTitledLine *line = self.groupChartData.rsiLinesData[idx];
+            CCSLineData *lineData = line.data[[[line data] count] - 1];
+            NSString *rsi = [[NSString stringWithFormat:@"%f", lineData.value] decimal:2];
+            [rsiData addObject:rsi];
+        }];
+        if (rsiData && [rsiData count] == 3) {
+            [_lblRSI setText:[NSString stringWithFormat:@"RSI%@: %@ RSI%@: %@ RSI24: %@", rsiN1, rsiData[0], rsiN2, rsiData[1], rsiData[2]]];
+        }else{
+            [_lblRSI setText:[NSString stringWithFormat:@"RSI%@: %@ RSI%@: %@ RSI24: %@", rsiN1, @"0.00", rsiN2, @"0.00", @"0.00"]];
+        }
+        
+        NSString *wrN = [WR_N getUserDefaultString];
+        if (self.groupChartData.wrLinesData && [self.groupChartData.wrLinesData count] > 0) {
+            CCSTitledLine *wrLine = self.groupChartData.wrLinesData[0];
+            CCSLineData *wrLineData = wrLine.data[[[wrLine data] count] - 1];
+            NSString *wr = [[NSString stringWithFormat:@"%f", wrLineData.value] decimal:2];
+            
+            [_lblWR setText:[NSString stringWithFormat:@"WR(%@): %@", wrN, wr]];
+        }else{
+            [_lblWR setText:[NSString stringWithFormat:@"WR(%@): %@", wrN, @"0.00"]];
+        }
+        
+        NSString *cciN = [CCI_N getUserDefaultString];
+        if (self.groupChartData.cciLinesData && [self.groupChartData.cciLinesData count] > 0) {
+            CCSTitledLine *cciLine = self.groupChartData.cciLinesData[0];
+            CCSLineData *cciLineData = cciLine.data[[[cciLine data] count] - 1];
+            NSString *cci = [[NSString stringWithFormat:@"%f", cciLineData.value] decimal:2];
+            
+            [_lblCCI setText:[NSString stringWithFormat:@"CCI(%@): %@", cciN, cci]];
+        }else{
+            [_lblCCI setText:[NSString stringWithFormat:@"CCI(%@): %@", cciN, @"0.00"]];
+        }
+        
+        NSString *bollN = [BOLL_N getUserDefaultString];
+        
+        NSMutableArray *bollData = [[NSMutableArray alloc] init];
+        [self.groupChartData.bollLinesData enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            CCSTitledLine *line = self.groupChartData.bollLinesData[idx];
+            CCSLineData *lineData = line.data[[[line data] count] - 1];
+            NSString *boll = [[NSString stringWithFormat:@"%f", lineData.value] decimal:2];
+            [bollData addObject:boll];
+        }];
+        if (bollData && [bollData count] == 3) {
+            [_lblBOLL setText:[NSString stringWithFormat:@"BOLL(%@,2,2): %@, %@, %@", bollN, bollData[0], bollData[1], bollData[2]]];
+        }else{
+            [_lblBOLL setText:[NSString stringWithFormat:@"BOLL(%@,2,2): %@, %@, %@", bollN, @"0.00", @"0.00", @"0.00"]];
+        }
     }
 }
 
@@ -380,7 +509,7 @@
     
     // 横屏
     if (self.orientationType == GroupChartHorizontalType) {
-        UISegmentedControl *segBottomChartType = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"VOL", @"MACD", @"KDJ", @"RSI", @"WR", @"CCI", @"BOLL", nil]];
+        UISegmentedControl *segBottomChartType = [[UISegmentedControl alloc] initWithItems:@[@"VOL", @"MACD", @"KDJ", @"RSI", @"WR", @"CCI", @"BOLL", @""]];
         segBottomChartType.frame = CGRectMake(_contentSize.width - _contentSize.width/HORIZONTAL_LEFT_RIGHT_SCALE - (_contentSize.height - _contentSize.width/HORIZONTAL_LEFT_RIGHT_SCALE)/2.0f, (_contentSize.height - _contentSize.width/HORIZONTAL_LEFT_RIGHT_SCALE)/2.0f,  _contentSize.height, _contentSize.width/HORIZONTAL_LEFT_RIGHT_SCALE);
         [segBottomChartType addTarget:self action:@selector(segBottomChartTypeTypeValueChaged:) forControlEvents:UIControlEventValueChanged];
         [segBottomChartType setSelectedSegmentIndex:0];
@@ -388,7 +517,7 @@
         segBottomChartType.tintColor = _chartsBackgroundColor;
         [segBottomChartType setBackgroundColor:_chartsBackgroundColor];
         NSDictionary* selectedTextAttributes = @{NSFontAttributeName:[UIFont systemFontOfSize:13.0f],
-                                                 NSForegroundColorAttributeName: [UIColor whiteColor]};
+                                                 NSForegroundColorAttributeName: [@"#23423F" str2Color]};
         [segBottomChartType setTitleTextAttributes:selectedTextAttributes forState:UIControlStateSelected];//设置文字属性
         NSDictionary* unselectedTextAttributes = @{NSFontAttributeName:[UIFont systemFontOfSize:13.0f],
                                                    NSForegroundColorAttributeName: [UIColor lightGrayColor]};
@@ -403,6 +532,14 @@
         self.segBottomChartType = segBottomChartType;
         
         [self addSubview:segBottomChartType];
+        
+        UIButton *btnChartHorizontal = [[UIButton alloc] init];
+        [btnChartHorizontal setFrame:CGRectMake(_contentSize.width - _contentSize.width/HORIZONTAL_LEFT_RIGHT_SCALE , _contentSize.height - _contentSize.height/8.0f, _contentSize.width/HORIZONTAL_LEFT_RIGHT_SCALE, _contentSize.height/8.0f)];
+        [btnChartHorizontal.titleLabel setFont:[UIFont systemFontOfSize:12.0f]];
+        [btnChartHorizontal setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
+        [btnChartHorizontal setTitle:@"设置" forState:UIControlStateNormal];
+        [btnChartHorizontal addTarget:self action:@selector(setting:) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:btnChartHorizontal];
     }else{
         NSArray *arraySegItems = @[@"VOL", @"MACD", @"KDJ", @"RSI", @"WR", @"CCI", @"BOLL"];
         
@@ -414,7 +551,7 @@
         segBottomChartType.tintColor = _chartsBackgroundColor;
         [segBottomChartType setBackgroundColor:_chartsBackgroundColor];
         NSDictionary* selectedTextAttributes = @{NSFontAttributeName:[UIFont systemFontOfSize:11.0f],
-                                                 NSForegroundColorAttributeName: [UIColor whiteColor]};
+                                                 NSForegroundColorAttributeName: [@"#23423F" str2Color]};
         [segBottomChartType setTitleTextAttributes:selectedTextAttributes forState:UIControlStateSelected];//设置文字属性
         NSDictionary* unselectedTextAttributes = @{NSFontAttributeName:[UIFont systemFontOfSize:11.0f],
                                                    NSForegroundColorAttributeName: [UIColor lightGrayColor]};
@@ -427,7 +564,7 @@
         UIButton *btnChartHorizontal = [[UIButton alloc] init];
         [btnChartHorizontal setFrame:CGRectMake(segBottomChartType.frame.size.width, segBottomChartType.frame.origin.y, _contentSize.width - segBottomChartType.frame.size.width, segBottomChartType.frame.size.height)];
         [btnChartHorizontal.titleLabel setFont:[UIFont systemFontOfSize:12.0f]];
-        [btnChartHorizontal setTitleColor:[UIColor greenColor] forState:UIControlStateNormal];
+        [btnChartHorizontal setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
         [btnChartHorizontal setTitle:@"设置" forState:UIControlStateNormal];
         [btnChartHorizontal addTarget:self action:@selector(setting:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:btnChartHorizontal];
@@ -482,6 +619,13 @@
     candleStickChart.displayLatitudeTitle  = YES;
     candleStickChart.userInteractionEnabled = YES;
     
+//    candleStickChart.positiveStickBorderColor = [@"#ED4D4D" str2Color];
+//    candleStickChart.negativeStickFillColor = [@"#52BA27" str2Color];
+    candleStickChart.positiveStickBorderColor = LINE_COLORS[0];
+    candleStickChart.positiveStickFillColor = LINE_COLORS[0];
+    candleStickChart.negativeStickBorderColor = LINE_COLORS[1];
+    candleStickChart.negativeStickFillColor = LINE_COLORS[1];
+    
 //    candleStickChart.candleStickStyle = GroupCandleStickChartTypeBar;
 //    candleStickChart.axisYPosition = CCSGridChartYAxisPositionRight;
 //    candleStickChart.displayNumber = 50;
@@ -501,6 +645,67 @@
     [candleStickChart addTarget:self action:@selector(candleStickChartTouch:) forControlEvents:UIControlEventAllTouchEvents];
     
     [self addSubview:candleStickChart];
+    
+    UIView *vOhlcContainer = [[UIView alloc] init];
+    [vOhlcContainer setFrame:CGRectMake(0.0f, 0.0f, candleStickChart.frame.size.width, 30.0f)];
+    [vOhlcContainer setBackgroundColor:[UIColor clearColor]];
+    [self addSubview:vOhlcContainer];
+    
+    UILabel *lblOpenLabel = [[UILabel alloc] init];
+    [lblOpenLabel setFrame:CGRectMake(0.0f, 8.0f, 15.0f, vOhlcContainer.frame.size.height)];
+    [lblOpenLabel setTextColor:[UIColor lightGrayColor]];
+    [lblOpenLabel setFont:[UIFont systemFontOfSize:11.0f]];
+    [lblOpenLabel setText:@"开:"];
+    [vOhlcContainer addSubview:lblOpenLabel];
+    UILabel *lblOpen = [[UILabel alloc] init];
+    [lblOpen setFrame:CGRectMake(lblOpenLabel.frame.size.width+3.0f, 8.0f, 35.0f, vOhlcContainer.frame.size.height)];
+    [lblOpen setTextColor:[UIColor lightGrayColor]];
+    [lblOpen setFont:[UIFont systemFontOfSize:11.0f]];
+    [lblOpen setText:@"0.0"];
+    [vOhlcContainer addSubview:lblOpen];
+    _lblOpen = lblOpen;
+    
+    UILabel *lblCloseLabel = [[UILabel alloc] init];
+    [lblCloseLabel setFrame:CGRectMake(lblOpen.frame.origin.x + lblOpen.frame.size.width, 8.0f, lblOpenLabel.frame.size.width, vOhlcContainer.frame.size.height)];
+    [lblCloseLabel setTextColor:[UIColor lightGrayColor]];
+    [lblCloseLabel setFont:[UIFont systemFontOfSize:11.0f]];
+    [lblCloseLabel setText:@"收:"];
+    [vOhlcContainer addSubview:lblCloseLabel];
+    UILabel *lblClose = [[UILabel alloc] init];
+    [lblClose setFrame:CGRectMake(lblCloseLabel.frame.origin.x + lblCloseLabel.frame.size.width, 8.0f, lblOpen.frame.size.width, vOhlcContainer.frame.size.height)];
+    [lblClose setTextColor:[UIColor lightGrayColor]];
+    [lblClose setFont:[UIFont systemFontOfSize:11.0f]];
+    [lblClose setText:@"0.0"];
+    [vOhlcContainer addSubview:lblClose];
+    _lblClose = lblClose;
+    
+    UILabel *lblHighLabel = [[UILabel alloc] init];
+    [lblHighLabel setFrame:CGRectMake(lblClose.frame.origin.x + lblClose.frame.size.width, 8.0f, lblOpenLabel.frame.size.width, vOhlcContainer.frame.size.height)];
+    [lblHighLabel setTextColor:[UIColor lightGrayColor]];
+    [lblHighLabel setFont:[UIFont systemFontOfSize:11.0f]];
+    [lblHighLabel setText:@"高:"];
+    [vOhlcContainer addSubview:lblHighLabel];
+    UILabel *lblHigh = [[UILabel alloc] init];
+    [lblHigh setFrame:CGRectMake(lblHighLabel.frame.origin.x + lblHighLabel.frame.size.width, 8.0f, lblOpen.frame.size.width, vOhlcContainer.frame.size.height)];
+    [lblHigh setTextColor:[UIColor lightGrayColor]];
+    [lblHigh setFont:[UIFont systemFontOfSize:11.0f]];
+    [lblHigh setText:@"0.0"];
+    [vOhlcContainer addSubview:lblHigh];
+    _lblHigh = lblHigh;
+    
+    UILabel *lblLowLabel = [[UILabel alloc] init];
+    [lblLowLabel setFrame:CGRectMake(lblHigh.frame.origin.x + lblHigh.frame.size.width, 8.0f, lblOpenLabel.frame.size.width, vOhlcContainer.frame.size.height)];
+    [lblLowLabel setTextColor:[UIColor lightGrayColor]];
+    [lblLowLabel setFont:[UIFont systemFontOfSize:11.0f]];
+    [lblLowLabel setText:@"低:"];
+    [vOhlcContainer addSubview:lblLowLabel];
+    UILabel *lblLow = [[UILabel alloc] init];
+    [lblLow setFrame:CGRectMake(lblLowLabel.frame.origin.x + lblLowLabel.frame.size.width, 8.0f, lblOpen.frame.size.width, vOhlcContainer.frame.size.height)];
+    [lblLow setTextColor:[UIColor lightGrayColor]];
+    [lblLow setFont:[UIFont systemFontOfSize:11.0f]];
+    [lblLow setText:@"0.0"];
+    [vOhlcContainer addSubview:lblLow];
+    _lblLow = lblLow;
 }
 
 - (void)initCandleStickChartData {
@@ -509,7 +714,7 @@
         self.candleStickChart.linesData = self.groupChartData.candleStickLinesData;
         self.candleStickChart.bollingerBandData = self.groupChartData.candleStickBollingerBandData;
         
-        self.candleStickChart.singleTouchPoint = CGPointMake(-1, -1);
+//        self.candleStickChart.singleTouchPoint = CGPointMake(-1, -1);
         
         [self.candleStickChart setNeedsDisplay];
         
@@ -522,10 +727,14 @@
         for (NSInteger i = [self.chartData count] - 1; i >= 0; i--) {
             CCSOHLCVDData *item = [self.chartData objectAtIndex:i];
             CCSCandleStickChartData *stickData = [[CCSCandleStickChartData alloc] init];
-            stickData.open = [item.open doubleValue];
-            stickData.high = [item.high doubleValue];
-            stickData.low = [item.low doubleValue];
-            stickData.close = [item.close doubleValue];
+//            stickData.open = [item.open doubleValue];
+//            stickData.high = [item.high doubleValue];
+//            stickData.low = [item.low doubleValue];
+//            stickData.close = [item.close doubleValue];
+            stickData.open = item.open;
+            stickData.high = item.high;
+            stickData.low = item.low;
+            stickData.close = item.close;
             stickData.change = 0;
             stickData.date = [item.date dateWithFormat:@"yyyy-MM-dd HH:mm:ss" target:@"yy-MM-dd"];
             // 增加数据
@@ -546,7 +755,7 @@
 }
 
 - (void)initStickChart {
-    CCSColoredStickChart *stickchart = [[CCSColoredStickChart alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.scrollViewBottomChart.frame.size.width, self.scrollViewBottomChart.frame.size.height)];
+    CCSMAColoredStickChart *stickchart = [[CCSMAColoredStickChart alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.scrollViewBottomChart.frame.size.width, self.scrollViewBottomChart.frame.size.height)];
     stickchart.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     self.stickChart = stickchart;
     
@@ -567,12 +776,32 @@
     self.stickChart.backgroundColor = _chartsBackgroundColor;
     
     [self.scrollViewBottomChart addSubview:self.stickChart];
+    
+    UIView *vVOLContainer = [[UIView alloc] init];
+    [vVOLContainer setFrame:CGRectMake(0.0f, 0.0f, self.stickChart.frame.size.width, 30.0f)];
+    [vVOLContainer setBackgroundColor:[UIColor clearColor]];
+    [self.stickChart addSubview:vVOLContainer];
+    
+    UILabel *lblVOLLabel = [[UILabel alloc] init];
+    [lblVOLLabel setFrame:CGRectMake(0.0f, 8.0f, 30.0f, vVOLContainer.frame.size.height)];
+    [lblVOLLabel setTextColor:[UIColor lightGrayColor]];
+    [lblVOLLabel setFont:[UIFont systemFontOfSize:11.0f]];
+    [lblVOLLabel setText:@"VOL:"];
+    [vVOLContainer addSubview:lblVOLLabel];
+    UILabel *lblVOL = [[UILabel alloc] init];
+    [lblVOL setFrame:CGRectMake(lblVOLLabel.frame.size.width+3.0f, 8.0f, vVOLContainer.frame.size.width, vVOLContainer.frame.size.height)];
+    [lblVOL setTextColor:[UIColor lightGrayColor]];
+    [lblVOL setFont:[UIFont systemFontOfSize:11.0f]];
+    [lblVOL setText:@"0.0"];
+    [vVOLContainer addSubview:lblVOL];
+    _lblVOL = lblVOL;
 }
 
 - (void)initStickChartData {
     if (self.groupChartData) {
         self.stickChart.stickData = self.groupChartData.stickData;
-        self.stickChart.singleTouchPoint = CGPointMake(-1, -1);
+        self.stickChart.linesData = self.groupChartData.stickMAData;
+//        self.stickChart.singleTouchPoint = CGPointMake(-1, -1);
         
         [self.stickChart setNeedsDisplay];
         
@@ -585,14 +814,25 @@
         for (NSInteger i = [self.chartData count] - 1; i >= 0; i--) {
             CCSOHLCVDData *item = [self.chartData objectAtIndex:i];
             CCSColoredStickChartData *stickData = [[CCSColoredStickChartData alloc] init];
-            stickData.high = [item.vol doubleValue];
+//            stickData.high = [item.vol doubleValue];
+            stickData.high = item.vol;
             stickData.low = 0;
             stickData.date = [item.date dateWithFormat:@"yyyy-MM-dd HH:mm:ss" target:@"yy-MM-dd"];
             
-            if ([item.close doubleValue] > [item.open doubleValue]) {
+//            if ([item.close doubleValue] > [item.open doubleValue]) {
+//                stickData.fillColor = [UIColor clearColor];
+//                stickData.borderColor = [UIColor redColor];
+//            } else if ([item.close doubleValue] < [item.open doubleValue]) {
+//                stickData.fillColor = [UIColor greenColor];
+//                stickData.borderColor = [UIColor clearColor];
+//            } else {
+//                stickData.fillColor = [UIColor lightGrayColor];
+//                stickData.borderColor = [UIColor clearColor];
+//            }
+            if (item.close > item.open) {
                 stickData.fillColor = [UIColor clearColor];
                 stickData.borderColor = [UIColor redColor];
-            } else if ([item.close doubleValue] < [item.open doubleValue]) {
+            } else if (item.close < item.open) {
                 stickData.fillColor = [UIColor greenColor];
                 stickData.borderColor = [UIColor clearColor];
             } else {
@@ -620,16 +860,20 @@
     
     //设置stickData
     self.macdChart.stickFillColor = [UIColor colorWithRed:0.7 green:0.7 blue:0 alpha:0.8];
-
+    self.macdChart.positiveStickStrokeColor = [@"#ED4D4D" str2Color];
+    self.macdChart.positiveStickFillColor = [@"#ED4D4D" str2Color];
+    self.macdChart.negativeStickStrokeColor = [@"#52BA27" str2Color];
+    self.macdChart.negativeStickFillColor = [@"#52BA27" str2Color];
+    
 //    self.macdChart.maxValue = 300000;
 //    self.macdChart.minValue = -300000;
 //    self.macdChart.maxSticksNum = 100;
 //    self.macdChart.macdDisplayType = CCSMACDChartDisplayTypeStick;
 //    self.macdChart.positiveStickColor = [UIColor redColor];
 //    self.macdChart.negativeStickColor = [UIColor greenColor];
-    self.macdChart.macdLineColor = [UIColor cyanColor];
-    self.macdChart.deaLineColor = [UIColor blueColor];
-    self.macdChart.diffLineColor = [UIColor orangeColor];
+    self.macdChart.macdLineColor = LINE_COLORS[0];
+    self.macdChart.deaLineColor = LINE_COLORS[1];
+    self.macdChart.diffLineColor = LINE_COLORS[2];
 //    self.macdChart.displayNumber = 50;
 //    self.macdChart.displayFrom = 0;
     self.macdChart.axisCalc = AXIS_CALC_PARM;
@@ -640,6 +884,26 @@
     self.macdChart.backgroundColor = _chartsBackgroundColor;
     
     [self.scrollViewBottomChart addSubview:self.macdChart];
+    
+    UIView *vMACDContainer = [[UIView alloc] init];
+    [vMACDContainer setFrame:CGRectMake(0.0f, 0.0f, self.stickChart.frame.size.width, 30.0f)];
+    [vMACDContainer setBackgroundColor:[UIColor clearColor]];
+    [self.macdChart addSubview:vMACDContainer];
+    
+    UILabel *lblMACDLabel = [[UILabel alloc] init];
+    [lblMACDLabel setFrame:CGRectMake(0.0f, 8.0f, 100.0f, vMACDContainer.frame.size.height)];
+    [lblMACDLabel setTextColor:[UIColor lightGrayColor]];
+    [lblMACDLabel setFont:[UIFont systemFontOfSize:11.0f]];
+    [lblMACDLabel setText:@"MACD(9,12,26):"];
+    [vMACDContainer addSubview:lblMACDLabel];
+    _lblMACDLabel = lblMACDLabel;
+    UILabel *lblMACD = [[UILabel alloc] init];
+    [lblMACD setFrame:CGRectMake(lblMACDLabel.frame.size.width+3.0f, 8.0f, vMACDContainer.frame.size.width, vMACDContainer.frame.size.height)];
+    [lblMACD setTextColor:[UIColor lightGrayColor]];
+    [lblMACD setFont:[UIFont systemFontOfSize:11.0f]];
+    [lblMACD setText:@"-0.0 DIF:-0.0 DEA:-0.0"];
+    [vMACDContainer addSubview:lblMACD];
+    _lblMACD = lblMACD;
 }
 
 - (void)initMACDChartData {
@@ -696,12 +960,32 @@
     self.kdjChart.backgroundColor = _chartsBackgroundColor;
     
     [self.scrollViewBottomChart addSubview:self.kdjChart];
+    
+    UIView *vKDJContainer = [[UIView alloc] init];
+    [vKDJContainer setFrame:CGRectMake(0.0f, 0.0f, self.stickChart.frame.size.width, 30.0f)];
+    [vKDJContainer setBackgroundColor:[UIColor clearColor]];
+    [self.kdjChart addSubview:vKDJContainer];
+    
+    UILabel *lblKDJLabel = [[UILabel alloc] init];
+    [lblKDJLabel setFrame:CGRectMake(0.0f, 8.0f, 80.0f, vKDJContainer.frame.size.height)];
+    [lblKDJLabel setTextColor:[UIColor lightGrayColor]];
+    [lblKDJLabel setFont:[UIFont systemFontOfSize:11.0f]];
+    [lblKDJLabel setText:@"KDJ(9,3,3):"];
+    [vKDJContainer addSubview:lblKDJLabel];
+    _lblKDJLabel = lblKDJLabel;
+    UILabel *lblKDJ = [[UILabel alloc] init];
+    [lblKDJ setFrame:CGRectMake(lblKDJLabel.frame.size.width+3.0f, 8.0f, vKDJContainer.frame.size.width, vKDJContainer.frame.size.height)];
+    [lblKDJ setTextColor:[UIColor lightGrayColor]];
+    [lblKDJ setFont:[UIFont systemFontOfSize:11.0f]];
+    [lblKDJ setText:@"DIF:-0.0 DEA:-0.0"];
+    [vKDJContainer addSubview:lblKDJ];
+    _lblKDJ = lblKDJ;
 }
 
 - (void)initKDJChartData {
     if (self.groupChartData) {
         self.kdjChart.linesData = self.groupChartData.kdjLinesData;
-        self.kdjChart.singleTouchPoint = CGPointMake(-1, -1);
+//        self.kdjChart.singleTouchPoint = CGPointMake(-1, -1);
         
         self.kdjChart.maxValue = 120;
         self.kdjChart.minValue = -20;
@@ -745,12 +1029,25 @@
     self.rsiChart.backgroundColor = _chartsBackgroundColor;
     
     [self.scrollViewBottomChart addSubview:self.rsiChart];
+    
+    UIView *vRSIContainer = [[UIView alloc] init];
+    [vRSIContainer setFrame:CGRectMake(0.0f, 0.0f, self.stickChart.frame.size.width, 30.0f)];
+    [vRSIContainer setBackgroundColor:[UIColor clearColor]];
+    [self.rsiChart addSubview:vRSIContainer];
+    
+    UILabel *lblRSI = [[UILabel alloc] init];
+    [lblRSI setFrame:CGRectMake(0.0f, 8.0f, vRSIContainer.frame.size.width, vRSIContainer.frame.size.height)];
+    [lblRSI setTextColor:[UIColor lightGrayColor]];
+    [lblRSI setFont:[UIFont systemFontOfSize:11.0f]];
+    [lblRSI setText:@"RSI6: 0.00 RSI12:0.00"];
+    [vRSIContainer addSubview:lblRSI];
+    _lblRSI = lblRSI;
 }
 
 - (void)initRSIChartData {
     if (self.groupChartData) {
         self.rsiChart.linesData = self.groupChartData.rsiLinesData;
-        self.rsiChart.singleTouchPoint = CGPointMake(-1, -1);
+//        self.rsiChart.singleTouchPoint = CGPointMake(-1, -1);
         
         self.rsiChart.maxValue = 100;
         self.rsiChart.minValue = 0;
@@ -801,12 +1098,25 @@
     // self.wrChart.noneDisplayValue = 9999;
     
     [self.scrollViewBottomChart addSubview:self.wrChart];
+    
+    UIView *vWRContainer = [[UIView alloc] init];
+    [vWRContainer setFrame:CGRectMake(0.0f, 0.0f, self.stickChart.frame.size.width, 30.0f)];
+    [vWRContainer setBackgroundColor:[UIColor clearColor]];
+    [self.wrChart addSubview:vWRContainer];
+    
+    UILabel *lblWR = [[UILabel alloc] init];
+    [lblWR setFrame:CGRectMake(0.0f, 8.0f, vWRContainer.frame.size.width, vWRContainer.frame.size.height)];
+    [lblWR setTextColor:[UIColor lightGrayColor]];
+    [lblWR setFont:[UIFont systemFontOfSize:11.0f]];
+    [lblWR setText:@"WR(10): 0.00"];
+    [vWRContainer addSubview:lblWR];
+    _lblWR = lblWR;
 }
 
 - (void)initWRChartData {
     if (self.groupChartData) {
         self.wrChart.linesData = self.groupChartData.wrLinesData;
-        self.wrChart.singleTouchPoint = CGPointMake(-1, -1);
+//        self.wrChart.singleTouchPoint = CGPointMake(-1, -1);
         
         self.wrChart.maxValue = 100;
         self.wrChart.minValue = 0;
@@ -845,12 +1155,25 @@
     self.cciChart.backgroundColor = _chartsBackgroundColor;
     
     [self.scrollViewBottomChart addSubview:self.cciChart];
+    
+    UIView *vCCIContainer = [[UIView alloc] init];
+    [vCCIContainer setFrame:CGRectMake(0.0f, 0.0f, self.stickChart.frame.size.width, 30.0f)];
+    [vCCIContainer setBackgroundColor:[UIColor clearColor]];
+    [self.cciChart addSubview:vCCIContainer];
+    
+    UILabel *lblCCI = [[UILabel alloc] init];
+    [lblCCI setFrame:CGRectMake(0.0f, 8.0f, vCCIContainer.frame.size.width, vCCIContainer.frame.size.height)];
+    [lblCCI setTextColor:[UIColor lightGrayColor]];
+    [lblCCI setFont:[UIFont systemFontOfSize:11.0f]];
+    [lblCCI setText:@"CCI(14): 0.00"];
+    [vCCIContainer addSubview:lblCCI];
+    _lblCCI = lblCCI;
 }
 
 - (void)initCCIChartData {
     if (self.groupChartData) {
         self.cciChart.linesData = self.groupChartData.cciLinesData;
-        self.cciChart.singleTouchPoint = CGPointMake(-1, -1);
+//        self.cciChart.singleTouchPoint = CGPointMake(-1, -1);
         
         [self.cciChart setNeedsDisplay];
         
@@ -885,12 +1208,25 @@
     self.bollChart.axisCalc = AXIS_CALC_PARM;
     
     [self.scrollViewBottomChart addSubview:self.bollChart];
+    
+    UIView *vBOLLContainer = [[UIView alloc] init];
+    [vBOLLContainer setFrame:CGRectMake(0.0f, 0.0f, self.stickChart.frame.size.width, 30.0f)];
+    [vBOLLContainer setBackgroundColor:[UIColor clearColor]];
+    [self.bollChart addSubview:vBOLLContainer];
+    
+    UILabel *lblBOLL = [[UILabel alloc] init];
+    [lblBOLL setFrame:CGRectMake(0.0f, 8.0f, vBOLLContainer.frame.size.width, vBOLLContainer.frame.size.height)];
+    [lblBOLL setTextColor:[UIColor lightGrayColor]];
+    [lblBOLL setFont:[UIFont systemFontOfSize:11.0f]];
+    [lblBOLL setText:@"BOLL(20,3,3): 0.00 0.00 0.00"];
+    [vBOLLContainer addSubview:lblBOLL];
+    _lblBOLL = lblBOLL;
 }
 
 - (void)initBOLLChartData {
     if (self.groupChartData) {
         self.bollChart.linesData = self.groupChartData.bollLinesData;
-        self.bollChart.singleTouchPoint = CGPointMake(-1, -1);
+//        self.bollChart.singleTouchPoint = CGPointMake(-1, -1);
         
         [self.bollChart setNeedsDisplay];
         
@@ -919,57 +1255,57 @@
         }
         
         //设置标签值
-        self.lblOpen.text = [[[NSString stringWithFormat:@"%f", ohlc.open] decimal:2] zero];
-        self.lblHigh.text = [[[NSString stringWithFormat:@"%f", ohlc.high] decimal:2] zero];
-        self.lblLow.text = [[[NSString stringWithFormat:@"%f", ohlc.low] decimal:2] zero];
-        self.lblClose.text = [[[NSString stringWithFormat:@"%f", ohlc.close] decimal:2] zero];
+        _lblOpen.text = [[[NSString stringWithFormat:@"%f", ohlc.open/1000] decimal:0] zero];
+        _lblHigh.text = [[[NSString stringWithFormat:@"%f", ohlc.high/1000] decimal:0] zero];
+        _lblLow.text = [[[NSString stringWithFormat:@"%f", ohlc.low/1000] decimal:0] zero];
+        _lblClose.text = [[[NSString stringWithFormat:@"%f", ohlc.close/1000] decimal:0] zero];
         
-        self.lblChange.text = [NSString stringWithFormat:@"%@(%@%%)",
-                               [[NSString stringWithFormat:@"%f", ohlc.change] decimalWithSign:2],
-                               [[NSString stringWithFormat:@"%f", ohlc.change * 100 / lastohlc.close] decimalWithSign:2]];
+//        self.lblChange.text = [NSString stringWithFormat:@"%@(%@%%)",
+//                               [[NSString stringWithFormat:@"%f", ohlc.change] decimalWithSign:2],
+//                               [[NSString stringWithFormat:@"%f", ohlc.change * 100 / lastohlc.close] decimalWithSign:2]];
         
-        self.lblPreClose.text = [NSString stringWithFormat:@"前日終値:%@", [[[NSString stringWithFormat:@"%f", lastohlc.close] decimal:2] zero]];
-        
-        self.lblDate.text = ohlc.date;
+//        self.lblPreClose.text = [NSString stringWithFormat:@"前日終値:%@", [[[NSString stringWithFormat:@"%f", lastohlc.close] decimal:2] zero]];
+//        
+//        self.lblDate.text = ohlc.date;
         
         //设置标签文本颜色
         if (ohlc.open == 0) {
-            self.lblOpen.textColor = [UIColor blackColor];
+            self.lblOpen.textColor = [UIColor lightGrayColor];
         } else {
             //设置标签文本颜色
-            self.lblOpen.textColor = ohlc.open != lastohlc.close ? ohlc.open > lastohlc.close ? [UIColor redColor] : [UIColor blueColor] : [UIColor blackColor];
+            self.lblOpen.textColor = ohlc.open != lastohlc.close ? ohlc.open > lastohlc.close ? LINE_COLORS[0] : LINE_COLORS[1] : [UIColor lightGrayColor];
         }
         
         if (ohlc.high == 0) {
-            self.lblHigh.textColor = [UIColor blackColor];
+            self.lblHigh.textColor = [UIColor lightGrayColor];
         } else {
             //设置标签文本颜色
-            self.lblHigh.textColor = ohlc.high != lastohlc.close ? ohlc.high > lastohlc.close ? [UIColor redColor] : [UIColor blueColor] : [UIColor blackColor];
+            self.lblHigh.textColor = ohlc.high != lastohlc.close ? ohlc.high > lastohlc.close ? LINE_COLORS[0] : LINE_COLORS[1] : [UIColor lightGrayColor];
         }
         
         if (ohlc.low == 0) {
-            self.lblLow.textColor = [UIColor blackColor];
+            self.lblLow.textColor = [UIColor lightGrayColor];
         } else {
-            self.lblLow.textColor = ohlc.low != lastohlc.close ? ohlc.low > lastohlc.close ? [UIColor redColor] : [UIColor blueColor] : [UIColor blackColor];
+            self.lblLow.textColor = ohlc.low != lastohlc.close ? ohlc.low > lastohlc.close ? LINE_COLORS[0] : LINE_COLORS[1] : [UIColor lightGrayColor];
         }
         
         if (ohlc.close == 0) {
-            self.lblClose.textColor = [UIColor blackColor];
+            self.lblClose.textColor = [UIColor lightGrayColor];
         } else {
-            self.lblClose.textColor = ohlc.close != lastohlc.close ? ohlc.close > lastohlc.close ? [UIColor redColor] : [UIColor blueColor] : [UIColor blackColor];
+            self.lblClose.textColor = ohlc.close != lastohlc.close ? ohlc.close > lastohlc.close ? LINE_COLORS[0] : LINE_COLORS[1] : [UIColor lightGrayColor];
         }
         
         if (ohlc.change == 0) {
-            self.lblChange.textColor = [UIColor blackColor];
+            self.lblChange.textColor = [UIColor lightGrayColor];
         } else {
-            self.lblChange.textColor = ohlc.close != lastohlc.close ? ohlc.close > lastohlc.close ? [UIColor redColor] : [UIColor blueColor] : [UIColor blackColor];
+            self.lblChange.textColor = ohlc.close != lastohlc.close ? ohlc.close > lastohlc.close ? LINE_COLORS[0] : LINE_COLORS[1] : [UIColor lightGrayColor];
         }
         
     }
     
     if (self.stickChart.stickData && [self.stickChart.stickData count] > 0) {
         //成交量
-        self.lblVolume.text = [[[NSString stringWithFormat:@"%-2.0f", ((CCSStickChartData *) [self.stickChart.stickData objectAtIndex:i]).high] decimal] zero];
+        _lblVOL.text = [[[[NSString stringWithFormat:@"%f", ((CCSStickChartData *) [self.stickChart.stickData objectAtIndex:i]).high/10000] decimal] zero] append:@"万"];
     }
     
     if (self.candleStickChart.linesData && [self.candleStickChart.linesData count] > 0) {
@@ -1028,153 +1364,77 @@
                 }
                 self.lblSubTitle8.textColor = self.macdChart.macdLineColor;
                 
+                if (macdData) {
+                    [_lblMACD setText:[NSString stringWithFormat:@"DIF:%@ DEA:%@", [[NSString stringWithFormat:@"%f", macdData.diff] decimal:2], [[NSString stringWithFormat:@"%f", macdData.dea] decimal:2]]];
+                }else{
+                    [_lblMACD setText:[NSString stringWithFormat:@"DIF:%f DEA:%f", 0.0f, 0.0f]];
+                }
             }
         } else if (GroupChartViewTypeKDJ == self.bottomChartType) {
-            //均线数据
-            CCSTitledLine *lineK = [self.kdjChart.linesData objectAtIndex:0];
-            CCSTitledLine *lineD = [self.kdjChart.linesData objectAtIndex:1];
-            CCSTitledLine *lineJ = [self.kdjChart.linesData objectAtIndex:2];
-            
-            //K
-            if (lineK && lineK.data && [lineK.data count] > 0) {
-                if (((CCSLineData *) [lineK.data objectAtIndex:i]).value != 0) {
-                    self.lblSubTitle6.text = [NSString stringWithFormat:@"%@: %@", lineK.title, [[[NSString stringWithFormat:@"%f", ((CCSLineData *) [lineK.data objectAtIndex:i]).value / self.candleStickChart.axisCalc] decimal:2] zeroIsBlank]];
-                } else {
-                    self.lblSubTitle6.text = @"";
-                }
-                self.lblSubTitle6.textColor = lineK.color;
-            }
-            
-            //D
-            if (lineD && lineD.data && [lineD.data count] > 0) {
-                if (((CCSLineData *) [lineD.data objectAtIndex:i]).value != 0) {
-                    self.lblSubTitle7.text = [NSString stringWithFormat:@"%@: %@", lineD.title, [[[NSString stringWithFormat:@"%f", ((CCSLineData *) [lineD.data objectAtIndex:i]).value / self.candleStickChart.axisCalc] decimal:2] zeroIsBlank]];
-                } else {
-                    self.lblSubTitle7.text = @"";
-                }
-                self.lblSubTitle7.textColor = lineD.color;
-            }
-            
-            //J
-            if (lineJ && lineJ.data && [lineJ.data count] > 0) {
-                if (((CCSLineData *) [lineJ.data objectAtIndex:i]).value != 0) {
-                    self.lblSubTitle8.text = [NSString stringWithFormat:@"%@: %@", lineJ.title, [[[NSString stringWithFormat:@"%f", ((CCSLineData *) [lineJ.data objectAtIndex:i]).value / self.candleStickChart.axisCalc] decimal:2] zeroIsBlank]];
-                } else {
-                    self.lblSubTitle8.text = @"";
-                }
-                self.lblSubTitle8.textColor = lineJ.color;
+            NSMutableArray *kdjData = [[NSMutableArray alloc] init];
+            [self.groupChartData.kdjLinesData enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                CCSTitledLine *line = self.groupChartData.kdjLinesData[idx];
+                CCSLineData *lineData = line.data[i];
+                NSString *kdj = [[NSString stringWithFormat:@"%f", lineData.value] decimal:2];
+                [kdjData addObject:kdj];
+            }];
+            if (kdjData && [kdjData count] == 3) {
+                [_lblKDJ setText:[NSString stringWithFormat:@"K:%@ D:%@ J:%@", kdjData[0], kdjData[1], kdjData[2]]];
+            }else{
+                [_lblKDJ setText:[NSString stringWithFormat:@"K:%@ D:%@ J:%@", @"0.00", @"0.00", @"0.00"]];
             }
         } else if (GroupChartViewTypeRSI == self.bottomChartType) {
-            //均线数据
-            CCSTitledLine *line6 = [self.rsiChart.linesData objectAtIndex:0];
-            CCSTitledLine *line12 = [self.rsiChart.linesData objectAtIndex:1];
-            CCSTitledLine *line24 = [self.rsiChart.linesData objectAtIndex:2];
+            NSString *rsiN1 = [RSI_N1 getUserDefaultString];
+            NSString *rsiN2 = [RSI_N2 getUserDefaultString];
             
-            //6
-            if (line6 && line6.data && [line6.data count] > 0) {
-                if (((CCSLineData *) [line6.data objectAtIndex:i]).value != 0) {
-                    self.lblSubTitle6.text = [NSString stringWithFormat:@"%@: %@", line6.title, [[[NSString stringWithFormat:@"%f", ((CCSLineData *) [line6.data objectAtIndex:i]).value / self.candleStickChart.axisCalc] decimal:2] zeroIsBlank]];
-                } else {
-                    self.lblSubTitle6.text = @"";
-                }
-                self.lblSubTitle6.textColor = line6.color;
-            }
-            
-            //12
-            if (line12 && line12.data && [line12.data count] > 0) {
-                if (((CCSLineData *) [line12.data objectAtIndex:i]).value != 0) {
-                    self.lblSubTitle7.text = [NSString stringWithFormat:@"%@: %@", line12.title, [[[NSString stringWithFormat:@"%f", ((CCSLineData *) [line12.data objectAtIndex:i]).value / self.candleStickChart.axisCalc] decimal:2] zeroIsBlank]];
-                } else {
-                    self.lblSubTitle7.text = @"";
-                }
-                self.lblSubTitle7.textColor = line12.color;
-            }
-            
-            //24
-            if (line24 && line24.data && [line24.data count] > 0) {
-                if (((CCSLineData *) [line24.data objectAtIndex:i]).value != 0) {
-                    self.lblSubTitle8.text = [NSString stringWithFormat:@"%@: %@", line24.title, [[[NSString stringWithFormat:@"%f", ((CCSLineData *) [line24.data objectAtIndex:i]).value / self.candleStickChart.axisCalc] decimal:2] zeroIsBlank]];
-                } else {
-                    self.lblSubTitle8.text = @"";
-                }
-                self.lblSubTitle8.textColor = line24.color;
+            NSMutableArray *rsiData = [[NSMutableArray alloc] init];
+            [self.groupChartData.rsiLinesData enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                CCSTitledLine *line = self.groupChartData.rsiLinesData[idx];
+                CCSLineData *lineData = line.data[i];
+                NSString *rsi = [[NSString stringWithFormat:@"%f", lineData.value] decimal:2];
+                [rsiData addObject:rsi];
+            }];
+            if (rsiData && [rsiData count] == 3) {
+                [_lblRSI setText:[NSString stringWithFormat:@"RSI%@: %@ RSI%@: %@ RSI24: %@", rsiN1, rsiData[0], rsiN2, rsiData[1], rsiData[2]]];
+            }else{
+                [_lblRSI setText:[NSString stringWithFormat:@"RSI%@: %@ RSI%@: %@ RSI24: %@", rsiN1, @"0.00", rsiN2, @"0.00", @"0.00"]];
             }
         } else if (GroupChartViewTypeWR == self.bottomChartType) {
-            //均线数据
-            CCSTitledLine *lineWR = [self.wrChart.linesData objectAtIndex:0];
-            
-            //WR
-            if (lineWR && lineWR.data && [lineWR.data count] > 0) {
-                if (((CCSLineData *) [lineWR.data objectAtIndex:i]).value != 0) {
-                    self.lblSubTitle6.text = [NSString stringWithFormat:@"%@: %@", lineWR.title, [[[NSString stringWithFormat:@"%f", ((CCSLineData *) [lineWR.data objectAtIndex:i]).value / self.candleStickChart.axisCalc] decimal:2] zeroIsBlank]];
-                } else {
-                    self.lblSubTitle6.text = @"";
-                }
-                self.lblSubTitle6.textColor = lineWR.color;
+            NSString *wrN = [WR_N getUserDefaultString];
+            if (self.groupChartData.wrLinesData && [self.groupChartData.wrLinesData count] > 0) {
+                CCSTitledLine *wrLine = self.groupChartData.wrLinesData[0];
+                CCSLineData *wrLineData = wrLine.data[i];
+                NSString *wr = [[NSString stringWithFormat:@"%f", wrLineData.value] decimal:2];
+                
+                [_lblWR setText:[NSString stringWithFormat:@"WR(%@): %@", wrN, wr]];
+            }else{
+                [_lblWR setText:[NSString stringWithFormat:@"WR(%@): %@", wrN, @"0.00"]];
             }
-            
-            self.lblSubTitle7.text = @"";
-            self.lblSubTitle8.text = @"";
-            
         } else if (GroupChartViewTypeCCI == self.bottomChartType) {
-            //均线数据
-            CCSTitledLine *lineCCI = [self.cciChart.linesData objectAtIndex:0];
-            
-            if (lineCCI && lineCCI.data && [lineCCI.data count] > 0) {
-                if (((CCSLineData *) [lineCCI.data objectAtIndex:i]).value != 0) {
-                    self.lblSubTitle6.text = [NSString stringWithFormat:@"%@: %@", lineCCI.title, [[[NSString stringWithFormat:@"%f", ((CCSLineData *) [lineCCI.data objectAtIndex:i]).value / self.candleStickChart.axisCalc] decimal:2] zeroIsBlank]];
-                } else {
-                    self.lblSubTitle6.text = @"";
-                }
-                self.lblSubTitle6.textColor = lineCCI.color;
+            NSString *cciN = [CCI_N getUserDefaultString];
+            if (self.groupChartData.cciLinesData && [self.groupChartData.cciLinesData count] > 0) {
+                CCSTitledLine *cciLine = self.groupChartData.cciLinesData[0];
+                CCSLineData *cciLineData = cciLine.data[i];
+                NSString *cci = [[NSString stringWithFormat:@"%f", cciLineData.value] decimal:2];
+                
+                [_lblCCI setText:[NSString stringWithFormat:@"CCI(%@): %@", cciN, cci]];
+            }else{
+                [_lblCCI setText:[NSString stringWithFormat:@"CCI(%@): %@", cciN, @"0.00"]];
             }
-            
-            self.lblSubTitle7.text = @"";
-            self.lblSubTitle8.text = @"";
-            
         } else if (GroupChartViewTypeBOLL == self.bottomChartType) {
-            //均线数据
-            CCSTitledLine *upper = [self.candleStickChart.bollingerBandData objectAtIndex:0];
-            CCSTitledLine *lower = [self.candleStickChart.bollingerBandData objectAtIndex:1];
-            CCSTitledLine *boll = [self.candleStickChart.bollingerBandData objectAtIndex:2];
+            NSString *bollN = [BOLL_N getUserDefaultString];
             
-            //UPPER
-            if (upper && upper.data && [upper.data count] > 0) {
-                if (((CCSLineData *) [upper.data objectAtIndex:i]).value != 0) {
-                    self.lblSubTitle3.text = [NSString stringWithFormat:@"%@: %@", upper.title, [[[NSString stringWithFormat:@"%f", ((CCSLineData *) [upper.data objectAtIndex:i]).value / self.candleStickChart.axisCalc] decimal:2] zeroIsBlank]];
-                } else {
-                    self.lblSubTitle3.text = @"";
-                }
-                self.lblSubTitle3.textColor = upper.color;
-                
-                self.lblSubTitle6.textColor = self.lblSubTitle3.textColor;
-                self.lblSubTitle6.text = self.lblSubTitle3.text;
-            }
-            
-            //LOWER
-            if (lower && lower.data && [lower.data count] > 0) {
-                if (((CCSLineData *) [lower.data objectAtIndex:i]).value != 0) {
-                    self.lblSubTitle4.text = [NSString stringWithFormat:@"%@: %@", lower.title, [[[NSString stringWithFormat:@"%f", ((CCSLineData *) [lower.data objectAtIndex:i]).value / self.candleStickChart.axisCalc] decimal:2] zeroIsBlank]];
-                } else {
-                    self.lblSubTitle4.text = @"";
-                }
-                self.lblSubTitle4.textColor = lower.color;
-                
-                self.lblSubTitle7.textColor = self.lblSubTitle4.textColor;
-                self.lblSubTitle7.text = self.lblSubTitle4.text;
-            }
-            
-            //BOLL
-            if (boll && boll.data && [boll.data count] > 0) {
-                if (((CCSLineData *) [boll.data objectAtIndex:i]).value != 0) {
-                    self.lblSubTitle5.text = [NSString stringWithFormat:@"%@: %@", boll.title, [[[NSString stringWithFormat:@"%f", ((CCSLineData *) [boll.data objectAtIndex:i]).value / self.candleStickChart.axisCalc] decimal:2] zeroIsBlank]];
-                } else {
-                    self.lblSubTitle5.text = @"";
-                }
-                self.lblSubTitle5.textColor = boll.color;
-                
-                self.lblSubTitle8.textColor = self.lblSubTitle5.textColor;
-                self.lblSubTitle8.text = self.lblSubTitle5.text;
+            NSMutableArray *bollData = [[NSMutableArray alloc] init];
+            [self.groupChartData.bollLinesData enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                CCSTitledLine *line = self.groupChartData.bollLinesData[idx];
+                CCSLineData *lineData = line.data[i];
+                NSString *boll = [[NSString stringWithFormat:@"%f", lineData.value] decimal:2];
+                [bollData addObject:boll];
+            }];
+            if (bollData && [bollData count] == 3) {
+                [_lblBOLL setText:[NSString stringWithFormat:@"BOLL(%@,2,2): %@, %@, %@", bollN, bollData[0], bollData[1], bollData[2]]];
+            }else{
+                [_lblBOLL setText:[NSString stringWithFormat:@"BOLL(%@,2,2): %@, %@, %@", bollN, @"0.00", @"0.00", @"0.00"]];
             }
         }
     }

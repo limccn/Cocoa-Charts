@@ -1,9 +1,11 @@
 //
-//  TaLibToos.m
-//  okasanonlinetrade
+//  CCSTALibUtils.m
+//  CocoaChartsUtils
 //
-//  Created by lengyc on 2013/12/09.
-//  Copyright (c) 2013年 ohs. All rights reserved.
+//  Created by lengyc on 12/27/13.
+//
+//  Copyright (C) 2013 ShangHai Okasan-Huada computer system CO.,LTD. All Rights Reserved.
+//  See LICENSE.txt for this file’s licensing information
 //
 
 #import "CCSTALibUtils.h"

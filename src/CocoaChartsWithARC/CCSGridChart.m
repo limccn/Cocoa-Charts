@@ -71,7 +71,7 @@
     self.longitudeFontColor = [UIColor lightGrayColor];
     self.latitudeFontColor = [UIColor lightGrayColor];
     self.dashCrossLines = YES;
-    self.crossLinesColor = [UIColor cyanColor];
+    self.crossLinesColor = [UIColor grayColor];
     self.crossLinesFontColor = [UIColor whiteColor];
     self.longitudeFontSize = 11;
     self.latitudeFontSize = 11;
@@ -562,8 +562,17 @@
 }
 
 - (void)drawCrossLines:(CGRect)rect {
+    
+    //过滤非显示区域的点
+    if (self.singleTouchPoint.x < self.axisMarginLeft ||
+        self.singleTouchPoint.y < self.axisMarginTop ||
+        self.singleTouchPoint.x > rect.size.width - self.axisMarginRight ||
+        self.singleTouchPoint.y > rect.size.height - self.axisMarginBottom) {
+        return;
+    }
+    
     CGContextRef context = UIGraphicsGetCurrentContext();
-    CGContextSetLineWidth(context, 0.5f);
+    CGContextSetLineWidth(context, 1.0f);
     CGContextSetStrokeColorWithColor(context, self.crossLinesColor.CGColor);
     CGContextSetFillColorWithColor(context, self.crossLinesColor.CGColor);
 
@@ -641,6 +650,21 @@
 //                CGContextAddRect(context,CGRectMake(1, self.singleTouchPoint.y - 6, self.axisMarginLeft-2, 14));
 //                //绘制线条
                 CGContextStrokePath(context);
+                
+                
+                NSString *value = [self calcAxisYGraduate:rect];
+                CGRect boxRect = CGRectMake(1, self.singleTouchPoint.y - self.latitudeFontSize/2.0 - 2, value.length * self.latitudeFontSize / 2 + 4, self.latitudeFontSize+4);
+                
+                CGContextAddRect(context,boxRect);
+                CGContextFillPath(context);
+                
+                NSMutableParagraphStyle* paragraphStyle = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+                paragraphStyle.lineBreakMode = NSLineBreakByCharWrapping;
+                NSDictionary*attribute = @{NSParagraphStyleAttributeName:paragraphStyle};
+                
+                [value drawInRect:boxRect withAttributes:attribute];
+
+                
 //                
 //                CGContextSetFillColorWithColor(context,self.crossLinesFontColor.CGColor);
 
@@ -719,6 +743,22 @@
 //                CGContextAddRect(context,CGRectMake(1, self.singleTouchPoint.y - 6, self.axisMarginLeft-2, 14));
 //                //绘制线条
                 CGContextStrokePath(context);
+                
+                NSString *value = [self calcAxisYGraduate:rect];
+                CGRect boxRect = CGRectMake(1, self.singleTouchPoint.y - self.latitudeFontSize/2.0 - 2, value.length * self.latitudeFontSize / 2 + 4, self.latitudeFontSize+4);
+                
+                CGContextAddRect(context,boxRect);
+                CGContextFillPath(context);
+                
+//                [value drawInRect:boxRect withAttributes:{}];
+                
+                NSMutableParagraphStyle* paragraphStyle = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+                paragraphStyle.lineBreakMode = NSLineBreakByCharWrapping;
+                NSDictionary*attribute = @{NSParagraphStyleAttributeName:paragraphStyle};
+                
+                [value drawInRect:boxRect withAttributes:attribute];
+    
+                
 //                
 //                CGContextSetFillColorWithColor(context,self.crossLinesFontColor.CGColor);
 
@@ -874,9 +914,9 @@ CCFloat _minDistance = 8;
 {
     _singleTouchPoint = point;
     
-    if (self.chartDelegate && [self.chartDelegate respondsToSelector:@selector(CCSChartBeTouchedOn:point:indexAt:)]) {
-        [self.chartDelegate CCSChartBeTouchedOn:self point:point indexAt:0];
-    }
+//    if (self.chartDelegate && [self.chartDelegate respondsToSelector:@selector(CCSChartBeTouchedOn:point:indexAt:)]) {
+//        [self.chartDelegate CCSChartBeTouchedOn:self point:point indexAt:0];
+//    }
 }
 
 @end

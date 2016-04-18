@@ -28,6 +28,7 @@
 #import "CCSPieChart.h"
 #import "CCSPizzaChart.h"
 #import "CCSSpiderWebChart.h"
+#import "CCSMAColoredStickChart.h"
 
 #import "CCSLineData.h"
 #import "CCSTitledLine.h"

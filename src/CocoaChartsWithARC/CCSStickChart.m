@@ -409,14 +409,14 @@
     //父类的点击事件
     [super touchesBegan:touches withEvent:event];
     //计算选中的索引
-    [self calcSelectedIndex];
+//    [self calcSelectedIndex];
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
     //调用父类的触摸事件
     [super touchesMoved:touches withEvent:event];
     //计算选中的索引
-    [self calcSelectedIndex];
+//    [self calcSelectedIndex];
 
     NSArray *allTouches = [touches allObjects];
     //处理点击事件

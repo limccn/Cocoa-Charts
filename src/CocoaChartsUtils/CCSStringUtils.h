@@ -1,9 +1,11 @@
 //
 //  CCSStringUtils.h
-//  CocoaChartsSample
+//  CocoaChartsUtils
 //
 //  Created by limc on 12/27/13.
-//  Copyright (c) 2013 limc. All rights reserved.
+//
+//  Copyright (C) 2013 ShangHai Okasan-Huada computer system CO.,LTD. All Rights Reserved.
+//  See LICENSE.txt for this file’s licensing information
 //
 
 #import <Foundation/Foundation.h>

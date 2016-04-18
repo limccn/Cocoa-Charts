@@ -1,9 +1,11 @@
 //
 //  NSString+UIColor.h
-//  OWIN
+//  CocoaChartsUtils
 //
-//  Created by zhourr_ on 16/2/17.
-//  Copyright © 2016年 OHS. All rights reserved.
+//  Created by zhourr on 12/27/13.
+//
+//  Copyright (C) 2013 ShangHai Okasan-Huada computer system CO.,LTD. All Rights Reserved.
+//  See LICENSE.txt for this file’s licensing information
 //
 
 #import <Foundation/Foundation.h>
