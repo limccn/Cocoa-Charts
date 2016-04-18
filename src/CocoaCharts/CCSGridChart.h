@@ -23,15 +23,15 @@
 
 @protocol CCSChartDelegate <NSObject>
 @optional
-- (void)CCSChartBeTouchedOn:(CGPoint)point indexAt:(CCUInt) index;
-- (void)CCSChartDisplayChangedFrom:(CCUInt)from number:(CCUInt) number;
+- (void)CCSChartBeTouchedOn:(id)chart point:(CGPoint)point indexAt:(CCUInt) index;
+- (void)CCSChartDisplayChangedFrom:(id)chart from:(CCUInt)from number:(CCUInt) number;
 @end
 
 /*!
  @typedef enum CCSGridChartYAxisPosition
  Y Axis' Display position in grid
  Y軸の表示位置
- Y轴在画面种的表示位置
+ Y轴在画面中的表示位置
  */
 typedef enum {
     CCSGridChartYAxisPositionLeft,               //Axis Y left
@@ -41,8 +41,8 @@ typedef enum {
 /*!
  @typedef enum CCSGridChartXAxisPosition
  X Axis' Display position in grid
- X軸の表示位置
- X轴在画面种的表示位置
+ X軸表示位置
+ X轴在画面中的表示位置
  */
 typedef enum {
     CCSGridChartXAxisPositionTop,                //Axis X top
@@ -74,18 +74,10 @@ typedef enum {
     UIColor *_crossLinesFontColor;
     UIFont *_longitudeFont;
     UIFont *_latitudeFont;
-//    CCFloat _axisMarginLeft;
-//    CCFloat _axisMarginBottom;
-//    CCFloat _axisMarginTop;
-//    CCFloat _axisMarginRight;
-    CCFloat _axisYTitleQuadrantWidth;
-    CCFloat _axisXTitleQuadrantHeight;
-    CCFloat _dataQuadrantPaddingTop;
-    CCFloat _dataQuadrantPaddingLeft;
-    CCFloat _dataQuadrantPaddingBottom;
-    CCFloat _dataQuadrantPaddingRight;
-    CCFloat _axisWidth;
-    CCFloat _borderWidth;
+    CCFloat _axisMarginLeft;
+    CCFloat _axisMarginBottom;
+    CCFloat _axisMarginTop;
+    CCFloat _axisMarginRight;
     CCUInt _longitudeFontSize;
     CCUInt _latitudeFontSize;
     CCSGridChartXAxisPosition _axisXPosition;
@@ -97,11 +89,12 @@ typedef enum {
     BOOL _displayLatitude;
     BOOL _dashLatitude;
     BOOL _displayBorder;
+    BOOL _dashCrossLines;
     BOOL _displayCrossXOnTouch;
     BOOL _displayCrossYOnTouch;
     CGPoint _singleTouchPoint;
     
-    UIViewController<CCSChartDelegate> *_chartDelegate;
+    __unsafe_unretained UIViewController<CCSChartDelegate> *_chartDelegate;
 }
 
 /*!
@@ -109,117 +102,110 @@ typedef enum {
  X軸の表示用タイトル配列
  X轴标题数组
  */
-@property(retain, nonatomic) NSMutableArray *latitudeTitles;
+@property(strong, nonatomic) NSMutableArray *latitudeTitles;
 
 /*!
  Titles for display of Y axis
  Y軸の表示用タイトル配列
  Y轴标题数组
  */
-@property(retain, nonatomic) NSMutableArray *longitudeTitles;
+@property(strong, nonatomic) NSMutableArray *longitudeTitles;
 
 /*!
  Color of X axis
  X軸の色
  坐标轴X的显示颜色
  */
-@property(retain, nonatomic) UIColor *axisXColor;
+@property(strong, nonatomic) UIColor *axisXColor;
 
 /*!
  Color of Y axis
  Y軸の色
  坐标轴Y的显示颜色
  */
-@property(retain, nonatomic) UIColor *axisYColor;
+@property(strong, nonatomic) UIColor *axisYColor;
 
 /*!
  Color of grid‘s longitude line
  経線の色
  网格经线的显示颜色
  */
-@property(retain, nonatomic) UIColor *longitudeColor;
+@property(strong, nonatomic) UIColor *longitudeColor;
 
 /*!
  Color of grid‘s latitude line
  緯線の色
  网格纬线的显示颜色
  */
-@property(retain, nonatomic) UIColor *latitudeColor;
+@property(strong, nonatomic) UIColor *latitudeColor;
 
 /*!
  Color of grid‘s border line
  枠線の色
  图边框的颜色
  */
-@property(retain, nonatomic) UIColor *borderColor;
+@property(strong, nonatomic) UIColor *borderColor;
 
 /*!
  Color of text for the longitude　degrees display
  経度のタイトルの色
  经线刻度字体颜色
  */
-@property(retain, nonatomic) UIColor *longitudeFontColor;
+@property(strong, nonatomic) UIColor *longitudeFontColor;
 
 /*!
  Color of text for the latitude　degrees display
  緯度のタイトルの色
  纬线刻度字体颜色
  */
-@property(retain, nonatomic) UIColor *latitudeFontColor;
+@property(strong, nonatomic) UIColor *latitudeFontColor;
 
 /*!
  Color of cross line inside grid when touched
  タッチしたポイント表示用十字線の色
  十字交叉线颜色
  */
-@property(retain, nonatomic) UIColor *crossLinesColor;
+@property(strong, nonatomic) UIColor *crossLinesColor;
+
+@property(assign, nonatomic) BOOL dashCrossLines;
 
 /*!
  Color of cross line degree text when touched
  タッチしたポイント表示用十字線度数文字の色
  十字交叉线坐标轴字体颜色
  */
-@property(retain, nonatomic) UIColor *crossLinesFontColor;
+@property(strong, nonatomic) UIColor *crossLinesFontColor;
 
-@property(retain, nonatomic) UIFont *longitudeFont;
-@property(retain, nonatomic) UIFont *latitudeFont;
+@property(strong, nonatomic) UIFont *longitudeFont;
+@property(strong, nonatomic) UIFont *latitudeFont;
 
 /*!
  Margin of the axis to the left border
  轴線より左枠線の距離
  轴线左边距
  */
-@property(assign, nonatomic , setter = setAxisMarginLeft:,getter = getAxisMarginLeft) CCFloat axisMarginLeft;
+@property(assign, nonatomic) CCFloat axisMarginLeft;
 
 /*!
  Margin of the axis to the bottom border
  轴線より下枠線の距離
  轴线下边距
  */
-@property(assign, nonatomic, setter = setAxisMarginBottom:,getter = getAxisMarginBottom) CCFloat axisMarginBottom;
+@property(assign, nonatomic) CCFloat axisMarginBottom;
 
 /*!
  Margin of the axis to the top border
  轴線より上枠線の距離
  轴线上边距
  */
-@property(assign, nonatomic, setter = setAxisMarginTop:,getter = getAxisMarginTop) CCFloat axisMarginTop;
+@property(assign, nonatomic) CCFloat axisMarginTop;
 
 /*!
  Margin of the axis to the top border
  轴線より右枠線の距離
  轴线右边距
  */
-@property(assign, nonatomic,  setter = setAxisMarginRight:,getter = getAxisMarginRight) CCFloat axisMarginRight;
-
-@property(assign, nonatomic) CCFloat axisYTitleQuadrantWidth;
-@property(assign, nonatomic) CCFloat axisXTitleQuadrantHeight;
-@property(assign, nonatomic) CCFloat dataQuadrantPaddingTop;
-@property(assign, nonatomic) CCFloat dataQuadrantPaddingLeft;
-@property(assign, nonatomic) CCFloat dataQuadrantPaddingBottom;
-@property(assign, nonatomic) CCFloat dataQuadrantPaddingRight;
-@property(assign, nonatomic) CCFloat axisWidth;
-@property(assign, nonatomic) CCFloat borderWidth;
+@property(assign, nonatomic) CCFloat axisMarginRight;
 
 /*!
  Font size of text for the longitude　degrees display
@@ -461,7 +447,7 @@ typedef enum {
  经度计算结果
  
  */
-- (CCFloat)touchPointAxisXValue:(CGRect)rect;
+- (CCFloat )touchPointAxisXValue:(CGRect)rect;
 
 /*!
  @abstract calculate the y axis display value of touched point (value:0.0～1.0)
@@ -476,7 +462,7 @@ typedef enum {
  計算出した度数］
  纬度计算结果
  */
-- (CCFloat)touchPointAxisYValue:(CGRect)rect;
+- (CCFloat )touchPointAxisYValue:(CGRect)rect;
 
 /*!
  @abstract Zoom out the grid
@@ -491,18 +477,5 @@ typedef enum {
  放大表示
  */
 - (void)zoomIn;
-
-- (CCFloat) dataQuadrantWidth:(CGRect)rect;
-- (CCFloat) dataQuadrantHeight:(CGRect)rect;
-- (CCFloat) dataQuadrantStartX:(CGRect)rect;
-- (CCFloat) dataQuadrantPaddingStartX:(CGRect)rect;
-- (CCFloat) dataQuadrantEndX:(CGRect)rect;
-- (CCFloat) dataQuadrantPaddingEndX:(CGRect)rect;
-- (CCFloat) dataQuadrantStartY:(CGRect)rect;
-- (CCFloat) dataQuadrantPaddingStartY:(CGRect)rect;
-- (CCFloat) dataQuadrantEndY:(CGRect)rect;
-- (CCFloat) dataQuadrantPaddingEndY:(CGRect)rect;
-- (CCFloat) dataQuadrantPaddingWidth:(CGRect)rect;
-- (CCFloat) dataQuadrantPaddingHeight:(CGRect)rect;
 
 @end

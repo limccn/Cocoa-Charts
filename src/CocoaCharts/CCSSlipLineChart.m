@@ -5,18 +5,6 @@
 //  Created by limc on 12/6/13.
 //  Copyright (c) 2013 limc. All rights reserved.
 //
-//  Licensed under the Apache License, Version 2.0 (the "License");
-//  you may not use this file except in compliance with the License.
-//  You may obtain a copy of the License at
-//
-//  http://www.apache.org/licenses/LICENSE-2.0
-//
-//  Unless required by applicable law or agreed to in writing, software
-//  distributed under the License is distributed on an "AS IS" BASIS,
-//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-//  See the License for the specific language governing permissions and
-//  limitations under the License.
-//
 
 #import "CCSSlipLineChart.h"
 #import "CCSTitledLine.h"
@@ -27,6 +15,12 @@
     CCFloat _minDistance1;
     CCInt _flag;
     CCFloat _firstX;
+    
+    BOOL _isLongPress;
+    BOOL _isMoved;
+    BOOL _waitForLongPress;
+    
+    CGPoint _firstTouchPoint;
 }
 @end
 
@@ -40,10 +34,15 @@
 - (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        _startDistance1 = 0;
-        _minDistance1 = 8;
-        _flag = 1;
-        _firstX = 0;
+         _startDistance1 = 0;
+         _minDistance1 = 8;
+         _flag = 1;
+         _firstX = 0;
+        
+        
+         _isLongPress = NO;
+         _isMoved = NO;
+         _waitForLongPress = NO;
     }
     return self;
 }
@@ -57,6 +56,10 @@
     self.minDisplayNumber = 20;
     self.zoomBaseLine = CCSLineZoomBaseLineCenter;
     self.noneDisplayValue = 0;
+    
+    self.displayCrossXOnTouch = NO;
+    self.displayCrossYOnTouch = NO;
+    
 }
 
 
@@ -67,12 +70,12 @@
     CCFloat maxValue = -CCIntMax;
     CCFloat minValue = CCIntMax;
     
-    for (NSInteger i = [self.linesData count] - 1; i >= 0; i--) {
+    for (CCInt i = [self.linesData count] - 1; i >= 0; i--) {
         CCSTitledLine *line = [self.linesData objectAtIndex:i];
         
         //获取线条数据
         NSArray *lineDatas = line.data;
-        for (CCUInt j = self.displayFrom; j < self.displayFrom + self.displayNumber; j++) {
+        for (CCUInt j = self.displayFrom; j < self.displayFrom + self.displayNumber - 1; j++) {
             CCSLineData *lineData = [lineDatas objectAtIndex:j];
             
             //忽略不显示值的情况
@@ -106,7 +109,6 @@
     [self initAxisY];
     [self initAxisX];
     
-    
     [super drawRect:rect];
     
     //绘制数据
@@ -114,15 +116,8 @@
 }
 
 - (void)drawData:(CGRect)rect {
-    if (self.linesData == nil) {
-        return;
-    }
     
-    if ([self.linesData count] == 0) {
-        return;
-    }
     // 起始位置
-    CCFloat lineLength;
     CCFloat startX;
     CCFloat lastY = 0;
     
@@ -130,371 +125,445 @@
     CGContextSetLineWidth(context, self.lineWidth);
     CGContextSetAllowsAntialiasing(context, YES);
     
-    //逐条输出MA线
-    for (CCUInt i = 0; i < [self.linesData count]; i++) {
-        CCSTitledLine *line = [self.linesData objectAtIndex:i];
-        
-        if (line== nil) {
-            continue;
-        }
-        if ([line.data count] == 0) {
-            continue;
-        }
-
-        //设置线条颜色
-        CGContextSetStrokeColorWithColor(context, line.color.CGColor);
-        //获取线条数据
-        NSArray *lineDatas = line.data;
-        //判断Y轴的位置设置从左往右还是从右往左绘制
-        if (self.axisYPosition == CCSGridChartYAxisPositionLeft) {
-            if (self.lineAlignType == CCSLineAlignTypeCenter) {
-                // 点线距离
-                lineLength= ([self dataQuadrantPaddingWidth:rect] / self.displayNumber);
-                //起始点
-                startX = [self dataQuadrantPaddingStartX:rect] + lineLength / 2;
-            }else if (self.lineAlignType == CCSLineAlignTypeJustify) {
-                // 点线距离
-                lineLength= ([self dataQuadrantPaddingWidth:rect] / (self.displayNumber - 1));
-                //起始点
-                startX = [self dataQuadrantPaddingStartX:rect];
-            }
+    if (self.linesData != NULL) {
+        //逐条输出MA线
+        for (CCUInt i = 0; i < [self.linesData count]; i++) {
+            CCSTitledLine *line = [self.linesData objectAtIndex:i];
             
-            //遍历并绘制线条
-            for (CCUInt j = self.displayFrom; j < self.displayFrom + self.displayNumber; j++) {
-                CCSLineData *lineData = [lineDatas objectAtIndex:j];
-                //获取终点Y坐标
-                CCFloat valueY = [self calcValueY:lineData.value inRect:rect];
-                //绘制线条路径
-                if (j == self.displayFrom) {
-                    CGContextMoveToPoint(context, startX, valueY);
-                    lastY = valueY;
-                } else {
-                    if (lineData.value - self.noneDisplayValue == 0) {
-                        CGContextMoveToPoint(context, startX, lastY);
-                    } else {
-                        CGContextAddLineToPoint(context, startX, valueY);
-                        lastY = valueY;
-                    }
-                }
-                //X位移
-                startX = startX + lineLength;
-            }
-        } else {
-            
-            if (self.lineAlignType == CCSLineAlignTypeCenter) {
-                // 点线距离
-                lineLength = ([self dataQuadrantPaddingWidth:rect] / self.displayNumber);
-                //起始点
-                startX = [self dataQuadrantPaddingEndX:rect] - lineLength / 2;
-            }else if (self.lineAlignType == CCSLineAlignTypeJustify) {
-                // 点线距离
-                lineLength= ([self dataQuadrantPaddingWidth:rect] / (self.displayNumber - 1));
-                //起始点
-                startX = [self dataQuadrantPaddingEndX:rect];
-            }
-            
-            //判断点的多少
-            if ([lineDatas count] == 0) {
-                //0根则返回
-                return;
-            } else if ([lineDatas count] == 1) {
-                //1根则绘制一条直线
-                CCSLineData *lineData = [lineDatas objectAtIndex:0];
-                //获取终点Y坐标
-                CCFloat valueY = [self calcValueY:lineData.value inRect:rect];
-                
-                CGContextMoveToPoint(context, startX, valueY);
-                CGContextAddLineToPoint(context, [self dataQuadrantPaddingStartX:rect], valueY);
-                
-            } else {
-                //遍历并绘制线条
-                for (CCUInt j = 0; j < self.displayNumber; j++) {
-                    CCUInt index = self.displayFrom + self.displayNumber - 1 - j;
-                    CCSLineData *lineData = [lineDatas objectAtIndex:index];
-                    //获取终点Y坐标
-                    CCFloat valueY = [self calcValueY:lineData.value inRect:rect];
-                    //绘制线条路径
-                    if (index == self.displayFrom + self.displayNumber - 1) {
-                        CGContextMoveToPoint(context, startX, valueY);
-                        lastY = valueY;
-                    } else {
-                        if (lineData.value - self.noneDisplayValue == 0) {
-                            CGContextMoveToPoint(context, startX, lastY);
-                        } else {
-                            CGContextAddLineToPoint(context, startX, valueY);
+            if (line != NULL) {
+                //设置线条颜色
+                CGContextSetStrokeColorWithColor(context, line.color.CGColor);
+                //获取线条数据
+                NSArray *lineDatas = line.data;
+                //判断Y轴的位置设置从左往右还是从右往左绘制
+                if (self.axisYPosition == CCSGridChartYAxisPositionLeft) {
+                    //TODO:自左向右绘图未对应
+                    // 点线距离
+                    CCFloat lineLength = ((rect.size.width - self.axisMarginLeft - 2 * self.axisMarginRight) / self.displayNumber);
+                    //起始点
+                    startX = super.axisMarginLeft + lineLength / 2;
+                    //遍历并绘制线条
+                    for (CCUInt j = self.displayFrom; j < self.displayFrom + self.displayNumber; j++) {
+                        CCSLineData *lineData = [lineDatas objectAtIndex:j];
+                        //获取终点Y坐标
+                        CCFloat valueY = ((1 - (lineData.value - self.minValue) / (self.maxValue - self.minValue)) * (rect.size.height - 2 * self.axisMarginTop - self.axisMarginBottom) + self.axisMarginTop);
+                        //绘制线条路径
+                        if (j == self.displayFrom) {
+                            CGContextMoveToPoint(context, startX, valueY);
                             lastY = valueY;
+                        } else {
+                            if (lineData.value - self.noneDisplayValue == 0) {
+                                CGContextMoveToPoint(context, startX, lastY);
+                            } else {
+                                CGContextAddLineToPoint(context, startX, valueY);
+                                lastY = valueY;
+                            }
+                        }
+                        //X位移
+                        startX = startX + lineLength;
+                    }
+                } else {
+                    
+                    // 点线距离
+                    CCFloat lineLength = ((rect.size.width - 2 * self.axisMarginLeft - self.axisMarginRight) / self.displayNumber);
+                    //起始点
+                    startX = rect.size.width - self.axisMarginRight - self.axisMarginLeft - lineLength / 2;
+                    
+                    //判断点的多少
+                    if ([lineDatas count] == 0) {
+                        //0根则返回
+                        return;
+                    } else if ([lineDatas count] == 1) {
+                        //1根则绘制一条直线
+                        CCSLineData *lineData = [lineDatas objectAtIndex:0];
+                        //获取终点Y坐标
+                        CCFloat valueY = ((1 - (lineData.value - self.minValue) / (self.maxValue - self.minValue)) * (rect.size.height - 2 * self.axisMarginTop - self.axisMarginBottom) + self.axisMarginTop);
+                        
+                        CGContextMoveToPoint(context, startX, valueY);
+                        CGContextAddLineToPoint(context, self.axisMarginLeft, valueY);
+                        
+                    } else {
+                        //遍历并绘制线条
+                        for (CCUInt j = 0; j < self.displayNumber; j++) {
+                            CCUInt index = self.displayFrom + self.displayNumber - 1 - j;
+                            CCSLineData *lineData = [lineDatas objectAtIndex:index];
+                            //获取终点Y坐标
+                            CCFloat valueY = ((1 - (lineData.value - self.minValue) / (self.maxValue - self.minValue)) * (rect.size.height - 2 * self.axisMarginTop - self.axisMarginBottom) + self.axisMarginTop);
+                            //绘制线条路径
+                            if (index == self.displayFrom + self.displayNumber - 1) {
+                                CGContextMoveToPoint(context, startX, valueY);
+                                lastY = valueY;
+                            } else {
+                                if (lineData.value - self.noneDisplayValue == 0) {
+                                    CGContextMoveToPoint(context, startX, lastY);
+                                } else {
+                                    CGContextAddLineToPoint(context, startX, valueY);
+                                    lastY = valueY;
+                                }
+                            }
+                            //X位移
+                            startX = startX - lineLength;
                         }
                     }
-                    //X位移
-                    startX = startX - lineLength;
                 }
+                
+                //绘制路径
+                CGContextStrokePath(context);
             }
-        }
-        
-        //绘制路径
-        CGContextStrokePath(context);
-    }
-}
-
-
-- (void)drawLongitudeLines:(CGRect)rect {
-    if (self.displayLongitude == NO) {
-        return;
-    }
-    
-    if ([self.longitudeTitles count] <= 0) {
-        return;
-    }
-    
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    CGContextSetLineWidth(context, 0.5f);
-    CGContextSetStrokeColorWithColor(context, self.longitudeColor.CGColor);
-    CGContextSetFillColorWithColor(context, self.longitudeFontColor.CGColor);
-    
-    //设置线条为点线
-    if (self.dashLongitude) {
-        CGFloat lengths[] = {3.0, 3.0};
-        CGContextSetLineDash(context, 0.0, lengths, 2);
-    }
-    
-    CCFloat postOffset,offset;
-    CCFloat lineLength = ([self dataQuadrantPaddingWidth:rect] / self.displayNumber);
-    if (self.lineAlignType == CCSLineAlignTypeCenter) {
-        postOffset= ([self dataQuadrantPaddingWidth:rect] - lineLength) / ([self.longitudeTitles count] - 1);
-        offset = [self dataQuadrantPaddingStartX:rect] + lineLength/2;
-    }else{
-        postOffset= [self dataQuadrantPaddingWidth:rect] / ([self.longitudeTitles count] - 1);
-        offset = [self dataQuadrantPaddingStartX:rect];
-    }
-    
-    for (CCUInt i = 0; i < [self.longitudeTitles count]; i++) {
-        CGContextMoveToPoint(context, offset + i * postOffset, [self dataQuadrantStartY:rect]);
-        CGContextAddLineToPoint(context, offset + i * postOffset, [self dataQuadrantEndY:rect]);
-    }
-    
-    CGContextStrokePath(context);
-    CGContextSetLineDash(context, 0, nil, 0);
-}
-
-- (void)drawXAxisTitles:(CGRect)rect {
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    CGContextSetLineWidth(context, 0.5f);
-    CGContextSetStrokeColorWithColor(context, self.longitudeColor.CGColor);
-    CGContextSetFillColorWithColor(context, self.longitudeFontColor.CGColor);
-    
-    if (self.displayLongitude == NO) {
-        return;
-    }
-    
-    if (self.displayLongitudeTitle == NO) {
-        return;
-    }
-    
-    if ([self.longitudeTitles count] <= 0) {
-        return;
-    }
-    
-    CCFloat postOffset,offset;
-    CCFloat lineLength = ([self dataQuadrantPaddingWidth:rect] / self.displayNumber);
-    if (self.lineAlignType == CCSLineAlignTypeCenter) {
-        postOffset= ([self dataQuadrantPaddingWidth:rect] - lineLength) / ([self.longitudeTitles count] - 1);
-        offset = [self dataQuadrantPaddingStartX:rect] + lineLength/2;
-    }else{
-        postOffset= [self dataQuadrantPaddingWidth:rect] / ([self.longitudeTitles count] - 1);
-        offset = [self dataQuadrantPaddingStartX:rect];
-    }
-    
-    for (CCUInt i = 0; i < [self.longitudeTitles count]; i++) {
-        CCFloat startY;
-        if (self.axisXPosition == CCSGridChartXAxisPositionBottom) {
-            startY = [self dataQuadrantEndY:rect] + [self axisWidth];
-        }else{
-            startY = [self borderWidth];
-        }
-        
-        NSString *str = (NSString *) [self.longitudeTitles objectAtIndex:i];
-        
-        //调整X轴坐标位置
-        //调整X轴坐标位置
-        if (i == 0) {
-            //            [str drawInRect:CGRectMake([self dataQuadrantPaddingStartX:rect], startY, postOffset, self.longitudeFontSize)
-            //                   withFont:self.longitudeFont
-            //              lineBreakMode:NSLineBreakByWordWrapping
-            //                  alignment:NSTextAlignmentLeft];
-            
-            CGRect textRect= CGRectMake([self dataQuadrantPaddingStartX:rect], startY, postOffset, self.longitudeFontSize);
-            UIFont *textFont= self.longitudeFont; //设置字体
-            NSMutableParagraphStyle *textStyle=[[[NSMutableParagraphStyle alloc]init]autorelease];//段落样式
-            textStyle.alignment=NSTextAlignmentLeft;
-            textStyle.lineBreakMode = NSLineBreakByWordWrapping;
-            //绘制字体
-            [str drawInRect:textRect withAttributes:@{NSFontAttributeName:textFont,NSParagraphStyleAttributeName:textStyle}];
-            
-        } else if (i == [self.longitudeTitles count] - 1) {
-            if (self.axisYPosition == CCSGridChartYAxisPositionLeft) {
-                //                [str drawInRect:CGRectMake(rect.size.width - postOffset, startY, postOffset, self.longitudeFontSize)
-                //                       withFont:self.longitudeFont
-                //                  lineBreakMode:NSLineBreakByWordWrapping
-                //                      alignment:NSTextAlignmentRight];
-                
-                CGRect textRect= CGRectMake(rect.size.width - postOffset, startY, postOffset, self.longitudeFontSize);
-                UIFont *textFont= self.longitudeFont; //设置字体
-                NSMutableParagraphStyle *textStyle=[[[NSMutableParagraphStyle alloc]init]autorelease];//段落样式
-                textStyle.alignment=NSTextAlignmentRight;
-                textStyle.lineBreakMode = NSLineBreakByWordWrapping;
-                //绘制字体
-                [str drawInRect:textRect withAttributes:@{NSFontAttributeName:textFont,NSParagraphStyleAttributeName:textStyle}];
-                
-            } else {
-                //                [str drawInRect:CGRectMake(offset + (i - 0.5) * postOffset, startY, postOffset, self.longitudeFontSize)
-                //                       withFont:self.longitudeFont
-                //                  lineBreakMode:NSLineBreakByWordWrapping
-                //                      alignment:NSTextAlignmentCenter];
-                
-                CGRect textRect= CGRectMake(offset + (i - 0.5) * postOffset, startY, postOffset, self.longitudeFontSize);
-                UIFont *textFont= self.longitudeFont; //设置字体
-                NSMutableParagraphStyle *textStyle=[[[NSMutableParagraphStyle alloc]init]autorelease];//段落样式
-                textStyle.alignment=NSTextAlignmentCenter;
-                textStyle.lineBreakMode = NSLineBreakByWordWrapping;
-                //绘制字体
-                [str drawInRect:textRect withAttributes:@{NSFontAttributeName:textFont,NSParagraphStyleAttributeName:textStyle}];
-            }
-            
-        } else {
-            //            [str drawInRect:CGRectMake(offset + (i - 0.5) * postOffset, startY, postOffset, self.longitudeFontSize)
-            //                   withFont:self.longitudeFont
-            //              lineBreakMode:NSLineBreakByWordWrapping
-            //                  alignment:NSTextAlignmentCenter];
-            
-            CGRect textRect= CGRectMake(offset + (i - 0.5) * postOffset, startY, postOffset, self.longitudeFontSize);
-            UIFont *textFont= self.longitudeFont; //设置字体
-            NSMutableParagraphStyle *textStyle=[[[NSMutableParagraphStyle alloc]init]autorelease];//段落样式
-            textStyle.alignment=NSTextAlignmentCenter;
-            textStyle.lineBreakMode = NSLineBreakByWordWrapping;
-            //绘制字体
-            [str drawInRect:textRect withAttributes:@{NSFontAttributeName:textFont,NSParagraphStyleAttributeName:textStyle}];
         }
     }
 }
 
 - (void)initAxisX {
-    if (self.linesData == nil) {
-        return;
-    }
-    
-    if ([self.linesData count] == 0) {
-        return;
-    }
-    NSMutableArray *TitleX = [[[NSMutableArray alloc] init] autorelease];
-    //以第1条线作为X轴的标示
-    CCSTitledLine *line = [self.linesData objectAtIndex:0];
-    
-    if (line== nil) {
-        return;
-    }
-    if ([line.data count] == 0) {
-        return;
-    }
-    CCFloat average = self.displayNumber / self.longitudeNum;
-    //处理刻度
-    for (CCUInt i = 0; i < self.longitudeNum; i++) {
-        CCUInt index = self.displayFrom + (CCUInt) floor(i * average);
-        if (index > self.displayFrom + self.displayNumber - 1) {
-            index = self.displayFrom + self.displayNumber - 1;
+    NSMutableArray *TitleX = [[NSMutableArray alloc] init];
+    if (self.linesData != NULL && [self.linesData count] > 0) {
+        //以第1条线作为X轴的标示
+        CCSTitledLine *line = [self.linesData objectAtIndex:0];
+        if ([line.data count] > 0) {
+            CCFloat average = [line.data count] / self.longitudeNum;            
+            //处理刻度
+            for (CCUInt i = 0; i < self.longitudeNum; i++) {
+                CCUInt index = self.displayFrom + (CCUInt) floor(i * average);
+                if (index > self.displayFrom + self.displayNumber - 1) {
+                    index = self.displayFrom + self.displayNumber - 1;
+                }
+                CCSLineData *lineData = [line.data objectAtIndex:index];
+                //追加标题
+                [TitleX addObject:[NSString stringWithFormat:@"%@", lineData.date]];
+            }
+            CCSLineData *lineData = [line.data objectAtIndex:self.displayFrom + self.displayNumber - 1];
+            //追加标题
+            [TitleX addObject:[NSString stringWithFormat:@"%@", lineData.date]];
         }
-        CCSLineData *lineData = [line.data objectAtIndex:index];
-        //追加标题
-        [TitleX addObject:[NSString stringWithFormat:@"%@", lineData.date]];
     }
-    CCSLineData *lineData = [line.data objectAtIndex:self.displayFrom + self.displayNumber];
-    //追加标题
-    [TitleX addObject:[NSString stringWithFormat:@"%@", lineData.date]];
-    
     self.longitudeTitles = TitleX;
 }
 
+//- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+//    //调用父类的触摸事件
+//    //[super touchesBegan:touches withEvent:event];
+//    
+//    NSArray *allTouches = [touches allObjects];
+//    //处理点击事件
+//    if ([allTouches count] == 1) {
+//        CGPoint pt1 = [[allTouches objectAtIndex:0] locationInView:self];
+//        
+//        if (_flag == 0) {
+//            _firstX = pt1.x;
+//        } else {
+//            if (fabs(pt1.x - self.singleTouchPoint.x) < 6) {
+//                self.displayCrossXOnTouch = NO;
+//                self.displayCrossYOnTouch = NO;
+//                [self setNeedsDisplay];
+//                self.singleTouchPoint = CGPointZero;
+//                _flag = 0;
+//                
+//            } else {
+//                //获取选中点
+//                self.singleTouchPoint = [[allTouches objectAtIndex:0] locationInView:self];
+//                //重绘
+//                self.displayCrossXOnTouch = YES;
+//                self.displayCrossYOnTouch = YES;
+//                [self setNeedsDisplay];
+//                
+//                _flag = 1;
+//            }
+//        }
+//        
+//    } else if ([allTouches count] == 2) {
+//        CGPoint pt1 = [[allTouches objectAtIndex:0] locationInView:self];
+//        CGPoint pt2 = [[allTouches objectAtIndex:1] locationInView:self];
+//        
+//        _startDistance1 = fabsf(pt1.x - pt2.x);
+//    } else {
+//        
+//    }
+//}
+//
+//- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
+//    //调用父类的触摸事件
+//    [super touchesMoved:touches withEvent:event];
+//    
+//    NSArray *allTouches = [touches allObjects];
+//    //处理点击事件
+//    if ([allTouches count] == 1) {
+//        if (_flag == 0) {
+//            CGPoint pt1 = [[allTouches objectAtIndex:0] locationInView:self];
+//            CCFloat stickWidth = ((self.frame.size.width - self.axisMarginLeft - self.axisMarginRight) / self.displayNumber) - 1;
+//            
+//            if (pt1.x - _firstX > stickWidth) {
+//                if (self.displayFrom > 1) {
+//                    self.displayFrom = self.displayFrom - 2;
+//                }
+//            } else if (pt1.x - _firstX < -stickWidth) {
+//                
+//                CCSTitledLine *line = [self.linesData objectAtIndex:0];
+//                if (self.displayFrom < [line.data count] - 2 - self.displayNumber) {
+//                    self.displayFrom = self.displayFrom + 2;
+//                }
+//            }
+//            
+//            _firstX = pt1.x;
+//            
+//            [self setNeedsDisplay];
+//            //设置可滚动
+//            [self performSelector:@selector(setNeedsDisplay) withObject:nil afterDelay:0];
+//            
+//        } else {
+//            //获取选中点
+//            self.singleTouchPoint = [[allTouches objectAtIndex:0] locationInView:self];
+//            //设置可滚动
+//            [self performSelector:@selector(setNeedsDisplay) withObject:nil afterDelay:0];
+//        }
+//        //        }
+//    } else if ([allTouches count] == 2) {
+//        CGPoint pt1 = [[allTouches objectAtIndex:0] locationInView:self];
+//        CGPoint pt2 = [[allTouches objectAtIndex:1] locationInView:self];
+//        
+//        CCFloat endDistance = fabsf(pt1.x - pt2.x);
+//        //放大
+//        if (endDistance - _startDistance1 > _minDistance1) {
+//            [self zoomOut];
+//            _startDistance1 = endDistance;
+//            
+//            [self setNeedsDisplay];
+//        } else if (endDistance - _startDistance1 < -_minDistance1) {
+//            [self zoomIn];
+//            _startDistance1 = endDistance;
+//            
+//            [self setNeedsDisplay];
+//        }
+//        
+//    } else {
+//        
+//    }
+//    
+//}
+//
+//- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+//    //调用父类的触摸事件
+//    [super touchesEnded:touches withEvent:event];
+//    
+//    _startDistance1 = 0;
+//    
+//    _flag = 1;
+//    
+//    [self setNeedsDisplay];
+//}
+
+
+
+
+
+- (void) changeLongPressState:(BOOL)state {
+    _waitForLongPress = NO;
+    
+    if (_isLongPress == NO) {
+        _isLongPress = YES;
+        
+        self.displayCrossXOnTouch = NO;
+        self.displayCrossYOnTouch = NO;
+        //获取选中点
+        self.singleTouchPoint = _firstTouchPoint;
+        [self setNeedsDisplay];
+        
+    }else{
+        self.displayCrossXOnTouch = YES;
+        self.displayCrossYOnTouch = YES;
+        [self setNeedsDisplay];
+    }
+    
+    [self canPerformAction:@selector(changeLongPressState:) withSender:nil];
+}
+
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    //调用父类的触摸事件
-    //[super touchesBegan:touches withEvent:event];
+    
     
     NSArray *allTouches = [touches allObjects];
     //处理点击事件
     if ([allTouches count] == 1) {
         CGPoint pt1 = [[allTouches objectAtIndex:0] locationInView:self];
         
-        if (_flag == 0) {
-            _firstX = pt1.x;
-        } else {
-            if (fabs(pt1.x - self.singleTouchPoint.x) < 6) {
-                self.displayCrossXOnTouch = NO;
-                self.displayCrossYOnTouch = NO;
-                [self setNeedsDisplay];
-                self.singleTouchPoint = CGPointZero;
-                _flag = 0;
-                
-            } else {
-                //获取选中点
-                self.singleTouchPoint = [[allTouches objectAtIndex:0] locationInView:self];
-                //重绘
-                self.displayCrossXOnTouch = YES;
-                self.displayCrossYOnTouch = YES;
-                [self setNeedsDisplay];
-                
-                _flag = 1;
-            }
-        }
+        
+        self.displayCrossXOnTouch = NO;
+        self.displayCrossYOnTouch = NO;
+        
+        _firstX = pt1.x;
+        
+        _firstTouchPoint = pt1;
+        
+        _isLongPress = NO;
+        _isMoved = NO;
+        _waitForLongPress = YES;
+        [self performSelector:@selector(changeLongPressState:) withObject:nil afterDelay:0.5];
+        
+        
+        //        if (_flag == 0) {
+        //            _firstX = pt1.x;
+        //
+        //        } else {
+        //            if (fabs(pt1.x - self.singleTouchPoint.x) < 10) {
+        //                self.displayCrossXOnTouch = NO;
+        //                self.displayCrossYOnTouch = NO;
+        //                [self setNeedsDisplay];
+        //                self.singleTouchPoint = CGPointZero;
+        //                _flag = 0;
+        //
+        //            } else {
+        //                //获取选中点
+        //                self.singleTouchPoint = [[allTouches objectAtIndex:0] locationInView:self];
+        //                //重绘
+        //                self.displayCrossXOnTouch = YES;
+        //                self.displayCrossYOnTouch = YES;
+        //                [self setNeedsDisplay];
+        //
+        //                _flag = 1;
+        //            }
+        //        }
         
     } else if ([allTouches count] == 2) {
         CGPoint pt1 = [[allTouches objectAtIndex:0] locationInView:self];
         CGPoint pt2 = [[allTouches objectAtIndex:1] locationInView:self];
         
-        _startDistance1 = fabsf(pt1.x - pt2.x);
+        _startDistance1 = fabs(pt1.x - pt2.x);
     } else {
         
     }
+    
+    //调用父类的触摸事件
+    [super touchesBegan:touches withEvent:event];
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
-    //调用父类的触摸事件
-    [super touchesMoved:touches withEvent:event];
+    
     
     NSArray *allTouches = [touches allObjects];
     //处理点击事件
     if ([allTouches count] == 1) {
-        if (_flag == 0) {
-            CGPoint pt1 = [[allTouches objectAtIndex:0] locationInView:self];
-            CCFloat lineLength = ([self dataQuadrantPaddingWidth:self.frame] / self.displayNumber) - 1;
-            
-            if (pt1.x - _firstX > lineLength) {
-                if (self.displayFrom > 1) {
-                    self.displayFrom = self.displayFrom - 2;
+        
+        
+        CGPoint pt1 = [[allTouches objectAtIndex:0] locationInView:self];
+        
+        if (_isLongPress == NO) {
+            if (fabs(pt1.x - _firstTouchPoint.x) < 4) {
+                //            _firstX = pt1.x;
+                if (_waitForLongPress) {
+                    NSLog(@"Waiting for LongPress");
+                }else{
+                    _isLongPress = YES;
+                    NSLog(@"LongPress");
                 }
-            } else if (pt1.x - _firstX < -lineLength) {
-                
-                CCSTitledLine *line = [self.linesData objectAtIndex:0];
-                if (self.displayFrom < [line.data count] - 2 - self.displayNumber) {
-                    self.displayFrom = self.displayFrom + 2;
-                }
+            }else{
+                NSLog(@"Moved");
+                //                _firstX = pt1.x;
+                _waitForLongPress = NO;
+                _isMoved = YES;
+                [self canPerformAction:@selector(changeLongPressState:) withSender:nil];
+                //            _isLongPress = NO;
             }
+            self.displayCrossXOnTouch = NO;
+            self.displayCrossYOnTouch = NO;
+            [self setNeedsDisplay];
+            
+        }else if(_isMoved == NO){
+            self.displayCrossXOnTouch = YES;
+            self.displayCrossYOnTouch = YES;
+            [self setNeedsDisplay];
+            
+        }
+        
+        if (_isMoved) {
+            
+            self.displayCrossXOnTouch = NO;
+            self.displayCrossYOnTouch = NO;
+            
+            CGPoint pt1 = [[allTouches objectAtIndex:0] locationInView:self];
+            CCFloat stickWidth = ((self.frame.size.width - self.axisMarginLeft - self.axisMarginRight) / self.displayNumber) - 1;
+            
+            
+//            CCSTitledLine *line = [self.linesData objectAtIndex:0];
+//            
+//            if (pt1.x - _firstX > stickWidth) {
+//                if (self.displayFrom > 2) {
+//                    self.displayFrom = self.displayFrom - 2;
+//                }
+//            } else if (pt1.x - _firstX < -stickWidth) {
+//                if (self.displayFrom + self.displayNumber + 2 < [line.data count]) {
+//                    self.displayFrom = self.displayFrom + 2;
+//                }
+//            }
+            
+            if (pt1.x - _firstX > stickWidth) {
+                [self moveLeft];
+            } else if (pt1.x - _firstX < -stickWidth) {
+                [self moveRight];
+            }
+
             
             _firstX = pt1.x;
             
-            [self setNeedsDisplay];
-            //设置可滚动
-            [self performSelector:@selector(setNeedsDisplay) withObject:nil afterDelay:0];
-            
-        } else {
             //获取选中点
             self.singleTouchPoint = [[allTouches objectAtIndex:0] locationInView:self];
+            
+            [self setNeedsDisplay];
+            
             //设置可滚动
-            [self performSelector:@selector(setNeedsDisplay) withObject:nil afterDelay:0];
+            //[self performSelector:@selector(setNeedsDisplay) withObject:nil afterDelay:0];
+            
+            //            if (self.coChart) {
+            //                ((CCSSlipStickChart *)self.coChart).displayFrom = self.displayFrom;
+            //                ((CCSSlipStickChart *)self.coChart).displayNumber = self.displayNumber;
+            //                [self.coChart setNeedsDisplay];
+            //            }
+            
         }
+        
+        
+        //        if (_flag == 0) {
+        ////            CGPoint pt1 = [[allTouches objectAtIndex:0] locationInView:self];
+        ////            CCFloat stickWidth = ((self.frame.size.width - self.axisMarginLeft - self.axisMarginRight) / self.displayNumber) - 1;
+        ////
+        ////
+        ////            if (_isLongPress) {
+        ////                if (pt1.x - _firstX < 15) {
+        ////                    NSLog(@"LongPress");
+        ////                }
+        ////            }
+        ////
+        ////            if (pt1.x - _firstX > stickWidth) {
+        ////                if (self.displayFrom > 2) {
+        ////                    self.displayFrom = self.displayFrom - 2;
+        ////                }
+        ////            } else if (pt1.x - _firstX < -stickWidth) {
+        ////                if (self.displayFrom + self.displayNumber + 2 < [self.stickData count]) {
+        ////                    self.displayFrom = self.displayFrom + 2;
+        ////                }
+        ////            }
+        ////
+        ////            _firstX = pt1.x;
+        ////
+        ////            [self setNeedsDisplay];
+        ////            //设置可滚动
+        ////            //[self performSelector:@selector(setNeedsDisplay) withObject:nil afterDelay:0];
+        ////
+        ////            if (self.coChart) {
+        ////                ((CCSSlipStickChart *)self.coChart).displayFrom = self.displayFrom;
+        ////                ((CCSSlipStickChart *)self.coChart).displayNumber = self.displayNumber;
+        ////                [self.coChart setNeedsDisplay];
+        ////            }
+        //        } else {
+        //            //获取选中点
+        //            self.singleTouchPoint = [[allTouches objectAtIndex:0] locationInView:self];
+        //            //设置可滚动
+        //            //[self performSelector:@selector(setNeedsDisplay) withObject:nil afterDelay:0];
+        //            [self setNeedsDisplay];
+        //        }
         //        }
     } else if ([allTouches count] == 2) {
         CGPoint pt1 = [[allTouches objectAtIndex:0] locationInView:self];
         CGPoint pt2 = [[allTouches objectAtIndex:1] locationInView:self];
         
-        CCFloat endDistance = fabsf(pt1.x - pt2.x);
+        CCFloat endDistance = fabs(pt1.x - pt2.x);
         //放大
         if (endDistance - _startDistance1 > _minDistance1) {
             [self zoomOut];
@@ -512,17 +581,101 @@
         
     }
     
+    //调用父类的触摸事件
+    [super touchesMoved:touches withEvent:event];
+    
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
     //调用父类的触摸事件
     [super touchesEnded:touches withEvent:event];
     
+    [self canPerformAction:@selector(changeLongPressState:) withSender:nil];
+    
     _startDistance1 = 0;
     
     _flag = 1;
     
+    NSLog(@"end");
+    _isLongPress = NO;
+    _isMoved = NO;
+    _waitForLongPress = YES;
+    
+    self.displayCrossXOnTouch = NO;
+    self.displayCrossYOnTouch = NO;
+    
+    
     [self setNeedsDisplay];
+}
+
+- (void)calcSelectedIndex {
+    //X在系统范围内、进行计算
+    if (self.axisYPosition == CCSGridChartYAxisPositionLeft) {
+        if (self.singleTouchPoint.x > self.axisMarginLeft
+            && self.singleTouchPoint.x < self.frame.size.width) {
+            CCFloat stickWidth = ((self.frame.size.width - self.axisMarginLeft - self.axisMarginRight) / self.displayNumber);
+            CCFloat valueWidth = self.singleTouchPoint.x - self.axisMarginLeft;
+            if (valueWidth > 0) {
+                CCUInt index = (CCUInt) (valueWidth / stickWidth);
+                //如果超过则设置位最大
+                if (index >= self.displayNumber) {
+                    index = self.displayNumber - 1;
+                }
+                //设置选中的index
+                self.selectedIndex = self.displayFrom + index;
+                
+            }
+        }
+    } else {
+        if (self.singleTouchPoint.x > self.axisMarginLeft
+            && self.singleTouchPoint.x < self.frame.size.width - self.axisMarginRight) {
+            CCFloat stickWidth = 1.0 * ((self.frame.size.width - self.axisMarginLeft - self.axisMarginRight) / self.displayNumber);
+            CCFloat valueWidth = self.singleTouchPoint.x - self.axisMarginLeft;
+            if (valueWidth > 0) {
+                CCUInt index = (CCUInt) (valueWidth / stickWidth);
+                //如果超过则设置位最大
+                if (index >= self.displayNumber) {
+                    index = self.displayNumber - 1;
+                }
+                //设置选中的index
+                self.selectedIndex = self.displayFrom + index;
+                
+            }
+        }
+    }
+    
+}
+
+- (void) moveLeft {
+    
+    if (self.displayFrom > 2) {
+        self.displayFrom = self.displayFrom - 2;
+    }
+    
+    if (self.chartDelegate && [self.chartDelegate respondsToSelector:@selector(CCSChartDisplayChangedFrom:from:number:)]) {
+        [self.chartDelegate CCSChartDisplayChangedFrom:self from:self.displayFrom number:self.displayNumber];
+    }
+    
+    if (self.chartDelegate && [self.chartDelegate respondsToSelector:@selector(CCSChartDisplayChangedFrom:from:number:)]) {
+        [self.chartDelegate CCSChartDisplayChangedFrom:self from:self.displayFrom number:self.displayNumber];
+    }
+}
+
+- (void) moveRight {
+    
+    CCSTitledLine *line = [self.linesData objectAtIndex:0];
+    
+    if (self.displayFrom + self.displayNumber + 2 < [line.data count]) {
+        self.displayFrom = self.displayFrom + 2;
+    }
+    
+    if (self.chartDelegate && [self.chartDelegate respondsToSelector:@selector(CCSChartDisplayChangedFrom:from:number:)]) {
+        [self.chartDelegate CCSChartDisplayChangedFrom:self from:self.displayFrom number:self.displayNumber];
+    }
+    
+    if (self.chartDelegate && [self.chartDelegate respondsToSelector:@selector(CCSChartDisplayChangedFrom:from:number:)]) {
+        [self.chartDelegate CCSChartDisplayChangedFrom:self from:self.displayFrom number:self.displayNumber];
+    }
 }
 
 
@@ -550,6 +703,14 @@
         //处理displayFrom越界
         if (self.displayFrom + self.displayNumber >= [line.data count]) {
             self.displayFrom = [line.data count] - self.displayNumber;
+        }
+        
+        if (self.chartDelegate && [self.chartDelegate respondsToSelector:@selector(CCSChartDisplayChangedFrom:from:number:)]) {
+            [self.chartDelegate CCSChartDisplayChangedFrom:self from:self.displayFrom number:self.displayNumber];
+        }
+        
+        if (self.chartDelegate && [self.chartDelegate respondsToSelector:@selector(CCSChartDisplayChangedFrom:from:number:)]) {
+            [self.chartDelegate CCSChartDisplayChangedFrom:self from:self.displayFrom number:self.displayNumber];
         }
         
     }
@@ -586,8 +747,22 @@
         if (self.displayFrom + self.displayNumber >= [line.data count]) {
             self.displayNumber = [line.data count] - self.displayFrom;
         }
+        
+        if (self.chartDelegate && [self.chartDelegate respondsToSelector:@selector(CCSChartDisplayChangedFrom:from:number:)]) {
+            [self.chartDelegate CCSChartDisplayChangedFrom:self from:self.displayFrom number:self.displayNumber];
+        }
+        
+        if (self.chartDelegate && [self.chartDelegate respondsToSelector:@selector(CCSChartDisplayChangedFrom:from:number:)]) {
+            [self.chartDelegate CCSChartDisplayChangedFrom:self from:self.displayFrom number:self.displayNumber];
+        }
     }
 }
 
+
+-(void) bindSelectedIndex
+{
+    CCFloat stickWidth = ((self.frame.size.width - self.axisMarginLeft - self.axisMarginRight) / self.displayNumber);
+    _singleTouchPoint = CGPointMake(self.axisMarginLeft +(self.selectedIndex - self.displayFrom + 0.5) * stickWidth, self.singleTouchPoint.y);
+}
 
 @end

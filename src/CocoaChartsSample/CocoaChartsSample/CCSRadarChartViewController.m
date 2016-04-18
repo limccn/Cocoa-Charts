@@ -5,18 +5,6 @@
 //  Created by limc on 11/13/13.
 //  Copyright (c) 2013 limc. All rights reserved.
 //
-//  Licensed under the Apache License, Version 2.0 (the "License");
-//  you may not use this file except in compliance with the License.
-//  You may obtain a copy of the License at
-//
-//  http://www.apache.org/licenses/LICENSE-2.0
-//
-//  Unless required by applicable law or agreed to in writing, software
-//  distributed under the License is distributed on an "AS IS" BASIS,
-//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-//  See the License for the specific language governing permissions and
-//  limitations under the License.
-//
 
 #import "CCSRadarChartViewController.h"
 #import "CCSRadarChart.h"
@@ -47,28 +35,28 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor grayColor];
 
-    CCSRadarChart *spiderwebchart = [[[CCSRadarChart alloc] initWithFrame:CGRectMake(0, 80, 320, 320)] autorelease];
+    CCSRadarChart *spiderwebchart = [[CCSRadarChart alloc] initWithFrame:CGRectMake(0, 80, 320, 320)];
 
     spiderwebchart.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
 
-    NSArray *values1 = [[[NSArray alloc] initWithObjects:
-            [[[NSNumber alloc] initWithFloat:3.0f] autorelease],
-            [[[NSNumber alloc] initWithFloat:4.0f] autorelease],
-            [[[NSNumber alloc] initWithFloat:3.0f] autorelease],
-            [[[NSNumber alloc] initWithFloat:4.0f] autorelease],
-            [[[NSNumber alloc] initWithFloat:5.0f] autorelease],
-            nil] autorelease];
-    NSArray *values2 = [[[NSArray alloc] initWithObjects:
-            [[[NSNumber alloc] initWithFloat:5.0f] autorelease],
-            [[[NSNumber alloc] initWithFloat:2.0f] autorelease],
-            [[[NSNumber alloc] initWithFloat:3.0f] autorelease],
-            [[[NSNumber alloc] initWithFloat:2.0f] autorelease],
-            [[[NSNumber alloc] initWithFloat:3.0f] autorelease],
-            nil] autorelease];
+    NSArray *values1 = [NSArray arrayWithObjects:
+            [NSNumber numberWithFloat:3.0f],
+            [NSNumber numberWithFloat:4.0f],
+            [NSNumber numberWithFloat:3.0f],
+            [NSNumber numberWithFloat:4.0f],
+            [NSNumber numberWithFloat:5.0f],
+            nil];
+    NSArray *values2 = [NSArray arrayWithObjects:
+            [NSNumber numberWithFloat:5.0f],
+            [NSNumber numberWithFloat:2.0f],
+            [NSNumber numberWithFloat:3.0f],
+            [NSNumber numberWithFloat:2.0f],
+            [NSNumber numberWithFloat:3.0f],
+            nil];
 
-    NSMutableArray *spiderwebdata = [[[NSMutableArray alloc] init] autorelease];
-    [spiderwebdata addObject:[[[CCSTitleValuesColor alloc] initWithTitle:@"New York" values:values1 color:[UIColor blueColor]] autorelease]];
-    [spiderwebdata addObject:[[[CCSTitleValuesColor alloc] initWithTitle:@"Los Angeles" values:values2 color:[UIColor redColor]] autorelease]];
+    NSMutableArray *spiderwebdata = [[NSMutableArray alloc] init];
+    [spiderwebdata addObject:[[CCSTitleValuesColor alloc] initWithTitle:@"New York" values:values1 color:[UIColor blueColor]]];
+    [spiderwebdata addObject:[[CCSTitleValuesColor alloc] initWithTitle:@"Los Angeles" values:values2 color:[UIColor redColor]]];
 
     spiderwebchart.titles = [NSMutableArray arrayWithObjects:@"Alpha", @"Bravo", @"Charlie", @"Delta", @"Echo", nil];
 

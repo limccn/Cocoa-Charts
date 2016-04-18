@@ -51,35 +51,35 @@
  値上がりローソクのボーダー色
  阳线的边框颜色
  */
-@property(retain, nonatomic) UIColor *positiveStickBorderColor;
+@property(strong, nonatomic) UIColor *positiveStickBorderColor;
 
 /*!
  Price up stick's fill color
  値上がりローソクの色
  阳线的填充颜色
  */
-@property(retain, nonatomic) UIColor *positiveStickFillColor;
+@property(strong, nonatomic) UIColor *positiveStickFillColor;
 
 /*!
  Price down stick's border color
  値下りローソクのボーダー色
  阴线的边框颜色
  */
-@property(retain, nonatomic) UIColor *negativeStickBorderColor;
+@property(strong, nonatomic) UIColor *negativeStickBorderColor;
 
 /*!
  Price down stick's fill color
  値下りローソクの色
  阴线的填充颜色
  */
-@property(retain, nonatomic) UIColor *negativeStickFillColor;
+@property(strong, nonatomic) UIColor *negativeStickFillColor;
 
 /*!
  Price no change stick's color (cross-star,T-like etc.)
  クローススターの色（価格変動無し）
  十字线显示颜色（十字星,一字平线,T形线的情况）
  */
-@property(retain, nonatomic) UIColor *crossStarColor;
+@property(strong, nonatomic) UIColor *crossStarColor;
 
 
 @property(assign, nonatomic) CCInt candleStickStyle;

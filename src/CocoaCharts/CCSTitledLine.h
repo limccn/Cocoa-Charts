@@ -41,14 +41,14 @@
  ラインのデータ
  线条数据
  */
-@property(retain, nonatomic) NSArray *data;
+@property(strong, nonatomic) NSArray *data;
 
 /*!
  Line's color
  ラインの色
  线条颜色
  */
-@property(retain, nonatomic) UIColor *color;
+@property(strong, nonatomic) UIColor *color;
 
 /*!
  Line's title

@@ -5,18 +5,6 @@
 //  Created by limc on 12/2/13.
 //  Copyright (c) 2013 limc. All rights reserved.
 //
-//  Licensed under the Apache License, Version 2.0 (the "License");
-//  you may not use this file except in compliance with the License.
-//  You may obtain a copy of the License at
-//
-//  http://www.apache.org/licenses/LICENSE-2.0
-//
-//  Unless required by applicable law or agreed to in writing, software
-//  distributed under the License is distributed on an "AS IS" BASIS,
-//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-//  See the License for the specific language governing permissions and
-//  limitations under the License.
-//
 
 #import "CCSColoredStickChart.h"
 #import "CCSColoredStickChartData.h"
@@ -35,33 +23,28 @@
 - (void)initProperty {
     //初始化父类的熟悉
     [super initProperty];
-    self.coloredStickStyle = CCSColoredStickStyleNoBorder;
+    self.coloredStickStyle = CCSColoredStickStyleWithBorder;
 }
 
 - (void)drawData:(CGRect)rect {
-    if (self.stickData == nil) {
-        return;
-    }
-    if([self.stickData count] == 0){
-        return;
-    }
     // 蜡烛棒宽度
-    CCFloat stickWidth = ([self dataQuadrantPaddingWidth:rect] / self.displayNumber) - 1;
+    CCFloat stickWidth = ((rect.size.width - self.axisMarginLeft - self.axisMarginRight) / self.displayNumber) - 1;
 
     CGContextRef context = UIGraphicsGetCurrentContext();
 
-    CGContextSetLineWidth(context, 1.0f);
+    CGContextSetLineWidth(context, 0.5f);
 
+    if (self.stickData != NULL && [self.stickData count] > 0) {
 
         if (self.axisYPosition == CCSGridChartYAxisPositionLeft) {
             // 蜡烛棒起始绘制位置
-            CCFloat stickX = [self dataQuadrantPaddingStartX:rect] + 1;
+            CCFloat stickX = self.axisMarginLeft + 1;
             //判断显示为方柱或显示为线条
             for (CCUInt i = self.displayFrom; i < self.displayFrom + self.displayNumber; i++) {
                 CCSColoredStickChartData *stick = [self.stickData objectAtIndex:i];
 
-                CCFloat highY = [self calcValueY:stick.high inRect:rect];
-                CCFloat lowY = [self calcValueY:stick.low inRect:rect];
+                CCFloat highY = ((1 - (stick.high - self.minValue) / (self.maxValue - self.minValue)) * (rect.size.height - self.axisMarginBottom) - super.axisMarginTop);
+                CCFloat lowY = ((1 - (stick.low - self.minValue) / (self.maxValue - self.minValue)) * (rect.size.height - self.axisMarginBottom) - self.axisMarginTop);
 
                 if (stick.high == 0) {
                     //没有值的情况下不绘制
@@ -92,16 +75,16 @@
             }
         } else {
             // 蜡烛棒起始绘制位置
-            CCFloat stickX = [self dataQuadrantPaddingEndX:rect] - 1 - stickWidth;
+            CCFloat stickX = rect.size.width - self.axisMarginRight - 1 - stickWidth;
             //判断显示为方柱或显示为线条
             for (CCUInt i = 0; i < self.displayNumber; i++) {
                 //获取index
                 CCUInt index = self.displayFrom + self.displayNumber - 1 - i;
                 CCSColoredStickChartData *stick = [self.stickData objectAtIndex:index];
 
-                CCFloat highY = [self calcValueY:stick.high inRect:rect];
-                CCFloat lowY = [self calcValueY:stick.low inRect:rect];
-                
+                CCFloat highY = ((1 - (stick.high - self.minValue) / (self.maxValue - self.minValue)) * (rect.size.height - self.axisMarginBottom) - super.axisMarginTop);
+                CCFloat lowY = ((1 - (stick.low - self.minValue) / (self.maxValue - self.minValue)) * (rect.size.height - self.axisMarginBottom) - self.axisMarginTop);
+
                 if (stick.high == 0) {
                     //没有值的情况下不绘制
                 } else {
@@ -129,6 +112,7 @@
             }
         }
 
+    }
 }
 
 

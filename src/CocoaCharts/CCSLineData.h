@@ -47,7 +47,7 @@
  日付
  日期
  */
-@property(retain, nonatomic) NSString *date;
+@property(strong, nonatomic) NSString *date;
 
 
 /*!

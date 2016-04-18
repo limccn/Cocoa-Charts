@@ -50,33 +50,33 @@
  表示用データ
  表示用的数据
  */
-@property(retain, nonatomic) NSArray *data;
+@property(strong, nonatomic) NSArray *data;
 
 /*!
  Titles for display data
  表示データのタイトルリスト
  数据的标题
  */
-@property(retain, nonatomic) NSArray *titles;
+@property(strong, nonatomic) NSArray *titles;
 
 /*!
  Color of web‘s longitude line
  経線の色
  蛛网经线的显示颜色
  */
-@property(retain, nonatomic) UIColor *longitudeColor;
+@property(strong, nonatomic) UIColor *longitudeColor;
 
 /*!
  Color of web‘s latitude line
  緯線の色
  蛛网纬线的显示颜色
  */
-@property(retain, nonatomic) UIColor *latitudeColor;
+@property(strong, nonatomic) UIColor *latitudeColor;
 
 /*!
  蛛网填充颜色 
  */
-@property(retain, nonatomic) UIColor *spiderWebFillColor;
+@property(strong, nonatomic) UIColor *spiderWebFillColor;
 
 /*!
  Radius of the spider web

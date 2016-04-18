@@ -1,9 +1,9 @@
 //
 //  CCSAreaChart.h
-//  CocoaChartsSample
+//  Cocoa-Charts
 //
-//  Created by limc on 11/13/13.
-//  Copyright (c) 2013 limc. All rights reserved.
+//  Created by limc on 11-10-27.
+//  Copyright 2011 limc.cn All rights reserved.
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
 //  you may not use this file except in compliance with the License.

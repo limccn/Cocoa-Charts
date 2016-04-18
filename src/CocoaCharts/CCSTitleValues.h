@@ -47,7 +47,7 @@
  複数な値
  数据的值列表
  */
-@property(retain, nonatomic) NSArray *values;
+@property(strong, nonatomic) NSArray *values;
 
 
 /*!

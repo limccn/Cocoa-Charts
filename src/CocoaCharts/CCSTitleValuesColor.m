@@ -41,8 +41,4 @@
     return self;
 }
 
-- (void)dealloc {
-    [_color release];
-    [super dealloc];
-}
 @end

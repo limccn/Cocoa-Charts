@@ -1,11 +1,13 @@
 //
-// Prefix header for all source files of the 'CocoaChartsSample' target in the 'CocoaChartsSample' project
+//  Prefix header
+//
+//  The contents of this file are implicitly included at the beginning of every source file.
 //
 
 #import <Availability.h>
 
-#ifndef __IPHONE_4_0
-#warning "This project uses features only available in iOS SDK 4.0 and later."
+#ifndef __IPHONE_3_0
+#warning "This project uses features only available in iOS SDK 3.0 and later."
 #endif
 
 #ifdef __OBJC__
@@ -15,4 +17,4 @@
 
 #define MARGIN_TOP ([[[UIDevice currentDevice] systemVersion] floatValue] > 6.9 ? 66:0)
 #define DEVICE_WIDTH ((UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) ? 320:690)
-#define DEVICE_HEIGHT ((UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) ? 120:200)
+#define DEVICE_HEIGHT ((UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) ? 100:200)

@@ -2,8 +2,8 @@
 //  main.m
 //  CocoaChartsSample
 //
-//  Created by limc on 13-05-22.
-//  Copyright (c) 2012 limc.cn All rights reserved.
+//  Created by limc on 2014/03/07.
+//  Copyright (c) 2014年 limc. All rights reserved.
 //
 
 #import "CCSAppDelegate.h"

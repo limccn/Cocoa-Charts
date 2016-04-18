@@ -47,14 +47,6 @@
     self.candleStickStyle = CCSCandleStickStyleStandard;
 }
 
-- (void)dealloc {
-    [_positiveStickBorderColor release];
-    [_positiveStickFillColor release];
-    [_negativeStickBorderColor release];
-    [_negativeStickFillColor release];
-    [_crossStarColor release];
-    [super dealloc];
-}
 
 - (void)calcValueRange {
     if (self.stickData != NULL && [self.stickData count] > 0) {
@@ -99,7 +91,7 @@
                 }
             }
         } else {
-            for (NSInteger i = [self.stickData count] - 1; i > [self.stickData count] - self.maxSticksNum; i--) {
+            for (CCInt i = [self.stickData count] - 1; i > [self.stickData count] - self.maxSticksNum; i--) {
                 CCSCandleStickChartData *stick = [self.stickData objectAtIndex:i];
                 if (stick.open == 0 && stick.high == 0 && stick.low == 0) {
                     //停盘期间计算收盘价
@@ -209,7 +201,7 @@
 }
 
 - (void)initAxisX {
-    NSMutableArray *TitleX = [[[NSMutableArray alloc] init] autorelease];
+    NSMutableArray *TitleX = [[NSMutableArray alloc] init];
     if (self.stickData != NULL && [self.stickData count] > 0) {
         CCFloat average = 1.0 * self.maxSticksNum / self.longitudeNum;
         if (self.axisYPosition == CCSGridChartYAxisPositionLeft) {
@@ -250,7 +242,7 @@
 
 
 - (void)initAxisY {
-    //调用父类的initAxisX方法
+    //调用父类的initAxisY方法
     [super initAxisY];
 }
 
@@ -261,7 +253,7 @@
 
 - (void)drawData:(CGRect)rect {
     // 蜡烛棒宽度
-    CCFloat stickWidth = ([self dataQuadrantPaddingWidth:rect] / self.maxSticksNum) - 1;
+    CCFloat stickWidth = ((rect.size.width - self.axisMarginLeft - self.axisMarginRight) / self.maxSticksNum) - 1;
 
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSetLineWidth(context, 1.0f);
@@ -270,13 +262,13 @@
         //判断Y轴的位置设置从左往右还是从右往左绘制
         if (self.axisYPosition == CCSGridChartYAxisPositionLeft) {
             // 蜡烛棒起始绘制位置
-            CCFloat stickX = [self dataQuadrantPaddingStartX:rect] + 1;
+            CCFloat stickX = self.axisMarginLeft + 1;
             for (CCUInt i = 0; i < [self.stickData count]; i++) {
                 CCSCandleStickChartData *data = [self.stickData objectAtIndex:i];
-                CCFloat openY = [self calcValueY:data.open inRect:rect];
-                CCFloat highY = [self calcValueY:data.high inRect:rect];
-                CCFloat lowY = [self calcValueY:data.low inRect:rect];
-                CCFloat closeY = [self calcValueY:data.close inRect:rect];
+                CCFloat openY = ((1 - (data.open - self.minValue) / (self.maxValue - self.minValue)) * (rect.size.height - self.axisMarginBottom) - self.axisMarginTop);
+                CCFloat highY = ((1 - (data.high - self.minValue) / (self.maxValue - self.minValue)) * (rect.size.height - self.axisMarginBottom) - self.axisMarginTop);
+                CCFloat lowY = ((1 - (data.low - self.minValue) / (self.maxValue - self.minValue)) * (rect.size.height - self.axisMarginBottom) - self.axisMarginTop);
+                CCFloat closeY = ((1 - (data.close - self.minValue) / (self.maxValue - self.minValue)) * (rect.size.height - self.axisMarginBottom) - self.axisMarginTop);
 
                 // 处理和生产K线中的阴线和阳线
                 if (data.open == 0 && data.high == 0 && data.low == 0) {
@@ -368,13 +360,13 @@
             }
         } else {
             // 蜡烛棒起始绘制位置
-            CCFloat stickX = [self dataQuadrantPaddingEndX:rect] - 1 - stickWidth;
-            for (NSInteger i = [self.stickData count] - 1; i >= 0; i--) {
+            CCFloat stickX = rect.size.width - self.axisMarginRight - 1 - stickWidth;
+            for (CCInt i = [self.stickData count] - 1; i >= 0; i--) {
                 CCSCandleStickChartData *data = [self.stickData objectAtIndex:i];
-                CCFloat openY = [self calcValueY:data.open inRect:rect];
-                CCFloat highY = [self calcValueY:data.high inRect:rect];
-                CCFloat lowY = [self calcValueY:data.low inRect:rect];
-                CCFloat closeY = [self calcValueY:data.close inRect:rect];
+                CCFloat openY = ((1 - (data.open - self.minValue) / (self.maxValue - self.minValue)) * (rect.size.height - self.axisMarginBottom) - self.axisMarginTop);
+                CCFloat highY = ((1 - (data.high - self.minValue) / (self.maxValue - self.minValue)) * (rect.size.height - self.axisMarginBottom) - self.axisMarginTop);
+                CCFloat lowY = ((1 - (data.low - self.minValue) / (self.maxValue - self.minValue)) * (rect.size.height - self.axisMarginBottom) - self.axisMarginTop);
+                CCFloat closeY = ((1 - (data.close - self.minValue) / (self.maxValue - self.minValue)) * (rect.size.height - self.axisMarginBottom) - self.axisMarginTop);
 
                 // 处理和生产K线中的阴线和阳线
                 if (data.open == 0 && data.high == 0 && data.low == 0) {

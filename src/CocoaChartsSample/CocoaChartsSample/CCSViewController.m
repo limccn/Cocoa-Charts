@@ -5,18 +5,6 @@
 //  Created by limc on 13-05-22.
 //  Copyright (c) 2012 limc.cn All rights reserved.
 //
-//  Licensed under the Apache License, Version 2.0 (the "License");
-//  you may not use this file except in compliance with the License.
-//  You may obtain a copy of the License at
-//
-//  http://www.apache.org/licenses/LICENSE-2.0
-//
-//  Unless required by applicable law or agreed to in writing, software
-//  distributed under the License is distributed on an "AS IS" BASIS,
-//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-//  See the License for the specific language governing permissions and
-//  limitations under the License.
-//
 
 #import "CCSViewController.h"
 #import "CCSAppDelegate.h"
@@ -42,6 +30,10 @@
 #import "CCSBOLLMASlipCandleStickChartViewController.h"
 #import "CCSSlipLineChartViewController.h"
 #import "CCSSimpleDemoViewController.h"
+#import "CCSDonutChartViewController.h"
+
+#import "CCSSampleHorizontalViewController.h"
+#import "CCSSampleGroupChartDemoViewController.h"
 
 @interface CCSViewController () {
 }
@@ -51,16 +43,11 @@
 @implementation CCSViewController
 @synthesize tableView = _tableView;
 
-- (void)dealloc {
-    [_tableView release];
-    [super dealloc];
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    self.tableView = [[[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)
-                                                  style:UITableViewStylePlain]autorelease];
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)
+                                                  style:UITableViewStylePlain];
     self.tableView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin
             | UIViewAutoresizingFlexibleTopMargin
             | UIViewAutoresizingFlexibleRightMargin
@@ -80,16 +67,15 @@
     self.navigationController.navigationBarHidden = NO;
     
     // Index path for selected row
-    NSIndexPath *selectedRow = [_tableView indexPathForSelectedRow];
+    NSIndexPath *selectedRow = [self.tableView indexPathForSelectedRow];
     
     // Deselet the row with animation
-    [_tableView deselectRowAtIndexPath:selectedRow animated:YES];
+    [self.tableView deselectRowAtIndexPath:selectedRow animated:YES];
     
     // Scroll the selected row to the center
-    [_tableView scrollToRowAtIndexPath:selectedRow
-                      atScrollPosition:UITableViewScrollPositionMiddle
-                              animated:YES];
-
+    [self.tableView scrollToRowAtIndexPath:selectedRow
+                          atScrollPosition:UITableViewScrollPositionMiddle
+                                  animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -103,9 +89,9 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == 0) {
-        return 1;
+        return 3;
     } else if (section == 1) {
-        return 21;
+        return 22;
     }
 
     return 0;
@@ -114,13 +100,13 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     if (section == 0) {
-        UILabel *lblTitle = [[[UILabel alloc] init]autorelease];
+        UILabel *lblTitle = [[UILabel alloc] init];
         lblTitle.backgroundColor = [UIColor grayColor];
         lblTitle.textColor = [UIColor whiteColor];
         lblTitle.text = @"Charts Demo";
         return lblTitle;
     } else if (section == 1) {
-        UILabel *lblTitle = [[[UILabel alloc] init]autorelease];
+        UILabel *lblTitle = [[UILabel alloc] init];
         lblTitle.backgroundColor = [UIColor grayColor];
         lblTitle.textColor = [UIColor whiteColor];
         lblTitle.text = @"Single Chart Demo";
@@ -150,11 +136,17 @@
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
 
     if (indexPath.section == 0) {
-        cell.textLabel.text = @"Simple Demo";
+        if (indexPath.row == 0) {
+            cell.textLabel.text = @"Simple Demo";
+        }else if(indexPath.row == 1){
+            cell.textLabel.text = @"Simple Horizontal Demo";
+        }else{
+            cell.textLabel.text = @"Simple GroupChart Demo";
+        }
     } else {
         NSUInteger row = indexPath.row;
         //    NSLog(@"%d",row);
@@ -222,6 +214,9 @@
         else if (CCSChartTypeSlipLineChart == row) {
             cell.textLabel.text = @"SlipLineChart";
         }
+        else if (CCSChartTypeDonutChart == row) {
+            cell.textLabel.text = @"DonutChart";
+        }
         else {
         }
 
@@ -234,79 +229,84 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 
-//    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
     UIViewController *viewController = nil;
 
     if (indexPath.section == 0) {
         NSUInteger row = indexPath.row;
         if (row == 0) {
-            viewController = [[[CCSSimpleDemoViewController alloc] init] autorelease];
+            viewController = [[CCSSimpleDemoViewController alloc] init];
+        }else if(row == 1){
+            viewController = [[CCSSampleHorizontalViewController alloc] init];
+        }else{
+            viewController = [[CCSSampleGroupChartDemoViewController alloc] init];
         }
     } else if (indexPath.section == 1) {
         NSUInteger row = indexPath.row;
         if (CCSChartTypeGridChart == row) {
-            viewController = [[[CCSGridChartViewController alloc] init] autorelease];
+            viewController = [[CCSGridChartViewController alloc] init];
         }
         else if (CCSChartTypeLineChart == row) {
-            viewController = [[[CCSLineChartViewController alloc] init] autorelease];
+            viewController = [[CCSLineChartViewController alloc] init];
         }
         else if (CCSChartTypeStickChart == row) {
-            viewController = [[[CCSStickChartViewController alloc] init] autorelease];
+            viewController = [[CCSStickChartViewController alloc] init];
         }
         else if (CCSChartTypeMAStickChart == row) {
-            viewController = [[[CCSMAStickChartViewController alloc] init] autorelease];
+            viewController = [[CCSMAStickChartViewController alloc] init];
         }
         else if (CCSChartTypeCandleStickChart == row) {
-            viewController = [[[CCSCandleStickViewController alloc] init] autorelease];
+            viewController = [[CCSCandleStickViewController alloc] init];
         }
         else if (CCSChartTypeMACandleStickChart == row) {
-            viewController = [[[CCSMACandleStickChartViewController alloc] init] autorelease];
+            viewController = [[CCSMACandleStickChartViewController alloc] init];
         }
         else if (CCSChartTypePieChart == row) {
-            viewController = [[[CCSPieChartViewController alloc] init] autorelease];
+            viewController = [[CCSPieChartViewController alloc] init];
         }
         else if (CCSChartTypePizzaChart == row) {
-            viewController = [[[CCSPizzaChartViewController alloc] init] autorelease];
+            viewController = [[CCSPizzaChartViewController alloc] init];
         }
         else if (CCSChartTypeSpiderWebChart == row) {
-            viewController = [[[CCSSpiderWebChartViewController alloc] init] autorelease];
+            viewController = [[CCSSpiderWebChartViewController alloc] init];
         }
         else if (CCSChartTypeMinusStickChart == row) {
-            viewController = [[[CCSMinusStickChartViewController alloc] init] autorelease];
+            viewController = [[CCSMinusStickChartViewController alloc] init];
         }
         else if (CCSChartTypeMACDChart == row) {
-            viewController = [[[CCSMACDChartViewController alloc] init] autorelease];
+            viewController = [[CCSMACDChartViewController alloc] init];
         }
         else if (CCSChartTypeAreaChart == row) {
-            viewController = [[[CCSAreaChartViewController alloc] init] autorelease];
+            viewController = [[CCSAreaChartViewController alloc] init];
         }
         else if (CCSChartTypeStackedAreaChart == row) {
-            viewController = [[[CCSStackedAreaChartViewController alloc] init] autorelease];
+            viewController = [[CCSStackedAreaChartViewController alloc] init];
         }
         else if (CCSChartTypeBandAreaChart == row) {
-            viewController = [[[CCSBandAreaChartViewController alloc] init] autorelease];
+            viewController = [[CCSBandAreaChartViewController alloc] init];
         }
         else if (CCSChartTypeRadarChart == row) {
-            viewController = [[[CCSRadarChartViewController alloc] init] autorelease];
+            viewController = [[CCSRadarChartViewController alloc] init];
         }
         else if (CCSChartTypeSlipStickChart == row) {
-            viewController = [[[CCSSlipStickChartViewController alloc] init] autorelease];
+            viewController = [[CCSSlipStickChartViewController alloc] init];
         }
         else if (CCSChartTypeColoredSlipStickChart == row) {
-            viewController = [[[CCSColoredStickChartViewController alloc] init] autorelease];
+            viewController = [[CCSColoredStickChartViewController alloc] init];
         }
         else if (CCSChartTypeSlipCandleStickChart == row) {
-            viewController = [[[CCSSlipCandleStickChartViewController alloc] init] autorelease];
+            viewController = [[CCSSlipCandleStickChartViewController alloc] init];
         }
         else if (CCSChartTypeMASlipCandleStickChart == row) {
-            viewController = [[[CCSMASlipCandleStickChartViewController alloc] init] autorelease];
+            viewController = [[CCSMASlipCandleStickChartViewController alloc] init];
         }
         else if (CCSChartTypeBOLLMASlipCandleStickChart == row) {
-            viewController = [[[CCSBOLLMASlipCandleStickChartViewController alloc] init] autorelease];
+            viewController = [[CCSBOLLMASlipCandleStickChartViewController alloc] init];
         }
         else if (CCSChartTypeSlipLineChart == row) {
-            viewController = [[[CCSSlipLineChartViewController alloc] init] autorelease];
+            viewController = [[CCSSlipLineChartViewController alloc] init];
+        }
+        else if (CCSChartTypeDonutChart == row) {
+            viewController = [[CCSDonutChartViewController alloc] init];
         }
         else {
 
@@ -317,7 +317,12 @@
     CCSAppDelegate *appDelegate = (CCSAppDelegate *) [UIApplication sharedApplication].delegate;
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
         UINavigationController *navigationController = (UINavigationController *) appDelegate.viewController;
-        [navigationController pushViewController:viewController animated:YES];
+        if ([viewController isKindOfClass:[CCSSampleHorizontalViewController class]]) {
+            [[navigationController.viewControllers lastObject] presentViewController:viewController animated:YES completion:^{
+            }];
+        }else{
+            [navigationController pushViewController:viewController animated:YES];
+        }
     } else if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
         UISplitViewController *splitViewController = (UISplitViewController *) appDelegate.viewController;
         UINavigationController *navigationController = [splitViewController.viewControllers objectAtIndex:1];

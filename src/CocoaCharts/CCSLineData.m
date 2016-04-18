@@ -44,9 +44,5 @@
     return self;
 }
 
-- (void)dealloc {
-    [_date release];
-    [super dealloc];
-}
 
 @end
