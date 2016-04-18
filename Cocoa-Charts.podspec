@@ -7,7 +7,7 @@ Pod::Spec.new do |s|
   s.authors = {'limccn' => 'limc.cn@me.com'}
   s.platform = :ios, '7.0'
   s.ios.deployment_target = '7.0'
-  s.source = { :git => 'https://github.com/limccn/Cocoa-Charts', :tag => 'v#{s.version}' }
+  s.source = { :git => 'https://github.com/limccn/Cocoa-Charts.git', :tag => 'v#{s.version}' }
   s.requires_arc = true
   s.public_header_files = 'src/CocoaCharts/CocoaCharts.h'
   s.source_files = 'src/CocoaCharts/*.{h,m}'
