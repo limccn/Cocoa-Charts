@@ -28,7 +28,6 @@
 #import "CCSColoredStickChart.h"
 #import "CCSDonutChart.h"
 #import "CCSGridChart.h"
-#import "CCSGroupChart.h"
 #import "CCSLineChart.h"
 #import "CCSMACandleStickChart.h"
 #import "CCSMACDChart.h"
