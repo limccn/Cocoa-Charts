@@ -17,6 +17,7 @@
 #import "ta_libc.h"
 #import "CCSTALibUtils.h"
 #import "CCSStringUtils.h"
+#import "CCSJSONData.h"
 
 /**
  * 屏幕宽高
