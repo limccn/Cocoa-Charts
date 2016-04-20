@@ -24,6 +24,7 @@
 #import "NSArray+CCSTACompute.h"
 #import "CCSStringUtils.h"
 #import "NSString+UserDefault.h"
+#import "CCSJSONData.h"
 
 #define MIN_CHART_LEFT_RIGHT_SCALE                  3.0f
 
@@ -32,11 +33,11 @@
 /** 精选 Cell */
 static NSString *DetailCellIdentifier             = @"CCSSamplGroupChartDetailTableViewCell";
 
-typedef enum {
-    Chart1minData = 0,
-    Chart15minData = 1,
-    ChartTimesData = 2
-} ChartDataType;
+//typedef enum {
+//    Chart1minData = 0,
+//    Chart15minData = 1,
+//    ChartTimesData = 2
+//} ChartDataType;
 
 @interface CCSSampleGroupChartDemoViewController (){
     NSMutableArray                                  *_chartData;

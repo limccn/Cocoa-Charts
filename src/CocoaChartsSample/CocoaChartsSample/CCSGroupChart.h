@@ -1,6 +1,6 @@
 //
 //  CCSGroupChart.h
-//  CocoaChartsSample
+//  CocoaChartsSampleWithARC
 //
 //  Created by zhourr_ on 16/3/28.
 //  Copyright © 2016年 limc. All rights reserved.
@@ -13,6 +13,7 @@
 #import "CCSSlipLineChart.h"
 #import "CCSCandleStickChart.h"
 #import "CCSBOLLMASlipCandleStickChart.h"
+#import "CCSOHLCVDData.h"
 
 #import "JSONModelLib.h"
 
@@ -26,17 +27,51 @@ typedef enum {
     GroupChartViewTypeBOLL = 107
 } GroupChartViewType;
 
-@interface OHLCVDGroupData : NSObject
+typedef enum {
+    GroupChartHorizontalType,
+    GroupChartverticalType
+} GroupChartOrientationType;
 
-@property(strong, nonatomic) NSString *open;
-@property(strong, nonatomic) NSString *high;
-@property(strong, nonatomic) NSString *low;
-@property(strong, nonatomic) NSString *close;
-@property(strong, nonatomic) NSString *vol;
-@property(strong, nonatomic) NSString *date;
-@property(strong, nonatomic) NSString *current;
-@property(strong, nonatomic) NSString *change;
-@property(strong, nonatomic) NSString *preclose;
+@interface CCSGroupChartData : NSObject
+
+@property(strong, nonatomic) NSArray *ohlcvdDatas;
+
+/** CandleStickChartData */
+@property(strong, nonatomic) NSArray *candleStickData;
+@property(strong, nonatomic) NSArray *candleStickLinesData;
+@property(strong, nonatomic) NSArray *candleStickBollingerBandData;
+
+/** StickChart */
+@property(strong, nonatomic) NSArray *stickData;
+
+/** MacdChart */
+@property(strong, nonatomic) NSArray *macdStickData;
+
+/** KDJChart */
+@property(strong, nonatomic) NSArray *kdjLinesData;
+
+/** RSIChart */
+@property(strong, nonatomic) NSArray *rsiLinesData;
+
+/** WRChart */
+@property(strong, nonatomic) NSArray *wrLinesData;
+
+/** CCIChart */
+@property(strong, nonatomic) NSArray *cciLinesData;
+
+/** BOLLChart */
+@property(strong, nonatomic) NSArray *bollLinesData;
+
+- (id)initWithCCSOHLCVDDatas:(NSArray *)ohlcvdDatas;
+
+- (void)updateMACDStickData:(NSInteger)macdS l:(NSInteger)macdL m:(NSInteger)macdM;
+- (void)updateCandleStickLinesData:(NSInteger)ma1 ma2:(NSInteger)ma2 ma3:(NSInteger)ma3;
+- (void)updateCandleStickBollingerBandData:(NSInteger) bollN;
+- (void)updateKDJData:(NSInteger)macdN;
+- (void)updateRSIData:(NSInteger) n1 n2:(NSInteger) n2;
+- (void)updateWRData:(NSInteger) wrN;
+- (void)updateCCIData:(NSInteger) cciN;
+- (void)updateBOLLData:(NSInteger) bollN;
 
 @end
 
@@ -83,10 +118,17 @@ typedef enum {
 @property(strong, nonatomic) UIScrollView *scrollViewBottomChart;
 
 @property(assign, nonatomic) GroupChartViewType bottomChartType;
+@property(strong, nonatomic) CCSOHLCVDData *oHLCVDData;
 @property(strong, nonatomic) NSMutableArray *chartData;
-@property(strong, nonatomic) OHLCVDGroupData *oHLCVDData;
+
+@property(strong, nonatomic) CCSGroupChartData *groupChartData;
 
 @property(weak, nonatomic) UIViewController<CCSChartDelegate> *chartDelegate;
+
+@property(assign, nonatomic) GroupChartOrientationType orientationType;
+
+/** 设置 */
+@property (nonatomic, copy) void (^setting)();
 
 /*******************************************************************************
  * Public Methods
@@ -94,5 +136,15 @@ typedef enum {
 
 - (void)CCSChartBeTouchedOn:(id)chart point:(CGPoint)point indexAt:(NSUInteger)index;
 - (void)CCSChartDisplayChangedFrom:(id)chart from:(NSUInteger)from number:(NSUInteger)number;
+
+- (void)setChartsBackgroundColor:(UIColor *)backgroundColor;
+
+- (void)updateCandleStickChart;
+- (void)updateMACDChart;
+- (void)updateKDJChart;
+- (void)updateRSIChart;
+- (void)updateWRChart;
+- (void)updateCCIChart;
+- (void)updateBOLLChart;
 
 @end
