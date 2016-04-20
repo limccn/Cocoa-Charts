@@ -16,6 +16,7 @@ Android-Charts/Cocoa-Charts技术交流QQ群现已开通，欢迎加入。群号
 - `pie chart`
 - `spider web chart`
 - `area chart`
+- `band chart`
 - `separated stick chart`
 - `pizza chart`
 - `round radar chart`
@@ -23,8 +24,6 @@ Android-Charts/Cocoa-Charts技术交流QQ群现已开通，欢迎加入。群号
 
 ### Under developing Charts
 - `stacked stick chart`
-
-
 
     
 ###More About Cocoa-Charts
@@ -50,6 +49,7 @@ application on both iOS and Android platforms.
 - [Android-Charts](https://github.com/limccn/Android-Charts.git)
 
 ## Get Start
+### Installation with source code
 
 1. Clone or download Cocoa-Charts if you haven't yet, At the command prompt type command like this
 
@@ -58,6 +58,21 @@ application on both iOS and Android platforms.
 2. Import the Cocoa-Charts source files to your Xcode project.
 
 3. Select the graph/chart you want to use in your application, and Enjoy it.
+
+### Installation With CocoaPods
+
+####Use Podfile
+
+To integrate Cocoa-Charts into your Xcode project using CocoaPods, specify it in your Podfile:
+
+        source 'https://github.com/CocoaPods/Specs.git'
+        platform :ios, '7.0'
+
+        pod 'Cocoa-Charts', '~> 0.2'
+Then, run the following command:
+
+        $ pod install
+
 
 ## History, Change Logs
 ###v0.1, `2012-07-14`
