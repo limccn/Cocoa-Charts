@@ -123,6 +123,8 @@
                         
                         ptFirst =  CGPointMake(startX, valueY);
                     }
+                    
+                    
                     //X位移
                     startX = startX + lineLength;
                 }

@@ -1,8 +1,8 @@
 //
-//  Cocoa-Charts.h
+//  CCSTitleValues.m
 //  Cocoa-Charts
 //
-//  Created by limc on 11-10-24.
+//  Created by limc on 11-10-27.
 //  Copyright 2011 limc.cn All rights reserved.
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,23 +18,30 @@
 //  limitations under the License.
 //
 
-#import "CCSBaseChartView.h"
-#import "CCSGridChart.h"
-#import "CCSLineChart.h"
-#import "CCSStickChart.h"
-#import "CCSCandleStickChart.h"
-#import "CCSMAStickChart.h"
-#import "CCSMACandleStickChart.h"
-#import "CCSPieChart.h"
-#import "CCSPizzaChart.h"
-#import "CCSSpiderWebChart.h"
-
-#import "CCSLineData.h"
-#import "CCSTitledLine.h"
-#import "CCSTitleValue.h"
-#import "CCSTitleValueColor.h"
 #import "CCSTitleValues.h"
-#import "CCSTitleValuesColor.h"
 
 
+@implementation CCSTitleValues
 
+@synthesize title = _title;
+@synthesize values = _values;
+
+- (id)init {
+    self = [super init];
+    if (self) {
+
+    }
+    return self;
+}
+
+- (id)initWithTitle:(NSString *)title values:(NSArray *)values {
+    self = [self init];
+
+    if (self) {
+        self.title = title;
+        self.values = values;
+    }
+    return self;
+}
+
+@end

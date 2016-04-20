@@ -164,6 +164,7 @@
                             CGContextAddLineToPoint(context, stickX + stickWidth / 2, highY);
                         }
                     }
+
                 }
 
                 //X位移

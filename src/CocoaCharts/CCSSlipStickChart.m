@@ -633,8 +633,8 @@
 
             }
         }
+
     }
-    
 }
 
 - (void) moveLeft {
@@ -702,7 +702,7 @@
                 self.displayFrom = resultDisplayFrom;
             }
         }
-        
+
         //处理displayNumber越界
         if (self.displayNumber < self.minDisplayNumber) {
             self.displayNumber = self.minDisplayNumber;

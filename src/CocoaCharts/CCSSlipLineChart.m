@@ -932,4 +932,10 @@
     _singleTouchPoint = CGPointMake(self.axisMarginLeft +(self.selectedIndex - self.displayFrom + 0.5) * stickWidth, self.singleTouchPoint.y);
 }
 
+-(void) bindSelectedIndex
+{
+    CCFloat stickWidth = ((self.frame.size.width - self.axisMarginLeft - self.axisMarginRight) / self.displayNumber);
+    _singleTouchPoint = CGPointMake(self.axisMarginLeft +(self.selectedIndex - self.displayFrom + 0.5) * stickWidth, self.singleTouchPoint.y);
+}
+
 @end

@@ -1165,6 +1165,15 @@
 			path = JSONModelTransformations;
 			sourceTree = "<group>";
 		};
+		55733E158D4F87CFC4C06D6C /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				FA441BB5CDA32F56EF901973 /* Pods.debug.xcconfig */,
+				82B4BB86FA08FB5AC1F2A154 /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1240,7 +1249,15 @@
 				3B961C571CC7D43A00C34980 /* CCSSettingDetailViewController.xib in Resources */,
 				3B961C641CC7D43A00C34980 /* CocoaChartsSample-Info.plist in Resources */,
 			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
 			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
@@ -1597,6 +1614,7 @@
 		};
 		3BB5DF2918C9624800288894 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FA441BB5CDA32F56EF901973 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -1615,6 +1633,7 @@
 		};
 		3BB5DF2A18C9624800288894 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 82B4BB86FA08FB5AC1F2A154 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;

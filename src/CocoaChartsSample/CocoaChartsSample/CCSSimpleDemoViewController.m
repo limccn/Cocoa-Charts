@@ -17,8 +17,11 @@
 #import "ta_libc.h"
 #import "CCSTALibUtils.h"
 #import "CCSStringUtils.h"
+#import "CCSJSONData.h"
 
 #define WR_NONE_DISPLAY @"101"
+
+#define AXIS_CALC_PARM  1000
 
 #define AXIS_CALC_PARM  1000
 

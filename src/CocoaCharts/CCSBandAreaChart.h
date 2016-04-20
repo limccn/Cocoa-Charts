@@ -1,9 +1,9 @@
 //
 //  CCSBandAreaChart.h
-//  CocoaChartsSample
+//  Cocoa-Charts
 //
-//  Created by limc on 11/14/13.
-//  Copyright (c) 2013 limc. All rights reserved.
+//  Created by limc on 11-10-27.
+//  Copyright 2011 limc.cn All rights reserved.
 //
 
 #import "CCSLineChart.h"
