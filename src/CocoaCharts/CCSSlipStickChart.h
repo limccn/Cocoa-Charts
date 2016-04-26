@@ -35,6 +35,9 @@ typedef enum {
 //    CCUInt _zoomBaseLine;
     CCInt _maxDisplayNumberToLine;
     
+    CGFloat _widthForStickDrawAsLine;
+    UIColor *_colorForStickDrawAsLine;
+    
 }
 
 @property(assign, nonatomic, setter = setDisplayNumber:) CCInt displayNumber;
@@ -44,6 +47,9 @@ typedef enum {
 
 //@property(assign, nonatomic) CCUInt zoomBaseLine;
 @property(assign, nonatomic) CCInt maxDisplayNumberToLine;
+@property(assign, nonatomic) CGFloat widthForStickDrawAsLine;
+@property(strong, nonatomic) UIColor *colorForStickDrawAsLine;
+
 
 -(CCInt) getDataDisplayNumber;
 -(CCInt) getDisplayTo;

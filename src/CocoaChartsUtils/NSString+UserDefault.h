@@ -18,6 +18,10 @@
 #define MA2                                      @"MA2"
 #define MA3                                      @"MA3"
 
+#define VMA1                                     @"VMA1"
+#define VMA2                                     @"VMA2"
+#define VMA3                                     @"VMA3"
+
 #define KDJ_N                                    @"KDJ_N"
 
 #define RSI_N1                                   @"RSI_N1"

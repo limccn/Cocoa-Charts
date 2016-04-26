@@ -50,13 +50,11 @@ NSArray *CArrayToNSArrayWithParameter(const double inCArray[], int length, int o
     NSMutableArray *outNSArray = [[NSMutableArray alloc] initWithCapacity:length];
 
     for (NSInteger index = 0; index < length; index++) {
-
         if (index >= outBegIdx && index < outBegIdx + outNBElement) {
             [outNSArray addObject:[NSString stringWithFormat:@"%f", inCArray[index - outBegIdx]]];
         } else {
             [outNSArray addObject:[NSString stringWithFormat:@"%f", parmeter]];
         }
-
     }
 
     return outNSArray;

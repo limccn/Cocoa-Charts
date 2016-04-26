@@ -25,9 +25,8 @@
 #import "CCSSlipLineChart.h"
 #import "CCSCandleStickChart.h"
 #import "CCSBOLLMASlipCandleStickChart.h"
-#import "CCSMAColoredStickChart.h"
-
 #import "CCSOHLCVDData.h"
+#import "CCSMAColoredStickChart.h"
 
 typedef enum {
     GroupChartViewTypeVOL = 101,
@@ -46,7 +45,7 @@ typedef enum {
 
 @interface CCSGroupChartData : NSObject
 
-@property(copy, nonatomic) NSArray   *ohlcvdDatas;
+@property(strong, nonatomic) NSArray *ohlcvdDatas;
 
 /** CandleStickChartData */
 @property(strong, nonatomic) NSArray *candleStickData;
@@ -75,18 +74,11 @@ typedef enum {
 /** BOLLChart */
 @property(strong, nonatomic) NSArray *bollLinesData;
 
-/**
- * 初始化数据
- */
 - (id)initWithCCSOHLCVDDatas:(NSArray *)ohlcvdDatas;
 
-/**
- * 更新某个指标
- */
 - (void)updateMACDStickData:(NSInteger)macdS l:(NSInteger)macdL m:(NSInteger)macdM;
 - (void)updateCandleStickLinesData:(NSInteger)ma1 ma2:(NSInteger)ma2 ma3:(NSInteger)ma3;
 - (void)updateCandleStickBollingerBandData:(NSInteger) bollN;
-- (void)updateStickLinesData:(NSInteger)ma1 ma2:(NSInteger)ma2 ma3:(NSInteger)ma3;
 - (void)updateKDJData:(NSInteger)macdN;
 - (void)updateRSIData:(NSInteger) n1 n2:(NSInteger) n2;
 - (void)updateWRData:(NSInteger) wrN;
@@ -107,38 +99,44 @@ typedef enum {
  * Public Properties
  *******************************************************************************/
 
-/** K线图 */
-@property(strong, nonatomic) CCSBOLLMASlipCandleStickChart *candleStickChart;
-/** VOL 图 */
+@property(strong, nonatomic) UILabel *lblTitle;
+@property(strong, nonatomic) UILabel *lblOpen;
+@property(strong, nonatomic) UILabel *lblHigh;
+@property(strong, nonatomic) UILabel *lblLow;
+@property(strong, nonatomic) UILabel *lblClose;
+@property(strong, nonatomic) UILabel *lblVolume;
+@property(strong, nonatomic) UILabel *lblDate;
+@property(strong, nonatomic) UILabel *lblChange;
+@property(strong, nonatomic) UILabel *lblPreClose;
+@property(strong, nonatomic) UILabel *lblSubTitle1;
+@property(strong, nonatomic) UILabel *lblSubTitle2;
+@property(strong, nonatomic) UILabel *lblSubTitle3;
+@property(strong, nonatomic) UILabel *lblSubTitle4;
+@property(strong, nonatomic) UILabel *lblSubTitle5;
+@property(strong, nonatomic) UILabel *lblSubTitle6;
+@property(strong, nonatomic) UILabel *lblSubTitle7;
+@property(strong, nonatomic) UILabel *lblSubTitle8;
+@property(strong, nonatomic) UILabel *lblSubTitle9;
+@property(strong, nonatomic) UILabel *lblSubTitle10;
 @property(strong, nonatomic) CCSMAColoredStickChart *stickChart;
-/** MACD 图 */
+@property(strong, nonatomic) CCSBOLLMASlipCandleStickChart *candleStickChart;
 @property(strong, nonatomic) CCSMACDChart *macdChart;
-/** KDJ 图 */
 @property(strong, nonatomic) CCSSlipLineChart *kdjChart;
-/** RSI 图 */
 @property(strong, nonatomic) CCSSlipLineChart *rsiChart;
-/** WR 图 */
 @property(strong, nonatomic) CCSSlipLineChart *wrChart;
-/** CCI 图 */
 @property(strong, nonatomic) CCSSlipLineChart *cciChart;
-/** BOLL 图 */
 @property(strong, nonatomic) CCSSlipLineChart *bollChart;
-/** 图表类型切换 UISegmentedControl */
 @property(strong, nonatomic) UISegmentedControl *segBottomChartType;
-/** 底部图表容器 */
 @property(strong, nonatomic) UIScrollView *scrollViewBottomChart;
 
-/** 当前显示的图表类型 */
 @property(assign, nonatomic) GroupChartViewType bottomChartType;
-
-/** 图表数据源,还未计算 */
+@property(strong, nonatomic) CCSOHLCVDData *oHLCVDData;
 @property(strong, nonatomic) NSMutableArray *chartData;
-/** 图表数据源,已经计算好 */
+
 @property(strong, nonatomic) CCSGroupChartData *groupChartData;
 
 @property(weak, nonatomic) UIViewController<CCSChartDelegate> *chartDelegate;
 
-/** 图表是否全屏 */
 @property(assign, nonatomic) GroupChartOrientationType orientationType;
 
 /** 设置 */
@@ -148,40 +146,17 @@ typedef enum {
  * Public Methods
  *******************************************************************************/
 
-/**
- * 图表 ontouch 事件
- */
 - (void)CCSChartBeTouchedOn:(id)chart point:(CGPoint)point indexAt:(NSUInteger)index;
-/**
- *
- */
 - (void)CCSChartDisplayChangedFrom:(id)chart from:(NSUInteger)from number:(NSUInteger)number;
 
-/**
- * 设置背景色
- */
 - (void)setChartsBackgroundColor:(UIColor *)backgroundColor;
 
-/**
- * 设置按钮颜色
- */
-- (void)setButtonTextColor: (UIColor *)normalColor selectedColor: (UIColor *)selectedColor;
-
-/**
- * 更新某个图表,直接对数据源进行重新计算
- */
 - (void)updateCandleStickChart;
-- (void)updateStickChart;
 - (void)updateMACDChart;
 - (void)updateKDJChart;
 - (void)updateRSIChart;
 - (void)updateWRChart;
 - (void)updateCCIChart;
 - (void)updateBOLLChart;
-
-/**
- * 刷新图表,直接对数据源进行修改
- */
-- (void)refreshGroupChart;
 
 @end

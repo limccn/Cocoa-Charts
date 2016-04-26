@@ -44,6 +44,8 @@
     CCUInt _selectedStickIndex;
     CCFloat _maxValue;
     CCFloat _minValue;
+    CCFloat _maxDataValue;
+    CCFloat _minDataValue;
     CCUInt _axisCalc;
     BOOL _autoCalcRange;
     __unsafe_unretained CCSStickChart *_coChart;
@@ -111,6 +113,20 @@
  Y轴显示最小值
  */
 @property(assign, nonatomic) CCFloat minValue;
+
+/*!
+ Max display value of axis Y
+ Y軸の最大値
+ Y轴显示最大值
+ */
+@property(assign, nonatomic) CCFloat maxDataValue;
+
+/*!
+ Min display value of axis Y
+ Y軸の最小値
+ Y轴显示最小值
+ */
+@property(assign, nonatomic) CCFloat minDataValue;
 
 /*!
  fast calculator for axis Y degrees （display degrees＝degrees/axisCalc）
@@ -184,4 +200,5 @@
 
 -(CCInt) getSelectedIndex;
 
+- (NSString *)formatAxisYDegree:(CGFloat)value;
 @end

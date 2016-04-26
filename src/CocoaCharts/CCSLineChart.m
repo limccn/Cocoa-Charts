@@ -251,12 +251,12 @@
             
             if (self.lineAlignType == CCSLineAlignTypeCenter) {
                 // 点线距离
-                lineLength= ((rect.size.width - self.axisMarginLeft - 2 * self.axisMarginRight) / [line.data count]);
+                lineLength= ((rect.size.width - self.axisMarginLeft - self.axisMarginRight) / [line.data count]);
                 //起始点
                 startX = super.axisMarginLeft + lineLength / 2;
             }else if (self.lineAlignType == CCSLineAlignTypeJustify) {
                 // 点线距离
-                lineLength= ((rect.size.width - self.axisMarginLeft - 2 * self.axisMarginRight) / ([line.data count] - 1));
+                lineLength= ((rect.size.width - self.axisMarginLeft - self.axisMarginRight) / ([line.data count] - 1));
                 //起始点
                 startX = super.axisMarginLeft + self.axisMarginRight;
             }
@@ -373,7 +373,7 @@
     CCFloat offset;
     
     if (self.axisYPosition == CCSGridChartYAxisPositionLeft) {
-        postOffset = (rect.size.width - self.axisMarginLeft - 2 * self.axisMarginRight) / ([self.longitudeTitles count]);
+        postOffset = (rect.size.width - self.axisMarginLeft - self.axisMarginRight) / ([self.longitudeTitles count]);
         offset = self.axisMarginLeft + self.axisMarginRight + postOffset / 2;
     }
     else {
@@ -423,7 +423,7 @@
     CCFloat offset;
     
     if (self.axisYPosition == CCSGridChartYAxisPositionLeft) {
-        postOffset = (rect.size.width - self.axisMarginLeft - 2 * self.axisMarginRight) / ([self.longitudeTitles count]);
+        postOffset = (rect.size.width - self.axisMarginLeft - self.axisMarginRight) / ([self.longitudeTitles count]);
         offset = self.axisMarginLeft + self.axisMarginRight + postOffset / 2;
     } else {
         //TODO
@@ -434,12 +434,7 @@
     for (CCUInt i = 0; i < [self.longitudeTitles count]; i++) {
         if (self.axisXPosition == CCSGridChartXAxisPositionBottom) {
             NSString *str = (NSString *) [self.longitudeTitles objectAtIndex:i];
-            
             //调整X轴坐标位置
-//            [str drawInRect:CGRectMake(offset + (i - 0.5) * postOffset, rect.size.height - self.axisMarginBottom, postOffset, self.longitudeFontSize)
-//                   withFont:self.longitudeFont
-//              lineBreakMode:NSLineBreakByWordWrapping
-//                  alignment:NSTextAlignmentCenter];
             
             CGRect textRect= CGRectMake(offset + (i - 0.5) * postOffset, rect.size.height - self.axisMarginBottom, postOffset, self.longitudeFontSize);
             UIFont *textFont= self.longitudeFont; //设置字体
@@ -453,11 +448,6 @@
             NSString *str = (NSString *) [self.longitudeTitles objectAtIndex:i];
             
             //调整X轴坐标位置
-//            [str drawInRect:CGRectMake(offset + (i - 0.5) * postOffset, 0, postOffset, self.longitudeFontSize)
-//                   withFont:self.longitudeFont
-//              lineBreakMode:NSLineBreakByWordWrapping
-//                  alignment:NSTextAlignmentCenter];
-            
             CGRect textRect= CGRectMake(offset + (i - 0.5) * postOffset, 0, postOffset, self.longitudeFontSize);
             UIFont *textFont= self.longitudeFont; //设置字体
             NSMutableParagraphStyle *textStyle=[[NSMutableParagraphStyle alloc]init];//段落样式
@@ -471,9 +461,12 @@
 
 
 - (void)initAxisY {
+    if (self.autoCalcLatitudeTitle == NO) {
+        return;
+    }
     
-    if (self.autoCalcRange) {
-        //计算取值范围
+    //计算取值范围
+    if ([self autoCalcRange]) {
         [self calcValueRange];
     }
 
@@ -511,6 +504,10 @@
 
 
 - (void)initAxisX {
+    if (self.autoCalcLongitudeTitle == NO) {
+        return;
+    }
+    
     NSMutableArray *TitleX = [[NSMutableArray alloc] init];
     if (self.linesData != NULL && [self.linesData count] > 0) {
         //以第1条线作为X轴的标示
@@ -568,8 +565,8 @@
         return @"";
     }
     if (self.axisCalc == 1) {
-        CCUInt degree = (value * (self.maxValue - self.minValue) + self.minValue) / self.axisCalc;
-        return [[NSNumber numberWithUnsignedInteger:degree]stringValue];
+        CCInt degree = (value * (self.maxValue - self.minValue) + self.minValue) / self.axisCalc;
+        return [[NSNumber numberWithInteger:degree]stringValue];
     } else {
         return [NSString stringWithFormat:@"%-.2f", (value * (self.maxValue - self.minValue) + self.minValue) / self.axisCalc];
     }
@@ -645,8 +642,9 @@
 
 
 -(CGFloat) computeValueY:(CGFloat)value inRect:(CGRect)rect{
-    return (1 - (value - self.minValue) / (self.maxValue - self.minValue)) * (rect.size.height - self.axisMarginBottom) - self.axisMarginTop;
+    return (1 - (value - self.minValue) / (self.maxValue - self.minValue)) * (rect.size.height - self.axisMarginBottom - 2 * self.axisMarginTop) + self.axisMarginTop;
 }
+
 
 //-(void) calcSelectedIndex
 //{

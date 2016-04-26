@@ -20,7 +20,6 @@
 		3B8C01C01CC4CA84007914C4 /* CCSColoredStickChartData.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B8C017A1CC4CA84007914C4 /* CCSColoredStickChartData.m */; };
 		3B8C01C11CC4CA84007914C4 /* CCSDonutChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B8C017C1CC4CA84007914C4 /* CCSDonutChart.m */; };
 		3B8C01C21CC4CA84007914C4 /* CCSGridChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B8C017E1CC4CA84007914C4 /* CCSGridChart.m */; };
-		3B8C01C31CC4CA84007914C4 /* CCSGroupChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B8C01801CC4CA84007914C4 /* CCSGroupChart.m */; };
 		3B8C01C41CC4CA84007914C4 /* CCSLineChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B8C01831CC4CA84007914C4 /* CCSLineChart.m */; };
 		3B8C01C51CC4CA84007914C4 /* CCSLineData.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B8C01851CC4CA84007914C4 /* CCSLineData.m */; };
 		3B8C01C61CC4CA84007914C4 /* CCSMACandleStickChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B8C01871CC4CA84007914C4 /* CCSMACandleStickChart.m */; };
@@ -88,10 +87,17 @@
 		3B8C025B1CC4CAB8007914C4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3B8C022A1CC4CAB8007914C4 /* InfoPlist.strings */; };
 		3B8C025C1CC4CAB8007914C4 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3B8C022C1CC4CAB8007914C4 /* Images.xcassets */; };
 		3B8C025D1CC4CAB8007914C4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B8C022D1CC4CAB8007914C4 /* main.m */; };
+		3B961BCE1CC783CD00C34980 /* 15min.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3B961BC71CC783CD00C34980 /* 15min.txt */; };
+		3B961BCF1CC783CD00C34980 /* 1min.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3B961BC81CC783CD00C34980 /* 1min.txt */; };
+		3B961BD01CC783CD00C34980 /* allpdts.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3B961BC91CC783CD00C34980 /* allpdts.txt */; };
+		3B961BD11CC783CD00C34980 /* KLineData.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3B961BCA1CC783CD00C34980 /* KLineData.txt */; };
+		3B961BD21CC783CD00C34980 /* N225.xml in Resources */ = {isa = PBXBuildFile; fileRef = 3B961BCB1CC783CD00C34980 /* N225.xml */; };
+		3B961BD31CC783CD00C34980 /* test.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B961BCC1CC783CD00C34980 /* test.plist */; };
+		3B961BD41CC783CD00C34980 /* time.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3B961BCD1CC783CD00C34980 /* time.txt */; };
+		3B961D6D1CC8CC4700C34980 /* CCSTickChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B961D6C1CC8CC4700C34980 /* CCSTickChart.m */; };
 		3BB5DF0018C9624800288894 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BB5DEFF18C9624800288894 /* Foundation.framework */; };
 		3BB5DF0218C9624800288894 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BB5DF0118C9624800288894 /* CoreGraphics.framework */; };
 		3BB5DF0418C9624800288894 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BB5DF0318C9624800288894 /* UIKit.framework */; };
-		3BB5E09618C984F600288894 /* N225.xml in Resources */ = {isa = PBXBuildFile; fileRef = 3BB5DFE118C984F600288894 /* N225.xml */; };
 		3BB5E09718C984F600288894 /* ta_global.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5DFEB18C984F600288894 /* ta_global.c */; };
 		3BB5E09818C984F600288894 /* ta_retcode.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5DFF018C984F600288894 /* ta_retcode.c */; };
 		3BB5E09918C984F600288894 /* ta_retcode.csv in Resources */ = {isa = PBXBuildFile; fileRef = 3BB5DFF118C984F600288894 /* ta_retcode.csv */; };
@@ -258,17 +264,12 @@
 		3BB5E13A18C984F600288894 /* ta_WILLR.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E09418C984F600288894 /* ta_WILLR.c */; };
 		3BB5E13B18C984F600288894 /* ta_WMA.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E09518C984F600288894 /* ta_WMA.c */; };
 		3BB873421CC4BBF500DEAE92 /* NSArray+CCSTACompute.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BB873411CC4BBF500DEAE92 /* NSArray+CCSTACompute.m */; };
-		3BDAD3991BDE12F9000AC06C /* test.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3BDAD3981BDE12F9000AC06C /* test.plist */; };
+		3BE2858C1CC63A780079AA35 /* CCSGroupChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BE2858A1CC63A780079AA35 /* CCSGroupChart.m */; };
 		3BE4865B1CC39CEF00A3E4FB /* CCSStringUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BE486521CC39CEF00A3E4FB /* CCSStringUtils.m */; };
 		3BE4865C1CC39CEF00A3E4FB /* CCSTALibUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BE486541CC39CEF00A3E4FB /* CCSTALibUtils.m */; };
 		3BE4865E1CC39CEF00A3E4FB /* NSString+UIColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BE486581CC39CEF00A3E4FB /* NSString+UIColor.m */; };
 		3BE4865F1CC39CEF00A3E4FB /* NSString+UserDefault.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BE4865A1CC39CEF00A3E4FB /* NSString+UserDefault.m */; };
 		B9D9486EC13AC2EB4A9B76F0 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 69441982625698A57CC7DB46 /* libPods.a */; };
-		F86FE2821CA29CC9003E0DC6 /* 1min.txt in Resources */ = {isa = PBXBuildFile; fileRef = F86FE27E1CA29CC9003E0DC6 /* 1min.txt */; };
-		F86FE2831CA29CC9003E0DC6 /* 15min.txt in Resources */ = {isa = PBXBuildFile; fileRef = F86FE27F1CA29CC9003E0DC6 /* 15min.txt */; };
-		F86FE2841CA29CC9003E0DC6 /* allpdts.txt in Resources */ = {isa = PBXBuildFile; fileRef = F86FE2801CA29CC9003E0DC6 /* allpdts.txt */; };
-		F86FE2851CA29CC9003E0DC6 /* time.txt in Resources */ = {isa = PBXBuildFile; fileRef = F86FE2811CA29CC9003E0DC6 /* time.txt */; };
-		F8C2EDD41CAE672A00D72985 /* KLineData.txt in Resources */ = {isa = PBXBuildFile; fileRef = F8C2EDD31CAE672A00D72985 /* KLineData.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -299,8 +300,6 @@
 		3B8C017C1CC4CA84007914C4 /* CCSDonutChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSDonutChart.m; sourceTree = "<group>"; };
 		3B8C017D1CC4CA84007914C4 /* CCSGridChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSGridChart.h; sourceTree = "<group>"; };
 		3B8C017E1CC4CA84007914C4 /* CCSGridChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSGridChart.m; sourceTree = "<group>"; };
-		3B8C017F1CC4CA84007914C4 /* CCSGroupChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSGroupChart.h; sourceTree = "<group>"; };
-		3B8C01801CC4CA84007914C4 /* CCSGroupChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSGroupChart.m; sourceTree = "<group>"; };
 		3B8C01811CC4CA84007914C4 /* CCSHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSHeader.h; sourceTree = "<group>"; };
 		3B8C01821CC4CA84007914C4 /* CCSLineChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSLineChart.h; sourceTree = "<group>"; };
 		3B8C01831CC4CA84007914C4 /* CCSLineChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSLineChart.m; sourceTree = "<group>"; };
@@ -429,11 +428,19 @@
 		3B8C022B1CC4CAB8007914C4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3B8C022C1CC4CAB8007914C4 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		3B8C022D1CC4CAB8007914C4 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		3B961BC71CC783CD00C34980 /* 15min.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 15min.txt; sourceTree = "<group>"; };
+		3B961BC81CC783CD00C34980 /* 1min.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 1min.txt; sourceTree = "<group>"; };
+		3B961BC91CC783CD00C34980 /* allpdts.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = allpdts.txt; sourceTree = "<group>"; };
+		3B961BCA1CC783CD00C34980 /* KLineData.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = KLineData.txt; sourceTree = "<group>"; };
+		3B961BCB1CC783CD00C34980 /* N225.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = N225.xml; sourceTree = "<group>"; };
+		3B961BCC1CC783CD00C34980 /* test.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = test.plist; sourceTree = "<group>"; };
+		3B961BCD1CC783CD00C34980 /* time.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = time.txt; sourceTree = "<group>"; };
+		3B961D6B1CC8CC4700C34980 /* CCSTickChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSTickChart.h; sourceTree = "<group>"; };
+		3B961D6C1CC8CC4700C34980 /* CCSTickChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSTickChart.m; sourceTree = "<group>"; };
 		3BB5DEFC18C9624800288894 /* CocoaChartsSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CocoaChartsSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BB5DEFF18C9624800288894 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		3BB5DF0118C9624800288894 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		3BB5DF0318C9624800288894 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		3BB5DFE118C984F600288894 /* N225.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = N225.xml; sourceTree = "<group>"; };
 		3BB5DFE418C984F600288894 /* ta_abstract.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ta_abstract.h; sourceTree = "<group>"; };
 		3BB5DFE518C984F600288894 /* ta_common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ta_common.h; sourceTree = "<group>"; };
 		3BB5DFE618C984F600288894 /* ta_defs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ta_defs.h; sourceTree = "<group>"; };
@@ -611,7 +618,8 @@
 		3BB5E09518C984F600288894 /* ta_WMA.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ta_WMA.c; sourceTree = "<group>"; };
 		3BB873401CC4BBF500DEAE92 /* NSArray+CCSTACompute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+CCSTACompute.h"; sourceTree = "<group>"; };
 		3BB873411CC4BBF500DEAE92 /* NSArray+CCSTACompute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+CCSTACompute.m"; sourceTree = "<group>"; };
-		3BDAD3981BDE12F9000AC06C /* test.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = test.plist; sourceTree = "<group>"; };
+		3BE2858A1CC63A780079AA35 /* CCSGroupChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSGroupChart.m; sourceTree = "<group>"; };
+		3BE2858B1CC63A780079AA35 /* CCSGroupChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSGroupChart.h; sourceTree = "<group>"; };
 		3BE486511CC39CEF00A3E4FB /* CCSStringUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSStringUtils.h; sourceTree = "<group>"; };
 		3BE486521CC39CEF00A3E4FB /* CCSStringUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSStringUtils.m; sourceTree = "<group>"; };
 		3BE486531CC39CEF00A3E4FB /* CCSTALibUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSTALibUtils.h; sourceTree = "<group>"; };
@@ -623,11 +631,6 @@
 		5D2BD16ADA0618F467FDA75B /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		69441982625698A57CC7DB46 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7D9E0A0F1D6DCA8178C4E37 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
-		F86FE27E1CA29CC9003E0DC6 /* 1min.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 1min.txt; sourceTree = "<group>"; };
-		F86FE27F1CA29CC9003E0DC6 /* 15min.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 15min.txt; sourceTree = "<group>"; };
-		F86FE2801CA29CC9003E0DC6 /* allpdts.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = allpdts.txt; sourceTree = "<group>"; };
-		F86FE2811CA29CC9003E0DC6 /* time.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = time.txt; sourceTree = "<group>"; };
-		F8C2EDD31CAE672A00D72985 /* KLineData.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = KLineData.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -652,6 +655,41 @@
 				5D2BD16ADA0618F467FDA75B /* Pods.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		3B4C69001CCF5C62004FEDB3 /* CCSGroupChartSample */ = {
+			isa = PBXGroup;
+			children = (
+				3B8C020A1CC4CAB8007914C4 /* CCSSampleGroupChartDemoViewController.h */,
+				3B8C020B1CC4CAB8007914C4 /* CCSSampleGroupChartDemoViewController.m */,
+				3B8C020C1CC4CAB8007914C4 /* CCSSampleGroupChartDemoViewController.xib */,
+				3B8C020D1CC4CAB8007914C4 /* CCSSampleHorizontalViewController.h */,
+				3B8C020E1CC4CAB8007914C4 /* CCSSampleHorizontalViewController.m */,
+				3B8C020F1CC4CAB8007914C4 /* CCSSamplGroupChartDetailTableViewCell.h */,
+				3B8C02101CC4CAB8007914C4 /* CCSSamplGroupChartDetailTableViewCell.m */,
+				3B8C02111CC4CAB8007914C4 /* CCSSamplGroupChartDetailTableViewCell.xib */,
+				3B8C02121CC4CAB8007914C4 /* CCSSettingDetailViewController.h */,
+				3B8C02131CC4CAB8007914C4 /* CCSSettingDetailViewController.m */,
+				3B8C02141CC4CAB8007914C4 /* CCSSettingDetailViewController.xib */,
+				3B8C02151CC4CAB8007914C4 /* CCSSettingResetTableViewCell.h */,
+				3B8C02161CC4CAB8007914C4 /* CCSSettingResetTableViewCell.m */,
+				3B8C02171CC4CAB8007914C4 /* CCSSettingResetTableViewCell.xib */,
+				3B8C01EA1CC4CAB8007914C4 /* CCSChartsSettingTableViewCell.h */,
+				3B8C01EB1CC4CAB8007914C4 /* CCSChartsSettingTableViewCell.m */,
+				3B8C01EC1CC4CAB8007914C4 /* CCSChartsSettingTableViewCell.xib */,
+				3B8C01ED1CC4CAB8007914C4 /* CCSChartsSettingViewController.h */,
+				3B8C01EE1CC4CAB8007914C4 /* CCSChartsSettingViewController.m */,
+				3B8C01EF1CC4CAB8007914C4 /* CCSChartsSettingViewController.xib */,
+				3BE2858A1CC63A780079AA35 /* CCSGroupChart.m */,
+				3BE2858B1CC63A780079AA35 /* CCSGroupChart.h */,
+				3B697CCE1CC4CCBA0098C1A8 /* CCSJSONData.h */,
+				3B697CCF1CC4CCBA0098C1A8 /* CCSJSONData.m */,
+				3B697CD01CC4CCBA0098C1A8 /* CCSSegmentedControl.h */,
+				3B697CD11CC4CCBA0098C1A8 /* CCSSegmentedControl.m */,
+				3B8C01E01CC4CAB8007914C4 /* CCSAppDelegate.h */,
+				3B8C01E11CC4CAB8007914C4 /* CCSAppDelegate.m */,
+			);
+			name = CCSGroupChartSample;
 			sourceTree = "<group>";
 		};
 		3B8C01671CC4CA84007914C4 /* CocoaCharts */ = {
@@ -680,8 +718,6 @@
 				3B8C017C1CC4CA84007914C4 /* CCSDonutChart.m */,
 				3B8C017D1CC4CA84007914C4 /* CCSGridChart.h */,
 				3B8C017E1CC4CA84007914C4 /* CCSGridChart.m */,
-				3B8C017F1CC4CA84007914C4 /* CCSGroupChart.h */,
-				3B8C01801CC4CA84007914C4 /* CCSGroupChart.m */,
 				3B8C01811CC4CA84007914C4 /* CCSHeader.h */,
 				3B8C01821CC4CA84007914C4 /* CCSLineChart.h */,
 				3B8C01831CC4CA84007914C4 /* CCSLineChart.m */,
@@ -733,6 +769,8 @@
 				3B8C01B51CC4CA84007914C4 /* CCSTitleValues.m */,
 				3B8C01B61CC4CA84007914C4 /* CCSTitleValuesColor.h */,
 				3B8C01B71CC4CA84007914C4 /* CCSTitleValuesColor.m */,
+				3B961D6B1CC8CC4700C34980 /* CCSTickChart.h */,
+				3B961D6C1CC8CC4700C34980 /* CCSTickChart.m */,
 			);
 			name = CocoaCharts;
 			path = ../CocoaCharts;
@@ -741,12 +779,7 @@
 		3B8C01DF1CC4CAB8007914C4 /* CocoaChartsSample */ = {
 			isa = PBXGroup;
 			children = (
-				3B697CCE1CC4CCBA0098C1A8 /* CCSJSONData.h */,
-				3B697CCF1CC4CCBA0098C1A8 /* CCSJSONData.m */,
-				3B697CD01CC4CCBA0098C1A8 /* CCSSegmentedControl.h */,
-				3B697CD11CC4CCBA0098C1A8 /* CCSSegmentedControl.m */,
-				3B8C01E01CC4CAB8007914C4 /* CCSAppDelegate.h */,
-				3B8C01E11CC4CAB8007914C4 /* CCSAppDelegate.m */,
+				3B4C69001CCF5C62004FEDB3 /* CCSGroupChartSample */,
 				3B8C01E21CC4CAB8007914C4 /* CCSAreaChartViewController.h */,
 				3B8C01E31CC4CAB8007914C4 /* CCSAreaChartViewController.m */,
 				3B8C01E41CC4CAB8007914C4 /* CCSBandAreaChartViewController.h */,
@@ -755,12 +788,6 @@
 				3B8C01E71CC4CAB8007914C4 /* CCSBOLLMASlipCandleStickChartViewController.m */,
 				3B8C01E81CC4CAB8007914C4 /* CCSCandleStickChartViewController.h */,
 				3B8C01E91CC4CAB8007914C4 /* CCSCandleStickChartViewController.m */,
-				3B8C01EA1CC4CAB8007914C4 /* CCSChartsSettingTableViewCell.h */,
-				3B8C01EB1CC4CAB8007914C4 /* CCSChartsSettingTableViewCell.m */,
-				3B8C01EC1CC4CAB8007914C4 /* CCSChartsSettingTableViewCell.xib */,
-				3B8C01ED1CC4CAB8007914C4 /* CCSChartsSettingViewController.h */,
-				3B8C01EE1CC4CAB8007914C4 /* CCSChartsSettingViewController.m */,
-				3B8C01EF1CC4CAB8007914C4 /* CCSChartsSettingViewController.xib */,
 				3B8C01F01CC4CAB8007914C4 /* CCSColoredStickChartViewController.h */,
 				3B8C01F11CC4CAB8007914C4 /* CCSColoredStickChartViewController.m */,
 				3B8C01F21CC4CAB8007914C4 /* CCSDetailViewController.h */,
@@ -787,20 +814,6 @@
 				3B8C02071CC4CAB8007914C4 /* CCSPizzaChartViewController.m */,
 				3B8C02081CC4CAB8007914C4 /* CCSRadarChartViewController.h */,
 				3B8C02091CC4CAB8007914C4 /* CCSRadarChartViewController.m */,
-				3B8C020A1CC4CAB8007914C4 /* CCSSampleGroupChartDemoViewController.h */,
-				3B8C020B1CC4CAB8007914C4 /* CCSSampleGroupChartDemoViewController.m */,
-				3B8C020C1CC4CAB8007914C4 /* CCSSampleGroupChartDemoViewController.xib */,
-				3B8C020D1CC4CAB8007914C4 /* CCSSampleHorizontalViewController.h */,
-				3B8C020E1CC4CAB8007914C4 /* CCSSampleHorizontalViewController.m */,
-				3B8C020F1CC4CAB8007914C4 /* CCSSamplGroupChartDetailTableViewCell.h */,
-				3B8C02101CC4CAB8007914C4 /* CCSSamplGroupChartDetailTableViewCell.m */,
-				3B8C02111CC4CAB8007914C4 /* CCSSamplGroupChartDetailTableViewCell.xib */,
-				3B8C02121CC4CAB8007914C4 /* CCSSettingDetailViewController.h */,
-				3B8C02131CC4CAB8007914C4 /* CCSSettingDetailViewController.m */,
-				3B8C02141CC4CAB8007914C4 /* CCSSettingDetailViewController.xib */,
-				3B8C02151CC4CAB8007914C4 /* CCSSettingResetTableViewCell.h */,
-				3B8C02161CC4CAB8007914C4 /* CCSSettingResetTableViewCell.m */,
-				3B8C02171CC4CAB8007914C4 /* CCSSettingResetTableViewCell.xib */,
 				3B8C02181CC4CAB8007914C4 /* CCSSimpleDemoViewController.h */,
 				3B8C02191CC4CAB8007914C4 /* CCSSimpleDemoViewController.m */,
 				3B8C021A1CC4CAB8007914C4 /* CCSSlipCandleStickChartViewController.h */,
@@ -826,19 +839,27 @@
 			path = CocoaChartsSample;
 			sourceTree = "<group>";
 		};
+		3B961BC61CC783CD00C34980 /* SampleDatas */ = {
+			isa = PBXGroup;
+			children = (
+				3B961BC71CC783CD00C34980 /* 15min.txt */,
+				3B961BC81CC783CD00C34980 /* 1min.txt */,
+				3B961BC91CC783CD00C34980 /* allpdts.txt */,
+				3B961BCA1CC783CD00C34980 /* KLineData.txt */,
+				3B961BCB1CC783CD00C34980 /* N225.xml */,
+				3B961BCC1CC783CD00C34980 /* test.plist */,
+				3B961BCD1CC783CD00C34980 /* time.txt */,
+			);
+			path = SampleDatas;
+			sourceTree = "<group>";
+		};
 		3BB5DEF318C9624800288894 = {
 			isa = PBXGroup;
 			children = (
+				3B961BC61CC783CD00C34980 /* SampleDatas */,
 				3B8C01DF1CC4CAB8007914C4 /* CocoaChartsSample */,
 				3B8C01671CC4CA84007914C4 /* CocoaCharts */,
-				F8C2EDD31CAE672A00D72985 /* KLineData.txt */,
-				F86FE27E1CA29CC9003E0DC6 /* 1min.txt */,
-				F86FE27F1CA29CC9003E0DC6 /* 15min.txt */,
-				F86FE2801CA29CC9003E0DC6 /* allpdts.txt */,
-				F86FE2811CA29CC9003E0DC6 /* time.txt */,
-				3BDAD3981BDE12F9000AC06C /* test.plist */,
 				3BE486501CC39CEF00A3E4FB /* CocoaChartsUtils */,
-				3BB5DFE118C984F600288894 /* N225.xml */,
 				3BB5DFE218C984F600288894 /* TALib */,
 				3BB5DEFE18C9624800288894 /* Frameworks */,
 				3BB5DEFD18C9624800288894 /* Products */,
@@ -1158,19 +1179,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				3B8C023B1CC4CAB8007914C4 /* CCSChartsSettingViewController.xib in Resources */,
+				3B961BD01CC783CD00C34980 /* allpdts.txt in Resources */,
+				3B961BD11CC783CD00C34980 /* KLineData.txt in Resources */,
+				3B961BD31CC783CD00C34980 /* test.plist in Resources */,
 				3B8C025B1CC4CAB8007914C4 /* InfoPlist.strings in Resources */,
+				3B961BD41CC783CD00C34980 /* time.txt in Resources */,
 				3B8C024D1CC4CAB8007914C4 /* CCSSamplGroupChartDetailTableViewCell.xib in Resources */,
+				3B961BCE1CC783CD00C34980 /* 15min.txt in Resources */,
+				3B961BD21CC783CD00C34980 /* N225.xml in Resources */,
+				3B961BCF1CC783CD00C34980 /* 1min.txt in Resources */,
 				3B8C02391CC4CAB8007914C4 /* CCSChartsSettingTableViewCell.xib in Resources */,
-				3BB5E09618C984F600288894 /* N225.xml in Resources */,
 				3BB5E09918C984F600288894 /* ta_retcode.csv in Resources */,
-				3BDAD3991BDE12F9000AC06C /* test.plist in Resources */,
-				F86FE2831CA29CC9003E0DC6 /* 15min.txt in Resources */,
-				F86FE2841CA29CC9003E0DC6 /* allpdts.txt in Resources */,
-				F86FE2851CA29CC9003E0DC6 /* time.txt in Resources */,
-				F8C2EDD41CAE672A00D72985 /* KLineData.txt in Resources */,
 				3B8C025C1CC4CAB8007914C4 /* Images.xcassets in Resources */,
 				3B8C02511CC4CAB8007914C4 /* CCSSettingResetTableViewCell.xib in Resources */,
-				F86FE2821CA29CC9003E0DC6 /* 1min.txt in Resources */,
 				3B8C024A1CC4CAB8007914C4 /* CCSSampleGroupChartDemoViewController.xib in Resources */,
 				3B8C024F1CC4CAB8007914C4 /* CCSSettingDetailViewController.xib in Resources */,
 			);
@@ -1237,6 +1258,7 @@
 				3BB5E11E18C984F600288894 /* ta_ROCR.c in Sources */,
 				3BB5E09E18C984F600288894 /* ta_ADOSC.c in Sources */,
 				3BB5E12418C984F600288894 /* ta_SINH.c in Sources */,
+				3BE2858C1CC63A780079AA35 /* CCSGroupChart.m in Sources */,
 				3BB5E11318C984F600288894 /* ta_MOM.c in Sources */,
 				3BB5E11B18C984F600288894 /* ta_PVI.c in Sources */,
 				3BB5E0EC18C984F600288894 /* ta_COS.c in Sources */,
@@ -1338,6 +1360,7 @@
 				3B8C024C1CC4CAB8007914C4 /* CCSSamplGroupChartDetailTableViewCell.m in Sources */,
 				3BB5E10218C984F600288894 /* ta_MACD.c in Sources */,
 				3B8C01BF1CC4CA84007914C4 /* CCSColoredStickChart.m in Sources */,
+				3B961D6D1CC8CC4700C34980 /* CCSTickChart.m in Sources */,
 				3BB5E0FF18C984F600288894 /* ta_LN.c in Sources */,
 				3B8C02571CC4CAB8007914C4 /* CCSStackedAreaChartViewController.m in Sources */,
 				3BB5E0E718C984F600288894 /* ta_CDLUPSIDEGAP2CROWS.c in Sources */,
@@ -1359,7 +1382,6 @@
 				3B8C02371CC4CAB8007914C4 /* CCSCandleStickChartViewController.m in Sources */,
 				3BB5E0B818C984F600288894 /* ta_CDLCONCEALBABYSWALL.c in Sources */,
 				3BB5E0B918C984F600288894 /* ta_CDLCOUNTERATTACK.c in Sources */,
-				3B8C01C31CC4CA84007914C4 /* CCSGroupChart.m in Sources */,
 				3BB5E0AF18C984F600288894 /* ta_CDL3LINESTRIKE.c in Sources */,
 				3B8C01DE1CC4CA84007914C4 /* CCSTitleValuesColor.m in Sources */,
 				3BB5E0F218C984F600288894 /* ta_EXP.c in Sources */,

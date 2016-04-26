@@ -64,7 +64,7 @@
                 if (self.axisYPosition == CCSGridChartYAxisPositionLeft) {
                     //TODO:自左向右绘图未对应
                     // 点线距离
-                    CCFloat lineLength = ((rect.size.width - self.axisMarginLeft - 2 * self.axisMarginRight) / ([line.data count] - 1));
+                    CCFloat lineLength = ((rect.size.width - self.axisMarginLeft - self.axisMarginRight) / ([line.data count] - 1));
                     //起始点
                     startX = super.axisMarginLeft;
                     //遍历并绘制线条

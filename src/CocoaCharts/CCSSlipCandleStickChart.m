@@ -116,6 +116,9 @@
 //        }
 //    }
 
+    self.maxDataValue = maxValue;
+    self.minDataValue = minValue;
+    
     self.maxValue = maxValue;
     self.minValue = minValue;
 
@@ -164,8 +167,14 @@
 }
 
 - (void)initAxisX {
+    if (self.autoCalcLongitudeTitle == NO) {
+        return;
+    }
+
     //计算取值范围
-    [self calcValueRange];
+    if ([self autoCalcRange]) {
+        [self calcValueRange];
+    }
 
     NSMutableArray *TitleX = [[NSMutableArray alloc] init];
     if (self.stickData != NULL && [self.stickData count] > 0 && self.displayNumber > 0) {
@@ -232,10 +241,12 @@
 
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSetLineWidth(context, 0.5f);
+    
+    BOOL maxValueDrawn = NO;
+    BOOL minValueDrawn = NO;
+    
 
     if (self.stickData != NULL && [self.stickData count] > 0) {
-        //判断Y轴的位置设置从左往右还是从右往左绘制
-        if (self.axisYPosition == CCSGridChartYAxisPositionLeft) {
             // 蜡烛棒起始绘制位置
             CCFloat stickX = self.axisMarginLeft + 1;
             for (CCUInt i = self.displayFrom; i < [self getDisplayTo]; i++) {
@@ -244,6 +255,8 @@
                 CCFloat highY = [self computeValueY:data.high inRect:rect];
                 CCFloat lowY = [self computeValueY:data.low inRect:rect];
                 CCFloat closeY = [self computeValueY:data.close inRect:rect];
+                
+                CGFloat stickCenterX = stickX + stickWidth / 2;
 
                 // 处理和生产K线中的阴线和阳线
                 if (data.open == 0 && data.high == 0 && data.low == 0) {
@@ -257,13 +270,13 @@
                     if (self.candleStickStyle == CCSCandleStickStyleStandard) {
                         
                         //绘制上下影线
-                        CGContextMoveToPoint(context, stickX + stickWidth / 2, highY);
-                        CGContextAddLineToPoint(context, stickX + stickWidth / 2, closeY);
+                        CGContextMoveToPoint(context, stickCenterX, highY);
+                        CGContextAddLineToPoint(context, stickCenterX, closeY);
 
                         CGContextStrokePath(context);
                         
-                        CGContextMoveToPoint(context, stickX + stickWidth / 2, openY);
-                        CGContextAddLineToPoint(context, stickX + stickWidth / 2, lowY);
+                        CGContextMoveToPoint(context, stickCenterX, openY);
+                        CGContextAddLineToPoint(context, stickCenterX, lowY);
                         
                         CGContextStrokePath(context);
                         
@@ -276,13 +289,13 @@
 
                     } else if (self.candleStickStyle == CCSCandleStickStyleBar) {
                         //绘制上下影线
-                        CGContextMoveToPoint(context, stickX + stickWidth / 2, highY);
-                        CGContextAddLineToPoint(context, stickX + stickWidth / 2, lowY);
+                        CGContextMoveToPoint(context, stickCenterX, highY);
+                        CGContextAddLineToPoint(context, stickCenterX, lowY);
 
-                        CGContextMoveToPoint(context, stickX + stickWidth / 2, openY);
+                        CGContextMoveToPoint(context, stickCenterX, openY);
                         CGContextAddLineToPoint(context, stickX, openY);
 
-                        CGContextMoveToPoint(context, stickX + stickWidth / 2, closeY);
+                        CGContextMoveToPoint(context, stickCenterX, closeY);
                         CGContextAddLineToPoint(context, stickX + stickWidth, closeY);
 
                         CGContextStrokePath(context);
@@ -300,14 +313,14 @@
                     if (self.candleStickStyle == CCSCandleStickStyleStandard) {
                         
                         //绘制上下影线
-                        CGContextMoveToPoint(context, stickX + stickWidth / 2, highY);
-                        CGContextAddLineToPoint(context, stickX + stickWidth / 2, openY);
+                        CGContextMoveToPoint(context, stickCenterX, highY);
+                        CGContextAddLineToPoint(context, stickCenterX, openY);
 
                         CGContextStrokePath(context);
                         
                         
-                        CGContextMoveToPoint(context, stickX + stickWidth / 2, closeY);
-                        CGContextAddLineToPoint(context, stickX + stickWidth / 2, lowY);
+                        CGContextMoveToPoint(context, stickCenterX, closeY);
+                        CGContextAddLineToPoint(context, stickCenterX, lowY);
                         
                         CGContextStrokePath(context);
                         
@@ -322,13 +335,13 @@
 
                     } else if (self.candleStickStyle == CCSCandleStickStyleBar) {
                         //绘制上下影线
-                        CGContextMoveToPoint(context, stickX + stickWidth / 2, highY);
-                        CGContextAddLineToPoint(context, stickX + stickWidth / 2, lowY);
+                        CGContextMoveToPoint(context, stickCenterX, highY);
+                        CGContextAddLineToPoint(context, stickCenterX, lowY);
 
-                        CGContextMoveToPoint(context, stickX + stickWidth / 2, openY);
+                        CGContextMoveToPoint(context, stickCenterX, openY);
                         CGContextAddLineToPoint(context, stickX, openY);
 
-                        CGContextMoveToPoint(context, stickX + stickWidth / 2, closeY);
+                        CGContextMoveToPoint(context, stickCenterX, closeY);
                         CGContextAddLineToPoint(context, stickX + stickWidth, closeY);
 
                         CGContextStrokePath(context);
@@ -345,137 +358,25 @@
                         CGContextAddLineToPoint(context, stickX + stickWidth, openY);
                     }
                     //绘制上下影线
-                    CGContextMoveToPoint(context, stickX + stickWidth / 2, highY);
-                    CGContextAddLineToPoint(context, stickX + stickWidth / 2, lowY);
+                    CGContextMoveToPoint(context, stickCenterX, highY);
+                    CGContextAddLineToPoint(context, stickCenterX, lowY);
 
                     CGContextStrokePath(context);
+                }
+                
+                if (data.high - self.maxDataValue == 0 && maxValueDrawn == NO) {
+                    [self drawMaxLabel:rect value:data.high point:CGPointMake(stickCenterX,highY)];
+                    maxValueDrawn = YES;
+                }
+                
+                if (data.low - self.minDataValue == 0 && minValueDrawn == NO) {
+                    [self drawMinLabel:rect value:data.low point:CGPointMake(stickCenterX,lowY)];
+                    minValueDrawn = YES;
                 }
 
                 //X位移
                 stickX = stickX + 0.5f + stickWidth;
             }
-        } else {
-            // 蜡烛棒起始绘制位置
-            CCFloat stickX = rect.size.width - self.axisMarginRight - 1 - stickWidth;
-            for (CCUInt i = 0; i < self.displayNumber; i++) {
-                //获取index
-                CCUInt index = [self getDisplayTo] - 1 - i;
-
-                CCSCandleStickChartData *data = [self.stickData objectAtIndex:index];
-                CCFloat openY = [self computeValueY:data.open inRect:rect];
-                CCFloat highY = [self computeValueY:data.high inRect:rect];
-                CCFloat lowY = [self computeValueY:data.low inRect:rect];
-                CCFloat closeY = [self computeValueY:data.close inRect:rect];
-
-                // 处理和生产K线中的阴线和阳线
-                if (data.open == 0 && data.high == 0 && data.low == 0) {
-                    //停盘的情况，什么都不绘制
-                } else if (data.open < data.close) {
-                    
-                    if (self.candleStickStyle == CCSCandleStickStyleStandard) {
-                        //阳线
-                        //根据宽度判断是否绘制立柱
-                        CGContextSetStrokeColorWithColor(context, self.positiveStickBorderColor.CGColor);
-                        CGContextSetFillColorWithColor(context, self.positiveStickFillColor.CGColor);
-                        
-                        
-                        //绘制上下影线
-                        CGContextMoveToPoint(context, stickX + stickWidth / 2, openY);
-                        CGContextAddLineToPoint(context, stickX + stickWidth / 2, lowY);
-                        CGContextStrokePath(context);
-                        
-                        
-                        CGContextMoveToPoint(context, stickX + stickWidth / 2, highY);
-                        CGContextAddLineToPoint(context, stickX + stickWidth / 2, closeY);
-                        CGContextStrokePath(context);
-                        
-                        
-                        if (stickWidth >= 1) {
-                            CGContextAddRect(context, CGRectMake(stickX, closeY, stickWidth, openY - closeY));
-                            CGContextFillPath(context);
-                            
-                            CGContextAddRect(context, CGRectMake(stickX, closeY, stickWidth, openY - closeY));
-                            CGContextStrokePath(context);
-                        }
-                    } else if (self.candleStickStyle == CCSCandleStickStyleBar) {
-                        //绘制上下影线
-                        CGContextMoveToPoint(context, stickX + stickWidth / 2, highY);
-                        CGContextAddLineToPoint(context, stickX + stickWidth / 2, lowY);
-                        
-                        CGContextMoveToPoint(context, stickX + stickWidth / 2, openY);
-                        CGContextAddLineToPoint(context, stickX, openY);
-                        
-                        CGContextMoveToPoint(context, stickX + stickWidth / 2, closeY);
-                        CGContextAddLineToPoint(context, stickX + stickWidth, closeY);
-                        
-                        CGContextStrokePath(context);
-                    } else if (self.candleStickStyle == CCSCandleStickStyleLine) {
-                        
-                    }
-                   
-
-                } else if (data.open > data.close) {
-                    
-                    if (self.candleStickStyle == CCSCandleStickStyleStandard) {
-                        //阴线
-                        //根据宽度判断是否绘制立柱
-                        
-                        CGContextSetStrokeColorWithColor(context, self.negativeStickBorderColor.CGColor);
-                        CGContextSetFillColorWithColor(context, self.negativeStickFillColor.CGColor);
-                        //绘制上下影线
-                        CGContextMoveToPoint(context, stickX + stickWidth / 2, highY);
-                        CGContextAddLineToPoint(context, stickX + stickWidth / 2, openY);
-
-                        CGContextStrokePath(context);
-                        
-                        CGContextMoveToPoint(context, stickX + stickWidth / 2, closeY);
-                        CGContextAddLineToPoint(context, stickX + stickWidth / 2, lowY);
-                        
-                        CGContextStrokePath(context);
-
-                        
-                        if (stickWidth >= 1) {
-                            CGContextAddRect(context, CGRectMake(stickX, openY, stickWidth, closeY - openY));
-                            CGContextFillPath(context);
-                            CGContextAddRect(context, CGRectMake(stickX, closeY, stickWidth, openY - closeY));
-                            CGContextStrokePath(context);
-                        }
-                    
-                    }else if (self.candleStickStyle == CCSCandleStickStyleBar) {
-                        //绘制上下影线
-                        CGContextMoveToPoint(context, stickX + stickWidth / 2, highY);
-                        CGContextAddLineToPoint(context, stickX + stickWidth / 2, lowY);
-                        
-                        CGContextMoveToPoint(context, stickX + stickWidth / 2, openY);
-                        CGContextAddLineToPoint(context, stickX, openY);
-                        
-                        CGContextMoveToPoint(context, stickX + stickWidth / 2, closeY);
-                        CGContextAddLineToPoint(context, stickX + stickWidth, closeY);
-                        
-                        CGContextStrokePath(context);
-                    } else if (self.candleStickStyle == CCSCandleStickStyleLine) {
-                        
-                    }
-                } else {
-                    //十字线
-                    //根据宽度判断是否绘制横线
-                    CGContextSetStrokeColorWithColor(context, self.crossStarColor.CGColor);
-                    CGContextSetFillColorWithColor(context, self.crossStarColor.CGColor);
-                    if (stickWidth >= 1) {
-                        CGContextMoveToPoint(context, stickX, closeY);
-                        CGContextAddLineToPoint(context, stickX + stickWidth, openY);
-                    }
-                    //绘制上下影线
-                    CGContextMoveToPoint(context, stickX + stickWidth / 2, highY);
-                    CGContextAddLineToPoint(context, stickX + stickWidth / 2, lowY);
-
-                    CGContextStrokePath(context);
-                }
-
-                //X位移
-                stickX = stickX - 0.5f - stickWidth;
-            }
-        }
     }
 }
 
@@ -483,9 +384,9 @@
     if (self.stickData != NULL && [self.stickData count] > 0) {
         
         CGContextRef context = UIGraphicsGetCurrentContext();
-        CGContextSetLineWidth(context, 1.0f);
+        CGContextSetLineWidth(context, self.widthForStickDrawAsLine);
         CGContextSetAllowsAntialiasing(context, YES);
-        CGContextSetStrokeColorWithColor(context, [[UIColor whiteColor] CGColor] );
+        CGContextSetStrokeColorWithColor(context, [self.colorForStickDrawAsLine CGColor] );
         // 点线距离
         CCFloat lineLength = [self getDataStickWidth];
         //起始点
@@ -516,6 +417,170 @@
         
         //绘制路径
         CGContextStrokePath(context);
+    }
+}
+
+-(void) drawMaxLabel:(CGRect)rect value:(CGFloat)value point:(CGPoint) pt{
+    
+    NSString *valueStr = [self formatAxisYDegree:value];
+    
+    NSMutableParagraphStyle *textStyle=[[NSMutableParagraphStyle alloc]init];//段落样式
+    textStyle.alignment=NSTextAlignmentLeft;
+    textStyle.lineBreakMode = NSLineBreakByWordWrapping;
+    
+    NSDictionary *attrs = @{NSFontAttributeName:self.latitudeFont,
+                            NSParagraphStyleAttributeName:textStyle,
+                            NSForegroundColorAttributeName:self.latitudeFontColor};
+    CGSize textSize = [valueStr boundingRectWithSize:CGSizeMake(100, 100) options:NSStringDrawingUsesLineFragmentOrigin attributes:attrs context:nil].size;
+    
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSetLineWidth(context, 0.5f);
+    
+    CGContextSetFillColorWithColor(context, [UIColor purpleColor].CGColor);
+    CGContextSetStrokeColorWithColor(context, [UIColor purpleColor].CGColor);
+
+    
+    
+    CCUInt spaceToTopBottom = 6;
+    CCUInt spaceToRect = 10;
+    
+    
+    if(pt.x > self.axisMarginLeft + textSize.width + spaceToRect){
+        //画左边
+        //向上画
+        CGContextMoveToPoint(context, pt.x,  pt.y);
+        CGContextAddLineToPoint(context, pt.x, pt.y - spaceToTopBottom);
+        CGContextMoveToPoint(context, pt.x,  pt.y - spaceToTopBottom);
+        CGContextAddLineToPoint(context, pt.x - spaceToRect, pt.y - spaceToTopBottom);
+        
+        CGContextStrokePath(context);
+        
+        CGRect textRect= CGRectMake(pt.x - textSize.width - spaceToRect , pt.y - textSize.height / 2.f - spaceToTopBottom, textSize.width, textSize.height);
+    
+        CGContextFillRect(context, textRect);
+        
+        CGContextSetStrokeColorWithColor(context, [UIColor whiteColor].CGColor);
+        //绘制字体
+        [valueStr drawInRect:textRect withAttributes:attrs];
+    }else{
+        
+        // 画左边
+        if(pt.x > rect.size.width - self.axisMarginRight - textSize.width - spaceToRect){
+            CGContextMoveToPoint(context, pt.x,  pt.y);
+            CGContextAddLineToPoint(context, pt.x, pt.y - spaceToTopBottom);
+            CGContextMoveToPoint(context, pt.x,  pt.y - spaceToTopBottom);
+            CGContextAddLineToPoint(context, pt.x - spaceToRect, pt.y - spaceToTopBottom);
+            
+            CGContextStrokePath(context);
+            
+            CGRect textRect= CGRectMake(pt.x - textSize.width - spaceToRect , pt.y - textSize.height / 2.f - spaceToTopBottom, textSize.width, textSize.height);
+            
+            CGContextFillRect(context, textRect);
+            
+            CGContextSetStrokeColorWithColor(context, [UIColor whiteColor].CGColor);
+
+            //绘制字体
+            [valueStr drawInRect:textRect withAttributes:attrs];
+            
+        }else{
+            CGContextMoveToPoint(context, pt.x,  pt.y);
+            CGContextAddLineToPoint(context, pt.x, pt.y - spaceToTopBottom);
+            CGContextMoveToPoint(context, pt.x,  pt.y - spaceToTopBottom);
+            CGContextAddLineToPoint(context, pt.x + spaceToRect, pt.y - spaceToTopBottom);
+            
+            CGContextStrokePath(context);
+            //画右边
+            CGRect textRect= CGRectMake(pt.x + spaceToRect, pt.y - textSize.height / 2.f - spaceToTopBottom, textSize.width, textSize.height);
+            
+            CGContextFillRect(context, textRect);
+            
+            CGContextSetStrokeColorWithColor(context, [UIColor whiteColor].CGColor);
+            
+            //绘制字体
+            [valueStr drawInRect:textRect withAttributes:attrs];
+        }
+    }
+    
+}
+
+-(void) drawMinLabel:(CGRect)rect value:(CGFloat)value point:(CGPoint) pt{
+    NSString *valueStr = [self formatAxisYDegree:value];
+    
+    NSMutableParagraphStyle *textStyle=[[NSMutableParagraphStyle alloc]init];//段落样式
+    textStyle.alignment=NSTextAlignmentLeft;
+    textStyle.lineBreakMode = NSLineBreakByWordWrapping;
+    
+    NSDictionary *attrs = @{NSFontAttributeName:self.latitudeFont,
+                            NSParagraphStyleAttributeName:textStyle,
+                            NSForegroundColorAttributeName:self.latitudeFontColor};
+    CGSize textSize = [valueStr boundingRectWithSize:CGSizeMake(100, 100) options:NSStringDrawingUsesLineFragmentOrigin attributes:attrs context:nil].size;
+    
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSetLineWidth(context, 0.5f);
+    
+    CGContextSetFillColorWithColor(context, [UIColor purpleColor].CGColor);
+    CGContextSetStrokeColorWithColor(context, [UIColor purpleColor].CGColor);
+    
+    
+    
+    CCUInt spaceToTopBottom = 6;
+    CCUInt spaceToRect = 10;
+    
+    
+    if(pt.x > self.axisMarginLeft + textSize.width + spaceToRect){
+        //画左边
+        //向上画
+        CGContextMoveToPoint(context, pt.x,  pt.y);
+        CGContextAddLineToPoint(context, pt.x, pt.y + spaceToTopBottom);
+        CGContextMoveToPoint(context, pt.x,  pt.y + spaceToTopBottom);
+        CGContextAddLineToPoint(context, pt.x - spaceToRect, pt.y + spaceToTopBottom);
+        
+        CGContextStrokePath(context);
+        
+        CGRect textRect= CGRectMake(pt.x - textSize.width - spaceToRect , pt.y - textSize.height / 2.f + spaceToTopBottom, textSize.width, textSize.height);
+        
+        CGContextFillRect(context, textRect);
+        
+        CGContextSetStrokeColorWithColor(context, [UIColor whiteColor].CGColor);
+        //绘制字体
+        [valueStr drawInRect:textRect withAttributes:attrs];
+    }else{
+        
+        // 画左边
+        if(pt.x > rect.size.width - self.axisMarginRight - textSize.width - spaceToRect){
+            CGContextMoveToPoint(context, pt.x,  pt.y);
+            CGContextAddLineToPoint(context, pt.x, pt.y + spaceToTopBottom);
+            CGContextMoveToPoint(context, pt.x,  pt.y + spaceToTopBottom);
+            CGContextAddLineToPoint(context, pt.x - spaceToRect, pt.y + spaceToTopBottom);
+            
+            CGContextStrokePath(context);
+            
+            CGRect textRect= CGRectMake(pt.x - textSize.width - spaceToRect , pt.y - textSize.height / 2.f + spaceToTopBottom, textSize.width, textSize.height);
+            
+            CGContextFillRect(context, textRect);
+            
+            CGContextSetStrokeColorWithColor(context, [UIColor whiteColor].CGColor);
+            
+            //绘制字体
+            [valueStr drawInRect:textRect withAttributes:attrs];
+            
+        }else{
+            CGContextMoveToPoint(context, pt.x,  pt.y);
+            CGContextAddLineToPoint(context, pt.x, pt.y + spaceToTopBottom);
+            CGContextMoveToPoint(context, pt.x,  pt.y + spaceToTopBottom);
+            CGContextAddLineToPoint(context, pt.x + spaceToRect, pt.y + spaceToTopBottom);
+            
+            CGContextStrokePath(context);
+            //画右边
+            CGRect textRect= CGRectMake(pt.x + spaceToRect, pt.y - textSize.height / 2.f + spaceToTopBottom, textSize.width, textSize.height);
+            
+            CGContextFillRect(context, textRect);
+            
+            CGContextSetStrokeColorWithColor(context, [UIColor whiteColor].CGColor);
+            
+            //绘制字体
+            [valueStr drawInRect:textRect withAttributes:attrs];
+        }
     }
 }
 

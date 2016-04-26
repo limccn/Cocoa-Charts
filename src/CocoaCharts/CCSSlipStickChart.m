@@ -44,6 +44,8 @@
 @synthesize maxDisplayNumber = _maxDisplayNumber;
 //@synthesize zoomBaseLine = _zoomBaseLine;
 @synthesize maxDisplayNumberToLine = _maxDisplayNumberToLine;
+@synthesize widthForStickDrawAsLine = _widthForStickDrawAsLine;
+@synthesize colorForStickDrawAsLine = _colorForStickDrawAsLine;
 
 - (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
@@ -73,6 +75,9 @@
     self.maxDisplayNumber = 20;
 //    self.zoomBaseLine = CCSStickZoomBaseLineCenter;
     self.maxDisplayNumberToLine = 120;
+    self.widthForStickDrawAsLine = 2;
+    self.colorForStickDrawAsLine = [UIColor grayColor];
+    
 }
 
 - (void)calcDataValueRange {
@@ -104,11 +109,17 @@
 
     }
 
+    self.maxDataValue = maxValue;
+    self.minDataValue = minValue;
     self.maxValue = maxValue;
     self.minValue = minValue;
 }
 
 - (void)initAxisX {
+    if (self.autoCalcLongitudeTitle == NO) {
+        return;
+    }
+
     NSMutableArray *TitleX = [[NSMutableArray alloc] init];
     if (self.stickData != NULL && [self.stickData count] > 0 && self.displayNumber > 0) {
         CCFloat average = [self getDataDisplayNumber] / self.longitudeNum;
@@ -149,9 +160,15 @@
 }
 
 - (void)initAxisY {
+    
+    if (self.autoCalcLatitudeTitle == NO) {
+        return;
+    }
+    
     //计算取值范围
-    [self calcValueRange];
-
+    if([self autoCalcRange]){
+        [self calcValueRange];
+    }
     if (self.maxValue == 0. && self.minValue == 0.) {
         self.latitudeTitles = nil;
         return;
@@ -159,36 +176,16 @@
 
     NSMutableArray *TitleY = [[NSMutableArray alloc] init];
     CCFloat average = (CCUInt) ((self.maxValue - self.minValue) / self.latitudeNum);
-//    //处理刻度
-//    for (CCUInt i = 0; i < self.latitudeNum; i++) {
-//        if (self.axisCalc == 1) {
-//            CCUInt degree = floor(self.minValue + i * average) / self.axisCalc;
-//            NSString *value = [[NSNumber numberWithUnsignedInteger:degree]stringValue];
-//            [TitleY addObject:value];
-//        } else {
-//            NSString *value = [NSString stringWithFormat:@"%-.2f", floor(self.minValue + i * average) / self.axisCalc];
-//            [TitleY addObject:value];
-//        }
-//    }
-//    //处理最大值
-//    if (self.axisCalc == 1) {
-//        CCUInt degree = (CCInt) (self.maxValue) / self.axisCalc;
-//        NSString *value = [[NSNumber numberWithUnsignedInteger:degree]stringValue];
-//        [TitleY addObject:value];
-//    }
-//    else {
-//        NSString *value = [NSString stringWithFormat:@"%-.2f", (self.maxValue) / self.axisCalc];
-//        [TitleY addObject:value];
-//    }
-
+    
     //处理刻度
     for (CCUInt i = 0; i < self.latitudeNum; i++) {
-        CCUInt degree =  self.minValue + i * average;
+        
+        CCInt degree =  self.minValue + i * average;
         NSString *value = [self formatAxisYDegree:degree];
         [TitleY addObject:value];
     }
    
-    CCUInt degree =  self.maxValue;
+    CCInt degree =  self.maxValue;
     NSString *value = [self formatAxisYDegree:degree];
     [TitleY addObject:value];
     
@@ -522,9 +519,9 @@
     if (self.stickData != NULL && [self.stickData count] > 0) {
         
         CGContextRef context = UIGraphicsGetCurrentContext();
-        CGContextSetLineWidth(context, 1.0f);
+        CGContextSetLineWidth(context, self.widthForStickDrawAsLine);
         CGContextSetAllowsAntialiasing(context, YES);
-        CGContextSetStrokeColorWithColor(context, [[UIColor whiteColor] CGColor] );
+        CGContextSetStrokeColorWithColor(context, [self.colorForStickDrawAsLine CGColor]);
         // 点线距离
         CCFloat lineLength = [self getDataStickWidth ];
         //起始点
@@ -560,7 +557,6 @@
         CGContextStrokePath(context);
     }
 }
-
 
 - (void)drawSticks:(CGRect)rect {
     // 蜡烛棒宽度

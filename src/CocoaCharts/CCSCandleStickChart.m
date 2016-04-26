@@ -201,6 +201,10 @@
 }
 
 - (void)initAxisX {
+    if (self.autoCalcLongitudeTitle == NO) {
+        return;
+    }
+    
     NSMutableArray *TitleX = [[NSMutableArray alloc] init];
     if (self.stickData != NULL && [self.stickData count] > 0) {
         CCFloat average = 1.0 * self.maxSticksNum / self.longitudeNum;

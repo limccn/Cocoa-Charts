@@ -23,11 +23,12 @@
 #import "NSString+UserDefault.h"
 #import "NSString+UIColor.h"
 
-#define WR_NONE_DISPLAY 101
+#define WR_NONE_DISPLAY 1
 
 #define AXIS_CALC_PARM  1000
 
 #define SOURCE_DATE_FORMAT                              @"yyyyMMddHHmmss"
+#define TO_DATE_FORMAT                                  @"yy-MM-dd"
 
 @implementation NSArray (CCSTACompute)
 
@@ -36,7 +37,7 @@
  ******************************************************************************/
 
 - (CCSTitledLine *)computeMAData:(NSInteger)period{
-    NSMutableArray *arrCls = [[NSMutableArray alloc] init];
+//    NSMutableArray *arrCls = [[NSMutableArray alloc] init];
     double *inCls = malloc(sizeof(double) * self.count);
     
     for (NSUInteger index = 0; index < self.count; index++) {
@@ -66,7 +67,7 @@
         
         for (NSInteger index = 0; index < self.count; index++) {
             CCSOHLCVDData *item = [self objectAtIndex:self.count - 1 - index];
-            [maData addObject:[[CCSLineData alloc] initWithValue:[[arr objectAtIndex:index] doubleValue] date:[item.date dateWithFormat:SOURCE_DATE_FORMAT target:@"yy-MM-dd"]]];
+            [maData addObject:[[CCSLineData alloc] initWithValue:[[arr objectAtIndex:index] doubleValue] date:[item.date dateWithFormat:SOURCE_DATE_FORMAT target:TO_DATE_FORMAT]]];
         }
     }
     
@@ -93,7 +94,7 @@
 }
 
 - (CCSTitledLine *)computeVOLMAData:(NSInteger)period{
-    NSMutableArray *arrCls = [[NSMutableArray alloc] init];
+//    NSMutableArray *arrCls = [[NSMutableArray alloc] init];
     double *inCls = malloc(sizeof(double) * self.count);
     
     for (NSUInteger index = 0; index < self.count; index++) {
@@ -123,7 +124,7 @@
         
         for (NSInteger index = 0; index < self.count; index++) {
             CCSOHLCVDData *item = [self objectAtIndex:self.count - 1 - index];
-            [maData addObject:[[CCSLineData alloc] initWithValue:[[arr objectAtIndex:index] doubleValue] date:[item.date dateWithFormat:SOURCE_DATE_FORMAT target:@"yy-MM-dd"]]];
+            [maData addObject:[[CCSLineData alloc] initWithValue:[[arr objectAtIndex:index] doubleValue] date:[item.date dateWithFormat:SOURCE_DATE_FORMAT target:TO_DATE_FORMAT]]];
         }
     }
     
@@ -152,7 +153,7 @@
 }
 
 - (NSMutableArray *)computeMACDData: (NSInteger)optInFastPeriod optInSlowPeriod:(NSInteger)optInSlowPeriod optInSignalPeriod:(NSInteger)optInSignalPeriod{
-    NSMutableArray *arrCls = [[NSMutableArray alloc] init];
+//    NSMutableArray *arrCls = [[NSMutableArray alloc] init];
     double *inCls = malloc(sizeof(double) * self.count);
     for (NSUInteger index = 0; index < self.count; index++) {
         CCSOHLCVDData *item = [self objectAtIndex:self.count - 1 - index];
@@ -182,7 +183,6 @@
     NSMutableArray *MACDData = [[NSMutableArray alloc] init];
     
     if (TA_SUCCESS == ta_retCode) {
-        
         NSArray *arrMACDSignal = CArrayToNSArray(outMACDSignal, (int) self.count, outBegIdx, outNBElement);
         NSArray *arrMACD = CArrayToNSArray(outMACD, (int) self.count, outBegIdx, outNBElement);
         NSArray *arrMACDHist = CArrayToNSArray(outMACDHist, (int) self.count, outBegIdx, outNBElement);
@@ -193,7 +193,7 @@
             [MACDData addObject:[[CCSMACDData alloc] initWithDea:[(NSString *) [arrMACDSignal objectAtIndex:index] doubleValue]
                                                             diff:[(NSString *) [arrMACD objectAtIndex:index] doubleValue]
                                                             macd:[(NSString *) [arrMACDHist objectAtIndex:index] doubleValue] * 2
-                                                            date:[item.date dateWithFormat:SOURCE_DATE_FORMAT target:@"yy-MM-dd"]]];
+                                                            date:[item.date dateWithFormat:SOURCE_DATE_FORMAT target:TO_DATE_FORMAT]]];
         }
     }
     
@@ -206,7 +206,7 @@
 }
 
 - (NSMutableArray *)computeKDJData:(NSInteger)optInFastK_Period optInSlowK_Period:(NSInteger)optInSlowK_Period optInSlowD_Period:(NSInteger)optInSlowD_Period{
-    NSMutableArray *arrHigval = [[NSMutableArray alloc] init];
+//    NSMutableArray *arrHigval = [[NSMutableArray alloc] init];
     double *inHigval = malloc(sizeof(double) * self.count);
     for (NSUInteger index = 0; index < self.count; index++) {
         CCSOHLCVDData *item = [self objectAtIndex:self.count - 1 - index];
@@ -216,7 +216,7 @@
     
 //    NSArrayToCArray(arrHigval, inHigval);
     
-    NSMutableArray *arrLowval = [[NSMutableArray alloc] init];
+//    NSMutableArray *arrLowval = [[NSMutableArray alloc] init];
     double *inLowval = malloc(sizeof(double) * self.count);
     for (NSUInteger index = 0; index < self.count; index++) {
         CCSOHLCVDData *item = [self objectAtIndex:self.count - 1 - index];
@@ -226,7 +226,7 @@
     
 //    NSArrayToCArray(arrLowval, inLowval);
     
-    NSMutableArray *arrCls = [[NSMutableArray alloc] init];
+//    NSMutableArray *arrCls = [[NSMutableArray alloc] init];
     double *inCls = malloc(sizeof(double) * self.count);
     for (NSUInteger index = 0; index < self.count; index++) {
         CCSOHLCVDData *item = [self objectAtIndex:self.count - 1 - index];
@@ -265,11 +265,11 @@
         
         for (NSInteger index = 0; index < self.count; index++) {
             CCSOHLCVDData *item = [self objectAtIndex:self.count - 1 - index];
-            [slowKLineData addObject:[[CCSLineData alloc] initWithValue:[[arrSlowK objectAtIndex:index] doubleValue] date:[item.date dateWithFormat:SOURCE_DATE_FORMAT target:@"yy-MM-dd"]]];
-            [slowDLineData addObject:[[CCSLineData alloc] initWithValue:[[arrSlowD objectAtIndex:index] doubleValue] date:[item.date dateWithFormat:SOURCE_DATE_FORMAT target:@"yy-MM-dd"]]];
+            [slowKLineData addObject:[[CCSLineData alloc] initWithValue:[[arrSlowK objectAtIndex:index] doubleValue] date:[item.date dateWithFormat:SOURCE_DATE_FORMAT target:TO_DATE_FORMAT]]];
+            [slowDLineData addObject:[[CCSLineData alloc] initWithValue:[[arrSlowD objectAtIndex:index] doubleValue] date:[item.date dateWithFormat:SOURCE_DATE_FORMAT target:TO_DATE_FORMAT]]];
             
             double slowKLine3k2d = 3 * [[arrSlowK objectAtIndex:index] doubleValue] - 2 * [[arrSlowD objectAtIndex:index] doubleValue];
-            [slow3K2DLineData addObject:[[CCSLineData alloc] initWithValue:slowKLine3k2d date:[item.date dateWithFormat:SOURCE_DATE_FORMAT target:@"yy-MM-dd"]]];
+            [slow3K2DLineData addObject:[[CCSLineData alloc] initWithValue:slowKLine3k2d date:[item.date dateWithFormat:SOURCE_DATE_FORMAT target:TO_DATE_FORMAT]]];
         }
     }
     
@@ -303,7 +303,7 @@
 }
 
 - (CCSTitledLine *)computeRSIData:(NSInteger)period{
-    NSMutableArray *arrCls = [[NSMutableArray alloc] init];
+//    NSMutableArray *arrCls = [[NSMutableArray alloc] init];
     double *inCls = malloc(sizeof(double) * self.count);
     for (NSUInteger index = 0; index < self.count; index++) {
         CCSOHLCVDData *item = [self objectAtIndex:self.count - 1 - index];
@@ -331,7 +331,7 @@
         
         for (NSInteger index = 0; index < self.count; index++) {
             CCSOHLCVDData *item = [self objectAtIndex:self.count - 1 - index];
-            [rsiLineData addObject:[[CCSLineData alloc] initWithValue:[[arr objectAtIndex:index] doubleValue] date:[item.date dateWithFormat:SOURCE_DATE_FORMAT target:@"yy-MM-dd"]]];
+            [rsiLineData addObject:[[CCSLineData alloc] initWithValue:[[arr objectAtIndex:index] doubleValue] date:[item.date dateWithFormat:SOURCE_DATE_FORMAT target:TO_DATE_FORMAT]]];
         }
     }
     
@@ -355,7 +355,7 @@
 }
 
 - (NSMutableArray *)computeWRData:(NSInteger)period{
-    NSMutableArray *arrHigval = [[NSMutableArray alloc] init];
+//    NSMutableArray *arrHigval = [[NSMutableArray alloc] init];
     double *inHigval = malloc(sizeof(double) * self.count);
     for (NSUInteger index = 0; index < self.count; index++) {
         CCSOHLCVDData *item = [self objectAtIndex:self.count - 1 - index];
@@ -365,7 +365,7 @@
     
 //    NSArrayToCArray(arrHigval, inHigval);
     
-    NSMutableArray *arrLowval = [[NSMutableArray alloc] init];
+//    NSMutableArray *arrLowval = [[NSMutableArray alloc] init];
     double *inLowval = malloc(sizeof(double) * self.count);
     for (NSUInteger index = 0; index < self.count; index++) {
         CCSOHLCVDData *item = [self objectAtIndex:self.count - 1 - index];
@@ -375,7 +375,7 @@
     
 //    NSArrayToCArray(arrLowval, inLowval);
     
-    NSMutableArray *arrCls = [[NSMutableArray alloc] init];
+//    NSMutableArray *arrCls = [[NSMutableArray alloc] init];
     double *inCls = malloc(sizeof(double) * self.count);
     for (NSUInteger index = 0; index < self.count; index++) {
         CCSOHLCVDData *item = [self objectAtIndex:self.count - 1 - index];
@@ -405,7 +405,7 @@
         
         for (NSInteger index = 0; index < self.count; index++) {
             CCSOHLCVDData *item = [self objectAtIndex:self.count - 1 - index];
-            [wrLineData addObject:[[CCSLineData alloc] initWithValue:-([[arrWR objectAtIndex:index] doubleValue]) date:[item.date dateWithFormat:SOURCE_DATE_FORMAT target:@"yy-MM-dd"]]];
+            [wrLineData addObject:[[CCSLineData alloc] initWithValue:([[arrWR objectAtIndex:index] doubleValue]) date:[item.date dateWithFormat:SOURCE_DATE_FORMAT target:TO_DATE_FORMAT]]];
         }
     }
     
@@ -427,7 +427,7 @@
 }
 
 - (NSMutableArray *)computeCCIData:(NSInteger)period{
-    NSMutableArray *arrHigval = [[NSMutableArray alloc] init];
+//    NSMutableArray *arrHigval = [[NSMutableArray alloc] init];
     double *inHigval = malloc(sizeof(double) * self.count);
     for (NSUInteger index = 0; index < self.count; index++) {
         CCSOHLCVDData *item = [self objectAtIndex:self.count - 1 - index];
@@ -437,7 +437,7 @@
     
 //    NSArrayToCArray(arrHigval, inHigval);
     
-    NSMutableArray *arrLowval = [[NSMutableArray alloc] init];
+//    NSMutableArray *arrLowval = [[NSMutableArray alloc] init];
     double *inLowval = malloc(sizeof(double) * self.count);
     for (NSUInteger index = 0; index < self.count; index++) {
         CCSOHLCVDData *item = [self objectAtIndex:self.count - 1 - index];
@@ -447,7 +447,7 @@
     
 //    NSArrayToCArray(arrLowval, inLowval);
     
-    NSMutableArray *arrCls = [[NSMutableArray alloc] init];
+//    NSMutableArray *arrCls = [[NSMutableArray alloc] init];
     double *inCls = malloc(sizeof(double) * self.count);
     for (NSUInteger index = 0; index < self.count; index++) {
         CCSOHLCVDData *item = [self objectAtIndex:self.count - 1 - index];
@@ -477,7 +477,7 @@
         
         for (NSInteger index = 0; index < self.count; index++) {
             CCSOHLCVDData *item = [self objectAtIndex:self.count - 1 - index];
-            [cciLineData addObject:[[CCSLineData alloc] initWithValue:[[arrCCI objectAtIndex:index] doubleValue] date:[item.date dateWithFormat:SOURCE_DATE_FORMAT target:@"yy-MM-dd"]]];
+            [cciLineData addObject:[[CCSLineData alloc] initWithValue:[[arrCCI objectAtIndex:index] doubleValue] date:[item.date dateWithFormat:SOURCE_DATE_FORMAT target:TO_DATE_FORMAT]]];
         }
     }
     
@@ -498,7 +498,7 @@
 }
 
 - (NSMutableArray *)computeBOLLData:(NSInteger)optInTimePeriod optInNbDevUp:(NSInteger)optInNbDevUp optInNbDevDn:(NSInteger)optInNbDevDn{
-    NSMutableArray *arrCls = [[NSMutableArray alloc] init];
+//    NSMutableArray *arrCls = [[NSMutableArray alloc] init];
     double *inCls = malloc(sizeof(double) * self.count);
     for (NSUInteger index = 0; index < self.count; index++) {
         CCSOHLCVDData *item = [self objectAtIndex:self.count - 1 - index];
@@ -537,9 +537,9 @@
         
         for (NSInteger index = 0; index < self.count; index++) {
             CCSOHLCVDData *item = [self objectAtIndex:self.count - 1 - index];
-            [bollLinedataUPPER addObject:[[CCSLineData alloc] initWithValue:[[arrUPPER objectAtIndex:index] doubleValue] date:[item.date dateWithFormat:SOURCE_DATE_FORMAT target:@"yy-MM-dd"]]];
-            [bollLinedataLOWER addObject:[[CCSLineData alloc] initWithValue:[[arrLOWER objectAtIndex:index] doubleValue] date:[item.date dateWithFormat:SOURCE_DATE_FORMAT target:@"yy-MM-dd"]]];
-            [bollLinedataBOLL addObject:[[CCSLineData alloc] initWithValue:[[arrBOLL objectAtIndex:index] doubleValue] date:[item.date dateWithFormat:SOURCE_DATE_FORMAT target:@"yy-MM-dd"]]];
+            [bollLinedataUPPER addObject:[[CCSLineData alloc] initWithValue:[[arrUPPER objectAtIndex:index] doubleValue] date:[item.date dateWithFormat:SOURCE_DATE_FORMAT target:TO_DATE_FORMAT]]];
+            [bollLinedataLOWER addObject:[[CCSLineData alloc] initWithValue:[[arrLOWER objectAtIndex:index] doubleValue] date:[item.date dateWithFormat:SOURCE_DATE_FORMAT target:TO_DATE_FORMAT]]];
+            [bollLinedataBOLL addObject:[[CCSLineData alloc] initWithValue:[[arrBOLL objectAtIndex:index] doubleValue] date:[item.date dateWithFormat:SOURCE_DATE_FORMAT target:TO_DATE_FORMAT]]];
         }
     }
     
@@ -587,7 +587,7 @@
         stickData.low = item.low;
         stickData.close = item.close;
         stickData.change = 0;
-        stickData.date = [item.date dateWithFormat:SOURCE_DATE_FORMAT target:@"yy-MM-dd"];
+        stickData.date = [item.date dateWithFormat:SOURCE_DATE_FORMAT target:TO_DATE_FORMAT];
         // 增加数据
         [stickDatas addObject:stickData];
     }
@@ -645,13 +645,13 @@
 //        stickData.high = [item.vol doubleValue];
         stickData.high = item.vol;
         stickData.low = 0;
-        stickData.date = [item.date dateWithFormat:SOURCE_DATE_FORMAT target:@"yy-MM-dd"];
+        stickData.date = [item.date dateWithFormat:SOURCE_DATE_FORMAT target:TO_DATE_FORMAT];
         
         if (item.close > item.open) {
-            stickData.fillColor = [@"#ED4D4D" str2Color];
+            stickData.fillColor = LINE_COLORS[0];
             stickData.borderColor = [UIColor clearColor];
         } else if (item.close < item.open) {
-            stickData.fillColor = [@"#52BA27" str2Color];
+            stickData.fillColor = LINE_COLORS[1];
             stickData.borderColor = [UIColor clearColor];
         } else {
             stickData.fillColor = [UIColor lightGrayColor];
@@ -665,22 +665,22 @@
 }
 
 - (NSArray *)convertStickMAData{
-    NSString *strMA1 = [MA1 getUserDefaultString];
+    NSString *strMA1 = [VMA1 getUserDefaultString];
     if (strMA1 == nil) {
         strMA1 = @"5";
-        [MA1 setUserDefaultWithString:strMA1];
+        [VMA1 setUserDefaultWithString:strMA1];
     }
     
-    NSString *strMA2 = [MA2 getUserDefaultString];
+    NSString *strMA2 = [VMA2 getUserDefaultString];
     if (strMA2 == nil) {
         strMA2 = @"10";
-        [MA2 setUserDefaultWithString:strMA2];
+        [VMA2 setUserDefaultWithString:strMA2];
     }
     
-    NSString *strMA3= [MA3 getUserDefaultString];
+    NSString *strMA3= [VMA3 getUserDefaultString];
     if (strMA3 == nil) {
         strMA3 = @"20";
-        [MA3 setUserDefaultWithString:strMA3];
+        [VMA3 setUserDefaultWithString:strMA3];
     }
     
     NSMutableArray *maLines = [[NSMutableArray alloc] init];

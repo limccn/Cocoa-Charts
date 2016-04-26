@@ -74,12 +74,14 @@ typedef enum {
     UIColor *_crossLinesFontColor;
     UIFont *_longitudeFont;
     UIFont *_latitudeFont;
+    UIFont *_crossLinesFont;
     CCFloat _axisMarginLeft;
     CCFloat _axisMarginBottom;
     CCFloat _axisMarginTop;
     CCFloat _axisMarginRight;
     CCUInt _longitudeFontSize;
     CCUInt _latitudeFontSize;
+    CCUInt _crossLineFontSize;
     CCSGridChartXAxisPosition _axisXPosition;
     CCSGridChartYAxisPosition _axisYPosition;
     BOOL _displayLatitudeTitle;
@@ -92,6 +94,8 @@ typedef enum {
     BOOL _dashCrossLines;
     BOOL _displayCrossXOnTouch;
     BOOL _displayCrossYOnTouch;
+    BOOL _autoCalcLatitudeTitle;
+    BOOL _autoCalcLongitudeTitle;
     CGPoint _singleTouchPoint;
     
     NSMutableArray *_noneDisplayValues;
@@ -180,6 +184,7 @@ typedef enum {
 
 @property(strong, nonatomic) UIFont *longitudeFont;
 @property(strong, nonatomic) UIFont *latitudeFont;
+@property(strong, nonatomic) UIFont *crossLinesFont;
 
 /*!
  Margin of the axis to the left border
@@ -222,6 +227,8 @@ typedef enum {
  纬线刻度字体大小
  */
 @property(assign, nonatomic) CCUInt latitudeFontSize;
+@property(assign, nonatomic) CCUInt crossLinesFontSize;
+
 
 /*!
  The position of X axis(top,bottom) reference:CCSGridChartAxisPosition
@@ -299,6 +306,11 @@ typedef enum {
  在控件被点击时，显示十字横线线
  */
 @property(assign, nonatomic) BOOL displayCrossYOnTouch;
+
+
+@property(assign, nonatomic) BOOL autoCalcLatitudeTitle;
+@property(assign, nonatomic) BOOL autoCalcLongitudeTitle;
+
 
 /*!
  Touched point inside of grid

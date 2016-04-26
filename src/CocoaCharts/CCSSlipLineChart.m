@@ -167,7 +167,7 @@
                 NSArray *lineDatas = line.data;
                 //判断Y轴的位置设置从左往右还是从右往左绘制
                // 点线距离
-                    CCFloat lineLength = ((rect.size.width - self.axisMarginLeft - 2 * self.axisMarginRight) / self.displayNumber);
+                    CCFloat lineLength = ((rect.size.width - self.axisMarginLeft - self.axisMarginRight) / self.displayNumber);
                     //起始点
                     startX = super.axisMarginLeft + lineLength / 2;
                     CGPoint ptFirst =  CGPointMake(-1, -1);
@@ -197,6 +197,10 @@
 }
 
 - (void)initAxisX {
+    if (self.autoCalcLongitudeTitle == NO) {
+        return;
+    }
+
     NSMutableArray *TitleX = [[NSMutableArray alloc] init];
     if (self.linesData != NULL && [self.linesData count] > 0 && self.displayNumber > 0) {
         //以第1条线作为X轴的标示
@@ -223,6 +227,9 @@
 
 
 - (void)initAxisY {
+    if (self.autoCalcLatitudeTitle == NO) {
+        return;
+    }
     //计算取值范围
     if ([self autoCalcRange]) {
         //计算取值范围

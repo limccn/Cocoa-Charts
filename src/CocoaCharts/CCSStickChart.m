@@ -33,6 +33,8 @@
 @synthesize selectedStickIndex = _selectedStickIndex;
 @synthesize maxValue = _maxValue;
 @synthesize minValue = _minValue;
+@synthesize maxDataValue = _maxDataValue;
+@synthesize minDataValue = _minDataValue;
 @synthesize coChart = _coChart;
 @synthesize axisCalc = _axisCalc;
 @synthesize autoCalcRange = _autoCalcRange;
@@ -50,6 +52,8 @@
     self.maxSticksNum = 26;
     self.maxValue = 100;
     self.minValue = 0;
+    self.maxDataValue = 0;
+    self.minDataValue = 0;
     self.selectedStickIndex = 0;
 
     self.stickData = nil;
@@ -177,6 +181,10 @@
 }
 
 - (void)initAxisX {
+    if (self.autoCalcLongitudeTitle == NO) {
+        return;
+    }
+
     NSMutableArray *TitleX = [[NSMutableArray alloc] init];
     if (self.stickData != NULL && [self.stickData count] > 0) {
         CCFloat average = self.maxSticksNum / self.longitudeNum;
@@ -217,8 +225,11 @@
 }
 
 - (void)initAxisY {
+    if (self.autoCalcLatitudeTitle == NO) {
+        return;
+    }
+    //计算取值范围
     if ([self autoCalcRange]) {
-        //计算取值范围
         [self calcValueRange];
     }
 
@@ -422,11 +433,6 @@
     //处理点击事件
     if ([allTouches count] == 1) {
 
-//        CGPoint pt = CGPointMake(self.singleTouchPoint.x, self.coChart.singleTouchPoint.y);
-//        //获取选中点
-//        self.coChart.singleTouchPoint = pt;
-//        [self.coChart performSelector:@selector(setNeedsDisplay) withObject:nil afterDelay:0];
-
     } else if ([allTouches count] == 2) {
 
     } else {
@@ -517,10 +523,6 @@
             } else {
                 self.maxSticksNum = self.maxSticksNum + 2;
             }
-//            if (self.coChart) {
-//                self.coChart.maxSticksNum = self.maxSticksNum;
-//                [self.coChart setNeedsDisplay];
-//            }
         }
     }
     else {
@@ -531,17 +533,13 @@
             } else {
                 self.maxSticksNum = self.maxSticksNum + 4;
             }
-//            if (self.coChart) {
-//                self.coChart.maxSticksNum = self.maxSticksNum;
-//                [self.coChart setNeedsDisplay];
-//            }
         }
     }
 }
 
 
 -(CGFloat) computeValueY:(CGFloat)value inRect:(CGRect)rect{
-    return (1 - (value - self.minValue) / (self.maxValue - self.minValue)) * (rect.size.height - self.axisMarginBottom) - self.axisMarginTop;
+    return (1 - (value - self.minValue) / (self.maxValue - self.minValue)) * (rect.size.height - self.axisMarginBottom - 2 * self.axisMarginTop) + self.axisMarginTop;
 }
 
 
@@ -562,9 +560,5 @@
     [self calcSelectedIndex];
     
     [self bindSelectedIndex];
-//    
-//    if (self.chartDelegate && [self.chartDelegate respondsToSelector:@selector(CCSChartBeTouchedOn:point:indexAt:)]) {
-//        [self.chartDelegate CCSChartBeTouchedOn:self point:point indexAt:self.selectedStickIndex];
-//    }
 }
 @end
