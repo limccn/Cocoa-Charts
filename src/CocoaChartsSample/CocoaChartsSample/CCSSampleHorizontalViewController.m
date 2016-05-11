@@ -24,7 +24,7 @@
  */
 #define MAIN_SCREEN_SIZE                [[UIScreen mainScreen] bounds].size
 
-#define WR_NONE_DISPLAY 101
+#define WR_NONE_DISPLAY @"101"
 
 #define AXIS_CALC_PARM  1000
 
@@ -855,8 +855,8 @@
     //    self.macdChart.displayCrossXOnTouch = YES;
     //    self.macdChart.displayCrossYOnTouch = YES;
     self.macdChart.macdDisplayType = CCSMACDChartDisplayTypeLineStick;
-    self.macdChart.positiveStickColor = [UIColor redColor];
-    self.macdChart.negativeStickColor = [UIColor greenColor];
+    self.macdChart.positiveStickFillColor = [UIColor redColor];
+    self.macdChart.negativeStickFillColor = [UIColor greenColor];
     self.macdChart.macdLineColor = [UIColor cyanColor];
     self.macdChart.deaLineColor = [UIColor blueColor];
     self.macdChart.diffLineColor = [UIColor orangeColor];
@@ -990,7 +990,7 @@
     //    self.wrChart.displayCrossYOnTouch = YES;
     self.wrChart.displayNumber = 50;
     self.wrChart.displayFrom = 0;
-    self.wrChart.noneDisplayValue = WR_NONE_DISPLAY;
+    self.wrChart.noneDisplayValues = [NSArray arrayWithObjects:WR_NONE_DISPLAY,nil];
     self.wrChart.displayLongitudeTitle = NO;
     self.wrChart.axisMarginBottom = 3;
     
@@ -1529,7 +1529,7 @@
     NSMutableArray *wrLineData = [[NSMutableArray alloc] init];
     
     if (TA_SUCCESS == ta_retCode) {
-        NSArray *arrWR = CArrayToNSArrayWithParameter(outReal, (int) items.count, outBegIdx, outNBElement, -WR_NONE_DISPLAY);
+        NSArray *arrWR = CArrayToNSArrayWithParameter(outReal, (int) items.count, outBegIdx, outNBElement, -[WR_NONE_DISPLAY doubleValue]);
         
         for (NSInteger index = 0; index < arrCls.count; index++) {
             OHLCVDData *item = [items objectAtIndex:items.count - 1 - index];

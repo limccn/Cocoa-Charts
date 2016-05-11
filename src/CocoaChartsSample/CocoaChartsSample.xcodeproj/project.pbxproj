@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		2F2DE25936B7B355E51DC419 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AAD83F14B0DFC8A1BD03ACCE /* libPods.a */; };
+		3B1694731CE32FC000A475F9 /* CCSSamplGroupChartDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B16946B1CE32FC000A475F9 /* CCSSamplGroupChartDetailTableViewCell.m */; };
+		3B1694741CE32FC000A475F9 /* CCSSamplGroupChartDetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B16946C1CE32FC000A475F9 /* CCSSamplGroupChartDetailTableViewCell.xib */; };
+		3B1694751CE32FC000A475F9 /* CCSSettingDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B16946E1CE32FC000A475F9 /* CCSSettingDetailViewController.m */; };
+		3B1694761CE32FC000A475F9 /* CCSSettingDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B16946F1CE32FC000A475F9 /* CCSSettingDetailViewController.xib */; };
+		3B1694771CE32FC000A475F9 /* CCSSettingResetTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B1694711CE32FC000A475F9 /* CCSSettingResetTableViewCell.m */; };
+		3B1694781CE32FC000A475F9 /* CCSSettingResetTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B1694721CE32FC000A475F9 /* CCSSettingResetTableViewCell.xib */; };
 		3B697D1D1CC4D58C0098C1A8 /* CCSAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B697CD61CC4D58C0098C1A8 /* CCSAppDelegate.m */; };
 		3B697D1E1CC4D58C0098C1A8 /* CCSAreaChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B697CD81CC4D58C0098C1A8 /* CCSAreaChartViewController.m */; };
 		3B697D1F1CC4D58C0098C1A8 /* CCSBandAreaChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B697CDA1CC4D58C0098C1A8 /* CCSBandAreaChartViewController.m */; };
@@ -263,6 +269,15 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3B16946A1CE32FC000A475F9 /* CCSSamplGroupChartDetailTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSSamplGroupChartDetailTableViewCell.h; sourceTree = "<group>"; };
+		3B16946B1CE32FC000A475F9 /* CCSSamplGroupChartDetailTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSSamplGroupChartDetailTableViewCell.m; sourceTree = "<group>"; };
+		3B16946C1CE32FC000A475F9 /* CCSSamplGroupChartDetailTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CCSSamplGroupChartDetailTableViewCell.xib; sourceTree = "<group>"; };
+		3B16946D1CE32FC000A475F9 /* CCSSettingDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSSettingDetailViewController.h; sourceTree = "<group>"; };
+		3B16946E1CE32FC000A475F9 /* CCSSettingDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSSettingDetailViewController.m; sourceTree = "<group>"; };
+		3B16946F1CE32FC000A475F9 /* CCSSettingDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CCSSettingDetailViewController.xib; sourceTree = "<group>"; };
+		3B1694701CE32FC000A475F9 /* CCSSettingResetTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSSettingResetTableViewCell.h; sourceTree = "<group>"; };
+		3B1694711CE32FC000A475F9 /* CCSSettingResetTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSSettingResetTableViewCell.m; sourceTree = "<group>"; };
+		3B1694721CE32FC000A475F9 /* CCSSettingResetTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CCSSettingResetTableViewCell.xib; sourceTree = "<group>"; };
 		3B697CD51CC4D58C0098C1A8 /* CCSAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSAppDelegate.h; sourceTree = "<group>"; };
 		3B697CD61CC4D58C0098C1A8 /* CCSAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSAppDelegate.m; sourceTree = "<group>"; };
 		3B697CD71CC4D58C0098C1A8 /* CCSAreaChartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSAreaChartViewController.h; sourceTree = "<group>"; };
@@ -625,6 +640,15 @@
 		3B697CD41CC4D58C0098C1A8 /* CocoaChartsSample */ = {
 			isa = PBXGroup;
 			children = (
+				3B16946A1CE32FC000A475F9 /* CCSSamplGroupChartDetailTableViewCell.h */,
+				3B16946B1CE32FC000A475F9 /* CCSSamplGroupChartDetailTableViewCell.m */,
+				3B16946C1CE32FC000A475F9 /* CCSSamplGroupChartDetailTableViewCell.xib */,
+				3B16946D1CE32FC000A475F9 /* CCSSettingDetailViewController.h */,
+				3B16946E1CE32FC000A475F9 /* CCSSettingDetailViewController.m */,
+				3B16946F1CE32FC000A475F9 /* CCSSettingDetailViewController.xib */,
+				3B1694701CE32FC000A475F9 /* CCSSettingResetTableViewCell.h */,
+				3B1694711CE32FC000A475F9 /* CCSSettingResetTableViewCell.m */,
+				3B1694721CE32FC000A475F9 /* CCSSettingResetTableViewCell.xib */,
 				3B961D4E1CC7DA6B00C34980 /* CCSChartsSettingTableViewCell.h */,
 				3B961D4F1CC7DA6B00C34980 /* CCSChartsSettingTableViewCell.m */,
 				3B961D501CC7DA6B00C34980 /* CCSChartsSettingTableViewCell.xib */,
@@ -1136,9 +1160,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3B1694761CE32FC000A475F9 /* CCSSettingDetailViewController.xib in Resources */,
 				3B6ADFF31CC4D5FD001627AF /* time.txt in Resources */,
+				3B1694741CE32FC000A475F9 /* CCSSamplGroupChartDetailTableViewCell.xib in Resources */,
 				3B6ADFF21CC4D5FD001627AF /* test.plist in Resources */,
 				3B697D301CC4D58C0098C1A8 /* CCSSampleGroupChartDemoViewController.xib in Resources */,
+				3B1694781CE32FC000A475F9 /* CCSSettingResetTableViewCell.xib in Resources */,
 				3B6ADFEE1CC4D5FD001627AF /* 15min.txt in Resources */,
 				3BB5E09918C984F600288894 /* ta_retcode.csv in Resources */,
 				3B6ADFF01CC4D5FD001627AF /* allpdts.txt in Resources */,
@@ -1261,12 +1288,14 @@
 				3B961D3A1CC7DA4100C34980 /* CCSMASlipCandleStickChart.m in Sources */,
 				3BB5E0FB18C984F600288894 /* ta_LINEARREG.c in Sources */,
 				3BB5E12318C984F600288894 /* ta_SIN.c in Sources */,
+				3B1694751CE32FC000A475F9 /* CCSSettingDetailViewController.m in Sources */,
 				3BB5E13A18C984F600288894 /* ta_WILLR.c in Sources */,
 				3B961D681CC7DB8900C34980 /* CCSTALibUtils.m in Sources */,
 				3BB5E0A318C984F600288894 /* ta_AROONOSC.c in Sources */,
 				3BB5E13818C984F600288894 /* ta_VAR.c in Sources */,
 				3BB5E09818C984F600288894 /* ta_retcode.c in Sources */,
 				3BB5E0B718C984F600288894 /* ta_CDLCLOSINGMARUBOZU.c in Sources */,
+				3B1694731CE32FC000A475F9 /* CCSSamplGroupChartDetailTableViewCell.m in Sources */,
 				3BB5E13118C984F600288894 /* ta_TRANGE.c in Sources */,
 				3BB5E0B418C984F600288894 /* ta_CDLADVANCEBLOCK.c in Sources */,
 				3BB5E11A18C984F600288894 /* ta_PPO.c in Sources */,
@@ -1418,6 +1447,7 @@
 				3BB5E0B118C984F600288894 /* ta_CDL3STARSINSOUTH.c in Sources */,
 				3BB5E0AC18C984F600288894 /* ta_CDL2CROWS.c in Sources */,
 				3BB5E0A418C984F600288894 /* ta_ASIN.c in Sources */,
+				3B1694771CE32FC000A475F9 /* CCSSettingResetTableViewCell.m in Sources */,
 				3BB5E11C18C984F600288894 /* ta_ROC.c in Sources */,
 				3BB5E0D518C984F600288894 /* ta_CDLMATHOLD.c in Sources */,
 				3BB5E12F18C984F600288894 /* ta_TANH.c in Sources */,
@@ -1494,7 +1524,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = YES;
 				PROVISIONING_PROFILE = "2d48e41b-f93e-4d22-a374-101358f10bf4";
 				SDKROOT = iphoneos;
@@ -1530,7 +1560,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PROVISIONING_PROFILE = "2d48e41b-f93e-4d22-a374-101358f10bf4";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1544,14 +1574,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: 明成 李 (493479K5WB)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CocoaChartsSample/CocoaChartsSample-Prefix.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/CocoaChartsSample/CocoaChartsSample-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				PRODUCT_BUNDLE_IDENTIFIER = cn.limc.CocoaChartsSample;
 				PRODUCT_NAME = CocoaChartsSample;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "ba9a2e38-8811-4ace-91fe-a82c52aebe88";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1562,14 +1593,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: 明成 李 (493479K5WB)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CocoaChartsSample/CocoaChartsSample-Prefix.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/CocoaChartsSample/CocoaChartsSample-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				PRODUCT_BUNDLE_IDENTIFIER = cn.limc.CocoaChartsSample;
 				PRODUCT_NAME = CocoaChartsSample;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "ba9a2e38-8811-4ace-91fe-a82c52aebe88";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
