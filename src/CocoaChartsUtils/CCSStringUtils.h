@@ -71,6 +71,11 @@
 //头部位置插入
 - (NSString *)concate:(NSString *)str;
 
+/**
+ * 是否包含某个字符串
+ */
+- (BOOL)contains:(NSString *)text;
+
 //对应字符分割
 - (NSArray *)split:(NSString *)split;
 
@@ -196,5 +201,9 @@
 
 // 123,456,789 -> 123456789
 - (NSString *)numberic;
+
+- (NSString *)unit:(NSUInteger)deci;
+
+- (NSString *)findJSONStringWithType:(NSString *) type;
 
 @end

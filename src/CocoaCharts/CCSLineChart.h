@@ -38,8 +38,6 @@ typedef enum {
  */
 @interface CCSLineChart : CCSGridChart {
     NSArray *_linesData;
-    CCUInt _latitudeNum;
-    CCUInt _longitudeNum;
     CCUInt _selectedIndex;
     CCFloat _lineWidth;
     CCFloat _maxValue;
@@ -57,17 +55,6 @@ typedef enum {
  */
 @property(strong, nonatomic, setter = setLinesData:) NSArray *linesData;
 
-/*!
- Number of latitude lines
- 显示纬线数 
- */
-@property(assign, nonatomic) CCUInt latitudeNum;
-
-/*!
- Number of longitude lines
- 显示经线数 
- */
-@property(assign, nonatomic) CCUInt longitudeNum;
 
 /*! 
  Selected data's index
@@ -146,6 +133,6 @@ typedef enum {
 
 - (void)setSelectedPointAddReDraw:(CGPoint)point;
 
--(CGFloat) computeValueY:(CGFloat)value inRect:(CGRect)rect;
+-(CCFloat) computeValueY:(CCFloat)value inRect:(CGRect)rect;
 
 @end

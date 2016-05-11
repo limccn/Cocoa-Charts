@@ -27,15 +27,13 @@
 @synthesize stickData = _stickData;
 @synthesize stickBorderColor = _stickBorderColor;
 @synthesize stickFillColor = _stickFillColor;
-@synthesize latitudeNum = _latitudeNum;
-@synthesize longitudeNum = _longitudeNum;
 @synthesize maxSticksNum = _maxSticksNum;
 @synthesize selectedStickIndex = _selectedStickIndex;
 @synthesize maxValue = _maxValue;
 @synthesize minValue = _minValue;
 @synthesize maxDataValue = _maxDataValue;
 @synthesize minDataValue = _minDataValue;
-@synthesize coChart = _coChart;
+//@synthesize coChart = _coChart;
 @synthesize axisCalc = _axisCalc;
 @synthesize autoCalcRange = _autoCalcRange;
 
@@ -46,9 +44,6 @@
 
     self.stickBorderColor = [UIColor yellowColor];
     self.stickFillColor = [UIColor yellowColor];
-
-    self.latitudeNum = 2;
-    self.longitudeNum = 3;
     self.maxSticksNum = 26;
     self.maxValue = 100;
     self.minValue = 0;
@@ -57,7 +52,7 @@
     self.selectedStickIndex = 0;
 
     self.stickData = nil;
-    self.coChart = nil;
+//    self.coChart = nil;
     self.axisCalc = 1;
     self.autoCalcRange = YES;
 }
@@ -242,31 +237,10 @@
     CCFloat average = (CCUInt) ((self.maxValue - self.minValue) / self.latitudeNum);
     //处理刻度
     for (CCUInt i = 0; i < self.latitudeNum; i++) {
-//        if (self.axisCalc == 1) {
-//            CCUInt degree =  self.minValue + i * average;
-//            NSString *value = [self formatAxisYDegree:degree];
-//            [TitleY addObject:value];
-//        } else {
-//            CCUInt degree =  self.minValue + i * average;
-//            NSString *value = [self formatAxisYDegree:degree];
-//            [TitleY addObject:value];
-//        }
-        
-            CCUInt degree =  self.minValue + i * average;
-            NSString *value = [self formatAxisYDegree:degree];
-            [TitleY addObject:value];
-
+        CCUInt degree =  self.minValue + i * average;
+        NSString *value = [self formatAxisYDegree:degree];
+        [TitleY addObject:value];
     }
-    //处理最大值
-//    if (self.axisCalc == 1) {
-//        CCUInt degree = (CCInt) (self.maxValue) / self.axisCalc;
-//        NSString *value = [[NSNumber numberWithUnsignedInteger:degree]stringValue];
-//        [TitleY addObject:value];
-//    }
-//    else {
-//        NSString *value = [NSString stringWithFormat:@"%-.2f", (self.maxValue) / self.axisCalc];
-//        [TitleY addObject:value];
-//    }
     CCUInt degree =  self.maxValue;
     NSString *value = [self formatAxisYDegree:degree];
     [TitleY addObject:value];
@@ -274,9 +248,13 @@
     self.latitudeTitles = TitleY;
 }
 
--(NSString*) formatAxisYDegree:(CGFloat)value {
+-(NSString*) formatAxisXDegree:(CCFloat)value {
+    return @"";
+}
+
+-(NSString*) formatAxisYDegree:(CCFloat)value {
     //数据
-    CGFloat displayValue = floor(value) / self.axisCalc;
+    CCFloat displayValue = floor(value) / self.axisCalc;
     if(displayValue > 10000){
         return [NSString stringWithFormat:@"%@万",[NSString stringWithFormat:@"%-.2f", displayValue/10000]];
     }else {
@@ -405,7 +383,7 @@
 - (NSString *)calcAxisYGraduate:(CGRect)rect {
     CCFloat value = [self touchPointAxisYValue:rect];
 
-    if (self.maxValue == 0. && self.minValue == 0.) {
+    if (self.maxValue - 0 == 0. && self.minValue - 0 == 0.) {
         return @"";
     }
 
@@ -443,35 +421,18 @@
 
 - (void)calcSelectedIndex {
     //X在系统范围内、进行计算
-    if (self.axisYPosition == CCSGridChartYAxisPositionLeft) {
-        if (self.singleTouchPoint.x > self.axisMarginLeft
-                && self.singleTouchPoint.x < self.frame.size.width) {
-            CCFloat stickWidth = ((self.frame.size.width - self.axisMarginLeft - self.axisMarginRight) / self.maxSticksNum);
-            CCFloat valueWidth = self.singleTouchPoint.x - self.axisMarginLeft;
-            if (valueWidth > 0) {
-                CCUInt index = (CCUInt) (valueWidth / stickWidth);
-                //如果超过则设置位最大
-                if (index >= self.maxSticksNum) {
-                    index = self.maxSticksNum - 1;
-                }
-                //设置选中的index
-                self.selectedStickIndex = index;
+    if (self.singleTouchPoint.x > self.axisMarginLeft
+        && self.singleTouchPoint.x < self.frame.size.width) {
+        CCFloat stickWidth = ((self.frame.size.width - self.axisMarginLeft - self.axisMarginRight) / self.maxSticksNum);
+        CCFloat valueWidth = self.singleTouchPoint.x - self.axisMarginLeft;
+        if (valueWidth > 0) {
+            CCUInt index = (CCUInt) (valueWidth / stickWidth);
+            //如果超过则设置位最大
+            if (index >= self.maxSticksNum) {
+                index = self.maxSticksNum - 1;
             }
-        }
-    } else {
-        if (self.singleTouchPoint.x > self.axisMarginLeft
-                && self.singleTouchPoint.x < self.frame.size.width - self.axisMarginRight) {
-            CCFloat stickWidth = 1.0 * ((self.frame.size.width - self.axisMarginLeft - self.axisMarginRight) / self.maxSticksNum);
-            CCFloat valueWidth = self.singleTouchPoint.x - self.axisMarginLeft;
-            if (valueWidth > 0) {
-                CCUInt index = (CCUInt) ([self.stickData count] - self.maxSticksNum + (valueWidth / stickWidth));
-                //如果超过则设置位最大
-                if (index >= [self.stickData count]) {
-                    index = [self.stickData count] - 1;
-                }
-                //设置选中的index
-                self.selectedStickIndex = index;
-            }
+            //设置选中的index
+            self.selectedStickIndex = index;
         }
     }
 }
@@ -493,10 +454,10 @@
             if (self.maxSticksNum < 20) {
                 self.maxSticksNum = 20;
             }
-            if (self.coChart) {
-                self.coChart.maxSticksNum = self.maxSticksNum;
-                [self.coChart setNeedsDisplay];
-            }
+//            if (self.coChart) {
+//                self.coChart.maxSticksNum = self.maxSticksNum;
+//                [self.coChart setNeedsDisplay];
+//            }
         }
     } else {
         //横屏最小40根，4根起开始变化
@@ -506,10 +467,10 @@
             if (self.maxSticksNum < 40) {
                 self.maxSticksNum = 40;
             }
-            if (self.coChart) {
-                self.coChart.maxSticksNum = self.maxSticksNum;
-                [self.coChart setNeedsDisplay];
-            }
+//            if (self.coChart) {
+//                self.coChart.maxSticksNum = self.maxSticksNum;
+//                [self.coChart setNeedsDisplay];
+//            }
         }
     }
 }
@@ -538,7 +499,7 @@
 }
 
 
--(CGFloat) computeValueY:(CGFloat)value inRect:(CGRect)rect{
+-(CCFloat) computeValueY:(CCFloat)value inRect:(CGRect)rect{
     return (1 - (value - self.minValue) / (self.maxValue - self.minValue)) * (rect.size.height - self.axisMarginBottom - 2 * self.axisMarginTop) + self.axisMarginTop;
 }
 
@@ -550,7 +511,7 @@
 
 -(void) bindSelectedIndex
 {
-    
+    // noop
 }
 
 - (void) setSingleTouchPoint:(CGPoint) point
@@ -558,7 +519,6 @@
     _singleTouchPoint = point;
     
     [self calcSelectedIndex];
-    
     [self bindSelectedIndex];
 }
 @end

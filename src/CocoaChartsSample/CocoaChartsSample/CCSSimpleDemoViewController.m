@@ -13,7 +13,6 @@
 #import "CCSTitledLine.h"
 #import "CCSLineData.h"
 #import "CCSMACDData.h"
-#import "CCSJSONData.h"
 
 #import "ta_libc.h"
 #import "CCSTALibUtils.h"
@@ -124,24 +123,24 @@
 - (void)loadDataJSON: (ChartDataType) chartDataType{
 //    NSString *strAllPdts = [self findJSONStringWithName:@"allpdts"];
     
-    CCSJSONData *jsonData = nil;
-    
-    if (chartDataType == Chart1minData) {
-        jsonData = [[CCSJSONData alloc] initWithData:[[self findJSONStringWithName:@"1min"] dataUsingEncoding:NSUTF8StringEncoding] error:nil];
-    }else if (chartDataType == Chart15minData){
-        jsonData = [[CCSJSONData alloc] initWithData:[[self findJSONStringWithName:@"15min"] dataUsingEncoding:NSUTF8StringEncoding] error:nil];
-    }else{
-        jsonData = [[CCSJSONData alloc] initWithData:[[self findJSONStringWithName:@"time"] dataUsingEncoding:NSUTF8StringEncoding] error:nil];
-    }
-    
-    NSArray *arrData = nil;
-    if (jsonData.kqn !=nil) {
-        arrData = jsonData.kqn;
-    }else if (jsonData.ct !=nil){
-        arrData = jsonData.ct;
-    }else if (jsonData.ctt !=nil){
-        arrData = jsonData.ctt;
-    }
+//    CCSJSONData *jsonData = nil;
+//    
+//    if (chartDataType == Chart1minData) {
+//        jsonData = [[CCSJSONData alloc] initWithData:[[self findJSONStringWithName:@"1min"] dataUsingEncoding:NSUTF8StringEncoding] error:nil];
+//    }else if (chartDataType == Chart15minData){
+//        jsonData = [[CCSJSONData alloc] initWithData:[[self findJSONStringWithName:@"15min"] dataUsingEncoding:NSUTF8StringEncoding] error:nil];
+//    }else{
+//        jsonData = [[CCSJSONData alloc] initWithData:[[self findJSONStringWithName:@"time"] dataUsingEncoding:NSUTF8StringEncoding] error:nil];
+//    }
+//    
+//    NSArray *arrData = nil;
+//    if (jsonData.kqn !=nil) {
+//        arrData = jsonData.kqn;
+//    }else if (jsonData.ct !=nil){
+//        arrData = jsonData.ct;
+//    }else if (jsonData.ctt !=nil){
+//        arrData = jsonData.ctt;
+//    }
     
     if (self.chartData == nil) {
         self.chartData = [[NSMutableArray alloc] init];
@@ -156,7 +155,7 @@
 //    data.current = [dict objectForKey:@"currentPrice"];
 //    data.preclose = nil;
 //    data.change = [dict objectForKey:@"changesPercent"];
-    for (NSDictionary *dict in arrData) {
+    for (NSDictionary *dict in self.chartData) {
         if (dict != nil) {
             OHLCVDData *data = [[OHLCVDData alloc] init];
             

@@ -50,81 +50,50 @@
     if (self) {
         self.ohlcvdDatas = ohlcvdDatas;
         self.candleStickData = [ohlcvdDatas convertCandleStickData];
-        self.candleStickLinesData = [ohlcvdDatas convertCandleStickLinesData];
-        self.candleStickBollingerBandData = [ohlcvdDatas convertCandleStickBollingerBandData];
+        self.candleStickLinesData = [ohlcvdDatas convertCandleStickLinesData:-1 ma2:-1 ma3:-1];
+        self.candleStickBollingerBandData = [ohlcvdDatas convertCandleStickBollingerBandData:-1];
         self.stickData = [ohlcvdDatas convertStickData];
-        self.stickMAData = [ohlcvdDatas convertStickMAData];
-        self.macdStickData = [ohlcvdDatas convertMacdStickData];
-        self.kdjLinesData = [ohlcvdDatas convertKDJLinesData];
-        self.rsiLinesData = [ohlcvdDatas convertRSILinesData];
-        self.wrLinesData = [ohlcvdDatas convertWRLinesData];
-        self.cciLinesData = [ohlcvdDatas convertCCILinesData];
-        self.bollLinesData = [ohlcvdDatas convertBOLLLinesData];
+        self.stickMAData = [ohlcvdDatas convertStickMAData:-1 ma2:-1 ma3:-1];
+        self.macdStickData = [ohlcvdDatas convertMacdStickData:-1 l:-1 m:-1];
+        self.kdjLinesData = [ohlcvdDatas convertKDJLinesData:-1];
+        self.rsiLinesData = [ohlcvdDatas convertRSILinesData:-1 n2:-1];
+        self.wrLinesData = [ohlcvdDatas convertWRLinesData:-1];
+        self.cciLinesData = [ohlcvdDatas convertCCILinesData:-1];
+        self.bollLinesData = [ohlcvdDatas convertBOLLLinesData:-1];
     }
     return self;
 }
 
 - (void)updateCandleStickLinesData:(NSInteger)ma1 ma2:(NSInteger)ma2 ma3:(NSInteger)ma3{
-    [MA1 setUserDefaultWithString:[NSString stringWithFormat:@"%ld", (long)ma1]];
-    [MA2 setUserDefaultWithString:[NSString stringWithFormat:@"%ld", (long)ma2]];
-    [MA3 setUserDefaultWithString:[NSString stringWithFormat:@"%ld", (long)ma3]];
-    
-    NSMutableArray *maLines = [[NSMutableArray alloc] init];
-    [maLines addObject: [self.ohlcvdDatas computeMAData:ma1]];
-    [maLines addObject: [self.ohlcvdDatas computeMAData:ma2]];
-    [maLines addObject: [self.ohlcvdDatas computeMAData:ma3]];
-    
-    self.candleStickLinesData = maLines;
+    self.candleStickLinesData = [self.ohlcvdDatas convertCandleStickLinesData:ma1 ma2:ma2 ma3:ma3];
 }
 
 - (void)updateCandleStickBollingerBandData:(NSInteger) bollN{
-    [BOLL_N setUserDefaultWithString:[NSString stringWithFormat:@"%ld", (long)bollN]];
-    
-    self.candleStickBollingerBandData = [self.ohlcvdDatas computeBOLLData:bollN optInNbDevUp:2 optInNbDevDn:2];
+    self.candleStickBollingerBandData = [self.ohlcvdDatas convertCandleStickBollingerBandData:bollN];
 }
 
 - (void)updateMACDStickData:(NSInteger)macdS l:(NSInteger)macdL m:(NSInteger)macdM{
-    [MACD_L setUserDefaultWithString:[NSString stringWithFormat:@"%ld", (long)macdL]];
-    [MACD_M setUserDefaultWithString:[NSString stringWithFormat:@"%ld", (long)macdM]];
-    [MACD_S setUserDefaultWithString:[NSString stringWithFormat:@"%ld", (long)macdS]];
-    
-    self.macdStickData = [self.ohlcvdDatas computeMACDData:macdL optInSlowPeriod:macdM optInSignalPeriod:macdS];
+    self.macdStickData = [self.ohlcvdDatas convertMacdStickData:macdS l:macdL m:macdM];
 }
 
 - (void)updateKDJData:(NSInteger)kdjN{
-    [KDJ_N setUserDefaultWithString:[NSString stringWithFormat:@"%ld", (long)kdjN]];
-    
-    self.kdjLinesData = [self.ohlcvdDatas computeKDJData:kdjN optInSlowK_Period:3 optInSlowD_Period:3];
+    self.kdjLinesData = [self.ohlcvdDatas convertKDJLinesData:kdjN];
 }
 
 - (void)updateRSIData:(NSInteger) n1 n2:(NSInteger) n2{
-    [RSI_N1 setUserDefaultWithString:[NSString stringWithFormat:@"%ld", (long)n1]];
-    [RSI_N2 setUserDefaultWithString:[NSString stringWithFormat:@"%ld", (long)n2]];
-    
-    NSMutableArray *linesData = [[NSMutableArray alloc] init];
-    [linesData addObject:[self.ohlcvdDatas computeRSIData:n1]];
-    [linesData addObject:[self.ohlcvdDatas computeRSIData:n2]];
-    [linesData addObject:[self.ohlcvdDatas computeRSIData:24]];
-    
-    self.rsiLinesData = linesData;
+    self.rsiLinesData = [self.ohlcvdDatas convertRSILinesData:n1 n2:n2];
 }
 
 - (void)updateWRData:(NSInteger) wrN{
-    [WR_N setUserDefaultWithString:[NSString stringWithFormat:@"%ld", (long)wrN]];
-    
     self.wrLinesData = [self.ohlcvdDatas computeWRData:wrN];
 }
 
 - (void)updateCCIData:(NSInteger) cciN{
-    [CCI_N setUserDefaultWithString:[NSString stringWithFormat:@"%ld", (long)cciN]];
-    
-    self.cciLinesData = [self.ohlcvdDatas computeCCIData:cciN];
+    self.cciLinesData = [self.ohlcvdDatas convertCCILinesData:cciN];
 }
 
 - (void)updateBOLLData:(NSInteger) bollN{
-    [BOLL_N setUserDefaultWithString:[NSString stringWithFormat:@"%ld", (long)bollN]];
-    
-    self.bollLinesData = [self.ohlcvdDatas computeBOLLData:bollN optInNbDevUp:2 optInNbDevDn:2];
+    self.bollLinesData = [self.ohlcvdDatas convertBOLLLinesData:bollN];
 }
 
 @end
@@ -1118,8 +1087,8 @@
         self.wrChart.linesData = self.groupChartData.wrLinesData;
 //        self.wrChart.singleTouchPoint = CGPointMake(-1, -1);
         
-        self.wrChart.maxValue = 100;
-        self.wrChart.minValue = 0;
+        self.wrChart.maxValue = 0;
+        self.wrChart.minValue = -100;
         
         [self.wrChart setNeedsDisplay];
         

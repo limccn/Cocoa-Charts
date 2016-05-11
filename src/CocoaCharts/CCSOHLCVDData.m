@@ -22,4 +22,13 @@
 
 @implementation CCSOHLCVDData
 
+- (id)init{
+    self = [super init];
+    
+    if (self) {
+        self.date = @"00000000000000";
+    }
+    return self;
+}
+
 @end

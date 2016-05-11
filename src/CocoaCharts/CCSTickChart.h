@@ -7,27 +7,34 @@
 //
 
 #import "CCSSlipLineChart.h"
+#import "CCSHeader.h"
 
 @interface CCSTickChart : CCSSlipLineChart {
     NSArray *_longitudeSplitor;
     NSArray *_latitudeSplitor;
     
-    CGFloat _lastClose;
+    CCFloat _lastClose;
     
     BOOL _limitRangeSupport;
-    CGFloat _limitMaxValue;
-    CGFloat _limitMinValue;
+    CCFloat _limitMaxValue;
+    CCFloat _limitMinValue;
+    
+    BOOL _enableZoom;
+    BOOL _enableSlip;
     
 }
 
 @property(strong,nonatomic) NSArray *longitudeSplitor;
 @property(strong,nonatomic) NSArray *latitudeSplitor;
 
-@property(assign,nonatomic) CGFloat lastClose;
+@property(assign,nonatomic) CCFloat lastClose;
 
 @property(assign,nonatomic) BOOL limitRangeSupport;
-@property(assign,nonatomic) CGFloat limitMaxValue;
-@property(assign,nonatomic) CGFloat limitMinValue;
+@property(assign,nonatomic) CCFloat limitMaxValue;
+@property(assign,nonatomic) CCFloat limitMinValue;
 
+
+@property(assign,nonatomic) BOOL enableZoom;
+@property(assign,nonatomic) BOOL enableSlip;
 
 @end

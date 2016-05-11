@@ -25,8 +25,6 @@
 @implementation CCSLineChart
 
 @synthesize linesData = _linesData;
-@synthesize latitudeNum = _latitudeNum;
-@synthesize longitudeNum = _longitudeNum;
 @synthesize selectedIndex = _selectedIndex;
 @synthesize lineWidth = _lineWidth;
 @synthesize maxValue = _maxValue;
@@ -40,8 +38,6 @@
 
     [super initProperty];
 
-    self.latitudeNum = 2;
-    self.longitudeNum = 3;
     self.maxValue = CCIntMin;
     self.minValue = CCIntMax;
     self.selectedIndex = 0;
@@ -172,12 +168,6 @@
         //最大值加上轴差
         self.maxValue = (CCInt) self.maxValue + (self.latitudeNum * rate) - ((CCInt) (self.maxValue - self.minValue) % (self.latitudeNum * rate));
     }
-    
-    //    //等分轴修正
-    //    if (self.latitudeNum >0 && (int)(self.maxValue - self.minValue) % (self.latitudeNum) != 0) {
-    //        //最大值加上轴差
-    //        self.maxValue = self.maxValue + self.latitudeNum - ((int)(self.maxValue - self.minValue) % self.latitudeNum);
-    //    }
 }
 
 - (void) calcBalanceRange{
@@ -286,7 +276,7 @@
             
             if (self.lineAlignType == CCSLineAlignTypeCenter) {
                 // 点线距离
-                CCFloat lineLength = ((rect.size.width - 2 * self.axisMarginLeft - self.axisMarginRight) / [line.data count] - 1);
+                lineLength = ((rect.size.width - 2 * self.axisMarginLeft - self.axisMarginRight) / [line.data count] - 1);
                 //起始点
                 startX = rect.size.width - self.axisMarginRight - self.axisMarginLeft - lineLength / 2;
             }else if (self.lineAlignType == CCSLineAlignTypeJustify) {
@@ -321,7 +311,6 @@
                         lastY = valueY;
                     } else if (j == 0) {
                         if (lineData.value == 0) {
-//                                    CGContextMoveToPoint(context, startX, lastY);
                             CGContextAddLineToPoint(context, self.axisMarginLeft, lastY);
                         } else {
                             CGContextAddLineToPoint(context, self.axisMarginLeft, valueY);
@@ -377,7 +366,6 @@
         offset = self.axisMarginLeft + self.axisMarginRight + postOffset / 2;
     }
     else {
-        //TODO
         postOffset = (rect.size.width - 2 * self.axisMarginLeft - self.axisMarginRight) / ([self.longitudeTitles count]);
         offset = self.axisMarginLeft;
     }
@@ -426,7 +414,6 @@
         postOffset = (rect.size.width - self.axisMarginLeft - self.axisMarginRight) / ([self.longitudeTitles count]);
         offset = self.axisMarginLeft + self.axisMarginRight + postOffset / 2;
     } else {
-        //TODO
         postOffset = (rect.size.width - 2 * self.axisMarginLeft - self.axisMarginRight) / ([self.longitudeTitles count]);
         offset = self.axisMarginLeft;
     }
@@ -581,11 +568,11 @@
 }
 
 -(void) calcSelectedIndex{
+     // noop
 }
 
--(void) bindSelectedIndex
-{
-    
+-(void) bindSelectedIndex{
+    // noop
 }
 
 - (void)setSelectedPointAddReDraw:(CGPoint)point {
@@ -600,14 +587,11 @@
 - (void) setSingleTouchPoint:(CGPoint) point
 {
     _singleTouchPoint = point;
-    
+    // 计算选中Index
     [self calcSelectedIndex];
-    
+    // 绑定选中index
     [self bindSelectedIndex];
     
-//    if (self.chartDelegate && [self.chartDelegate respondsToSelector:@selector(CCSChartBeTouchedOn:indexAt:)]) {
-//        [self.chartDelegate CCSChartBeTouchedOn:point indexAt:self.selectedIndex];
-//    }
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -626,171 +610,17 @@
     NSArray *allTouches = [touches allObjects];
     //处理点击事件
     if ([allTouches count] == 1) {
-        
-//        CGPoint pt = CGPointMake(self.singleTouchPoint.x, self.coChart.singleTouchPoint.y);
-//        //获取选中点
-//        self.coChart.singleTouchPoint = pt;
-//        [self.coChart performSelector:@selector(setNeedsDisplay) withObject:nil afterDelay:0];
-        
+        // noop
     } else if ([allTouches count] == 2) {
-        
+        // noop
     } else {
-        
+        // noop
     }
     
 }
 
-
--(CGFloat) computeValueY:(CGFloat)value inRect:(CGRect)rect{
+-(CCFloat) computeValueY:(CCFloat)value inRect:(CGRect)rect{
     return (1 - (value - self.minValue) / (self.maxValue - self.minValue)) * (rect.size.height - self.axisMarginBottom - 2 * self.axisMarginTop) + self.axisMarginTop;
 }
 
-
-//-(void) calcSelectedIndex
-//{
-//    //X在系统范围内、进行计算
-//    if(self.singleTouchPoint.x > self.axisMarginLeft 
-//       && self.singleTouchPoint.x < self.frame.size.width)
-//    {
-//        CCFloat stickWidth = ((self.frame.size.width - self.axisMarginLeft -self.axisMarginRight) / self.maxPointsNum);
-//        CCFloat valueWidth = self.singleTouchPoint.x - self.axisMarginLeft;
-//        if(valueWidth > 0)
-//        {
-//            int index = round(valueWidth / stickWidth);
-//            //如果超过则设置位最大
-//            if (index >= self.maxPointsNum)
-//            {
-//                index = self.maxPointsNum - 1;
-//            }
-//            //设置选中的index
-//            self.selectedIndex = index;
-//        }
-//    }
-//}
-
-//-(void) setSelectedPointAddReDraw:(CGPoint)point
-//{
-//    point.y = 1;
-//    self.singleTouchPoint = point;
-//    [self calcSelectedIndex];
-//    
-//    [self setNeedsDisplay];
-//}
-//
-//-(void) setSelectedIndexAddReDraw:(unsigned int)selectedIndex
-//{
-//    CCSTitledLine *line = [self.linesData objectAtIndex:0];
-//    if(selectedIndex < [line.data count])
-//    {
-//        //计算选中的点
-//        CCFloat value = ((CCSLineData *)[line.data objectAtIndex:selectedIndex]).value;
-//        CCFloat ptY = (1 - (value-self.minValue)/(self.maxValue-self.minValue)) * (self.frame.size.height-self.axisMarginBottom-2*self.axisMarginTop) + self.axisMarginTop;
-//        
-//        CCFloat ptX = self.axisMarginLeft + selectedIndex * ((self.frame.size.width - self.axisMarginLeft -2 * self.axisMarginRight) / self.maxPointsNum);
-//        
-//        self.singleTouchPoint = CGPointMake(ptX,ptY);
-//        //设置选中的index
-//        self.selectedIndex = selectedIndex;
-//    }
-//    
-//    [self setNeedsDisplay];
-//}
-
-//-(void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
-//{
-//    //调用父类的触摸事件
-//    [super touchesBegan:touches withEvent:event];
-//    
-//    NSArray *allTouches = [touches allObjects];
-//    //处理点击事件
-//    if([allTouches count] == 1)
-//    {
-//        for (CCSLineChart *chart in self.coCharts) {
-//            chart.singleTouchPoint = self.singleTouchPoint;        
-//            [chart performSelector:@selector(setNeedsDisplay) withObject:nil afterDelay:0];
-//        }        
-//    }
-//    
-//    CCFloat value = [self touchPointAxisXValue:self.frame];
-//    if(self.linesData != NULL){
-//        CCSTitledLine *line = [self.linesData objectAtIndex:0];
-//        int index = 0;
-//        if(value >= 1){
-//            index = self.maxPointsNum;
-//        }else if(value <= 0){
-//            index = 0;
-//        }else{
-//            index = (int)round(self.maxPointsNum * value);
-//        }
-//        
-//        if(index < [line.data count])
-//        {
-//            CCFloat value = ((CCSLineData *)[line.data objectAtIndex:index]).value;
-//            CCFloat ptY = (1 - (value-self.minValue)/(self.maxValue-self.minValue)) * (self.frame.size.height-self.axisMarginBottom-2*self.axisMarginTop) + self.axisMarginTop;
-//            
-//            self.singleTouchPoint = CGPointMake(self.singleTouchPoint.x,ptY);
-//            
-//            [self calcSelectedIndex];
-//            
-//            CCFloat ptX = self.axisMarginLeft + self.selectedIndex * ((self.frame.size.width - self.axisMarginLeft -2 * self.axisMarginRight) / self.maxPointsNum);
-//            self.singleTouchPoint = CGPointMake(ptX,ptY);
-//
-//        }
-//    }
-//}
-
-//-(void) touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
-//{
-//    //调用父类的触摸事件
-//    [super touchesMoved:touches withEvent:event];
-//     
-//    NSArray *allTouches = [touches allObjects];
-//    //处理点击事件
-//    if([allTouches count] == 1)
-//    {
-//        for (CCSLineChart *chart in self.coCharts) {
-//            chart.singleTouchPoint = self.singleTouchPoint;        
-//            [chart performSelector:@selector(setNeedsDisplay) withObject:nil afterDelay:0];
-//        }  
-//    }else if([allTouches count] == 2)
-//    {
-//        
-//    }else{
-//        
-//    }
-//    
-//}
-//
-//-(void) touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
-//{
-//    //调用父类的触摸事件
-//    [super touchesEnded:touches withEvent:event];
-//    
-//    NSArray *allTouches = [touches allObjects];
-//    //处理点击事件
-//    if([allTouches count] == 1)
-//    {
-//        for (CCSLineChart *chart in self.coCharts) {
-//            chart.singleTouchPoint = self.singleTouchPoint;        
-//            [chart performSelector:@selector(setNeedsDisplay) withObject:nil afterDelay:0];
-//        }  
-//    }
-//}
-
-//-(void) addCoCharts:(CCSLineChart *)chart
-//{
-//    if(!self.coCharts)
-//    {
-//        //初始化
-//        NSMutableArray *arr = [[NSMutableArray alloc]init];
-//        self.coCharts = arr;
-//        [arr release];
-//    }
-//    
-//    //添加chart
-//    if(chart)
-//    {
-//        [self.coCharts addObject:chart];
-//    }
-//}
 @end

@@ -272,21 +272,21 @@
     
     //处理刻度
     for (CCUInt i = 0; i < self.latitudeNum; i++) {
-        CGFloat degree =  self.minValue + i * average;
+        CCFloat degree =  self.minValue + i * average;
         NSString *value = [self formatAxisYDegree:degree];
         [TitleY addObject:value];
     }
     
-    CGFloat degree =  self.maxValue;
+    CCFloat degree =  self.maxValue;
     NSString *value = [self formatAxisYDegree:degree];
     [TitleY addObject:value];
     
     self.latitudeTitles = TitleY;
 }
 
--(NSString*) formatAxisYDegree:(CGFloat)value {
+-(NSString*) formatAxisYDegree:(CCFloat)value {
     //数据
-    CGFloat displayValue = value/ self.axisCalc;
+    CCFloat displayValue = value/ self.axisCalc;
     return [NSString stringWithFormat:@"%-.2f", displayValue];
 }
 

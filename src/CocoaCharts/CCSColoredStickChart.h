@@ -25,11 +25,18 @@ typedef enum {
     CCSColoredStickStyleWithBorder = 1,
 } CCSColoredStickStyle;
 
-
+/*!
+ CCSColoredStickChart
+ 
+ 支持多彩填充的柱状图
+ */
 @interface CCSColoredStickChart : CCSSlipStickChart {
     CCSColoredStickStyle _coloredStickStyle;
 }
 
+/*!
+ 填充的样式
+ */
 @property(assign, nonatomic) CCSColoredStickStyle coloredStickStyle;
 
 @end

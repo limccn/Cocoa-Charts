@@ -18,7 +18,8 @@
 @synthesize limitRangeSupport = _limitRangeSupport;
 @synthesize limitMaxValue = _limitMaxValue;
 @synthesize limitMinValue = _limitMinValue;
-
+@synthesize enableZoom = _enableZoom;
+@synthesize enableSlip = _enableSlip;
 
 - (void)initProperty {
     //初始化父类的熟悉
@@ -31,6 +32,8 @@
     self.limitRangeSupport = NO;
     self.limitMaxValue = 0;
     self.limitMinValue = 0;
+    self.enableSlip = YES;
+    self.enableZoom = YES;
     
 }
 
@@ -56,7 +59,7 @@
 
 - (void) calcBalanceRange{
     if(self.lastClose > 0 && self.maxValue > 0 && self.minValue > 0){
-        CGFloat gap = MAX(fabs(self.maxValue - self.lastClose),fabs(self.minValue - self.lastClose));
+        CCFloat gap = MAX(fabs(self.maxValue - self.lastClose),fabs(self.minValue - self.lastClose));
         self.maxValue = self.lastClose + gap;
         self.minValue = self.lastClose - gap;
 
@@ -163,7 +166,7 @@
     }
     
     CCFloat offset;
-    CGFloat postOffset;
+    CCFloat postOffset;
     
     CCFloat lineLength = ((rect.size.width - self.axisMarginLeft - self.axisMarginRight) / self.displayNumber);
     
@@ -178,11 +181,11 @@
             postOffset = counter * lineLength;
             offset = self.axisMarginLeft + lineLength / 2;
             
-            CGFloat titleLength = [str boundingRectWithSize:CGSizeMake(100, 100) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : self.longitudeFont} context:nil].size.width;
+            CCFloat titleLength = [str boundingRectWithSize:CGSizeMake(100, 100) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : self.longitudeFont} context:nil].size.width;
             
             CGRect textRect;
             if (titleIndex > 0) {
-                CGFloat titleX= offset + postOffset - titleLength / 2.0;
+                CCFloat titleX= offset + postOffset - titleLength / 2.0;
                 //处理最后一条轴线越线问题
                 if (titleX + titleLength > rect.size.width - self.axisMarginRight) {
                     titleX= rect.size.width - self.axisMarginRight - titleLength;
@@ -212,99 +215,7 @@
         
     }while(counter < self.displayNumber);
     
-    
-    
-//    for (CCUInt i = 0; i <= [self.longitudeTitles count]; i++) {
-//        if (self.axisXPosition == CCSGridChartXAxisPositionBottom) {
-//            if (i < [self.longitudeTitles count]) {
-//                NSString *str = (NSString *) [self.longitudeTitles objectAtIndex:i];
-//                
-//                //调整X轴坐标位置
-//                if (i == 0) {
-//                    CGRect textRect= CGRectMake(0, rect.size.height - self.axisMarginBottom, postOffset, self.longitudeFontSize);
-//                    UIFont *textFont= self.longitudeFont; //设置字体
-//                    NSMutableParagraphStyle *textStyle=[[NSMutableParagraphStyle alloc]init];//段落样式
-//                    textStyle.alignment=NSTextAlignmentLeft;
-//                    textStyle.lineBreakMode = NSLineBreakByWordWrapping;
-//                    //绘制字体
-//                    [str drawInRect:textRect withAttributes:@{NSFontAttributeName:textFont,
-//                                                              NSParagraphStyleAttributeName:textStyle,
-//                                                              NSForegroundColorAttributeName:self.longitudeFontColor}];
-//                    
-//                } else if (i == [self.longitudeTitles count] - 1) {
-//                    CGRect textRect= CGRectMake(rect.size.width - postOffset, rect.size.height - self.axisMarginBottom, postOffset, self.longitudeFontSize);
-//                    UIFont *textFont= self.longitudeFont; //设置字体
-//                    NSMutableParagraphStyle *textStyle=[[NSMutableParagraphStyle alloc]init];//段落样式
-//                    textStyle.alignment=NSTextAlignmentRight;
-//                    textStyle.lineBreakMode = NSLineBreakByWordWrapping;
-//                    //绘制字体
-//                    //                    [str drawInRect:textRect withAttributes:@{NSFontAttributeName:textFont,NSParagraphStyleAttributeName:textStyle}];
-//                    //绘制字体
-//                    [str drawInRect:textRect withAttributes:@{NSFontAttributeName:textFont,
-//                                                              NSParagraphStyleAttributeName:textStyle,
-//                                                              NSForegroundColorAttributeName:self.longitudeFontColor}];
-//                } else {
-//                    CGRect textRect= CGRectMake(offset + (i - 0.5) * postOffset, rect.size.height - self.axisMarginBottom, postOffset, self.longitudeFontSize);
-//                    UIFont *textFont= self.longitudeFont; //设置字体
-//                    NSMutableParagraphStyle *textStyle=[[NSMutableParagraphStyle alloc]init];//段落样式
-//                    textStyle.alignment=NSTextAlignmentCenter;
-//                    textStyle.lineBreakMode = NSLineBreakByWordWrapping;
-//                    //绘制字体
-//                    //                    [str drawInRect:textRect withAttributes:@{NSFontAttributeName:textFont,NSParagraphStyleAttributeName:textStyle}];
-//                    //绘制字体
-//                    [str drawInRect:textRect withAttributes:@{NSFontAttributeName:textFont,
-//                                                              NSParagraphStyleAttributeName:textStyle,
-//                                                              NSForegroundColorAttributeName:self.longitudeFontColor}];
-//                }
-//            }
-//        } else {
-//            
-//            if (i < [self.longitudeTitles count]) {
-//                NSString *str = (NSString *) [self.longitudeTitles objectAtIndex:i];
-//                
-//                //调整X轴坐标位置
-//                if (i == 0) {
-//                    CGRect textRect= CGRectMake(0, 0, postOffset, self.longitudeFontSize);
-//                    UIFont *textFont= self.longitudeFont; //设置字体
-//                    NSMutableParagraphStyle *textStyle=[[NSMutableParagraphStyle alloc]init];//段落样式
-//                    textStyle.alignment=NSTextAlignmentLeft;
-//                    textStyle.lineBreakMode = NSLineBreakByWordWrapping;
-//                    //绘制字体
-//                    //                    [str drawInRect:textRect withAttributes:@{NSFontAttributeName:textFont,NSParagraphStyleAttributeName:textStyle}];
-//                    //绘制字体
-//                    [str drawInRect:textRect withAttributes:@{NSFontAttributeName:textFont,
-//                                                              NSParagraphStyleAttributeName:textStyle,
-//                                                              NSForegroundColorAttributeName:self.longitudeFontColor}];
-//                    
-//                } else if (i == [self.longitudeTitles count] - 1) {
-//                    CGRect textRect= CGRectMake(rect.size.width - postOffset, 0, postOffset, self.longitudeFontSize);
-//                    UIFont *textFont= self.longitudeFont; //设置字体
-//                    NSMutableParagraphStyle *textStyle=[[NSMutableParagraphStyle alloc]init];//段落样式
-//                    textStyle.alignment=NSTextAlignmentRight;
-//                    textStyle.lineBreakMode = NSLineBreakByWordWrapping;
-//                    //绘制字体
-//                    //                    [str drawInRect:textRect withAttributes:@{NSFontAttributeName:textFont,NSParagraphStyleAttributeName:textStyle}];
-//                    //绘制字体
-//                    [str drawInRect:textRect withAttributes:@{NSFontAttributeName:textFont,
-//                                                              NSParagraphStyleAttributeName:textStyle,
-//                                                              NSForegroundColorAttributeName:self.longitudeFontColor}];
-//                } else {
-//                    CGRect textRect= CGRectMake(offset + (i - 0.5) * postOffset, 0, postOffset, self.longitudeFontSize);
-//                    UIFont *textFont= self.longitudeFont; //设置字体
-//                    NSMutableParagraphStyle *textStyle=[[NSMutableParagraphStyle alloc]init];//段落样式
-//                    textStyle.alignment=NSTextAlignmentCenter;
-//                    textStyle.lineBreakMode = NSLineBreakByWordWrapping;
-//                    //绘制字体
-//                    //                    [str drawInRect:textRect withAttributes:@{NSFontAttributeName:textFont,NSParagraphStyleAttributeName:textStyle}];
-//                    //绘制字体
-//                    [str drawInRect:textRect withAttributes:@{NSFontAttributeName:textFont,
-//                                                              NSParagraphStyleAttributeName:textStyle,
-//                                                              NSForegroundColorAttributeName:self.longitudeFontColor}];
-//                }
-//            }
-//        }
-//    }
-}
+ }
 
 - (void)drawLines:(CGRect)rect {
     // 起始位置
@@ -371,15 +282,15 @@
 -(void) bindSelectedIndex
 {
     CCFloat stickWidth = [self getDataStickWidth];
-    CGFloat pointX = self.axisMarginLeft +(self.selectedIndex - self.displayFrom + 0.5) * stickWidth;
-    CGFloat pointY = self.singleTouchPoint.y;
+    CCFloat pointX = self.axisMarginLeft +(self.selectedIndex - self.displayFrom + 0.5) * stickWidth;
+    CCFloat pointY = self.singleTouchPoint.y;
     
     if (self.linesData != nil && [self.linesData count] > 0 ){
         CCSTitledLine *line = [self.linesData objectAtIndex:0];
         if (line != nil) {
             if (line.data != nil && [line.data count] > self.selectedIndex) {
                 CCSLineData *lineData = [line.data objectAtIndex:self.selectedIndex];
-                if ([self isNoneDisplayValue:lineData.value]) {
+                if ([self isNoneDisplayValue:lineData.value] == NO) {
                     pointY = [self computeValueY:lineData.value inRect:self.frame];
                 }
             }
@@ -390,5 +301,28 @@
 }
 
 
+- (void)zoomOut {
+    if (self.enableZoom) {
+        [super zoomOut];
+    }
+}
+
+- (void)zoomIn {
+    if (self.enableZoom) {
+        [super zoomIn];
+    }
+}
+
+- (void)moveLeft {
+    if (self.enableSlip) {
+        [super moveLeft];
+    }
+}
+
+- (void)moveRight {
+    if (self.enableSlip) {
+        [super moveRight];
+    }
+}
 
 @end

@@ -20,10 +20,20 @@
 
 #import "CCSLineChart.h"
 
+/*!
+ CCSAreaChart
+ 
+ 普通面积图，以X轴为底边绘制面积
+ */
 @interface CCSAreaChart : CCSLineChart {
     CCFloat _areaAlpha;
 }
 
+
+/*!
+ @abstract
+ 面积填充部分的透明度
+ */
 @property(assign, nonatomic) CCFloat areaAlpha;
 
 @end
