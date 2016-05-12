@@ -27,14 +27,16 @@
 @synthesize stickData = _stickData;
 @synthesize stickBorderColor = _stickBorderColor;
 @synthesize stickFillColor = _stickFillColor;
-@synthesize latitudeNum = _latitudeNum;
-@synthesize longitudeNum = _longitudeNum;
 @synthesize maxSticksNum = _maxSticksNum;
 @synthesize selectedStickIndex = _selectedStickIndex;
 @synthesize maxValue = _maxValue;
 @synthesize minValue = _minValue;
-@synthesize coChart = _coChart;
+@synthesize maxDataValue = _maxDataValue;
+@synthesize minDataValue = _minDataValue;
+//@synthesize coChart = _coChart;
 @synthesize axisCalc = _axisCalc;
+@synthesize autoCalcRange = _autoCalcRange;
+
 
 - (void)initProperty {
     //初始化父类的熟悉
@@ -42,20 +44,22 @@
 
     self.stickBorderColor = [UIColor yellowColor];
     self.stickFillColor = [UIColor yellowColor];
-
-    self.latitudeNum = 2;
-    self.longitudeNum = 3;
     self.maxSticksNum = 26;
     self.maxValue = 100;
     self.minValue = 0;
+    self.maxDataValue = 0;
+    self.minDataValue = 0;
     self.selectedStickIndex = 0;
 
     self.stickData = nil;
-    self.coChart = nil;
+//    self.coChart = nil;
     self.axisCalc = 1;
+    self.autoCalcRange = YES;
 }
 
 - (void)calcDataValueRange {
+    
+    
     CCFloat maxValue = 0;
     CCFloat minValue = CCIntMax;
 
@@ -172,6 +176,10 @@
 }
 
 - (void)initAxisX {
+    if (self.autoCalcLongitudeTitle == NO) {
+        return;
+    }
+
     NSMutableArray *TitleX = [[NSMutableArray alloc] init];
     if (self.stickData != NULL && [self.stickData count] > 0) {
         CCFloat average = self.maxSticksNum / self.longitudeNum;
@@ -212,8 +220,13 @@
 }
 
 - (void)initAxisY {
+    if (self.autoCalcLatitudeTitle == NO) {
+        return;
+    }
     //计算取值范围
-    [self calcValueRange];
+    if ([self autoCalcRange]) {
+        [self calcValueRange];
+    }
 
     if (self.maxValue == 0. && self.minValue == 0.) {
         self.latitudeTitles = nil;
@@ -224,27 +237,35 @@
     CCFloat average = (CCUInt) ((self.maxValue - self.minValue) / self.latitudeNum);
     //处理刻度
     for (CCUInt i = 0; i < self.latitudeNum; i++) {
-        if (self.axisCalc == 1) {
-            CCUInt degree = floor(self.minValue + i * average) / self.axisCalc;
-            NSString *value = [[NSNumber numberWithUnsignedInteger:degree]stringValue];
-            [TitleY addObject:value];
-        } else {
-            NSString *value = [NSString stringWithFormat:@"%-.2f", floor(self.minValue + i * average) / self.axisCalc];
-            [TitleY addObject:value];
-        }
-    }
-    //处理最大值
-    if (self.axisCalc == 1) {
-        CCUInt degree = (CCInt) (self.maxValue) / self.axisCalc;
-        NSString *value = [[NSNumber numberWithUnsignedInteger:degree]stringValue];
+        CCUInt degree =  self.minValue + i * average;
+        NSString *value = [self formatAxisYDegree:degree];
         [TitleY addObject:value];
     }
-    else {
-        NSString *value = [NSString stringWithFormat:@"%-.2f", (self.maxValue) / self.axisCalc];
-        [TitleY addObject:value];
-    }
+    CCUInt degree =  self.maxValue;
+    NSString *value = [self formatAxisYDegree:degree];
+    [TitleY addObject:value];
 
     self.latitudeTitles = TitleY;
+}
+
+-(NSString*) formatAxisXDegree:(CCFloat)value {
+    return @"";
+}
+
+-(NSString*) formatAxisYDegree:(CCFloat)value {
+    //数据
+    CCFloat displayValue = floor(value) / self.axisCalc;
+    if(displayValue > 10000){
+        return [NSString stringWithFormat:@"%@万",[NSString stringWithFormat:@"%-.2f", displayValue/10000]];
+    }else {
+        return [NSString stringWithFormat:@"%ld", (CCInt)displayValue];
+    }
+}
+
+-(void) drawData:(CGRect)rect{
+    [super drawData:rect];
+    //绘制数据
+    [self drawSticks:rect];
 }
 
 - (void)drawRect:(CGRect)rect {
@@ -253,12 +274,9 @@
     [self initAxisX];
 
     [super drawRect:rect];
-
-    //绘制数据
-    [self drawData:rect];
 }
 
-- (void)drawData:(CGRect)rect {
+- (void)drawSticks:(CGRect)rect {
     // 蜡烛棒宽度
     CCFloat stickWidth = ((rect.size.width - self.axisMarginLeft - self.axisMarginRight) / self.maxSticksNum) - 1;
 
@@ -284,7 +302,7 @@
                     //没有值的情况下不绘制
                 } else {
                     //绘制数据，根据宽度判断绘制直线或方柱
-                    if (stickWidth >= 2) {
+                    if (stickWidth >= 1) {
                         CGContextAddRect(context, CGRectMake(stickX, highY, stickWidth, lowY - highY));
                         //填充路径
                         CGContextFillPath(context);
@@ -313,7 +331,7 @@
                     //没有值的情况下不绘制
                 } else {
                     //绘制数据，根据宽度判断绘制直线或方柱
-                    if (stickWidth >= 2) {
+                    if (stickWidth >= 1) {
                         CGContextAddRect(context, CGRectMake(stickX, highY, stickWidth, lowY - highY));
                         //填充路径
                         CGContextFillPath(context);
@@ -365,7 +383,7 @@
 - (NSString *)calcAxisYGraduate:(CGRect)rect {
     CCFloat value = [self touchPointAxisYValue:rect];
 
-    if (self.maxValue == 0. && self.minValue == 0.) {
+    if (self.maxValue - 0 == 0. && self.minValue - 0 == 0.) {
         return @"";
     }
 
@@ -380,23 +398,18 @@
     //父类的点击事件
     [super touchesBegan:touches withEvent:event];
     //计算选中的索引
-    [self calcSelectedIndex];
+//    [self calcSelectedIndex];
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
     //调用父类的触摸事件
     [super touchesMoved:touches withEvent:event];
     //计算选中的索引
-    [self calcSelectedIndex];
+//    [self calcSelectedIndex];
 
     NSArray *allTouches = [touches allObjects];
     //处理点击事件
     if ([allTouches count] == 1) {
-
-//        CGPoint pt = CGPointMake(self.singleTouchPoint.x, self.coChart.singleTouchPoint.y);
-//        //获取选中点
-//        self.coChart.singleTouchPoint = pt;
-//        [self.coChart performSelector:@selector(setNeedsDisplay) withObject:nil afterDelay:0];
 
     } else if ([allTouches count] == 2) {
 
@@ -408,35 +421,18 @@
 
 - (void)calcSelectedIndex {
     //X在系统范围内、进行计算
-    if (self.axisYPosition == CCSGridChartYAxisPositionLeft) {
-        if (self.singleTouchPoint.x > self.axisMarginLeft
-                && self.singleTouchPoint.x < self.frame.size.width) {
-            CCFloat stickWidth = ((self.frame.size.width - self.axisMarginLeft - self.axisMarginRight) / self.maxSticksNum);
-            CCFloat valueWidth = self.singleTouchPoint.x - self.axisMarginLeft;
-            if (valueWidth > 0) {
-                CCUInt index = (CCUInt) (valueWidth / stickWidth);
-                //如果超过则设置位最大
-                if (index >= self.maxSticksNum) {
-                    index = self.maxSticksNum - 1;
-                }
-                //设置选中的index
-                self.selectedStickIndex = index;
+    if (self.singleTouchPoint.x > self.axisMarginLeft
+        && self.singleTouchPoint.x < self.frame.size.width) {
+        CCFloat stickWidth = ((self.frame.size.width - self.axisMarginLeft - self.axisMarginRight) / self.maxSticksNum);
+        CCFloat valueWidth = self.singleTouchPoint.x - self.axisMarginLeft;
+        if (valueWidth > 0) {
+            CCUInt index = (CCUInt) (valueWidth / stickWidth);
+            //如果超过则设置位最大
+            if (index >= self.maxSticksNum) {
+                index = self.maxSticksNum - 1;
             }
-        }
-    } else {
-        if (self.singleTouchPoint.x > self.axisMarginLeft
-                && self.singleTouchPoint.x < self.frame.size.width - self.axisMarginRight) {
-            CCFloat stickWidth = 1.0 * ((self.frame.size.width - self.axisMarginLeft - self.axisMarginRight) / self.maxSticksNum);
-            CCFloat valueWidth = self.singleTouchPoint.x - self.axisMarginLeft;
-            if (valueWidth > 0) {
-                CCUInt index = (CCUInt) ([self.stickData count] - self.maxSticksNum + (valueWidth / stickWidth));
-                //如果超过则设置位最大
-                if (index >= [self.stickData count]) {
-                    index = [self.stickData count] - 1;
-                }
-                //设置选中的index
-                self.selectedStickIndex = index;
-            }
+            //设置选中的index
+            self.selectedStickIndex = index;
         }
     }
 }
@@ -458,10 +454,10 @@
             if (self.maxSticksNum < 20) {
                 self.maxSticksNum = 20;
             }
-            if (self.coChart) {
-                self.coChart.maxSticksNum = self.maxSticksNum;
-                [self.coChart setNeedsDisplay];
-            }
+//            if (self.coChart) {
+//                self.coChart.maxSticksNum = self.maxSticksNum;
+//                [self.coChart setNeedsDisplay];
+//            }
         }
     } else {
         //横屏最小40根，4根起开始变化
@@ -471,10 +467,10 @@
             if (self.maxSticksNum < 40) {
                 self.maxSticksNum = 40;
             }
-            if (self.coChart) {
-                self.coChart.maxSticksNum = self.maxSticksNum;
-                [self.coChart setNeedsDisplay];
-            }
+//            if (self.coChart) {
+//                self.coChart.maxSticksNum = self.maxSticksNum;
+//                [self.coChart setNeedsDisplay];
+//            }
         }
     }
 }
@@ -488,10 +484,6 @@
             } else {
                 self.maxSticksNum = self.maxSticksNum + 2;
             }
-//            if (self.coChart) {
-//                self.coChart.maxSticksNum = self.maxSticksNum;
-//                [self.coChart setNeedsDisplay];
-//            }
         }
     }
     else {
@@ -502,17 +494,24 @@
             } else {
                 self.maxSticksNum = self.maxSticksNum + 4;
             }
-//            if (self.coChart) {
-//                self.coChart.maxSticksNum = self.maxSticksNum;
-//                [self.coChart setNeedsDisplay];
-//            }
         }
     }
 }
 
+
+-(CCFloat) computeValueY:(CCFloat)value inRect:(CGRect)rect{
+    return (1 - (value - self.minValue) / (self.maxValue - self.minValue)) * (rect.size.height - self.axisMarginBottom - 2 * self.axisMarginTop) + self.axisMarginTop;
+}
+
+
+-(CCInt) getSelectedIndex
+{
+    return [self selectedStickIndex];
+}
+
 -(void) bindSelectedIndex
 {
-    
+    // noop
 }
 
 - (void) setSingleTouchPoint:(CGPoint) point
@@ -520,11 +519,6 @@
     _singleTouchPoint = point;
     
     [self calcSelectedIndex];
-    
     [self bindSelectedIndex];
-//    
-//    if (self.chartDelegate && [self.chartDelegate respondsToSelector:@selector(CCSChartBeTouchedOn:point:indexAt:)]) {
-//        [self.chartDelegate CCSChartBeTouchedOn:self point:point indexAt:self.selectedStickIndex];
-//    }
 }
 @end

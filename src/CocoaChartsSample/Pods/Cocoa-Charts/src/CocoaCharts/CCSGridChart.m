@@ -31,17 +31,23 @@
 @synthesize borderColor = _borderColor;
 @synthesize longitudeFontColor = _longitudeFontColor;
 @synthesize latitudeFontColor = _latitudeFontColor;
+@synthesize latitudeNum = _latitudeNum;
+@synthesize longitudeNum = _longitudeNum;
 @synthesize longitudeFont = _longitudeFont;
 @synthesize latitudeFont = _latitudeFont;
+@synthesize crossLinesFont = _crossLinesFont;
 @synthesize axisMarginLeft = _axisMarginLeft;
 @synthesize axisMarginBottom = _axisMarginBottom;
 @synthesize axisMarginTop = _axisMarginTop;
 @synthesize axisMarginRight = _axisMarginRight;
 @synthesize longitudeFontSize = _longitudeFontSize;
 @synthesize latitudeFontSize = _latitudeFontSize;
+@synthesize crossLinesFontSize = _crossLinesFontSize;
 @synthesize axisXPosition = _axisXPosition;
 @synthesize axisYPosition = _axisYPosition;
 @synthesize displayLatitudeTitle = _displayLatitudeTitle;
+@synthesize displayLeftLatitudeTitle = _displayLeftLatitudeTitle;
+@synthesize displayRightLatitudeTitle = _displayRightLatitudeTitle;
 @synthesize displayLongitudeTitle = _displayLongitudeTitle;
 @synthesize displayLongitude = _displayLongitude;
 @synthesize dashLongitude = _dashLongitude;
@@ -50,10 +56,15 @@
 @synthesize displayBorder = _displayBorder;
 @synthesize displayCrossXOnTouch = _displayCrossXOnTouch;
 @synthesize displayCrossYOnTouch = _displayCrossYOnTouch;
+@synthesize displayXDegreeOnTouch = _displayXDegreeOnTouch;
+@synthesize displayYDegreeOnTouch = _displayYDegreeOnTouch;
+@synthesize autoCalcLatitudeTitle = _autoCalcLatitudeTitle;
+@synthesize autoCalcLongitudeTitle = _autoCalcLongitudeTitle;
 @synthesize singleTouchPoint = _singleTouchPoint;
 @synthesize dashCrossLines = _dashCrossLines;
 @synthesize crossLinesColor = _crossLinesColor;
 @synthesize crossLinesFontColor = _crossLinesFontColor;
+@synthesize noneDisplayValues = _noneDisplayValues;
 @synthesize chartDelegate = _chartDelegate;
 
 
@@ -70,12 +81,16 @@
     self.longitudeFontColor = [UIColor lightGrayColor];
     self.latitudeFontColor = [UIColor lightGrayColor];
     self.dashCrossLines = YES;
-    self.crossLinesColor = [UIColor blackColor];
+    self.crossLinesColor = [UIColor grayColor];
     self.crossLinesFontColor = [UIColor whiteColor];
-    self.longitudeFontSize = 11;
-    self.latitudeFontSize = 11;
+    self.longitudeFontSize = 10;
+    self.latitudeFontSize = 10;
+    self.latitudeNum = 2;
+    self.longitudeNum = 3;
+    self.crossLinesFontSize = 10;
     self.longitudeFont = [UIFont systemFontOfSize:self.longitudeFontSize];
     self.latitudeFont = [UIFont systemFontOfSize:self.latitudeFontSize];
+    self.crossLinesFont = [UIFont systemFontOfSize:self.crossLinesFontSize];
     self.axisMarginLeft = 3;
     self.axisMarginBottom = 16;
     self.axisMarginTop = 3;
@@ -83,14 +98,20 @@
     self.axisXPosition = CCSGridChartXAxisPositionBottom;
     self.axisYPosition = CCSGridChartYAxisPositionLeft;
     self.displayLatitudeTitle = YES;
+    self.displayLeftLatitudeTitle = YES;
+    self.displayRightLatitudeTitle = YES;
     self.displayLongitudeTitle = YES;
     self.displayLongitude = YES;
     self.displayLatitude = YES;
     self.dashLongitude = NO;
     self.dashLatitude = NO;
     self.displayBorder = YES;
-    self.displayCrossXOnTouch = YES;
-    self.displayCrossYOnTouch = YES;
+    self.displayCrossXOnTouch = NO;
+    self.displayCrossYOnTouch = NO;
+    self.displayXDegreeOnTouch = YES;
+    self.displayYDegreeOnTouch = YES;
+    self.autoCalcLatitudeTitle = YES;
+    self.autoCalcLongitudeTitle = YES;
 
     //初期化X轴
     self.latitudeTitles = nil;
@@ -99,6 +120,8 @@
     //设置可以多点触控
     self.multipleTouchEnabled = YES;
     self.userInteractionEnabled = YES;
+    
+    self.noneDisplayValues = [NSMutableArray arrayWithObjects:@"0", nil];
 
     [self registerObservers];
 }
@@ -111,6 +134,8 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIDeviceOrientationDidChangeNotification object:nil];
 }
 
+- (void) drawData:(CGRect)rect{
+}
 
 - (void)drawRect:(CGRect)rect {
     //清理当前画面，设置背景色
@@ -130,14 +155,17 @@
 
     //绘制纬线
     [self drawLatitudeLines:rect];
-    //绘制X轴标题
-    [self drawXAxisTitles:rect];
     //绘制经线
     [self drawLongitudeLines:rect];
+    //绘制数据
+    [self drawData:rect];
+    //绘制X轴标题
+    [self drawXAxisTitles:rect];
     //绘制Y轴标题
     [self drawYAxisTitles:rect];
 
     [self drawCrossLines:rect];
+    
 }
 
 - (void)drawBorder:(CGRect)rect {
@@ -232,14 +260,8 @@
     CCFloat offset = rect.size.height - self.axisMarginBottom - self.axisMarginTop;
     
     for (CCUInt i = 0; i <= [self.latitudeTitles count]; i++) {
-//        if (self.axisYPosition == CCSGridChartYAxisPositionLeft) {
-//            CGContextMoveToPoint(context, self.axisMarginLeft, offset - i * postOffset);
-//            CGContextAddLineToPoint(context, rect.size.width, offset - i * postOffset);
-//            
-//        } else {
-            CGContextMoveToPoint(context, 0, offset - i * postOffset);
-            CGContextAddLineToPoint(context, rect.size.width , offset - i * postOffset);
-//        }
+        CGContextMoveToPoint(context, 0, offset - i * postOffset);
+        CGContextAddLineToPoint(context, rect.size.width , offset - i * postOffset);
     }
     CGContextStrokePath(context);
     //还原线条
@@ -273,113 +295,57 @@
     
     CCFloat offset = rect.size.height - self.axisMarginBottom - self.axisMarginTop;
     
-    const int fixedLableWidth = 100;
-    
-    for (CCUInt i = 0; i <= [self.latitudeTitles count]; i++) {
+    for (CCUInt i = 0; i < [self.latitudeTitles count]; i++) {
+        // 左侧
         // 绘制线条
-//        if (self.axisYPosition == CCSGridChartYAxisPositionLeft) {
-            if (i < [self.latitudeTitles count]) {
-                NSString *str = (NSString *) [self.latitudeTitles objectAtIndex:i];
-                
-                //处理成千分数形式
-                NSNumberFormatter *decimalformatter = [[NSNumberFormatter alloc] init];
-                decimalformatter.numberStyle = NSNumberFormatterDecimalStyle;
-                
-                str = [decimalformatter stringFromNumber:[NSNumber numberWithDouble:[str doubleValue]]];
-                
-                //调整Y轴坐标位置
-                if (i == 0) {
-                    CGRect textRect= CGRectMake(self.axisMarginLeft, offset - i * postOffset - self.latitudeFontSize - 1, fixedLableWidth, self.latitudeFontSize);
-                    UIFont *textFont= self.latitudeFont; //设置字体
-                    NSMutableParagraphStyle *textStyle=[[NSMutableParagraphStyle alloc]init];//段落样式
-                    textStyle.alignment=NSTextAlignmentLeft;
-                    textStyle.lineBreakMode = NSLineBreakByWordWrapping;
-                    //绘制字体
-//                    [str drawInRect:textRect withAttributes:@{NSFontAttributeName:textFont,NSParagraphStyleAttributeName:textStyle}];
-                    [str drawInRect:textRect withAttributes:@{NSFontAttributeName:textFont,
-                                                              NSParagraphStyleAttributeName:textStyle,
-                                                              NSForegroundColorAttributeName:self.latitudeFontColor}];
-                } else if (i == [self.latitudeTitles count] - 1) {
-                    
-                    CGRect textRect= CGRectMake(self.axisMarginLeft, offset - i * postOffset, fixedLableWidth, self.latitudeFontSize);
-                    UIFont *textFont= self.latitudeFont; //设置字体
-                    NSMutableParagraphStyle *textStyle=[[NSMutableParagraphStyle alloc]init];//段落样式
-                    textStyle.alignment=NSTextAlignmentLeft;
-                    textStyle.lineBreakMode = NSLineBreakByWordWrapping;
-                    //绘制字体
-//                    [str drawInRect:textRect withAttributes:@{NSFontAttributeName:textFont,NSParagraphStyleAttributeName:textStyle}];
-                    [str drawInRect:textRect withAttributes:@{NSFontAttributeName:textFont,
-                                                              NSParagraphStyleAttributeName:textStyle,
-                                                              NSForegroundColorAttributeName:self.latitudeFontColor}];
-                } else {
-                    CGRect textRect= CGRectMake(self.axisMarginLeft, offset - i * postOffset - self.latitudeFontSize - 1 , fixedLableWidth, self.latitudeFontSize);
-                    UIFont *textFont= self.latitudeFont; //设置字体
-                    NSMutableParagraphStyle *textStyle=[[NSMutableParagraphStyle alloc]init];//段落样式
-                    textStyle.alignment=NSTextAlignmentLeft;
-                    textStyle.lineBreakMode = NSLineBreakByWordWrapping;
-                    //绘制字体
-//                    [str drawInRect:textRect withAttributes:@{NSFontAttributeName:textFont,NSParagraphStyleAttributeName:textStyle}];
-                    [str drawInRect:textRect withAttributes:@{NSFontAttributeName:textFont,
-                                                              NSParagraphStyleAttributeName:textStyle,
-                                                              NSForegroundColorAttributeName:self.latitudeFontColor}];
-                }
-                
+        NSString *valueStr = (NSString *) [self.latitudeTitles objectAtIndex:i];
+        UIFont *textFont= self.latitudeFont; //设置字体
+        NSMutableParagraphStyle *textStyle=[[NSMutableParagraphStyle alloc]init];//段落样式
+        textStyle.lineBreakMode = NSLineBreakByWordWrapping;
+        
+        NSDictionary *attrs = @{NSFontAttributeName:textFont,
+                                NSParagraphStyleAttributeName:textStyle,
+                                NSForegroundColorAttributeName:self.latitudeFontColor};
+        CGSize textSize = [valueStr boundingRectWithSize:CGSizeMake(100, 100)
+                                                 options:NSStringDrawingUsesLineFragmentOrigin
+                                              attributes:attrs
+                                                 context:nil].size;
+        
+        if(self.displayLeftLatitudeTitle){
+            textStyle.alignment=NSTextAlignmentLeft;
+            //调整Y轴坐标位置
+            if (i == 0) {
+                CGRect textRect= CGRectMake(self.axisMarginLeft, offset - i * postOffset - textSize.height - 1, textSize.width, textSize.height);
+                //绘制字体
+                [valueStr drawInRect:textRect withAttributes:attrs];
+            } else if (i == [self.latitudeTitles count] - 1) {
+                CGRect textRect= CGRectMake(self.axisMarginLeft, offset - i * postOffset, textSize.width, textSize.height);
+                //绘制字体
+                [valueStr drawInRect:textRect withAttributes:attrs];
+            } else {
+                CGRect textRect= CGRectMake(self.axisMarginLeft, offset - i * postOffset - textSize.height - 1 ,textSize.width, textSize.height);
+                [valueStr drawInRect:textRect withAttributes:attrs];
             }
-            
-//        } else {
-            if (i < [self.latitudeTitles count]) {
-                NSString *str = (NSString *) [self.latitudeTitles objectAtIndex:i];
-                
-                //处理成千分数形式
-                NSNumberFormatter *decimalformatter = [[NSNumberFormatter alloc] init];
-                decimalformatter.numberStyle = NSNumberFormatterDecimalStyle;
-                
-                str = [decimalformatter stringFromNumber:[NSNumber numberWithDouble:[str doubleValue]]];
-                
-                //调整Y轴坐标位置
-                if (i == 0) {
-                    
-                    CGRect textRect= CGRectMake(rect.size.width - fixedLableWidth - self.axisMarginRight, offset - i * postOffset - self.latitudeFontSize - 1, fixedLableWidth, self.latitudeFontSize);
-                    UIFont *textFont= self.latitudeFont; //设置字体
-                    NSMutableParagraphStyle *textStyle=[[NSMutableParagraphStyle alloc]init];//段落样式
-                    textStyle.alignment=NSTextAlignmentRight;
-                    textStyle.lineBreakMode = NSLineBreakByWordWrapping;
-                    //绘制字体
-//                    [str drawInRect:textRect withAttributes:@{NSFontAttributeName:textFont,NSParagraphStyleAttributeName:textStyle}];
-                    [str drawInRect:textRect withAttributes:@{NSFontAttributeName:textFont,
-                                                              NSParagraphStyleAttributeName:textStyle,
-                                                              NSForegroundColorAttributeName:self.latitudeFontColor}];
-                    
-                    
-                } else if (i == [self.latitudeTitles count] - 1) {
-                    
-                    CGRect textRect= CGRectMake(rect.size.width - fixedLableWidth - self.axisMarginRight, offset - i * postOffset, fixedLableWidth, self.latitudeFontSize);
-                    UIFont *textFont= self.latitudeFont; //设置字体
-                    NSMutableParagraphStyle *textStyle=[[NSMutableParagraphStyle alloc]init];//段落样式
-                    textStyle.alignment=NSTextAlignmentRight;
-                    textStyle.lineBreakMode = NSLineBreakByWordWrapping;
-                    //绘制字体
-//                    [str drawInRect:textRect withAttributes:@{NSFontAttributeName:textFont,NSParagraphStyleAttributeName:textStyle}];
-                    [str drawInRect:textRect withAttributes:@{NSFontAttributeName:textFont,
-                                                              NSParagraphStyleAttributeName:textStyle,
-                                                              NSForegroundColorAttributeName:self.latitudeFontColor}];
-                    
-                } else {
-                    
-                    CGRect textRect= CGRectMake(rect.size.width - fixedLableWidth - self.axisMarginRight, offset - i * postOffset - self.latitudeFontSize - 1, fixedLableWidth, self.latitudeFontSize);
-                    UIFont *textFont= self.latitudeFont; //设置字体
-                    NSMutableParagraphStyle *textStyle=[[NSMutableParagraphStyle alloc]init];//段落样式
-                    textStyle.alignment=NSTextAlignmentRight;
-                    textStyle.lineBreakMode = NSLineBreakByWordWrapping;
-                    //绘制字体
-//                    [str drawInRect:textRect withAttributes:@{NSFontAttributeName:textFont,NSParagraphStyleAttributeName:textStyle}];
-//
-                    [str drawInRect:textRect withAttributes:@{NSFontAttributeName:textFont,
-                                                              NSParagraphStyleAttributeName:textStyle,
-                                                              NSForegroundColorAttributeName:self.latitudeFontColor}];
-                }
+        }
+        
+        if(self.displayRightLatitudeTitle){
+            textStyle.alignment=NSTextAlignmentRight;
+            //绘制右侧
+            //调整Y轴坐标位置
+            if (i == 0) {
+                CGRect textRect= CGRectMake(rect.size.width - textSize.width - self.axisMarginRight, offset - i * postOffset - textSize.height - 1, textSize.width, textSize.height);
+                //绘制字体
+                [valueStr drawInRect:textRect withAttributes:attrs];
+            } else if (i == [self.latitudeTitles count] - 1) {
+                CGRect textRect= CGRectMake(rect.size.width - textSize.width - self.axisMarginRight, offset - i * postOffset, textSize.width, textSize.height);
+                //绘制字体
+                [valueStr drawInRect:textRect withAttributes:attrs];
+            } else {
+                CGRect textRect= CGRectMake(rect.size.width - textSize.width - self.axisMarginRight, offset - i * postOffset - textSize.height - 1, textSize.width, textSize.height);
+                //绘制字体//
+                [valueStr drawInRect:textRect withAttributes:attrs];
             }
-//        }
+        }
     }
 }
 
@@ -392,10 +358,15 @@
     if (self.displayLongitude == NO) {
         return;
     }
+
+    if (self.longitudeNum <= 0){
+        return;
+    }
     
     if ([self.longitudeTitles count] <= 0) {
         return;
     }
+    
     //设置线条为点线
     if (self.dashLongitude) {
         CGFloat lengths[] = {3.0, 3.0};
@@ -404,20 +375,11 @@
     CCFloat postOffset;
     CCFloat offset;
     
-//    if (self.axisYPosition == CCSGridChartYAxisPositionLeft) {
-//        postOffset = (rect.size.width - self.axisMarginLeft - 2 * self.axisMarginRight) / ([self.longitudeTitles count] - 1);
-//        offset = self.axisMarginLeft + self.axisMarginRight;
-//    }
-//    else {
-//        postOffset = (rect.size.width - 2 * self.axisMarginLeft - self.axisMarginRight) / ([self.longitudeTitles count] - 1);
-//        offset = self.axisMarginLeft;
-//    }
     
-    
-    postOffset = (rect.size.width - self.axisMarginLeft - self.axisMarginRight) / ([self.longitudeTitles count] - 1);
+    postOffset = (rect.size.width - self.axisMarginLeft - self.axisMarginRight) / self.longitudeNum;
     offset = self.axisMarginLeft;
     
-    for (CCUInt i = 0; i <= [self.longitudeTitles count]; i++) {
+    for (CCUInt i = 0; i <= self.longitudeNum ; i++) {
         if (self.axisXPosition == CCSGridChartXAxisPositionBottom) {
                 CGContextMoveToPoint(context, offset + i * postOffset, 0);
                 CGContextAddLineToPoint(context, offset + i * postOffset, rect.size.height - self.axisMarginBottom);
@@ -453,109 +415,79 @@
     CCFloat postOffset;
     CCFloat offset;
     
-    if (self.axisYPosition == CCSGridChartYAxisPositionLeft) {
-        postOffset = (rect.size.width - self.axisMarginLeft - 2 * self.axisMarginRight) / ([self.longitudeTitles count] - 1);
-        offset = self.axisMarginLeft + self.axisMarginRight;
-    } else {
-        postOffset = (rect.size.width - 2 * self.axisMarginLeft - self.axisMarginRight) / ([self.longitudeTitles count] - 1);
-        offset = self.axisMarginLeft;
-    }
+    postOffset = (rect.size.width - self.axisMarginLeft - self.axisMarginRight) / self.longitudeNum;
+    offset = self.axisMarginLeft ;
+    
+    for (CCUInt i = 0; i < [self.longitudeTitles count] && i <= self.longitudeNum; i++) {
         
-    for (CCUInt i = 0; i <= [self.longitudeTitles count]; i++) {
+        // 绘制线条
+        NSString *valueStr = (NSString *) [self.longitudeTitles objectAtIndex:i];
+        UIFont *textFont= self.longitudeFont; //设置字体
+        NSMutableParagraphStyle *textStyle=[[NSMutableParagraphStyle alloc]init];//段落样式
+        textStyle.lineBreakMode = NSLineBreakByWordWrapping;
+        
+        NSDictionary *attrs = @{NSFontAttributeName:textFont,
+                                NSParagraphStyleAttributeName:textStyle,
+                                NSForegroundColorAttributeName:self.longitudeFontColor};
+        CGSize textSize = [valueStr boundingRectWithSize:CGSizeMake(100, 100)
+                                                 options:NSStringDrawingUsesLineFragmentOrigin
+                                              attributes:attrs
+                                                 context:nil].size;
+        
         if (self.axisXPosition == CCSGridChartXAxisPositionBottom) {
-            if (i < [self.longitudeTitles count]) {
-                NSString *str = (NSString *) [self.longitudeTitles objectAtIndex:i];
+            //调整X轴坐标位置
+            if (i == 0) {
+                CGRect textRect= CGRectMake(0, rect.size.height - self.axisMarginBottom, postOffset, textSize.height);
+                textStyle.alignment=NSTextAlignmentLeft;
+                //绘制字体
+                [valueStr drawInRect:textRect withAttributes:attrs];
                 
-                //调整X轴坐标位置
-                if (i == 0) {
-                    CGRect textRect= CGRectMake(0, rect.size.height - self.axisMarginBottom, postOffset, self.longitudeFontSize);
-                    UIFont *textFont= self.longitudeFont; //设置字体
-                    NSMutableParagraphStyle *textStyle=[[NSMutableParagraphStyle alloc]init];//段落样式
-                    textStyle.alignment=NSTextAlignmentLeft;
-                    textStyle.lineBreakMode = NSLineBreakByWordWrapping;
-                    //绘制字体
-                    [str drawInRect:textRect withAttributes:@{NSFontAttributeName:textFont,
-                                                              NSParagraphStyleAttributeName:textStyle,
-                                                              NSForegroundColorAttributeName:self.longitudeFontColor}];
-                    
-                } else if (i == [self.longitudeTitles count] - 1) {
-                    CGRect textRect= CGRectMake(rect.size.width - postOffset, rect.size.height - self.axisMarginBottom, postOffset, self.longitudeFontSize);
-                    UIFont *textFont= self.longitudeFont; //设置字体
-                    NSMutableParagraphStyle *textStyle=[[NSMutableParagraphStyle alloc]init];//段落样式
-                    textStyle.alignment=NSTextAlignmentRight;
-                    textStyle.lineBreakMode = NSLineBreakByWordWrapping;
-                    //绘制字体
-//                    [str drawInRect:textRect withAttributes:@{NSFontAttributeName:textFont,NSParagraphStyleAttributeName:textStyle}];
-                    //绘制字体
-                    [str drawInRect:textRect withAttributes:@{NSFontAttributeName:textFont,
-                                                              NSParagraphStyleAttributeName:textStyle,
-                                                              NSForegroundColorAttributeName:self.longitudeFontColor}];
-                } else {
-                    CGRect textRect= CGRectMake(offset + (i - 0.5) * postOffset, rect.size.height - self.axisMarginBottom, postOffset, self.longitudeFontSize);
-                    UIFont *textFont= self.longitudeFont; //设置字体
-                    NSMutableParagraphStyle *textStyle=[[NSMutableParagraphStyle alloc]init];//段落样式
-                    textStyle.alignment=NSTextAlignmentCenter;
-                    textStyle.lineBreakMode = NSLineBreakByWordWrapping;
-                    //绘制字体
-//                    [str drawInRect:textRect withAttributes:@{NSFontAttributeName:textFont,NSParagraphStyleAttributeName:textStyle}];
-                    //绘制字体
-                    [str drawInRect:textRect withAttributes:@{NSFontAttributeName:textFont,
-                                                              NSParagraphStyleAttributeName:textStyle,
-                                                              NSForegroundColorAttributeName:self.longitudeFontColor}];
-                }
+            } else if (i == self.longitudeNum) {
+                CGRect textRect= CGRectMake(rect.size.width - postOffset, rect.size.height - self.axisMarginBottom, postOffset, textSize.height);
+                textStyle.alignment=NSTextAlignmentRight;
+                //绘制字体
+                [valueStr drawInRect:textRect withAttributes:attrs];
+            } else {
+                CGRect textRect= CGRectMake(offset + (i - 0.5) * postOffset, rect.size.height - self.axisMarginBottom, postOffset, textSize.height);
+                textStyle.alignment=NSTextAlignmentCenter;
+                //绘制字体
+                [valueStr drawInRect:textRect withAttributes:attrs];
             }
         } else {
-            
-            if (i < [self.longitudeTitles count]) {
-                NSString *str = (NSString *) [self.longitudeTitles objectAtIndex:i];
-                
-                //调整X轴坐标位置
-                if (i == 0) {
-                    CGRect textRect= CGRectMake(0, 0, postOffset, self.longitudeFontSize);
-                    UIFont *textFont= self.longitudeFont; //设置字体
-                    NSMutableParagraphStyle *textStyle=[[NSMutableParagraphStyle alloc]init];//段落样式
-                    textStyle.alignment=NSTextAlignmentLeft;
-                    textStyle.lineBreakMode = NSLineBreakByWordWrapping;
-                    //绘制字体
-//                    [str drawInRect:textRect withAttributes:@{NSFontAttributeName:textFont,NSParagraphStyleAttributeName:textStyle}];
-                    //绘制字体
-                    [str drawInRect:textRect withAttributes:@{NSFontAttributeName:textFont,
-                                                              NSParagraphStyleAttributeName:textStyle,
-                                                              NSForegroundColorAttributeName:self.longitudeFontColor}];
-                    
-                } else if (i == [self.longitudeTitles count] - 1) {
-                    CGRect textRect= CGRectMake(rect.size.width - postOffset, 0, postOffset, self.longitudeFontSize);
-                    UIFont *textFont= self.longitudeFont; //设置字体
-                    NSMutableParagraphStyle *textStyle=[[NSMutableParagraphStyle alloc]init];//段落样式
-                    textStyle.alignment=NSTextAlignmentRight;
-                    textStyle.lineBreakMode = NSLineBreakByWordWrapping;
-                    //绘制字体
-//                    [str drawInRect:textRect withAttributes:@{NSFontAttributeName:textFont,NSParagraphStyleAttributeName:textStyle}];
-                    //绘制字体
-                    [str drawInRect:textRect withAttributes:@{NSFontAttributeName:textFont,
-                                                              NSParagraphStyleAttributeName:textStyle,
-                                                              NSForegroundColorAttributeName:self.longitudeFontColor}];
-                } else {
-                    CGRect textRect= CGRectMake(offset + (i - 0.5) * postOffset, 0, postOffset, self.longitudeFontSize);
-                    UIFont *textFont= self.longitudeFont; //设置字体
-                    NSMutableParagraphStyle *textStyle=[[NSMutableParagraphStyle alloc]init];//段落样式
-                    textStyle.alignment=NSTextAlignmentCenter;
-                    textStyle.lineBreakMode = NSLineBreakByWordWrapping;
-                    //绘制字体
-//                    [str drawInRect:textRect withAttributes:@{NSFontAttributeName:textFont,NSParagraphStyleAttributeName:textStyle}];
-                    //绘制字体
-                    [str drawInRect:textRect withAttributes:@{NSFontAttributeName:textFont,
-                                                              NSParagraphStyleAttributeName:textStyle,
-                                                              NSForegroundColorAttributeName:self.longitudeFontColor}];
-                }
+            //调整X轴坐标位置
+            if (i == 0) {
+                CGRect textRect= CGRectMake(0, 0, postOffset, textSize.height);
+                textStyle.alignment=NSTextAlignmentLeft;
+                //绘制字体
+                [valueStr drawInRect:textRect withAttributes:attrs];
+            } else if (i == self.longitudeNum) {
+                CGRect textRect= CGRectMake(rect.size.width - postOffset, 0, postOffset, textSize.height);
+                textStyle.alignment=NSTextAlignmentRight;
+                //绘制字体
+                [valueStr drawInRect:textRect withAttributes:attrs];
+            } else {
+                CGRect textRect= CGRectMake(offset + (i - 0.5) * postOffset, 0, postOffset, textSize.height);
+                textStyle.alignment=NSTextAlignmentCenter;
+                //绘制字体
+                [valueStr drawInRect:textRect withAttributes:attrs];
+      
             }
         }
     }
 }
 
 - (void)drawCrossLines:(CGRect)rect {
+    
+    //过滤非显示区域的点
+    if (self.singleTouchPoint.x < self.axisMarginLeft ||
+        self.singleTouchPoint.y < self.axisMarginTop ||
+        self.singleTouchPoint.x > rect.size.width - self.axisMarginRight ||
+        self.singleTouchPoint.y > rect.size.height - self.axisMarginBottom) {
+        return;
+    }
+    
     CGContextRef context = UIGraphicsGetCurrentContext();
-    CGContextSetLineWidth(context, 0.5f);
+    CGContextSetLineWidth(context, 1.0f);
     CGContextSetStrokeColorWithColor(context, self.crossLinesColor.CGColor);
     CGContextSetFillColorWithColor(context, self.crossLinesColor.CGColor);
 
@@ -564,164 +496,121 @@
         CGFloat lengths[] = {2.0, 2.0};
         CGContextSetLineDash(context, 0.0, lengths, 1);
     }
-
-    if (self.axisXPosition == CCSGridChartXAxisPositionBottom) {
-//        //界定点击有效范围
-//        if (self.singleTouchPoint.x >= self.axisMarginLeft
-//                && self.singleTouchPoint.y > 0
-//                && self.singleTouchPoint.x < rect.size.width
-//                && self.singleTouchPoint.y < rect.size.height - self.axisMarginBottom) {
-
-//            //获得标尺刻度
-//            NSString *meterY = [self calcAxisYGraduate:rect];
-//            NSString *meterX = [self calcAxisXGraduate:rect];
-//            
-//            //处理成千分数形式
-//            NSNumberFormatter *decimalformatter = [[NSNumberFormatter alloc]init];
-//            decimalformatter.numberStyle = NSNumberFormatterDecimalStyle;
-//            
-//            meterY = [decimalformatter stringFromNumber:[NSNumber numberWithDouble:[meterY doubleValue]]];
-
-
-            //绘制横线
-            if (self.displayCrossXOnTouch) {
-//                //设置半透明
-//                CGContextSetAlpha(context, 0.7);
-//                CGContextSetFillColorWithColor(context,self.crossLinesColor.CGColor);
-//                //填充方框
-//                CGContextAddRect(context,CGRectMake(self.singleTouchPoint.x -35, rect.size.height - self.axisMarginBottom + 1, 70, 14));
-//                //绘制线条
-//                CGContextFillPath(context);
-
-                //还原半透明
-                CGContextSetAlpha(context, 1);
-
-                CGContextMoveToPoint(context, self.singleTouchPoint.x, 0);
-                CGContextAddLineToPoint(context, self.singleTouchPoint.x, rect.size.height - self.axisMarginBottom);
-
-//                //绘制方框
-//                CGContextAddRect(context,CGRectMake(self.singleTouchPoint.x -35, rect.size.height - self.axisMarginBottom + 1, 70, 14));
-//                //绘制线条
-                CGContextStrokePath(context);
-//                
-//                CGContextSetFillColorWithColor(context,self.crossLinesFontColor.CGColor);
-
-//                //绘制标尺刻度
-//                [meterX drawInRect:CGRectMake(self.singleTouchPoint.x -35, rect.size.height - self.axisMarginBottom + 1, 70, 12)
-//                          withFont:[UIFont fontWithName:@"Helvetica" size:self.longitudeFontSize] 
-//                     lineBreakMode:UILineBreakModeTailTruncation 
-//                         alignment:NSTextAlignmentCenter];
-
+    
+    
+    //绘制横线
+    if (self.displayCrossXOnTouch) {
+        
+        if (self.axisXPosition == CCSGridChartXAxisPositionBottom) {
+            //还原半透明
+            CGContextSetAlpha(context, 1);
+            
+            CGContextMoveToPoint(context, self.singleTouchPoint.x, 0);
+            CGContextAddLineToPoint(context, self.singleTouchPoint.x, rect.size.height - self.axisMarginBottom);
+            
+            //绘制线条
+            CGContextStrokePath(context);
+            
+            if(self.displayXDegreeOnTouch){
+                // 绘制线条
+                NSString *valueStr = [self calcAxisXGraduate:rect];
+                UIFont *textFont= self.crossLinesFont; //设置字体
+                NSMutableParagraphStyle *textStyle=[[NSMutableParagraphStyle alloc]init];//段落样式
+                textStyle.lineBreakMode = NSLineBreakByWordWrapping;
+                textStyle.alignment=NSTextAlignmentCenter;
+                
+                NSDictionary *attrs = @{NSFontAttributeName:textFont,
+                                        NSParagraphStyleAttributeName:textStyle,
+                                        NSForegroundColorAttributeName:self.crossLinesFontColor};
+                CGSize textSize = [valueStr boundingRectWithSize:CGSizeMake(100, 100)
+                                                         options:NSStringDrawingUsesLineFragmentOrigin
+                                                      attributes:attrs
+                                                         context:nil].size;
+                CGRect boxRect = CGRectMake(self.singleTouchPoint.x - textSize.width / 2.0, 1, textSize.width, textSize.height);
+                
+                CGContextAddRect(context,boxRect);
+                CGContextFillPath(context);
+                
+                [valueStr drawInRect:boxRect withAttributes:attrs];
+            }
+        }
+        else{
+            //还原半透明
+            CGContextSetAlpha(context, 1);
+            
+            CGContextMoveToPoint(context, self.singleTouchPoint.x, self.axisMarginTop);
+            CGContextAddLineToPoint(context, self.singleTouchPoint.x, rect.size.height);
+            
+            //绘制线条
+            CGContextStrokePath(context);
+            
+            if(self.displayXDegreeOnTouch){
+                // 绘制线条
+                NSString *valueStr = [self calcAxisXGraduate:rect];
+                UIFont *textFont= self.crossLinesFont; //设置字体
+                NSMutableParagraphStyle *textStyle=[[NSMutableParagraphStyle alloc]init];//段落样式
+                textStyle.lineBreakMode = NSLineBreakByWordWrapping;
+                textStyle.alignment=NSTextAlignmentCenter;
+                
+                NSDictionary *attrs = @{NSFontAttributeName:textFont,
+                                        NSParagraphStyleAttributeName:textStyle,
+                                        NSForegroundColorAttributeName:self.crossLinesFontColor};
+                CGSize textSize = [valueStr boundingRectWithSize:CGSizeMake(100, 100)
+                                                         options:NSStringDrawingUsesLineFragmentOrigin
+                                                      attributes:attrs
+                                                         context:nil].size;
+                CGRect boxRect = CGRectMake(self.singleTouchPoint.x - textSize.width / 2.0, 1, textSize.width, textSize.height);
+                
+                CGContextAddRect(context,boxRect);
+                CGContextFillPath(context);
+                
+                [valueStr drawInRect:boxRect withAttributes:attrs];
             }
 
-            //绘制纵线与刻度
-            if (self.displayCrossYOnTouch) {
-//                //设置半透明
-//                CGContextSetAlpha(context, 0.7);
-//                CGContextSetFillColorWithColor(context,self.crossLinesColor.CGColor);
-//                //填充方框
-//                CGContextAddRect(context,CGRectMake(1, self.singleTouchPoint.y - 6, self.axisMarginLeft-2, 14));
-//                //绘制线条
-//                CGContextFillPath(context);
-                //还原半透明
-                CGContextSetAlpha(context, 1);
-
-                CGContextMoveToPoint(context, 0, self.singleTouchPoint.y);
-                CGContextAddLineToPoint(context, rect.size.width, self.singleTouchPoint.y);
-
-//                //绘制方框
-//                CGContextAddRect(context,CGRectMake(1, self.singleTouchPoint.y - 6, self.axisMarginLeft-2, 14));
-//                //绘制线条
-                CGContextStrokePath(context);
-//                
-//                CGContextSetFillColorWithColor(context,self.crossLinesFontColor.CGColor);
-
-//                [meterY drawInRect:CGRectMake(1, self.singleTouchPoint.y - 5, self.axisMarginLeft-2, 50)
-//                          withFont:[UIFont fontWithName:@"Helvetica" size:self.latitudeFontSize]
-//                     lineBreakMode:NSLineBreakByWordWrapping 
-//                         alignment:NSTextAlignmentRight];
-
-            }
-//        }
- 
-    } else {
-//        //界定点击有效范围
-//        if (self.singleTouchPoint.x >= self.axisMarginLeft
-//                && self.singleTouchPoint.y > self.axisMarginTop
-//                && self.singleTouchPoint.x < rect.size.width
-//                && self.singleTouchPoint.y < rect.size.height) {
-
-//            //获得标尺刻度
-//            NSString *meterY = [self calcAxisYGraduate:rect];
-//            NSString *meterX = [self calcAxisXGraduate:rect];
-//            
-//            //处理成千分数形式
-//            NSNumberFormatter *decimalformatter = [[NSNumberFormatter alloc]init];
-//            decimalformatter.numberStyle = NSNumberFormatterDecimalStyle;
-//            
-//            meterY = [decimalformatter stringFromNumber:[NSNumber numberWithDouble:[meterY doubleValue]]];
-
-            //绘制横线
-            if (self.displayCrossXOnTouch) {
-//                //设置半透明
-//                CGContextSetAlpha(context, 0.7);
-//                CGContextSetFillColorWithColor(context,self.crossLinesColor.CGColor);
-//                //填充方框
-//                CGContextAddRect(context,CGRectMake(self.singleTouchPoint.x -35, self.axisMarginTop + 1, 70, 14));
-//                //绘制线条
-//                CGContextFillPath(context);
-
-                //还原半透明
-                CGContextSetAlpha(context, 1);
-
-                CGContextMoveToPoint(context, self.singleTouchPoint.x, self.axisMarginTop);
-                CGContextAddLineToPoint(context, self.singleTouchPoint.x, rect.size.height);
-
-//                //绘制方框
-//                CGContextAddRect(context,CGRectMake(self.singleTouchPoint.x -35, self.axisMarginTop + 1, 70, 14));
-//                //绘制线条
-                CGContextStrokePath(context);
-//                
-//                CGContextSetFillColorWithColor(context,self.crossLinesFontColor.CGColor);
-
-//                //绘制标尺刻度
-//                [meterX drawInRect:CGRectMake(self.singleTouchPoint.x -35, self.axisMarginTop + 1, 70, 12)
-//                          withFont:[UIFont fontWithName:@"Helvetica" size:self.longitudeFontSize] 
-//                     lineBreakMode:UILineBreakModeTailTruncation 
-//                         alignment:NSTextAlignmentCenter];
-            }
-
-            //绘制纵线与刻度
-            if (self.displayCrossYOnTouch) {
-
-//                //设置半透明
-//                CGContextSetAlpha(context, 0.7);
-//                CGContextSetFillColorWithColor(context,self.crossLinesColor.CGColor);
-//                //填充方框
-//                CGContextAddRect(context,CGRectMake(1, self.singleTouchPoint.y - 6, self.axisMarginLeft-2, 14));
-//                //绘制线条
-//                CGContextFillPath(context);
-                //还原半透明
-                CGContextSetAlpha(context, 1);
-
-                CGContextMoveToPoint(context, 0, self.singleTouchPoint.y);
-                CGContextAddLineToPoint(context, rect.size.width, self.singleTouchPoint.y);
-
-//                //绘制方框
-//                CGContextAddRect(context,CGRectMake(1, self.singleTouchPoint.y - 6, self.axisMarginLeft-2, 14));
-//                //绘制线条
-                CGContextStrokePath(context);
-//                
-//                CGContextSetFillColorWithColor(context,self.crossLinesFontColor.CGColor);
-
-//                [meterY drawInRect:CGRectMake(1, self.singleTouchPoint.y - 5, self.axisMarginLeft-2, 50)
-//                          withFont:[UIFont fontWithName:@"Helvetica" size:self.latitudeFontSize]
-//                     lineBreakMode:NSLineBreakByWordWrapping 
-//                         alignment:NSTextAlignmentRight];
-            }
-//        }
-
+        }
+        
     }
+    
+    CGContextSetStrokeColorWithColor(context, self.crossLinesColor.CGColor);
+    CGContextSetFillColorWithColor(context, self.crossLinesColor.CGColor);
+    
+    //绘制纵线与刻度
+    if (self.displayCrossYOnTouch) {
+        
+        //还原半透明
+        CGContextSetAlpha(context, 1);
+        
+        CGContextMoveToPoint(context, 0, self.singleTouchPoint.y);
+        CGContextAddLineToPoint(context, rect.size.width, self.singleTouchPoint.y);
+        
+        //绘制线条
+        CGContextStrokePath(context);
+        
+        if(self.displayYDegreeOnTouch){
+            // 绘制线条
+            NSString *valueStr = [self calcAxisYGraduate:rect];
+            UIFont *textFont= self.crossLinesFont; //设置字体
+            NSMutableParagraphStyle *textStyle=[[NSMutableParagraphStyle alloc]init];//段落样式
+            textStyle.lineBreakMode = NSLineBreakByWordWrapping;
+            textStyle.alignment=NSTextAlignmentLeft;
+            
+            NSDictionary *attrs = @{NSFontAttributeName:textFont,
+                                    NSParagraphStyleAttributeName:textStyle,
+                                    NSForegroundColorAttributeName:self.crossLinesFontColor};
+            CGSize textSize = [valueStr boundingRectWithSize:CGSizeMake(100, 100)
+                                                     options:NSStringDrawingUsesLineFragmentOrigin
+                                                  attributes:attrs
+                                                     context:nil].size;
+            CGRect boxRect = CGRectMake(1, self.singleTouchPoint.y - textSize.height / 2.0, textSize.width, textSize.height);
+            
+            CGContextAddRect(context,boxRect);
+            CGContextFillPath(context);
+            
+            [valueStr drawInRect:boxRect withAttributes:attrs];
+        }
+        
+    }
+    
     
      CGContextSetLineDash(context, 0, nil, 0);
 }
@@ -737,17 +626,9 @@
 
 
 - (CCFloat )touchPointAxisXValue:(CGRect)rect {
-    if (self.axisYPosition == CCSGridChartYAxisPositionLeft) {
-        CCFloat length = rect.size.width - self.axisMarginLeft - 2 * self.axisMarginRight;
-        CCFloat valueLength = self.singleTouchPoint.x - self.axisMarginLeft - self.axisMarginRight;
-
-        return valueLength / length;
-    } else {
-        CCFloat length = rect.size.width - 2 * self.axisMarginLeft - self.axisMarginRight;
-        CCFloat valueLength = self.singleTouchPoint.x - self.axisMarginLeft;
-
-        return valueLength / length;
-    }
+    CCFloat length = rect.size.width - self.axisMarginLeft - self.axisMarginRight;
+    CCFloat valueLength = self.singleTouchPoint.x - self.axisMarginLeft ;
+    return valueLength / length;
 }
 
 - (CCFloat )touchPointAxisYValue:(CGRect)rect {
@@ -797,13 +678,10 @@ CCFloat _minDistance = 8;
     NSArray *allTouches = [touches allObjects];
     //处理点击事件
     if ([allTouches count] == 1) {
-//        if(fabs([[allTouches objectAtIndex:0]locationInView:self].x - self.singleTouchPoint.x) > 5)
-//        {
         //获取选中点
         self.singleTouchPoint = [[allTouches objectAtIndex:0] locationInView:self];
         //设置可滚动
         [self performSelector:@selector(setNeedsDisplay) withObject:nil afterDelay:0];
-//        }
     } else if ([allTouches count] == 2) {
         CGPoint pt1 = [[allTouches objectAtIndex:0] locationInView:self];
         CGPoint pt2 = [[allTouches objectAtIndex:1] locationInView:self];
@@ -838,21 +716,43 @@ CCFloat _minDistance = 8;
 }
 
 - (void)zoomOut {
+    // noop
 }
 
 - (void)zoomIn {
+    // noop
+}
+
+- (void)moveLeft{
+    // noop
+}
+
+- (void)moveRight{
+    // noop
+}
+
+-(BOOL) isNoneDisplayValue:(CCFloat)value{
+    if (self.noneDisplayValues == nil){
+        return false;
+    }
+    if ([self.noneDisplayValues count] == 0){
+        return false;
+    }
+    for(int i = 0 ; i < [self.noneDisplayValues count]; i++){
+        if (value - [[self.noneDisplayValues objectAtIndex:i]doubleValue] == 0){
+            return true;
+        }
+    }
+    return false;
 }
 
 - (void)CCSChartDidTouched:(CGPoint *)point {
+    //noop
 }
 
 - (void) setSingleTouchPoint:(CGPoint) point
 {
     _singleTouchPoint = point;
-    
-    if (self.chartDelegate && [self.chartDelegate respondsToSelector:@selector(CCSChartBeTouchedOn:point:indexAt:)]) {
-        [self.chartDelegate CCSChartBeTouchedOn:self point:point indexAt:0];
-    }
 }
 
 @end

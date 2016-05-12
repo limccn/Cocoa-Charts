@@ -21,7 +21,6 @@
 #import "CCSPizzaChart.h"
 #import "CCSTitleValueColor.h"
 
-
 @implementation CCSPizzaChart
 
 @synthesize selectedIndex = _selectedIndex;
@@ -31,7 +30,6 @@
 - (void)initProperty {
     //初始化父类的熟悉
     [super initProperty];
-
     //初始化相关属性
     self.selectedIndex = 0;
     self.offsetLength = self.radius * 0.11f;

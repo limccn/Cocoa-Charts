@@ -8,19 +8,29 @@
 
 #import "CCSSampleGroupChartDemoViewController.h"
 
+#import "CCSChartsSettingViewController.h"
+
+#import "CCSSamplGroupChartDetailTableViewCell.h"
+
+#import "CCSAppDelegate.h"
+
 #define AXIS_CALC_PARM  1000
 
 #import "CCSAreaChart.h"
 #import "CCSLineData.h"
 #import "CCSTitledLine.h"
 
+#import "NSArray+CCSTACompute.h"
 #import "CCSStringUtils.h"
-#import "CCSJSONData.h"
+#import "NSString+UserDefault.h"
+#import "NSString+UIColor.h"
 
-/**
- * 屏幕宽高
- */
-#define VIEW_SIZE                self.view.bounds.size
+#define MIN_CHART_LEFT_RIGHT_SCALE                  3.0f
+
+#define VIEW_SIZE                                   self.view.bounds.size
+
+/** 精选 Cell */
+static NSString *DetailCellIdentifier             = @"CCSSamplGroupChartDetailTableViewCell";
 
 typedef enum {
     Chart1minData = 0,
@@ -29,10 +39,14 @@ typedef enum {
 } ChartDataType;
 
 @interface CCSSampleGroupChartDemoViewController (){
-    NSMutableArray                                  *_chartData;
-    
-    CCSAreaChart                                    *_areachart;
+    CCSGroupChartData                               *_dayData;
 }
+
+- (void)loadJSONData: (ChartDataType) chartDataType;
+
+- (void)loadKLineData: (ChartDataType) chartDataType;
+
+- (void)loadTickData;
 
 @end
 
@@ -42,6 +56,7 @@ typedef enum {
     [super viewDidLoad];
     
     [self initView];
+    [self initAreaChart];
     
     // 延迟操作执行的代码
     [self loadJSONData:Chart15minData];
@@ -52,185 +67,243 @@ typedef enum {
     // Dispose of any resources that can be recreated.
 }
 
+- (void)segTopChartTypeTypeValueChaged:(UISegmentedControl *)segmentedControl {
+    
+    if (segmentedControl.selectedSegmentIndex == 0) {
+        [self.areachart setHidden:NO];
+        [self.groupChart setHidden:YES];
+        
+        [self loadTickData];
+    }else if (segmentedControl.selectedSegmentIndex == 1) {
+        [self.areachart setHidden:YES];
+        [self.groupChart setHidden:NO];
+        
+        if (!_dayData) {
+            [self loadJSONData:Chart15minData];
+        }else{
+            [self.groupChart setGroupChartData:_dayData];
+        }
+    }else{
+    }
+}
+
+/*******************************************************************************
+ * Implements Of CCSChartDelegate
+ *******************************************************************************/
+
+- (void)CCSChartBeTouchedOn:(id)chart point:(CGPoint)point indexAt:(CCUInt)index{
+    [_groupChart CCSChartBeTouchedOn:chart point:point indexAt:index];
+}
+
+- (void)CCSChartDisplayChangedFrom:(id)chart from:(CCUInt)from number:(CCUInt)number{
+    [_groupChart CCSChartDisplayChangedFrom:chart from:from number:number];
+}
+
 - (void)initView{
     [self.segTopChartType addTarget:self action:@selector(segTopChartTypeTypeValueChaged:) forControlEvents:UIControlEventValueChanged];
     [self.segTopChartType setSelectedSegmentIndex:1];
     
-    [_groupChart setChartDelegate:self];
+    // 设置颜色
+    self.segTopChartType.tintColor = [UIColor whiteColor];
+    [self.segTopChartType setBackgroundColor:[UIColor whiteColor]];
+    NSDictionary* selectedTextAttributes = @{NSFontAttributeName:[UIFont systemFontOfSize:11.0f],
+                                             NSForegroundColorAttributeName: [@"#323232" str2Color]};
+    // 设置文字属性
+    [self.segTopChartType setTitleTextAttributes:selectedTextAttributes forState:UIControlStateSelected];
+    NSDictionary* unselectedTextAttributes = @{NSFontAttributeName:[UIFont systemFontOfSize:11.0f],
+                                               NSForegroundColorAttributeName: [UIColor lightGrayColor]};
+    [self.segTopChartType setTitleTextAttributes:unselectedTextAttributes forState:UIControlStateNormal];
     
-    [self initAreaChart];
+    [_groupChart setChartDelegate:self];
+    [_groupChart setChartsBackgroundColor:[@"F5F5F5" str2Color]];
+    [_groupChart setSetting:^{
+        CCSChartsSettingViewController *ctrlSetting = [[CCSChartsSettingViewController alloc] init];
+        ctrlSetting.ctrlChart = self;
+        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:ctrlSetting];
+        [self presentViewController:navigationController animated:YES completion:^{
+        }];
+    }];
+    
+    //实例化一个NSDateFormatter对象
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    //设定时间格式,这里可以设置成自己需要的格式
+    [dateFormatter setDateFormat:@"MM月dd日 HH:mm:ss"];
+    //用[NSDate date]可以获取系统当前时间
+    NSString *currentDateStr = [dateFormatter stringFromDate:[NSDate date]];
+    [self.lblTime setText:currentDateStr];
 }
 
 - (void)initAreaChart{
-    NSMutableArray *linedata = [[NSMutableArray alloc] init];
+    [self.areachart setBackgroundColor:[@"F5F5F5" str2Color]];
     
-    CCSJSONData *jsonData = [[CCSJSONData alloc] initWithData:[[self findJSONStringWithName:@"1min"] dataUsingEncoding:NSUTF8StringEncoding] error:nil];
-    
-    NSArray *arrData = nil;
-    if (jsonData.kqn !=nil) {
-        arrData = jsonData.kqn;
-    }else if (jsonData.ct !=nil){
-        arrData = jsonData.ct;
-    }else if (jsonData.ctt !=nil){
-        arrData = jsonData.ctt;
-    }
-    
-    NSMutableArray *singlelinedata = [[NSMutableArray alloc] init];
-    
-    for (NSDictionary *dic in arrData) {
-        @try {
-            [singlelinedata addObject: [[CCSLineData alloc] initWithValue:[dic[@"o"] doubleValue] * AXIS_CALC_PARM date:[NSString stringWithFormat:@"%@", [dic[@"pt"] dateWithFormat:@"yyyy-MM-ddHH: mm: ss" target:@"HH:mm"]]]];
-        }
-        @catch (NSException *exception) {
-            continue;
-        }
-        @finally {
-        }
-    }
-    
-    CCSTitledLine *singleline = [[CCSTitledLine alloc] init];
-    singleline.data = singlelinedata;
-    singleline.color = [UIColor purpleColor];
-    singleline.title = @"chartLine2";
-    
-    [linedata addObject:singleline];
-    
-    _areachart = [[CCSAreaChart alloc] initWithFrame:CGRectMake(8.0f, MARGIN_TOP + 44.0f, VIEW_SIZE.width - 16.0f, 333.0f)];
-    _areachart.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-    
-    _areachart.linesData = linedata;
-    _areachart.lineWidth = 1.0f;
-    _areachart.maxValue = 150000;
-    _areachart.minValue = 100000;
-    _areachart.longitudeNum = 4;
-    _areachart.latitudeNum = 4;
-    _areachart.backgroundColor = [UIColor clearColor];
-    _areachart.areaAlpha = 0.2;
-    
-    [_areachart setHidden:YES];
-    
-    NSMutableArray *TitleX = [[NSMutableArray alloc] init];
-    
-    for (CCSLineData *lineData in singlelinedata){
-        [TitleX addObject:lineData.date];
-    }
-    
-    _areachart.longitudeTitles = TitleX;
-    
-    [self.view addSubview:_areachart];
+    self.areachart.lineWidth = 0.5f;
+    self.areachart.maxValue = 150000;
+    self.areachart.minValue = 100000;
+    self.areachart.longitudeNum = 4;
+    self.areachart.latitudeNum = 4;
+    self.areachart.areaAlpha = 0.2;
 }
 
 - (void)loadJSONData: (ChartDataType) chartDataType{
-    // when 时间 从现在开始经过多少纳秒
-    dispatch_time_t when = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.01 * NSEC_PER_SEC));
-    // 经过多少纳秒，由主队列调度任务异步执行
-    dispatch_after(when, dispatch_get_main_queue(), ^{
-        [self loadData:chartDataType];
+    DO_IN_BACKGROUND(^{
+        [self loadKLineData:chartDataType];
     });
 }
 
-- (void)loadData: (ChartDataType) chartDataType{
-//    NSString *strAllPdts = [self findJSONStringWithName:@"allpdts"];
+- (void)loadKLineData: (ChartDataType) chartDataType{
+    // 读取JSON
+    NSString *jsonString = [@"KLineData" findJSONStringWithType:@"txt"];
+    // 解析
+    NSDictionary *dicKLineData = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding]
+                                                                 options:kNilOptions
+                                                                   error:nil];
     
-    CCSJSONData *jsonData = nil;
+    NSArray *arrNativeData = dicKLineData[@"kLine"];
     
-    if (chartDataType == Chart1minData) {
-        jsonData = [[CCSJSONData alloc] initWithData:[[self findJSONStringWithName:@"1min"] dataUsingEncoding:NSUTF8StringEncoding] error:nil];
-    }else if (chartDataType == Chart15minData){
-        jsonData = [[CCSJSONData alloc] initWithData:[[self findJSONStringWithName:@"15min"] dataUsingEncoding:NSUTF8StringEncoding] error:nil];
-    }else{
-        jsonData = [[CCSJSONData alloc] initWithData:[[self findJSONStringWithName:@"time"] dataUsingEncoding:NSUTF8StringEncoding] error:nil];
-    }
+    arrNativeData = [[arrNativeData reverseObjectEnumerator] allObjects];
     
-    NSArray *arrData = nil;
-    if (jsonData.kqn !=nil) {
-        arrData = jsonData.kqn;
-    }else if (jsonData.ct !=nil){
-        arrData = jsonData.ct;
-    }else if (jsonData.ctt !=nil){
-        arrData = jsonData.ctt;
-    }
-    
-    if (_chartData == nil) {
-        _chartData = [[NSMutableArray alloc] init];
-    }
-    
-    //    data.open = [dict objectForKey:@"openPrice"];
-    //    data.high = [dict objectForKey:@"upPrice"];
-    //    data.low = [dict objectForKey:@"lowPrice"];
-    //    data.close = [dict objectForKey:@"closePrice"];
-    //    data.vol = [dict objectForKey:@"totalNum"];
-    //    data.date = [dict objectForKey:@"tradeDate"];
-    //    data.current = [dict objectForKey:@"currentPrice"];
-    //    data.preclose = nil;
-    //    data.change = [dict objectForKey:@"changesPercent"];
-    for (NSDictionary *dict in arrData) {
+    NSMutableArray *ohlcdDatas = [[NSMutableArray alloc] init];
+    for (NSDictionary *dict in arrNativeData) {
         if (dict != nil) {
-            OHLCVDGroupData *data = [[OHLCVDGroupData alloc] init];
+            CCSOHLCVDData *data = [[CCSOHLCVDData alloc] init];
             
-            data.open = [dict objectForKey:@"o"];
-            data.high = [dict objectForKey:@"h"];
-            data.low = [dict objectForKey:@"l"];
-            data.close = [dict objectForKey:@"c"];
-            data.vol = [dict objectForKey:@"tr"];
-            data.date = [dict objectForKey:@"qt"];
-            data.current = [dict objectForKey:@"n"];
-            data.preclose = nil;
-            data.change = [dict objectForKey:@"changesPercent"];
-            [_chartData addObject:data];
+            data.open = [[dict objectForKey:@"open"] doubleValue] * AXIS_CALC_PARM;
+            data.high = [[dict objectForKey:@"high"] doubleValue] * AXIS_CALC_PARM;
+            data.low = [[dict objectForKey:@"low"] doubleValue] * AXIS_CALC_PARM;
+            data.close = [[dict objectForKey:@"close"] doubleValue]* AXIS_CALC_PARM;
+            data.vol = [[dict objectForKey:@"volume"] doubleValue];
+            data.date = [dict objectForKey:@"day"];
+            data.current = [[dict objectForKey:@"close"] doubleValue];
+            data.preclose = 0;
+            data.change = 0;
+            [ohlcdDatas addObject:data];
         }
     }
     
-    [self dataPreProcess];
+    DO_IN_MAIN_QUEUE(^{
+        [self setDayData:ohlcdDatas];
+    });
 }
 
-- (void) dataPreProcess{
-    if (_chartData == nil) {
-        return;
+- (void)loadTickData{
+    DO_IN_BACKGROUND(^{
+        // 读取JSON
+        NSString *jsonString = [@"Tick" findJSONStringWithType:@"txt"];
+        // 解析
+        NSDictionary *dicTickData = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding]
+                                                                    options:kNilOptions
+                                                                      error:nil];
+        
+        NSArray *arrNativeData = dicTickData[@"tick"];
+        
+        arrNativeData = [[arrNativeData reverseObjectEnumerator] allObjects];
+        
+        [self minsDataProcess:arrNativeData];
+    });
+}
+
+- (void)minsDataProcess:(NSArray *)arrData{
+    NSMutableArray *linedata = [[NSMutableArray alloc] init];
+    
+    NSMutableDictionary *dicMinsData = [[NSMutableDictionary alloc] init];
+    for (NSDictionary *dic in arrData) {
+        [dicMinsData setObject:dic[@"o"] forKey:[NSString stringWithFormat:@"%@", [dic[@"pt"] dateWithFormat:@"yyyy-MM-ddHH: mm: ss" target:@"HH:mm"]]];
     }
     
-    for (int i=0; i< [_chartData count];  i++) {
-        OHLCVDGroupData *data = _chartData[i];
-        data.open = [NSString stringWithFormat:@"%f",[data.open doubleValue] * AXIS_CALC_PARM];
-        data.high = [NSString stringWithFormat:@"%f",[data.high doubleValue] * AXIS_CALC_PARM];
-        data.low = [NSString stringWithFormat:@"%f",[data.low doubleValue] * AXIS_CALC_PARM];
-        data.close = [NSString stringWithFormat:@"%f",[data.close doubleValue] * AXIS_CALC_PARM];
+    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+    [numberFormatter setPositiveFormat:@"00"];
+    
+    NSMutableArray *arrMinsLineData = [[NSMutableArray alloc] init];
+    for (int i=1; i<=60*24; i++) {
+        int hour = i/60;
+        int min = i - hour*60;
+        
+        NSString *time = [NSString stringWithFormat:@"%@:%@", [numberFormatter stringFromNumber:[NSNumber numberWithInt:hour]], [numberFormatter stringFromNumber:[NSNumber numberWithInt:min]]];
+        
+        double open = 4310.0;
+        if (dicMinsData[time]) {
+            open = [dicMinsData[time] doubleValue];
+        }
+        
+        [arrMinsLineData addObject:[[CCSLineData alloc] initWithValue:open * AXIS_CALC_PARM date: time]];
     }
-    [_groupChart setChartData:_chartData];
+    
+    CCSTitledLine *singleline = [[CCSTitledLine alloc] init];
+    singleline.data = arrMinsLineData;
+    singleline.color = LINE_COLORS[2];
+    singleline.title = @"chartLine";
+    
+    [linedata addObject:singleline];
+    
+    _areachart.linesData = linedata;
+    
+    NSMutableArray *TitleX = [[NSMutableArray alloc] init];
+    
+    for (CCSLineData *lineData in arrMinsLineData){
+        [TitleX addObject:lineData.date];
+    }
+    
+    self.areachart.longitudeTitles = TitleX;
+    
+    DO_IN_MAIN_QUEUE(^{
+        [_areachart setNeedsDisplay];
+    });
 }
 
-- (void)CCSChartBeTouchedOn:(id)chart point:(CGPoint)point indexAt:(NSUInteger)index{
-    [_groupChart CCSChartBeTouchedOn:chart point:point indexAt:index];
-}
-
-- (void)CCSChartDisplayChangedFrom:(id)chart from:(NSUInteger)from number:(NSUInteger)number{
-    [_groupChart CCSChartDisplayChangedFrom:chart from:from number:number];
-}
-
-- (void)segTopChartTypeTypeValueChaged:(UISegmentedControl *)segmentedControl {
-    if (segmentedControl.selectedSegmentIndex == 0) {
-        [_areachart setHidden:NO];
-        [self.groupChart setHidden:YES];
-    }else if (segmentedControl.selectedSegmentIndex == 1){
-        [_areachart setHidden:YES];
-        [self.groupChart setHidden:NO];
-        [self loadJSONData:Chart15minData];
-    }else if (segmentedControl.selectedSegmentIndex == 2){
-        [_areachart setHidden:YES];
-        [self.groupChart setHidden:NO];
-        [self loadJSONData:Chart1minData];
-    }else{
-        [_areachart setHidden:YES];
-        [self.groupChart setHidden:NO];
-        [self loadJSONData:ChartTimesData];
+- (void)updateChartsWithIndicatorType:(IndicatorType) indicatorType{
+    if (indicatorType == IndicatorMACD) {
+        [_dayData updateMACDStickData:self.macdS l:self.macdL m:self.macdM];
+        
+        [self.groupChart updateMACDChart];
+    }else if (indicatorType == IndicatorMA){
+        [_dayData updateCandleStickLinesData:self.ma1 ma2:self.ma2 ma3:self.ma3];
+        
+        [self.groupChart updateCandleStickChart];
+    }else if (indicatorType == IndicatorKDJ){
+        [_dayData updateKDJData:self.kdjN];
+        
+        [self.groupChart updateKDJChart];
+    }else if (indicatorType == IndicatorRSI){
+        [_dayData updateRSIData:self.rsiN1 n2:self.rsiN2];
+        
+        [self.groupChart updateRSIChart];
+    }else if (indicatorType == IndicatorWR){
+        [_dayData updateWRData:self.wrN];
+        
+        [self.groupChart updateWRChart];
+    }else if (indicatorType == IndicatorCCI){
+        [_dayData updateCCIData:self.cciN];
+        
+        [self.groupChart updateCCIChart];
+    }else if (indicatorType == IndicatorBOLL){
+        [_dayData updateBOLLData:self.bollN];
+        [_dayData updateCandleStickBollingerBandData:self.bollN];
+        
+        [self.groupChart updateCandleStickChart];
+        [self.groupChart updateBOLLChart];
     }
 }
 
-- (NSString *)findJSONStringWithName:(NSString *)name{
-    NSString *filePath = [[NSBundle mainBundle] pathForResource:name ofType:@"txt"];
-    //UTF-8编码
-    NSString *str = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
-    return str;
+/*******************************************************************************
+ * setter
+ *******************************************************************************/
+
+/**
+ * 设置日数据
+ */
+- (void)setDayData:(NSArray *) ohlcvDatas{
+    _dayData = [[CCSGroupChartData alloc] initWithCCSOHLCVDDatas:ohlcvDatas];
+    
+    [self.groupChart setGroupChartData:_dayData];
+}
+
+/**
+ * 设置周数据
+ */
+- (void)setWeekData:(NSArray *) ohlcvDatas{
+    _dayData = [[CCSGroupChartData alloc] initWithCCSOHLCVDDatas:ohlcvDatas];
+    
+    [self.groupChart setGroupChartData:_dayData];
 }
 
 @end

@@ -87,7 +87,9 @@ typedef enum {
  */
 @property(strong, nonatomic) UIColor *crossStarColor;
 
-
+/*!
+ 蜡烛线的样式，蜡烛、美国线、光线条，支持自动显示线条
+ */
 @property(assign, nonatomic) CCInt candleStickStyle;
 
 @end

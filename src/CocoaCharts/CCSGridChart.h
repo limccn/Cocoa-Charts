@@ -24,6 +24,8 @@
 @protocol CCSChartDelegate <NSObject>
 @optional
 - (void)CCSChartBeTouchedOn:(id)chart point:(CGPoint)point indexAt:(CCUInt) index;
+- (void)CCSChartBeLongPressDown:(id)chart;
+- (void)CCSChartBeLongPressUp:(id)chart;
 - (void)CCSChartDisplayChangedFrom:(id)chart from:(CCUInt)from number:(CCUInt) number;
 @end
 
@@ -70,19 +72,25 @@ typedef enum {
     UIColor *_borderColor;
     UIColor *_longitudeFontColor;
     UIColor *_latitudeFontColor;
+    CCUInt _latitudeNum;
+    CCUInt _longitudeNum;
     UIColor *_crossLinesColor;
     UIColor *_crossLinesFontColor;
     UIFont *_longitudeFont;
     UIFont *_latitudeFont;
+    UIFont *_crossLinesFont;
     CCFloat _axisMarginLeft;
     CCFloat _axisMarginBottom;
     CCFloat _axisMarginTop;
     CCFloat _axisMarginRight;
     CCUInt _longitudeFontSize;
     CCUInt _latitudeFontSize;
+    CCUInt _crossLineFontSize;
     CCSGridChartXAxisPosition _axisXPosition;
     CCSGridChartYAxisPosition _axisYPosition;
     BOOL _displayLatitudeTitle;
+    BOOL _displayLeftLatitudeTitle;
+    BOOL _displayRightLatitudeTitle;
     BOOL _displayLongitudeTitle;
     BOOL _displayLongitude;
     BOOL _dashLongitude;
@@ -92,9 +100,15 @@ typedef enum {
     BOOL _dashCrossLines;
     BOOL _displayCrossXOnTouch;
     BOOL _displayCrossYOnTouch;
+    BOOL _displayXDegreeOnTouch;
+    BOOL _displayYDegreeOnTouch;
+    BOOL _autoCalcLatitudeTitle;
+    BOOL _autoCalcLongitudeTitle;
     CGPoint _singleTouchPoint;
     
-    __unsafe_unretained UIViewController<CCSChartDelegate> *_chartDelegate;
+    NSMutableArray *_noneDisplayValues;
+
+    __unsafe_unretained id<CCSChartDelegate> _chartDelegate;
 }
 
 /*!
@@ -161,6 +175,20 @@ typedef enum {
 @property(strong, nonatomic) UIColor *latitudeFontColor;
 
 /*!
+ Numbers of grid‘s latitude line
+ 緯線の数量
+ 网格纬线的数量
+ */
+@property(assign, nonatomic) CCUInt latitudeNum;
+
+/*!
+ Numbers of grid‘s longitude line
+ 経線の数量
+ 网格经线的数量
+ */
+@property(assign, nonatomic) CCUInt longitudeNum;
+
+/*!
  Color of cross line inside grid when touched
  タッチしたポイント表示用十字線の色
  十字交叉线颜色
@@ -178,6 +206,7 @@ typedef enum {
 
 @property(strong, nonatomic) UIFont *longitudeFont;
 @property(strong, nonatomic) UIFont *latitudeFont;
+@property(strong, nonatomic) UIFont *crossLinesFont;
 
 /*!
  Margin of the axis to the left border
@@ -220,6 +249,8 @@ typedef enum {
  纬线刻度字体大小
  */
 @property(assign, nonatomic) CCUInt latitudeFontSize;
+@property(assign, nonatomic) CCUInt crossLinesFontSize;
+
 
 /*!
  The position of X axis(top,bottom) reference:CCSGridChartAxisPosition
@@ -241,6 +272,9 @@ typedef enum {
  X轴上的标题是否显示
  */
 @property(assign, nonatomic) BOOL displayLatitudeTitle;
+@property(assign, nonatomic) BOOL displayLeftLatitudeTitle;
+@property(assign, nonatomic) BOOL displayRightLatitudeTitle;
+
 
 /*!
  Should display the degrees in Y axis？
@@ -298,6 +332,14 @@ typedef enum {
  */
 @property(assign, nonatomic) BOOL displayCrossYOnTouch;
 
+@property(assign, nonatomic) BOOL displayXDegreeOnTouch;
+@property(assign, nonatomic) BOOL displayYDegreeOnTouch;
+
+
+@property(assign, nonatomic) BOOL autoCalcLatitudeTitle;
+@property(assign, nonatomic) BOOL autoCalcLongitudeTitle;
+
+
 /*!
  Touched point inside of grid
  タッチしたポイント
@@ -305,13 +347,14 @@ typedef enum {
  */
 @property(assign, nonatomic ,setter = setSingleTouchPoint:) CGPoint singleTouchPoint;
 
+@property(strong, nonatomic) NSMutableArray *noneDisplayValues;
 
 /*!
  Touched point inside of grid
  タッチしたポイント
  单点触控的选中点
  */
-@property(assign, nonatomic) UIViewController<CCSChartDelegate> *chartDelegate;
+@property(assign, nonatomic) id<CCSChartDelegate> chartDelegate;
 
 
 /*!
@@ -477,5 +520,37 @@ typedef enum {
  放大表示
  */
 - (void)zoomIn;
+
+/*!
+ @abstract Move left the data
+ 左に移動する。
+ 左移
+ */
+- (void)moveLeft;
+
+/*!
+ @abstract Move left the data
+ 右に移動する。
+ 右移
+ */
+- (void)moveRight;
+
+/*!
+ @abstract draw datas
+ データを描く。
+ 绘制数据
+ 
+ @param rect Rect to draw datas
+ データを書きRect
+ 用户绘制数据的Rect
+ */
+- (void) drawData:(CGRect)rect;
+
+/*!
+ @abstract check if value should display.(etc. 0,9999)
+ 値が要表示の判定.
+ 判断是否需要显示的值
+ */
+- (BOOL) isNoneDisplayValue:(CCFloat)value;
 
 @end

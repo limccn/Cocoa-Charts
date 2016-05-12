@@ -38,13 +38,13 @@ typedef enum {
  */
 @interface CCSLineChart : CCSGridChart {
     NSArray *_linesData;
-    CCUInt _latitudeNum;
-    CCUInt _longitudeNum;
     CCUInt _selectedIndex;
     CCFloat _lineWidth;
     CCFloat _maxValue;
     CCFloat _minValue;
     CCUInt _axisCalc;
+    BOOL _autoCalcRange;
+    BOOL _balanceRange;
     CCSLineAlignType _lineAlignType;
 }
 
@@ -55,17 +55,6 @@ typedef enum {
  */
 @property(strong, nonatomic, setter = setLinesData:) NSArray *linesData;
 
-/*!
- Number of latitude lines
- 显示纬线数 
- */
-@property(assign, nonatomic) CCUInt latitudeNum;
-
-/*!
- Number of longitude lines
- 显示经线数 
- */
-@property(assign, nonatomic) CCUInt longitudeNum;
 
 /*! 
  Selected data's index
@@ -100,6 +89,9 @@ typedef enum {
  Y轴显示值的快速计算子（表示刻度＝ 计算刻度/axisCalc）
  */
 @property(assign, nonatomic) CCUInt axisCalc;
+
+@property(assign, nonatomic) BOOL autoCalcRange;
+@property(assign, nonatomic) BOOL balanceRange;
 
 @property(assign, nonatomic) CCSLineAlignType lineAlignType;
 
@@ -137,6 +129,10 @@ typedef enum {
 
 - (void)calcValueRange;
 
+- (void)calcBalanceRange;
+
 - (void)setSelectedPointAddReDraw:(CGPoint)point;
+
+-(CCFloat) computeValueY:(CCFloat)value inRect:(CGRect)rect;
 
 @end

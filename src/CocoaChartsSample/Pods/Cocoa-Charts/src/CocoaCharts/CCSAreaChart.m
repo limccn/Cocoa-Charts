@@ -2,7 +2,7 @@
 //  CCSAreaChart.m
 //  Cocoa-Charts
 //
-//  Created by limc on 11-10-27.
+//  Created by limc on 13-10-27.
 //  Copyright 2011 limc.cn All rights reserved.
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
@@ -62,9 +62,8 @@
                 NSArray *lineDatas = line.data;
                 //判断Y轴的位置设置从左往右还是从右往左绘制
                 if (self.axisYPosition == CCSGridChartYAxisPositionLeft) {
-                    //TODO:自左向右绘图未对应
                     // 点线距离
-                    CCFloat lineLength = ((rect.size.width - self.axisMarginLeft - 2 * self.axisMarginRight) / ([line.data count] - 1));
+                    CCFloat lineLength = ((rect.size.width - self.axisMarginLeft - self.axisMarginRight) / ([line.data count] - 1));
                     //起始点
                     startX = super.axisMarginLeft;
                     //遍历并绘制线条
