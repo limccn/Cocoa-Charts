@@ -10,7 +10,7 @@
 	<string>46</string>
 	<key>objects</key>
 	<dict>
-		<key>0028479A6176B33FA0D5BF8EBA4CDA8E</key>
+		<key>00ECEA49A3C9FA05B807495E73BE3931</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
@@ -19,67 +19,24 @@
 			<key>lastKnownFileType</key>
 			<string>sourcecode.c.h</string>
 			<key>name</key>
-			<string>CCSMASlipCandleStickChart.h</string>
+			<string>JSONKeyMapper.h</string>
 			<key>path</key>
-			<string>src/CocoaCharts/CCSMASlipCandleStickChart.h</string>
+			<string>JSONModel/JSONModelTransformations/JSONKeyMapper.h</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>003330C9B2CAF9CB1AA6CB82EB8D92BF</key>
-		<dict>
-			<key>fileRef</key>
-			<string>7D39A92B346F735E8767D34CA995A365</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>ATTRIBUTES</key>
-				<array>
-					<string>Public</string>
-				</array>
-			</dict>
-		</dict>
-		<key>004FC204836AA01F27558458A9DD9773</key>
-		<dict>
-			<key>fileRef</key>
-			<string>DF4D4D93AC52AB23D63923DEE9988B97</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>ATTRIBUTES</key>
-				<array>
-					<string>Public</string>
-				</array>
-			</dict>
-		</dict>
-		<key>006FD443078D1304CF0EDDB7BCE9A244</key>
+		<key>024CDF58966ABE07A33047CDBE207875</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
 			<key>isa</key>
 			<string>PBXFileReference</string>
 			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
+			<string>sourcecode.c.h</string>
 			<key>name</key>
-			<string>JSONModelError.m</string>
+			<string>JSONModel+networking.h</string>
 			<key>path</key>
-			<string>JSONModel/JSONModel/JSONModelError.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>0337C54D9D3E7371025D2ECC883A6D67</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>CCSCandleStickChart.m</string>
-			<key>path</key>
-			<string>src/CocoaCharts/CCSCandleStickChart.m</string>
+			<string>JSONModel/JSONModelNetworking/JSONModel+networking.h</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
@@ -96,17 +53,10 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>03C7BEC22F8D5E9B3225715B9737A692</key>
-		<dict>
-			<key>fileRef</key>
-			<string>EC874BEC477D1E0658AF828D3F009EE5</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
 		<key>04E0EFD308A39DA6783F9004C5689973</key>
 		<dict>
 			<key>fileRef</key>
-			<string>81589EB99530B977728D9D7298719136</string>
+			<string>3EDFBCBA4E1CBD6CE261C920B24069B0</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 			<key>settings</key>
@@ -116,21 +66,6 @@
 					<string>Public</string>
 				</array>
 			</dict>
-		</dict>
-		<key>04F8C36314EE5CED528C057826261E84</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>CCSLineChart.h</string>
-			<key>path</key>
-			<string>src/CocoaCharts/CCSLineChart.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
 		</dict>
 		<key>052A17875CB827423D627183396CEB60</key>
 		<dict>
@@ -200,36 +135,7 @@
 			<key>name</key>
 			<string>Release</string>
 		</dict>
-		<key>06F34885D5C37C574E4283366D26B701</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>CCSCandleStickChartData.m</string>
-			<key>path</key>
-			<string>src/CocoaCharts/CCSCandleStickChartData.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>0769E9BAABA9E9508867A03A4E6C7429</key>
-		<dict>
-			<key>fileRef</key>
-			<string>860D72063A9133A8281DCAD6DE7AA479</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>ATTRIBUTES</key>
-				<array>
-					<string>Public</string>
-				</array>
-			</dict>
-		</dict>
-		<key>086834E04A004614CEB30A4D0CEEC28D</key>
+		<key>078B0AE0C5F319408EA0612AF81E26B7</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
@@ -238,9 +144,9 @@
 			<key>lastKnownFileType</key>
 			<string>sourcecode.c.h</string>
 			<key>name</key>
-			<string>CCSCandleStickChartData.h</string>
+			<string>JSONAPI.h</string>
 			<key>path</key>
-			<string>src/CocoaCharts/CCSCandleStickChartData.h</string>
+			<string>JSONModel/JSONModelNetworking/JSONAPI.h</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
@@ -265,25 +171,11 @@
 			<key>productName</key>
 			<string>JSONModel</string>
 			<key>productReference</key>
-			<string>937FB1C953A74B5B3F3B40D6B6A4208C</string>
+			<string>535F281DE8E8B9AEF79BE43B42FC0BF3</string>
 			<key>productType</key>
 			<string>com.apple.product-type.library.static</string>
 		</dict>
-		<key>0A755AB8CCA2E8E79393414C728B6FC0</key>
-		<dict>
-			<key>fileRef</key>
-			<string>4DA0D4AF4661004F42A3E5F1B4F36FE1</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>ATTRIBUTES</key>
-				<array>
-					<string>Public</string>
-				</array>
-			</dict>
-		</dict>
-		<key>0FD3EE5BAA98C44A60A1AD74AA90E006</key>
+		<key>0A28C311A3D27213DEB4B1175FC59F6D</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
@@ -292,11 +184,93 @@
 			<key>lastKnownFileType</key>
 			<string>sourcecode.c.h</string>
 			<key>name</key>
-			<string>CCSTitleValues.h</string>
+			<string>JSONModelError.h</string>
 			<key>path</key>
-			<string>src/CocoaCharts/CCSTitleValues.h</string>
+			<string>JSONModel/JSONModel/JSONModelError.h</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
+		</dict>
+		<key>0A8706F200BD0AAF177C9BEE067B1EF1</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>078B0AE0C5F319408EA0612AF81E26B7</string>
+				<string>3AE64D4C06A1AC82784D1E7387B2184E</string>
+				<string>11EEB87D68A0A31A5FDBE56AEAA0D009</string>
+				<string>F46CFFBC5BC888F7735EF7154D18B89D</string>
+				<string>00ECEA49A3C9FA05B807495E73BE3931</string>
+				<string>8EBDEEF087336FBB0ED3061D1CBC0041</string>
+				<string>A032955935C1E4A997C090695782BAAB</string>
+				<string>126F48784DDD04F31345C4F03037C027</string>
+				<string>024CDF58966ABE07A33047CDBE207875</string>
+				<string>739AE1A63BDA9EF913A833CE8A8D65FC</string>
+				<string>5EEA1796BC1C30B1DE6C1F5EE8BF1CA3</string>
+				<string>12C97923BA61B9B98A66BA4E0B2EF482</string>
+				<string>1F8FE3D2D7796F46240884C61FAD0B56</string>
+				<string>7039D659C8B14F28F9701E7AB6160F3A</string>
+				<string>0A28C311A3D27213DEB4B1175FC59F6D</string>
+				<string>DD6BC7848CEF9E23C9AA646C55850052</string>
+				<string>1A9B4729C01E8C08BAE03F80377AC6DC</string>
+				<string>3EDFBCBA4E1CBD6CE261C920B24069B0</string>
+				<string>C7CA98CA676BFC6D8F2BC1645653FAE1</string>
+				<string>F3417FD55DF0D85CCCCA639EA2F8C827</string>
+				<string>C9C9EB2AB0D3A17606A413E684ADED0B</string>
+				<string>8F3A5653403F96E9276466B16E517E59</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>JSONModel</string>
+			<key>path</key>
+			<string>JSONModel</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>0AB57AA642723A0183579CAF67ACE168</key>
+		<dict>
+			<key>buildConfigurations</key>
+			<array>
+				<string>0CB9258A266CB7EF8CC69825866D0A6F</string>
+				<string>A3CA3FCDC8C54EBCA1DAB58E33A96AC5</string>
+			</array>
+			<key>defaultConfigurationIsVisible</key>
+			<string>0</string>
+			<key>defaultConfigurationName</key>
+			<string>Release</string>
+			<key>isa</key>
+			<string>XCConfigurationList</string>
+		</dict>
+		<key>0CB9258A266CB7EF8CC69825866D0A6F</key>
+		<dict>
+			<key>baseConfigurationReference</key>
+			<string>4E762F23EC34ED4A6FF3312D84E33A40</string>
+			<key>buildSettings</key>
+			<dict>
+				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
+				<string>YES</string>
+				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
+				<string>7.0</string>
+				<key>MACH_O_TYPE</key>
+				<string>staticlib</string>
+				<key>MTL_ENABLE_DEBUG_INFO</key>
+				<string>YES</string>
+				<key>OTHER_LDFLAGS</key>
+				<string></string>
+				<key>OTHER_LIBTOOLFLAGS</key>
+				<string></string>
+				<key>PODS_ROOT</key>
+				<string>$(SRCROOT)</string>
+				<key>PRODUCT_NAME</key>
+				<string>$(TARGET_NAME)</string>
+				<key>SDKROOT</key>
+				<string>iphoneos</string>
+				<key>SKIP_INSTALL</key>
+				<string>YES</string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Debug</string>
 		</dict>
 		<key>10834806BD7B412BC24F347361FA2C8E</key>
 		<dict>
@@ -311,19 +285,7 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>128993FF267CC0FA8EE6889C6AEC2EC3</key>
-		<dict>
-			<key>fileRef</key>
-			<string>66ADF19F960FB12A510C39ED8A607467</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>COMPILER_FLAGS</key>
-				<string>-DOS_OBJECT_USE_OBJC=0</string>
-			</dict>
-		</dict>
-		<key>130A06A896E3B7829B47B39AC3AEE34E</key>
+		<key>11EEB87D68A0A31A5FDBE56AEAA0D009</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
@@ -332,48 +294,58 @@
 			<key>lastKnownFileType</key>
 			<string>sourcecode.c.h</string>
 			<key>name</key>
-			<string>CCSSlipCandleStickChart.h</string>
+			<string>JSONHTTPClient.h</string>
 			<key>path</key>
-			<string>src/CocoaCharts/CCSSlipCandleStickChart.h</string>
+			<string>JSONModel/JSONModelNetworking/JSONHTTPClient.h</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>139AF26B7532251A21ACFFD9CF531AD1</key>
+		<key>126F48784DDD04F31345C4F03037C027</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>JSONModel.m</string>
+			<key>path</key>
+			<string>JSONModel/JSONModel/JSONModel.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>128993FF267CC0FA8EE6889C6AEC2EC3</key>
 		<dict>
 			<key>fileRef</key>
-			<string>661267AAEBB22C3B75E00C9D8CEF1CD2</string>
+			<string>12C97923BA61B9B98A66BA4E0B2EF482</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>COMPILER_FLAGS</key>
+				<string>-DOS_OBJECT_USE_OBJC=0</string>
+			</dict>
 		</dict>
-		<key>13E500542E9D2CC0163AA0035C83EEB5</key>
+		<key>12C97923BA61B9B98A66BA4E0B2EF482</key>
 		<dict>
-			<key>buildConfigurationList</key>
-			<string>D1FC1391F642633670C1D015DF82F7DD</string>
-			<key>buildPhases</key>
-			<array>
-				<string>18A9447E497D674C2F3DB41667B548C6</string>
-				<string>7E662C49DE6EA98548C889CE67ADA93F</string>
-				<string>B80B2C48435985BFEBB3FC728C06B78A</string>
-			</array>
-			<key>buildRules</key>
-			<array/>
-			<key>dependencies</key>
-			<array/>
+			<key>includeInIndex</key>
+			<string>1</string>
 			<key>isa</key>
-			<string>PBXNativeTarget</string>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
 			<key>name</key>
-			<string>Cocoa-Charts</string>
-			<key>productName</key>
-			<string>Cocoa-Charts</string>
-			<key>productReference</key>
-			<string>E95CC47C24B2ECFBB09583C88618CA40</string>
-			<key>productType</key>
-			<string>com.apple.product-type.library.static</string>
+			<string>JSONModelArray.m</string>
+			<key>path</key>
+			<string>JSONModel/JSONModel/JSONModelArray.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
 		</dict>
 		<key>16A189CC65DC66678D3D637ED8B5B5FF</key>
 		<dict>
 			<key>fileRef</key>
-			<string>D04DF0A59FD7799608ABF0A23A991D15</string>
+			<string>739AE1A63BDA9EF913A833CE8A8D65FC</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 			<key>settings</key>
@@ -381,40 +353,11 @@
 				<key>COMPILER_FLAGS</key>
 				<string>-DOS_OBJECT_USE_OBJC=0</string>
 			</dict>
-		</dict>
-		<key>16DE392F26FC0BD69934F4A42F6753FB</key>
-		<dict>
-			<key>fileRef</key>
-			<string>130A06A896E3B7829B47B39AC3AEE34E</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>ATTRIBUTES</key>
-				<array>
-					<string>Public</string>
-				</array>
-			</dict>
-		</dict>
-		<key>17480F44BBB4434DC8028D4CCBBF66F3</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>CCSColoredStickChart.h</string>
-			<key>path</key>
-			<string>src/CocoaCharts/CCSColoredStickChart.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
 		</dict>
 		<key>17D8C9D90B9DCDE1B8B9D5ECF8DADCEC</key>
 		<dict>
 			<key>fileRef</key>
-			<string>006FD443078D1304CF0EDDB7BCE9A244</string>
+			<string>DD6BC7848CEF9E23C9AA646C55850052</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 			<key>settings</key>
@@ -423,54 +366,7 @@
 				<string>-DOS_OBJECT_USE_OBJC=0</string>
 			</dict>
 		</dict>
-		<key>18A9447E497D674C2F3DB41667B548C6</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>18F3F0CDB0A53A2EE52C0169E2FDAF41</string>
-				<string>1CDFCACE68E2B511A881A08F6918EB00</string>
-				<string>B356B7495E15415467387833FF29B3CF</string>
-				<string>139AF26B7532251A21ACFFD9CF531AD1</string>
-				<string>764D5C703CBE03582542A2EF2FFC4CA7</string>
-				<string>BEB7C333F738FA7532DEA6E0B6D8FFB7</string>
-				<string>42D650F255B535E7D05C003EC396DFE4</string>
-				<string>4675904608BD93269F7DE577ACB1A287</string>
-				<string>B055D923884F197D7CC314CCD705259D</string>
-				<string>23EEBA683127F4E22125E1A96468AF16</string>
-				<string>8D3F3B006D1F69138D9B4551475E9319</string>
-				<string>CAA5B9904B7C781A70AC981D33A50BB1</string>
-				<string>4C01CF180D63E96B7946B4AB7079EBBC</string>
-				<string>BE775EC7F085F7FE44E6EAA283960AF2</string>
-				<string>AA109CAF091A6D59C8AE299F44D07E21</string>
-				<string>37BE5A1A7CDAA14F08CBD5453255F45E</string>
-				<string>B1A8F73FDB60174C9256F6C0B115B181</string>
-				<string>F468275486CD3C72374D219458E0539C</string>
-				<string>E805F907366C23454D2D64607C49F648</string>
-				<string>4291BCBCCCDD84C857305561DD2A2A5E</string>
-				<string>44146DD1BECB5D4A0F3FBB67561ADF20</string>
-				<string>BB0C5894ACB3ACDDAD05445035598903</string>
-				<string>7F31B28045AB9C1F58A1999BD0E1E58F</string>
-				<string>CBB91E0FD050A91D04D18761142B0101</string>
-				<string>D41B2B33FB1EAAA94E703E587984D35D</string>
-				<string>D5AF79C4D78340FC9DA1F03F527AFCFE</string>
-				<string>90F013D371A7F91B792ED6E1F68F1CF5</string>
-				<string>4692BD3EE57145A38E2A858E1CEB6946</string>
-				<string>56A0BF2BDA0214C7C1EF647D8B7BD91B</string>
-				<string>ADB2A2E0BBE6E61EE6C6F01CFB063CD8</string>
-				<string>3833AE40F2A9B0AE8953443E4321DCA9</string>
-				<string>03C7BEC22F8D5E9B3225715B9737A692</string>
-				<string>7E98A506015B43BC2A5BADF9EB50F5A2</string>
-				<string>54FFC885259ED7FD45CADE819A4D8F39</string>
-				<string>2B45649E7087341814FA36C971FD67CC</string>
-			</array>
-			<key>isa</key>
-			<string>PBXSourcesBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>18F09EF0970AFE282446915F7DF577A7</key>
+		<key>1A9B4729C01E8C08BAE03F80377AC6DC</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
@@ -479,20 +375,13 @@
 			<key>lastKnownFileType</key>
 			<string>sourcecode.c.h</string>
 			<key>name</key>
-			<string>CCSBandAreaChart.h</string>
+			<string>JSONModelLib.h</string>
 			<key>path</key>
-			<string>src/CocoaCharts/CCSBandAreaChart.h</string>
+			<string>JSONModel/JSONModelLib.h</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>18F3F0CDB0A53A2EE52C0169E2FDAF41</key>
-		<dict>
-			<key>fileRef</key>
-			<string>CAB41ED21A0757AAF9A517FC7A98957E</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>1A879DED99AFE822BD67F835CA8C1219</key>
+		<key>1F8FE3D2D7796F46240884C61FAD0B56</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
@@ -501,103 +390,9 @@
 			<key>lastKnownFileType</key>
 			<string>sourcecode.c.h</string>
 			<key>name</key>
-			<string>CCSBaseChartView.h</string>
+			<string>JSONModelClassProperty.h</string>
 			<key>path</key>
-			<string>src/CocoaCharts/CCSBaseChartView.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>1AA4CFAD6464F9A5592C87778CACD3AC</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>CCSRadarChart.h</string>
-			<key>path</key>
-			<string>src/CocoaCharts/CCSRadarChart.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>1BAFCBB32562A86F1D04B08B53B4B4D0</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>CCSTitledLine.m</string>
-			<key>path</key>
-			<string>src/CocoaCharts/CCSTitledLine.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>1CDFCACE68E2B511A881A08F6918EB00</key>
-		<dict>
-			<key>fileRef</key>
-			<string>4A5647A16EF753276E01696D244F5AF2</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>1E03B5A02C4E99468F83DCFE122059B6</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.xcconfig</string>
-			<key>path</key>
-			<string>Cocoa-Charts.xcconfig</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>1E6D6709D16C0E7D12DAE95928F08E73</key>
-		<dict>
-			<key>fileRef</key>
-			<string>879BC2ECD7B4739419BEA1C614A7BB9F</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>ATTRIBUTES</key>
-				<array>
-					<string>Public</string>
-				</array>
-			</dict>
-		</dict>
-		<key>1E8634C7F351EBEA85896B119C739D33</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>CCSPieChart.h</string>
-			<key>path</key>
-			<string>src/CocoaCharts/CCSPieChart.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>206FF822107707E05CFC958EAB171AC9</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>CCSPizzaChart.m</string>
-			<key>path</key>
-			<string>src/CocoaCharts/CCSPizzaChart.m</string>
+			<string>JSONModel/JSONModel/JSONModelClassProperty.h</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
@@ -608,85 +403,29 @@
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 		</dict>
-		<key>231E448A70ABF22D04DA07F064958580</key>
+		<key>21AB33CBDCBD3B9865F50977990D9782</key>
 		<dict>
-			<key>includeInIndex</key>
+			<key>containerPortal</key>
+			<string>D41D8CD98F00B204E9800998ECF8427E</string>
+			<key>isa</key>
+			<string>PBXContainerItemProxy</string>
+			<key>proxyType</key>
 			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>CCSTitledLine.h</string>
-			<key>path</key>
-			<string>src/CocoaCharts/CCSTitledLine.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
+			<key>remoteGlobalIDString</key>
+			<string>09FA060F1A0492FB25232F489AC4E573</string>
+			<key>remoteInfo</key>
+			<string>JSONModel</string>
 		</dict>
-		<key>23DB5D7A5533F4A709BABBDDB7C0C2CF</key>
+		<key>25FF5A70086BBE33AC608A9170585B60</key>
 		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
+			<key>children</key>
+			<array>
+				<string>0A8706F200BD0AAF177C9BEE067B1EF1</string>
+			</array>
 			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
+			<string>PBXGroup</string>
 			<key>name</key>
-			<string>JSONHTTPClient.m</string>
-			<key>path</key>
-			<string>JSONModel/JSONModelNetworking/JSONHTTPClient.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>23EEBA683127F4E22125E1A96468AF16</key>
-		<dict>
-			<key>fileRef</key>
-			<string>4B42C1E36844D4DA2A8D424BFA77F481</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>23FBCBA5E781436CE46332E396211FC0</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>JSONValueTransformer.m</string>
-			<key>path</key>
-			<string>JSONModel/JSONModelTransformations/JSONValueTransformer.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>263506508C07C774E8644D9EB9D4F33B</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>NSArray+JSONModel.m</string>
-			<key>path</key>
-			<string>JSONModel/JSONModelCategories/NSArray+JSONModel.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>26F8F53EEB0F3F02BAF514D2C1E97D42</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>CCSPieChart.m</string>
-			<key>path</key>
-			<string>src/CocoaCharts/CCSPieChart.m</string>
+			<string>Pods</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
@@ -703,72 +442,10 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>2A3937DB62D444567998C86D58980FC2</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>CCSMinusStickChart.h</string>
-			<key>path</key>
-			<string>src/CocoaCharts/CCSMinusStickChart.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>2AB0DA10B0A710735A5347BB4011A0AC</key>
-		<dict>
-			<key>fileRef</key>
-			<string>E0CBE82CDBFC3BB60DA012790329BB0F</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>ATTRIBUTES</key>
-				<array>
-					<string>Public</string>
-				</array>
-			</dict>
-		</dict>
-		<key>2B45649E7087341814FA36C971FD67CC</key>
-		<dict>
-			<key>fileRef</key>
-			<string>D1EC8E163A0130A719444B871A4AAD9E</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>2B963693815DD8CE373C26709C0E0F00</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXTargetDependency</string>
-			<key>name</key>
-			<string>JSONModel</string>
-			<key>target</key>
-			<string>09FA060F1A0492FB25232F489AC4E573</string>
-			<key>targetProxy</key>
-			<string>3A258DACC953A877938341548B8F7888</string>
-		</dict>
-		<key>2BD42C84A8EA476614EF83805E640BA4</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>JSONAPI.h</string>
-			<key>path</key>
-			<string>JSONModel/JSONModelNetworking/JSONAPI.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
 		<key>2C5CBD3A72085FEB008264874E65D26A</key>
 		<dict>
 			<key>baseConfigurationReference</key>
-			<string>E496A7CDA20D79274699E7B146F41432</string>
+			<string>4778E41C70A4B2470658988DBCEA7F93</string>
 			<key>buildSettings</key>
 			<dict>
 				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
@@ -799,34 +476,6 @@
 			<key>name</key>
 			<string>Release</string>
 		</dict>
-		<key>2C6F89857A50C25D19AA738C8FBB1FDA</key>
-		<dict>
-			<key>fileRef</key>
-			<string>086834E04A004614CEB30A4D0CEEC28D</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>ATTRIBUTES</key>
-				<array>
-					<string>Public</string>
-				</array>
-			</dict>
-		</dict>
-		<key>2CBA9D48E5EB572113807B2C023D2E00</key>
-		<dict>
-			<key>fileRef</key>
-			<string>8B72BF634F0371A593D3D67952A2298C</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>ATTRIBUTES</key>
-				<array>
-					<string>Public</string>
-				</array>
-			</dict>
-		</dict>
 		<key>2D8E8EC45A3A1A1D94AE762CB5028504</key>
 		<dict>
 			<key>buildConfigurations</key>
@@ -841,41 +490,6 @@
 			<key>isa</key>
 			<string>XCConfigurationList</string>
 		</dict>
-		<key>3210F1F06FD71900001CD27064ABEE06</key>
-		<dict>
-			<key>fileRef</key>
-			<string>D01DA10A539C2614AF90DEAAE85243E9</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>ATTRIBUTES</key>
-				<array>
-					<string>Public</string>
-				</array>
-			</dict>
-		</dict>
-		<key>3380CADAAB2961C4F88FCF7505ED1A29</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>7AAA5F420704190E95D7E613DB0522AF</string>
-				<string>FD39E1F87C34700D0BB109BA2AF0A6BA</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Pods</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>37BE5A1A7CDAA14F08CBD5453255F45E</key>
-		<dict>
-			<key>fileRef</key>
-			<string>684B989906ECCE5D10A5DA8BAB8D8280</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
 		<key>37DB56D75062CC75FCB0966E1C6E8A8E</key>
 		<dict>
 			<key>includeInIndex</key>
@@ -889,66 +503,32 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>3833AE40F2A9B0AE8953443E4321DCA9</key>
-		<dict>
-			<key>fileRef</key>
-			<string>EBB799547EEAF0947CF7DC6CA448B7EC</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>39DA20DEE5DBFAEBAE56C6CC17FADF2A</key>
-		<dict>
-			<key>fileRef</key>
-			<string>5B55272F61E3D8308FD87227A67CD255</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>ATTRIBUTES</key>
-				<array>
-					<string>Public</string>
-				</array>
-			</dict>
-		</dict>
-		<key>3A258DACC953A877938341548B8F7888</key>
-		<dict>
-			<key>containerPortal</key>
-			<string>D41D8CD98F00B204E9800998ECF8427E</string>
-			<key>isa</key>
-			<string>PBXContainerItemProxy</string>
-			<key>proxyType</key>
-			<string>1</string>
-			<key>remoteGlobalIDString</key>
-			<string>09FA060F1A0492FB25232F489AC4E573</string>
-			<key>remoteInfo</key>
-			<string>JSONModel</string>
-		</dict>
-		<key>3B7FBDE86DABEB5713AF62A1149CB1D9</key>
-		<dict>
-			<key>fileRef</key>
-			<string>0028479A6176B33FA0D5BF8EBA4CDA8E</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>ATTRIBUTES</key>
-				<array>
-					<string>Public</string>
-				</array>
-			</dict>
-		</dict>
-		<key>3E31C3158A2E5755B4C48E2B855E2A17</key>
+		<key>3AE64D4C06A1AC82784D1E7387B2184E</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
 			<key>isa</key>
 			<string>PBXFileReference</string>
 			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
+			<string>sourcecode.c.objc</string>
 			<key>name</key>
-			<string>JSONModel+networking.h</string>
+			<string>JSONAPI.m</string>
 			<key>path</key>
-			<string>JSONModel/JSONModelNetworking/JSONModel+networking.h</string>
+			<string>JSONModel/JSONModelNetworking/JSONAPI.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>3BA933A0CB355030E248272E5A7A5441</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>535F281DE8E8B9AEF79BE43B42FC0BF3</string>
+				<string>8BFA4D9F5D77CE1B4AFF03E6D9FB5FFE</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Products</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
@@ -965,99 +545,7 @@
 			<key>sourceTree</key>
 			<string>DEVELOPER_DIR</string>
 		</dict>
-		<key>40266921FE31748E74CA6ADF1949985D</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>E95CC47C24B2ECFBB09583C88618CA40</string>
-				<string>937FB1C953A74B5B3F3B40D6B6A4208C</string>
-				<string>8B915D7FB7BB02DE0DBC76088C7F0196</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Products</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>417667AC84737B56162A9DEA0F089B6E</key>
-		<dict>
-			<key>fileRef</key>
-			<string>59768C86D377CF1DC035B69F8258E0A4</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>ATTRIBUTES</key>
-				<array>
-					<string>Public</string>
-				</array>
-			</dict>
-		</dict>
-		<key>41B5FC8A40669B8D1BD98E6948AA1DC7</key>
-		<dict>
-			<key>buildConfigurationList</key>
-			<string>F902F3D92AB19FA3AA7F0A17092A6BD7</string>
-			<key>buildPhases</key>
-			<array>
-				<string>755AFB0E1659C91D527F96BE7484D2F8</string>
-				<string>B0DE9F70D0A10104B848FCBDA0C7B6B5</string>
-			</array>
-			<key>buildRules</key>
-			<array/>
-			<key>dependencies</key>
-			<array>
-				<string>5533B95FC839544353A562D74152F8D6</string>
-				<string>2B963693815DD8CE373C26709C0E0F00</string>
-			</array>
-			<key>isa</key>
-			<string>PBXNativeTarget</string>
-			<key>name</key>
-			<string>Pods</string>
-			<key>productName</key>
-			<string>Pods</string>
-			<key>productReference</key>
-			<string>8B915D7FB7BB02DE0DBC76088C7F0196</string>
-			<key>productType</key>
-			<string>com.apple.product-type.library.static</string>
-		</dict>
-		<key>41D04C1A4B7747B7DAA4005E361A4F6C</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>CCSStickChart.m</string>
-			<key>path</key>
-			<string>src/CocoaCharts/CCSStickChart.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>4291BCBCCCDD84C857305561DD2A2A5E</key>
-		<dict>
-			<key>fileRef</key>
-			<string>26F8F53EEB0F3F02BAF514D2C1E97D42</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>42D650F255B535E7D05C003EC396DFE4</key>
-		<dict>
-			<key>fileRef</key>
-			<string>06F34885D5C37C574E4283366D26B701</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>44146DD1BECB5D4A0F3FBB67561ADF20</key>
-		<dict>
-			<key>fileRef</key>
-			<string>206FF822107707E05CFC958EAB171AC9</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>449DB4942C29D1FD4350EC92918B4AA9</key>
+		<key>3EDFBCBA4E1CBD6CE261C920B24069B0</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
@@ -1066,73 +554,29 @@
 			<key>lastKnownFileType</key>
 			<string>sourcecode.c.h</string>
 			<key>name</key>
-			<string>CCSPizzaChart.h</string>
+			<string>JSONValueTransformer.h</string>
 			<key>path</key>
-			<string>src/CocoaCharts/CCSPizzaChart.h</string>
+			<string>JSONModel/JSONModelTransformations/JSONValueTransformer.h</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>45AB21441277971F97136DD2D14F2492</key>
-		<dict>
-			<key>fileRef</key>
-			<string>4C12166B73DFC805FEBDA6F5AE3B2602</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>ATTRIBUTES</key>
-				<array>
-					<string>Public</string>
-				</array>
-			</dict>
-		</dict>
-		<key>45B51F14F3C241FA6D37A78381A58275</key>
-		<dict>
-			<key>fileRef</key>
-			<string>DA36C70F5F177A1A805A5F45B05F80BA</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>ATTRIBUTES</key>
-				<array>
-					<string>Public</string>
-				</array>
-			</dict>
-		</dict>
-		<key>4675904608BD93269F7DE577ACB1A287</key>
-		<dict>
-			<key>fileRef</key>
-			<string>F14BE9BF34E87F0A4E65F3F200A0276F</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>4692BD3EE57145A38E2A858E1CEB6946</key>
-		<dict>
-			<key>fileRef</key>
-			<string>41D04C1A4B7747B7DAA4005E361A4F6C</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>46B7183153677B7E8808B4B9BABF0D3B</key>
+		<key>4778E41C70A4B2470658988DBCEA7F93</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
 			<key>isa</key>
 			<string>PBXFileReference</string>
 			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>JSONHTTPClient.h</string>
+			<string>text.xcconfig</string>
 			<key>path</key>
-			<string>JSONModel/JSONModelNetworking/JSONHTTPClient.h</string>
+			<string>JSONModel.xcconfig</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
 		<key>4A4DCF231CE4F0B8916A5FA4590C3343</key>
 		<dict>
 			<key>fileRef</key>
-			<string>BF56435E4E3D1CB76F00245312DEA02E</string>
+			<string>126F48784DDD04F31345C4F03037C027</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 			<key>settings</key>
@@ -1140,55 +584,11 @@
 				<key>COMPILER_FLAGS</key>
 				<string>-DOS_OBJECT_USE_OBJC=0</string>
 			</dict>
-		</dict>
-		<key>4A5647A16EF753276E01696D244F5AF2</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>CCSBandAreaChart.m</string>
-			<key>path</key>
-			<string>src/CocoaCharts/CCSBandAreaChart.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>4A56D246D59E375AF4A7AB4199959D9C</key>
-		<dict>
-			<key>fileRef</key>
-			<string>1AA4CFAD6464F9A5592C87778CACD3AC</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>ATTRIBUTES</key>
-				<array>
-					<string>Public</string>
-				</array>
-			</dict>
-		</dict>
-		<key>4B42C1E36844D4DA2A8D424BFA77F481</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>CCSDonutChart.m</string>
-			<key>path</key>
-			<string>src/CocoaCharts/CCSDonutChart.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
 		</dict>
 		<key>4BDE97C783ED286933A60CAE9292B775</key>
 		<dict>
 			<key>fileRef</key>
-			<string>F71DD8C50AE2744DCF33CFB392F78D07</string>
+			<string>00ECEA49A3C9FA05B807495E73BE3931</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 			<key>settings</key>
@@ -1198,77 +598,11 @@
 					<string>Public</string>
 				</array>
 			</dict>
-		</dict>
-		<key>4C01CF180D63E96B7946B4AB7079EBBC</key>
-		<dict>
-			<key>fileRef</key>
-			<string>8C35C421BE86E18C0886BD2A9EDC67BD</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>4C12166B73DFC805FEBDA6F5AE3B2602</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>CCSBOLLMASlipCandleStickChart.h</string>
-			<key>path</key>
-			<string>src/CocoaCharts/CCSBOLLMASlipCandleStickChart.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>4C3BD945A970B6822F47E7B8C7BE5CAD</key>
-		<dict>
-			<key>fileRef</key>
-			<string>449DB4942C29D1FD4350EC92918B4AA9</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>ATTRIBUTES</key>
-				<array>
-					<string>Public</string>
-				</array>
-			</dict>
-		</dict>
-		<key>4DA0D4AF4661004F42A3E5F1B4F36FE1</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>CCSTitleValueColor.h</string>
-			<key>path</key>
-			<string>src/CocoaCharts/CCSTitleValueColor.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>4DD0719754161A6841C5AF7418C92D6F</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>CCSCandleStickChart.h</string>
-			<key>path</key>
-			<string>src/CocoaCharts/CCSCandleStickChart.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
 		</dict>
 		<key>4DE36D4B16AB5BD257BDBA97DE1BD733</key>
 		<dict>
 			<key>fileRef</key>
-			<string>CFEF36C7DE50E85266F0FACD1C35B73C</string>
+			<string>7039D659C8B14F28F9701E7AB6160F3A</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 			<key>settings</key>
@@ -1276,21 +610,6 @@
 				<key>COMPILER_FLAGS</key>
 				<string>-DOS_OBJECT_USE_OBJC=0</string>
 			</dict>
-		</dict>
-		<key>4E579C4B35A50233B6A4C932ECAB24BD</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>CCSGridChart.m</string>
-			<key>path</key>
-			<string>src/CocoaCharts/CCSGridChart.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
 		</dict>
 		<key>4E762F23EC34ED4A6FF3312D84E33A40</key>
 		<dict>
@@ -1305,38 +624,10 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>5027CB6219E2E2BDB92A532BB1FB3D6A</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>Cocoa-Charts-prefix.pch</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>507CE39D2BBD66BB65D8C3FDC875F895</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>JSONModelError.h</string>
-			<key>path</key>
-			<string>JSONModel/JSONModel/JSONModelError.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
 		<key>52B9F1F399DEADDDFBE3F17BAA8D6D14</key>
 		<dict>
 			<key>fileRef</key>
-			<string>874E090AEF0CD9D58E9BC9D34C7F00EB</string>
+			<string>5EEA1796BC1C30B1DE6C1F5EE8BF1CA3</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 			<key>settings</key>
@@ -1347,197 +638,46 @@
 				</array>
 			</dict>
 		</dict>
-		<key>54FFC885259ED7FD45CADE819A4D8F39</key>
+		<key>535F281DE8E8B9AEF79BE43B42FC0BF3</key>
 		<dict>
-			<key>fileRef</key>
-			<string>BF3D165F8021329CCF70DE2F902AB58D</string>
+			<key>explicitFileType</key>
+			<string>archive.ar</string>
+			<key>includeInIndex</key>
+			<string>0</string>
 			<key>isa</key>
-			<string>PBXBuildFile</string>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>libJSONModel.a</string>
+			<key>path</key>
+			<string>libJSONModel.a</string>
+			<key>sourceTree</key>
+			<string>BUILT_PRODUCTS_DIR</string>
 		</dict>
-		<key>5533B95FC839544353A562D74152F8D6</key>
+		<key>5EEA1796BC1C30B1DE6C1F5EE8BF1CA3</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>JSONModelArray.h</string>
+			<key>path</key>
+			<string>JSONModel/JSONModel/JSONModelArray.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>60141EA56083969C5308733BEB310671</key>
 		<dict>
 			<key>isa</key>
 			<string>PBXTargetDependency</string>
 			<key>name</key>
-			<string>Cocoa-Charts</string>
+			<string>JSONModel</string>
 			<key>target</key>
-			<string>13E500542E9D2CC0163AA0035C83EEB5</string>
+			<string>09FA060F1A0492FB25232F489AC4E573</string>
 			<key>targetProxy</key>
-			<string>E12C3AD6EA0AF9D1B53E4A5740281F07</string>
-		</dict>
-		<key>56A0BF2BDA0214C7C1EF647D8B7BD91B</key>
-		<dict>
-			<key>fileRef</key>
-			<string>F0F4C227395CF6928A375FEF5237D65D</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>59768C86D377CF1DC035B69F8258E0A4</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>CCSHeader.h</string>
-			<key>path</key>
-			<string>src/CocoaCharts/CCSHeader.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>5B55272F61E3D8308FD87227A67CD255</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>CCSMACDChart.h</string>
-			<key>path</key>
-			<string>src/CocoaCharts/CCSMACDChart.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>5B9264B4A0AA7CBE63966E60DC614ADD</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>JSONModel.h</string>
-			<key>path</key>
-			<string>JSONModel/JSONModel/JSONModel.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>5C2D98CCFE2B0FC7169F4360E206062E</key>
-		<dict>
-			<key>baseConfigurationReference</key>
-			<string>1E03B5A02C4E99468F83DCFE122059B6</string>
-			<key>buildSettings</key>
-			<dict>
-				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
-				<string>YES</string>
-				<key>GCC_PREFIX_HEADER</key>
-				<string>Target Support Files/Cocoa-Charts/Cocoa-Charts-prefix.pch</string>
-				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
-				<string>7.0</string>
-				<key>MTL_ENABLE_DEBUG_INFO</key>
-				<string>NO</string>
-				<key>OTHER_LDFLAGS</key>
-				<string></string>
-				<key>OTHER_LIBTOOLFLAGS</key>
-				<string></string>
-				<key>PRIVATE_HEADERS_FOLDER_PATH</key>
-				<string></string>
-				<key>PRODUCT_NAME</key>
-				<string>$(TARGET_NAME)</string>
-				<key>PUBLIC_HEADERS_FOLDER_PATH</key>
-				<string></string>
-				<key>SDKROOT</key>
-				<string>iphoneos</string>
-				<key>SKIP_INSTALL</key>
-				<string>YES</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Release</string>
-		</dict>
-		<key>62114D6473F33F3CA51AD9E67601321F</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>CCSStickChartData.h</string>
-			<key>path</key>
-			<string>src/CocoaCharts/CCSStickChartData.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>63D13C8A3CDC1AF1868764904DBEAA96</key>
-		<dict>
-			<key>fileRef</key>
-			<string>18F09EF0970AFE282446915F7DF577A7</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>ATTRIBUTES</key>
-				<array>
-					<string>Public</string>
-				</array>
-			</dict>
-		</dict>
-		<key>65B5F1CC842071055FB7EE74456FDB37</key>
-		<dict>
-			<key>fileRef</key>
-			<string>231E448A70ABF22D04DA07F064958580</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>ATTRIBUTES</key>
-				<array>
-					<string>Public</string>
-				</array>
-			</dict>
-		</dict>
-		<key>661267AAEBB22C3B75E00C9D8CEF1CD2</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>CCSBaseData.m</string>
-			<key>path</key>
-			<string>src/CocoaCharts/CCSBaseData.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>66ADF19F960FB12A510C39ED8A607467</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>JSONModelArray.m</string>
-			<key>path</key>
-			<string>JSONModel/JSONModel/JSONModelArray.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>684B989906ECCE5D10A5DA8BAB8D8280</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>CCSMACDData.m</string>
-			<key>path</key>
-			<string>src/CocoaCharts/CCSMACDData.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
+			<string>21AB33CBDCBD3B9865F50977990D9782</string>
 		</dict>
 		<key>6911BECA35E7518D864239B7E898EEF3</key>
 		<dict>
@@ -1551,35 +691,6 @@
 			<string>Pods-frameworks.sh</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
-		</dict>
-		<key>69481C280DCAE9648662F62844B48193</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>JSONAPI.m</string>
-			<key>path</key>
-			<string>JSONModel/JSONModelNetworking/JSONAPI.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>6A045602C6EF8CB2FFCC050C169F82C7</key>
-		<dict>
-			<key>fileRef</key>
-			<string>2A3937DB62D444567998C86D58980FC2</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>ATTRIBUTES</key>
-				<array>
-					<string>Public</string>
-				</array>
-			</dict>
 		</dict>
 		<key>6EEA72BE015541ED3D178BEF9BB5788F</key>
 		<dict>
@@ -1604,10 +715,40 @@
 			<key>runOnlyForDeploymentPostprocessing</key>
 			<string>0</string>
 		</dict>
+		<key>7039D659C8B14F28F9701E7AB6160F3A</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>JSONModelClassProperty.m</string>
+			<key>path</key>
+			<string>JSONModel/JSONModel/JSONModelClassProperty.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>739AE1A63BDA9EF913A833CE8A8D65FC</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>JSONModel+networking.m</string>
+			<key>path</key>
+			<string>JSONModel/JSONModelNetworking/JSONModel+networking.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
 		<key>740B64AC8CA44CDC54A3A2CCB396A0EB</key>
 		<dict>
 			<key>fileRef</key>
-			<string>97B52CFCEB299C16622D0A9A7776F50A</string>
+			<string>1F8FE3D2D7796F46240884C61FAD0B56</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 			<key>settings</key>
@@ -1617,195 +758,6 @@
 					<string>Public</string>
 				</array>
 			</dict>
-		</dict>
-		<key>7434E2A119E423DDACDB9EECD0C3A8E3</key>
-		<dict>
-			<key>fileRef</key>
-			<string>272643F56613CA0D336AE3DBF19DC404</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>755AFB0E1659C91D527F96BE7484D2F8</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>7434E2A119E423DDACDB9EECD0C3A8E3</string>
-			</array>
-			<key>isa</key>
-			<string>PBXSourcesBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>75905CE58A358BF5CD0F1DB3C6FFAF84</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>CCSMinusStickChart.m</string>
-			<key>path</key>
-			<string>src/CocoaCharts/CCSMinusStickChart.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>764D5C703CBE03582542A2EF2FFC4CA7</key>
-		<dict>
-			<key>fileRef</key>
-			<string>91FC22011C57AF9DDE147257A7D661D8</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>788C33FBD9C8C097AF6C316DD62C6C80</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>CCSMACDChart.m</string>
-			<key>path</key>
-			<string>src/CocoaCharts/CCSMACDChart.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>796AAEF015BECE0FB96B6DB76BFA6527</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>1E03B5A02C4E99468F83DCFE122059B6</string>
-				<string>D1EC8E163A0130A719444B871A4AAD9E</string>
-				<string>5027CB6219E2E2BDB92A532BB1FB3D6A</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Support Files</string>
-			<key>path</key>
-			<string>../Target Support Files/Cocoa-Charts</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>7AAA5F420704190E95D7E613DB0522AF</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>7D39A92B346F735E8767D34CA995A365</string>
-				<string>CAB41ED21A0757AAF9A517FC7A98957E</string>
-				<string>18F09EF0970AFE282446915F7DF577A7</string>
-				<string>4A5647A16EF753276E01696D244F5AF2</string>
-				<string>1A879DED99AFE822BD67F835CA8C1219</string>
-				<string>E81217A955D2EA18C4636430AC570071</string>
-				<string>879BC2ECD7B4739419BEA1C614A7BB9F</string>
-				<string>661267AAEBB22C3B75E00C9D8CEF1CD2</string>
-				<string>4C12166B73DFC805FEBDA6F5AE3B2602</string>
-				<string>91FC22011C57AF9DDE147257A7D661D8</string>
-				<string>4DD0719754161A6841C5AF7418C92D6F</string>
-				<string>0337C54D9D3E7371025D2ECC883A6D67</string>
-				<string>086834E04A004614CEB30A4D0CEEC28D</string>
-				<string>06F34885D5C37C574E4283366D26B701</string>
-				<string>17480F44BBB4434DC8028D4CCBBF66F3</string>
-				<string>F14BE9BF34E87F0A4E65F3F200A0276F</string>
-				<string>BDD70ECA3E908584EBE06EE67EC267D2</string>
-				<string>A05DC2DD28FFC90C12D42414B00854D3</string>
-				<string>C6D6E4AB34E92475D268591B33D60E97</string>
-				<string>4B42C1E36844D4DA2A8D424BFA77F481</string>
-				<string>DA36C70F5F177A1A805A5F45B05F80BA</string>
-				<string>4E579C4B35A50233B6A4C932ECAB24BD</string>
-				<string>59768C86D377CF1DC035B69F8258E0A4</string>
-				<string>04F8C36314EE5CED528C057826261E84</string>
-				<string>F06E8AF47BCEB34ED00FB4BEF7A87152</string>
-				<string>8B72BF634F0371A593D3D67952A2298C</string>
-				<string>8C35C421BE86E18C0886BD2A9EDC67BD</string>
-				<string>BBAA8C5A7264152993FB53A58DEAE440</string>
-				<string>8DF05C0E84BF14DE4DB7E58597498D67</string>
-				<string>5B55272F61E3D8308FD87227A67CD255</string>
-				<string>788C33FBD9C8C097AF6C316DD62C6C80</string>
-				<string>A51148F1ED607735A470CA7669FC1EF9</string>
-				<string>684B989906ECCE5D10A5DA8BAB8D8280</string>
-				<string>0028479A6176B33FA0D5BF8EBA4CDA8E</string>
-				<string>D0BFDAF7E2AE00387371F71A2FFDA90A</string>
-				<string>8D584CDFE496AD363D44B7972E462AF1</string>
-				<string>E275BCB54DA044F77F725290E6349F1F</string>
-				<string>2A3937DB62D444567998C86D58980FC2</string>
-				<string>75905CE58A358BF5CD0F1DB3C6FFAF84</string>
-				<string>1E8634C7F351EBEA85896B119C739D33</string>
-				<string>26F8F53EEB0F3F02BAF514D2C1E97D42</string>
-				<string>449DB4942C29D1FD4350EC92918B4AA9</string>
-				<string>206FF822107707E05CFC958EAB171AC9</string>
-				<string>1AA4CFAD6464F9A5592C87778CACD3AC</string>
-				<string>F82AB2A5151137B893DFB8F77C29CE26</string>
-				<string>130A06A896E3B7829B47B39AC3AEE34E</string>
-				<string>CF7DAB35AD0E27998EE52B37726BE946</string>
-				<string>D01DA10A539C2614AF90DEAAE85243E9</string>
-				<string>F35DE464BAD15A4D08702F3F28838214</string>
-				<string>CCF37102052172153FC994CB5853547C</string>
-				<string>B66AFC9EB3177758910292173A0FAE69</string>
-				<string>97DE90029F29C2A55F50AC8D31AA2B4F</string>
-				<string>87A9D02A2CBD9A5D831D7BB0E32F9338</string>
-				<string>CB51AA3725C2BA7CC68E7B68B0B01D6E</string>
-				<string>95AA4164FDBE5CDAA2DAB1F9494A4785</string>
-				<string>A743A496A5367410B65C4BE56E8CE5D5</string>
-				<string>41D04C1A4B7747B7DAA4005E361A4F6C</string>
-				<string>62114D6473F33F3CA51AD9E67601321F</string>
-				<string>F0F4C227395CF6928A375FEF5237D65D</string>
-				<string>231E448A70ABF22D04DA07F064958580</string>
-				<string>1BAFCBB32562A86F1D04B08B53B4B4D0</string>
-				<string>DF4D4D93AC52AB23D63923DEE9988B97</string>
-				<string>EBB799547EEAF0947CF7DC6CA448B7EC</string>
-				<string>4DA0D4AF4661004F42A3E5F1B4F36FE1</string>
-				<string>EC874BEC477D1E0658AF828D3F009EE5</string>
-				<string>0FD3EE5BAA98C44A60A1AD74AA90E006</string>
-				<string>B6BD0160C9F08C69472E8F1E89CE3B36</string>
-				<string>860D72063A9133A8281DCAD6DE7AA479</string>
-				<string>BF3D165F8021329CCF70DE2F902AB58D</string>
-				<string>E0CBE82CDBFC3BB60DA012790329BB0F</string>
-				<string>796AAEF015BECE0FB96B6DB76BFA6527</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Cocoa-Charts</string>
-			<key>path</key>
-			<string>Cocoa-Charts</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>7C4743DA1511F9FA14839593220792D6</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>JSONModelLib.h</string>
-			<key>path</key>
-			<string>JSONModel/JSONModelLib.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>7D39A92B346F735E8767D34CA995A365</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>CCSAreaChart.h</string>
-			<key>path</key>
-			<string>src/CocoaCharts/CCSAreaChart.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
 		</dict>
 		<key>7DB346D0F39D3F0E887471402A8071AB</key>
 		<dict>
@@ -1813,8 +765,8 @@
 			<array>
 				<string>BA6428E9F66FD5A23C0A2E06ED26CD2F</string>
 				<string>BC3CA7F9E30CC8F7E2DD044DD34432FC</string>
-				<string>3380CADAAB2961C4F88FCF7505ED1A29</string>
-				<string>40266921FE31748E74CA6ADF1949985D</string>
+				<string>25FF5A70086BBE33AC608A9170585B60</string>
+				<string>3BA933A0CB355030E248272E5A7A5441</string>
 				<string>037C0CA694176A3C0915F62C9D20B3E6</string>
 			</array>
 			<key>isa</key>
@@ -1822,66 +774,49 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>7E662C49DE6EA98548C889CE67ADA93F</key>
+		<key>83B390894F6AB3A6B2E98F89454B43C9</key>
 		<dict>
 			<key>buildActionMask</key>
 			<string>2147483647</string>
 			<key>files</key>
 			<array>
-				<string>F6D5A97C9DE6FAFDACD52EC004E25020</string>
+				<string>FB32BEBB275C3CDF5E04F95697476DD0</string>
 			</array>
 			<key>isa</key>
 			<string>PBXFrameworksBuildPhase</string>
 			<key>runOnlyForDeploymentPostprocessing</key>
 			<string>0</string>
 		</dict>
-		<key>7E98A506015B43BC2A5BADF9EB50F5A2</key>
+		<key>856568397924F01BF5891CFAD1805082</key>
 		<dict>
-			<key>fileRef</key>
-			<string>B6BD0160C9F08C69472E8F1E89CE3B36</string>
+			<key>buildConfigurationList</key>
+			<string>0AB57AA642723A0183579CAF67ACE168</string>
+			<key>buildPhases</key>
+			<array>
+				<string>B2D17AF8B0CDDD8ABA740F31ADAC40FE</string>
+				<string>83B390894F6AB3A6B2E98F89454B43C9</string>
+			</array>
+			<key>buildRules</key>
+			<array/>
+			<key>dependencies</key>
+			<array>
+				<string>60141EA56083969C5308733BEB310671</string>
+			</array>
 			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>7F31B28045AB9C1F58A1999BD0E1E58F</key>
-		<dict>
-			<key>fileRef</key>
-			<string>CF7DAB35AD0E27998EE52B37726BE946</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>8115C904A883942D588F25F680B88810</key>
-		<dict>
-			<key>fileRef</key>
-			<string>CB51AA3725C2BA7CC68E7B68B0B01D6E</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>ATTRIBUTES</key>
-				<array>
-					<string>Public</string>
-				</array>
-			</dict>
-		</dict>
-		<key>81589EB99530B977728D9D7298719136</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
+			<string>PBXNativeTarget</string>
 			<key>name</key>
-			<string>JSONValueTransformer.h</string>
-			<key>path</key>
-			<string>JSONModel/JSONModelTransformations/JSONValueTransformer.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
+			<string>Pods</string>
+			<key>productName</key>
+			<string>Pods</string>
+			<key>productReference</key>
+			<string>8BFA4D9F5D77CE1B4AFF03E6D9FB5FFE</string>
+			<key>productType</key>
+			<string>com.apple.product-type.library.static</string>
 		</dict>
 		<key>85AC21BC7BD345D84F489F7A52D39E44</key>
 		<dict>
 			<key>fileRef</key>
-			<string>2BD42C84A8EA476614EF83805E640BA4</string>
+			<string>078B0AE0C5F319408EA0612AF81E26B7</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 			<key>settings</key>
@@ -1892,7 +827,7 @@
 				</array>
 			</dict>
 		</dict>
-		<key>860D72063A9133A8281DCAD6DE7AA479</key>
+		<key>8B1630AD4657B842E99F2C088BA183C5</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
@@ -1900,122 +835,12 @@
 			<string>PBXFileReference</string>
 			<key>lastKnownFileType</key>
 			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>CCSTitleValuesColor.h</string>
 			<key>path</key>
-			<string>src/CocoaCharts/CCSTitleValuesColor.h</string>
+			<string>JSONModel-prefix.pch</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>86BF1E43769E11E8BD8240DCE423AC44</key>
-		<dict>
-			<key>baseConfigurationReference</key>
-			<string>1E03B5A02C4E99468F83DCFE122059B6</string>
-			<key>buildSettings</key>
-			<dict>
-				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
-				<string>YES</string>
-				<key>GCC_PREFIX_HEADER</key>
-				<string>Target Support Files/Cocoa-Charts/Cocoa-Charts-prefix.pch</string>
-				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
-				<string>7.0</string>
-				<key>MTL_ENABLE_DEBUG_INFO</key>
-				<string>YES</string>
-				<key>OTHER_LDFLAGS</key>
-				<string></string>
-				<key>OTHER_LIBTOOLFLAGS</key>
-				<string></string>
-				<key>PRIVATE_HEADERS_FOLDER_PATH</key>
-				<string></string>
-				<key>PRODUCT_NAME</key>
-				<string>$(TARGET_NAME)</string>
-				<key>PUBLIC_HEADERS_FOLDER_PATH</key>
-				<string></string>
-				<key>SDKROOT</key>
-				<string>iphoneos</string>
-				<key>SKIP_INSTALL</key>
-				<string>YES</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Debug</string>
-		</dict>
-		<key>874E090AEF0CD9D58E9BC9D34C7F00EB</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>JSONModelArray.h</string>
-			<key>path</key>
-			<string>JSONModel/JSONModel/JSONModelArray.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>87850CF772150B1871356A1164CE3EC8</key>
-		<dict>
-			<key>fileRef</key>
-			<string>8D584CDFE496AD363D44B7972E462AF1</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>ATTRIBUTES</key>
-				<array>
-					<string>Public</string>
-				</array>
-			</dict>
-		</dict>
-		<key>879BC2ECD7B4739419BEA1C614A7BB9F</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>CCSBaseData.h</string>
-			<key>path</key>
-			<string>src/CocoaCharts/CCSBaseData.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>87A9D02A2CBD9A5D831D7BB0E32F9338</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>CCSSpiderWebChart.m</string>
-			<key>path</key>
-			<string>src/CocoaCharts/CCSSpiderWebChart.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>8B72BF634F0371A593D3D67952A2298C</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>CCSLineData.h</string>
-			<key>path</key>
-			<string>src/CocoaCharts/CCSLineData.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>8B915D7FB7BB02DE0DBC76088C7F0196</key>
+		<key>8BFA4D9F5D77CE1B4AFF03E6D9FB5FFE</key>
 		<dict>
 			<key>explicitFileType</key>
 			<string>archive.ar</string>
@@ -2030,138 +855,7 @@
 			<key>sourceTree</key>
 			<string>BUILT_PRODUCTS_DIR</string>
 		</dict>
-		<key>8C35C421BE86E18C0886BD2A9EDC67BD</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>CCSLineData.m</string>
-			<key>path</key>
-			<string>src/CocoaCharts/CCSLineData.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>8D3F3B006D1F69138D9B4551475E9319</key>
-		<dict>
-			<key>fileRef</key>
-			<string>4E579C4B35A50233B6A4C932ECAB24BD</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>8D584CDFE496AD363D44B7972E462AF1</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>CCSMAStickChart.h</string>
-			<key>path</key>
-			<string>src/CocoaCharts/CCSMAStickChart.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>8DF05C0E84BF14DE4DB7E58597498D67</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>CCSMACandleStickChart.m</string>
-			<key>path</key>
-			<string>src/CocoaCharts/CCSMACandleStickChart.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>8F11ABA0C553B18981097015226E5748</key>
-		<dict>
-			<key>fileRef</key>
-			<string>D2A322978486048A8AB3E3465CEFB634</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>ATTRIBUTES</key>
-				<array>
-					<string>Public</string>
-				</array>
-			</dict>
-		</dict>
-		<key>90F013D371A7F91B792ED6E1F68F1CF5</key>
-		<dict>
-			<key>fileRef</key>
-			<string>95AA4164FDBE5CDAA2DAB1F9494A4785</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>91FC22011C57AF9DDE147257A7D661D8</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>CCSBOLLMASlipCandleStickChart.m</string>
-			<key>path</key>
-			<string>src/CocoaCharts/CCSBOLLMASlipCandleStickChart.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>937FB1C953A74B5B3F3B40D6B6A4208C</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>archive.ar</string>
-			<key>includeInIndex</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>name</key>
-			<string>libJSONModel.a</string>
-			<key>path</key>
-			<string>libJSONModel.a</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
-		</dict>
-		<key>93D074ED28175CE99948C4CB14223201</key>
-		<dict>
-			<key>fileRef</key>
-			<string>62114D6473F33F3CA51AD9E67601321F</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>ATTRIBUTES</key>
-				<array>
-					<string>Public</string>
-				</array>
-			</dict>
-		</dict>
-		<key>943F6BBDBE01E3D09496E333CF317ADD</key>
-		<dict>
-			<key>fileRef</key>
-			<string>C6D6E4AB34E92475D268591B33D60E97</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>ATTRIBUTES</key>
-				<array>
-					<string>Public</string>
-				</array>
-			</dict>
-		</dict>
-		<key>9440D3B5E64DAE274EF8FF9FF9910DEC</key>
+		<key>8EBDEEF087336FBB0ED3061D1CBC0041</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
@@ -2176,38 +870,10 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>95AA4164FDBE5CDAA2DAB1F9494A4785</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>CCSStackedAreaChart.m</string>
-			<key>path</key>
-			<string>src/CocoaCharts/CCSStackedAreaChart.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>95DC21A292F25EF066969E4357323B18</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>JSONModel-prefix.pch</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>96F644E957742DA7690CBEB1291E89E0</key>
+		<key>8F11ABA0C553B18981097015226E5748</key>
 		<dict>
 			<key>fileRef</key>
-			<string>BDD70ECA3E908584EBE06EE67EC267D2</string>
+			<string>F3417FD55DF0D85CCCCA639EA2F8C827</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 			<key>settings</key>
@@ -2218,33 +884,20 @@
 				</array>
 			</dict>
 		</dict>
-		<key>97B52CFCEB299C16622D0A9A7776F50A</key>
+		<key>8F3A5653403F96E9276466B16E517E59</key>
 		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
+			<key>children</key>
+			<array>
+				<string>4778E41C70A4B2470658988DBCEA7F93</string>
+				<string>D9371E95B6338D34B73F6B3C85F7A9F3</string>
+				<string>8B1630AD4657B842E99F2C088BA183C5</string>
+			</array>
 			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
+			<string>PBXGroup</string>
 			<key>name</key>
-			<string>JSONModelClassProperty.h</string>
+			<string>Support Files</string>
 			<key>path</key>
-			<string>JSONModel/JSONModel/JSONModelClassProperty.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>97DE90029F29C2A55F50AC8D31AA2B4F</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>CCSSpiderWebChart.h</string>
-			<key>path</key>
-			<string>src/CocoaCharts/CCSSpiderWebChart.h</string>
+			<string>../Target Support Files/JSONModel</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
@@ -2284,48 +937,20 @@
 			<key>runOnlyForDeploymentPostprocessing</key>
 			<string>0</string>
 		</dict>
-		<key>A05DC2DD28FFC90C12D42414B00854D3</key>
+		<key>A032955935C1E4A997C090695782BAAB</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
 			<key>isa</key>
 			<string>PBXFileReference</string>
 			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
+			<string>sourcecode.c.h</string>
 			<key>name</key>
-			<string>CCSColoredStickChartData.m</string>
+			<string>JSONModel.h</string>
 			<key>path</key>
-			<string>src/CocoaCharts/CCSColoredStickChartData.m</string>
+			<string>JSONModel/JSONModel/JSONModel.h</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
-		</dict>
-		<key>A1305C1AEE6E3BAFB026093EB9F83670</key>
-		<dict>
-			<key>fileRef</key>
-			<string>CCF37102052172153FC994CB5853547C</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>ATTRIBUTES</key>
-				<array>
-					<string>Public</string>
-				</array>
-			</dict>
-		</dict>
-		<key>A1704B83DBA638966D6AE8F2CFD24E4C</key>
-		<dict>
-			<key>fileRef</key>
-			<string>97DE90029F29C2A55F50AC8D31AA2B4F</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>ATTRIBUTES</key>
-				<array>
-					<string>Public</string>
-				</array>
-			</dict>
 		</dict>
 		<key>A1A36D34413696BE466E2CA0AFF194DA</key>
 		<dict>
@@ -2340,106 +965,10 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>A21A9A850058BAE50DF6E2D30E66BDD5</key>
-		<dict>
-			<key>fileRef</key>
-			<string>BBAA8C5A7264152993FB53A58DEAE440</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>ATTRIBUTES</key>
-				<array>
-					<string>Public</string>
-				</array>
-			</dict>
-		</dict>
-		<key>A51148F1ED607735A470CA7669FC1EF9</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>CCSMACDData.h</string>
-			<key>path</key>
-			<string>src/CocoaCharts/CCSMACDData.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>A743A496A5367410B65C4BE56E8CE5D5</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>CCSStickChart.h</string>
-			<key>path</key>
-			<string>src/CocoaCharts/CCSStickChart.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>AA109CAF091A6D59C8AE299F44D07E21</key>
-		<dict>
-			<key>fileRef</key>
-			<string>788C33FBD9C8C097AF6C316DD62C6C80</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>AAFF13AE228E98022E21E00E4E51C483</key>
-		<dict>
-			<key>fileRef</key>
-			<string>1E8634C7F351EBEA85896B119C739D33</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>ATTRIBUTES</key>
-				<array>
-					<string>Public</string>
-				</array>
-			</dict>
-		</dict>
-		<key>ABC9A1F8D86F932BEE6C28A8849048A6</key>
-		<dict>
-			<key>fileRef</key>
-			<string>9440D3B5E64DAE274EF8FF9FF9910DEC</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>COMPILER_FLAGS</key>
-				<string>-DOS_OBJECT_USE_OBJC=0</string>
-			</dict>
-		</dict>
-		<key>ACF42F60DB38312D939C3817F3AECE32</key>
-		<dict>
-			<key>fileRef</key>
-			<string>23DB5D7A5533F4A709BABBDDB7C0C2CF</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>COMPILER_FLAGS</key>
-				<string>-DOS_OBJECT_USE_OBJC=0</string>
-			</dict>
-		</dict>
-		<key>ADB2A2E0BBE6E61EE6C6F01CFB063CD8</key>
-		<dict>
-			<key>fileRef</key>
-			<string>1BAFCBB32562A86F1D04B08B53B4B4D0</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>AE06E73A56389F93D11055478598B00B</key>
+		<key>A3CA3FCDC8C54EBCA1DAB58E33A96AC5</key>
 		<dict>
 			<key>baseConfigurationReference</key>
-			<string>4E762F23EC34ED4A6FF3312D84E33A40</string>
+			<string>98C98CDFB3F20F2925F6CD1F141BB14F</string>
 			<key>buildSettings</key>
 			<dict>
 				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
@@ -2449,7 +978,7 @@
 				<key>MACH_O_TYPE</key>
 				<string>staticlib</string>
 				<key>MTL_ENABLE_DEBUG_INFO</key>
-				<string>YES</string>
+				<string>NO</string>
 				<key>OTHER_LDFLAGS</key>
 				<string></string>
 				<key>OTHER_LIBTOOLFLAGS</key>
@@ -2466,12 +995,12 @@
 			<key>isa</key>
 			<string>XCBuildConfiguration</string>
 			<key>name</key>
-			<string>Debug</string>
+			<string>Release</string>
 		</dict>
-		<key>AED2BAD1D43745DD69F82C134A985AB3</key>
+		<key>ABC9A1F8D86F932BEE6C28A8849048A6</key>
 		<dict>
 			<key>fileRef</key>
-			<string>69481C280DCAE9648662F62844B48193</string>
+			<string>8EBDEEF087336FBB0ED3061D1CBC0041</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 			<key>settings</key>
@@ -2480,39 +1009,42 @@
 				<string>-DOS_OBJECT_USE_OBJC=0</string>
 			</dict>
 		</dict>
-		<key>B055D923884F197D7CC314CCD705259D</key>
+		<key>ACF42F60DB38312D939C3817F3AECE32</key>
 		<dict>
 			<key>fileRef</key>
-			<string>A05DC2DD28FFC90C12D42414B00854D3</string>
+			<string>F46CFFBC5BC888F7735EF7154D18B89D</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>COMPILER_FLAGS</key>
+				<string>-DOS_OBJECT_USE_OBJC=0</string>
+			</dict>
 		</dict>
-		<key>B0DE9F70D0A10104B848FCBDA0C7B6B5</key>
+		<key>AED2BAD1D43745DD69F82C134A985AB3</key>
+		<dict>
+			<key>fileRef</key>
+			<string>3AE64D4C06A1AC82784D1E7387B2184E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>COMPILER_FLAGS</key>
+				<string>-DOS_OBJECT_USE_OBJC=0</string>
+			</dict>
+		</dict>
+		<key>B2D17AF8B0CDDD8ABA740F31ADAC40FE</key>
 		<dict>
 			<key>buildActionMask</key>
 			<string>2147483647</string>
 			<key>files</key>
 			<array>
-				<string>B93CDABDD18732835A4CC80BA21EEE85</string>
+				<string>D949B8823CB6F2E9FDFF2F7362F85F2F</string>
 			</array>
 			<key>isa</key>
-			<string>PBXFrameworksBuildPhase</string>
+			<string>PBXSourcesBuildPhase</string>
 			<key>runOnlyForDeploymentPostprocessing</key>
 			<string>0</string>
-		</dict>
-		<key>B1A8F73FDB60174C9256F6C0B115B181</key>
-		<dict>
-			<key>fileRef</key>
-			<string>D0BFDAF7E2AE00387371F71A2FFDA90A</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>B356B7495E15415467387833FF29B3CF</key>
-		<dict>
-			<key>fileRef</key>
-			<string>E81217A955D2EA18C4636430AC570071</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
 		</dict>
 		<key>B37F0F91F85060E28F1DAAB522DC7EC1</key>
 		<dict>
@@ -2608,25 +1140,10 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>B66AFC9EB3177758910292173A0FAE69</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>CCSSlipStickChart.m</string>
-			<key>path</key>
-			<string>src/CocoaCharts/CCSSlipStickChart.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
 		<key>B685C45C6BF1321FC17F0F03AC635E4C</key>
 		<dict>
 			<key>fileRef</key>
-			<string>263506508C07C774E8644D9EB9D4F33B</string>
+			<string>C9C9EB2AB0D3A17606A413E684ADED0B</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 			<key>settings</key>
@@ -2635,73 +1152,10 @@
 				<string>-DOS_OBJECT_USE_OBJC=0</string>
 			</dict>
 		</dict>
-		<key>B6BD0160C9F08C69472E8F1E89CE3B36</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>CCSTitleValues.m</string>
-			<key>path</key>
-			<string>src/CocoaCharts/CCSTitleValues.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>B80B2C48435985BFEBB3FC728C06B78A</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>003330C9B2CAF9CB1AA6CB82EB8D92BF</string>
-				<string>63D13C8A3CDC1AF1868764904DBEAA96</string>
-				<string>E9BD2BF9B61DFEDF622A26076AC64BB5</string>
-				<string>1E6D6709D16C0E7D12DAE95928F08E73</string>
-				<string>45AB21441277971F97136DD2D14F2492</string>
-				<string>E08084BE7368B3608E2CB36C34077767</string>
-				<string>2C6F89857A50C25D19AA738C8FBB1FDA</string>
-				<string>F08FC2EB3F9914EA7BCCB3EEBC1FD2FC</string>
-				<string>96F644E957742DA7690CBEB1291E89E0</string>
-				<string>943F6BBDBE01E3D09496E333CF317ADD</string>
-				<string>45B51F14F3C241FA6D37A78381A58275</string>
-				<string>417667AC84737B56162A9DEA0F089B6E</string>
-				<string>EEC4F46C2A5F8AA26FA2FD13371B651C</string>
-				<string>2CBA9D48E5EB572113807B2C023D2E00</string>
-				<string>A21A9A850058BAE50DF6E2D30E66BDD5</string>
-				<string>39DA20DEE5DBFAEBAE56C6CC17FADF2A</string>
-				<string>DB027C4781CD7390DE854A566AE80E3C</string>
-				<string>3B7FBDE86DABEB5713AF62A1149CB1D9</string>
-				<string>87850CF772150B1871356A1164CE3EC8</string>
-				<string>6A045602C6EF8CB2FFCC050C169F82C7</string>
-				<string>AAFF13AE228E98022E21E00E4E51C483</string>
-				<string>4C3BD945A970B6822F47E7B8C7BE5CAD</string>
-				<string>4A56D246D59E375AF4A7AB4199959D9C</string>
-				<string>16DE392F26FC0BD69934F4A42F6753FB</string>
-				<string>3210F1F06FD71900001CD27064ABEE06</string>
-				<string>A1305C1AEE6E3BAFB026093EB9F83670</string>
-				<string>A1704B83DBA638966D6AE8F2CFD24E4C</string>
-				<string>8115C904A883942D588F25F680B88810</string>
-				<string>EDBF20741C164ADCC7CB9421476E9039</string>
-				<string>93D074ED28175CE99948C4CB14223201</string>
-				<string>65B5F1CC842071055FB7EE74456FDB37</string>
-				<string>004FC204836AA01F27558458A9DD9773</string>
-				<string>0A755AB8CCA2E8E79393414C728B6FC0</string>
-				<string>D77D00454DA503F2E3BE9E26A5BEFC78</string>
-				<string>0769E9BAABA9E9508867A03A4E6C7429</string>
-				<string>2AB0DA10B0A710735A5347BB4011A0AC</string>
-			</array>
-			<key>isa</key>
-			<string>PBXHeadersBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
 		<key>B82A170962598E7EAE9A8752574B7B74</key>
 		<dict>
 			<key>fileRef</key>
-			<string>5B9264B4A0AA7CBE63966E60DC614ADD</string>
+			<string>A032955935C1E4A997C090695782BAAB</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 			<key>settings</key>
@@ -2711,13 +1165,6 @@
 					<string>Public</string>
 				</array>
 			</dict>
-		</dict>
-		<key>B93CDABDD18732835A4CC80BA21EEE85</key>
-		<dict>
-			<key>fileRef</key>
-			<string>3E4E89230EF59BC255123B67864ACF77</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
 		</dict>
 		<key>BA6428E9F66FD5A23C0A2E06ED26CD2F</key>
 		<dict>
@@ -2736,28 +1183,6 @@
 			<key>xcLanguageSpecificationIdentifier</key>
 			<string>xcode.lang.ruby</string>
 		</dict>
-		<key>BB0C5894ACB3ACDDAD05445035598903</key>
-		<dict>
-			<key>fileRef</key>
-			<string>F82AB2A5151137B893DFB8F77C29CE26</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>BBAA8C5A7264152993FB53A58DEAE440</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>CCSMACandleStickChart.h</string>
-			<key>path</key>
-			<string>src/CocoaCharts/CCSMACandleStickChart.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
 		<key>BC3CA7F9E30CC8F7E2DD044DD34432FC</key>
 		<dict>
 			<key>children</key>
@@ -2768,65 +1193,6 @@
 			<string>PBXGroup</string>
 			<key>name</key>
 			<string>Frameworks</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>BDD70ECA3E908584EBE06EE67EC267D2</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>CCSColoredStickChartData.h</string>
-			<key>path</key>
-			<string>src/CocoaCharts/CCSColoredStickChartData.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>BE775EC7F085F7FE44E6EAA283960AF2</key>
-		<dict>
-			<key>fileRef</key>
-			<string>8DF05C0E84BF14DE4DB7E58597498D67</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>BEB7C333F738FA7532DEA6E0B6D8FFB7</key>
-		<dict>
-			<key>fileRef</key>
-			<string>0337C54D9D3E7371025D2ECC883A6D67</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>BF3D165F8021329CCF70DE2F902AB58D</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>CCSTitleValuesColor.m</string>
-			<key>path</key>
-			<string>src/CocoaCharts/CCSTitleValuesColor.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>BF56435E4E3D1CB76F00245312DEA02E</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>JSONModel.m</string>
-			<key>path</key>
-			<string>JSONModel/JSONModel/JSONModel.m</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
@@ -2843,42 +1209,10 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>BF8053A00E7D17056088D4EC1CCFE392</key>
-		<dict>
-			<key>baseConfigurationReference</key>
-			<string>98C98CDFB3F20F2925F6CD1F141BB14F</string>
-			<key>buildSettings</key>
-			<dict>
-				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
-				<string>YES</string>
-				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
-				<string>7.0</string>
-				<key>MACH_O_TYPE</key>
-				<string>staticlib</string>
-				<key>MTL_ENABLE_DEBUG_INFO</key>
-				<string>NO</string>
-				<key>OTHER_LDFLAGS</key>
-				<string></string>
-				<key>OTHER_LIBTOOLFLAGS</key>
-				<string></string>
-				<key>PODS_ROOT</key>
-				<string>$(SRCROOT)</string>
-				<key>PRODUCT_NAME</key>
-				<string>$(TARGET_NAME)</string>
-				<key>SDKROOT</key>
-				<string>iphoneos</string>
-				<key>SKIP_INSTALL</key>
-				<string>YES</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Release</string>
-		</dict>
 		<key>C591CE6B9FA1950409E543A70B3ECABE</key>
 		<dict>
 			<key>fileRef</key>
-			<string>7C4743DA1511F9FA14839593220792D6</string>
+			<string>1A9B4729C01E8C08BAE03F80377AC6DC</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 			<key>settings</key>
@@ -2903,42 +1237,7 @@
 			<key>isa</key>
 			<string>XCConfigurationList</string>
 		</dict>
-		<key>C6D6E4AB34E92475D268591B33D60E97</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>CCSDonutChart.h</string>
-			<key>path</key>
-			<string>src/CocoaCharts/CCSDonutChart.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>C8263315F4CA7CC7D6BAFC13F9928886</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>JSONModel-dummy.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>CAA5B9904B7C781A70AC981D33A50BB1</key>
-		<dict>
-			<key>fileRef</key>
-			<string>F06E8AF47BCEB34ED00FB4BEF7A87152</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>CAB41ED21A0757AAF9A517FC7A98957E</key>
+		<key>C7CA98CA676BFC6D8F2BC1645653FAE1</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
@@ -2947,50 +1246,13 @@
 			<key>lastKnownFileType</key>
 			<string>sourcecode.c.objc</string>
 			<key>name</key>
-			<string>CCSAreaChart.m</string>
+			<string>JSONValueTransformer.m</string>
 			<key>path</key>
-			<string>src/CocoaCharts/CCSAreaChart.m</string>
+			<string>JSONModel/JSONModelTransformations/JSONValueTransformer.m</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>CB51AA3725C2BA7CC68E7B68B0B01D6E</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>CCSStackedAreaChart.h</string>
-			<key>path</key>
-			<string>src/CocoaCharts/CCSStackedAreaChart.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>CBB91E0FD050A91D04D18761142B0101</key>
-		<dict>
-			<key>fileRef</key>
-			<string>F35DE464BAD15A4D08702F3F28838214</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>CCF37102052172153FC994CB5853547C</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>CCSSlipStickChart.h</string>
-			<key>path</key>
-			<string>src/CocoaCharts/CCSSlipStickChart.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>CF7DAB35AD0E27998EE52B37726BE946</key>
+		<key>C9C9EB2AB0D3A17606A413E684ADED0B</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
@@ -2999,103 +1261,16 @@
 			<key>lastKnownFileType</key>
 			<string>sourcecode.c.objc</string>
 			<key>name</key>
-			<string>CCSSlipCandleStickChart.m</string>
+			<string>NSArray+JSONModel.m</string>
 			<key>path</key>
-			<string>src/CocoaCharts/CCSSlipCandleStickChart.m</string>
+			<string>JSONModel/JSONModelCategories/NSArray+JSONModel.m</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
-		</dict>
-		<key>CFEF36C7DE50E85266F0FACD1C35B73C</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>JSONModelClassProperty.m</string>
-			<key>path</key>
-			<string>JSONModel/JSONModel/JSONModelClassProperty.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>D01DA10A539C2614AF90DEAAE85243E9</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>CCSSlipLineChart.h</string>
-			<key>path</key>
-			<string>src/CocoaCharts/CCSSlipLineChart.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>D04DF0A59FD7799608ABF0A23A991D15</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>JSONModel+networking.m</string>
-			<key>path</key>
-			<string>JSONModel/JSONModelNetworking/JSONModel+networking.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>D0BFDAF7E2AE00387371F71A2FFDA90A</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>CCSMASlipCandleStickChart.m</string>
-			<key>path</key>
-			<string>src/CocoaCharts/CCSMASlipCandleStickChart.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>D1EC8E163A0130A719444B871A4AAD9E</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>Cocoa-Charts-dummy.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>D1FC1391F642633670C1D015DF82F7DD</key>
-		<dict>
-			<key>buildConfigurations</key>
-			<array>
-				<string>86BF1E43769E11E8BD8240DCE423AC44</string>
-				<string>5C2D98CCFE2B0FC7169F4360E206062E</string>
-			</array>
-			<key>defaultConfigurationIsVisible</key>
-			<string>0</string>
-			<key>defaultConfigurationName</key>
-			<string>Release</string>
-			<key>isa</key>
-			<string>XCConfigurationList</string>
 		</dict>
 		<key>D2718FB5214DA8A524CE735932323F82</key>
 		<dict>
 			<key>fileRef</key>
-			<string>46B7183153677B7E8808B4B9BABF0D3B</string>
+			<string>11EEB87D68A0A31A5FDBE56AEAA0D009</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 			<key>settings</key>
@@ -3105,28 +1280,6 @@
 					<string>Public</string>
 				</array>
 			</dict>
-		</dict>
-		<key>D2A322978486048A8AB3E3465CEFB634</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>NSArray+JSONModel.h</string>
-			<key>path</key>
-			<string>JSONModel/JSONModelCategories/NSArray+JSONModel.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>D41B2B33FB1EAAA94E703E587984D35D</key>
-		<dict>
-			<key>fileRef</key>
-			<string>B66AFC9EB3177758910292173A0FAE69</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
 		</dict>
 		<key>D41D8CD98F00B204E9800998ECF8427E</key>
 		<dict>
@@ -3154,7 +1307,7 @@
 			<key>mainGroup</key>
 			<string>7DB346D0F39D3F0E887471402A8071AB</string>
 			<key>productRefGroup</key>
-			<string>40266921FE31748E74CA6ADF1949985D</string>
+			<string>3BA933A0CB355030E248272E5A7A5441</string>
 			<key>projectDirPath</key>
 			<string></string>
 			<key>projectReferences</key>
@@ -3163,22 +1316,21 @@
 			<string></string>
 			<key>targets</key>
 			<array>
-				<string>13E500542E9D2CC0163AA0035C83EEB5</string>
 				<string>09FA060F1A0492FB25232F489AC4E573</string>
-				<string>41B5FC8A40669B8D1BD98E6948AA1DC7</string>
+				<string>856568397924F01BF5891CFAD1805082</string>
 			</array>
 		</dict>
 		<key>D4EF11B8928C1374360A67C3BC22AD13</key>
 		<dict>
 			<key>fileRef</key>
-			<string>C8263315F4CA7CC7D6BAFC13F9928886</string>
+			<string>D9371E95B6338D34B73F6B3C85F7A9F3</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 		</dict>
 		<key>D5A53314F0406B315CA0867F8EFCFD33</key>
 		<dict>
 			<key>baseConfigurationReference</key>
-			<string>E496A7CDA20D79274699E7B146F41432</string>
+			<string>4778E41C70A4B2470658988DBCEA7F93</string>
 			<key>buildSettings</key>
 			<dict>
 				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
@@ -3209,60 +1361,30 @@
 			<key>name</key>
 			<string>Debug</string>
 		</dict>
-		<key>D5AF79C4D78340FC9DA1F03F527AFCFE</key>
-		<dict>
-			<key>fileRef</key>
-			<string>87A9D02A2CBD9A5D831D7BB0E32F9338</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>D77D00454DA503F2E3BE9E26A5BEFC78</key>
-		<dict>
-			<key>fileRef</key>
-			<string>0FD3EE5BAA98C44A60A1AD74AA90E006</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>ATTRIBUTES</key>
-				<array>
-					<string>Public</string>
-				</array>
-			</dict>
-		</dict>
-		<key>DA36C70F5F177A1A805A5F45B05F80BA</key>
+		<key>D9371E95B6338D34B73F6B3C85F7A9F3</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
 			<key>isa</key>
 			<string>PBXFileReference</string>
 			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>CCSGridChart.h</string>
+			<string>sourcecode.c.objc</string>
 			<key>path</key>
-			<string>src/CocoaCharts/CCSGridChart.h</string>
+			<string>JSONModel-dummy.m</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>DB027C4781CD7390DE854A566AE80E3C</key>
+		<key>D949B8823CB6F2E9FDFF2F7362F85F2F</key>
 		<dict>
 			<key>fileRef</key>
-			<string>A51148F1ED607735A470CA7669FC1EF9</string>
+			<string>272643F56613CA0D336AE3DBF19DC404</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>ATTRIBUTES</key>
-				<array>
-					<string>Public</string>
-				</array>
-			</dict>
 		</dict>
 		<key>DCB74D72FE0E9C8C8E23B49C8CE52276</key>
 		<dict>
 			<key>fileRef</key>
-			<string>23FBCBA5E781436CE46332E396211FC0</string>
+			<string>C7CA98CA676BFC6D8F2BC1645653FAE1</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 			<key>settings</key>
@@ -3271,64 +1393,7 @@
 				<string>-DOS_OBJECT_USE_OBJC=0</string>
 			</dict>
 		</dict>
-		<key>DF4D4D93AC52AB23D63923DEE9988B97</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>CCSTitleValue.h</string>
-			<key>path</key>
-			<string>src/CocoaCharts/CCSTitleValue.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>E08084BE7368B3608E2CB36C34077767</key>
-		<dict>
-			<key>fileRef</key>
-			<string>4DD0719754161A6841C5AF7418C92D6F</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>ATTRIBUTES</key>
-				<array>
-					<string>Public</string>
-				</array>
-			</dict>
-		</dict>
-		<key>E0CBE82CDBFC3BB60DA012790329BB0F</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>CocoaCharts.h</string>
-			<key>path</key>
-			<string>src/CocoaCharts/CocoaCharts.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>E12C3AD6EA0AF9D1B53E4A5740281F07</key>
-		<dict>
-			<key>containerPortal</key>
-			<string>D41D8CD98F00B204E9800998ECF8427E</string>
-			<key>isa</key>
-			<string>PBXContainerItemProxy</string>
-			<key>proxyType</key>
-			<string>1</string>
-			<key>remoteGlobalIDString</key>
-			<string>13E500542E9D2CC0163AA0035C83EEB5</string>
-			<key>remoteInfo</key>
-			<string>Cocoa-Charts</string>
-		</dict>
-		<key>E275BCB54DA044F77F725290E6349F1F</key>
+		<key>DD6BC7848CEF9E23C9AA646C55850052</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
@@ -3337,75 +1402,11 @@
 			<key>lastKnownFileType</key>
 			<string>sourcecode.c.objc</string>
 			<key>name</key>
-			<string>CCSMAStickChart.m</string>
+			<string>JSONModelError.m</string>
 			<key>path</key>
-			<string>src/CocoaCharts/CCSMAStickChart.m</string>
+			<string>JSONModel/JSONModel/JSONModelError.m</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
-		</dict>
-		<key>E496A7CDA20D79274699E7B146F41432</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.xcconfig</string>
-			<key>path</key>
-			<string>JSONModel.xcconfig</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>E805F907366C23454D2D64607C49F648</key>
-		<dict>
-			<key>fileRef</key>
-			<string>75905CE58A358BF5CD0F1DB3C6FFAF84</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>E81217A955D2EA18C4636430AC570071</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>CCSBaseChartView.m</string>
-			<key>path</key>
-			<string>src/CocoaCharts/CCSBaseChartView.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>E95CC47C24B2ECFBB09583C88618CA40</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>archive.ar</string>
-			<key>includeInIndex</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>name</key>
-			<string>libCocoa-Charts.a</string>
-			<key>path</key>
-			<string>libCocoa-Charts.a</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
-		</dict>
-		<key>E9BD2BF9B61DFEDF622A26076AC64BB5</key>
-		<dict>
-			<key>fileRef</key>
-			<string>1A879DED99AFE822BD67F835CA8C1219</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>ATTRIBUTES</key>
-				<array>
-					<string>Public</string>
-				</array>
-			</dict>
 		</dict>
 		<key>EB932C7244160CC464D5F7E2A9713D3F</key>
 		<dict>
@@ -3420,184 +1421,7 @@
 			<key>runOnlyForDeploymentPostprocessing</key>
 			<string>0</string>
 		</dict>
-		<key>EBB799547EEAF0947CF7DC6CA448B7EC</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>CCSTitleValue.m</string>
-			<key>path</key>
-			<string>src/CocoaCharts/CCSTitleValue.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>EC874BEC477D1E0658AF828D3F009EE5</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>CCSTitleValueColor.m</string>
-			<key>path</key>
-			<string>src/CocoaCharts/CCSTitleValueColor.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>EDBF20741C164ADCC7CB9421476E9039</key>
-		<dict>
-			<key>fileRef</key>
-			<string>A743A496A5367410B65C4BE56E8CE5D5</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>ATTRIBUTES</key>
-				<array>
-					<string>Public</string>
-				</array>
-			</dict>
-		</dict>
-		<key>EEC4F46C2A5F8AA26FA2FD13371B651C</key>
-		<dict>
-			<key>fileRef</key>
-			<string>04F8C36314EE5CED528C057826261E84</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>ATTRIBUTES</key>
-				<array>
-					<string>Public</string>
-				</array>
-			</dict>
-		</dict>
-		<key>F06E8AF47BCEB34ED00FB4BEF7A87152</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>CCSLineChart.m</string>
-			<key>path</key>
-			<string>src/CocoaCharts/CCSLineChart.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>F08FC2EB3F9914EA7BCCB3EEBC1FD2FC</key>
-		<dict>
-			<key>fileRef</key>
-			<string>17480F44BBB4434DC8028D4CCBBF66F3</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>ATTRIBUTES</key>
-				<array>
-					<string>Public</string>
-				</array>
-			</dict>
-		</dict>
-		<key>F0F4C227395CF6928A375FEF5237D65D</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>CCSStickChartData.m</string>
-			<key>path</key>
-			<string>src/CocoaCharts/CCSStickChartData.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>F131DF27774003562ED1066FACEFFD86</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>E496A7CDA20D79274699E7B146F41432</string>
-				<string>C8263315F4CA7CC7D6BAFC13F9928886</string>
-				<string>95DC21A292F25EF066969E4357323B18</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Support Files</string>
-			<key>path</key>
-			<string>../Target Support Files/JSONModel</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>F14BE9BF34E87F0A4E65F3F200A0276F</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>CCSColoredStickChart.m</string>
-			<key>path</key>
-			<string>src/CocoaCharts/CCSColoredStickChart.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>F35DE464BAD15A4D08702F3F28838214</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>CCSSlipLineChart.m</string>
-			<key>path</key>
-			<string>src/CocoaCharts/CCSSlipLineChart.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>F468275486CD3C72374D219458E0539C</key>
-		<dict>
-			<key>fileRef</key>
-			<string>E275BCB54DA044F77F725290E6349F1F</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>F4D2A0918C2C064F1A16B4CA2D42089A</key>
-		<dict>
-			<key>fileRef</key>
-			<string>507CE39D2BBD66BB65D8C3FDC875F895</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>ATTRIBUTES</key>
-				<array>
-					<string>Public</string>
-				</array>
-			</dict>
-		</dict>
-		<key>F6D5A97C9DE6FAFDACD52EC004E25020</key>
-		<dict>
-			<key>fileRef</key>
-			<string>3E4E89230EF59BC255123B67864ACF77</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>F71DD8C50AE2744DCF33CFB392F78D07</key>
+		<key>F3417FD55DF0D85CCCCA639EA2F8C827</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
@@ -3606,16 +1430,31 @@
 			<key>lastKnownFileType</key>
 			<string>sourcecode.c.h</string>
 			<key>name</key>
-			<string>JSONKeyMapper.h</string>
+			<string>NSArray+JSONModel.h</string>
 			<key>path</key>
-			<string>JSONModel/JSONModelTransformations/JSONKeyMapper.h</string>
+			<string>JSONModel/JSONModelCategories/NSArray+JSONModel.h</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>F7B5D2658B77049DDEC0AAA88E6FCEA7</key>
+		<key>F46CFFBC5BC888F7735EF7154D18B89D</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>JSONHTTPClient.m</string>
+			<key>path</key>
+			<string>JSONModel/JSONModelNetworking/JSONHTTPClient.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>F4D2A0918C2C064F1A16B4CA2D42089A</key>
 		<dict>
 			<key>fileRef</key>
-			<string>3E31C3158A2E5755B4C48E2B855E2A17</string>
+			<string>0A28C311A3D27213DEB4B1175FC59F6D</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 			<key>settings</key>
@@ -3626,70 +1465,26 @@
 				</array>
 			</dict>
 		</dict>
-		<key>F82AB2A5151137B893DFB8F77C29CE26</key>
+		<key>F7B5D2658B77049DDEC0AAA88E6FCEA7</key>
 		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
+			<key>fileRef</key>
+			<string>024CDF58966ABE07A33047CDBE207875</string>
 			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>CCSRadarChart.m</string>
-			<key>path</key>
-			<string>src/CocoaCharts/CCSRadarChart.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
 		</dict>
-		<key>F902F3D92AB19FA3AA7F0A17092A6BD7</key>
+		<key>FB32BEBB275C3CDF5E04F95697476DD0</key>
 		<dict>
-			<key>buildConfigurations</key>
-			<array>
-				<string>AE06E73A56389F93D11055478598B00B</string>
-				<string>BF8053A00E7D17056088D4EC1CCFE392</string>
-			</array>
-			<key>defaultConfigurationIsVisible</key>
-			<string>0</string>
-			<key>defaultConfigurationName</key>
-			<string>Release</string>
+			<key>fileRef</key>
+			<string>3E4E89230EF59BC255123B67864ACF77</string>
 			<key>isa</key>
-			<string>XCConfigurationList</string>
-		</dict>
-		<key>FD39E1F87C34700D0BB109BA2AF0A6BA</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>2BD42C84A8EA476614EF83805E640BA4</string>
-				<string>69481C280DCAE9648662F62844B48193</string>
-				<string>46B7183153677B7E8808B4B9BABF0D3B</string>
-				<string>23DB5D7A5533F4A709BABBDDB7C0C2CF</string>
-				<string>F71DD8C50AE2744DCF33CFB392F78D07</string>
-				<string>9440D3B5E64DAE274EF8FF9FF9910DEC</string>
-				<string>5B9264B4A0AA7CBE63966E60DC614ADD</string>
-				<string>BF56435E4E3D1CB76F00245312DEA02E</string>
-				<string>3E31C3158A2E5755B4C48E2B855E2A17</string>
-				<string>D04DF0A59FD7799608ABF0A23A991D15</string>
-				<string>874E090AEF0CD9D58E9BC9D34C7F00EB</string>
-				<string>66ADF19F960FB12A510C39ED8A607467</string>
-				<string>97B52CFCEB299C16622D0A9A7776F50A</string>
-				<string>CFEF36C7DE50E85266F0FACD1C35B73C</string>
-				<string>507CE39D2BBD66BB65D8C3FDC875F895</string>
-				<string>006FD443078D1304CF0EDDB7BCE9A244</string>
-				<string>7C4743DA1511F9FA14839593220792D6</string>
-				<string>81589EB99530B977728D9D7298719136</string>
-				<string>23FBCBA5E781436CE46332E396211FC0</string>
-				<string>D2A322978486048A8AB3E3465CEFB634</string>
-				<string>263506508C07C774E8644D9EB9D4F33B</string>
-				<string>F131DF27774003562ED1066FACEFFD86</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>JSONModel</string>
-			<key>path</key>
-			<string>JSONModel</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
+			<string>PBXBuildFile</string>
 		</dict>
 	</dict>
 	<key>rootObject</key>

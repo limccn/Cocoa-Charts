@@ -2,7 +2,7 @@
 //  CCSBandAreaChart.h
 //  Cocoa-Charts
 //
-//  Created by limc on 11-10-27.
+//  Created by limc on 13-10-27.
 //  Copyright 2011 limc.cn All rights reserved.
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,10 +20,19 @@
 
 #import "CCSLineChart.h"
 
+/*!
+ CCSBandAreaChart
+ 
+ 带状面积图，以两条直线作为边线绘制面积
+ */
 @interface CCSBandAreaChart : CCSLineChart {
     CCFloat _areaAlpha;
 }
 
+/*!
+ @abstract
+ 面积填充部分的透明度
+ */
 @property(assign, nonatomic) CCFloat areaAlpha;
 
 @end

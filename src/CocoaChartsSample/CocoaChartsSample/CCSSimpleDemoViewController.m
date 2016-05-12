@@ -17,9 +17,8 @@
 #import "ta_libc.h"
 #import "CCSTALibUtils.h"
 #import "CCSStringUtils.h"
-#import "CCSJSONData.h"
 
-#define WR_NONE_DISPLAY 101
+#define WR_NONE_DISPLAY @"101"
 
 #define AXIS_CALC_PARM  1000
 
@@ -124,24 +123,24 @@
 - (void)loadDataJSON: (ChartDataType) chartDataType{
 //    NSString *strAllPdts = [self findJSONStringWithName:@"allpdts"];
     
-    CCSJSONData *jsonData = nil;
-    
-    if (chartDataType == Chart1minData) {
-        jsonData = [[CCSJSONData alloc] initWithData:[[self findJSONStringWithName:@"1min"] dataUsingEncoding:NSUTF8StringEncoding] error:nil];
-    }else if (chartDataType == Chart15minData){
-        jsonData = [[CCSJSONData alloc] initWithData:[[self findJSONStringWithName:@"15min"] dataUsingEncoding:NSUTF8StringEncoding] error:nil];
-    }else{
-        jsonData = [[CCSJSONData alloc] initWithData:[[self findJSONStringWithName:@"time"] dataUsingEncoding:NSUTF8StringEncoding] error:nil];
-    }
-    
-    NSArray *arrData = nil;
-    if (jsonData.kqn !=nil) {
-        arrData = jsonData.kqn;
-    }else if (jsonData.ct !=nil){
-        arrData = jsonData.ct;
-    }else if (jsonData.ctt !=nil){
-        arrData = jsonData.ctt;
-    }
+//    CCSJSONData *jsonData = nil;
+//    
+//    if (chartDataType == Chart1minData) {
+//        jsonData = [[CCSJSONData alloc] initWithData:[[self findJSONStringWithName:@"1min"] dataUsingEncoding:NSUTF8StringEncoding] error:nil];
+//    }else if (chartDataType == Chart15minData){
+//        jsonData = [[CCSJSONData alloc] initWithData:[[self findJSONStringWithName:@"15min"] dataUsingEncoding:NSUTF8StringEncoding] error:nil];
+//    }else{
+//        jsonData = [[CCSJSONData alloc] initWithData:[[self findJSONStringWithName:@"time"] dataUsingEncoding:NSUTF8StringEncoding] error:nil];
+//    }
+//    
+//    NSArray *arrData = nil;
+//    if (jsonData.kqn !=nil) {
+//        arrData = jsonData.kqn;
+//    }else if (jsonData.ct !=nil){
+//        arrData = jsonData.ct;
+//    }else if (jsonData.ctt !=nil){
+//        arrData = jsonData.ctt;
+//    }
     
     if (self.chartData == nil) {
         self.chartData = [[NSMutableArray alloc] init];
@@ -156,7 +155,7 @@
 //    data.current = [dict objectForKey:@"currentPrice"];
 //    data.preclose = nil;
 //    data.change = [dict objectForKey:@"changesPercent"];
-    for (NSDictionary *dict in arrData) {
+    for (NSDictionary *dict in self.chartData) {
         if (dict != nil) {
             OHLCVDData *data = [[OHLCVDData alloc] init];
             
@@ -176,39 +175,39 @@
     [self dataPreProcess];
 }
 
-- (void) loadData2 {
-    NSMutableArray *arr = [NSMutableArray arrayWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"test" ofType:@".plist"]];
-    
-    if (arr ==nil) {
-        return;
-    }
-    
-    if (self.chartData == nil) {
-        self.chartData = [[NSMutableArray alloc] init];
-    }
-    
-    for (int i=0; i<[arr count]; i++) {
-        NSDictionary *dict = [arr objectAtIndex:i];
-        if (dict != nil) {
-            OHLCVDData *data = [[OHLCVDData alloc] init];
-            
-            data.open = [dict objectForKey:@"openPrice"];
-            data.high = [dict objectForKey:@"upPrice"];
-            data.low = [dict objectForKey:@"lowPrice"];
-            data.close = [dict objectForKey:@"closePrice"];
-            data.vol = [dict objectForKey:@"totalNum"];
-            data.date = [dict objectForKey:@"tradeDate"];
-            data.current = [dict objectForKey:@"currentPrice"];
-            data.preclose = nil;
-            data.change = [dict objectForKey:@"changesPercent"];
-            
-            [self.chartData addObject:data];
-            
-        }
-    }
-    
-    [self dataPreProcess];
-}
+//- (void) loadData2 {
+//    NSMutableArray *arr = [NSMutableArray arrayWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"test" ofType:@".plist"]];
+//    
+//    if (arr ==nil) {
+//        return;
+//    }
+//    
+//    if (self.chartData == nil) {
+//        self.chartData = [[NSMutableArray alloc] init];
+//    }
+//    
+//    for (int i=0; i<[arr count]; i++) {
+//        NSDictionary *dict = [arr objectAtIndex:i];
+//        if (dict != nil) {
+//            OHLCVDData *data = [[OHLCVDData alloc] init];
+//            
+//            data.open = [dict objectForKey:@"openPrice"];
+//            data.high = [dict objectForKey:@"upPrice"];
+//            data.low = [dict objectForKey:@"lowPrice"];
+//            data.close = [dict objectForKey:@"closePrice"];
+//            data.vol = [dict objectForKey:@"totalNum"];
+//            data.date = [dict objectForKey:@"tradeDate"];
+//            data.current = [dict objectForKey:@"currentPrice"];
+//            data.preclose = nil;
+//            data.change = [dict objectForKey:@"changesPercent"];
+//            
+//            [self.chartData addObject:data];
+//            
+//        }
+//    }
+//    
+//    [self dataPreProcess];
+//}
 
 - (void) dataPreProcess{
     
@@ -861,12 +860,12 @@
 
     //设置stickData
 //    self.stickChart.minDisplayNumber = 25;
-    self.stickChart.maxValue = 800000;
-    self.stickChart.minValue = 0;
+//    self.stickChart.maxValue = 800000;
+//    self.stickChart.minValue = 0;
 //    self.stickChart.axisMarginLeft = 50;
 //    self.stickChart.displayCrossYOnTouch = YES;
 //    self.stickChart.displayCrossXOnTouch = YES;
-    self.stickChart.stickFillColor = [UIColor colorWithRed:0.7 green:0.7 blue:0 alpha:0.8];
+//    self.stickChart.stickFillColor = [UIColor colorWithRed:0.7 green:0.7 blue:0 alpha:0.8];
 
 //    self.stickChart.axisXColor = [UIColor darkGrayColor];
 //    self.stickChart.axisYColor = [UIColor darkGrayColor];
@@ -878,8 +877,8 @@
 //    self.stickChart.axisMarginRight = 0;
 //    self.stickChart.axisMarginTop = 1;
 //    self.stickChart.axisYPosition = CCSGridChartYAxisPositionRight;
-    self.stickChart.displayNumber = 50;
-    self.stickChart.displayFrom = 0;
+//    self.stickChart.displayNumber = 50;
+//    self.stickChart.displayFrom = 0;
     self.stickChart.displayLongitudeTitle = NO;
     self.stickChart.axisMarginBottom = 3;
     
@@ -892,22 +891,9 @@
 
 - (void)initMACDChartData {
     if (self.chartData != NULL) {
-        NSMutableArray *stickDatas = [[NSMutableArray alloc] initWithCapacity:[self.chartData count]];
-        for (NSInteger i = [self.chartData count] - 1; i >= 0; i--) {
-            OHLCVDData *item = [self.chartData objectAtIndex:i];
-            CCSCandleStickChartData *stickData = [[CCSCandleStickChartData alloc] init];
-            stickData.open = [item.open doubleValue];
-            stickData.high = [item.high doubleValue];
-            stickData.low = [item.low doubleValue];
-            stickData.close = [item.close doubleValue];
-            stickData.change = 0;
-            stickData.date = [item.date dateWithFormat:@"yyyy-MM-ddHH:mm:ss" target:@"yy-MM-dd"];
-            //增加数据
-            [stickDatas addObject:stickData];
-        }
-
+        
         self.macdChart.stickData = [self computeMACDData:self.chartData];
-        self.macdChart.singleTouchPoint = CGPointMake(-1, -1);
+//        self.macdChart.singleTouchPoint = CGPointMake(-1, -1);
 
         [self.macdChart setNeedsDisplay];
     }
@@ -941,20 +927,20 @@
 //    self.macdChart.axisMarginTop = 1;
 //    self.macdChart.axisYPosition = CCSGridChartYAxisPositionRight;
 
-    self.macdChart.maxValue = 300000;
-    self.macdChart.minValue = -300000;
-    self.macdChart.maxSticksNum = 100;
+//    self.macdChart.maxValue = 300000;
+//    self.macdChart.minValue = -300000;
+//    self.macdChart.maxSticksNum = 100;
 //    self.macdChart.displayCrossXOnTouch = YES;
 //    self.macdChart.displayCrossYOnTouch = YES;
-    self.macdChart.macdDisplayType = CCSMACDChartDisplayTypeLineStick;
-    self.macdChart.positiveStickColor = [UIColor redColor];
-    self.macdChart.negativeStickColor = [UIColor greenColor];
+//    self.macdChart.macdDisplayType = CCSMACDChartDisplayTypeStick;
+//    self.macdChart.positiveStickColor = [UIColor redColor];
+//    self.macdChart.negativeStickColor = [UIColor greenColor];
     self.macdChart.macdLineColor = [UIColor cyanColor];
     self.macdChart.deaLineColor = [UIColor blueColor];
     self.macdChart.diffLineColor = [UIColor orangeColor];
-    self.macdChart.displayNumber = 50;
-    self.macdChart.displayFrom = 0;
-    self.macdChart.axisCalc = 1000000;
+//    self.macdChart.displayNumber = 50;
+//    self.macdChart.displayFrom = 0;
+    self.macdChart.axisCalc = AXIS_CALC_PARM;
     self.macdChart.displayLongitudeTitle = NO;
     self.macdChart.axisMarginBottom = 3;
     
@@ -997,11 +983,14 @@
 //    self.kdjChart.axisYPosition = CCSGridChartYAxisPositionRight;
 //    self.kdjChart.displayCrossXOnTouch = YES;
 //    self.kdjChart.displayCrossYOnTouch = YES;
-    self.kdjChart.displayNumber = 50;
-    self.kdjChart.displayFrom = 0;
+//    self.kdjChart.displayNumber = 50;
+//    self.kdjChart.displayFrom = 0;
     self.kdjChart.latitudeNum = 2;
     self.kdjChart.displayLongitudeTitle = NO;
     self.kdjChart.axisMarginBottom = 3;
+    self.kdjChart.autoCalcRange = NO;
+    self.kdjChart.maxValue = 120;
+    self.kdjChart.minValue = -20;
     
     self.kdjChart.chartDelegate = self;
     
@@ -1032,10 +1021,13 @@
 //    self.rsiChart.axisYPosition = CCSGridChartYAxisPositionRight;
 //    self.rsiChart.displayCrossXOnTouch = YES;
 //    self.rsiChart.displayCrossYOnTouch = YES;
-    self.rsiChart.displayNumber = 50;
-    self.rsiChart.displayFrom = 0;
+//    self.rsiChart.displayNumber = 50;
+//    self.rsiChart.displayFrom = 0;
     self.rsiChart.displayLongitudeTitle = NO;
     self.rsiChart.axisMarginBottom = 3;
+    self.rsiChart.autoCalcRange = NO;
+    self.rsiChart.maxValue = 100;
+    self.rsiChart.minValue = 0;
     
     self.rsiChart.chartDelegate = self;
     
@@ -1053,7 +1045,7 @@
         [linesData addObject:[self computeRSIData:self.chartData period:24]];
 
         self.rsiChart.linesData = linesData;
-        self.rsiChart.singleTouchPoint = CGPointMake(-1, -1);
+//        self.rsiChart.singleTouchPoint = CGPointMake(-1, -1);
 
         [self.rsiChart setNeedsDisplay];
     }
@@ -1081,11 +1073,14 @@
 //    self.wrChart.axisYPosition = CCSGridChartYAxisPositionRight;
 //    self.wrChart.displayCrossXOnTouch = YES;
 //    self.wrChart.displayCrossYOnTouch = YES;
-    self.wrChart.displayNumber = 50;
-    self.wrChart.displayFrom = 0;
-    self.wrChart.noneDisplayValue = WR_NONE_DISPLAY;
+//    self.wrChart.displayNumber = 50;
+//    self.wrChart.displayFrom = 0;
+    self.wrChart.noneDisplayValues = [NSMutableArray arrayWithObjects:WR_NONE_DISPLAY, nil];
     self.wrChart.displayLongitudeTitle = NO;
     self.wrChart.axisMarginBottom = 3;
+    self.wrChart.autoCalcRange = NO;
+    self.wrChart.maxValue = 100;
+    self.wrChart.minValue = 0;
     
     self.wrChart.chartDelegate = self;
     
@@ -1098,7 +1093,7 @@
 - (void)initWRChartData {
     if (self.chartData != NULL) {
         self.wrChart.linesData = [self computeWRData:self.chartData period:6];
-        self.wrChart.singleTouchPoint = CGPointMake(-1, -1);
+//        self.wrChart.singleTouchPoint = CGPointMake(-1, -1);
 
         [self.wrChart setNeedsDisplay];
     }
@@ -1126,10 +1121,12 @@
 //    self.cciChart.axisYPosition = CCSGridChartYAxisPositionRight;
 //    self.cciChart.displayCrossXOnTouch = YES;
 //    self.cciChart.displayCrossYOnTouch = YES;
-    self.cciChart.displayNumber = 50;
-    self.cciChart.displayFrom = 0;
+//    self.cciChart.displayNumber = 50;
+//    self.cciChart.displayFrom = 0;
     self.cciChart.displayLongitudeTitle = NO;
     self.cciChart.axisMarginBottom = 3;
+//    self.cciChart.autoCalcRange = YES;
+//    self.cciChart.balanceRange = YES;
     
     self.cciChart.chartDelegate = self;
     
@@ -1142,7 +1139,7 @@
     if (self.chartData != NULL) {
 
         self.cciChart.linesData = [self computeCCIData:self.chartData period:14];
-        self.cciChart.singleTouchPoint = CGPointMake(-1, -1);
+//        self.cciChart.singleTouchPoint = CGPointMake(-1, -1);
 
         [self.cciChart setNeedsDisplay];
     }
@@ -1170,8 +1167,8 @@
 //    self.bollChart.axisYPosition = CCSGridChartYAxisPositionRight;
 //    self.bollChart.displayCrossXOnTouch = YES;
 //    self.bollChart.displayCrossYOnTouch = YES;
-    self.bollChart.displayNumber = 50;
-    self.bollChart.displayFrom = 0;
+//    self.bollChart.displayNumber = 50;
+//    self.bollChart.displayFrom = 0;
     self.bollChart.displayLongitudeTitle = NO;
     self.bollChart.axisMarginBottom = 3;
     
@@ -1186,7 +1183,7 @@
 - (void)initBOLLChartData {
     if (self.chartData != NULL) {
         self.bollChart.linesData = [self computeBOLLData:self.chartData];
-        self.bollChart.singleTouchPoint = CGPointMake(-1, -1);
+//        self.bollChart.singleTouchPoint = CGPointMake(-1, -1);
 
         [self.bollChart setNeedsDisplay];
     }
@@ -1204,7 +1201,7 @@
             stickData.low = [item.low doubleValue];
             stickData.close = [item.close doubleValue];
             stickData.change = 0;
-            stickData.date = [item.date dateWithFormat:@"yyyy-MM-ddHH: mm: ss" target:@"yy-MM-dd"];
+            stickData.date = [item.date dateWithFormat:@"yyyy-MM-dd HH:mm:ss" target:@"yy-MM-dd"];
             //增加数据
             [stickDatas addObject:stickData];
         }
@@ -1231,7 +1228,7 @@
     //设置stickData
     candleStickChart.maxValue = 340;
     candleStickChart.minValue = 240;
-    candleStickChart.axisCalc = 1;
+//    candleStickChart.axisCalc = 1;
     candleStickChart.displayLongitudeTitle = YES;
     candleStickChart.displayLatitudeTitle  = YES;
 //    candleStickChart.axisMarginBottom = 0;
@@ -1250,9 +1247,9 @@
 //    candleStickChart.axisMarginRight = 0;
 //    candleStickChart.axisMarginBottom = 0;
 //    candleStickChart.axisMarginTop = 1;
-    candleStickChart.axisYPosition = CCSGridChartYAxisPositionRight;
-    candleStickChart.displayNumber = 50;
-    candleStickChart.displayFrom = 0;
+//    candleStickChart.axisYPosition = CCSGridChartYAxisPositionRight;
+//    candleStickChart.displayNumber = 50;
+//    candleStickChart.displayFrom = 0;
     candleStickChart.bollingerBandStyle = CCSBollingerBandStyleNone;
     candleStickChart.axisCalc = AXIS_CALC_PARM;
     candleStickChart.latitudeNum = 3;
@@ -1425,9 +1422,9 @@
         for (NSInteger index = 0; index < arrCls.count; index++) {
             //两倍表示MACD
             OHLCVDData *item = [items objectAtIndex:items.count - 1 - index];
-            [MACDData addObject:[[CCSMACDData alloc] initWithDea:[(NSString *) [arrMACDSignal objectAtIndex:index] doubleValue] * 1000000
-                                                            diff:[(NSString *) [arrMACD objectAtIndex:index] doubleValue] * 1000000
-                                                            macd:[(NSString *) [arrMACDHist objectAtIndex:index] doubleValue] * 2 * 1000000
+            [MACDData addObject:[[CCSMACDData alloc] initWithDea:[(NSString *) [arrMACDSignal objectAtIndex:index] doubleValue]
+                                                            diff:[(NSString *) [arrMACD objectAtIndex:index] doubleValue]
+                                                            macd:[(NSString *) [arrMACDHist objectAtIndex:index] doubleValue] * 2
                                                             date:[item.date dateWithFormat:@"yyyy-MM-ddHH:mm:ss" target:@"yy-MM-dd"]]];
         }
     }
@@ -1622,7 +1619,7 @@
     NSMutableArray *wrLineData = [[NSMutableArray alloc] init];
 
     if (TA_SUCCESS == ta_retCode) {
-        NSArray *arrWR = CArrayToNSArrayWithParameter(outReal, (int) items.count, outBegIdx, outNBElement, -WR_NONE_DISPLAY);
+        NSArray *arrWR = CArrayToNSArrayWithParameter(outReal, (int) items.count, outBegIdx, outNBElement, -[WR_NONE_DISPLAY doubleValue]);
 
         for (NSInteger index = 0; index < arrCls.count; index++) {
             OHLCVDData *item = [items objectAtIndex:items.count - 1 - index];
@@ -1785,7 +1782,7 @@
     return bollBanddata;
 }
 
-- (void)CCSChartBeTouchedOn:(id)chart point:(CGPoint)point indexAt:(NSUInteger)index {
+- (void)CCSChartBeTouchedOn:(id)chart point:(CGPoint)point indexAt:(CCUInt)index {
     
     if ([chart isKindOfClass:[self.candleStickChart class]]) {
         
@@ -1820,7 +1817,7 @@
     }
 }
 
-- (void)CCSChartDisplayChangedFrom:(id)chart from:(NSUInteger)from number:(NSUInteger)number{
+- (void)CCSChartDisplayChangedFrom:(id)chart from:(CCUInt)from number:(CCUInt)number{
     
     if ([chart isKindOfClass:[self.candleStickChart class]]) {
         if (0 == self.segBottomChartType.selectedSegmentIndex) {

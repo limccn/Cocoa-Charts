@@ -2,7 +2,7 @@
 //  CCSAreaChart.h
 //  Cocoa-Charts
 //
-//  Created by limc on 11-10-27.
+//  Created by limc on 13-10-27.
 //  Copyright 2011 limc.cn All rights reserved.
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,10 +20,20 @@
 
 #import "CCSLineChart.h"
 
+/*!
+ CCSAreaChart
+ 
+ 普通面积图，以X轴为底边绘制面积
+ */
 @interface CCSAreaChart : CCSLineChart {
     CCFloat _areaAlpha;
 }
 
+
+/*!
+ @abstract
+ 面积填充部分的透明度
+ */
 @property(assign, nonatomic) CCFloat areaAlpha;
 
 @end

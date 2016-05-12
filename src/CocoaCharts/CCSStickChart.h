@@ -38,14 +38,15 @@
     NSArray *_stickData;
     UIColor *_stickBorderColor;
     UIColor *_stickFillColor;
-    CCUInt _latitudeNum;
-    CCUInt _longitudeNum;
     CCUInt _maxSticksNum;
     CCUInt _selectedStickIndex;
     CCFloat _maxValue;
     CCFloat _minValue;
+    CCFloat _maxDataValue;
+    CCFloat _minDataValue;
     CCUInt _axisCalc;
-    __unsafe_unretained CCSStickChart *_coChart;
+    BOOL _autoCalcRange;
+//    __unsafe_unretained CCSStickChart *_coChart;
 }
 
 /*!
@@ -68,20 +69,6 @@
  表示柱条的填充颜色
  */
 @property(strong, nonatomic) UIColor *stickFillColor;
-
-/*!
- Numbers of grid‘s latitude line
- 緯線の数量
- 网格纬线的数量
- */
-@property(assign, nonatomic) CCUInt latitudeNum;
-
-/*!
- Numbers of grid‘s longitude line
- 経線の数量
- 网格经线的数量
- */
-@property(assign, nonatomic) CCUInt longitudeNum;
 
 /*!
  Max number of sticks
@@ -112,19 +99,39 @@
 @property(assign, nonatomic) CCFloat minValue;
 
 /*!
+ Max display value of axis Y
+ Y軸の最大値
+ Y轴显示最大值
+ */
+@property(assign, nonatomic) CCFloat maxDataValue;
+
+/*!
+ Min display value of axis Y
+ Y軸の最小値
+ Y轴显示最小值
+ */
+@property(assign, nonatomic) CCFloat minDataValue;
+
+/*!
  fast calculator for axis Y degrees （display degrees＝degrees/axisCalc）
  Y軸目盛りの快速計算子，（表示目盛り＝計算目盛り/axisCalc）
  Y轴显示值的快速计算子（表示刻度＝ 计算刻度/axisCalc）
  */
 @property(assign, nonatomic) CCUInt axisCalc;
 
+/*!
+ Should Automatically compute display value range. 
+ 自動にデータの範囲を計算するフラグ
+ 是否需要自动计算最大和最小值。
+ */
+@property(assign, nonatomic) BOOL autoCalcRange;
 
 /*!
  if this chart touched,will effect some other charts,this value is for save them
  連携チャート、チャートに関する動作の連携用
  两个相同类型图表之间传值用对象
  */
-@property(assign, nonatomic) CCSStickChart *coChart;
+//@property(assign, nonatomic) CCSStickChart *coChart;
 
 
 /*!
@@ -170,6 +177,7 @@
  */
 - (void)setSelectedPointAddReDraw:(CGPoint)point;
 
+
 - (void)calcDataValueRange;
 
 - (void)calcValueRangePaddingZero;
@@ -177,5 +185,13 @@
 - (void)calcValueRangeFormatForAxis;
 
 - (void)calcValueRange;
+
+- (CCFloat) computeValueY:(CCFloat)value inRect:(CGRect)rect;
+
+- (CCInt) getSelectedIndex;
+
+- (NSString *)formatAxisYDegree:(CCFloat)value;
+
+- (NSString *)formatAxisXDegree:(CCFloat)value;
 
 @end

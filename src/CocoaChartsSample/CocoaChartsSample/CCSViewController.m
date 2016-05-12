@@ -32,8 +32,8 @@
 #import "CCSSimpleDemoViewController.h"
 #import "CCSDonutChartViewController.h"
 
-#import "CCSSampleHorizontalViewController.h"
 #import "CCSSampleGroupChartDemoViewController.h"
+#import "CCSSampleGroupChartHorizontalViewController.h"
 
 @interface CCSViewController () {
 }
@@ -236,7 +236,7 @@
         if (row == 0) {
             viewController = [[CCSSimpleDemoViewController alloc] init];
         }else if(row == 1){
-            viewController = [[CCSSampleHorizontalViewController alloc] init];
+            viewController = [[CCSSampleGroupChartHorizontalViewController alloc] init];
         }else{
             viewController = [[CCSSampleGroupChartDemoViewController alloc] init];
         }
@@ -317,12 +317,13 @@
     CCSAppDelegate *appDelegate = (CCSAppDelegate *) [UIApplication sharedApplication].delegate;
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
         UINavigationController *navigationController = (UINavigationController *) appDelegate.viewController;
-        if ([viewController isKindOfClass:[CCSSampleHorizontalViewController class]]) {
-            [[navigationController.viewControllers lastObject] presentViewController:viewController animated:YES completion:^{
-            }];
-        }else{
-            [navigationController pushViewController:viewController animated:YES];
-        }
+//        if ([viewController isKindOfClass:[CCSSampleHorizontalViewController class]]) {
+//            [[navigationController.viewControllers lastObject] presentViewController:viewController animated:YES completion:^{
+//            }];
+//        }else{
+//            [navigationController pushViewController:viewController animated:YES];
+//        }
+        [navigationController pushViewController:viewController animated:YES];
     } else if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
         UISplitViewController *splitViewController = (UISplitViewController *) appDelegate.viewController;
         UINavigationController *navigationController = [splitViewController.viewControllers objectAtIndex:1];
