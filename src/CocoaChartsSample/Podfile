@@ -1,5 +1,5 @@
 platform :ios, '7.0'
 pod 'JSONModel', '~> 1.1.2'
-pod ‘Cocoa-Charts’, '~> 0.2.1.1’
+pod ‘Cocoa-Charts’, '~> 0.2.2’
 
 
