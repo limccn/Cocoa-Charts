@@ -63,7 +63,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
 
-    self.title = @"Cocoa-Charts v0.21";
+    self.title = @"Cocoa-Charts v0.2.1.1";
     self.navigationController.navigationBarHidden = NO;
     
     // Index path for selected row
