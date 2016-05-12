@@ -9,9 +9,9 @@ build/
 !default.mode2v3
 *.perspectivev3
 !default.perspectivev3
-*.xcworkspace
-!default.xcworkspace
+project.xcworkspace
 xcuserdata
+xcshareddata
 profile
 *.moved-aside
 DerivedData
