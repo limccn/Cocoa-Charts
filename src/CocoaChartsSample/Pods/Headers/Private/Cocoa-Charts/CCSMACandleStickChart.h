@@ -1,0 +1,1 @@
+../../../Cocoa-Charts/src/CocoaCharts/CCSMACandleStickChart.h
