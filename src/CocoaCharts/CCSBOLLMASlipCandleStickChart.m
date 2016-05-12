@@ -165,82 +165,37 @@
         NSArray *line2Datas = line2.data;
         
         //判断Y轴的位置设置从左往右还是从右往左绘制
-//        if (self.axisYPosition == CCSGridChartYAxisPositionLeft) {
-            // 点线距离
-            CCFloat lineLength = [self getDataStickWidth];
-            //起始点
-            startX = super.axisMarginLeft + lineLength / 2;
-            //遍历并绘制线条
-            for (CCUInt j = self.displayFrom; j < [self getDisplayTo]; j++) {
-                CCSLineData *line1Data = [line1Datas objectAtIndex:j];
-                CCSLineData *line2Data = [line2Datas objectAtIndex:j];
+        // 点线距离
+        CCFloat lineLength = [self getDataStickWidth];
+        //起始点
+        startX = super.axisMarginLeft + lineLength / 2;
+        //遍历并绘制线条
+        for (CCUInt j = self.displayFrom; j < [self getDisplayTo]; j++) {
+            CCSLineData *line1Data = [line1Datas objectAtIndex:j];
+            CCSLineData *line2Data = [line2Datas objectAtIndex:j];
+            
+            //获取终点Y坐标
+            CCFloat valueY1 = [self computeValueY:line1Data.value inRect:rect];
+            CCFloat valueY2 = [self computeValueY:line2Data.value inRect:rect];
+            
+            //绘制线条路径
+            if (j == self.displayFrom) {
+                CGContextMoveToPoint(context, startX, valueY1);
+                CGContextAddLineToPoint(context, startX, valueY2);
+                CGContextMoveToPoint(context, startX, valueY1);
+            } else {
+                CGContextAddLineToPoint(context, startX, valueY1);
+                CGContextAddLineToPoint(context, startX, valueY2);
+                CGContextAddLineToPoint(context, lastX, lastY);
                 
-                //获取终点Y坐标
-                CCFloat valueY1 = [self computeValueY:line1Data.value inRect:rect];
-                CCFloat valueY2 = [self computeValueY:line2Data.value inRect:rect];
-                
-                //绘制线条路径
-                if (j == self.displayFrom) {
-                    CGContextMoveToPoint(context, startX, valueY1);
-                    CGContextAddLineToPoint(context, startX, valueY2);
-                    CGContextMoveToPoint(context, startX, valueY1);
-                } else {
-                    CGContextAddLineToPoint(context, startX, valueY1);
-                    CGContextAddLineToPoint(context, startX, valueY2);
-                    CGContextAddLineToPoint(context, lastX, lastY);
-                    
-                    CGContextClosePath(context);
-                    CGContextMoveToPoint(context, startX, valueY1);
-                }
-                lastX = startX;
-                lastY = valueY2;
-                //X位移
-                startX = startX + lineLength;
+                CGContextClosePath(context);
+                CGContextMoveToPoint(context, startX, valueY1);
             }
-//        } else {
-//            // 点线距离
-//            CCFloat lineLength = [self getDataStickWidth];
-//            //起始点
-//            startX = rect.size.width - self.axisMarginRight - self.axisMarginLeft - lineLength / 2;
-//            
-//            //判断点的多少
-//            if ([line1Datas count] == 0 || [line2Datas count] == 0) {
-//                return;
-//            } else if ([line1Datas count] == 1 || [line2Datas count] == 1) {
-//                return;
-//            } else {
-//                //遍历并绘制线条
-//                for (CCUInt j = 0; j < self.displayNumber; j++) {
-//                    CCUInt index = [self getDisplayTo] - 1 - j;
-//                    CCSLineData *line1Data = [line1Datas objectAtIndex:index];
-//                    CCSLineData *line2Data = [line2Datas objectAtIndex:index];
-//                    
-//                    //获取终点Y坐标
-//                    CCFloat valueY1 = [self computeValueY:line1Data.value inRect:rect];
-//                    CCFloat valueY2 = [self computeValueY:line2Data.value inRect:rect];
-//                    //绘制线条路径
-//                    if (index == [self getDisplayTo] - 1) {
-//                        CGContextMoveToPoint(context, startX, valueY1);
-//                        CGContextAddLineToPoint(context, startX, valueY2);
-//                        CGContextMoveToPoint(context, startX, valueY1);
-//                        //                            } else if (j == self.displayFrom) {
-//                        //                                CGContextAddLineToPoint(context, self.axisMarginLeft, valueY);
-//                    } else {
-//                        CGContextAddLineToPoint(context, startX, valueY1);
-//                        CGContextAddLineToPoint(context, startX, valueY2);
-//                        CGContextAddLineToPoint(context, lastX, lastY);
-//                        
-//                        CGContextClosePath(context);
-//                        CGContextMoveToPoint(context, startX, valueY1);
-//                    }
-//                    
-//                    lastX = startX;
-//                    lastY = valueY2;
-//                    //X位移
-//                    startX = startX - lineLength;
-//                }
-//            }
-//        }
+            lastX = startX;
+            lastY = valueY2;
+            //X位移
+            startX = startX + lineLength;
+        }
         CGContextClosePath(context);
         CGContextSetAlpha(context, self.bollingerBandAlpha);
         CGContextSetFillColorWithColor(context, self.bollingerBandColor.CGColor);

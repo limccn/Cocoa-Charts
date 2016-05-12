@@ -32,8 +32,8 @@
 #import "CCSSimpleDemoViewController.h"
 #import "CCSDonutChartViewController.h"
 
-#import "CCSSampleHorizontalViewController.h"
 #import "CCSSampleGroupChartDemoViewController.h"
+#import "CCSSampleGroupChartHorizontalViewController.h"
 
 @interface CCSViewController () {
 }
@@ -236,7 +236,7 @@
         if (row == 0) {
             viewController = [[CCSSimpleDemoViewController alloc] init];
         }else if(row == 1){
-            viewController = [[CCSSampleHorizontalViewController alloc] init];
+            viewController = [[CCSSampleGroupChartHorizontalViewController alloc] init];
         }else{
             viewController = [[CCSSampleGroupChartDemoViewController alloc] init];
         }

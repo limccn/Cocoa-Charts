@@ -125,6 +125,19 @@
     return [str stringByAppendingString:self];
 }
 
+/**
+ * 是否包含某个字符串
+ */
+- (BOOL)contains:(NSString *)text{
+    //判断roadTitleLab.text 是否含有qingjoin
+    if([self rangeOfString:text].location != NSNotFound)//_roaldSearchText
+    {
+        return YES;
+    }else{
+        return NO;
+    }
+}
+
 //对应字符分割
 - (NSArray *)split:(NSString *)split {
     return [self componentsSeparatedByString:split];
@@ -353,6 +366,26 @@
     return [self numberic];
 }
 
+- (NSString *)unit:(NSUInteger)deci{
+    CGFloat floatValue = [self floatValue];
+    
+    NSString *strUnit;
+    
+    if (floatValue >= 10000 && floatValue < 100000000){
+        floatValue = floatValue/10000;
+        
+        strUnit = [[[NSString stringWithFormat:@"%f", floatValue] decimal:2] append:@"万"];
+    }else if (floatValue >= 100000000){
+        floatValue = floatValue/100000000;
+        
+        strUnit = [[[NSString stringWithFormat:@"%f", floatValue] decimal:2] append:@"亿"];
+    }else{
+        strUnit = [self decimal: deci];
+    }
+    
+    return strUnit;
+}
+
 - (NSString *)decimalWithSign {
     NSString *str = [self decimal];
 
@@ -406,6 +439,13 @@
     } else {
         return nil;
     }
+}
+
+- (NSString *)findJSONStringWithType:(NSString *) type{
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:self ofType:type];
+    //UTF-8编码
+    NSString *str = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
+    return str;
 }
 
 @end

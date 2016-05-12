@@ -11,63 +11,15 @@
 #import "CCSSettingDetailViewController.h"
 
 #import "CCSGroupChart.h"
+#import "CCSAreaChart.h"
 
-@interface CCSSampleGroupChartDemoViewController : UIViewController<CCSChartDelegate, UITableViewDataSource, UITableViewDelegate>
+@interface CCSSampleGroupChartDemoViewController : UIViewController<CCSChartDelegate>
 
 @property (weak, nonatomic) IBOutlet UISegmentedControl      *segTopChartType;
 @property (weak, nonatomic) IBOutlet CCSGroupChart           *groupChart;
-@property (weak, nonatomic) IBOutlet UIButton                *btnHorizontal;
-@property (weak, nonatomic) IBOutlet UIView                  *vPopTriangle;
-@property (weak, nonatomic) IBOutlet UIView                  *vMinsContainer;
-@property (weak, nonatomic) IBOutlet UIView                  *vKMinsContainer;
-@property (weak, nonatomic) IBOutlet UIButton                *btn1Mins;
-@property (weak, nonatomic) IBOutlet UIButton                *btn5Mins;
-@property (weak, nonatomic) IBOutlet UIButton                *btn15Mins;
-@property (weak, nonatomic) IBOutlet UIButton                *btn30Mins;
-@property (weak, nonatomic) IBOutlet UIButton                *btn1Hours;
-@property (weak, nonatomic) IBOutlet UIButton                *btn2Hours;
-@property (weak, nonatomic) IBOutlet UIButton                *btn4Hours;
+@property (weak, nonatomic) IBOutlet CCSAreaChart            *areachart;
 
 @property (weak, nonatomic) IBOutlet UILabel                 *lblTime;
-
-@property (weak, nonatomic) IBOutlet UIButton                *btnMinutes;
-
-/**
- * 选择分钟
- */
-- (IBAction)minutesTouchUpInside:(id)sender;
-
-/**
- * 选择分钟 k线图
- */
-- (IBAction)selectMinutesKChartTouchUpInside:(id)sender;
-
-/** 盘口数据 */
-@property (strong, nonatomic) NSArray                        *arrayHandicapData;
-/** 分时数据 */
-@property (strong, nonatomic) NSArray                        *arrayTickData;
-/** 明细数据 */
-@property (strong, nonatomic) NSArray                        *arrayDetailData;
-/** 日数据 */
-@property (strong, nonatomic) CCSGroupChartData              *chartDayData;
-/** 周数据 */
-@property (strong, nonatomic) CCSGroupChartData              *chartWeekData;
-/** 月数据 */
-@property (strong, nonatomic) CCSGroupChartData              *chartMonthData;
-/** 1分钟数据 */
-@property (strong, nonatomic) CCSGroupChartData              *chart1MinData;
-/** 5分钟数据 */
-@property (strong, nonatomic) CCSGroupChartData              *chart5MinData;
-/** 15分钟数据 */
-@property (strong, nonatomic) CCSGroupChartData              *chart15MinData;
-/** 30分钟数据 */
-@property (strong, nonatomic) CCSGroupChartData              *chart30MinData;
-/** 1小时数据 */
-@property (strong, nonatomic) CCSGroupChartData              *chart1HourData;
-/** 2小时数据 */
-@property (strong, nonatomic) CCSGroupChartData              *chart2HourData;
-/** 4小时数据 */
-@property (strong, nonatomic) CCSGroupChartData              *chart4HourData;
 
 /** macd */
 @property (assign, nonatomic) NSInteger                       macdS;

@@ -29,7 +29,16 @@
 @synthesize negativeStickFillColor = _negativeStickFillColor;
 @synthesize crossStarColor = _crossStarColor;
 @synthesize candleStickStyle = _candleStickStyle;
-
+@synthesize maxLabelFillColor = _maxLabelFillColor;
+@synthesize maxLabelStrokeColor = _maxLabelStrokeColor;
+@synthesize maxLabelFontColor = _maxLabelFontColor;
+@synthesize minLabelFillColor = _minLabelFillColor;
+@synthesize minLabelStrokeColor = _minLabelStrokeColor;
+@synthesize minLabelFontColor = _minLabelFontColor;
+@synthesize maxLabelFontSize = _maxLabelFontSize;
+@synthesize minLabelFontSize = _minLabelFontSize;
+@synthesize displayMaxLabel = _displayMaxLabel;
+@synthesize displayMinLabel = _displayMinLabel;
 
 - (void)initProperty {
 
@@ -40,7 +49,19 @@
     self.negativeStickBorderColor = [UIColor greenColor];
     self.negativeStickFillColor = [UIColor greenColor];
     self.crossStarColor = [UIColor lightGrayColor];
+    
+    self.maxLabelFillColor = [UIColor purpleColor];
+    self.maxLabelStrokeColor = [UIColor purpleColor];
+    self.maxLabelFontColor = [UIColor whiteColor];
+    self.minLabelFillColor = [UIColor purpleColor];
+    self.minLabelStrokeColor = [UIColor purpleColor];
+    self.minLabelFontColor = [UIColor whiteColor];
 
+    self.maxLabelFontSize = self.latitudeFontSize;
+    self.minLabelFontSize = self.latitudeFontSize;
+    self.displayMaxLabel = YES;
+    self.displayMinLabel = YES;
+    
     self.candleStickStyle = CCSCandleStickStyleStandard;
 
 }
@@ -52,70 +73,31 @@
     
     CCFloat maxValue = 0;
     CCFloat minValue = CCIntMax;
-//
-//    CCSCandleStickChartData *first = [self.stickData objectAtIndex:self.displayFrom];
-//
-//    //第一个stick为停盘的情况
-//    if (first.high == 0 && first.low == 0) {
-//
-//    } else {
-//        //max取最小，min取最大
-//        maxValue = first.high;
-//        minValue = first.low;
-//    }
-
+    
     //判断显示为方柱或显示为线条
-//    if (self.axisYPosition == CCSGridChartYAxisPositionLeft) {
-        for (CCUInt i = self.displayFrom; i < [self getDisplayTo]; i++) {
-            CCSCandleStickChartData *stick = [self.stickData objectAtIndex:i];
-            if (stick.open == 0 && stick.high == 0 && stick.low == 0) {
-                //停盘期间计算收盘价
-                if (stick.close > 0) {
-                    if (stick.close < minValue) {
-                        minValue = stick.close;
-                    }
-
-                    if (stick.close > maxValue) {
-                        maxValue = stick.close;
-                    }
+    for (CCUInt i = self.displayFrom; i < [self getDisplayTo]; i++) {
+        CCSCandleStickChartData *stick = [self.stickData objectAtIndex:i];
+        if (stick.open == 0 && stick.high == 0 && stick.low == 0) {
+            //停盘期间计算收盘价
+            if (stick.close > 0) {
+                if (stick.close < minValue) {
+                    minValue = stick.close;
                 }
-            } else {
-                if (stick.low < minValue) {
-                    minValue = stick.low;
-                }
-
-                if (stick.high > maxValue) {
-                    maxValue = stick.high;
+                
+                if (stick.close > maxValue) {
+                    maxValue = stick.close;
                 }
             }
+        } else {
+            if (stick.low < minValue) {
+                minValue = stick.low;
+            }
+            
+            if (stick.high > maxValue) {
+                maxValue = stick.high;
+            }
         }
-//    } else {
-//        for (CCUInt i = 0; i < self.displayNumber; i++) {
-//            CCUInt index = [self getDisplayTo] - 1 - i;
-//            CCSCandleStickChartData *stick = [self.stickData objectAtIndex:index];
-//            if (stick.open == 0 && stick.high == 0 && stick.low == 0) {
-//                //停盘期间计算收盘价
-//                if (stick.close > 0) {
-//                    if (stick.close < minValue) {
-//                        minValue = stick.close;
-//                    }
-//
-//                    if (stick.close > maxValue) {
-//                        maxValue = stick.close;
-//                    }
-//                }
-//            } else {
-//                if (stick.low < minValue) {
-//                    minValue = stick.low;
-//                }
-//
-//                if (stick.high > maxValue) {
-//                    maxValue = stick.high;
-//                }
-//            }
-//        }
-//    }
-
+    }
     self.maxDataValue = maxValue;
     self.minDataValue = minValue;
     
@@ -126,33 +108,7 @@
 
 - (void)calcValueRangeFormatForAxis {
     
-//    return;
-
     CCInt rate = self.axisCalc;
-
-//    if (self.maxValue < 3000) {
-//        rate = 1;
-//    } else if (self.maxValue >= 3000 && self.maxValue < 5000) {
-//        rate = 5;
-//    } else if (self.maxValue >= 5000 && self.maxValue < 30000) {
-//        rate = 10;
-//    } else if (self.maxValue >= 30000 && self.maxValue < 50000) {
-//        rate = 50;
-//    } else if (self.maxValue >= 50000 && self.maxValue < 300000) {
-//        rate = 100;
-//    } else if (self.maxValue >= 300000 && self.maxValue < 500000) {
-//        rate = 500;
-//    } else if (self.maxValue >= 500000 && self.maxValue < 3000000) {
-//        rate = 1000;
-//    } else if (self.maxValue >= 3000000 && self.maxValue < 5000000) {
-//        rate = 5000;
-//    } else if (self.maxValue >= 5000000 && self.maxValue < 30000000) {
-//        rate = 10000;
-//    } else if (self.maxValue >= 30000000 && self.maxValue < 50000000) {
-//        rate = 50000;
-//    } else {
-//        rate = 100000;
-//    }
 
     //等分轴修正
     if (self.latitudeNum > 0 && rate > 1 && (CCInt) (self.minValue) % rate != 0) {
@@ -178,39 +134,18 @@
 
     NSMutableArray *TitleX = [[NSMutableArray alloc] init];
     if (self.stickData != NULL && [self.stickData count] > 0 && self.displayNumber > 0) {
-        CCFloat average = 1.0 * self.displayNumber / self.longitudeNum;
-        if (self.axisYPosition == CCSGridChartYAxisPositionLeft) {
-            CCSCandleStickChartData *chartdata = nil;
-            //处理刻度
-            for (CCUInt i = 0; i < self.longitudeNum; i++) {
-                CCUInt index = self.displayFrom + (CCUInt) floor(i * average);
-                if (index > [self getDisplayTo] - 1) {
-                    index = [self getDisplayTo] - 1;
-                }
-                chartdata = [self.stickData objectAtIndex:index];
-                //追加标题
-                [TitleX addObject:[NSString stringWithFormat:@"%@", chartdata.date]];
+        CCFloat average = 1.0 * [self getDataDisplayNumber] / self.longitudeNum;
+        CCSCandleStickChartData *chartdata = nil;
+        //处理刻度
+        for (CCUInt i = 0; i <= self.longitudeNum; i++) {
+            CCUInt index = self.displayFrom + (CCUInt) floor(i * average);
+            if (index > [self getDisplayTo] - 1) {
+                index = [self getDisplayTo] - 1;
             }
-            chartdata = [self.stickData objectAtIndex:[self getDisplayTo] - 1];
-            //追加标题
-            [TitleX addObject:[NSString stringWithFormat:@"%@", chartdata.date]];
-        } else {
-            CCSCandleStickChartData *chartdata = nil;
-            //处理刻度
-            for (CCUInt i = 0; i < self.longitudeNum; i++) {
-                CCUInt index = self.displayFrom + (CCUInt) floor(i * average);
-                if (index > [self getDisplayTo] - 1) {
-                    index = [self getDisplayTo] - 1;
-                }
-                chartdata = [self.stickData objectAtIndex:index];
-                //追加标题
-                [TitleX addObject:[NSString stringWithFormat:@"%@", chartdata.date]];
-            }
-            chartdata = [self.stickData objectAtIndex:[self getDisplayTo] - 1];
+            chartdata = [self.stickData objectAtIndex:index];
             //追加标题
             [TitleX addObject:[NSString stringWithFormat:@"%@", chartdata.date]];
         }
-
     }
     self.longitudeTitles = TitleX;
 }
@@ -256,7 +191,7 @@
                 CCFloat lowY = [self computeValueY:data.low inRect:rect];
                 CCFloat closeY = [self computeValueY:data.close inRect:rect];
                 
-                CGFloat stickCenterX = stickX + stickWidth / 2;
+                CCFloat stickCenterX = stickX + stickWidth / 2;
 
                 // 处理和生产K线中的阴线和阳线
                 if (data.open == 0 && data.high == 0 && data.low == 0) {
@@ -420,7 +355,10 @@
     }
 }
 
--(void) drawMaxLabel:(CGRect)rect value:(CGFloat)value point:(CGPoint) pt{
+-(void) drawMaxLabel:(CGRect)rect value:(CCFloat)value point:(CGPoint) pt{
+    if ([self displayMaxLabel] == NO) {
+        return;
+    }
     
     NSString *valueStr = [self formatAxisYDegree:value];
     
@@ -428,22 +366,20 @@
     textStyle.alignment=NSTextAlignmentLeft;
     textStyle.lineBreakMode = NSLineBreakByWordWrapping;
     
-    NSDictionary *attrs = @{NSFontAttributeName:self.latitudeFont,
+    NSDictionary *attrs = @{NSFontAttributeName:[UIFont systemFontOfSize:self.maxLabelFontSize],
                             NSParagraphStyleAttributeName:textStyle,
-                            NSForegroundColorAttributeName:self.latitudeFontColor};
+                            NSForegroundColorAttributeName:self.maxLabelFontColor};
     CGSize textSize = [valueStr boundingRectWithSize:CGSizeMake(100, 100) options:NSStringDrawingUsesLineFragmentOrigin attributes:attrs context:nil].size;
     
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSetLineWidth(context, 0.5f);
     
-    CGContextSetFillColorWithColor(context, [UIColor purpleColor].CGColor);
-    CGContextSetStrokeColorWithColor(context, [UIColor purpleColor].CGColor);
+    CGContextSetFillColorWithColor(context, self.maxLabelFillColor.CGColor);
+    CGContextSetStrokeColorWithColor(context, self.maxLabelStrokeColor.CGColor);
 
     
-    
-    CCUInt spaceToTopBottom = 6;
-    CCUInt spaceToRect = 10;
-    
+    CCUInt spaceToTopBottom = self.maxLabelFontSize;
+    CCUInt spaceToRect = self.maxLabelFontSize * 1.48f;
     
     if(pt.x > self.axisMarginLeft + textSize.width + spaceToRect){
         //画左边
@@ -459,7 +395,7 @@
     
         CGContextFillRect(context, textRect);
         
-        CGContextSetStrokeColorWithColor(context, [UIColor whiteColor].CGColor);
+        CGContextSetStrokeColorWithColor(context, self.maxLabelFontColor.CGColor);
         //绘制字体
         [valueStr drawInRect:textRect withAttributes:attrs];
     }else{
@@ -477,7 +413,7 @@
             
             CGContextFillRect(context, textRect);
             
-            CGContextSetStrokeColorWithColor(context, [UIColor whiteColor].CGColor);
+            CGContextSetStrokeColorWithColor(context, self.maxLabelFontColor.CGColor);
 
             //绘制字体
             [valueStr drawInRect:textRect withAttributes:attrs];
@@ -494,7 +430,7 @@
             
             CGContextFillRect(context, textRect);
             
-            CGContextSetStrokeColorWithColor(context, [UIColor whiteColor].CGColor);
+            CGContextSetStrokeColorWithColor(context, self.maxLabelFontColor.CGColor);
             
             //绘制字体
             [valueStr drawInRect:textRect withAttributes:attrs];
@@ -503,29 +439,32 @@
     
 }
 
--(void) drawMinLabel:(CGRect)rect value:(CGFloat)value point:(CGPoint) pt{
+-(void) drawMinLabel:(CGRect)rect value:(CCFloat)value point:(CGPoint) pt{
+    if ([self displayMinLabel] == NO) {
+        return;
+    }
+
     NSString *valueStr = [self formatAxisYDegree:value];
     
     NSMutableParagraphStyle *textStyle=[[NSMutableParagraphStyle alloc]init];//段落样式
     textStyle.alignment=NSTextAlignmentLeft;
     textStyle.lineBreakMode = NSLineBreakByWordWrapping;
     
-    NSDictionary *attrs = @{NSFontAttributeName:self.latitudeFont,
+    NSDictionary *attrs = @{NSFontAttributeName:[UIFont systemFontOfSize:self.minLabelFontSize],
                             NSParagraphStyleAttributeName:textStyle,
-                            NSForegroundColorAttributeName:self.latitudeFontColor};
+                            NSForegroundColorAttributeName:self.minLabelFontColor};
     CGSize textSize = [valueStr boundingRectWithSize:CGSizeMake(100, 100) options:NSStringDrawingUsesLineFragmentOrigin attributes:attrs context:nil].size;
     
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSetLineWidth(context, 0.5f);
     
-    CGContextSetFillColorWithColor(context, [UIColor purpleColor].CGColor);
-    CGContextSetStrokeColorWithColor(context, [UIColor purpleColor].CGColor);
+    CGContextSetFillColorWithColor(context, self.minLabelFillColor.CGColor);
+    CGContextSetStrokeColorWithColor(context, self.minLabelStrokeColor.CGColor);
     
     
     
-    CCUInt spaceToTopBottom = 6;
-    CCUInt spaceToRect = 10;
-    
+    CCUInt spaceToTopBottom = self.minLabelFontSize;
+    CCUInt spaceToRect = self.minLabelFontSize * 1.48f;
     
     if(pt.x > self.axisMarginLeft + textSize.width + spaceToRect){
         //画左边
@@ -541,7 +480,7 @@
         
         CGContextFillRect(context, textRect);
         
-        CGContextSetStrokeColorWithColor(context, [UIColor whiteColor].CGColor);
+        CGContextSetStrokeColorWithColor(context, self.minLabelFontColor.CGColor);
         //绘制字体
         [valueStr drawInRect:textRect withAttributes:attrs];
     }else{
@@ -559,7 +498,7 @@
             
             CGContextFillRect(context, textRect);
             
-            CGContextSetStrokeColorWithColor(context, [UIColor whiteColor].CGColor);
+            CGContextSetStrokeColorWithColor(context, self.minLabelFontColor.CGColor);
             
             //绘制字体
             [valueStr drawInRect:textRect withAttributes:attrs];
@@ -576,7 +515,7 @@
             
             CGContextFillRect(context, textRect);
             
-            CGContextSetStrokeColorWithColor(context, [UIColor whiteColor].CGColor);
+            CGContextSetStrokeColorWithColor(context, self.minLabelFontColor.CGColor);
             
             //绘制字体
             [valueStr drawInRect:textRect withAttributes:attrs];

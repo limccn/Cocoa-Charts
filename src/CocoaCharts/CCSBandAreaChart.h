@@ -20,10 +20,19 @@
 
 #import "CCSLineChart.h"
 
+/*!
+ CCSBandAreaChart
+ 
+ 带状面积图，以两条直线作为边线绘制面积
+ */
 @interface CCSBandAreaChart : CCSLineChart {
     CCFloat _areaAlpha;
 }
 
+/*!
+ @abstract
+ 面积填充部分的透明度
+ */
 @property(assign, nonatomic) CCFloat areaAlpha;
 
 @end

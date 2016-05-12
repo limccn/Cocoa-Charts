@@ -42,6 +42,17 @@
     UIColor *_negativeStickBorderColor;
     UIColor *_negativeStickFillColor;
     UIColor *_crossStarColor;
+    UIColor *_maxLabelFillColor;
+    UIColor *_maxLabelStrokeColor;
+    UIColor *_maxLabelFontColor;
+    UIColor *_minLabelFillColor;
+    UIColor *_minLabelStrokeColor;
+    UIColor *_minLabelFontColor;
+    CCInt _maxLabelFontSize;
+    CCInt _minLabelFontSize;
+    BOOL _displayMaxLabel;
+    BOOL _displayMinLabel;
+    
     CCInt _candleStickStyle;
 }
 
@@ -83,6 +94,16 @@
 
 @property(assign, nonatomic) CCInt candleStickStyle;
 
+@property(strong, nonatomic) UIColor *maxLabelFillColor;
+@property(strong, nonatomic) UIColor *maxLabelStrokeColor;
+@property(strong, nonatomic) UIColor *maxLabelFontColor;
+@property(strong, nonatomic) UIColor *minLabelFillColor;
+@property(strong, nonatomic) UIColor *minLabelStrokeColor;
+@property(strong, nonatomic) UIColor *minLabelFontColor;
 
+@property(assign, nonatomic) CCInt maxLabelFontSize;
+@property(assign, nonatomic) CCInt minLabelFontSize;
+@property(assign, nonatomic) BOOL displayMaxLabel;
+@property(assign, nonatomic) BOOL displayMinLabel;
 
 @end

@@ -32,8 +32,6 @@ typedef enum {
     CCInt _minDisplayNumber;
     CCInt _maxDisplayNumber;
 //    CCUInt _zoomBaseLine;
-    
-//    CCFloat _noneDisplayValue;
 }
 
 @property(assign, nonatomic) CCInt displayNumber;
@@ -41,12 +39,11 @@ typedef enum {
 @property(assign, nonatomic) CCInt minDisplayNumber;
 @property(assign, nonatomic) CCInt maxDisplayNumber;
 //@property(assign, nonatomic) CCUInt zoomBaseLine;
-//@property(assign, nonatomic) CCFloat noneDisplayValue;
 
 -(CCInt) getDataDisplayNumber;
 -(CCInt) getDisplayTo;
--(CGFloat) getStickWidth;
--(CGFloat) getDataStickWidth;
+-(CCFloat) getStickWidth;
+-(CCFloat) getDataStickWidth;
 
 
 @end

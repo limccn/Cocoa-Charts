@@ -18,3 +18,19 @@
 #define MARGIN_TOP ([[[UIDevice currentDevice] systemVersion] floatValue] > 6.9 ? 66:0)
 #define DEVICE_WIDTH ((UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) ? 320:690)
 #define DEVICE_HEIGHT ((UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) ? 100:200)
+
+// IIF
+#if !defined(IIF)
+#define IIF_IMPL(condition,true_,false_) (condition)?true_:false_
+#define IIF(condition,true_,false_) IIF_IMPL(condition,true_,false_)
+#endif
+
+// 在主线程中执行
+#define DO_IN_MAIN_QUEUE(action) dispatch_async(dispatch_get_main_queue(), action)
+// 在主线程中延迟执行
+#define DO_IN_MAIN_QUEUE_AFTER(seconds, action) dispatch_after(dispatch_time(DISPATCH_TIME_NOW, seconds * NSEC_PER_SEC), dispatch_get_main_queue(), action)
+
+// 在子线程中执行
+#define DO_IN_BACKGROUND(action) dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), action)
+// 在子线程中延迟执行
+#define DO_IN_BACKGROUND_AFTER(seconds, action) dispatch_after(dispatch_time(DISPATCH_TIME_NOW, seconds * NSEC_PER_SEC), dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), action)

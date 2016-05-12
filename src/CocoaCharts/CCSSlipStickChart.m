@@ -55,8 +55,6 @@
         _doubleTouchInterval = 100;
         _flag = 1;
         _firstX = 0;
-        
-        
          _isLongPress = NO;
          _isMoved = NO;
          _waitForLongPress = NO;
@@ -87,14 +85,6 @@
     CCFloat maxValue = 0;
     CCFloat minValue = CCIntMax;
 
-//    CCSStickChartData *first = [self.stickData objectAtIndex:self.displayFrom];
-//    //第一个stick为停盘的情况
-//    if (first.high == 0 && first.low == 0) {
-//
-//    } else {
-//        maxValue = first.high;
-//        minValue = first.low;
-//    }
 
     //判断显示为方柱或显示为线条
     for (CCUInt i = self.displayFrom; i < [self getDisplayTo]; i++) {
@@ -109,8 +99,10 @@
 
     }
 
+    // 真实最大和最小值，用于显示最大和最小游标
     self.maxDataValue = maxValue;
     self.minDataValue = minValue;
+    
     self.maxValue = maxValue;
     self.minValue = minValue;
 }
@@ -122,45 +114,27 @@
 
     NSMutableArray *TitleX = [[NSMutableArray alloc] init];
     if (self.stickData != NULL && [self.stickData count] > 0 && self.displayNumber > 0) {
-        CCFloat average = [self getDataDisplayNumber] / self.longitudeNum;
+        CCFloat average = [self getDataDisplayNumber]/ self.longitudeNum;
         CCSStickChartData *chartdata = nil;
-        if (self.axisYPosition == CCSGridChartYAxisPositionLeft) {
-            //处理刻度
-            for (CCUInt i = 0; i < self.longitudeNum; i++) {
-                CCUInt index = self.displayFrom + (CCUInt) floor(i * average);
-                if (index > [self getDisplayTo] - 1) {
-                    index = [self getDisplayTo] - 1;
-                }
-                chartdata = [self.stickData objectAtIndex:index];
-                //追加标题
-                [TitleX addObject:[NSString stringWithFormat:@"%@", chartdata.date]];
+        //处理刻度
+        for (CCUInt i = 0; i < self.longitudeNum; i++) {
+            CCUInt index = self.displayFrom + (CCUInt) floor(i * average);
+            if (index > [self getDisplayTo] - 1) {
+                index = [self getDisplayTo] - 1;
             }
-            chartdata = [self.stickData objectAtIndex:[self getDisplayTo] - 1];
+            chartdata = [self.stickData objectAtIndex:index];
             //追加标题
             [TitleX addObject:[NSString stringWithFormat:@"%@", chartdata.date]];
         }
-        else {
-            //处理刻度
-            for (CCUInt i = 0; i < self.longitudeNum; i++) {
-                CCUInt index = self.displayFrom + (CCUInt) floor(i * average);
-                if (index > [self getDisplayTo] - 1) {
-                    index = [self getDisplayTo] - 1;
-                }
-                chartdata = [self.stickData objectAtIndex:index];
-                //追加标题
-                [TitleX addObject:[NSString stringWithFormat:@"%@", chartdata.date]];
-            }
-            chartdata = [self.stickData objectAtIndex:[self getDisplayTo] - 1];
-            //追加标题
-            [TitleX addObject:[NSString stringWithFormat:@"%@", chartdata.date]];
-        }
-
+        chartdata = [self.stickData objectAtIndex:[self getDisplayTo] - 1];
+        //追加标题
+        [TitleX addObject:[NSString stringWithFormat:@"%@", chartdata.date]];
+        
     }
     self.longitudeTitles = TitleX;
 }
 
 - (void)initAxisY {
-    
     if (self.autoCalcLatitudeTitle == NO) {
         return;
     }
@@ -192,9 +166,9 @@
     self.latitudeTitles = TitleY;
 }
 
--(NSString*) formatAxisYDegree:(CGFloat)value {
+-(NSString*) formatAxisYDegree:(CCFloat)value {
     //数据
-    CGFloat displayValue = floor(value) / self.axisCalc;
+    CCFloat displayValue = floor(value) / self.axisCalc;
     //处理成千分数形式
     NSNumberFormatter *decimalformatter = [[NSNumberFormatter alloc] init];
     decimalformatter.positiveFormat = @"###,##0;";
@@ -213,31 +187,17 @@
     CCFloat value = [self touchPointAxisXValue:rect];
     NSString *result = @"";
     if (self.stickData != NULL && [self.stickData count] > 0) {
-//        if (self.axisYPosition == CCSGridChartYAxisPositionLeft) {
-            if (value >= 1) {
-                result = ((CCSStickChartData *) [self.stickData objectAtIndex:[self getDisplayTo] - 1]).date;
-            } else if (value <= 0) {
-                result = ((CCSStickChartData *) [self.stickData objectAtIndex:self.displayFrom]).date;
-            } else {
-                CCUInt index = self.displayFrom + (CCUInt) (self.displayNumber * value);
-                if (index > [self getDisplayTo] - 1) {
-                    index = [self getDisplayTo] - 1;
-                }
-                result = ((CCSStickChartData *) [self.stickData objectAtIndex:index]).date;
+        if (value >= 1) {
+            result = ((CCSStickChartData *) [self.stickData objectAtIndex:[self getDisplayTo] - 1]).date;
+        } else if (value <= 0) {
+            result = ((CCSStickChartData *) [self.stickData objectAtIndex:self.displayFrom]).date;
+        } else {
+            CCUInt index = self.displayFrom + (CCUInt) ([self getDataDisplayNumber] * value);
+            if (index > [self getDisplayTo] - 1) {
+                index = [self getDisplayTo] - 1;
             }
-//        } else {
-//            if (value >= 1) {
-//                result = ((CCSStickChartData *) [self.stickData objectAtIndex:[self getDisplayTo] - 1]).date;
-//            } else if (value <= 0) {
-//                result = ((CCSStickChartData *) [self.stickData objectAtIndex:self.displayFrom]).date;
-//            } else {
-//                CCUInt index = self.displayFrom + (CCUInt) (self.displayNumber * value);
-//                if (index > [self getDisplayTo] - 1) {
-//                    index = [self getDisplayTo] - 1;
-//                }
-//                result = ((CCSStickChartData *) [self.stickData objectAtIndex:index]).date;
-//            }
-//        }
+            result = ((CCSStickChartData *) [self.stickData objectAtIndex:index]).date;
+        }
     }
     return result;
 }
@@ -254,6 +214,10 @@
         //获取选中点
         self.singleTouchPoint = _firstTouchPoint;
         [self setNeedsDisplay];
+        
+        if (self.chartDelegate && [self.chartDelegate respondsToSelector:@selector(CCSChartBeLongPressDown:)]) {
+            [self.chartDelegate CCSChartBeLongPressDown:self];
+        }
         
     }else{
         self.displayCrossXOnTouch = YES;
@@ -285,30 +249,6 @@
         _isMoved = NO;
         _waitForLongPress = YES;
         [self performSelector:@selector(changeLongPressState:) withObject:nil afterDelay:1.0f];
-
-        
-//        if (_flag == 0) {
-//            _firstX = pt1.x;
-//            
-//        } else {
-//            if (fabs(pt1.x - self.singleTouchPoint.x) < 10) {
-//                self.displayCrossXOnTouch = NO;
-//                self.displayCrossYOnTouch = NO;
-//                [self setNeedsDisplay];
-//                self.singleTouchPoint = CGPointZero;
-//                _flag = 0;
-//
-//            } else {
-//                //获取选中点
-//                self.singleTouchPoint = [[allTouches objectAtIndex:0] locationInView:self];
-//                //重绘
-//                self.displayCrossXOnTouch = YES;
-//                self.displayCrossYOnTouch = YES;
-//                [self setNeedsDisplay];
-//
-//                _flag = 1;
-//            }
-//        }
 
     } else if ([allTouches count] == 2) {
         self.displayCrossXOnTouch = NO;
@@ -371,7 +311,7 @@
             self.displayCrossXOnTouch = NO;
             self.displayCrossYOnTouch = NO;
             
-            CGPoint pt1 = [[allTouches objectAtIndex:0] locationInView:self];
+            //CGPoint pt1 = [[allTouches objectAtIndex:0] locationInView:self];
             CCFloat stickWidth = [self getDataStickWidth];
 
             if (pt1.x - _firstX > stickWidth) {
@@ -388,58 +328,7 @@
             
             [self setNeedsDisplay];
             
-            //设置可滚动
-            //[self performSelector:@selector(setNeedsDisplay) withObject:nil afterDelay:0];
-
-//            if (self.coChart) {
-//                ((CCSSlipStickChart *)self.coChart).displayFrom = self.displayFrom;
-//                ((CCSSlipStickChart *)self.coChart).displayNumber = self.displayNumber;
-//                [self.coChart setNeedsDisplay];
-//            }
-
         }
-        
-        
-//        if (_flag == 0) {
-////            CGPoint pt1 = [[allTouches objectAtIndex:0] locationInView:self];
-////            CCFloat stickWidth = ((self.frame.size.width - self.axisMarginLeft - self.axisMarginRight) / self.displayNumber) - 1;
-////
-////            
-////            if (_isLongPress) {
-////                if (pt1.x - _firstX < 15) {
-////                    NSLog(@"LongPress");
-////                }
-////            }
-////            
-////            if (pt1.x - _firstX > stickWidth) {
-////                if (self.displayFrom > 2) {
-////                    self.displayFrom = self.displayFrom - 2;
-////                }
-////            } else if (pt1.x - _firstX < -stickWidth) {
-////                if ([self getDisplayTo] + 2 < [self.stickData count]) {
-////                    self.displayFrom = self.displayFrom + 2;
-////                }
-////            }
-////
-////            _firstX = pt1.x;
-////
-////            [self setNeedsDisplay];
-////            //设置可滚动
-////            //[self performSelector:@selector(setNeedsDisplay) withObject:nil afterDelay:0];
-////            
-////            if (self.coChart) {
-////                ((CCSSlipStickChart *)self.coChart).displayFrom = self.displayFrom;
-////                ((CCSSlipStickChart *)self.coChart).displayNumber = self.displayNumber;
-////                [self.coChart setNeedsDisplay];
-////            }
-//        } else {
-//            //获取选中点
-//            self.singleTouchPoint = [[allTouches objectAtIndex:0] locationInView:self];
-//            //设置可滚动
-//            //[self performSelector:@selector(setNeedsDisplay) withObject:nil afterDelay:0];
-//            [self setNeedsDisplay];
-//        }
-        //        }
     } else if ([allTouches count] == 2) {
         //限制为单指十字线
         if (self.displayCrossXOnTouch == YES && self.displayCrossYOnTouch == YES) {
@@ -494,6 +383,11 @@
     _flag = 1;
     
     NSLog(@"end");
+    if(_isLongPress){
+        if (self.chartDelegate && [self.chartDelegate respondsToSelector:@selector(CCSChartBeLongPressUp:)]) {
+            [self.chartDelegate CCSChartBeLongPressUp:self];
+        }
+    }
     _isLongPress = NO;
     _isMoved = NO;
     _waitForLongPress = YES;
@@ -530,9 +424,6 @@
         //遍历并绘制线条
         for (CCUInt j = self.displayFrom; j < [self getDisplayTo]; j++) {
             CCSStickChartData *data = [self.stickData objectAtIndex:j];
-            
-            
-//            CCFloat highY = ((1 - (data.high - self.minValue) / (self.maxValue - self.minValue)) * (rect.size.height - self.axisMarginBottom) - self.axisMarginTop);
             
             CCFloat highY = [self computeValueY:data.high inRect:rect];
             
@@ -576,9 +467,7 @@
             //判断显示为方柱或显示为线条
             for (CCUInt i = self.displayFrom; i < [self getDisplayTo]; i++) {
                 CCSStickChartData *stick = [self.stickData objectAtIndex:i];
-
-//                CCFloat highY = ((1 - (stick.high - self.minValue) / (self.maxValue - self.minValue)) * (rect.size.height - self.axisMarginBottom) - super.axisMarginTop);
-//                CCFloat lowY = ((1 - (stick.low - self.minValue) / (self.maxValue - self.minValue)) * (rect.size.height - self.axisMarginBottom) - self.axisMarginTop);
+                
                 CCFloat highY = [self computeValueY:stick.high inRect:rect];
                 CCFloat lowY = [self computeValueY:stick.low inRect:rect];
 
@@ -612,10 +501,6 @@
 
                 CCFloat highY = [self computeValueY:stick.high inRect:rect];
                 CCFloat lowY = [self computeValueY:stick.low inRect:rect];
-            
-//                CCFloat highY =  ((1 - (stick.high - self.minValue) / (self.maxValue - self.minValue)) * (rect.size.height - self.axisMarginBottom) - super.axisMarginTop);
-//                CCFloat lowY = ((1 - (stick.low - self.minValue) / (self.maxValue - self.minValue)) * (rect.size.height - self.axisMarginBottom) - self.axisMarginTop);
-                
 
                 if (stick.high == 0) {
                     //没有值的情况下不绘制
@@ -642,40 +527,20 @@
 
 - (void)calcSelectedIndex {
     //X在系统范围内、进行计算
-    if (self.axisYPosition == CCSGridChartYAxisPositionLeft) {
-        if (self.singleTouchPoint.x > self.axisMarginLeft
-            && self.singleTouchPoint.x < self.frame.size.width) {
-            CCFloat stickWidth = [self getDataStickWidth];
-            CCFloat valueWidth = self.singleTouchPoint.x - self.axisMarginLeft;
-            if (valueWidth > 0) {
-                CCUInt index = (CCUInt) (valueWidth / stickWidth);
-                //如果超过则设置位最大
-                if (index >= self.displayNumber) {
-                    index = self.displayNumber - 1;
-                }
-                //设置选中的index
-                self.selectedStickIndex = self.displayFrom + index;
-                
+    if (self.singleTouchPoint.x > self.axisMarginLeft
+        && self.singleTouchPoint.x < self.frame.size.width) {
+        CCFloat stickWidth = [self getDataStickWidth];
+        CCFloat valueWidth = self.singleTouchPoint.x - self.axisMarginLeft;
+        if (valueWidth > 0) {
+            CCUInt index = self.displayFrom + (CCUInt) (valueWidth / stickWidth);
+            //如果超过则设置位最大
+            if (index > [self getDisplayTo] - 1) {
+                index = [self getDisplayTo] - 1;
             }
-        }
-    } else {
-        if (self.singleTouchPoint.x > self.axisMarginLeft
-            && self.singleTouchPoint.x < self.frame.size.width - self.axisMarginRight) {
-            CCFloat stickWidth = 1.0 * [self getDataStickWidth];
-            CCFloat valueWidth = self.singleTouchPoint.x - self.axisMarginLeft;
-            if (valueWidth > 0) {
-                CCUInt index = (CCUInt) (valueWidth / stickWidth);
-                //如果超过则设置位最大
-                if (index >= self.displayNumber) {
-                    index = self.displayNumber - 1;
-                }
-                //设置选中的index
-                self.selectedStickIndex = self.displayFrom + index;
-
-            }
+            //设置选中的index
+            self.selectedStickIndex = index;
         }
     }
-    
 }
 
 - (void) moveLeft {
@@ -688,10 +553,6 @@
     }else{
         self.displayFrom = self.displayFrom - 2;
     }
-    
-//    if (self.displayFrom > 2) {
-//        self.displayFrom = self.displayFrom - 2;
-//    }
     
     if (self.chartDelegate && [self.chartDelegate respondsToSelector:@selector(CCSChartDisplayChangedFrom:from:number:)]) {
         [self.chartDelegate CCSChartDisplayChangedFrom:self from:self.displayFrom number:self.displayNumber];
@@ -712,10 +573,6 @@
     }else{
         self.displayFrom = self.displayFrom + 2;
     }
-    
-//    if ([self getDisplayTo] + 2 < [self.stickData count]) {
-//        self.displayFrom = self.displayFrom + 2;
-//    }
     
     if (self.chartDelegate && [self.chartDelegate respondsToSelector:@selector(CCSChartDisplayChangedFrom:from:number:)]) {
         [self.chartDelegate CCSChartDisplayChangedFrom:self from:self.displayFrom number:self.displayNumber];
@@ -807,12 +664,6 @@
 
 - (void) setDisplayFrom:(CCInt)displayFrom
 {
-//    if (displayFrom > 0 && displayFrom < self.maxDisplayNumber - self.minDisplayNumber) {
-//        if (displayFrom + self.displayNumber <= self.maxDisplayNumber) {
-//            _displayFrom = displayFrom;
-//        }
-//    }
-    
     if(displayFrom >= 0){
         _displayFrom = displayFrom;
     }
@@ -820,19 +671,9 @@
 
 -(void) setDisplayNumber:(CCInt)displayNumber
 {
-//    if (!self.stickData) {
-//        return;
-//    }
-//    
-//    if (_displayNumber >0  && displayNumber >= self.minDisplayNumber && displayNumber <= self.maxDisplayNumber) {
-//        if (self.displayFrom + displayNumber <= self.maxDisplayNumber) {
-//            _displayNumber = displayNumber;
-//        }
-//    }
     if(displayNumber >= 0){
         _displayNumber = displayNumber;
     }
-    
 }
 
 - (void) setStickData:(NSArray *)stickData
@@ -861,10 +702,6 @@
         
     }
     self.selectedStickIndex = 0;
-    
-    
-//    self.maxValue = CCIntMin;
-//    self.minValue = CCIntMax;
 }
 
 
@@ -876,19 +713,18 @@
     return self.displayFrom + self.displayNumber;
 }
 
--(CGFloat) getStickWidth{
+-(CCFloat) getStickWidth{
     return (self.frame.size.width - self.axisMarginLeft - self.axisMarginRight) / self.displayNumber;
 }
 
--(CGFloat) getDataStickWidth{
+-(CCFloat) getDataStickWidth{
     return (self.frame.size.width - self.axisMarginLeft - self.axisMarginRight) / [self getDataDisplayNumber];
 }
 
 -(void) bindSelectedIndex
 {
     CCFloat stickWidth = [self getDataStickWidth];
-    CGFloat pointX = self.axisMarginLeft +(self.selectedStickIndex - self.displayFrom + 0.5) * stickWidth;
-    
+    CCFloat pointX = self.axisMarginLeft +(self.selectedStickIndex - self.displayFrom + 0.5) * stickWidth;
     
     _singleTouchPoint = CGPointMake(pointX,self.singleTouchPoint.y);
 }

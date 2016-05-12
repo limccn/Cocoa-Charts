@@ -19,18 +19,22 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "CCSBaseData.h"
 
-@interface CCSOHLCVDData : NSObject
 
-@property(assign, nonatomic) CGFloat open;
-@property(assign, nonatomic) CGFloat high;
-@property(assign, nonatomic) CGFloat low;
-@property(assign, nonatomic) CGFloat close;
-@property(assign, nonatomic) CGFloat vol;
+@interface CCSOHLCVDData : CCSBaseData
+
+@property(assign, nonatomic) BOOL    endFlag;
+
+@property(assign, nonatomic) CCFloat open;
+@property(assign, nonatomic) CCFloat high;
+@property(assign, nonatomic) CCFloat low;
+@property(assign, nonatomic) CCFloat close;
+@property(assign, nonatomic) CCFloat vol;
 @property(copy, nonatomic) NSString *date;
-@property(assign, nonatomic) CGFloat current;
-@property(assign, nonatomic) CGFloat change;
-@property(assign, nonatomic) CGFloat preclose;
+@property(assign, nonatomic) CCFloat current;
+@property(assign, nonatomic) CCFloat change;
+@property(assign, nonatomic) CCFloat preclose;
 
 //@property(copy, nonatomic) NSString *open;
 //@property(copy, nonatomic) NSString *high;

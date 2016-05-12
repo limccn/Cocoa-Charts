@@ -38,8 +38,6 @@
     NSArray *_stickData;
     UIColor *_stickBorderColor;
     UIColor *_stickFillColor;
-    CCUInt _latitudeNum;
-    CCUInt _longitudeNum;
     CCUInt _maxSticksNum;
     CCUInt _selectedStickIndex;
     CCFloat _maxValue;
@@ -48,7 +46,7 @@
     CCFloat _minDataValue;
     CCUInt _axisCalc;
     BOOL _autoCalcRange;
-    __unsafe_unretained CCSStickChart *_coChart;
+//    __unsafe_unretained CCSStickChart *_coChart;
 }
 
 /*!
@@ -71,20 +69,6 @@
  表示柱条的填充颜色
  */
 @property(strong, nonatomic) UIColor *stickFillColor;
-
-/*!
- Numbers of grid‘s latitude line
- 緯線の数量
- 网格纬线的数量
- */
-@property(assign, nonatomic) CCUInt latitudeNum;
-
-/*!
- Numbers of grid‘s longitude line
- 経線の数量
- 网格经线的数量
- */
-@property(assign, nonatomic) CCUInt longitudeNum;
 
 /*!
  Max number of sticks
@@ -134,15 +118,20 @@
  Y轴显示值的快速计算子（表示刻度＝ 计算刻度/axisCalc）
  */
 @property(assign, nonatomic) CCUInt axisCalc;
-@property(assign, nonatomic) BOOL autoCalcRange;
 
+/*!
+ Should Automatically compute display value range. 
+ 自動にデータの範囲を計算するフラグ
+ 是否需要自动计算最大和最小值。
+ */
+@property(assign, nonatomic) BOOL autoCalcRange;
 
 /*!
  if this chart touched,will effect some other charts,this value is for save them
  連携チャート、チャートに関する動作の連携用
  两个相同类型图表之间传值用对象
  */
-@property(assign, nonatomic) CCSStickChart *coChart;
+//@property(assign, nonatomic) CCSStickChart *coChart;
 
 
 /*!
@@ -188,6 +177,7 @@
  */
 - (void)setSelectedPointAddReDraw:(CGPoint)point;
 
+
 - (void)calcDataValueRange;
 
 - (void)calcValueRangePaddingZero;
@@ -196,9 +186,12 @@
 
 - (void)calcValueRange;
 
--(CGFloat) computeValueY:(CGFloat)value inRect:(CGRect)rect;
+- (CCFloat) computeValueY:(CCFloat)value inRect:(CGRect)rect;
 
--(CCInt) getSelectedIndex;
+- (CCInt) getSelectedIndex;
 
-- (NSString *)formatAxisYDegree:(CGFloat)value;
+- (NSString *)formatAxisYDegree:(CCFloat)value;
+
+- (NSString *)formatAxisXDegree:(CCFloat)value;
+
 @end
