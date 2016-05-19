@@ -1,13 +1,10 @@
 PODS:
-  - Cocoa-Charts (0.2.1.1)
   - JSONModel (1.1.2)
 
 DEPENDENCIES:
-  - Cocoa-Charts (~> 0.2.1.1)
   - JSONModel (~> 1.1.2)
 
 SPEC CHECKSUMS:
-  Cocoa-Charts: 9592979d0d0352674e0d3b73285b219a54823e15
   JSONModel: 216584d0311b053ff714f1d6cb700dbf890847bc
 
 COCOAPODS: 0.39.0

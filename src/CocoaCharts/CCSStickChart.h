@@ -45,6 +45,7 @@
     CCFloat _maxDataValue;
     CCFloat _minDataValue;
     CCUInt _axisCalc;
+    CCFloat _stickSpacing;
     BOOL _autoCalcRange;
 //    __unsafe_unretained CCSStickChart *_coChart;
 }
@@ -118,6 +119,11 @@
  Y轴显示值的快速计算子（表示刻度＝ 计算刻度/axisCalc）
  */
 @property(assign, nonatomic) CCUInt axisCalc;
+
+// same as axisCalc, for android
+@property(assign, nonatomic , getter=getAxisCalc , setter=setAxisCalc:) CCUInt dataMulti;
+
+@property(assign, nonatomic) CCFloat stickSpacing;
 
 /*!
  Should Automatically compute display value range. 

@@ -91,7 +91,7 @@
 
 - (void)drawData:(CGRect)rect {
     // 蜡烛棒宽度
-    CCFloat stickWidth = ((rect.size.width - self.axisMarginLeft - self.axisMarginRight) / self.maxSticksNum) - 1;
+    CCFloat stickWidth = ((rect.size.width - self.axisMarginLeft - self.axisMarginRight) / self.maxSticksNum) - self.stickSpacing;
 
     CGContextRef context = UIGraphicsGetCurrentContext();
 
@@ -103,7 +103,7 @@
 
         if (self.axisYPosition == CCSGridChartYAxisPositionLeft) {
             // 蜡烛棒起始绘制位置
-            CCFloat stickX = self.axisMarginLeft + 1;
+            CCFloat stickX = self.axisMarginLeft + self.stickSpacing;
             //判断显示为方柱或显示为线条
             for (CCUInt i = 0; i < [self.stickData count]; i++) {
                 CCSStickChartData *stick = [self.stickData objectAtIndex:i];
@@ -128,11 +128,11 @@
                 }
 
                 //X位移
-                stickX = stickX + 1 + stickWidth;
+                stickX = stickX + self.stickSpacing + stickWidth;
             }
         } else {
             // 蜡烛棒起始绘制位置
-            CCFloat stickX = rect.size.width - self.axisMarginRight - 1 - stickWidth;
+            CCFloat stickX = rect.size.width - self.axisMarginRight - self.stickSpacing - stickWidth;
             //判断显示为方柱或显示为线条
             for (CCInt i = [self.stickData count] - 1; i >= 0; i--) {
                 CCSStickChartData *stick = [self.stickData objectAtIndex:i];
@@ -156,7 +156,7 @@
                     }
                 }
                 //X位移
-                stickX = stickX - 1 - stickWidth;
+                stickX = stickX - self.stickSpacing - stickWidth;
             }
         }
 

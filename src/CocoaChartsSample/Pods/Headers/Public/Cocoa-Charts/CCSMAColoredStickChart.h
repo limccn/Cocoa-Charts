@@ -1,1 +1,0 @@
-../../../Cocoa-Charts/src/CocoaCharts/CCSMAColoredStickChart.h

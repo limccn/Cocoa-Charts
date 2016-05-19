@@ -35,6 +35,7 @@
 @synthesize minDataValue = _minDataValue;
 //@synthesize coChart = _coChart;
 @synthesize axisCalc = _axisCalc;
+@synthesize stickSpacing = _stickSpacing;
 @synthesize autoCalcRange = _autoCalcRange;
 
 
@@ -54,6 +55,7 @@
     self.stickData = nil;
 //    self.coChart = nil;
     self.axisCalc = 1;
+    self.stickSpacing = 1.f;
     self.autoCalcRange = YES;
 }
 
@@ -278,7 +280,7 @@
 
 - (void)drawSticks:(CGRect)rect {
     // 蜡烛棒宽度
-    CCFloat stickWidth = ((rect.size.width - self.axisMarginLeft - self.axisMarginRight) / self.maxSticksNum) - 1;
+    CCFloat stickWidth = ((rect.size.width - self.axisMarginLeft - self.axisMarginRight) / self.maxSticksNum) - self.stickSpacing;
 
     CGContextRef context = UIGraphicsGetCurrentContext();
 
@@ -315,7 +317,7 @@
                 }
 
                 //X位移
-                stickX = stickX + 1 + stickWidth;
+                stickX = stickX + self.stickSpacing + stickWidth;
             }
         } else {
             // 蜡烛棒起始绘制位置
@@ -343,7 +345,7 @@
                     }
                 }
                 //X位移
-                stickX = stickX - 1 - stickWidth;
+                stickX = stickX - self.stickSpacing - stickWidth;
             }
         }
 

@@ -172,7 +172,7 @@
 
 - (void)drawSticks:(CGRect)rect {
     // 蜡烛棒宽度
-    CCFloat stickWidth = [self getDataStickWidth] - 0.5f;
+    CCFloat stickWidth = [self getDataStickWidth] - self.stickSpacing;
 
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSetLineWidth(context, 0.5f);
@@ -310,7 +310,7 @@
                 }
 
                 //X位移
-                stickX = stickX + 0.5f + stickWidth;
+                stickX = stickX + self.stickSpacing + stickWidth;
             }
     }
 }
