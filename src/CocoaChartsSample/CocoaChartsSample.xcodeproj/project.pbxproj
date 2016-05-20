@@ -748,7 +748,6 @@
 		3B961BC61CC783CD00C34980 /* SampleDatas */ = {
 			isa = PBXGroup;
 			children = (
-				3B991A0B1CED9AF400C0555F /* CocoaCharts */,
 				3B961BCA1CC783CD00C34980 /* KLineData.txt */,
 				3B961BCB1CC783CD00C34980 /* N225.xml */,
 				3B961BCC1CC783CD00C34980 /* test.plist */,
@@ -838,13 +837,14 @@
 				3B991A571CED9AF400C0555F /* CCSTitleValuesColor.m */,
 			);
 			name = CocoaCharts;
-			path = ../../CocoaCharts;
+			path = ../CocoaCharts;
 			sourceTree = "<group>";
 		};
 		3BB5DEF318C9624800288894 = {
 			isa = PBXGroup;
 			children = (
 				3B961BC61CC783CD00C34980 /* SampleDatas */,
+				3B991A0B1CED9AF400C0555F /* CocoaCharts */,
 				3B8C01DF1CC4CAB8007914C4 /* CocoaChartsSample */,
 				F860F8851CDC89C90092CAD9 /* CocoaChartsUtils */,
 				3BB5DFE218C984F600288894 /* TALib */,

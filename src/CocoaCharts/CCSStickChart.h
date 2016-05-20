@@ -196,8 +196,4 @@
 
 - (CCInt) getSelectedIndex;
 
-- (NSString *)formatAxisYDegree:(CCFloat)value;
-
-- (NSString *)formatAxisXDegree:(CCFloat)value;
-
 @end

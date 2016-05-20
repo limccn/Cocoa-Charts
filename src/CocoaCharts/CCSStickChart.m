@@ -257,11 +257,7 @@
 -(NSString*) formatAxisYDegree:(CCFloat)value {
     //数据
     CCFloat displayValue = floor(value) / self.axisCalc;
-    if(displayValue > 10000){
-        return [NSString stringWithFormat:@"%@万",[NSString stringWithFormat:@"%-.2f", displayValue/10000]];
-    }else {
-        return [NSString stringWithFormat:@"%ld", (CCInt)displayValue];
-    }
+    return [super formatAxisYDegree:displayValue];
 }
 
 -(void) drawData:(CGRect)rect{

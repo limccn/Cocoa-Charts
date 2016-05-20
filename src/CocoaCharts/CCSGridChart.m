@@ -66,6 +66,8 @@
 @synthesize crossLinesFontColor = _crossLinesFontColor;
 @synthesize noneDisplayValues = _noneDisplayValues;
 @synthesize chartDelegate = _chartDelegate;
+@synthesize axisYFormattorType = _axisYFormattorType;
+@synthesize axisYFormattor = _axisYFormattor;
 
 
 - (void)initProperty {
@@ -112,6 +114,8 @@
     self.displayYDegreeOnTouch = YES;
     self.autoCalcLatitudeTitle = YES;
     self.autoCalcLongitudeTitle = YES;
+    self.axisYFormattor = @"#,##0";
+    self.axisYFormattorType = CCSGridChartDecimalFormattorNormal;
 
     //初期化X轴
     self.latitudeTitles = nil;
@@ -753,6 +757,82 @@ CCFloat _minDistance = 8;
 - (void) setSingleTouchPoint:(CGPoint) point
 {
     _singleTouchPoint = point;
+}
+
+- (NSString *)formatAxisYDegree:(CCFloat)value
+{
+    //处理成千分数形式
+    NSNumberFormatter *decimalformatter = [[NSNumberFormatter alloc] init];
+        
+    if (self.axisYFormattorType == CCSGridChartDecimalFormattorNormal){
+        decimalformatter.positiveFormat = @"#,##0;";
+        return [decimalformatter stringFromNumber:[NSNumber numberWithDouble:value]];
+    }else if(self.axisYFormattorType == CCSGridChartDecimalFormattorDecimal1){
+        decimalformatter.positiveFormat = @"#,##0.0;";
+        return [decimalformatter stringFromNumber:[NSNumber numberWithDouble:value]];
+    }else if(self.axisYFormattorType == CCSGridChartDecimalFormattorDecimal2){
+        decimalformatter.positiveFormat = @"#,##0.00;";
+        return [decimalformatter stringFromNumber:[NSNumber numberWithDouble:value]];
+    }else if(self.axisYFormattorType == CCSGridChartDecimalFormattorDecimal3){
+        decimalformatter.positiveFormat = @"#,##0.000;";
+        return [decimalformatter stringFromNumber:[NSNumber numberWithDouble:value]];
+    }else if(self.axisYFormattorType == CCSGridChartDecimalFormattorKMBT){
+        if(value < 1000){
+            decimalformatter.positiveFormat = @"#,##0;";
+            return [decimalformatter stringFromNumber:[NSNumber numberWithDouble:value]];
+        }else if(value < 1000000){
+            decimalformatter.positiveFormat = @"#,##0.00;";
+            return [NSString stringWithFormat:@"%@K",[decimalformatter stringFromNumber:[NSNumber numberWithDouble:value/1000000]]];
+        }else if(value < 1000000000){
+            decimalformatter.positiveFormat = @"#,##0.00;";
+            return [NSString stringWithFormat:@"%@M",[decimalformatter stringFromNumber:[NSNumber numberWithDouble:value/1000000000]]];
+        }else if(value < 1000000000000){
+            decimalformatter.positiveFormat = @"#,##0.00;";
+            return [NSString stringWithFormat:@"%@B",[decimalformatter stringFromNumber:[NSNumber numberWithDouble:value/1000000000000]]];
+        }else {
+            decimalformatter.positiveFormat = @"#,##0.00;";
+            return [NSString stringWithFormat:@"%@T",[decimalformatter stringFromNumber:[NSNumber numberWithDouble:value/1000000000000000]]];
+        }
+
+    }else if(self.axisYFormattorType == CCSGridChartDecimalFormattorManOkuTyo){
+        if(value < 10000){
+            decimalformatter.positiveFormat = @"#,##0;";
+            return [decimalformatter stringFromNumber:[NSNumber numberWithDouble:value]];
+        }else if(value < 100000000){
+            decimalformatter.positiveFormat = @"#,##0.00;";
+            return [NSString stringWithFormat:@"%@万",[decimalformatter stringFromNumber:[NSNumber numberWithDouble:value/100000000]]];
+        }else if(value < 1000000000000){
+            decimalformatter.positiveFormat = @"#,##0.00;";
+            return [NSString stringWithFormat:@"%@億",[decimalformatter stringFromNumber:[NSNumber numberWithDouble:value/1000000000000]]];
+        }else {
+            decimalformatter.positiveFormat = @"#,##0.00;";
+            return [NSString stringWithFormat:@"%@兆",[decimalformatter stringFromNumber:[NSNumber numberWithDouble:value/10000000000000000]]];
+        }
+        
+    }else if(self.axisYFormattorType == CCSGridChartDecimalFormattorWangYiZhao){
+        if(value < 10000){
+            decimalformatter.positiveFormat = @"#,##0;";
+            return [decimalformatter stringFromNumber:[NSNumber numberWithDouble:value]];
+        }else if(value < 100000000){
+            decimalformatter.positiveFormat = @"#,##0.00;";
+            return [NSString stringWithFormat:@"%@万",[decimalformatter stringFromNumber:[NSNumber numberWithDouble:value/100000000]]];
+        }else if(value < 1000000000000){
+            decimalformatter.positiveFormat = @"#,##0.00;";
+            return [NSString stringWithFormat:@"%@亿",[decimalformatter stringFromNumber:[NSNumber numberWithDouble:value/1000000000000]]];
+        }else {
+            decimalformatter.positiveFormat = @"#,##0.00;";
+            return [NSString stringWithFormat:@"%@兆",[decimalformatter stringFromNumber:[NSNumber numberWithDouble:value/10000000000000000]]];
+        }
+        
+    }else{
+        decimalformatter.positiveFormat = self.axisYFormattor;
+        return [decimalformatter stringFromNumber:[NSNumber numberWithDouble:value]];
+    }
+}
+
+- (NSString *)formatAxisXDegree:(CCFloat)value
+{
+    return @"";
 }
 
 @end

@@ -284,10 +284,4 @@
     self.latitudeTitles = TitleY;
 }
 
--(NSString*) formatAxisYDegree:(CCFloat)value {
-    //数据
-    CCFloat displayValue = value/ self.axisCalc;
-    return [NSString stringWithFormat:@"%-.2f", displayValue];
-}
-
 @end

@@ -108,7 +108,7 @@
 
 - (void)calcValueRangeFormatForAxis {
     
-    CCInt rate = self.axisCalc;
+    CCInt rate = (self.maxValue - self.minValue) / (self.latitudeNum);
 
     //等分轴修正
     if (self.latitudeNum > 0 && rate > 1 && (CCInt) (self.minValue) % rate != 0) {

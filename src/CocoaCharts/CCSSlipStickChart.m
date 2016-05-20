@@ -166,23 +166,6 @@
     self.latitudeTitles = TitleY;
 }
 
--(NSString*) formatAxisYDegree:(CCFloat)value {
-    //数据
-    CCFloat displayValue = floor(value) / self.axisCalc;
-    //处理成千分数形式
-    NSNumberFormatter *decimalformatter = [[NSNumberFormatter alloc] init];
-    decimalformatter.positiveFormat = @"###,##0;";
-    if(displayValue < 10000){
-        return [decimalformatter stringFromNumber:[NSNumber numberWithInteger:(CCInt)displayValue]];
-    }else if(displayValue < 100000000){
-        decimalformatter.positiveFormat = @"###,##0.00;";
-        return [NSString stringWithFormat:@"%@万",[decimalformatter stringFromNumber:[NSNumber numberWithDouble:displayValue/10000]]];
-    }else {
-        decimalformatter.positiveFormat = @"###,##0.00;";
-        return [NSString stringWithFormat:@"%@亿",[decimalformatter stringFromNumber:[NSNumber numberWithDouble:displayValue/100000000]]];
-    }
-}
-
 - (NSString *)calcAxisXGraduate:(CGRect)rect {
     CCFloat value = [self touchPointAxisXValue:rect];
     NSString *result = @"";

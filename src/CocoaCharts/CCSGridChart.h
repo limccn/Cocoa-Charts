@@ -51,6 +51,18 @@ typedef enum {
     CCSGridChartXAxisPositionBottom              //Axis X bottom
 } CCSGridChartXAxisPosition;
 
+
+typedef enum {
+    CCSGridChartDecimalFormattorNormal,                     //Axis Y title formattor #,##0
+    CCSGridChartDecimalFormattorDecimal1,                   //Axis Y title formattor #,##0.0
+    CCSGridChartDecimalFormattorDecimal2,                   //Axis Y title formattor #,##0.00
+    CCSGridChartDecimalFormattorDecimal3,                   //Axis Y title formattor #,##0.000
+    CCSGridChartDecimalFormattorKMBT,                       //Axis Y title formattor ##0, ##0K, ##0M, ##0B, ##0T
+    CCSGridChartDecimalFormattorManOkuTyo,                  //Axis Y title formattor #,##0、#,##0万、#,##0億、#,##0兆
+    CCSGridChartDecimalFormattorWangYiZhao,                 //Axis Y title formattor #,##0, #,##0万, #,##0亿, #,##0兆
+    CCSGridChartDecimalFormattorCustom,                     //Axis Y title formattor custom
+} CCSGridChartDecimalFormattorType;
+
 /*!
  CCSGridChart
  
@@ -88,6 +100,8 @@ typedef enum {
     CCUInt _crossLineFontSize;
     CCSGridChartXAxisPosition _axisXPosition;
     CCSGridChartYAxisPosition _axisYPosition;
+    CCSGridChartDecimalFormattorType _axisYFormattorType;
+    NSString *_axisYFormattor;
     BOOL _displayLatitudeTitle;
     BOOL _displayLeftLatitudeTitle;
     BOOL _displayRightLatitudeTitle;
@@ -265,6 +279,9 @@ typedef enum {
  Y轴显示位置（左、右）参看：CCSGridChartAxisPosition
  */
 @property(assign, nonatomic) CCSGridChartYAxisPosition axisYPosition;
+
+@property(assign, nonatomic) CCSGridChartDecimalFormattorType axisYFormattorType;
+@property(copy, nonatomic) NSString *axisYFormattor;
 
 /*!
  Should display the degrees in X axis？
@@ -552,5 +569,9 @@ typedef enum {
  判断是否需要显示的值
  */
 - (BOOL) isNoneDisplayValue:(CCFloat)value;
+
+- (NSString *)formatAxisYDegree:(CCFloat)value;
+
+- (NSString *)formatAxisXDegree:(CCFloat)value;
 
 @end
