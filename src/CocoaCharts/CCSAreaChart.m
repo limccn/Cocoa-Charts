@@ -128,13 +128,15 @@
 
                 CGContextAddPath(context, path);
                 CGContextAddLineToPoint(context, rect.size.width - self.axisMarginRight, rect.size.height - self.axisMarginBottom - self.axisMarginTop);
-                CGContextAddLineToPoint(context, self.axisMarginLeft + self.axisMarginRight, rect.size.height - self.axisMarginBottom - self.axisMarginTop);
+                CGContextAddLineToPoint(context, self.axisMarginLeft, rect.size.height - self.axisMarginBottom - self.axisMarginTop);
 
                 CGContextClosePath(context);
                 CGContextSetAlpha(context, self.areaAlpha);
                 CGContextSetFillColorWithColor(context, line.color.CGColor);
                 CGContextFillPath(context);
 
+                //还原透明度
+                CGContextSetAlpha(context, 1);
                 CGPathRelease(path);
 
                 path = nil;

@@ -259,6 +259,7 @@
 		3BB5E13B18C984F600288894 /* ta_WMA.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5E09518C984F600288894 /* ta_WMA.c */; };
 		3BE2858C1CC63A780079AA35 /* CCSGroupChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BE2858A1CC63A780079AA35 /* CCSGroupChart.m */; };
 		B9D9486EC13AC2EB4A9B76F0 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 69441982625698A57CC7DB46 /* libPods.a */; };
+		F824DEAD1D681F4200C8CDCA /* CCSSlipAreaChart.m in Sources */ = {isa = PBXBuildFile; fileRef = F824DEAC1D681F4200C8CDCA /* CCSSlipAreaChart.m */; };
 		F860F8921CDC89C90092CAD9 /* CCSStringUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = F860F8871CDC89C90092CAD9 /* CCSStringUtils.m */; };
 		F860F8931CDC89C90092CAD9 /* CCSTALibUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = F860F8891CDC89C90092CAD9 /* CCSTALibUtils.m */; };
 		F860F8941CDC89C90092CAD9 /* NSArray+CCSTACompute.m in Sources */ = {isa = PBXBuildFile; fileRef = F860F88B1CDC89C90092CAD9 /* NSArray+CCSTACompute.m */; };
@@ -609,6 +610,8 @@
 		5D2BD16ADA0618F467FDA75B /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		69441982625698A57CC7DB46 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7D9E0A0F1D6DCA8178C4E37 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		F824DEAB1D681F4200C8CDCA /* CCSSlipAreaChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSSlipAreaChart.h; sourceTree = "<group>"; };
+		F824DEAC1D681F4200C8CDCA /* CCSSlipAreaChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSSlipAreaChart.m; sourceTree = "<group>"; };
 		F860F8861CDC89C90092CAD9 /* CCSStringUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSStringUtils.h; sourceTree = "<group>"; };
 		F860F8871CDC89C90092CAD9 /* CCSStringUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSStringUtils.m; sourceTree = "<group>"; };
 		F860F8881CDC89C90092CAD9 /* CCSTALibUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSTALibUtils.h; sourceTree = "<group>"; };
@@ -662,18 +665,18 @@
 				3B8C020F1CC4CAB8007914C4 /* CCSSamplGroupChartDetailTableViewCell.h */,
 				3B8C02101CC4CAB8007914C4 /* CCSSamplGroupChartDetailTableViewCell.m */,
 				3B8C02111CC4CAB8007914C4 /* CCSSamplGroupChartDetailTableViewCell.xib */,
-				3B8C02121CC4CAB8007914C4 /* CCSSettingDetailViewController.h */,
-				3B8C02131CC4CAB8007914C4 /* CCSSettingDetailViewController.m */,
-				3B8C02141CC4CAB8007914C4 /* CCSSettingDetailViewController.xib */,
+				3B8C01ED1CC4CAB8007914C4 /* CCSChartsSettingViewController.h */,
+				3B8C01EE1CC4CAB8007914C4 /* CCSChartsSettingViewController.m */,
+				3B8C01EF1CC4CAB8007914C4 /* CCSChartsSettingViewController.xib */,
 				3B8C02151CC4CAB8007914C4 /* CCSSettingResetTableViewCell.h */,
 				3B8C02161CC4CAB8007914C4 /* CCSSettingResetTableViewCell.m */,
 				3B8C02171CC4CAB8007914C4 /* CCSSettingResetTableViewCell.xib */,
 				3B8C01EA1CC4CAB8007914C4 /* CCSChartsSettingTableViewCell.h */,
 				3B8C01EB1CC4CAB8007914C4 /* CCSChartsSettingTableViewCell.m */,
 				3B8C01EC1CC4CAB8007914C4 /* CCSChartsSettingTableViewCell.xib */,
-				3B8C01ED1CC4CAB8007914C4 /* CCSChartsSettingViewController.h */,
-				3B8C01EE1CC4CAB8007914C4 /* CCSChartsSettingViewController.m */,
-				3B8C01EF1CC4CAB8007914C4 /* CCSChartsSettingViewController.xib */,
+				3B8C02121CC4CAB8007914C4 /* CCSSettingDetailViewController.h */,
+				3B8C02131CC4CAB8007914C4 /* CCSSettingDetailViewController.m */,
+				3B8C02141CC4CAB8007914C4 /* CCSSettingDetailViewController.xib */,
 				3BE2858B1CC63A780079AA35 /* CCSGroupChart.h */,
 				3BE2858A1CC63A780079AA35 /* CCSGroupChart.m */,
 			);
@@ -813,6 +816,8 @@
 				3B991A3F1CED9AF400C0555F /* CCSSlipCandleStickChart.m */,
 				3B991A401CED9AF400C0555F /* CCSSlipLineChart.h */,
 				3B991A411CED9AF400C0555F /* CCSSlipLineChart.m */,
+				F824DEAB1D681F4200C8CDCA /* CCSSlipAreaChart.h */,
+				F824DEAC1D681F4200C8CDCA /* CCSSlipAreaChart.m */,
 				3B991A421CED9AF400C0555F /* CCSSlipStickChart.h */,
 				3B991A431CED9AF400C0555F /* CCSSlipStickChart.m */,
 				3B991A441CED9AF400C0555F /* CCSSpiderWebChart.h */,
@@ -1429,6 +1434,7 @@
 				3B8C023F1CC4CAB8007914C4 /* CCSGridChartViewController.m in Sources */,
 				3B8C023E1CC4CAB8007914C4 /* CCSDonutChartViewController.m in Sources */,
 				3BB5E0A718C984F600288894 /* ta_AVGPRICE.c in Sources */,
+				F824DEAD1D681F4200C8CDCA /* CCSSlipAreaChart.m in Sources */,
 				3BB5E0BF18C984F600288894 /* ta_CDLEVENINGDOJISTAR.c in Sources */,
 				3BB5E11518C984F600288894 /* ta_NATR.c in Sources */,
 				3BB5E0E018C984F600288894 /* ta_CDLSTALLEDPATTERN.c in Sources */,

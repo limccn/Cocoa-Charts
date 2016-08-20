@@ -1,8 +1,8 @@
 //
-//  Cocoa-Charts.h
+//  CCSSlipAreaChart.h
 //  Cocoa-Charts
 //
-//  Created by limc on 11-10-24.
+//  Created by limc on 13-10-27.
 //  Copyright 2011 limc.cn All rights reserved.
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,25 +18,34 @@
 //  limitations under the License.
 //
 
-#import "CCSBaseChartView.h"
-#import "CCSGridChart.h"
-#import "CCSLineChart.h"
-#import "CCSStickChart.h"
-#import "CCSCandleStickChart.h"
-#import "CCSMAStickChart.h"
-#import "CCSMACandleStickChart.h"
-#import "CCSPieChart.h"
-#import "CCSPizzaChart.h"
-#import "CCSSpiderWebChart.h"
-#import "CCSMAColoredStickChart.h"
-#import "CCSSlipAreaChart.h"
+#import "CCSSlipLineChart.h"
 
-#import "CCSLineData.h"
-#import "CCSTitledLine.h"
-#import "CCSTitleValue.h"
-#import "CCSTitleValueColor.h"
-#import "CCSTitleValues.h"
-#import "CCSTitleValuesColor.h"
+/*!
+ CCSAreaChart
+ 
+ 普通面积图，以X轴为底边绘制面积
+ */
+@interface CCSSlipAreaChart : CCSSlipLineChart {
+    CCFloat _areaAlpha;
+    
+    CCFloat _lastClose;
+    
+    BOOL _enableZoom;
+    BOOL _enableSlip;
+}
 
+/*!
+ @abstract
+ 面积填充部分的透明度
+ */
+@property(assign, nonatomic) CCFloat areaAlpha;
 
+@property(assign,nonatomic) CCFloat lastClose;
 
+@property(assign,nonatomic) BOOL enableZoom;
+@property(assign,nonatomic) BOOL enableSlip;
+
+/** 绘制截止时间 */
+@property(copy,nonatomic)   NSString *closingDate;
+
+@end

@@ -113,7 +113,7 @@
 
     if (self.stickData != NULL && [self.stickData count] > 0) {
             // 蜡烛棒宽度
-            CCFloat stickWidth = [self getDataStickWidth] - 0.5;
+            CCFloat stickWidth = [self getDataStickWidth] - self.stickSpacing;
             
             // 蜡烛棒起始绘制位置
             CCFloat stickX = self.axisMarginLeft + 1;
@@ -173,7 +173,7 @@
                 }
 
                 //X位移
-                stickX = stickX + 0.5 + stickWidth;
+                stickX = stickX + self.stickSpacing + stickWidth;
             }
     }
 }

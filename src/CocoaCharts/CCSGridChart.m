@@ -99,6 +99,8 @@
     self.axisMarginRight = 3;
     self.axisXPosition = CCSGridChartXAxisPositionBottom;
     self.axisYPosition = CCSGridChartYAxisPositionLeft;
+    self.titlesXPosition = CCSGridChartXTitlesPositionBottom;
+    self.titlesYPosition = CCSGridChartYTitlesPositionRight;
     self.displayLatitudeTitle = YES;
     self.displayLeftLatitudeTitle = YES;
     self.displayRightLatitudeTitle = YES;

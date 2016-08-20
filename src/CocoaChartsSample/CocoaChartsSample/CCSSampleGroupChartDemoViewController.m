@@ -40,6 +40,10 @@ typedef enum {
 
 @interface CCSSampleGroupChartDemoViewController (){
     CCSGroupChartData                               *_dayData;
+    
+    NSMutableDictionary                             *_dicTickLineDatas;
+    NSMutableDictionary                             *_dicTickAvgLineDatas;
+    NSMutableDictionary                             *_dicTickVolStickDatas;
 }
 
 - (void)loadJSONData: (ChartDataType) chartDataType;
@@ -136,12 +140,105 @@ typedef enum {
 - (void)initAreaChart{
     [self.areachart setBackgroundColor:[@"F5F5F5" str2Color]];
     
-    self.areachart.lineWidth = 0.5f;
-    self.areachart.maxValue = 150000;
-    self.areachart.minValue = 100000;
-    self.areachart.longitudeNum = 4;
-    self.areachart.latitudeNum = 4;
+    self.areachart.lineWidth = 0.8f;
+    self.areachart.longitudeNum = 3;
+    self.areachart.latitudeNum = 3;
     self.areachart.areaAlpha = 0.2;
+    self.areachart.noneDisplayValues = [NSMutableArray arrayWithArray:@[@"0"]];
+    
+    self.areachart.axisCalc = AXIS_CALC_PARM;
+    
+    self.areachart.balanceRange = YES;
+    self.areachart.lastClose = 0.0f;
+    
+    self.areachart.displayFrom = 0;
+    
+    self.areachart.enableSlip = NO;
+    self.areachart.enableZoom = NO;
+    
+    self.areachart.longitudeFontColor = [UIColor lightGrayColor];
+    self.areachart.latitudeFontColor = [UIColor lightGrayColor];
+    
+    self.areachart.borderColor = BORDER_COLOR;
+    self.areachart.longitudeColor = GRID_LINE_COLOR;
+    self.areachart.latitudeColor = GRID_LINE_COLOR;
+    
+    _dicTickLineDatas = [[NSMutableDictionary alloc] init];
+    _dicTickAvgLineDatas = [[NSMutableDictionary alloc] init];
+    _dicTickVolStickDatas = [[NSMutableDictionary alloc] init];
+    
+    [self initTickLineDataWithDates:@[@""] tickChart:self.areachart dicLineDatas:_dicTickLineDatas dicAvgLineDatas:_dicTickAvgLineDatas volChart:nil dicTickVolStickDatas:_dicTickVolStickDatas];
+}
+
+- (void)initTickLineDataWithDates: (NSArray *) dates tickChart:(CCSSlipAreaChart *) tickChart dicLineDatas:(NSMutableDictionary *)dicLineDatas dicAvgLineDatas:(NSMutableDictionary *) dicAvgLineDatas volChart:(CCSMAColoredStickChart *) volChart dicTickVolStickDatas:(NSMutableDictionary *) dicTickVolStickDatas{
+    DO_IN_BACKGROUND((^{
+        NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+        [numberFormatter setPositiveFormat:@"00"];
+        
+        NSMutableArray *arrMinsLineData = [[NSMutableArray alloc] init];
+        NSMutableArray *arrMinsAvgLineData = [[NSMutableArray alloc] init];
+        
+        for (NSString *date in dates) {
+            for (int j=9.5*60; j<=60*11.5; j++) {
+                int hour = j/60;
+                int min = j - hour*60;
+                
+                NSString *time = [NSString stringWithFormat:@"%@:%@", [numberFormatter stringFromNumber:[NSNumber numberWithInt:hour]], [numberFormatter stringFromNumber:[NSNumber numberWithInt:min]]];
+                
+                if (date && ![date isEqualToString:@""]) {
+                    time = [[date append: @" "] append: time];
+                }
+                
+                CCSLineData *priceLineData = [[CCSLineData alloc] initWithValue:0.0 date: time];
+                [arrMinsLineData addObject: priceLineData];
+                [dicLineDatas setObject:priceLineData forKey: time];
+                
+                CCSLineData *avgPriceLineData = [[CCSLineData alloc] initWithValue:0.0 date: time];
+                [arrMinsAvgLineData addObject: avgPriceLineData];
+                [dicAvgLineDatas setObject:avgPriceLineData forKey: time];
+            }
+            for (int j=13*60+1; j<=60*15; j++) {
+                int hour = j/60;
+                int min = j - hour*60;
+                
+                NSString *time = [NSString stringWithFormat:@"%@:%@", [numberFormatter stringFromNumber:[NSNumber numberWithInt:hour]], [numberFormatter stringFromNumber:[NSNumber numberWithInt:min]]];
+                
+                if (date && ![date isEqualToString:@""]) {
+                    time = [[date append: @" "] append: time];
+                }
+                
+                CCSLineData *priceLineData = [[CCSLineData alloc] initWithValue:0.0 date: time];
+                [arrMinsLineData addObject: priceLineData];
+                [dicLineDatas setObject:priceLineData forKey: time];
+                
+                CCSLineData *avgPriceLineData = [[CCSLineData alloc] initWithValue:0.0 date: time];
+                [arrMinsAvgLineData addObject: avgPriceLineData];
+                [dicAvgLineDatas setObject:avgPriceLineData forKey: time];
+            }
+        }
+        
+        NSMutableArray *linedata = [[NSMutableArray alloc] init];
+        
+        CCSTitledLine *priceLine = [[CCSTitledLine alloc] init];
+        priceLine.data = arrMinsLineData;
+        priceLine.color = [UIColor clearColor];
+        priceLine.title = @"chartLine";
+        
+        [linedata addObject:priceLine];
+        
+        CCSTitledLine *avgLine = [[CCSTitledLine alloc] init];
+        avgLine.data = arrMinsAvgLineData;
+        avgLine.color = [UIColor clearColor];
+        avgLine.title = @"chartLine";
+        
+        [linedata addObject:avgLine];
+        
+        tickChart.displayNumber = arrMinsLineData.count;
+        tickChart.maxDisplayNumber = arrMinsLineData.count;
+        tickChart.minDisplayNumber = arrMinsLineData.count;
+        
+        tickChart.linesData = linedata;
+    }));
 }
 
 - (void)loadJSONData: (ChartDataType) chartDataType{
@@ -172,7 +269,7 @@ typedef enum {
             data.low = [[dict objectForKey:@"low"] doubleValue] * AXIS_CALC_PARM;
             data.close = [[dict objectForKey:@"close"] doubleValue]* AXIS_CALC_PARM;
             data.vol = [[dict objectForKey:@"volume"] doubleValue];
-            data.date = [dict objectForKey:@"day"];
+            data.date = [dict[@"day"] dateWithFormat:@"yyyy-MM-dd HH:mm:ss" target:@"yyyyMMddHHmmss"];
             data.current = [[dict objectForKey:@"close"] doubleValue];
             data.preclose = 0;
             data.change = 0;
@@ -198,55 +295,45 @@ typedef enum {
         
         arrNativeData = [[arrNativeData reverseObjectEnumerator] allObjects];
         
-        [self minsDataProcess:arrNativeData];
+        [self tickDataProcess:arrNativeData dates:@[@""] chart:self.areachart dicLineDatas:_dicTickLineDatas dicAvgLineDatas:_dicTickAvgLineDatas volChart:nil dicVolStickDatas:_dicTickVolStickDatas];
     });
 }
 
-- (void)minsDataProcess:(NSArray *)arrData{
-    NSMutableArray *linedata = [[NSMutableArray alloc] init];
-    
-    NSMutableDictionary *dicMinsData = [[NSMutableDictionary alloc] init];
-    for (NSDictionary *dic in arrData) {
-        [dicMinsData setObject:dic[@"o"] forKey:[NSString stringWithFormat:@"%@", [dic[@"pt"] dateWithFormat:@"yyyy-MM-ddHH: mm: ss" target:@"HH:mm"]]];
+- (void)tickDataProcess:(NSArray *)arrData dates:(NSArray *)dates chart:(CCSSlipAreaChart *) chart dicLineDatas:(NSMutableDictionary *)dicLineDatas dicAvgLineDatas:(NSMutableDictionary *) dicAvgLineDatas volChart:(CCSMAColoredStickChart *) volChart dicVolStickDatas:(NSMutableDictionary *) dicTickVolStickDatas{
+    // 循环设置价格
+    for (NSString *date in dates) {
+        __block CGFloat sumValue = 0.0f;
+        __block CGFloat sumVolume = 0.0f;
+        [arrData enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger index, BOOL * _Nonnull stop) {
+            NSDictionary *dic = obj;
+            
+            NSString *time = [dic[@"qt"] dateWithFormat:@"yyyy-MM-ddHH: mm: ss" target:@"HH:mm"];
+            if (date && ![date isEqualToString:@""]) {
+                time = [[date append: @" "] append: time];
+            }
+            
+            CCSLineData *lineData = dicLineDatas[time];
+            [lineData setValue: [dic[@"c"] doubleValue] * AXIS_CALC_PARM];
+            
+            sumValue += [dic[@"v"] doubleValue] * [dic[@"c"] doubleValue];
+            sumVolume += [dic[@"v"] doubleValue];
+            
+            CCSLineData *avgLineData = dicAvgLineDatas[time];
+            [avgLineData setValue: sumValue/sumVolume * AXIS_CALC_PARM];
+            
+            // 当前交易截止时间
+            if (index == arrData.count - 1) {
+                chart.closingDate = time;
+            }
+        }];
     }
     
-    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
-    [numberFormatter setPositiveFormat:@"00"];
-    
-    NSMutableArray *arrMinsLineData = [[NSMutableArray alloc] init];
-    for (int i=1; i<=60*24; i++) {
-        int hour = i/60;
-        int min = i - hour*60;
-        
-        NSString *time = [NSString stringWithFormat:@"%@:%@", [numberFormatter stringFromNumber:[NSNumber numberWithInt:hour]], [numberFormatter stringFromNumber:[NSNumber numberWithInt:min]]];
-        
-        double open = 4310.0;
-        if (dicMinsData[time]) {
-            open = [dicMinsData[time] doubleValue];
-        }
-        
-        [arrMinsLineData addObject:[[CCSLineData alloc] initWithValue:open * AXIS_CALC_PARM date: time]];
-    }
-    
-    CCSTitledLine *singleline = [[CCSTitledLine alloc] init];
-    singleline.data = arrMinsLineData;
-    singleline.color = LINE_COLORS[2];
-    singleline.title = @"chartLine";
-    
-    [linedata addObject:singleline];
-    
-    _areachart.linesData = linedata;
-    
-    NSMutableArray *TitleX = [[NSMutableArray alloc] init];
-    
-    for (CCSLineData *lineData in arrMinsLineData){
-        [TitleX addObject:lineData.date];
-    }
-    
-    self.areachart.longitudeTitles = TitleX;
+    ((CCSTitledLine*)chart.linesData[0]).color = LINE_COLORS[2];
+    ((CCSTitledLine*)chart.linesData[1]).color = LINE_COLORS[1];
     
     DO_IN_MAIN_QUEUE(^{
-        [_areachart setNeedsDisplay];
+        [chart setNeedsDisplay];
+        [volChart setNeedsDisplay];
     });
 }
 
@@ -292,7 +379,7 @@ typedef enum {
  * 设置日数据
  */
 - (void)setDayData:(NSArray *) ohlcvDatas{
-    _dayData = [[CCSGroupChartData alloc] initWithCCSOHLCVDDatas:ohlcvDatas];
+    _dayData = [[CCSGroupChartData alloc] initWithCCSOHLCVDDatas:ohlcvDatas displayChartType:GroupChartViewTypeVOL sourceDateFormat:@"yyyyMMddHHmmss" targetDateFormat:@"MM-dd HH:mm"];
     
     [self.groupChart setGroupChartData:_dayData];
 }
@@ -301,7 +388,7 @@ typedef enum {
  * 设置周数据
  */
 - (void)setWeekData:(NSArray *) ohlcvDatas{
-    _dayData = [[CCSGroupChartData alloc] initWithCCSOHLCVDDatas:ohlcvDatas];
+    _dayData = [[CCSGroupChartData alloc] initWithCCSOHLCVDDatas:ohlcvDatas displayChartType:GroupChartViewTypeVOL sourceDateFormat:@"yyyyMMddHHmmss" targetDateFormat:@"MM-dd HH:mm"];
     
     [self.groupChart setGroupChartData:_dayData];
 }

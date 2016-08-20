@@ -64,6 +64,24 @@ typedef enum {
 } CCSGridChartDecimalFormattorType;
 
 /*!
+ @typedef enum CCSGridChartYAxisPosition
+ X轴标题相对于X轴的表示位置
+ */
+typedef enum {
+    CCSGridChartXTitlesPositionTop,               //Axis X left
+    CCSGridChartXTitlesPositionBottom,            //Axis X right
+} CCSGridChartXTitlesPosition;
+
+/*!
+ @typedef enum CCSGridChartYAxisPosition
+ Y轴标题相对于Y轴的表示位置
+ */
+typedef enum {
+    CCSGridChartYTitlesPositionLeft,               //Axis Y left
+    CCSGridChartYTitlesPositionRight,              //Axis Y right
+} CCSGridChartYTitlesPosition;
+
+/*!
  CCSGridChart
  
  CCSGridChart is base type of all the charts that use a grid to display
@@ -279,6 +297,20 @@ typedef enum {
  Y轴显示位置（左、右）参看：CCSGridChartAxisPosition
  */
 @property(assign, nonatomic) CCSGridChartYAxisPosition axisYPosition;
+
+/*!
+ The position of X axis(top,bottom) reference:CCSGridChartAxisPosition
+ X軸の表示位置（上、下）参照：CCSGridChartAxisPosition
+ X轴显示位置（上、下）参看：CCSGridChartAxisPosition
+ */
+@property(assign, nonatomic) CCSGridChartXTitlesPosition titlesXPosition;
+
+/*!
+ The position of Y axis(left,right) reference:CCSGridChartAxisPosition
+ Y軸の表示位置（左、右）参照：CCSGridChartAxisPosition
+ Y轴显示位置（左、右）参看：CCSGridChartAxisPosition
+ */
+@property(assign, nonatomic) CCSGridChartYTitlesPosition titlesYPosition;
 
 @property(assign, nonatomic) CCSGridChartDecimalFormattorType axisYFormattorType;
 @property(copy, nonatomic) NSString *axisYFormattor;

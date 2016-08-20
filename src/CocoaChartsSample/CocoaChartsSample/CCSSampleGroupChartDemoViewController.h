@@ -11,13 +11,13 @@
 #import "CCSSettingDetailViewController.h"
 
 #import "CCSGroupChart.h"
-#import "CCSAreaChart.h"
+#import "CCSSlipAreaChart.h"
 
 @interface CCSSampleGroupChartDemoViewController : UIViewController<CCSChartDelegate>
 
 @property (weak, nonatomic) IBOutlet UISegmentedControl      *segTopChartType;
 @property (weak, nonatomic) IBOutlet CCSGroupChart           *groupChart;
-@property (weak, nonatomic) IBOutlet CCSAreaChart            *areachart;
+@property (weak, nonatomic) IBOutlet CCSSlipAreaChart        *areachart;
 
 @property (weak, nonatomic) IBOutlet UILabel                 *lblTime;
 
