@@ -828,6 +828,9 @@
     // 边框颜色
     candleStickChart.displayLongitudeTitle = YES;
     candleStickChart.axisMarginBottom = 15.0f;
+    candleStickChart.axisMarginTop = 15.0f;
+    candleStickChart.axisMarginLeft = 15.0f;
+    candleStickChart.axisMarginRight = 15.0f;
     
     candleStickChart.borderColor = BORDER_COLOR;
     candleStickChart.longitudeColor = GRID_LINE_COLOR;

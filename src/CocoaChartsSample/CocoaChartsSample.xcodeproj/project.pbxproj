@@ -656,6 +656,8 @@
 		3B4C69001CCF5C62004FEDB3 /* CCSGroupChartSample */ = {
 			isa = PBXGroup;
 			children = (
+				3BE2858B1CC63A780079AA35 /* CCSGroupChart.h */,
+				3BE2858A1CC63A780079AA35 /* CCSGroupChart.m */,
 				3B8C020A1CC4CAB8007914C4 /* CCSSampleGroupChartDemoViewController.h */,
 				3B8C020B1CC4CAB8007914C4 /* CCSSampleGroupChartDemoViewController.m */,
 				3B8C020C1CC4CAB8007914C4 /* CCSSampleGroupChartDemoViewController.xib */,
@@ -677,8 +679,6 @@
 				3B8C02121CC4CAB8007914C4 /* CCSSettingDetailViewController.h */,
 				3B8C02131CC4CAB8007914C4 /* CCSSettingDetailViewController.m */,
 				3B8C02141CC4CAB8007914C4 /* CCSSettingDetailViewController.xib */,
-				3BE2858B1CC63A780079AA35 /* CCSGroupChart.h */,
-				3BE2858A1CC63A780079AA35 /* CCSGroupChart.m */,
 			);
 			name = CCSGroupChartSample;
 			sourceTree = "<group>";
