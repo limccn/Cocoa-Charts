@@ -20,15 +20,6 @@
 
 #import <UIKit/UIKit.h>
 
-#import "CCSColoredStickChart.h"
-#import "CCSMACDChart.h"
-#import "CCSSlipLineChart.h"
-#import "CCSCandleStickChart.h"
-#import "CCSBOLLMASlipCandleStickChart.h"
-#import "CCSMAColoredStickChart.h"
-
-#import "CCSOHLCVDData.h"
-
 #define BORDER_COLOR                                    [@"#E8E9EA" str2Color]
 #define GRID_LINE_COLOR                                 [@"#E8E9EA" str2Color]
 
@@ -153,6 +144,7 @@ typedef enum {
 @property(strong, nonatomic) CCSSlipLineChart *cciChart;
 /** BOLL 图 */
 @property(strong, nonatomic) CCSSlipLineChart *bollChart;
+
 /** 图表类型切换 UISegmentedControl */
 @property(strong, nonatomic) UISegmentedControl *segBottomChartType;
 /** 底部图表容器 */
@@ -165,6 +157,8 @@ typedef enum {
 @property(strong, nonatomic) NSMutableArray *chartData;
 /** 图表数据源,已经计算好 */
 @property(strong, nonatomic) CCSGroupChartData *groupChartData;
+/** 计算倍数 */
+@property(assign, nonatomic) CCUInt             axisCalcParam;
 
 @property(weak, nonatomic) UIViewController<CCSChartDelegate> *chartDelegate;
 

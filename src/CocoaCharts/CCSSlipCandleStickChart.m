@@ -111,8 +111,8 @@
 }
 
 - (void)calcValueRangeFormatForAxis {
-//    CCInt rate =  self.axisCalc;
-    CCInt rate = (self.maxValue - self.minValue) / (self.latitudeNum);
+    CCInt rate =  self.axisCalc;
+//    CCInt rate = (self.maxValue - self.minValue) / (self.latitudeNum);
 //    rate = 0;
     
     if (rate == 0) {

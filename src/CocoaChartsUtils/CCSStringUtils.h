@@ -12,7 +12,13 @@
 
 @interface NSString (date)
 
++ (NSString *)currentDateWithTarget: (NSString *)target;
+
+- (NSDate *)dateWithFormat:(NSString *)source;
+
 - (NSString *)dateWithFormat:(NSString *)source target:(NSString *)target;
+
+- (NSString *)timeStampWithTarget:(NSString *)target;
 
 //清空格式
 - (NSString *)plainDate;
@@ -205,5 +211,7 @@
 - (NSString *)unit:(NSUInteger)deci;
 
 - (NSString *)findJSONStringWithType:(NSString *) type;
+
+- (NSTimeInterval)funcExecute: (void (^)())func;
 
 @end

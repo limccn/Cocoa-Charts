@@ -7,13 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "CCSColoredStickChart.h"
-#import "CCSMACDChart.h"
-#import "CCSSlipLineChart.h"
-#import "CCSCandleStickChart.h"
-#import "CCSBOLLMASlipCandleStickChart.h"
-
-#import "JSONModelLib.h"
 
 typedef enum {
     ChartViewTypeVOL = 101,

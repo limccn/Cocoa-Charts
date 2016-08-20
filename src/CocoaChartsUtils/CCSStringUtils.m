@@ -12,6 +12,26 @@
 
 @implementation NSString (date)
 
++ (NSString *)currentDateWithTarget: (NSString *)target
+{
+    //实例化一个NSDateFormatter对象
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    //设定时间格式,这里可以设置成自己需要的格式
+    [dateFormatter setDateFormat:target];
+    //用[NSDate date]可以获取系统当前时间
+    NSString *currentDateStr = [dateFormatter stringFromDate:[NSDate date]];
+    
+    return currentDateStr;
+}
+
+- (NSDate *)dateWithFormat:(NSString *)source{
+    NSDateFormatter *sourceDateFormatter = [[NSDateFormatter alloc] init];
+    [sourceDateFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"]];
+    sourceDateFormatter.dateFormat = source;
+
+    return [sourceDateFormatter dateFromString:self];
+}
+
 - (NSString *)dateWithFormat:(NSString *)source target:(NSString *)target {
     NSDateFormatter *sourceDateFormatter = [[NSDateFormatter alloc] init];
     [sourceDateFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"]];
@@ -21,6 +41,20 @@
     targetDateFormatter.dateFormat = target;
     NSString *str = [targetDateFormatter stringFromDate:[sourceDateFormatter dateFromString:self]];
 
+    if (str == nil) {
+        return @"";
+    } else {
+        return str;
+    }
+}
+
+- (NSString *)timeStampWithTarget:(NSString *)target{
+    NSDateFormatter* targetDateFormatter = [[NSDateFormatter alloc] init];
+    [targetDateFormatter setDateStyle:NSDateFormatterMediumStyle];
+    [targetDateFormatter setTimeStyle:NSDateFormatterShortStyle];
+    [targetDateFormatter setDateFormat:target];
+    NSString *str = [targetDateFormatter stringFromDate:[NSDate dateWithTimeIntervalSince1970:[self longLongValue]]];
+    
     if (str == nil) {
         return @"";
     } else {
@@ -446,6 +480,14 @@
     //UTF-8编码
     NSString *str = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
     return str;
+}
+
+- (NSTimeInterval)funcExecute: (void (^)())func{
+    NSTimeInterval beginInterval = [[NSDate date] timeIntervalSince1970];
+    func();
+    NSTimeInterval stopInterval = [[NSDate date] timeIntervalSince1970];
+    NSLog([@": %f" concate:self], stopInterval - beginInterval);
+    return stopInterval - beginInterval;
 }
 
 @end

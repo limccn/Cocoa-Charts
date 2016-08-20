@@ -20,23 +20,7 @@
 
 #import "CCSGroupChart.h"
 
-#import "CCSColoredStickChartData.h"
-#import "CCSCandleStickChartData.h"
-#import "CCSTitledLine.h"
-#import "CCSLineData.h"
-#import "CCSMACDData.h"
-
-#import "ta_libc.h"
-#import "CCSTALibUtils.h"
-#import "CCSStringUtils.h"
-#import "NSString+UserDefault.h"
-#import "NSString+UIColor.h"
-#import "UIView+AutoLayout.h"
-#import "NSArray+CCSTACompute.h"
-
 #define WR_NONE_DISPLAY @"101"
-
-#define AXIS_CALC_PARM  1000
 
 #define HORIZONTAL_LEFT_RIGHT_SCALE                     7.0f
 #define CANDLE_STICK_TOP_BOTTOM_SCALE                   4.0f
@@ -317,6 +301,7 @@
     // 设置初始化标识
     _isInitialize = YES;
     
+    self.axisCalcParam = 1;
     self.bottomChartType = GroupChartViewTypeVOL;
     self.orientationType = GroupChartverticalType;
 }
@@ -819,7 +804,7 @@
     candleStickChart.negativeStickFillColor = CANDLE_STICK_COLORS[1];
     
     candleStickChart.bollingerBandStyle = CCSBollingerBandStyleNone;
-    candleStickChart.axisCalc = AXIS_CALC_PARM;
+    candleStickChart.axisCalc = self.axisCalcParam;
     candleStickChart.latitudeNum = 3;
     candleStickChart.axisYFormattorType = CCSGridChartDecimalFormattorDecimal2;
     // 缩小到一定程度变线
@@ -828,9 +813,6 @@
     // 边框颜色
     candleStickChart.displayLongitudeTitle = YES;
     candleStickChart.axisMarginBottom = 15.0f;
-    candleStickChart.axisMarginTop = 15.0f;
-    candleStickChart.axisMarginLeft = 15.0f;
-    candleStickChart.axisMarginRight = 15.0f;
     
     candleStickChart.borderColor = BORDER_COLOR;
     candleStickChart.longitudeColor = GRID_LINE_COLOR;
@@ -1190,7 +1172,7 @@
     self.macdChart.diffLineColor = LINE_COLORS[2];
 //    self.macdChart.displayNumber = 50;
 //    self.macdChart.displayFrom = 0;
-    self.macdChart.axisCalc = AXIS_CALC_PARM;
+    self.macdChart.axisCalc = self.axisCalcParam;
     self.macdChart.displayLongitudeTitle = NO;
     self.macdChart.axisMarginBottom = 3;
     
@@ -1872,7 +1854,7 @@
     
     self.bollChart.chartDelegate = self.chartDelegate;
     self.bollChart.backgroundColor = _chartsBackgroundColor;
-    self.bollChart.axisCalc = AXIS_CALC_PARM;
+    self.bollChart.axisCalc = self.axisCalcParam;
     
     self.bollChart.borderColor = BORDER_COLOR;
     self.bollChart.longitudeColor = GRID_LINE_COLOR;
@@ -2030,7 +2012,7 @@
             //涨跌百分比
             CGFloat changeData = ohlc.close - lastohlc.close;
             
-            self.longPress(ohlc.date, ohlc.open/AXIS_CALC_PARM, ohlc.high/AXIS_CALC_PARM, ohlc.low/AXIS_CALC_PARM, ohlc.close/AXIS_CALC_PARM, changeData/lastohlc.close*100, ohlc.close > lastohlc.close, ((CCSOHLCVDData *)self.groupChartData.ohlcvdDatas[i]).vol);
+            self.longPress(ohlc.date, ohlc.open/self.axisCalcParam, ohlc.high/self.axisCalcParam, ohlc.low/self.axisCalcParam, ohlc.close/self.axisCalcParam, changeData/lastohlc.close*100, ohlc.close > lastohlc.close, ((CCSOHLCVDData *)self.groupChartData.ohlcvdDatas[i]).vol);
         }
     }
     

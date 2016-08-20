@@ -16,15 +16,6 @@
 
 #define AXIS_CALC_PARM  1000
 
-#import "CCSAreaChart.h"
-#import "CCSLineData.h"
-#import "CCSTitledLine.h"
-
-#import "NSArray+CCSTACompute.h"
-#import "CCSStringUtils.h"
-#import "NSString+UserDefault.h"
-#import "NSString+UIColor.h"
-
 #define MIN_CHART_LEFT_RIGHT_SCALE                  3.0f
 
 #define VIEW_SIZE                                   self.view.bounds.size
@@ -118,15 +109,16 @@ typedef enum {
                                                NSForegroundColorAttributeName: [UIColor lightGrayColor]};
     [self.segTopChartType setTitleTextAttributes:unselectedTextAttributes forState:UIControlStateNormal];
     
-    [_groupChart setChartDelegate:self];
-    [_groupChart setChartsBackgroundColor:[@"F5F5F5" str2Color]];
-    [_groupChart setSetting:^{
+    [self.groupChart setChartDelegate:self];
+    [self.groupChart setChartsBackgroundColor:[@"F5F5F5" str2Color]];
+    [self.groupChart setSetting:^{
         CCSChartsSettingViewController *ctrlSetting = [[CCSChartsSettingViewController alloc] init];
         ctrlSetting.ctrlChart = self;
         UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:ctrlSetting];
         [self presentViewController:navigationController animated:YES completion:^{
         }];
     }];
+    self.groupChart.axisCalcParam = AXIS_CALC_PARM;
     
     //实例化一个NSDateFormatter对象
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];

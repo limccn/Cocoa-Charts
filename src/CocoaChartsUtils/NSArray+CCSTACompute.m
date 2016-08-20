@@ -10,14 +10,15 @@
 
 #import "NSArray+CCSTACompute.h"
 
+#import "ta_libc.h"
+
+#import "CCSOHLCVDData.h"
+
 #import "CCSColoredStickChartData.h"
 #import "CCSCandleStickChartData.h"
 #import "CCSLineData.h"
 #import "CCSMACDData.h"
 
-#import "CCSOHLCVDData.h"
-
-#import "ta_libc.h"
 #import "CCSTALibUtils.h"
 #import "CCSStringUtils.h"
 #import "NSString+UserDefault.h"
@@ -570,6 +571,20 @@
     [bollBanddata addObject:bollLineBOLL];
     
     return bollBanddata;
+}
+
+/**
+ * 计算压力位
+ */
+- (NSMutableArray *)computeResistanceData:(CCInt)period sourceDateFormat:(NSString *) sourceDateFormat targetDateFormat:(NSString *)targetDateFormat{
+    return nil;
+}
+
+/**
+ * 计算支撑位
+ */
+- (NSMutableArray *)computeSurportData:(CCInt)period sourceDateFormat:(NSString *) sourceDateFormat targetDateFormat:(NSString *)targetDateFormat{
+    return nil;
 }
 
 - (NSArray *)convertCandleStickData:(NSString *) sourceDateFormat targetDateFormat:(NSString *)targetDateFormat{

@@ -1,4 +1,8 @@
+source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '7.0'
-pod 'JSONModel', '~> 1.1.2'
 
-
+target :CocoaChartsSample do
+    pod 'AFNetworking'
+    pod 'MBProgressHUD'
+    pod 'Realm'
+end

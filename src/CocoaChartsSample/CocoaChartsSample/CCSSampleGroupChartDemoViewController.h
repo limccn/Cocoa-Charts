@@ -11,7 +11,6 @@
 #import "CCSSettingDetailViewController.h"
 
 #import "CCSGroupChart.h"
-#import "CCSSlipAreaChart.h"
 
 @interface CCSSampleGroupChartDemoViewController : UIViewController<CCSChartDelegate>
 
