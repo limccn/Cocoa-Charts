@@ -23,12 +23,6 @@
 /** 精选 Cell */
 static NSString *DetailCellIdentifier             = @"CCSSamplGroupChartDetailTableViewCell";
 
-typedef enum {
-    Chart1minData = 0,
-    Chart15minData = 1,
-    ChartTimesData = 2
-} ChartDataType;
-
 @interface CCSSampleGroupChartDemoViewController (){
     CCSGroupChartData                               *_dayData;
     
@@ -36,12 +30,6 @@ typedef enum {
     NSMutableDictionary                             *_dicTickAvgLineDatas;
     NSMutableDictionary                             *_dicTickVolStickDatas;
 }
-
-- (void)loadJSONData: (ChartDataType) chartDataType;
-
-- (void)loadKLineData: (ChartDataType) chartDataType;
-
-- (void)loadTickData;
 
 @end
 
@@ -54,7 +42,7 @@ typedef enum {
     [self initAreaChart];
     
     // 延迟操作执行的代码
-    [self loadJSONData:Chart15minData];
+    [self loadCandleStickData: DisplayDailyType];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -74,7 +62,7 @@ typedef enum {
         [self.groupChart setHidden:NO];
         
         if (!_dayData) {
-            [self loadJSONData:Chart15minData];
+            [self loadCandleStickData:DisplayDailyType];
         }else{
             [self.groupChart setGroupChartData:_dayData];
         }
@@ -233,45 +221,87 @@ typedef enum {
     }));
 }
 
-- (void)loadJSONData: (ChartDataType) chartDataType{
+- (void)loadCandleStickData: (DisplayType) chartDataType{
+    if (self.productCode) {
+        [self loadOnlineCandleStickData:chartDataType];
+    }else{
+        [self loadLocalCandleStickData:chartDataType];
+    }
+}
+
+- (void)loadLocalCandleStickData: (DisplayType) chartDataType{
     DO_IN_BACKGROUND(^{
-        [self loadKLineData:chartDataType];
+        // 读取JSON
+        NSString *jsonString = [@"KLineData" findJSONStringWithType:@"txt"];
+        // 解析
+        NSDictionary *dicKLineData = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding]
+                                                                     options:kNilOptions
+                                                                       error:nil];
+        
+        NSArray *arrNativeData = dicKLineData[@"kLine"];
+        
+        arrNativeData = [[arrNativeData reverseObjectEnumerator] allObjects];
+        
+        NSMutableArray *ohlcdDatas = [[NSMutableArray alloc] init];
+        for (NSDictionary *dict in arrNativeData) {
+            if (dict != nil) {
+                CCSOHLCVDData *data = [[CCSOHLCVDData alloc] init];
+                
+                data.open = [[dict objectForKey:@"open"] doubleValue] * AXIS_CALC_PARM;
+                data.high = [[dict objectForKey:@"high"] doubleValue] * AXIS_CALC_PARM;
+                data.low = [[dict objectForKey:@"low"] doubleValue] * AXIS_CALC_PARM;
+                data.close = [[dict objectForKey:@"close"] doubleValue]* AXIS_CALC_PARM;
+                data.vol = [[dict objectForKey:@"volume"] doubleValue];
+                data.date = [dict[@"day"] dateWithFormat:@"yyyy-MM-dd HH:mm:ss" target:@"yyyyMMddHHmmss"];
+                data.current = [[dict objectForKey:@"close"] doubleValue];
+                data.preclose = 0;
+                data.change = 0;
+                [ohlcdDatas addObject:data];
+            }
+        }
+        DO_IN_MAIN_QUEUE(^{
+            [self setDayData:ohlcdDatas targetDateFormat:@"MM-dd HH:ss"];
+        });
     });
 }
 
-- (void)loadKLineData: (ChartDataType) chartDataType{
-    // 读取JSON
-    NSString *jsonString = [@"KLineData" findJSONStringWithType:@"txt"];
-    // 解析
-    NSDictionary *dicKLineData = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding]
-                                                                 options:kNilOptions
-                                                                   error:nil];
+- (void)loadOnlineCandleStickData:(DisplayType) chartDataType{
+    NSString *url = IIF(chartDataType == DisplayDailyType, @"market/getMktEqud.json", @"market/getMktEquw.json");
     
-    NSArray *arrNativeData = dicKLineData[@"kLine"];
+    CCSWMCloudRequest *request = [[CCSWMCloudRequest alloc] initWithUrl:url];
     
-    arrNativeData = [[arrNativeData reverseObjectEnumerator] allObjects];
+    NSMutableDictionary *dicParameters = [[NSMutableDictionary alloc] init];
+    [dicParameters setObject: self.productCode forKey:@"secID"];
+    [dicParameters setObject: @"20160101" forKey:@"beginDate"];
+    [dicParameters setObject:@"1" forKey:@"isOpen"];
+    [request setParameters: dicParameters];
     
-    NSMutableArray *ohlcdDatas = [[NSMutableArray alloc] init];
-    for (NSDictionary *dict in arrNativeData) {
-        if (dict != nil) {
+    [request getWithTag:RequestTagKLineData success:^(AFHTTPRequestSerializer *operation, id responseObject) {
+        // 解析
+        NSArray *candleStickDatas = PARSE_JSON_DATA(responseObject)[@"data"];
+        
+        NSMutableArray *ohlcdDatas = [[NSMutableArray alloc] init];
+        for (NSDictionary *dict in candleStickDatas) {
+            if (!dict) {
+                continue;
+            }
             CCSOHLCVDData *data = [[CCSOHLCVDData alloc] init];
             
-            data.open = [[dict objectForKey:@"open"] doubleValue] * AXIS_CALC_PARM;
-            data.high = [[dict objectForKey:@"high"] doubleValue] * AXIS_CALC_PARM;
-            data.low = [[dict objectForKey:@"low"] doubleValue] * AXIS_CALC_PARM;
-            data.close = [[dict objectForKey:@"close"] doubleValue]* AXIS_CALC_PARM;
-            data.vol = [[dict objectForKey:@"volume"] doubleValue];
-            data.date = [dict[@"day"] dateWithFormat:@"yyyy-MM-dd HH:mm:ss" target:@"yyyyMMddHHmmss"];
-            data.current = [[dict objectForKey:@"close"] doubleValue];
-            data.preclose = 0;
-            data.change = 0;
+            data.open = [[dict objectForKey:@"openPrice"] doubleValue] * AXIS_CALC_PARM;
+            data.high = [[dict objectForKey:@"highestPrice"] doubleValue] * AXIS_CALC_PARM;
+            data.low = [[dict objectForKey:@"lowestPrice"] doubleValue] * AXIS_CALC_PARM;
+            data.close = [[dict objectForKey:@"closePrice"] doubleValue] * AXIS_CALC_PARM;
+            data.vol = [[dict objectForKey:@"turnoverVol"] longValue];
+            data.date = [[dict objectForKey:@"tradeDate"] dateWithFormat:@"yyyy-MM-dd" target:@"yyyyMMddHHmmss"];
+            data.current = [[dict objectForKey:@"closePrice"] doubleValue] * AXIS_CALC_PARM;
+            data.preclose = [[dict objectForKey:@"preClosePrice"] doubleValue] * AXIS_CALC_PARM;
+            data.change = [[dict objectForKey:@"change"] doubleValue] * AXIS_CALC_PARM;
             [ohlcdDatas addObject:data];
         }
-    }
-    
-    DO_IN_MAIN_QUEUE(^{
-        [self setDayData:ohlcdDatas];
-    });
+        
+        [self setDayData:ohlcdDatas targetDateFormat:@"yyyy-MM-dd"];
+    } failure:^(AFHTTPRequestSerializer *operation, id failure) {
+    }];
 }
 
 - (void)loadTickData{
@@ -370,19 +400,11 @@ typedef enum {
 /**
  * 设置日数据
  */
-- (void)setDayData:(NSArray *) ohlcvDatas{
-    _dayData = [[CCSGroupChartData alloc] initWithCCSOHLCVDDatas:ohlcvDatas displayChartType:GroupChartViewTypeVOL sourceDateFormat:@"yyyyMMddHHmmss" targetDateFormat:@"MM-dd HH:mm"];
+- (void)setDayData:(NSArray *) ohlcvDatas targetDateFormat:(NSString *) target{
+    _dayData = [[CCSGroupChartData alloc] initWithCCSOHLCVDDatas:ohlcvDatas displayChartType:GroupChartViewTypeVOL sourceDateFormat:nil targetDateFormat: target];
     
     [self.groupChart setGroupChartData:_dayData];
 }
 
-/**
- * 设置周数据
- */
-- (void)setWeekData:(NSArray *) ohlcvDatas{
-    _dayData = [[CCSGroupChartData alloc] initWithCCSOHLCVDDatas:ohlcvDatas displayChartType:GroupChartViewTypeVOL sourceDateFormat:@"yyyyMMddHHmmss" targetDateFormat:@"MM-dd HH:mm"];
-    
-    [self.groupChart setGroupChartData:_dayData];
-}
 
 @end

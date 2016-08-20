@@ -32,6 +32,8 @@
 #import "CCSSimpleDemoViewController.h"
 #import "CCSDonutChartViewController.h"
 
+#import "CCSStockListViewController.h"
+
 #import "CCSSampleGroupChartDemoViewController.h"
 #import "CCSSampleGroupChartHorizontalViewController.h"
 
@@ -63,7 +65,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
 
-    self.title = @"Cocoa-Charts v0.2.2";
+    self.title = @"Cocoa-Charts v0.21";
     self.navigationController.navigationBarHidden = NO;
     
     // Index path for selected row
@@ -141,7 +143,7 @@
 
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
-            cell.textLabel.text = @"Simple Demo";
+            cell.textLabel.text = @"Stock List";
         }else if(indexPath.row == 1){
             cell.textLabel.text = @"Simple Horizontal Demo";
         }else{
@@ -234,7 +236,7 @@
     if (indexPath.section == 0) {
         NSUInteger row = indexPath.row;
         if (row == 0) {
-            viewController = [[CCSSimpleDemoViewController alloc] init];
+            viewController = [[CCSStockListViewController alloc] init];
         }else if(row == 1){
             viewController = [[CCSSampleGroupChartHorizontalViewController alloc] init];
         }else{

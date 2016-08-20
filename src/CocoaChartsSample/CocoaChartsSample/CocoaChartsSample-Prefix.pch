@@ -17,6 +17,8 @@
 #import "CocoaChartsUtils.h"
 #import "CCSCocoaCharts.h"
 
+#import "CCSWMCloudRequest.h"
+
 #endif
 
 #define MARGIN_TOP ([[[UIDevice currentDevice] systemVersion] floatValue] > 6.9 ? 66:0)

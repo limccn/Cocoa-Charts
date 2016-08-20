@@ -262,6 +262,12 @@
 		F824DEAD1D681F4200C8CDCA /* CCSSlipAreaChart.m in Sources */ = {isa = PBXBuildFile; fileRef = F824DEAC1D681F4200C8CDCA /* CCSSlipAreaChart.m */; };
 		F824DEBB1D684DAE00C8CDCA /* NSDate+Convert.m in Sources */ = {isa = PBXBuildFile; fileRef = F824DEB81D684DAE00C8CDCA /* NSDate+Convert.m */; };
 		F824DEBC1D684DAE00C8CDCA /* NSString+ICSandbox.m in Sources */ = {isa = PBXBuildFile; fileRef = F824DEBA1D684DAE00C8CDCA /* NSString+ICSandbox.m */; };
+		F824DEC21D68543600C8CDCA /* CCSStockListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F824DEBE1D68543600C8CDCA /* CCSStockListViewController.m */; };
+		F824DEC31D68543600C8CDCA /* CCSStockListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F824DEBF1D68543600C8CDCA /* CCSStockListViewController.xib */; };
+		F824DEC41D68543600C8CDCA /* CCSWMCloudRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = F824DEC11D68543600C8CDCA /* CCSWMCloudRequest.m */; };
+		F824DECC1D68548100C8CDCA /* CCSHttpRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = F824DEC71D68548100C8CDCA /* CCSHttpRequest.m */; };
+		F824DECD1D68548100C8CDCA /* CCSHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F824DEC91D68548100C8CDCA /* CCSHTTPSessionManager.m */; };
+		F824DECE1D68548100C8CDCA /* MaskViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F824DECB1D68548100C8CDCA /* MaskViewManager.m */; };
 		F860F8921CDC89C90092CAD9 /* CCSStringUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = F860F8871CDC89C90092CAD9 /* CCSStringUtils.m */; };
 		F860F8931CDC89C90092CAD9 /* CCSTALibUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = F860F8891CDC89C90092CAD9 /* CCSTALibUtils.m */; };
 		F860F8941CDC89C90092CAD9 /* NSArray+CCSTACompute.m in Sources */ = {isa = PBXBuildFile; fileRef = F860F88B1CDC89C90092CAD9 /* NSArray+CCSTACompute.m */; };
@@ -619,6 +625,17 @@
 		F824DEB81D684DAE00C8CDCA /* NSDate+Convert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Convert.m"; sourceTree = "<group>"; };
 		F824DEB91D684DAE00C8CDCA /* NSString+ICSandbox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+ICSandbox.h"; sourceTree = "<group>"; };
 		F824DEBA1D684DAE00C8CDCA /* NSString+ICSandbox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+ICSandbox.m"; sourceTree = "<group>"; };
+		F824DEBD1D68543600C8CDCA /* CCSStockListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSStockListViewController.h; sourceTree = "<group>"; };
+		F824DEBE1D68543600C8CDCA /* CCSStockListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSStockListViewController.m; sourceTree = "<group>"; };
+		F824DEBF1D68543600C8CDCA /* CCSStockListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CCSStockListViewController.xib; sourceTree = "<group>"; };
+		F824DEC01D68543600C8CDCA /* CCSWMCloudRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSWMCloudRequest.h; sourceTree = "<group>"; };
+		F824DEC11D68543600C8CDCA /* CCSWMCloudRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSWMCloudRequest.m; sourceTree = "<group>"; };
+		F824DEC61D68548100C8CDCA /* CCSHttpRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSHttpRequest.h; sourceTree = "<group>"; };
+		F824DEC71D68548100C8CDCA /* CCSHttpRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSHttpRequest.m; sourceTree = "<group>"; };
+		F824DEC81D68548100C8CDCA /* CCSHTTPSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSHTTPSessionManager.h; sourceTree = "<group>"; };
+		F824DEC91D68548100C8CDCA /* CCSHTTPSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSHTTPSessionManager.m; sourceTree = "<group>"; };
+		F824DECA1D68548100C8CDCA /* MaskViewManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MaskViewManager.h; sourceTree = "<group>"; };
+		F824DECB1D68548100C8CDCA /* MaskViewManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MaskViewManager.m; sourceTree = "<group>"; };
 		F860F8861CDC89C90092CAD9 /* CCSStringUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSStringUtils.h; sourceTree = "<group>"; };
 		F860F8871CDC89C90092CAD9 /* CCSStringUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSStringUtils.m; sourceTree = "<group>"; };
 		F860F8881CDC89C90092CAD9 /* CCSTALibUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSTALibUtils.h; sourceTree = "<group>"; };
@@ -656,6 +673,11 @@
 			children = (
 				3BE2858B1CC63A780079AA35 /* CCSGroupChart.h */,
 				3BE2858A1CC63A780079AA35 /* CCSGroupChart.m */,
+				F824DEC01D68543600C8CDCA /* CCSWMCloudRequest.h */,
+				F824DEC11D68543600C8CDCA /* CCSWMCloudRequest.m */,
+				F824DEBD1D68543600C8CDCA /* CCSStockListViewController.h */,
+				F824DEBE1D68543600C8CDCA /* CCSStockListViewController.m */,
+				F824DEBF1D68543600C8CDCA /* CCSStockListViewController.xib */,
 				3B8C020A1CC4CAB8007914C4 /* CCSSampleGroupChartDemoViewController.h */,
 				3B8C020B1CC4CAB8007914C4 /* CCSSampleGroupChartDemoViewController.m */,
 				3B8C020C1CC4CAB8007914C4 /* CCSSampleGroupChartDemoViewController.xib */,
@@ -849,6 +871,7 @@
 				3B961BC61CC783CD00C34980 /* SampleDatas */,
 				3B991A0B1CED9AF400C0555F /* CocoaCharts */,
 				3B8C01DF1CC4CAB8007914C4 /* CocoaChartsSample */,
+				F824DEC51D68548100C8CDCA /* CocoaChartsHttpRequest */,
 				F860F8851CDC89C90092CAD9 /* CocoaChartsUtils */,
 				3BB5DFE218C984F600288894 /* TALib */,
 				3BB5DEFE18C9624800288894 /* Frameworks */,
@@ -1099,6 +1122,20 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		F824DEC51D68548100C8CDCA /* CocoaChartsHttpRequest */ = {
+			isa = PBXGroup;
+			children = (
+				F824DEC61D68548100C8CDCA /* CCSHttpRequest.h */,
+				F824DEC71D68548100C8CDCA /* CCSHttpRequest.m */,
+				F824DEC81D68548100C8CDCA /* CCSHTTPSessionManager.h */,
+				F824DEC91D68548100C8CDCA /* CCSHTTPSessionManager.m */,
+				F824DECA1D68548100C8CDCA /* MaskViewManager.h */,
+				F824DECB1D68548100C8CDCA /* MaskViewManager.m */,
+			);
+			name = CocoaChartsHttpRequest;
+			path = ../CocoaChartsHttpRequest;
+			sourceTree = "<group>";
+		};
 		F860F8851CDC89C90092CAD9 /* CocoaChartsUtils */ = {
 			isa = PBXGroup;
 			children = (
@@ -1184,6 +1221,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F824DEC31D68543600C8CDCA /* CCSStockListViewController.xib in Resources */,
 				3B8C023B1CC4CAB8007914C4 /* CCSChartsSettingViewController.xib in Resources */,
 				3B961BD11CC783CD00C34980 /* KLineData.txt in Resources */,
 				3B961BD31CC783CD00C34980 /* test.plist in Resources */,
@@ -1291,8 +1329,10 @@
 				3BB5E0F718C984F600288894 /* ta_HT_SINE.c in Sources */,
 				3BB5E0EB18C984F600288894 /* ta_CORREL.c in Sources */,
 				3BB5E12218C984F600288894 /* ta_SAREXT.c in Sources */,
+				F824DEC21D68543600C8CDCA /* CCSStockListViewController.m in Sources */,
 				3BB5E0CA18C984F600288894 /* ta_CDLHOMINGPIGEON.c in Sources */,
 				3BB5E0C418C984F600288894 /* ta_CDLHANGINGMAN.c in Sources */,
+				F824DECE1D68548100C8CDCA /* MaskViewManager.m in Sources */,
 				3BB5E0F518C984F600288894 /* ta_HT_DCPHASE.c in Sources */,
 				3BB5E10918C984F600288894 /* ta_MEDPRICE.c in Sources */,
 				3BB5E0E218C984F600288894 /* ta_CDLTAKURI.c in Sources */,
@@ -1395,6 +1435,7 @@
 				3BB5E0B818C984F600288894 /* ta_CDLCONCEALBABYSWALL.c in Sources */,
 				3BB5E0B918C984F600288894 /* ta_CDLCOUNTERATTACK.c in Sources */,
 				3BB5E0AF18C984F600288894 /* ta_CDL3LINESTRIKE.c in Sources */,
+				F824DECD1D68548100C8CDCA /* CCSHTTPSessionManager.m in Sources */,
 				3BB5E0F218C984F600288894 /* ta_EXP.c in Sources */,
 				3B8C02531CC4CAB8007914C4 /* CCSSlipCandleStickChartViewController.m in Sources */,
 				3B8C02421CC4CAB8007914C4 /* CCSMACDChartViewController.m in Sources */,
@@ -1472,6 +1513,7 @@
 				3BB5E12818C984F600288894 /* ta_STOCH.c in Sources */,
 				3BB5E12118C984F600288894 /* ta_SAR.c in Sources */,
 				3BB5E0FD18C984F600288894 /* ta_LINEARREG_INTERCEPT.c in Sources */,
+				F824DEC41D68543600C8CDCA /* CCSWMCloudRequest.m in Sources */,
 				3BB5E0B118C984F600288894 /* ta_CDL3STARSINSOUTH.c in Sources */,
 				3BB5E0AC18C984F600288894 /* ta_CDL2CROWS.c in Sources */,
 				F860F8941CDC89C90092CAD9 /* NSArray+CCSTACompute.m in Sources */,
@@ -1499,6 +1541,7 @@
 				3B991A781CED9AF400C0555F /* CCSTitledLine.m in Sources */,
 				3B991A591CED9AF400C0555F /* CCSBandAreaChart.m in Sources */,
 				3B991A5E1CED9AF400C0555F /* CCSCandleStickChartData.m in Sources */,
+				F824DECC1D68548100C8CDCA /* CCSHttpRequest.m in Sources */,
 				3B991A611CED9AF400C0555F /* CCSDonutChart.m in Sources */,
 				3BB5E0DE18C984F600288894 /* ta_CDLSHORTLINE.c in Sources */,
 			);
