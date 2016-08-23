@@ -330,7 +330,7 @@
                 [cacheManager.realm deleteObjects: @[[quotesCache lastObject]]];
                 [cacheManager.realm addObjects: quoteDatas];
                 
-                RLMResults<QuoteData *> *quotesInDB = [cacheManager selectWithNeedRefresh:YES];
+                RLMResults<QuoteData *> *quotesInDB = [cacheManager selectWithRefresh:YES];
                 
                 NSMutableArray *quoteDatas = [[NSMutableArray alloc] init];
                 for (NSInteger i=quotesInDB.count-1; i>=quotesInDB.count-101; i--) {

@@ -52,7 +52,7 @@
     return 0;
 }
 
-- (RLMResults *)selectWithNeedRefresh:(BOOL) needRefresh{
+- (RLMResults *)selectWithRefresh:(BOOL) refresh{
     if (!self.modelCls || !self.realm) {
         self.allObjects = nil;
         return nil;

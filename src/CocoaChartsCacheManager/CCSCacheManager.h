@@ -35,6 +35,6 @@
 /**
  * 查询数据
  */
-- (RLMResults *)selectWithNeedRefresh:(BOOL) needRefresh;
+- (RLMResults *)selectWithRefresh:(BOOL) refresh;
 
 @end
