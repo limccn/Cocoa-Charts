@@ -21,6 +21,7 @@
     // 返回转换后的字符
     return [dateFormatter stringFromDate:self];
 }
+
 /**
  * 时间是否早于 compareDate
  */

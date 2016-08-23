@@ -14,14 +14,12 @@
 
 #import "CCSAppDelegate.h"
 
+#import "QuoteData.h"
+
 #define AXIS_CALC_PARM  1000
 
-#define MIN_CHART_LEFT_RIGHT_SCALE                  3.0f
-
-#define VIEW_SIZE                                   self.view.bounds.size
-
-/** 精选 Cell */
-static NSString *DetailCellIdentifier             = @"CCSSamplGroupChartDetailTableViewCell";
+#define DAILY_PATH                                  @"daily"
+#define DAILY_INDEX_PATH                            @"daily_index"
 
 @interface CCSSampleGroupChartDemoViewController (){
     CCSGroupChartData                               *_dayData;
@@ -265,14 +263,26 @@ static NSString *DetailCellIdentifier             = @"CCSSamplGroupChartDetailTa
     });
 }
 
+- (NSString *)localCachePath: (DisplayType) chartDataType{
+    return [NSString stringWithFormat: @"%@/%@/%@", [NSString documentPath], DAILY_PATH, self.productCode];
+}
+
 - (void)loadOnlineCandleStickData:(DisplayType) chartDataType{
+    CCSCacheManager *cacheManager = [[CCSCacheManager alloc] initWithPath:[self localCachePath:chartDataType] model:[QuoteData class]];
+    RLMResults<QuoteData *> *quotesCache = cacheManager.allObjects;
+    
     NSString *url = IIF(chartDataType == DisplayDailyType, @"market/getMktEqud.json", @"market/getMktEquw.json");
     
     CCSWMCloudRequest *request = [[CCSWMCloudRequest alloc] initWithUrl:url];
     
     NSMutableDictionary *dicParameters = [[NSMutableDictionary alloc] init];
     [dicParameters setObject: self.productCode forKey:@"secID"];
-    [dicParameters setObject: @"20160101" forKey:@"beginDate"];
+    if ([cacheManager count] > 0) {
+        [dicParameters setObject: [((QuoteData *)quotesCache.lastObject).dateTime convertDateWithFormat: @"yyyyMMdd"] forKey:@"beginDate"];
+    }else{
+        [dicParameters setObject: @"20120101" forKey:@"beginDate"];
+    }
+    
     [dicParameters setObject:@"1" forKey:@"isOpen"];
     [request setParameters: dicParameters];
     
@@ -280,13 +290,13 @@ static NSString *DetailCellIdentifier             = @"CCSSamplGroupChartDetailTa
         // 解析
         NSArray *candleStickDatas = PARSE_JSON_DATA(responseObject)[@"data"];
         
+        NSMutableArray<QuoteData *> *quoteDatas = [[NSMutableArray alloc] init];
         NSMutableArray *ohlcdDatas = [[NSMutableArray alloc] init];
         for (NSDictionary *dict in candleStickDatas) {
             if (!dict) {
                 continue;
             }
             CCSOHLCVDData *data = [[CCSOHLCVDData alloc] init];
-            
             data.open = [[dict objectForKey:@"openPrice"] doubleValue] * AXIS_CALC_PARM;
             data.high = [[dict objectForKey:@"highestPrice"] doubleValue] * AXIS_CALC_PARM;
             data.low = [[dict objectForKey:@"lowestPrice"] doubleValue] * AXIS_CALC_PARM;
@@ -297,12 +307,65 @@ static NSString *DetailCellIdentifier             = @"CCSSamplGroupChartDetailTa
             data.preclose = [[dict objectForKey:@"preClosePrice"] doubleValue] * AXIS_CALC_PARM;
             data.change = [[dict objectForKey:@"change"] doubleValue] * AXIS_CALC_PARM;
             [ohlcdDatas addObject:data];
+            
+            QuoteData *quoteData = [[QuoteData alloc] init];
+            quoteData.openPrice = [[dict objectForKey:@"openPrice"] doubleValue];
+            quoteData.highPrice = [[dict objectForKey:@"highestPrice"] doubleValue];
+            quoteData.lowPrice = [[dict objectForKey:@"lowestPrice"] doubleValue];
+            quoteData.lastPrice = [[dict objectForKey:@"closePrice"] doubleValue];
+            quoteData.volume = [[dict objectForKey:@"turnoverVol"] longValue];
+            quoteData.dateTime = [[dict objectForKey:@"tradeDate"] dateWithFormat:@"yyyy-MM-dd"];
+            quoteData.prevClosePrice = [[dict objectForKey:@"preClosePrice"] doubleValue];
+            quoteData.change = [[dict objectForKey:@"change"] doubleValue];
+            [quoteDatas addObject: quoteData];
         }
-        
-        [self setDayData:ohlcdDatas targetDateFormat:@"yyyy-MM-dd"];
+        // 是否缓存过
+        if ([cacheManager count] == 0) {
+            [self setDayData:ohlcdDatas targetDateFormat:@"yyyy-MM-dd"];
+            [cacheManager.realm transactionWithBlock:^{
+                [cacheManager.realm addObjects:quoteDatas];
+            }];
+        }else{
+            [cacheManager.realm transactionWithBlock:^{
+                [cacheManager.realm deleteObjects: @[[quotesCache lastObject]]];
+                [cacheManager.realm addObjects: quoteDatas];
+                
+                RLMResults<QuoteData *> *quotesInDB = [cacheManager selectWithNeedRefresh:YES];
+                
+                NSMutableArray *quoteDatas = [[NSMutableArray alloc] init];
+                for (NSInteger i=quotesInDB.count-1; i>=quotesInDB.count-101; i--) {
+                    if (i < 0) {
+                        break;
+                    }
+                    [quoteDatas addObject:[quotesInDB objectAtIndex:i]];
+                }
+                [self candleStickDataProces: chartDataType quotes:[[quoteDatas reverseObjectEnumerator] allObjects] quotesInDB: nil];
+            }];
+        }
     } failure:^(AFHTTPRequestSerializer *operation, id failure) {
     }];
 }
+
+- (void)candleStickDataProces: (DisplayType) chartDataType quotes:(NSArray<QuoteData *> *) quotes quotesInDB:(RLMResults<QuoteData *> *) quotesInDB{
+    NSMutableArray *ohlcdDatas = [[NSMutableArray alloc] init];
+    for (QuoteData *quoteData in IIF(quotes, quotes, quotesInDB)) {
+        CCSOHLCVDData *data = [[CCSOHLCVDData alloc] init];
+        
+        data.open = quoteData.openPrice * AXIS_CALC_PARM;
+        data.high = quoteData.highPrice * AXIS_CALC_PARM;
+        data.low = quoteData.lowPrice * AXIS_CALC_PARM;
+        data.close = quoteData.lastPrice * AXIS_CALC_PARM;
+        data.vol = quoteData.volume;
+        data.date = [quoteData.dateTime convertDateWithFormat:@"yyyyMMddHHmmss"];
+        data.current = quoteData.lastPrice * AXIS_CALC_PARM;
+        data.preclose = quoteData.prevClosePrice * AXIS_CALC_PARM;
+        data.change = quoteData.change * AXIS_CALC_PARM;
+        [ohlcdDatas addObject:data];
+    }
+    
+    [self setDayData:ohlcdDatas targetDateFormat:@"yyyy-MM-dd"];
+}
+
 
 - (void)loadTickData{
     DO_IN_BACKGROUND(^{

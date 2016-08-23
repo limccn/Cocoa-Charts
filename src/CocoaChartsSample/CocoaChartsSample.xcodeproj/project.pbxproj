@@ -268,6 +268,8 @@
 		F824DECC1D68548100C8CDCA /* CCSHttpRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = F824DEC71D68548100C8CDCA /* CCSHttpRequest.m */; };
 		F824DECD1D68548100C8CDCA /* CCSHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F824DEC91D68548100C8CDCA /* CCSHTTPSessionManager.m */; };
 		F824DECE1D68548100C8CDCA /* MaskViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F824DECB1D68548100C8CDCA /* MaskViewManager.m */; };
+		F824DED21D68625100C8CDCA /* CCSCacheManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F824DED11D68625100C8CDCA /* CCSCacheManager.m */; };
+		F824DED61D6863F100C8CDCA /* QuoteData.m in Sources */ = {isa = PBXBuildFile; fileRef = F824DED51D6863F100C8CDCA /* QuoteData.m */; };
 		F860F8921CDC89C90092CAD9 /* CCSStringUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = F860F8871CDC89C90092CAD9 /* CCSStringUtils.m */; };
 		F860F8931CDC89C90092CAD9 /* CCSTALibUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = F860F8891CDC89C90092CAD9 /* CCSTALibUtils.m */; };
 		F860F8941CDC89C90092CAD9 /* NSArray+CCSTACompute.m in Sources */ = {isa = PBXBuildFile; fileRef = F860F88B1CDC89C90092CAD9 /* NSArray+CCSTACompute.m */; };
@@ -636,6 +638,10 @@
 		F824DEC91D68548100C8CDCA /* CCSHTTPSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSHTTPSessionManager.m; sourceTree = "<group>"; };
 		F824DECA1D68548100C8CDCA /* MaskViewManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MaskViewManager.h; sourceTree = "<group>"; };
 		F824DECB1D68548100C8CDCA /* MaskViewManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MaskViewManager.m; sourceTree = "<group>"; };
+		F824DED01D68625100C8CDCA /* CCSCacheManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSCacheManager.h; sourceTree = "<group>"; };
+		F824DED11D68625100C8CDCA /* CCSCacheManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSCacheManager.m; sourceTree = "<group>"; };
+		F824DED41D6863F100C8CDCA /* QuoteData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuoteData.h; sourceTree = "<group>"; };
+		F824DED51D6863F100C8CDCA /* QuoteData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuoteData.m; sourceTree = "<group>"; };
 		F860F8861CDC89C90092CAD9 /* CCSStringUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSStringUtils.h; sourceTree = "<group>"; };
 		F860F8871CDC89C90092CAD9 /* CCSStringUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSStringUtils.m; sourceTree = "<group>"; };
 		F860F8881CDC89C90092CAD9 /* CCSTALibUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSTALibUtils.h; sourceTree = "<group>"; };
@@ -706,6 +712,7 @@
 		3B8C01DF1CC4CAB8007914C4 /* CocoaChartsSample */ = {
 			isa = PBXGroup;
 			children = (
+				F824DED31D6863F100C8CDCA /* CacheData */,
 				3B4C69001CCF5C62004FEDB3 /* CCSGroupChartSample */,
 				3B8C01E01CC4CAB8007914C4 /* CCSAppDelegate.h */,
 				3B8C01E11CC4CAB8007914C4 /* CCSAppDelegate.m */,
@@ -872,6 +879,7 @@
 				3B991A0B1CED9AF400C0555F /* CocoaCharts */,
 				3B8C01DF1CC4CAB8007914C4 /* CocoaChartsSample */,
 				F824DEC51D68548100C8CDCA /* CocoaChartsHttpRequest */,
+				F824DECF1D68625100C8CDCA /* CocoaChartsCacheManager */,
 				F860F8851CDC89C90092CAD9 /* CocoaChartsUtils */,
 				3BB5DFE218C984F600288894 /* TALib */,
 				3BB5DEFE18C9624800288894 /* Frameworks */,
@@ -1136,6 +1144,25 @@
 			path = ../CocoaChartsHttpRequest;
 			sourceTree = "<group>";
 		};
+		F824DECF1D68625100C8CDCA /* CocoaChartsCacheManager */ = {
+			isa = PBXGroup;
+			children = (
+				F824DED01D68625100C8CDCA /* CCSCacheManager.h */,
+				F824DED11D68625100C8CDCA /* CCSCacheManager.m */,
+			);
+			name = CocoaChartsCacheManager;
+			path = ../CocoaChartsCacheManager;
+			sourceTree = "<group>";
+		};
+		F824DED31D6863F100C8CDCA /* CacheData */ = {
+			isa = PBXGroup;
+			children = (
+				F824DED41D6863F100C8CDCA /* QuoteData.h */,
+				F824DED51D6863F100C8CDCA /* QuoteData.m */,
+			);
+			path = CacheData;
+			sourceTree = "<group>";
+		};
 		F860F8851CDC89C90092CAD9 /* CocoaChartsUtils */ = {
 			isa = PBXGroup;
 			children = (
@@ -1304,6 +1331,7 @@
 				3B991A661CED9AF400C0555F /* CCSMACDChart.m in Sources */,
 				3B991A721CED9AF400C0555F /* CCSSlipStickChart.m in Sources */,
 				3BB5E12418C984F600288894 /* ta_SINH.c in Sources */,
+				F824DED61D6863F100C8CDCA /* QuoteData.m in Sources */,
 				3BE2858C1CC63A780079AA35 /* CCSGroupChart.m in Sources */,
 				3BB5E11318C984F600288894 /* ta_MOM.c in Sources */,
 				3BB5E11B18C984F600288894 /* ta_PVI.c in Sources */,
@@ -1410,6 +1438,7 @@
 				3B8C02571CC4CAB8007914C4 /* CCSStackedAreaChartViewController.m in Sources */,
 				3BB5E0E718C984F600288894 /* ta_CDLUPSIDEGAP2CROWS.c in Sources */,
 				3B991A6E1CED9AF400C0555F /* CCSPizzaChart.m in Sources */,
+				F824DED21D68625100C8CDCA /* CCSCacheManager.m in Sources */,
 				3BB5E0DD18C984F600288894 /* ta_CDLSHOOTINGSTAR.c in Sources */,
 				3BB5E0E618C984F600288894 /* ta_CDLUNIQUE3RIVER.c in Sources */,
 				3B991A6C1CED9AF400C0555F /* CCSOHLCVDData.m in Sources */,

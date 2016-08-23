@@ -14,10 +14,13 @@
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
 
+#import <Realm/Realm.h>
+
 #import "CocoaChartsUtils.h"
 #import "CCSCocoaCharts.h"
 
 #import "CCSWMCloudRequest.h"
+#import "CCSCacheManager.h"
 
 #endif
 
