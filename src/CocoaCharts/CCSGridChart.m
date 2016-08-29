@@ -99,6 +99,8 @@
     self.axisMarginRight = 3;
     self.axisXPosition = CCSGridChartXAxisPositionBottom;
     self.axisYPosition = CCSGridChartYAxisPositionLeft;
+    self.titlesXPosition = CCSGridChartXTitlesPositionBottom;
+    self.titlesYPosition = CCSGridChartYTitlesPositionRight;
     self.displayLatitudeTitle = YES;
     self.displayLeftLatitudeTitle = YES;
     self.displayRightLatitudeTitle = YES;
@@ -183,24 +185,23 @@
     CGContextStrokePath(context);
 }
 
-
 - (void)drawXAxis:(CGRect)rect {
     if (self.axisXPosition == CCSGridChartXAxisPositionBottom) {
         CGContextRef context = UIGraphicsGetCurrentContext();
         CGContextSetLineWidth(context, 1.0f);
-
-        CGContextMoveToPoint(context, 0.0f, rect.size.height - self.axisMarginBottom);
-        CGContextAddLineToPoint(context, rect.size.width, rect.size.height - self.axisMarginBottom);
-
+        
+        CGContextMoveToPoint(context, self.axisMarginLeft, rect.size.height - self.axisMarginBottom);
+        CGContextAddLineToPoint(context, rect.size.width - self.axisMarginRight, rect.size.height - self.axisMarginBottom);
+        
         CGContextSetStrokeColorWithColor(context, self.axisXColor.CGColor);
         CGContextStrokePath(context);
     } else {
         CGContextRef context = UIGraphicsGetCurrentContext();
         CGContextSetLineWidth(context, 1.0f);
-
-        CGContextMoveToPoint(context, 0.0f, self.axisMarginTop);
-        CGContextAddLineToPoint(context, rect.size.width, self.axisMarginTop);
-
+        
+        CGContextMoveToPoint(context, self.axisMarginLeft, self.axisMarginTop);
+        CGContextAddLineToPoint(context, rect.size.width - self.axisMarginRight, self.axisMarginTop);
+        
         CGContextSetStrokeColorWithColor(context, self.axisXColor.CGColor);
         CGContextStrokePath(context);
     }
@@ -210,17 +211,17 @@
     if (self.axisYPosition == CCSGridChartYAxisPositionLeft) {
         CGContextRef context = UIGraphicsGetCurrentContext();
         CGContextSetLineWidth(context, 1.0f);
-
-        CGContextMoveToPoint(context, self.axisMarginLeft, 0.0f);
+        
+        CGContextMoveToPoint(context, self.axisMarginLeft, self.axisMarginTop);
         CGContextAddLineToPoint(context, self.axisMarginLeft, rect.size.height - self.axisMarginBottom);
-
+        
         CGContextSetStrokeColorWithColor(context, self.axisYColor.CGColor);
         CGContextStrokePath(context);
     }
     else {
         CGContextRef context = UIGraphicsGetCurrentContext();
         CGContextSetLineWidth(context, 1.0f);
-
+        
         if (self.axisXPosition == CCSGridChartXAxisPositionBottom) {
             CGContextMoveToPoint(context, rect.size.width - self.axisMarginRight, 0.0f);
             CGContextAddLineToPoint(context, rect.size.width - self.axisMarginRight, rect.size.height - self.axisMarginBottom);
@@ -228,7 +229,7 @@
             CGContextMoveToPoint(context, rect.size.width - self.axisMarginRight, self.axisMarginTop);
             CGContextAddLineToPoint(context, rect.size.width - self.axisMarginRight, rect.size.height);
         }
-
+        
         CGContextSetStrokeColorWithColor(context, self.axisYColor.CGColor);
         CGContextStrokePath(context);
     }
@@ -261,11 +262,11 @@
         postOffset = (rect.size.height - 2 * self.axisMarginBottom - self.axisMarginTop) * 1.0 / ([self.latitudeTitles count] - 1);
     }
     
-    CCFloat offset = rect.size.height - self.axisMarginBottom - self.axisMarginTop;
+    CCFloat offset = rect.size.height - self.axisMarginBottom;
     
     for (CCUInt i = 0; i <= [self.latitudeTitles count]; i++) {
-        CGContextMoveToPoint(context, 0, offset - i * postOffset);
-        CGContextAddLineToPoint(context, rect.size.width , offset - i * postOffset);
+        CGContextMoveToPoint(context, self.axisMarginLeft, offset - i * postOffset);
+        CGContextAddLineToPoint(context, rect.size.width - self.axisMarginRight, offset - i * postOffset);
     }
     CGContextStrokePath(context);
     //还原线条
@@ -385,11 +386,11 @@
     
     for (CCUInt i = 0; i <= self.longitudeNum ; i++) {
         if (self.axisXPosition == CCSGridChartXAxisPositionBottom) {
-                CGContextMoveToPoint(context, offset + i * postOffset, 0);
-                CGContextAddLineToPoint(context, offset + i * postOffset, rect.size.height - self.axisMarginBottom);
+            CGContextMoveToPoint(context, offset + i * postOffset, self.axisMarginTop);
+            CGContextAddLineToPoint(context, offset + i * postOffset, rect.size.height - self.axisMarginBottom + self.axisMarginTop);
         } else {
-                CGContextMoveToPoint(context, offset + i * postOffset, self.axisMarginTop);
-                CGContextAddLineToPoint(context, offset + i * postOffset, rect.size.height);
+            CGContextMoveToPoint(context, offset + i * postOffset, self.axisMarginTop);
+            CGContextAddLineToPoint(context, offset + i * postOffset, rect.size.height - self.axisMarginBottom + self.axisMarginTop);
         }
     }
     

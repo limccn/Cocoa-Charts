@@ -106,4 +106,34 @@
 @property(assign, nonatomic) BOOL displayMaxLabel;
 @property(assign, nonatomic) BOOL displayMinLabel;
 
+/*!
+ 压力位线颜色
+ */
+@property(strong, nonatomic) UIColor *resistanceLineColor;
+
+/*!
+ 支撑位线颜色
+ */
+@property(strong, nonatomic) UIColor *surportLineColor;
+
+/*!
+ 压力位是否虚线
+ */
+@property(assign, nonatomic) BOOL     resistanceDashLine;
+
+/*!
+ 支撑位是否虚线
+ */
+@property(assign, nonatomic) BOOL     surportDashLine;
+
+/*!
+ 压力位参数
+ */
+@property(strong, nonatomic) NSArray *resistancePeriods;
+
+/*!
+ 支撑位参数
+ */
+@property(strong, nonatomic) NSArray *surportPeriods;
+
 @end

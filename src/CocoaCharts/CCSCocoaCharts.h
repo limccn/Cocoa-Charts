@@ -29,6 +29,9 @@
 #import "CCSPizzaChart.h"
 #import "CCSSpiderWebChart.h"
 #import "CCSMAColoredStickChart.h"
+#import "CCSSlipAreaChart.h"
+#import "CCSBOLLMASlipCandleStickChart.h"
+#import "CCSMACDChart.h"
 
 #import "CCSLineData.h"
 #import "CCSTitledLine.h"
@@ -36,6 +39,7 @@
 #import "CCSTitleValueColor.h"
 #import "CCSTitleValues.h"
 #import "CCSTitleValuesColor.h"
-
-
-
+#import "CCSOHLCVDData.h"
+#import "CCSColoredStickChartData.h"
+#import "CCSMACDData.h"
+#import "CCSCandleStickChartData.h"

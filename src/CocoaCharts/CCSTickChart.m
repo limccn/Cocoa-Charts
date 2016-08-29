@@ -181,7 +181,10 @@
             postOffset = counter * lineLength;
             offset = self.axisMarginLeft + lineLength / 2;
             
-            CCFloat titleLength = [str boundingRectWithSize:CGSizeMake(100, 100) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : self.longitudeFont} context:nil].size.width;
+            UIFont *textFont= self.longitudeFont; //设置字体
+            textFont = [UIFont systemFontOfSize:8.0f];
+            
+            CCFloat titleLength = [str boundingRectWithSize:CGSizeMake(100, 100) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : textFont} context:nil].size.width;
             
             CGRect textRect;
             if (titleIndex > 0) {
@@ -195,7 +198,6 @@
                 textRect= CGRectMake(offset + postOffset , rect.size.height - self.axisMarginBottom, titleLength, self.longitudeFontSize);
             }
             
-            UIFont *textFont= self.longitudeFont; //设置字体
             NSMutableParagraphStyle *textStyle=[[NSMutableParagraphStyle alloc]init];//段落样式
             textStyle.alignment=NSTextAlignmentLeft;
             textStyle.lineBreakMode = NSLineBreakByWordWrapping;

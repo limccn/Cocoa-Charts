@@ -11,15 +11,26 @@
 #import "CCSSettingDetailViewController.h"
 
 #import "CCSGroupChart.h"
-#import "CCSAreaChart.h"
+
+typedef enum {
+    DisplayTickType                               = 101,
+    Display5DaysType                              = 102,
+    DisplayDailyType                              = 104,
+    DisplayweeklyType                             = 105
+} DisplayType;
 
 @interface CCSSampleGroupChartDemoViewController : UIViewController<CCSChartDelegate>
 
 @property (weak, nonatomic) IBOutlet UISegmentedControl      *segTopChartType;
 @property (weak, nonatomic) IBOutlet CCSGroupChart           *groupChart;
-@property (weak, nonatomic) IBOutlet CCSAreaChart            *areachart;
+@property (weak, nonatomic) IBOutlet CCSSlipAreaChart        *areachart;
 
 @property (weak, nonatomic) IBOutlet UILabel                 *lblTime;
+
+/** 商品 code */
+@property (copy, nonatomic) NSString                         *productCode;
+/** 价格保留小数位数 */
+@property (assign, nonatomic) NSUInteger                      scalePrice;
 
 /** macd */
 @property (assign, nonatomic) NSInteger                       macdS;

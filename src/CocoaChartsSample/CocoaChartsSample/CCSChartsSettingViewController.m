@@ -77,14 +77,11 @@ static NSString *ResetCellIdentifier               = @"CCSSettingResetTableViewC
 
 - (void)initNavigationBar{
     UIBarButtonItem *backItem = nil;
-    
     // 添加返回按钮,文字
-    backItem = [[UIBarButtonItem alloc] initWithTitle:@"关闭"
-                                                style:UIBarButtonItemStylePlain
-                                               target:self
-                                               action:@selector(backButtonClick:)];
+    backItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed: @"cancel"]
+                                                style:UIBarButtonItemStylePlain target:self action:@selector(backButtonClick:)];
     
-    [backItem setTintColor:[UIColor whiteColor]];
+    [backItem setTintColor:[UIColor blackColor]];
     [self.navigationItem setLeftBarButtonItem:backItem];
 }
 

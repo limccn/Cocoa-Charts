@@ -21,7 +21,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kaw-c0-lcp" userLabel="Content">
-                    <rect key="frame" x="0.0" y="66" width="600" height="534"/>
+                    <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nJ8-gc-jO1" userLabel="ProductContainer">
                             <rect key="frame" x="0.0" y="0.0" width="600" height="88"/>
@@ -224,11 +224,11 @@
                             </segments>
                         </segmentedControl>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q1g-YH-rqt" customClass="CCSGroupChart">
-                            <rect key="frame" x="0.0" y="132" width="600" height="402"/>
+                            <rect key="frame" x="0.0" y="132" width="600" height="404"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
-                        <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TCY-fJ-e1p" userLabel="TickChart" customClass="CCSAreaChart">
-                            <rect key="frame" x="0.0" y="132" width="600" height="402"/>
+                        <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TCY-fJ-e1p" userLabel="TickChart" customClass="CCSSlipAreaChart">
+                            <rect key="frame" x="0.0" y="132" width="600" height="404"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
                     </subviews>
@@ -255,7 +255,7 @@
                 <constraint firstAttribute="trailing" secondItem="kaw-c0-lcp" secondAttribute="trailing" id="5pU-vz-Ufv"/>
                 <constraint firstItem="kaw-c0-lcp" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="cqF-Ou-Q3X"/>
                 <constraint firstAttribute="bottom" secondItem="kaw-c0-lcp" secondAttribute="bottom" id="g3y-bM-ZN6"/>
-                <constraint firstItem="kaw-c0-lcp" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="66" id="pa2-DT-7wy"/>
+                <constraint firstItem="kaw-c0-lcp" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="64" id="pa2-DT-7wy"/>
             </constraints>
         </view>
     </objects>

@@ -11,13 +11,28 @@
 #endif
 
 #ifdef __OBJC__
-    #import <UIKit/UIKit.h>
-    #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+
+#import <Realm/Realm.h>
+
+#import "CocoaChartsUtils.h"
+#import "CCSCocoaCharts.h"
+
+#import "CCSWMCloudRequest.h"
+#import "CCSCacheManager.h"
+
 #endif
 
 #define MARGIN_TOP ([[[UIDevice currentDevice] systemVersion] floatValue] > 6.9 ? 66:0)
 #define DEVICE_WIDTH ((UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) ? 320:690)
 #define DEVICE_HEIGHT ((UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) ? 100:200)
+
+// IIF
+#if !defined(IIF)
+#define IIF_IMPL(condition,true_,false_) (condition)?true_:false_
+#define IIF(condition,true_,false_) IIF_IMPL(condition,true_,false_)
+#endif
 
 // IIF
 #if !defined(IIF)
@@ -34,3 +49,21 @@
 #define DO_IN_BACKGROUND(action) dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), action)
 // 在子线程中延迟执行
 #define DO_IN_BACKGROUND_AFTER(seconds, action) dispatch_after(dispatch_time(DISPATCH_TIME_NOW, seconds * NSEC_PER_SEC), dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), action)
+
+// JSON字符串转NSObject
+#define PARSE_JSON_STRING(jsonString) [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:kNilOptions error:nil]
+// JSONData转NSObject
+#define PARSE_JSON_DATA(jsonData) [NSJSONSerialization JSONObjectWithData:jsonData options:kNilOptions error:nil]
+
+// NSObject转JSON字符串
+#define PARSE_OBJECT(jsonObject) [[NSString alloc] initWithData:[NSJSONSerialization                dataWithJSONObject:jsonObject options:kNilOptions error:nil] encoding:NSUTF8StringEncoding]
+
+/**
+ * 数据类型转 NSString
+ */
+#define intToNSString(x) [NSString stringWithFormat:@"%d", (x)]
+#define floatToNSString(x) [NSString stringWithFormat:@"%f", (x)]
+#define doubleToNSString(x) [NSString stringWithFormat:@"%f", (x)]
+#define CGFloatToNSString(x) [NSString stringWithFormat:@"%f", (x)]
+#define NSUIntegerToNSString(x) [NSString stringWithFormat:@"%lu", (long)(x)]
+#define NSIntegerToNSString(x) [NSString stringWithFormat:@"%ld", (long)(x)]

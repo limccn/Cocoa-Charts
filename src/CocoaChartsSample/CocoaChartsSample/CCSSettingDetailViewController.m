@@ -9,7 +9,6 @@
 #import "CCSSettingDetailViewController.h"
 
 #import "CCSSampleGroupChartDemoViewController.h"
-#import "NSString+UserDefault.h"
 
 @interface CCSSettingDetailViewController (){
     UIToolbar                                         *_keyboardToolBar;

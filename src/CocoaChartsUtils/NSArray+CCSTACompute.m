@@ -10,14 +10,15 @@
 
 #import "NSArray+CCSTACompute.h"
 
+#import "ta_libc.h"
+
+#import "CCSOHLCVDData.h"
+
 #import "CCSColoredStickChartData.h"
 #import "CCSCandleStickChartData.h"
 #import "CCSLineData.h"
 #import "CCSMACDData.h"
 
-#import "CCSOHLCVDData.h"
-
-#import "ta_libc.h"
 #import "CCSTALibUtils.h"
 #import "CCSStringUtils.h"
 #import "NSString+UserDefault.h"
@@ -36,7 +37,7 @@
  *   Method of Chart Compute By TALib
  ******************************************************************************/
 
-- (CCSTitledLine *)computeMAData:(CCInt)period{
+- (CCSTitledLine *)computeMAData:(CCInt)period sourceDateFormat:(NSString *) sourceDateFormat targetDateFormat:(NSString *)targetDateFormat{
 //    NSMutableArray *arrCls = [[NSMutableArray alloc] init];
     double *inCls = malloc(sizeof(double) * self.count);
     
@@ -67,7 +68,7 @@
         
         for (CCInt index = 0; index < self.count; index++) {
             CCSOHLCVDData *item = [self objectAtIndex:self.count - 1 - index];
-            [maData addObject:[[CCSLineData alloc] initWithValue:[[arr objectAtIndex:index] doubleValue] date:[item.date dateWithFormat:SOURCE_DATE_FORMAT target:TO_DATE_FORMAT]]];
+            [maData addObject:[[CCSLineData alloc] initWithValue:[[arr objectAtIndex:index] doubleValue] date:[item.date dateWithFormat: sourceDateFormat?sourceDateFormat:SOURCE_DATE_FORMAT target:targetDateFormat?targetDateFormat:TO_DATE_FORMAT]]];
         }
     }
     
@@ -88,12 +89,13 @@
         maline.color = [UIColor magentaColor];
     }
     
+    maline.title = [NSString stringWithFormat:@"MA%ld", period];
     maline.data = maData;
     
     return maline;
 }
 
-- (CCSTitledLine *)computeVOLMAData:(CCInt)period{
+- (CCSTitledLine *)computeVOLMAData:(CCInt)period sourceDateFormat:(NSString *) sourceDateFormat targetDateFormat:(NSString *)targetDateFormat{
 //    NSMutableArray *arrCls = [[NSMutableArray alloc] init];
     double *inCls = malloc(sizeof(double) * self.count);
     
@@ -124,7 +126,7 @@
         
         for (CCInt index = 0; index < self.count; index++) {
             CCSOHLCVDData *item = [self objectAtIndex:self.count - 1 - index];
-            [maData addObject:[[CCSLineData alloc] initWithValue:[[arr objectAtIndex:index] doubleValue] date:[item.date dateWithFormat:SOURCE_DATE_FORMAT target:TO_DATE_FORMAT]]];
+            [maData addObject:[[CCSLineData alloc] initWithValue:[[arr objectAtIndex:index] doubleValue] date:[item.date dateWithFormat:sourceDateFormat?sourceDateFormat:SOURCE_DATE_FORMAT target:targetDateFormat?targetDateFormat:TO_DATE_FORMAT]]];
         }
     }
     
@@ -152,7 +154,7 @@
     return maline;
 }
 
-- (NSMutableArray *)computeMACDData: (CCInt)optInFastPeriod optInSlowPeriod:(CCInt)optInSlowPeriod optInSignalPeriod:(CCInt)optInSignalPeriod{
+- (NSMutableArray *)computeMACDData: (CCInt)optInFastPeriod optInSlowPeriod:(CCInt)optInSlowPeriod optInSignalPeriod:(CCInt)optInSignalPeriod sourceDateFormat:(NSString *) sourceDateFormat targetDateFormat:(NSString *)targetDateFormat{
 //    NSMutableArray *arrCls = [[NSMutableArray alloc] init];
     double *inCls = malloc(sizeof(double) * self.count);
     for (NSUInteger index = 0; index < self.count; index++) {
@@ -193,7 +195,7 @@
             [MACDData addObject:[[CCSMACDData alloc] initWithDea:[(NSString *) [arrMACDSignal objectAtIndex:index] doubleValue]
                                                             diff:[(NSString *) [arrMACD objectAtIndex:index] doubleValue]
                                                             macd:[(NSString *) [arrMACDHist objectAtIndex:index] doubleValue] * 2
-                                                            date:[item.date dateWithFormat:SOURCE_DATE_FORMAT target:TO_DATE_FORMAT]]];
+                                                            date:[item.date dateWithFormat:sourceDateFormat?sourceDateFormat:SOURCE_DATE_FORMAT target:targetDateFormat?targetDateFormat:TO_DATE_FORMAT]]];
         }
     }
     
@@ -205,7 +207,7 @@
     return MACDData;
 }
 
-- (NSMutableArray *)computeKDJData:(CCInt)optInFastK_Period optInSlowK_Period:(CCInt)optInSlowK_Period optInSlowD_Period:(CCInt)optInSlowD_Period{
+- (NSMutableArray *)computeKDJData:(CCInt)optInFastK_Period optInSlowK_Period:(CCInt)optInSlowK_Period optInSlowD_Period:(CCInt)optInSlowD_Period sourceDateFormat:(NSString *) sourceDateFormat targetDateFormat:(NSString *)targetDateFormat{
 //    NSMutableArray *arrHigval = [[NSMutableArray alloc] init];
     double *inHigval = malloc(sizeof(double) * self.count);
     for (NSUInteger index = 0; index < self.count; index++) {
@@ -265,11 +267,11 @@
         
         for (CCInt index = 0; index < self.count; index++) {
             CCSOHLCVDData *item = [self objectAtIndex:self.count - 1 - index];
-            [slowKLineData addObject:[[CCSLineData alloc] initWithValue:[[arrSlowK objectAtIndex:index] doubleValue] date:[item.date dateWithFormat:SOURCE_DATE_FORMAT target:TO_DATE_FORMAT]]];
-            [slowDLineData addObject:[[CCSLineData alloc] initWithValue:[[arrSlowD objectAtIndex:index] doubleValue] date:[item.date dateWithFormat:SOURCE_DATE_FORMAT target:TO_DATE_FORMAT]]];
+            [slowKLineData addObject:[[CCSLineData alloc] initWithValue:[[arrSlowK objectAtIndex:index] doubleValue] date:[item.date dateWithFormat:sourceDateFormat?sourceDateFormat:SOURCE_DATE_FORMAT target:targetDateFormat?targetDateFormat:TO_DATE_FORMAT]]];
+            [slowDLineData addObject:[[CCSLineData alloc] initWithValue:[[arrSlowD objectAtIndex:index] doubleValue] date:[item.date dateWithFormat:sourceDateFormat?sourceDateFormat:SOURCE_DATE_FORMAT target:targetDateFormat?targetDateFormat:TO_DATE_FORMAT]]];
             
             double slowKLine3k2d = 3 * [[arrSlowK objectAtIndex:index] doubleValue] - 2 * [[arrSlowD objectAtIndex:index] doubleValue];
-            [slow3K2DLineData addObject:[[CCSLineData alloc] initWithValue:slowKLine3k2d date:[item.date dateWithFormat:SOURCE_DATE_FORMAT target:TO_DATE_FORMAT]]];
+            [slow3K2DLineData addObject:[[CCSLineData alloc] initWithValue:slowKLine3k2d date:[item.date dateWithFormat:sourceDateFormat?sourceDateFormat:SOURCE_DATE_FORMAT target:targetDateFormat?targetDateFormat:TO_DATE_FORMAT]]];
         }
     }
     
@@ -302,7 +304,7 @@
     return kdjData;
 }
 
-- (CCSTitledLine *)computeRSIData:(CCInt)period{
+- (CCSTitledLine *)computeRSIData:(CCInt)period sourceDateFormat:(NSString *) sourceDateFormat targetDateFormat:(NSString *)targetDateFormat{
 //    NSMutableArray *arrCls = [[NSMutableArray alloc] init];
     double *inCls = malloc(sizeof(double) * self.count);
     for (NSUInteger index = 0; index < self.count; index++) {
@@ -331,7 +333,7 @@
         
         for (CCInt index = 0; index < self.count; index++) {
             CCSOHLCVDData *item = [self objectAtIndex:self.count - 1 - index];
-            [rsiLineData addObject:[[CCSLineData alloc] initWithValue:[[arr objectAtIndex:index] doubleValue] date:[item.date dateWithFormat:SOURCE_DATE_FORMAT target:TO_DATE_FORMAT]]];
+            [rsiLineData addObject:[[CCSLineData alloc] initWithValue:[[arr objectAtIndex:index] doubleValue] date:[item.date dateWithFormat:sourceDateFormat?sourceDateFormat:SOURCE_DATE_FORMAT target:targetDateFormat?targetDateFormat:TO_DATE_FORMAT]]];
         }
     }
     
@@ -354,7 +356,7 @@
     return rsiLine;
 }
 
-- (NSMutableArray *)computeWRData:(CCInt)period{
+- (NSMutableArray *)computeWRData:(CCInt)period sourceDateFormat:(NSString *) sourceDateFormat targetDateFormat:(NSString *)targetDateFormat{
 //    NSMutableArray *arrHigval = [[NSMutableArray alloc] init];
     double *inHigval = malloc(sizeof(double) * self.count);
     for (NSUInteger index = 0; index < self.count; index++) {
@@ -405,10 +407,9 @@
         
         for (CCInt index = 0; index < self.count; index++) {
             CCSOHLCVDData *item = [self objectAtIndex:self.count - 1 - index];
-            [wrLineData addObject:[[CCSLineData alloc] initWithValue:([[arrWR objectAtIndex:index] doubleValue]) date:[item.date dateWithFormat:SOURCE_DATE_FORMAT target:TO_DATE_FORMAT]]];
+            [wrLineData addObject:[[CCSLineData alloc] initWithValue:([[arrWR objectAtIndex:index] doubleValue]) date:[item.date dateWithFormat:sourceDateFormat?sourceDateFormat:SOURCE_DATE_FORMAT target:targetDateFormat?targetDateFormat:TO_DATE_FORMAT]]];
         }
     }
-    
     
     freeAndSetNULL(inHigval);
     freeAndSetNULL(inLowval);
@@ -426,7 +427,7 @@
     return wrData;
 }
 
-- (NSMutableArray *)computeCCIData:(CCInt)period{
+- (NSMutableArray *)computeCCIData:(CCInt)period sourceDateFormat:(NSString *) sourceDateFormat targetDateFormat:(NSString *)targetDateFormat{
 //    NSMutableArray *arrHigval = [[NSMutableArray alloc] init];
     double *inHigval = malloc(sizeof(double) * self.count);
     for (NSUInteger index = 0; index < self.count; index++) {
@@ -477,7 +478,7 @@
         
         for (CCInt index = 0; index < self.count; index++) {
             CCSOHLCVDData *item = [self objectAtIndex:self.count - 1 - index];
-            [cciLineData addObject:[[CCSLineData alloc] initWithValue:[[arrCCI objectAtIndex:index] doubleValue] date:[item.date dateWithFormat:SOURCE_DATE_FORMAT target:TO_DATE_FORMAT]]];
+            [cciLineData addObject:[[CCSLineData alloc] initWithValue:[[arrCCI objectAtIndex:index] doubleValue] date:[item.date dateWithFormat:sourceDateFormat?sourceDateFormat:SOURCE_DATE_FORMAT target:targetDateFormat?targetDateFormat:TO_DATE_FORMAT]]];
         }
     }
     
@@ -497,7 +498,7 @@
     return wrData;
 }
 
-- (NSMutableArray *)computeBOLLData:(CCInt)optInTimePeriod optInNbDevUp:(CCInt)optInNbDevUp optInNbDevDn:(CCInt)optInNbDevDn{
+- (NSMutableArray *)computeBOLLData:(CCInt)optInTimePeriod optInNbDevUp:(CCInt)optInNbDevUp optInNbDevDn:(CCInt)optInNbDevDn sourceDateFormat: (NSString *) sourceDateFormat targetDateFormat:(NSString *)targetDateFormat{
 //    NSMutableArray *arrCls = [[NSMutableArray alloc] init];
     double *inCls = malloc(sizeof(double) * self.count);
     for (NSUInteger index = 0; index < self.count; index++) {
@@ -537,9 +538,9 @@
         
         for (CCInt index = 0; index < self.count; index++) {
             CCSOHLCVDData *item = [self objectAtIndex:self.count - 1 - index];
-            [bollLinedataUPPER addObject:[[CCSLineData alloc] initWithValue:[[arrUPPER objectAtIndex:index] doubleValue] date:[item.date dateWithFormat:SOURCE_DATE_FORMAT target:TO_DATE_FORMAT]]];
-            [bollLinedataLOWER addObject:[[CCSLineData alloc] initWithValue:[[arrLOWER objectAtIndex:index] doubleValue] date:[item.date dateWithFormat:SOURCE_DATE_FORMAT target:TO_DATE_FORMAT]]];
-            [bollLinedataBOLL addObject:[[CCSLineData alloc] initWithValue:[[arrBOLL objectAtIndex:index] doubleValue] date:[item.date dateWithFormat:SOURCE_DATE_FORMAT target:TO_DATE_FORMAT]]];
+            [bollLinedataUPPER addObject:[[CCSLineData alloc] initWithValue:[[arrUPPER objectAtIndex:index] doubleValue] date:[item.date dateWithFormat:sourceDateFormat?sourceDateFormat:SOURCE_DATE_FORMAT target:targetDateFormat?targetDateFormat:TO_DATE_FORMAT]]];
+            [bollLinedataLOWER addObject:[[CCSLineData alloc] initWithValue:[[arrLOWER objectAtIndex:index] doubleValue] date:[item.date dateWithFormat:sourceDateFormat?sourceDateFormat:SOURCE_DATE_FORMAT target:targetDateFormat?targetDateFormat:TO_DATE_FORMAT]]];
+            [bollLinedataBOLL addObject:[[CCSLineData alloc] initWithValue:[[arrBOLL objectAtIndex:index] doubleValue] date:[item.date dateWithFormat:sourceDateFormat?sourceDateFormat:SOURCE_DATE_FORMAT target:targetDateFormat?targetDateFormat:TO_DATE_FORMAT]]];
         }
     }
     
@@ -572,7 +573,21 @@
     return bollBanddata;
 }
 
-- (NSArray *)convertCandleStickData{
+/**
+ * 计算压力位
+ */
+- (NSMutableArray *)computeResistanceData:(CCInt)period sourceDateFormat:(NSString *) sourceDateFormat targetDateFormat:(NSString *)targetDateFormat{
+    return nil;
+}
+
+/**
+ * 计算支撑位
+ */
+- (NSMutableArray *)computeSurportData:(CCInt)period sourceDateFormat:(NSString *) sourceDateFormat targetDateFormat:(NSString *)targetDateFormat{
+    return nil;
+}
+
+- (NSArray *)convertCandleStickData:(NSString *) sourceDateFormat targetDateFormat:(NSString *)targetDateFormat{
     NSMutableArray *stickDatas = [[NSMutableArray alloc] initWithCapacity:[self count]];
     
     for (CCInt i = [self count] - 1; i >= 0; i--) {
@@ -587,7 +602,7 @@
         stickData.low = item.low;
         stickData.close = item.close;
         stickData.change = 0;
-        stickData.date = [item.date dateWithFormat:SOURCE_DATE_FORMAT target:TO_DATE_FORMAT];
+        stickData.date = [item.date dateWithFormat: sourceDateFormat?sourceDateFormat:SOURCE_DATE_FORMAT target: targetDateFormat?targetDateFormat:TO_DATE_FORMAT];
         // 增加数据
         [stickDatas addObject:stickData];
     }
@@ -595,7 +610,7 @@
     return stickDatas;
 }
 
-- (NSArray *)convertCandleStickLinesData:(CCInt)ma1 ma2:(CCInt)ma2 ma3:(CCInt)ma3{
+- (NSArray *)convertCandleStickLinesData:(CCInt)ma1 ma2:(CCInt)ma2 ma3:(CCInt)ma3 sourceDateFormat: (NSString *) sourceDateFormat targetDateFormat:(NSString *)targetDateFormat{
     NSString *strMA1;
     NSString *strMA2;
     NSString *strMA3;
@@ -625,9 +640,9 @@
     }
     
     NSMutableArray *maLines = [[NSMutableArray alloc] init];
-    [maLines addObject: [self computeMAData: strMA1==nil?ma1:[strMA1 integerValue]]];
-    [maLines addObject: [self computeMAData: strMA2==nil?ma2:[strMA2 integerValue]]];
-    [maLines addObject: [self computeMAData: strMA3==nil?ma3:[strMA3 integerValue]]];
+    [maLines addObject: [self computeMAData: strMA1==nil?ma1:[strMA1 integerValue] sourceDateFormat:sourceDateFormat targetDateFormat:targetDateFormat]];
+    [maLines addObject: [self computeMAData: strMA2==nil?ma2:[strMA2 integerValue] sourceDateFormat:sourceDateFormat targetDateFormat:targetDateFormat]];
+    [maLines addObject: [self computeMAData: strMA3==nil?ma3:[strMA3 integerValue] sourceDateFormat:sourceDateFormat targetDateFormat:targetDateFormat]];
     
     [maLines enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         [maLines[idx] setColor:LINE_COLORS[idx]];
@@ -636,7 +651,7 @@
     return maLines;
 }
 
-- (NSArray *)convertCandleStickBollingerBandData:(CCInt) bollN{
+- (NSArray *)convertCandleStickBollingerBandData:(CCInt) bollN sourceDateFormat: (NSString *) sourceDateFormat targetDateFormat:(NSString *)targetDateFormat{
     NSString *strBOLLN;
     if (bollN < 0) {
         strBOLLN = [BOLL_N getUserDefaultString];
@@ -648,10 +663,10 @@
         [BOLL_N setUserDefaultWithString:[NSString stringWithFormat:@"%ld", (long)bollN]];
     }
     
-    return [self computeBOLLData:strBOLLN==nil?bollN:[strBOLLN integerValue] optInNbDevUp:2 optInNbDevDn:2];
+    return [self computeBOLLData:strBOLLN==nil?bollN:[strBOLLN integerValue] optInNbDevUp:2 optInNbDevDn:2 sourceDateFormat:sourceDateFormat targetDateFormat:targetDateFormat];
 }
 
-- (NSArray *)convertStickData{
+- (NSArray *)convertStickData:(NSString *) sourceDateFormat targetDateFormat:(NSString *)targetDateFormat{
     NSMutableArray *stickDatas = [[NSMutableArray alloc] initWithCapacity:[self count]];
     
     for (CCInt i = [self count] - 1; i >= 0; i--) {
@@ -660,17 +675,17 @@
 //        stickData.high = [item.vol doubleValue];
         stickData.high = item.vol;
         stickData.low = 0;
-        stickData.date = [item.date dateWithFormat:SOURCE_DATE_FORMAT target:TO_DATE_FORMAT];
+        stickData.date = [item.date dateWithFormat:sourceDateFormat?sourceDateFormat:SOURCE_DATE_FORMAT target:targetDateFormat?targetDateFormat:TO_DATE_FORMAT];
         
         if (item.close > item.open) {
             stickData.fillColor = VOL_STICK_COLORS[0];
-            stickData.borderColor = [UIColor clearColor];
+            stickData.borderColor = VOL_STICK_COLORS[0];
         } else if (item.close < item.open) {
             stickData.fillColor = VOL_STICK_COLORS[1];
-            stickData.borderColor = [UIColor clearColor];
+            stickData.borderColor = VOL_STICK_COLORS[1];
         } else {
             stickData.fillColor = [UIColor lightGrayColor];
-            stickData.borderColor = [UIColor clearColor];
+            stickData.borderColor = [UIColor lightGrayColor];
         }
         //增加数据
         [stickDatas addObject:stickData];
@@ -679,7 +694,7 @@
     return stickDatas;
 }
 
-- (NSArray *)convertStickMAData:(CCInt)ma1 ma2:(CCInt)ma2 ma3:(CCInt)ma3{
+- (NSArray *)convertStickMAData:(CCInt)ma1 ma2:(CCInt)ma2 ma3:(CCInt)ma3 sourceDateFormat:(NSString *) sourceDateFormat targetDateFormat:(NSString *)targetDateFormat{
     NSString *strMA1;
     NSString *strMA2;
     NSString *strMA3;
@@ -707,9 +722,9 @@
     }
     
     NSMutableArray *maLines = [[NSMutableArray alloc] init];
-    [maLines addObject: [self computeVOLMAData:strMA1==nil?ma1:[strMA1 integerValue]]];
-    [maLines addObject: [self computeVOLMAData:strMA2==nil?ma2:[strMA2 integerValue]]];
-    [maLines addObject: [self computeVOLMAData:strMA3==nil?ma3:[strMA3 integerValue]]];
+    [maLines addObject: [self computeVOLMAData:strMA1==nil?ma1:[strMA1 integerValue] sourceDateFormat:sourceDateFormat targetDateFormat:targetDateFormat]];
+    [maLines addObject: [self computeVOLMAData:strMA2==nil?ma2:[strMA2 integerValue] sourceDateFormat:sourceDateFormat targetDateFormat:targetDateFormat]];
+    [maLines addObject: [self computeVOLMAData:strMA3==nil?ma3:[strMA3 integerValue] sourceDateFormat:sourceDateFormat targetDateFormat:targetDateFormat]];
     
     [maLines enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         [maLines[idx] setColor:LINE_COLORS[idx]];
@@ -718,7 +733,7 @@
     return maLines;
 }
 
-- (NSArray *)convertMacdStickData:(CCInt)macdS l:(CCInt)macdL m:(CCInt)macdM{
+- (NSArray *)convertMacdStickData:(CCInt)macdS l:(CCInt)macdL m:(CCInt)macdM sourceDateFormat:(NSString *) sourceDateFormat targetDateFormat:(NSString *)targetDateFormat{
     NSString *strMACDL;
     NSString *strMACDM;
     NSString *strMACDS;
@@ -747,10 +762,10 @@
         [MACD_S setUserDefaultWithString:[NSString stringWithFormat:@"%ld", (long)macdS]];
     }
     
-    return [self computeMACDData:strMACDL==nil?macdL:[strMACDL integerValue] optInSlowPeriod:strMACDM==nil?macdM:[strMACDM integerValue] optInSignalPeriod:strMACDS==nil?macdS:[strMACDS integerValue]];
+    return [self computeMACDData:strMACDL==nil?macdL:[strMACDL integerValue] optInSlowPeriod:strMACDM==nil?macdM:[strMACDM integerValue] optInSignalPeriod:strMACDS==nil?macdS:[strMACDS integerValue] sourceDateFormat:sourceDateFormat targetDateFormat:targetDateFormat];
 }
 
-- (NSArray *)convertKDJLinesData:(CCInt)kdjN{
+- (NSArray *)convertKDJLinesData:(CCInt)kdjN sourceDateFormat:(NSString *) sourceDateFormat targetDateFormat:(NSString *)targetDateFormat{
     NSString *strKDJN;
     if (kdjN < 0) {
         strKDJN = [KDJ_N getUserDefaultString];
@@ -762,10 +777,10 @@
         [KDJ_N setUserDefaultWithString:[NSString stringWithFormat:@"%ld", (long)kdjN]];
     }
     
-    return [self computeKDJData:strKDJN==nil?kdjN:[strKDJN integerValue] optInSlowK_Period:3 optInSlowD_Period:3];
+    return [self computeKDJData:strKDJN==nil?kdjN:[strKDJN integerValue] optInSlowK_Period:3 optInSlowD_Period:3 sourceDateFormat:sourceDateFormat targetDateFormat:targetDateFormat];
 }
 
-- (NSArray *)convertRSILinesData:(CCInt) n1 n2:(CCInt) n2{
+- (NSArray *)convertRSILinesData:(CCInt) n1 n2:(CCInt) n2 sourceDateFormat:(NSString *) sourceDateFormat targetDateFormat:(NSString *)targetDateFormat{
     NSString *strRSIN1;
     NSString *strRSIN2;
     
@@ -786,9 +801,9 @@
     }
     
     NSMutableArray *linesData = [[NSMutableArray alloc] init];
-    [linesData addObject:[self computeRSIData: strRSIN1==nil?n1:[strRSIN1 integerValue]]];
-    [linesData addObject:[self computeRSIData: strRSIN2==nil?n2:[strRSIN2 integerValue]]];
-    [linesData addObject:[self computeRSIData:24]];
+    [linesData addObject:[self computeRSIData: strRSIN1==nil?n1:[strRSIN1 integerValue] sourceDateFormat:sourceDateFormat targetDateFormat:targetDateFormat]];
+    [linesData addObject:[self computeRSIData: strRSIN2==nil?n2:[strRSIN2 integerValue] sourceDateFormat:sourceDateFormat targetDateFormat:targetDateFormat]];
+    [linesData addObject:[self computeRSIData:24 sourceDateFormat:targetDateFormat targetDateFormat:sourceDateFormat]];
     
     [linesData enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         [linesData[idx] setColor:LINE_COLORS[idx]];
@@ -797,7 +812,7 @@
     return linesData;
 }
 
-- (NSArray *)convertWRLinesData:(CCInt) wrN{
+- (NSArray *)convertWRLinesData:(CCInt) wrN sourceDateFormat:(NSString *) sourceDateFormat targetDateFormat:(NSString *)targetDateFormat{
     NSString *strWRN;
     
     if (wrN<0) {
@@ -810,10 +825,10 @@
         [WR_N setUserDefaultWithString:[NSString stringWithFormat:@"%ld", (long)wrN]];
     }
     
-    return [self computeWRData:strWRN==nil?wrN:[strWRN integerValue]];
+    return [self computeWRData:strWRN==nil?wrN:[strWRN integerValue] sourceDateFormat:sourceDateFormat targetDateFormat:targetDateFormat];
 }
 
-- (NSArray *)convertCCILinesData:(CCInt) cciN{
+- (NSArray *)convertCCILinesData:(CCInt) cciN sourceDateFormat:(NSString *) sourceDateFormat targetDateFormat:(NSString *)targetDateFormat{
     NSString *strCCIN;
     
     if (cciN<0) {
@@ -825,10 +840,10 @@
     }else{
         [CCI_N setUserDefaultWithString:[NSString stringWithFormat:@"%ld", (long)cciN]];
     }
-    return [self computeCCIData:strCCIN==nil?cciN:[strCCIN integerValue]];
+    return [self computeCCIData:strCCIN==nil?cciN:[strCCIN integerValue] sourceDateFormat:sourceDateFormat targetDateFormat:targetDateFormat];
 }
 
-- (NSArray *)convertBOLLLinesData:(CCInt) bollN{
+- (NSArray *)convertBOLLLinesData:(CCInt) bollN sourceDateFormat:(NSString *) sourceDateFormat targetDateFormat:(NSString *)targetDateFormat{
     NSString *strBOLLN;
     
     if (bollN<0) {
@@ -841,7 +856,7 @@
         [BOLL_N setUserDefaultWithString:[NSString stringWithFormat:@"%ld", (long)bollN]];
     }
     
-    return [self computeBOLLData:strBOLLN==nil?bollN:[strBOLLN integerValue] optInNbDevUp:2 optInNbDevDn:2];
+    return [self computeBOLLData:strBOLLN==nil?bollN:[strBOLLN integerValue] optInNbDevUp:2 optInNbDevDn:2 sourceDateFormat:sourceDateFormat targetDateFormat:targetDateFormat];
 }
 
 @end

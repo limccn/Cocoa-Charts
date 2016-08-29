@@ -95,7 +95,6 @@
     }
 }
 
-
 - (void)drawLinesData:(CGRect)rect {
     //起始点
     CCFloat lineLength;

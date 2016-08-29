@@ -338,7 +338,7 @@
         _isLongPress = NO;
         _isMoved = NO;
         _waitForLongPress = YES;
-        [self performSelector:@selector(changeLongPressState:) withObject:nil afterDelay:1.0f];
+        [self performSelector:@selector(changeLongPressState:) withObject:nil afterDelay:0.7f];
         
     } else if ([allTouches count] == 2) {
         self.displayCrossXOnTouch = NO;
