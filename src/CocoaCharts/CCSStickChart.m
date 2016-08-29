@@ -221,43 +221,187 @@
     self.longitudeTitles = TitleX;
 }
 
+
 - (void)initAxisY {
     if (self.autoCalcLatitudeTitle == NO) {
         return;
     }
+    
     //计算取值范围
     if ([self autoCalcRange]) {
         [self calcValueRange];
     }
-
+    
     if (self.maxValue == 0. && self.minValue == 0.) {
-        self.latitudeTitles = nil;
+        self.latitudeTitlesLeft = nil;
+        self.latitudeTitlesRight = nil;
+        self.latitudeTitlesLeftColor = nil;
+        self.latitudeTitlesRightColor = nil;
         return;
     }
+    
+    if (self.leftAxisYFormattorType == CCSGridChartDecimalFormattorPercent ||
+        self.leftAxisYFormattorType == CCSGridChartDecimalFormattorPercent1 ||
+        self.leftAxisYFormattorType == CCSGridChartDecimalFormattorPercent2
+        )
+    {
+        self.latitudeTitlesLeft = [self computeTitleYPercent:YES];
+    }else{
+        self.latitudeTitlesLeft = [self computeTitleYNormal:YES];
+    }
+    
+    if (self.rightAxisYFormattorType == CCSGridChartDecimalFormattorPercent ||
+        self.rightAxisYFormattorType == CCSGridChartDecimalFormattorPercent1 ||
+        self.rightAxisYFormattorType == CCSGridChartDecimalFormattorPercent2
+        )
+    {
+        self.latitudeTitlesRight =  [self computeTitleYPercent:NO];
+    }else{
+        self.latitudeTitlesRight =  [self computeTitleYNormal:NO];
+    }
 
+
+    if (self.axisYTitlesColored && self.leftAxisYTitlesColored){
+        self.latitudeTitlesLeftColor =  [self computeTitleYColorNormal];
+    }else{
+        self.latitudeTitlesLeftColor =  [self computeTitleYColorNone];
+    }
+    
+    if (self.axisYTitlesColored && self.rightAxisYTitlesColored){
+        self.latitudeTitlesRightColor =  [self computeTitleYColorNormal];
+    }else{
+        self.latitudeTitlesRightColor =  [self computeTitleYColorNone];
+    }
+    
+}
+
+- (NSMutableArray *) computeTitleYNormal:(BOOL)isLeft {
     NSMutableArray *TitleY = [[NSMutableArray alloc] init];
     CCFloat average = (CCUInt) ((self.maxValue - self.minValue) / self.latitudeNum);
     //处理刻度
     for (CCUInt i = 0; i < self.latitudeNum; i++) {
         CCUInt degree =  self.minValue + i * average;
-        NSString *value = [self formatAxisYDegree:degree];
+        NSString *value;
+        if (isLeft) {
+            value = [self formatAxisYDegreeLeft:degree];
+        }else{
+            value = [self formatAxisYDegreeRight:degree];
+        }
+
         [TitleY addObject:value];
     }
     CCUInt degree =  self.maxValue;
-    NSString *value = [self formatAxisYDegree:degree];
+    NSString *value;
+    if (isLeft) {
+        value = [self formatAxisYDegreeLeft:degree];
+    }else{
+        value = [self formatAxisYDegreeRight:degree];
+    }
     [TitleY addObject:value];
+    
+    return TitleY;
+}
 
-    self.latitudeTitles = TitleY;
+- (NSMutableArray *) computeTitleYPercent:(BOOL)isLeft {
+    if (self.axisYTitleMidValue - 0 == 0) {
+//        NSLog(@"axisYTitleMidValue is ZERO, Use normal value");
+        return [self computeTitleYNormal:isLeft];
+    }
+    NSMutableArray *TitleY = [[NSMutableArray alloc] init];
+    CCFloat average = (CCUInt) ((self.maxValue - self.minValue) / self.latitudeNum);
+    //处理刻度
+    for (CCUInt i = 0; i < self.latitudeNum; i++) {
+        CCUInt degree =  self.minValue + i * average;
+        CCFloat percent= (degree - self.axisYTitleMidValue)/self.axisYTitleMidValue;
+        NSString *value;
+        if (isLeft) {
+            value = [self formatAxisYDegreeLeftPercent:percent];
+        }else{
+            value = [self formatAxisYDegreeRightPercent:percent];
+        }
+
+        [TitleY addObject:value];
+    }
+    CCUInt degree =  self.maxValue;
+    CCFloat percent= (degree - self.axisYTitleMidValue)/self.axisYTitleMidValue;
+    NSString *value;
+    if (isLeft) {
+        value = [self formatAxisYDegreeLeftPercent:percent];
+    }else{
+        value = [self formatAxisYDegreeRightPercent:percent];
+    }
+    [TitleY addObject:value];
+    return TitleY;
+}
+
+- (NSMutableArray *) computeTitleYColorNone {
+    NSMutableArray *TitleYColor = [[NSMutableArray alloc] init];
+    for (CCUInt i = 0; i < self.latitudeNum; i++) {
+        [TitleYColor addObject:self.latitudeFontColor];
+    }
+    [TitleYColor addObject:self.latitudeFontColor];
+    return TitleYColor;
+}
+
+- (NSMutableArray *) computeTitleYColorNormal {
+    if (self.axisYTitleMidValue - 0 == 0) {
+//        NSLog(@"axisYTitleMidValue is ZERO, Use normal value");
+        return [self computeTitleYColorNone];
+    }
+    NSMutableArray *TitleYColor = [[NSMutableArray alloc] init];
+    CCFloat average = (CCUInt) ((self.maxValue - self.minValue) / self.latitudeNum);
+    //处理刻度
+    for (CCUInt i = 0; i < self.latitudeNum; i++) {
+        CCUInt degree =  self.minValue + i * average;
+        if (degree > self.axisYTitleMidValue) {
+            [TitleYColor addObject:self.latitudeFontGreaterThanColor];
+        }else if(degree < self.axisYTitleMidValue){
+            [TitleYColor addObject:self.latitudeFontLessThanColor];
+        }else{
+            [TitleYColor addObject:self.latitudeFontEqualsColor];
+        }
+    }
+    
+    CCUInt degree =  self.maxValue;
+    if (degree > self.axisYTitleMidValue) {
+        [TitleYColor addObject:self.latitudeFontGreaterThanColor];
+    }else if(degree < self.axisYTitleMidValue){
+        [TitleYColor addObject:self.latitudeFontLessThanColor];
+    }else{
+        [TitleYColor addObject:self.latitudeFontEqualsColor];
+    }
+    [TitleYColor addObject:self.latitudeFontColor];
+    return TitleYColor;
 }
 
 -(NSString*) formatAxisXDegree:(CCFloat)value {
     return @"";
 }
 
--(NSString*) formatAxisYDegree:(CCFloat)value {
+//-(NSString*) formatAxisYDegree:(CCFloat)value {
+//    //数据
+//    CCFloat displayValue = floor(value) / self.axisCalc;
+//    return [super formatAxisYDegree:displayValue];
+//}
+
+-(NSString*) formatAxisYDegreeLeft:(CCFloat)value {
     //数据
     CCFloat displayValue = floor(value) / self.axisCalc;
-    return [super formatAxisYDegree:displayValue];
+    return [super formatAxisYDegreeLeft:displayValue];
+}
+
+-(NSString*) formatAxisYDegreeRight:(CCFloat)value {
+    //数据
+    CCFloat displayValue = floor(value) / self.axisCalc;
+    return [super formatAxisYDegreeRight:displayValue];
+}
+
+-(NSString*) formatAxisYDegreeLeftPercent:(CCFloat)value {
+    return [super formatAxisYDegreeLeft:value];
+}
+
+-(NSString*) formatAxisYDegreeRightPercent:(CCFloat)value {
+    return [super formatAxisYDegreeRight:value];
 }
 
 -(void) drawData:(CGRect)rect{

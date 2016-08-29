@@ -22,7 +22,11 @@
 
 @implementation CCSGridChart
 
-@synthesize latitudeTitles = _latitudeTitles;
+//@synthesize latitudeTitles = _latitudeTitles;
+@synthesize latitudeTitlesLeft = _latitudeTitlesLeft;
+@synthesize latitudeTitlesLeftColor = _latitudeTitlesLeftColor;
+@synthesize latitudeTitlesRight = _latitudeTitlesRight;
+@synthesize latitudeTitlesRightColor = _latitudeTitlesRightColor;
 @synthesize longitudeTitles = _longitudeTitles;
 @synthesize axisXColor = _axisXColor;
 @synthesize axisYColor = _axisYColor;
@@ -66,8 +70,21 @@
 @synthesize crossLinesFontColor = _crossLinesFontColor;
 @synthesize noneDisplayValues = _noneDisplayValues;
 @synthesize chartDelegate = _chartDelegate;
-@synthesize axisYFormattorType = _axisYFormattorType;
-@synthesize axisYFormattor = _axisYFormattor;
+//@synthesize axisYFormattorType = _axisYFormattorType;
+//@synthesize axisYFormattor = _axisYFormattor;
+
+@synthesize leftAxisYFormattorType = _leftAxisYFormattorType;
+@synthesize leftAxisYTitlesFormattor = _leftAxisYTitlesFormattor;
+@synthesize rightAxisYFormattorType = _rightAxisYFormattorType;
+@synthesize rightAxisYTitlesFormattor = _rightAxisYTitlesFormattor;
+@synthesize axisYTitleMidValue = _axisYTitleMidValue;
+@synthesize axisYTitlesColored = _axisYTitlesColored;
+@synthesize leftAxisYTitlesColored = _leftAxisYTitlesColored;
+@synthesize rightAxisYTitlesColored = _rightAxisYTitlesColored;
+@synthesize latitudeTitlesColor = _latitudeTitlesColor;
+@synthesize latitudeFontGreaterThanColor = _latitudeFontGreaterThanColor;
+@synthesize latitudeFontLessThanColor = _latitudeFontLessThanColor;
+@synthesize latitudeFontEqualsColor = _latitudeFontEqualsColor;
 
 
 - (void)initProperty {
@@ -116,11 +133,27 @@
     self.displayYDegreeOnTouch = YES;
     self.autoCalcLatitudeTitle = YES;
     self.autoCalcLongitudeTitle = YES;
-    self.axisYFormattor = @"#,##0";
-    self.axisYFormattorType = CCSGridChartDecimalFormattorNormal;
+//    self.axisYFormattor = @"#,##0";
+//    self.axisYFormattorType = CCSGridChartDecimalFormattorNormal;
+    self.leftAxisYFormattorType =CCSGridChartDecimalFormattorNormal;
+    self.leftAxisYTitlesFormattor = @"#,##0";
+    self.rightAxisYFormattorType =CCSGridChartDecimalFormattorPercent2;
+    self.rightAxisYTitlesFormattor = @"#,##0";
+    self.axisYTitlesColored = YES;
+    self.leftAxisYTitlesColored = YES;
+    self.rightAxisYTitlesColored = YES;
+    self.axisYTitleMidValue = 0.f;
+    self.latitudeFontGreaterThanColor = [UIColor redColor];
+    self.latitudeFontLessThanColor = [UIColor greenColor];
+    self.latitudeFontEqualsColor = [UIColor lightGrayColor];
 
     //初期化X轴
-    self.latitudeTitles = nil;
+//    self.latitudeTitles = nil;
+    self.latitudeTitlesLeft = nil;
+    self.latitudeTitlesLeftColor = nil;
+    self.latitudeTitlesRight = nil;
+    self.latitudeTitlesRightColor = nil;
+    
     //初期化X轴
     self.longitudeTitles = nil;
     //设置可以多点触控
@@ -245,7 +278,7 @@
         return;
     }
     
-    if ([self.latitudeTitles count] <= 0){
+    if ([self.latitudeTitlesLeft count] <= 0){
         return ;
     }
     //设置线条为点线
@@ -256,15 +289,15 @@
     
     CCFloat postOffset;
     if (self.axisXPosition == CCSGridChartXAxisPositionBottom) {
-        postOffset = (rect.size.height - self.axisMarginBottom - 2 * self.axisMarginTop) * 1.0 / ([self.latitudeTitles count] - 1);
+        postOffset = (rect.size.height - self.axisMarginBottom - 2 * self.axisMarginTop) * 1.0 / ([self.latitudeTitlesLeft count] - 1);
     }
     else {
-        postOffset = (rect.size.height - 2 * self.axisMarginBottom - self.axisMarginTop) * 1.0 / ([self.latitudeTitles count] - 1);
+        postOffset = (rect.size.height - 2 * self.axisMarginBottom - self.axisMarginTop) * 1.0 / ([self.latitudeTitlesLeft count] - 1);
     }
     
     CCFloat offset = rect.size.height - self.axisMarginBottom;
     
-    for (CCUInt i = 0; i <= [self.latitudeTitles count]; i++) {
+    for (CCUInt i = 0; i <= [self.latitudeTitlesLeft count]; i++) {
         CGContextMoveToPoint(context, self.axisMarginLeft, offset - i * postOffset);
         CGContextAddLineToPoint(context, rect.size.width - self.axisMarginRight, offset - i * postOffset);
     }
@@ -287,51 +320,87 @@
         return;
     }
     
-    if ([self.latitudeTitles count] <= 0) {
+    if ([self.latitudeTitlesLeft count] <= 0) {
+        return;
+    }
+    
+    if ([self.latitudeTitlesRight count] <= 0) {
         return;
     }
     
     CCFloat postOffset;
     if (self.axisXPosition == CCSGridChartXAxisPositionBottom) {
-        postOffset = (rect.size.height - self.axisMarginBottom - 2 * self.axisMarginTop) * 1.0 / ([self.latitudeTitles count] - 1);
+        postOffset = (rect.size.height - self.axisMarginBottom - 2 * self.axisMarginTop) * 1.0 / ([self.latitudeTitlesLeft count] - 1);
     } else {
-        postOffset = (rect.size.height - 2 * self.axisMarginBottom - self.axisMarginTop) * 1.0 / ([self.latitudeTitles count] - 1);
+        postOffset = (rect.size.height - 2 * self.axisMarginBottom - self.axisMarginTop) * 1.0 / ([self.latitudeTitlesLeft count] - 1);
     }
     
     CCFloat offset = rect.size.height - self.axisMarginBottom - self.axisMarginTop;
     
-    for (CCUInt i = 0; i < [self.latitudeTitles count]; i++) {
+    for (CCUInt i = 0; i < [self.latitudeTitlesLeft count]; i++) {
         // 左侧
-        // 绘制线条
-        NSString *valueStr = (NSString *) [self.latitudeTitles objectAtIndex:i];
+
         UIFont *textFont= self.latitudeFont; //设置字体
         NSMutableParagraphStyle *textStyle=[[NSMutableParagraphStyle alloc]init];//段落样式
         textStyle.lineBreakMode = NSLineBreakByWordWrapping;
         
-        NSDictionary *attrs = @{NSFontAttributeName:textFont,
-                                NSParagraphStyleAttributeName:textStyle,
-                                NSForegroundColorAttributeName:self.latitudeFontColor};
-        CGSize textSize = [valueStr boundingRectWithSize:CGSizeMake(100, 100)
+        // 绘制线条
+        NSString *valueStr=@"";
+        UIColor *textColor = self.latitudeFontColor;
+        NSDictionary *textAttrs;
+        CGSize textSize;
+
+        
+        valueStr = (NSString *) [self.latitudeTitlesLeft objectAtIndex:i];
+        if (self.axisYTitlesColored
+            && self.leftAxisYTitlesColored
+            &&  self.latitudeTitlesLeftColor !=nil
+            && [self.latitudeTitlesLeftColor count] > i) {
+            
+            textColor = [self.latitudeTitlesRightColor objectAtIndex:i];
+        }
+        textAttrs = @{NSFontAttributeName:textFont,
+                      NSParagraphStyleAttributeName:textStyle,
+                      NSForegroundColorAttributeName:textColor};
+        
+        textSize = [valueStr boundingRectWithSize:CGSizeMake(100, 100)
                                                  options:NSStringDrawingUsesLineFragmentOrigin
-                                              attributes:attrs
+                                              attributes:textAttrs
                                                  context:nil].size;
         
         if(self.displayLeftLatitudeTitle){
             textStyle.alignment=NSTextAlignmentLeft;
+                    
             //调整Y轴坐标位置
             if (i == 0) {
                 CGRect textRect= CGRectMake(self.axisMarginLeft, offset - i * postOffset - textSize.height - 1, textSize.width, textSize.height);
                 //绘制字体
-                [valueStr drawInRect:textRect withAttributes:attrs];
-            } else if (i == [self.latitudeTitles count] - 1) {
+                [valueStr drawInRect:textRect withAttributes:textAttrs];
+            } else if (i == [self.latitudeTitlesLeft count] - 1) {
                 CGRect textRect= CGRectMake(self.axisMarginLeft, offset - i * postOffset, textSize.width, textSize.height);
                 //绘制字体
-                [valueStr drawInRect:textRect withAttributes:attrs];
+                [valueStr drawInRect:textRect withAttributes:textAttrs];
             } else {
                 CGRect textRect= CGRectMake(self.axisMarginLeft, offset - i * postOffset - textSize.height - 1 ,textSize.width, textSize.height);
-                [valueStr drawInRect:textRect withAttributes:attrs];
+                [valueStr drawInRect:textRect withAttributes:textAttrs];
             }
         }
+        
+        valueStr = (NSString *) [self.latitudeTitlesRight objectAtIndex:i];
+        if (self.axisYTitlesColored
+            && self.rightAxisYTitlesColored
+            &&  self.latitudeTitlesRightColor !=nil
+            && [self.latitudeTitlesRightColor count] > i) {
+            textColor = [self.latitudeTitlesRightColor objectAtIndex:i];
+        }
+        
+        textAttrs = @{NSFontAttributeName:textFont,
+                      NSParagraphStyleAttributeName:textStyle,
+                      NSForegroundColorAttributeName:textColor};
+        textSize = [valueStr boundingRectWithSize:CGSizeMake(100, 100)
+                                          options:NSStringDrawingUsesLineFragmentOrigin
+                                       attributes:textAttrs
+                                          context:nil].size;
         
         if(self.displayRightLatitudeTitle){
             textStyle.alignment=NSTextAlignmentRight;
@@ -340,15 +409,15 @@
             if (i == 0) {
                 CGRect textRect= CGRectMake(rect.size.width - textSize.width - self.axisMarginRight, offset - i * postOffset - textSize.height - 1, textSize.width, textSize.height);
                 //绘制字体
-                [valueStr drawInRect:textRect withAttributes:attrs];
-            } else if (i == [self.latitudeTitles count] - 1) {
+                [valueStr drawInRect:textRect withAttributes:textAttrs];
+            } else if (i == [self.latitudeTitlesRight count] - 1) {
                 CGRect textRect= CGRectMake(rect.size.width - textSize.width - self.axisMarginRight, offset - i * postOffset, textSize.width, textSize.height);
                 //绘制字体
-                [valueStr drawInRect:textRect withAttributes:attrs];
+                [valueStr drawInRect:textRect withAttributes:textAttrs];
             } else {
                 CGRect textRect= CGRectMake(rect.size.width - textSize.width - self.axisMarginRight, offset - i * postOffset - textSize.height - 1, textSize.width, textSize.height);
                 //绘制字体//
-                [valueStr drawInRect:textRect withAttributes:attrs];
+                [valueStr drawInRect:textRect withAttributes:textAttrs];
             }
         }
     }
@@ -760,73 +829,132 @@ CCFloat _minDistance = 8;
     _singleTouchPoint = point;
 }
 
-- (NSString *)formatAxisYDegree:(CCFloat)value
+//- (NSString *)formatAxisYDegree:(CCFloat)value
+//{
+//    return [self formatDegree:value withType:self.axisYFormattorType def:self.axisYFormattor];
+//}
+
+- (NSString *)formatAxisYDegreeLeft:(CCFloat)value
+{
+    if (self.leftAxisYFormattorType == CCSGridChartDecimalFormattorPercent ||
+        self.leftAxisYFormattorType == CCSGridChartDecimalFormattorPercent1 ||
+        self.leftAxisYFormattorType == CCSGridChartDecimalFormattorPercent2
+        ){
+        if (self.axisYTitleMidValue - 0 == 0) {
+            return @"";
+        }
+    }
+    return [self formatDegree:value withType:self.leftAxisYFormattorType def:self.leftAxisYTitlesFormattor];
+}
+
+- (NSString *)formatAxisYDegreeRight:(CCFloat)value
+{
+    if (self.rightAxisYFormattorType == CCSGridChartDecimalFormattorPercent ||
+        self.rightAxisYFormattorType == CCSGridChartDecimalFormattorPercent1 ||
+        self.rightAxisYFormattorType == CCSGridChartDecimalFormattorPercent2
+        ){
+        if (self.axisYTitleMidValue - 0 == 0) {
+            return @"";
+        }
+    }
+    return [self formatDegree:value withType:self.rightAxisYFormattorType def:self.rightAxisYTitlesFormattor];
+}
+
+- (NSString *)formatDegree:(CCFloat)value withType:(CCSGridChartDecimalFormattorType) type def:(NSString *)formattor
 {
     //处理成千分数形式
     NSNumberFormatter *decimalformatter = [[NSNumberFormatter alloc] init];
-        
-    if (self.axisYFormattorType == CCSGridChartDecimalFormattorNormal){
+    
+    if (type == CCSGridChartDecimalFormattorNormal){
         decimalformatter.positiveFormat = @"#,##0;";
+        decimalformatter.negativeFormat = @"-#,##0;";
         return [decimalformatter stringFromNumber:[NSNumber numberWithDouble:value]];
-    }else if(self.axisYFormattorType == CCSGridChartDecimalFormattorDecimal1){
+    }else if(type == CCSGridChartDecimalFormattorDecimal1){
         decimalformatter.positiveFormat = @"#,##0.0;";
+        decimalformatter.negativeFormat = @"-#,##0.0;";
         return [decimalformatter stringFromNumber:[NSNumber numberWithDouble:value]];
-    }else if(self.axisYFormattorType == CCSGridChartDecimalFormattorDecimal2){
+    }else if(type == CCSGridChartDecimalFormattorDecimal2){
         decimalformatter.positiveFormat = @"#,##0.00;";
+        decimalformatter.negativeFormat = @"-#,##0.00;";
         return [decimalformatter stringFromNumber:[NSNumber numberWithDouble:value]];
-    }else if(self.axisYFormattorType == CCSGridChartDecimalFormattorDecimal3){
+    }else if(type == CCSGridChartDecimalFormattorDecimal3){
         decimalformatter.positiveFormat = @"#,##0.000;";
+        decimalformatter.negativeFormat = @"-#,##0.000;";
         return [decimalformatter stringFromNumber:[NSNumber numberWithDouble:value]];
-    }else if(self.axisYFormattorType == CCSGridChartDecimalFormattorKMBT){
+    }else if(type == CCSGridChartDecimalFormattorKMBT){
         if(value < 1000){
             decimalformatter.positiveFormat = @"#,##0;";
+            decimalformatter.negativeFormat = @"-#,##0;";
             return [decimalformatter stringFromNumber:[NSNumber numberWithDouble:value]];
         }else if(value < 1000000){
             decimalformatter.positiveFormat = @"#,##0.00;";
+            decimalformatter.negativeFormat = @"-#,##0.00;";
             return [NSString stringWithFormat:@"%@K",[decimalformatter stringFromNumber:[NSNumber numberWithDouble:value/1000000]]];
         }else if(value < 1000000000){
             decimalformatter.positiveFormat = @"#,##0.00;";
+            decimalformatter.negativeFormat = @"-#,##0.00;";
             return [NSString stringWithFormat:@"%@M",[decimalformatter stringFromNumber:[NSNumber numberWithDouble:value/1000000000]]];
         }else if(value < 1000000000000){
             decimalformatter.positiveFormat = @"#,##0.00;";
+            decimalformatter.negativeFormat = @"-#,##0.00;";
             return [NSString stringWithFormat:@"%@B",[decimalformatter stringFromNumber:[NSNumber numberWithDouble:value/1000000000000]]];
         }else {
             decimalformatter.positiveFormat = @"#,##0.00;";
+            decimalformatter.negativeFormat = @"-#,##0.00;";
             return [NSString stringWithFormat:@"%@T",[decimalformatter stringFromNumber:[NSNumber numberWithDouble:value/1000000000000000]]];
         }
-
-    }else if(self.axisYFormattorType == CCSGridChartDecimalFormattorManOkuTyo){
+        
+    }else if(type == CCSGridChartDecimalFormattorManOkuTyo){
         if(value < 10000){
             decimalformatter.positiveFormat = @"#,##0;";
+            decimalformatter.negativeFormat = @"-#,##0;";
             return [decimalformatter stringFromNumber:[NSNumber numberWithDouble:value]];
         }else if(value < 100000000){
             decimalformatter.positiveFormat = @"#,##0.00;";
+            decimalformatter.negativeFormat = @"-#,##0.00;";
             return [NSString stringWithFormat:@"%@万",[decimalformatter stringFromNumber:[NSNumber numberWithDouble:value/100000000]]];
         }else if(value < 1000000000000){
             decimalformatter.positiveFormat = @"#,##0.00;";
+            decimalformatter.negativeFormat = @"-#,##0.00;";
             return [NSString stringWithFormat:@"%@億",[decimalformatter stringFromNumber:[NSNumber numberWithDouble:value/1000000000000]]];
         }else {
             decimalformatter.positiveFormat = @"#,##0.00;";
+            decimalformatter.negativeFormat = @"-#,##0.00;";
             return [NSString stringWithFormat:@"%@兆",[decimalformatter stringFromNumber:[NSNumber numberWithDouble:value/10000000000000000]]];
         }
         
-    }else if(self.axisYFormattorType == CCSGridChartDecimalFormattorWangYiZhao){
+    }else if(type == CCSGridChartDecimalFormattorWangYiZhao){
         if(value < 10000){
             decimalformatter.positiveFormat = @"#,##0;";
+            decimalformatter.negativeFormat = @"-#,##0;";
             return [decimalformatter stringFromNumber:[NSNumber numberWithDouble:value]];
         }else if(value < 100000000){
             decimalformatter.positiveFormat = @"#,##0.00;";
+            decimalformatter.negativeFormat = @"-#,##0.00;";
             return [NSString stringWithFormat:@"%@万",[decimalformatter stringFromNumber:[NSNumber numberWithDouble:value/100000000]]];
         }else if(value < 1000000000000){
             decimalformatter.positiveFormat = @"#,##0.00;";
+            decimalformatter.negativeFormat = @"-#,##0.00;";
             return [NSString stringWithFormat:@"%@亿",[decimalformatter stringFromNumber:[NSNumber numberWithDouble:value/1000000000000]]];
         }else {
             decimalformatter.positiveFormat = @"#,##0.00;";
+            decimalformatter.negativeFormat = @"-#,##0.00;";
             return [NSString stringWithFormat:@"%@兆",[decimalformatter stringFromNumber:[NSNumber numberWithDouble:value/10000000000000000]]];
         }
-        
+    }else if(type == CCSGridChartDecimalFormattorPercent){
+        decimalformatter.positiveFormat = @"#,##0;";
+        decimalformatter.negativeFormat = @"-#,##0;";
+        return [NSString stringWithFormat:@"%@%%",[decimalformatter stringFromNumber:[NSNumber numberWithDouble:value]]];
+    }else if(type == CCSGridChartDecimalFormattorPercent1){
+        decimalformatter.positiveFormat = @"#,##0.0;";
+        decimalformatter.negativeFormat = @"-#,##0.0;";
+        return [NSString stringWithFormat:@"%@%%",[decimalformatter stringFromNumber:[NSNumber numberWithDouble:value]]];
+    }else if(type == CCSGridChartDecimalFormattorPercent2){
+        decimalformatter.positiveFormat = @"#,##0.00;";
+        decimalformatter.negativeFormat = @"-#,##0.00;";
+        return [NSString stringWithFormat:@"%@%%",[decimalformatter stringFromNumber:[NSNumber numberWithDouble:value]]];
     }else{
-        decimalformatter.positiveFormat = self.axisYFormattor;
+        decimalformatter.positiveFormat = formattor;
         return [decimalformatter stringFromNumber:[NSNumber numberWithDouble:value]];
     }
 }

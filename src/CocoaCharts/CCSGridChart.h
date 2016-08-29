@@ -60,6 +60,9 @@ typedef enum {
     CCSGridChartDecimalFormattorKMBT,                       //Axis Y title formattor ##0, ##0K, ##0M, ##0B, ##0T
     CCSGridChartDecimalFormattorManOkuTyo,                  //Axis Y title formattor #,##0、#,##0万、#,##0億、#,##0兆
     CCSGridChartDecimalFormattorWangYiZhao,                 //Axis Y title formattor #,##0, #,##0万, #,##0亿, #,##0兆
+    CCSGridChartDecimalFormattorPercent,                    //Axis Y title formattor 80%
+    CCSGridChartDecimalFormattorPercent1,                   //Axis Y title formattor 80.1%
+    CCSGridChartDecimalFormattorPercent2,                   //Axis Y title formattor 80.22%
     CCSGridChartDecimalFormattorCustom,                     //Axis Y title formattor custom
 } CCSGridChartDecimalFormattorType;
 
@@ -81,6 +84,7 @@ typedef enum {
     CCSGridChartYTitlesPositionRight,              //Axis Y right
 } CCSGridChartYTitlesPosition;
 
+
 /*!
  CCSGridChart
  
@@ -93,7 +97,11 @@ typedef enum {
  CCSGridChart是所有网格图表的基础类对象，它实现了基本的网格图表功能，这些功能将被它的继承类使用
  */
 @interface CCSGridChart : CCSBaseChartView {
-    NSMutableArray *_latitudeTitles;
+//    NSMutableArray *_latitudeTitles;
+    NSMutableArray *_latitudeTitlesLeft;
+    NSMutableArray *_latitudeTitlesLeftColor;
+    NSMutableArray *_latitudeTitlesRight;
+    NSMutableArray *_latitudeTitlesRightColor;
     NSMutableArray *_longitudeTitles;
     UIColor *_axisXColor;
     UIColor *_axisYColor;
@@ -118,8 +126,19 @@ typedef enum {
     CCUInt _crossLineFontSize;
     CCSGridChartXAxisPosition _axisXPosition;
     CCSGridChartYAxisPosition _axisYPosition;
-    CCSGridChartDecimalFormattorType _axisYFormattorType;
-    NSString *_axisYFormattor;
+//    CCSGridChartDecimalFormattorType _axisYFormattorType;
+//    NSString *_axisYFormattor;
+    CCSGridChartDecimalFormattorType _leftAxisYFormattorType;
+    NSString *_leftAxisYFormattor;
+    CCSGridChartDecimalFormattorType _rightAxisYFormattorType;
+    NSString *_rightAxisYFormattor;
+    CCFloat _axisYTitleMidValue;
+    BOOL _axisYTitlesColored;
+    BOOL _leftAxisYTitlesColored;
+    BOOL _rightAxisYTitlesColored;
+    UIColor *_latitudeFontGreaterThanColor;
+    UIColor *_latitudeFontLessThanColor;
+    UIColor *_latitudeFontEqualsColor;
     BOOL _displayLatitudeTitle;
     BOOL _displayLeftLatitudeTitle;
     BOOL _displayRightLatitudeTitle;
@@ -148,7 +167,12 @@ typedef enum {
  X軸の表示用タイトル配列
  X轴标题数组
  */
-@property(strong, nonatomic) NSMutableArray *latitudeTitles;
+//@property(strong, nonatomic) NSMutableArray *latitudeTitles;
+
+@property(strong, nonatomic) NSMutableArray *latitudeTitlesLeft;
+@property(strong, nonatomic) NSMutableArray *latitudeTitlesLeftColor;
+@property(strong, nonatomic) NSMutableArray *latitudeTitlesRight;
+@property(strong, nonatomic) NSMutableArray *latitudeTitlesRightColor;
 
 /*!
  Titles for display of Y axis
@@ -312,8 +336,22 @@ typedef enum {
  */
 @property(assign, nonatomic) CCSGridChartYTitlesPosition titlesYPosition;
 
-@property(assign, nonatomic) CCSGridChartDecimalFormattorType axisYFormattorType;
-@property(copy, nonatomic) NSString *axisYFormattor;
+//@property(assign, nonatomic) CCSGridChartDecimalFormattorType axisYFormattorType;
+//@property(copy, nonatomic) NSString *axisYFormattor;
+
+@property(assign, nonatomic)  CCSGridChartDecimalFormattorType leftAxisYFormattorType;
+@property(copy, nonatomic)  NSString *leftAxisYTitlesFormattor;
+@property(assign, nonatomic)  CCSGridChartDecimalFormattorType rightAxisYFormattorType;
+@property(copy, nonatomic)  NSString *rightAxisYTitlesFormattor;
+@property(assign, nonatomic)  CCFloat axisYTitleMidValue;
+@property(assign, nonatomic)  BOOL axisYTitlesColored;
+@property(assign, nonatomic)  BOOL leftAxisYTitlesColored;
+@property(assign, nonatomic)  BOOL rightAxisYTitlesColored;
+@property(strong, nonatomic) NSMutableArray *latitudeTitlesColor;
+@property(strong, nonatomic) UIColor *latitudeFontGreaterThanColor;
+@property(strong, nonatomic) UIColor *latitudeFontLessThanColor;
+@property(strong, nonatomic) UIColor *latitudeFontEqualsColor;
+
 
 /*!
  Should display the degrees in X axis？
@@ -602,8 +640,11 @@ typedef enum {
  */
 - (BOOL) isNoneDisplayValue:(CCFloat)value;
 
-- (NSString *)formatAxisYDegree:(CCFloat)value;
+//- (NSString *)formatAxisYDegree:(CCFloat)value;
+- (NSString *)formatAxisYDegreeLeft:(CCFloat)value;
+- (NSString *)formatAxisYDegreeRight:(CCFloat)value;
 
 - (NSString *)formatAxisXDegree:(CCFloat)value;
+
 
 @end

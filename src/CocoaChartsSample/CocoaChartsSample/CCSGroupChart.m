@@ -806,7 +806,9 @@
     candleStickChart.bollingerBandStyle = CCSBollingerBandStyleNone;
     candleStickChart.axisCalc = self.axisCalcParam;
     candleStickChart.latitudeNum = 3;
-    candleStickChart.axisYFormattorType = CCSGridChartDecimalFormattorDecimal2;
+    candleStickChart.leftAxisYFormattorType = CCSGridChartDecimalFormattorDecimal2;
+    candleStickChart.rightAxisYFormattorType = CCSGridChartDecimalFormattorDecimal2;
+    
     // 缩小到一定程度变线
     candleStickChart.widthForStickDrawAsLine = 1;
     candleStickChart.colorForStickDrawAsLine = [UIColor lightGrayColor];
@@ -1028,7 +1030,9 @@
 //    self.stickChart.displayFrom = 0;
     self.stickChart.displayLongitudeTitle = NO;
     self.stickChart.axisMarginBottom = 3;
-    self.stickChart.axisYFormattorType = CCSGridChartDecimalFormattorWangYiZhao;
+    self.stickChart.leftAxisYFormattorType = CCSGridChartDecimalFormattorWangYiZhao;
+    self.stickChart.rightAxisYFormattorType = CCSGridChartDecimalFormattorWangYiZhao;
+    
     // 缩小到一定程度变线
     self.stickChart.widthForStickDrawAsLine = 1;
     self.stickChart.colorForStickDrawAsLine = [UIColor lightGrayColor];

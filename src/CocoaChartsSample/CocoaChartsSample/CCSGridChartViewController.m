@@ -60,7 +60,9 @@
     [TitleY addObject:@"3000"];
     [TitleY addObject:@"4000"];
 
-    gridchart.latitudeTitles = TitleY;
+    gridchart.latitudeTitlesLeft = TitleY;
+    gridchart.latitudeTitlesRight = TitleY;
+    
 
     [self.view addSubview:gridchart];
 }

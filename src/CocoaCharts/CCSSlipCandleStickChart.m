@@ -369,7 +369,7 @@
         return;
     }
     
-    NSString *valueStr = [self formatAxisYDegree:value];
+    NSString *valueStr = [self formatAxisYDegreeLeft:value];
     
     NSMutableParagraphStyle *textStyle=[[NSMutableParagraphStyle alloc]init];//段落样式
     textStyle.alignment=NSTextAlignmentLeft;
@@ -453,7 +453,7 @@
         return;
     }
 
-    NSString *valueStr = [self formatAxisYDegree:value];
+    NSString *valueStr = [self formatAxisYDegreeLeft:value];
     
     NSMutableParagraphStyle *textStyle=[[NSMutableParagraphStyle alloc]init];//段落样式
     textStyle.alignment=NSTextAlignmentLeft;

@@ -46,6 +46,10 @@
     CCFloat _minDataValue;
     CCUInt _axisCalc;
     CCFloat _stickSpacing;
+//    NSArray *_baselineValues;
+//    CCFloat _midValue;
+//    BOOL _displayMidValueAsLine;
+//    BOOL _dashMidValueLine;
     BOOL _autoCalcRange;
 //    __unsafe_unretained CCSStickChart *_coChart;
 }
