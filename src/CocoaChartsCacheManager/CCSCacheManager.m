@@ -42,7 +42,7 @@
     if ([cacheDic hasLive]) {
         self.realm = [RLMRealm realmWithPath: self.cachePath];
     }
-    [self selectWithNeedRefresh:YES];
+    [self selectWithRefresh:YES];
 }
 
 - (NSUInteger)count{

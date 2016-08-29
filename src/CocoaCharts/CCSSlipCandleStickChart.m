@@ -168,8 +168,6 @@
 
 - (void)drawRect:(CGRect)rect {
     [super drawRect:rect];
-    // 绘制支撑线
-    [self drawSupportLines:rect];
 }
 
 -(void) drawData:(CGRect)rect{
@@ -534,87 +532,5 @@
     }
 }
 
-- (void)drawResistanceLines:(CGRect)rect{
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    CGContextSetLineWidth(context, 0.8f);
-    CGContextSetStrokeColorWithColor(context, [UIColor lightGrayColor].CGColor);
-    CGContextSetFillColorWithColor(context, [UIColor lightGrayColor].CGColor);
-    
-    if ([self.longitudeTitles count] <= 0) {
-        return;
-    }
-    //设置线条为点线
-    CGFloat lengths[] = {3.0, 3.0};
-    CGContextSetLineDash(context, 0.0, lengths, 2);
-    
-    CGContextMoveToPoint(context, self.axisMarginLeft, (rect.size.height-self.axisMarginBottom - self.axisMarginTop)/2.0f);
-    CGContextAddLineToPoint(context, rect.size.width-self.axisMarginRight, (rect.size.height-self.axisMarginBottom - self.axisMarginTop)/2.0f);
-    CGContextStrokePath(context);
-    
-    CGContextSetLineDash(context, 0, nil, 0);
-}
-
-- (void)drawSupportLines:(CGRect)rect{
-    NSArray *supportDatas = [self computeSupportDatas];
-    
-    if ([supportDatas count] <= 0) {
-        return;
-    }
-    
-    for (NSString *strSupportPrice in supportDatas) {
-        CCFloat supportPrice = [strSupportPrice doubleValue];
-        
-        CCFloat offsetY = [self computeValueY:supportPrice inRect:rect];
-        
-        [self drawLine:rect startPoint:CGPointMake(self.axisMarginLeft, offsetY) endPoint:CGPointMake(rect.size.width-self.axisMarginRight, offsetY) lineColor:self.surportLineColor isDash:self.surportDashLine];
-    }
-}
-
-- (void)drawLine:(CGRect)rect startPoint:(CGPoint)startPoint endPoint:(CGPoint)endPoint lineColor:(UIColor *)lineColor isDash:(BOOL) isDash{
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    CGContextSetLineWidth(context, 0.8f);
-    CGContextSetStrokeColorWithColor(context, lineColor.CGColor);
-    CGContextSetFillColorWithColor(context, lineColor.CGColor);
-    
-    if (isDash) {
-        // 设置线条为点线
-        CGFloat lengths[] = {3.0, 3.0};
-        CGContextSetLineDash(context, 0.0, lengths, 2);
-    }
-    
-    CGContextMoveToPoint(context, startPoint.x, startPoint.y);
-    CGContextAddLineToPoint(context, endPoint.x, endPoint.y);
-    CGContextStrokePath(context);
-    
-    CGContextSetLineDash(context, 0, nil, 0);
-}
-
-- (NSArray *)computeResistanceDatas{
-    // 压力数据,根据黄金分割计算
-    NSMutableArray *resistanceDatas = [[NSMutableArray alloc] init];
-    
-    // 压力系数
-    for (NSString *strPeriod in self.resistancePeriods) {
-        CCFloat period = [strPeriod doubleValue];
-    }
-    
-    return nil;
-}
-
-- (NSArray *)computeSupportDatas{
-    // 支撑数据,根据黄金分割计算
-    NSMutableArray *supportDatas = [[NSMutableArray alloc] init];
-    
-    if (!self.surportPeriods) {
-        self.surportPeriods = @[@"0.382", @"0.500", @"0.618"];
-    }
-    
-    // 压力系数
-    for (NSString *strPeriod in self.surportPeriods) {
-        CCFloat period = [strPeriod doubleValue];
-    }
-    
-    return supportDatas;
-}
 
 @end
