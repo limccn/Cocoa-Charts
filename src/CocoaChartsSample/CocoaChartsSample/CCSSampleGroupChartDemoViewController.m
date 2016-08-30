@@ -72,12 +72,28 @@
  * Implements Of CCSChartDelegate
  *******************************************************************************/
 
+- (void)CCSLineChartBeTouchedEnd:(id)chart value:(NSString *)value {
+    if(chart == self.areachart){
+        NSLog(@"Touched Value ===> %@",value);
+    }else{
+
+    }
+}
+
 - (void)CCSChartBeTouchedOn:(id)chart point:(CGPoint)point indexAt:(CCUInt)index{
-    [_groupChart CCSChartBeTouchedOn:chart point:point indexAt:index];
+    if(chart == self.areachart){
+        
+    }else{
+        [_groupChart CCSChartBeTouchedOn:chart point:point indexAt:index];
+    }
 }
 
 - (void)CCSChartDisplayChangedFrom:(id)chart from:(CCUInt)from number:(CCUInt)number{
-    [_groupChart CCSChartDisplayChangedFrom:chart from:from number:number];
+    if(chart == self.areachart){
+        
+    }else{
+        [_groupChart CCSChartDisplayChangedFrom:chart from:from number:number];
+    }
 }
 
 - (void)initView{
@@ -143,6 +159,8 @@
     self.areachart.borderColor = BORDER_COLOR;
     self.areachart.longitudeColor = GRID_LINE_COLOR;
     self.areachart.latitudeColor = GRID_LINE_COLOR;
+    
+    [self.areachart setChartDelegate:self];
     
     _dicTickLineDatas = [[NSMutableDictionary alloc] init];
     _dicTickAvgLineDatas = [[NSMutableDictionary alloc] init];

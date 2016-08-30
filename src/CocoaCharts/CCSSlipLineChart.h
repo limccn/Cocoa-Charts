@@ -21,6 +21,16 @@
 #import "CCSLineChart.h"
 
 typedef enum {
+    CCSLineChartTouchModeNone,
+    CCSLineChartTouchModeBoth,
+    CCSLineChartTouchModeFloatBoth,
+    CCSLineChartTouchModeHorizontal,
+    CCSLineChartTouchModeFloatHorizontal,
+    CCSLineChartTouchModeVertical,
+    CCSLineChartTouchModeFloatVertical,
+} CCSLineChartTouchMode;
+
+typedef enum {
     CCSLineZoomBaseLineCenter,
     CCSLineZoomBaseLineLeft,
     CCSLineZoomBaseLineRight
@@ -32,6 +42,8 @@ typedef enum {
     CCInt _minDisplayNumber;
     CCInt _maxDisplayNumber;
 //    CCUInt _zoomBaseLine;
+    
+    CCSLineChartTouchMode _touchMode;
 }
 
 @property(assign, nonatomic) CCInt displayNumber;
@@ -39,6 +51,9 @@ typedef enum {
 @property(assign, nonatomic) CCInt minDisplayNumber;
 @property(assign, nonatomic) CCInt maxDisplayNumber;
 //@property(assign, nonatomic) CCUInt zoomBaseLine;
+
+@property(assign, nonatomic) CCSLineChartTouchMode touchMode;
+
 
 -(CCInt) getDataDisplayNumber;
 -(CCInt) getDisplayTo;

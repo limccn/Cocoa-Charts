@@ -27,6 +27,7 @@
 - (void)CCSChartBeLongPressDown:(id)chart;
 - (void)CCSChartBeLongPressUp:(id)chart;
 - (void)CCSChartDisplayChangedFrom:(id)chart from:(CCUInt)from number:(CCUInt) number;
+- (void)CCSLineChartBeTouchedEnd:(id)chart value:(NSString *)value;
 @end
 
 /*!

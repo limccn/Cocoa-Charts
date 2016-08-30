@@ -297,13 +297,20 @@
     CCFloat pointX = self.axisMarginLeft +(self.selectedIndex - self.displayFrom + 0.5) * stickWidth;
     CCFloat pointY = self.singleTouchPoint.y;
     
-    if (self.linesData != nil && [self.linesData count] > 0 ){
-        CCSTitledLine *line = [self.linesData objectAtIndex:0];
-        if (line != nil) {
-            if (line.data != nil && [line.data count] > self.selectedIndex) {
-                CCSLineData *lineData = [line.data objectAtIndex:self.selectedIndex];
-                if ([self isNoneDisplayValue:lineData.value] == NO) {
-                    pointY = [self computeValueY:lineData.value inRect:self.frame];
+    // is FloatMode
+    if (self.touchMode == CCSLineChartTouchModeFloatHorizontal
+        || self.touchMode == CCSLineChartTouchModeFloatBoth){
+        //noop
+    }else{
+        
+        if (self.linesData != nil && [self.linesData count] > 0 ){
+            CCSTitledLine *line = [self.linesData objectAtIndex:0];
+            if (line != nil) {
+                if (line.data != nil && [line.data count] > self.selectedIndex) {
+                    CCSLineData *lineData = [line.data objectAtIndex:self.selectedIndex];
+                    if ([self isNoneDisplayValue:lineData.value] == NO) {
+                        pointY = [self computeValueY:lineData.value inRect:self.frame];
+                    }
                 }
             }
         }

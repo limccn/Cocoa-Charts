@@ -42,6 +42,7 @@
 @synthesize minDisplayNumber = _minDisplayNumber;
 @synthesize maxDisplayNumber = _maxDisplayNumber;
 //@synthesize zoomBaseLine = _zoomBaseLine;
+@synthesize touchMode = _touchMode;
 
 - (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
@@ -71,6 +72,8 @@
     
     self.displayCrossXOnTouch = NO;
     self.displayCrossYOnTouch = NO;
+    
+    self.touchMode = CCSLineChartTouchModeBoth;
     
 }
 
@@ -349,8 +352,23 @@
         }
         
     }else{
-        self.displayCrossXOnTouch = YES;
-        self.displayCrossYOnTouch = YES;
+//        self.displayCrossXOnTouch = YES;
+//        self.displayCrossYOnTouch = YES;
+        
+        if (self.touchMode ==  CCSLineChartTouchModeBoth) {
+            self.displayCrossXOnTouch = YES;
+            self.displayCrossYOnTouch = YES;
+        }else if (self.touchMode ==  CCSLineChartTouchModeHorizontal){
+            self.displayCrossXOnTouch = NO;
+            self.displayCrossYOnTouch = YES;
+        }else if (self.touchMode ==  CCSLineChartTouchModeVertical){
+            self.displayCrossXOnTouch = YES;
+            self.displayCrossYOnTouch = NO;
+        }else{
+            self.displayCrossXOnTouch = NO;
+            self.displayCrossYOnTouch = NO;
+        }
+        
         [self setNeedsDisplay];
     }
     
@@ -376,6 +394,7 @@
         
         _isLongPress = NO;
         _isMoved = NO;
+
         _waitForLongPress = YES;
         [self performSelector:@selector(changeLongPressState:) withObject:nil afterDelay:0.7f];
         
@@ -428,8 +447,24 @@
             [self setNeedsDisplay];
             
         }else if(_isMoved == NO){
-            self.displayCrossXOnTouch = YES;
-            self.displayCrossYOnTouch = YES;
+            
+//          self.displayCrossXOnTouch = YES;
+//          self.displayCrossYOnTouch = YES;
+            
+            if (self.touchMode ==  CCSLineChartTouchModeBoth || self.touchMode ==  CCSLineChartTouchModeFloatBoth) {
+                self.displayCrossXOnTouch = YES;
+                self.displayCrossYOnTouch = YES;
+            }else if (self.touchMode ==  CCSLineChartTouchModeHorizontal || self.touchMode ==  CCSLineChartTouchModeFloatHorizontal){
+                self.displayCrossXOnTouch = NO;
+                self.displayCrossYOnTouch = YES;
+            }else if (self.touchMode ==  CCSLineChartTouchModeVertical || self.touchMode ==  CCSLineChartTouchModeFloatVertical){
+                self.displayCrossXOnTouch = YES;
+                self.displayCrossYOnTouch = NO;
+            }else{
+                self.displayCrossXOnTouch = NO;
+                self.displayCrossYOnTouch = NO;
+            }
+            
             [self setNeedsDisplay];
             
         }
@@ -517,6 +552,23 @@
             [self.chartDelegate CCSChartBeLongPressUp:self];
         }
     }
+    
+    if (self.touchMode == CCSLineChartTouchModeFloatHorizontal
+        || self.touchMode == CCSLineChartTouchModeFloatBoth){
+        
+        NSString *touchedValue = @"";
+        if (self.singleTouchPoint.y > self.axisMarginTop
+            && self.singleTouchPoint.y < self.frame.size.height - self.axisMarginBottom) {
+            CCFloat value = [self computeYToValue:(CCFloat)self.singleTouchPoint.y inRect:(CGRect)self.frame];
+            //TODO use left formator
+            touchedValue = [self formatAxisYDegreeLeft:value];
+        }
+        
+        if (self.chartDelegate && [self.chartDelegate respondsToSelector:@selector(CCSLineChartBeTouchedEnd:value:)]) {
+            [self.chartDelegate CCSLineChartBeTouchedEnd:self value:touchedValue];
+        }
+    }
+    
     _isLongPress = NO;
     _isMoved = NO;
     _waitForLongPress = YES;
@@ -544,6 +596,7 @@
         }
     }
 }
+
 
 - (void) moveLeft {
     
@@ -740,10 +793,20 @@
     return (self.frame.size.width - self.axisMarginLeft - self.axisMarginRight) / [self getDataDisplayNumber];
 }
 
+-(CCFloat) computeYToValue:(CCFloat)y inRect:(CGRect)rect{
+    return  (1 - (y - self.axisMarginTop) / (rect.size.height - self.axisMarginBottom - 2 * self.axisMarginTop) ) * (self.maxValue - self.minValue) + self.minValue;
+}
+
 -(void) bindSelectedIndex
 {
     CCFloat stickWidth = [self getDataStickWidth];
-    _singleTouchPoint = CGPointMake(self.axisMarginLeft + (self.selectedIndex - self.displayFrom + 0.5) * stickWidth, self.singleTouchPoint.y);
+    // is FloatMode
+    if (self.touchMode == CCSLineChartTouchModeFloatHorizontal
+        || self.touchMode == CCSLineChartTouchModeFloatBoth) {
+        
+    }else{
+        _singleTouchPoint = CGPointMake(self.axisMarginLeft + (self.selectedIndex - self.displayFrom + 0.5) * stickWidth, self.singleTouchPoint.y);
+    }
 }
 
 @end
