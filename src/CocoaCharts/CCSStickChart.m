@@ -312,7 +312,7 @@
     //处理刻度
     for (CCUInt i = 0; i < self.latitudeNum; i++) {
         CCUInt degree =  self.minValue + i * average;
-        CCFloat percent= (degree - self.axisYTitleMidValue)/self.axisYTitleMidValue;
+        CCFloat percent= 100 * (degree - self.axisYTitleMidValue)/self.axisYTitleMidValue;
         NSString *value;
         if (isLeft) {
             value = [self formatAxisYDegreeLeftPercent:percent];
@@ -323,7 +323,7 @@
         [TitleY addObject:value];
     }
     CCUInt degree =  self.maxValue;
-    CCFloat percent= (degree - self.axisYTitleMidValue)/self.axisYTitleMidValue;
+    CCFloat percent= 100 * (degree - self.axisYTitleMidValue)/self.axisYTitleMidValue;
     NSString *value;
     if (isLeft) {
         value = [self formatAxisYDegreeLeftPercent:percent];
