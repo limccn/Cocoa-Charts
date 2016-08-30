@@ -86,6 +86,13 @@
 @synthesize latitudeFontLessThanColor = _latitudeFontLessThanColor;
 @synthesize latitudeFontEqualsColor = _latitudeFontEqualsColor;
 
+@synthesize customHorizontalGridValues=_customHorizontalGridValues;
+@synthesize customHorizontalGridType=_customHorizontalGridType;
+@synthesize customHorizontalGridColor=_customHorizontalGridColor;
+@synthesize customVerticalGridValues=_customVerticalGridValues;
+@synthesize customVerticalGridType=_customVerticalGridType;
+@synthesize customVerticalGridColor=_customVerticalGridColor;
+
 
 - (void)initProperty {
     //初始化父类的熟悉
@@ -161,6 +168,14 @@
     self.userInteractionEnabled = YES;
     
     self.noneDisplayValues = [NSMutableArray arrayWithObjects:@"0", nil];
+    
+    self.customHorizontalGridValues = nil;
+    self.customHorizontalGridType=CCSGridChartCustomGridTypeNone;
+    self.customHorizontalGridColor = [UIColor grayColor];
+    self.customVerticalGridValues = nil;
+    self.customVerticalGridType=CCSGridChartCustomGridTypeNone;
+    self.customVerticalGridColor = [UIColor grayColor];
+
 
     [self registerObservers];
 }
@@ -194,8 +209,12 @@
 
     //绘制纬线
     [self drawLatitudeLines:rect];
+    //绘制自定义水平grid
+    [self drawCustomHorizontalGrid:rect];
     //绘制经线
     [self drawLongitudeLines:rect];
+    //绘制自定义垂直grid
+    [self drawCustomVerticalGrid:rect];
     //绘制数据
     [self drawData:rect];
     //绘制X轴标题
@@ -267,6 +286,51 @@
         CGContextStrokePath(context);
     }
 }
+
+
+- (void)drawCustomHorizontalGrid:(CGRect)rect {
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSetLineWidth(context, 0.5f);
+    CGContextSetStrokeColorWithColor(context, self.customHorizontalGridColor.CGColor);
+    CGContextSetFillColorWithColor(context, self.customHorizontalGridColor.CGColor);
+    
+    if (self.customHorizontalGridType == CCSGridChartCustomGridTypeNone) {
+        return;
+    }
+    
+    if (self.customHorizontalGridType == CCSGridChartCustomGridTypeByValue) {
+        return;
+    }
+    
+    if (self.customHorizontalGridValues && [self.customHorizontalGridValues count] <= 0){
+        return;
+    }
+    //设置线条为点线
+    CGFloat lengths[] = {3.0, 3.0};
+    CGContextSetLineDash(context, 0.0, lengths, 2);
+    
+    CCFloat totalOffset;
+    
+    if (self.axisXPosition == CCSGridChartXAxisPositionBottom) {
+        totalOffset = (rect.size.height - self.axisMarginBottom - 2 * self.axisMarginTop) * 1.0;
+    }
+    else {
+        totalOffset = (rect.size.height - 2 * self.axisMarginBottom - self.axisMarginTop) * 1.0;
+    }
+    
+    CCFloat offset = rect.size.height - self.axisMarginBottom;
+    
+    for (CCUInt i = 0; i < [self.customHorizontalGridValues count]; i++) {
+        CCFloat ratio = [[self.customHorizontalGridValues objectAtIndex:i] doubleValue];
+        CGContextMoveToPoint(context, self.axisMarginLeft, offset - ratio * totalOffset);
+        CGContextAddLineToPoint(context, rect.size.width - self.axisMarginRight, offset - ratio * totalOffset);
+    }
+    
+    CGContextStrokePath(context);
+    //还原线条
+    CGContextSetLineDash(context, 0, nil, 0);
+}
+
 
 - (void)drawLatitudeLines:(CGRect)rect {
     CGContextRef context = UIGraphicsGetCurrentContext();
@@ -422,6 +486,49 @@
         }
     }
 }
+
+
+
+- (void)drawCustomVerticalGrid:(CGRect)rect {
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSetLineWidth(context, 0.5f);
+    CGContextSetStrokeColorWithColor(context, self.customVerticalGridColor.CGColor);
+    CGContextSetFillColorWithColor(context, self.customVerticalGridColor.CGColor);
+    
+    if (self.customVerticalGridType == CCSGridChartCustomGridTypeNone) {
+        return;
+    }
+    
+    if (self.customVerticalGridType == CCSGridChartCustomGridTypeByValue) {
+        return;
+    }
+    
+    if (self.customVerticalGridValues && [self.customVerticalGridValues count] <= 0){
+        return;
+    }
+    //设置线条为点线
+    CGFloat lengths[] = {3.0, 3.0};
+    CGContextSetLineDash(context, 0.0, lengths, 2);
+    
+    CCFloat totalOffset = (rect.size.width - self.axisMarginLeft - self.axisMarginRight) * 1.0;
+    CCFloat offset = self.axisMarginLeft;
+    
+    for (CCUInt i = 0; i < [self.customVerticalGridValues count]; i++) {
+        CCFloat ratio = [[self.customVerticalGridValues objectAtIndex:i] doubleValue];
+        if (self.axisXPosition == CCSGridChartXAxisPositionBottom) {
+            CGContextMoveToPoint(context, offset + ratio * totalOffset, self.axisMarginTop);
+            CGContextAddLineToPoint(context, offset + ratio * totalOffset, rect.size.height - self.axisMarginBottom + self.axisMarginTop);
+        } else {
+            CGContextMoveToPoint(context, offset + ratio * totalOffset, self.axisMarginTop);
+            CGContextAddLineToPoint(context, offset + ratio * totalOffset, rect.size.height - self.axisMarginBottom + self.axisMarginTop);
+        }
+    }
+    
+    CGContextStrokePath(context);
+    //还原线条
+    CGContextSetLineDash(context, 0, nil, 0);
+}
+
 
 - (void)drawLongitudeLines:(CGRect)rect {
     CGContextRef context = UIGraphicsGetCurrentContext();

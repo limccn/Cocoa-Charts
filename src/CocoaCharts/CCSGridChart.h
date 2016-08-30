@@ -85,6 +85,12 @@ typedef enum {
 } CCSGridChartYTitlesPosition;
 
 
+typedef enum {
+    CCSGridChartCustomGridTypeNone,
+    CCSGridChartCustomGridTypeByRatio,
+    CCSGridChartCustomGridTypeByValue,
+} CCSGridChartCustomGridType;
+
 /*!
  CCSGridChart
  
@@ -158,6 +164,13 @@ typedef enum {
     CGPoint _singleTouchPoint;
     
     NSMutableArray *_noneDisplayValues;
+    
+    NSMutableArray *_customHorizontalGridValues;
+    CCSGridChartCustomGridType _customHorizontalGridType;
+    UIColor *_customHorizontalGridColor;
+    NSMutableArray *_customVerticalGridValues;
+    CCSGridChartCustomGridType _customVerticalGridType;
+    UIColor *_customVerticalGridColor;
 
     __unsafe_unretained id<CCSChartDelegate> _chartDelegate;
 }
@@ -435,6 +448,14 @@ typedef enum {
 @property(assign, nonatomic ,setter = setSingleTouchPoint:) CGPoint singleTouchPoint;
 
 @property(strong, nonatomic) NSMutableArray *noneDisplayValues;
+
+
+@property(strong, nonatomic) NSMutableArray *customHorizontalGridValues;
+@property(assign, nonatomic) CCSGridChartCustomGridType customHorizontalGridType;
+@property(strong, nonatomic) UIColor *customHorizontalGridColor;
+@property(strong, nonatomic) NSMutableArray *customVerticalGridValues;
+@property(assign, nonatomic) CCSGridChartCustomGridType customVerticalGridType;
+@property(strong, nonatomic) UIColor *customVerticalGridColor;
 
 /*!
  Touched point inside of grid
