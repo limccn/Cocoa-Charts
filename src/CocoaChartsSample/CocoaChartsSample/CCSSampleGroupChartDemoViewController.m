@@ -137,6 +137,9 @@
     self.areachart.longitudeFontColor = [UIColor lightGrayColor];
     self.areachart.latitudeFontColor = [UIColor lightGrayColor];
     
+    self.areachart.leftAxisYFormattorType = CCSGridChartDecimalFormattorDecimal2;
+    self.areachart.rightAxisYFormattorType = CCSGridChartDecimalFormattorDecimal2;
+    
     self.areachart.borderColor = BORDER_COLOR;
     self.areachart.longitudeColor = GRID_LINE_COLOR;
     self.areachart.latitudeColor = GRID_LINE_COLOR;

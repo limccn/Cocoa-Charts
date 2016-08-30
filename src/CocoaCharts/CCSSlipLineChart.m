@@ -224,85 +224,85 @@
 }
 
 
-- (void)initAxisY {
-    if (self.autoCalcLatitudeTitle == NO) {
-        return;
-    }
-    
-    //计算取值范围
-    if ([self autoCalcRange]) {
-        [self calcValueRange];
-    }
-    
-    if (self.maxValue == 0. && self.minValue == 0.) {
-        self.latitudeTitlesLeft = nil;
-        self.latitudeTitlesRight = nil;
-        self.latitudeTitlesLeftColor = nil;
-        self.latitudeTitlesRightColor = nil;
-        return;
-    }
-    
-    [self initAxisYLeft];
-    [self initAxisYRight];
-}
-
-- (void)initAxisYLeft {
-    
-    NSMutableArray *TitleY = [[NSMutableArray alloc] init];
-    CCFloat average = (CCUInt) ((self.maxValue - self.minValue) / self.latitudeNum);
-    //处理刻度
-    for (CCUInt i = 0; i < self.latitudeNum; i++) {
-        if (self.axisCalc == 1) {
-            CCInt degree = (self.minValue + i * average) / self.axisCalc;
-            NSString *value = [[NSNumber numberWithInteger:degree]stringValue];
-            [TitleY addObject:value];
-        } else {
-            NSString *value = [NSString stringWithFormat:@"%-.2f", (self.minValue + i * average) / self.axisCalc];
-            [TitleY addObject:value];
-        }
-    }
-    //处理最大值
-    if (self.axisCalc == 1) {
-        CCInt degree = self.maxValue / self.axisCalc;
-        NSString *value = [[NSNumber numberWithInteger:degree]stringValue];
-        [TitleY addObject:value];
-    }
-    else {
-        NSString *value = [NSString stringWithFormat:@"%-.2f", (self.maxValue) / self.axisCalc];
-        [TitleY addObject:value];
-    }
-    
-    self.latitudeTitlesLeft = TitleY;
-}
-
-- (void)initAxisYRight {
-    
-    NSMutableArray *TitleY = [[NSMutableArray alloc] init];
-    CCFloat average = (CCUInt) ((self.maxValue - self.minValue) / self.latitudeNum);
-    //处理刻度
-    for (CCUInt i = 0; i < self.latitudeNum; i++) {
-        if (self.axisCalc == 1) {
-            CCInt degree = (self.minValue + i * average) / self.axisCalc;
-            NSString *value = [[NSNumber numberWithInteger:degree]stringValue];
-            [TitleY addObject:value];
-        } else {
-            NSString *value = [NSString stringWithFormat:@"%-.2f", (self.minValue + i * average) / self.axisCalc];
-            [TitleY addObject:value];
-        }
-    }
-    //处理最大值
-    if (self.axisCalc == 1) {
-        CCInt degree = self.maxValue / self.axisCalc;
-        NSString *value = [[NSNumber numberWithInteger:degree]stringValue];
-        [TitleY addObject:value];
-    }
-    else {
-        NSString *value = [NSString stringWithFormat:@"%-.2f", (self.maxValue) / self.axisCalc];
-        [TitleY addObject:value];
-    }
-    
-    self.latitudeTitlesLeft = TitleY;
-}
+//- (void)initAxisY {
+//    if (self.autoCalcLatitudeTitle == NO) {
+//        return;
+//    }
+//    
+//    //计算取值范围
+//    if ([self autoCalcRange]) {
+//        [self calcValueRange];
+//    }
+//    
+//    if (self.maxValue == 0. && self.minValue == 0.) {
+//        self.latitudeTitlesLeft = nil;
+//        self.latitudeTitlesRight = nil;
+//        self.latitudeTitlesLeftColor = nil;
+//        self.latitudeTitlesRightColor = nil;
+//        return;
+//    }
+//    
+//    [self initAxisYLeft];
+//    [self initAxisYRight];
+//}
+//
+//- (void)initAxisYLeft {
+//    
+//    NSMutableArray *TitleY = [[NSMutableArray alloc] init];
+//    CCFloat average = (CCUInt) ((self.maxValue - self.minValue) / self.latitudeNum);
+//    //处理刻度
+//    for (CCUInt i = 0; i < self.latitudeNum; i++) {
+//        if (self.axisCalc == 1) {
+//            CCInt degree = (self.minValue + i * average) / self.axisCalc;
+//            NSString *value = [[NSNumber numberWithInteger:degree]stringValue];
+//            [TitleY addObject:value];
+//        } else {
+//            NSString *value = [NSString stringWithFormat:@"%-.2f", (self.minValue + i * average) / self.axisCalc];
+//            [TitleY addObject:value];
+//        }
+//    }
+//    //处理最大值
+//    if (self.axisCalc == 1) {
+//        CCInt degree = self.maxValue / self.axisCalc;
+//        NSString *value = [[NSNumber numberWithInteger:degree]stringValue];
+//        [TitleY addObject:value];
+//    }
+//    else {
+//        NSString *value = [NSString stringWithFormat:@"%-.2f", (self.maxValue) / self.axisCalc];
+//        [TitleY addObject:value];
+//    }
+//    
+//    self.latitudeTitlesLeft = TitleY;
+//}
+//
+//- (void)initAxisYRight {
+//    
+//    NSMutableArray *TitleY = [[NSMutableArray alloc] init];
+//    CCFloat average = (CCUInt) ((self.maxValue - self.minValue) / self.latitudeNum);
+//    //处理刻度
+//    for (CCUInt i = 0; i < self.latitudeNum; i++) {
+//        if (self.axisCalc == 1) {
+//            CCInt degree = (self.minValue + i * average) / self.axisCalc;
+//            NSString *value = [[NSNumber numberWithInteger:degree]stringValue];
+//            [TitleY addObject:value];
+//        } else {
+//            NSString *value = [NSString stringWithFormat:@"%-.2f", (self.minValue + i * average) / self.axisCalc];
+//            [TitleY addObject:value];
+//        }
+//    }
+//    //处理最大值
+//    if (self.axisCalc == 1) {
+//        CCInt degree = self.maxValue / self.axisCalc;
+//        NSString *value = [[NSNumber numberWithInteger:degree]stringValue];
+//        [TitleY addObject:value];
+//    }
+//    else {
+//        NSString *value = [NSString stringWithFormat:@"%-.2f", (self.maxValue) / self.axisCalc];
+//        [TitleY addObject:value];
+//    }
+//    
+//    self.latitudeTitlesLeft = TitleY;
+//}
 
 - (NSString *)calcAxisXGraduate:(CGRect)rect {
     CCFloat value = [self touchPointAxisXValue:rect];
