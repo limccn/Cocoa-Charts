@@ -78,10 +78,18 @@
 - (void)drawRect:(CGRect)rect{
     [super drawRect:rect];
     
-    [self drawLastCloseLine:rect];
+
 }
 
-- (void)drawData:(CGRect)rect {
+-(void) drawData:(CGRect)rect{
+    [super drawData:rect];
+    
+    [self drawArea:rect];
+
+}
+
+
+- (void)drawArea:(CGRect)rect {
     // 起始位置
     CCFloat startX;
     
@@ -152,7 +160,7 @@
                         //1根则绘制一条直线
                         CCSLineData *lineData = [lineDatas objectAtIndex:0];
                         //获取终点Y坐标
-                        CCFloat valueY = ((1 - (lineData.value - self.minValue) / (self.maxValue - self.minValue)) * (rect.size.height - 2 * self.axisMarginTop - self.axisMarginBottom) + self.axisMarginTop);
+                        CCFloat valueY = [self computeValueY:lineData.value inRect:rect];
                         
                         CGContextMoveToPoint(context, startX, valueY);
                         CGContextAddLineToPoint(context, self.axisMarginLeft, valueY);
@@ -168,7 +176,7 @@
                             }
                             
                             //获取终点Y坐标
-                            CCFloat valueY = ((1 - (lineData.value - self.minValue) / (self.maxValue - self.minValue)) * (rect.size.height - 2 * self.axisMarginTop - self.axisMarginBottom) + self.axisMarginTop);
+                            CCFloat valueY = [self computeValueY:lineData.value inRect:rect];
                             //绘制线条路径
                             if (j == [lineDatas count] - 1) {
                                 CGContextMoveToPoint(context, startX, valueY);
@@ -208,26 +216,6 @@
             }
         }
     }
-}
-
-- (void)drawLastCloseLine:(CGRect)rect {
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    CGContextSetLineWidth(context, 0.8f);
-    CGContextSetStrokeColorWithColor(context, [UIColor lightGrayColor].CGColor);
-    CGContextSetFillColorWithColor(context, [UIColor lightGrayColor].CGColor);
-    
-    if ([self.longitudeTitles count] <= 0) {
-        return;
-    }
-    //设置线条为点线
-    CGFloat lengths[] = {3.0, 3.0};
-    CGContextSetLineDash(context, 0.0, lengths, 2);
-    
-    CGContextMoveToPoint(context, self.axisMarginLeft, (rect.size.height-self.axisMarginBottom - self.axisMarginTop)/2.0f);
-    CGContextAddLineToPoint(context, rect.size.width-self.axisMarginRight, (rect.size.height-self.axisMarginBottom - self.axisMarginTop)/2.0f);
-    CGContextStrokePath(context);
-    
-    CGContextSetLineDash(context, 0, nil, 0);
 }
 
 - (void)drawXAxisTitles:(CGRect)rect {

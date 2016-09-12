@@ -22,6 +22,13 @@
 #import "CCSTitledLine.h"
 #import "CCSLineData.h"
 
+NSString * const CCSLineValue = @"CCSLineValue";
+NSString * const CCSStyleLabelPosition = @"CCSStyleLabelPosition";
+NSString * const CCSStyleLabelPositionNone = @"CCSStyleLabelPositionNone";
+NSString * const CCSStyleLabelPositionLeft = @"CCSStyleLabelPositionLeft";
+NSString * const CCSStyleLabelPositionRight = @"CCSStyleLabelPositionRight";
+NSString * const CCSStyleLabelPositionBoth = @"CCSStyleLabelPositionBoth";
+
 @implementation CCSLineChart
 
 @synthesize linesData = _linesData;
@@ -51,8 +58,11 @@
     
     self.displayCrossXOnTouch = NO;
     self.displayCrossYOnTouch = NO;
+    
+    self.horizontalLines = [[NSMutableArray alloc]init];
+    self.verticalLines = [[NSMutableArray alloc]init];
+    
 }
-
 
 - (void)calcDataValueRange
 {
@@ -195,6 +205,9 @@
     [super drawData:rect];
     //绘制数据
     [self drawLines:rect];
+    
+    [self drawHorizontalLines:rect];
+    [self drawVerticalLines:rect];
 }
 
 - (void)drawRect:(CGRect)rect {
@@ -204,7 +217,6 @@
     [self initAxisX];
 
     [super drawRect:rect];
-
 }
 
 - (void)drawLines:(CGRect)rect {
@@ -251,12 +263,12 @@
                 startX = super.axisMarginLeft + self.axisMarginRight;
             }
             
-            
             //遍历并绘制线条
             for (CCUInt j = 0; j < [lineDatas count]; j++) {
                 CCSLineData *lineData = [lineDatas objectAtIndex:j];
                 //获取终点Y坐标
-                CCFloat valueY = ((1 - (lineData.value - self.minValue) / (self.maxValue - self.minValue)) * (rect.size.height - 2 * self.axisMarginTop - self.axisMarginBottom) + self.axisMarginTop);
+                CCFloat valueY =  [self computeValueY:lineData.value inRect:rect];
+
                 //绘制线条路径
                 if (j == 0) {
                     CGContextMoveToPoint(context, startX, valueY);
@@ -294,7 +306,8 @@
                 //1根则绘制一条直线
                 CCSLineData *lineData = [lineDatas objectAtIndex:0];
                 //获取终点Y坐标
-                CCFloat valueY = ((1 - (lineData.value - self.minValue) / (self.maxValue - self.minValue)) * (rect.size.height - 2 * self.axisMarginTop - self.axisMarginBottom) + self.axisMarginTop);
+                CCFloat valueY = [self computeValueY:lineData.value inRect:rect];
+
 
                 CGContextMoveToPoint(context, startX, valueY);
                 CGContextAddLineToPoint(context, self.axisMarginLeft, valueY);
@@ -304,7 +317,8 @@
                 for (CCInt j = [lineDatas count] - 1; j >= 0; j--) {
                     CCSLineData *lineData = [lineDatas objectAtIndex:j];
                     //获取终点Y坐标
-                    CCFloat valueY = ((1 - (lineData.value - self.minValue) / (self.maxValue - self.minValue)) * (rect.size.height - 2 * self.axisMarginTop - self.axisMarginBottom) + self.axisMarginTop);
+                    CCFloat valueY = [self computeValueY:lineData.value inRect:rect];
+
                     //绘制线条路径
                     if (j == [lineDatas count] - 1) {
                         CGContextMoveToPoint(context, startX, valueY);
@@ -333,6 +347,165 @@
         //绘制路径
         CGContextStrokePath(context);
     }
+}
+
+- (void) drawHorizontalLines:(CGRect)rect{
+    //linesData为空
+    if (self.horizontalLines == nil){
+        return;
+    }
+    //逐条输出
+    for (CCUInt i = 0; i < [self.horizontalLines count]; i++) {
+        
+        NSDictionary *attrDict = [self.horizontalLines objectAtIndex:i];
+        if (attrDict == nil) {
+            return;
+        }
+        [self drawHorizontalLine:attrDict inRect:rect];
+    }
+    
+}
+
+- (void) drawHorizontalLine:(NSDictionary *)attrDict inRect:(CGRect)rect {
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSetLineWidth(context, 0.5f);
+    
+    //获取终点Y坐标
+    CCFloat valueY;
+    NSNumber *lineValue = (NSNumber*)[attrDict objectForKey:CCSLineValue];
+    if (lineValue){
+        valueY = [self computeValueY:[lineValue floatValue] inRect:rect];
+    }else{
+        return;
+    }
+    // 线宽度
+    NSNumber *lineWidth = (NSNumber*)[attrDict objectForKey:CCSStyleLineWidth];
+    if (lineWidth){
+        CGContextSetLineWidth(context, [lineWidth floatValue]);
+    }else{
+        CGContextSetLineWidth(context, 0.5f);
+    }
+    // 线颜色
+    UIColor *lineColor = (UIColor*)[attrDict objectForKey:CCSStyleLineColor];
+    if (lineColor){
+        CGContextSetStrokeColorWithColor(context, lineColor.CGColor);
+        CGContextSetFillColorWithColor(context, lineColor.CGColor);
+    }else{
+        CGContextSetStrokeColorWithColor(context, [UIColor lightGrayColor].CGColor);
+        CGContextSetFillColorWithColor(context, [UIColor lightGrayColor].CGColor);
+    }
+    
+    //设置线条为点线
+    CGFloat lengths[] = {3.0, 3.0};
+    CGContextSetLineDash(context, 0.0, lengths, 2);
+    
+    CGContextMoveToPoint(context, self.axisMarginLeft, valueY);
+    CGContextAddLineToPoint(context, rect.size.width - self.axisMarginRight, valueY);
+    CGContextStrokePath(context);
+    
+    // 格式化
+    NSString *textFormat = (NSString*)[attrDict objectForKey:CCSStyleTextFormat];
+    if (textFormat == nil){
+        textFormat = @"%@";
+    }
+    //文本颜色
+    UIFont *textFont = (UIFont*)[attrDict objectForKey:CCSStyleTextFont];
+    if (textFont == nil){
+        textFont= self.crossLinesFont;
+    }
+    
+    //开盘:XXX
+    NSString *firstValueStr = [NSString stringWithFormat:textFormat,[self formatAxisYDegreeLeft:[lineValue floatValue]]];
+    
+    NSString *labelPosition = (NSString*)[attrDict objectForKey:CCSStyleLabelPosition];
+    
+    if([labelPosition isEqualToString:CCSStyleLabelPositionNone]){
+        return ;
+    }
+    
+    //填充背景
+    UIColor *backgroudColor = (UIColor*)[attrDict objectForKey:CCSStyleBackgroundColor];
+    //文本颜色
+    UIColor *foregroudColor = (UIColor*)[attrDict objectForKey:CCSStyleForegroundColor];
+    
+    if([labelPosition isEqualToString:CCSStyleLabelPositionLeft]
+       || [labelPosition isEqualToString:CCSStyleLabelPositionBoth]){
+
+        if (lineColor){
+            CGContextSetFillColorWithColor(context, backgroudColor.CGColor);
+        }else{
+            CGContextSetFillColorWithColor(context, [UIColor lightGrayColor].CGColor);
+        }
+
+        if (lineColor){
+            CGContextSetStrokeColorWithColor(context, foregroudColor.CGColor);
+        }else{
+            CGContextSetStrokeColorWithColor(context, [UIColor lightGrayColor].CGColor);
+        }
+        
+        NSMutableParagraphStyle *textStyle=[[NSMutableParagraphStyle alloc]init];//段落样式
+        textStyle=[[NSMutableParagraphStyle alloc]init];//段落样式
+        textStyle.lineBreakMode = NSLineBreakByWordWrapping;
+        textStyle.alignment=NSTextAlignmentLeft;
+        
+        NSDictionary * attrs = @{NSFontAttributeName:textFont,
+                                 NSParagraphStyleAttributeName:textStyle,
+                                 NSForegroundColorAttributeName:foregroudColor};
+        CGSize textSize = [firstValueStr boundingRectWithSize:CGSizeMake(100, 100)
+                                                      options:NSStringDrawingUsesLineFragmentOrigin
+                                                   attributes:attrs
+                                                      context:nil].size;
+        
+        CGRect boxRect = CGRectMake(self.axisMarginLeft, valueY - textSize.height / 2.0, textSize.width, textSize.height);
+        
+        CGContextAddRect(context,boxRect);
+        CGContextFillPath(context);
+        
+        [firstValueStr drawInRect:boxRect withAttributes:attrs];
+    }
+    
+    if([labelPosition isEqualToString:CCSStyleLabelPositionRight]
+       || [labelPosition isEqualToString:CCSStyleLabelPositionBoth]){
+        
+        if (lineColor){
+            CGContextSetFillColorWithColor(context, backgroudColor.CGColor);
+        }else{
+            CGContextSetFillColorWithColor(context, [UIColor lightGrayColor].CGColor);
+        }
+        
+        if (lineColor){
+            CGContextSetStrokeColorWithColor(context, foregroudColor.CGColor);
+        }else{
+            CGContextSetStrokeColorWithColor(context, [UIColor lightGrayColor].CGColor);
+        }
+        
+        NSMutableParagraphStyle *textStyle=[[NSMutableParagraphStyle alloc]init];//段落样式
+        textStyle=[[NSMutableParagraphStyle alloc]init];//段落样式
+        textStyle.lineBreakMode = NSLineBreakByWordWrapping;
+        textStyle.alignment=NSTextAlignmentRight;
+    
+        NSDictionary * attrs = @{NSFontAttributeName:textFont,
+                                 NSParagraphStyleAttributeName:textStyle,
+                                 NSForegroundColorAttributeName:foregroudColor};
+        CGSize textSize = [firstValueStr boundingRectWithSize:CGSizeMake(100, 100)
+                                                      options:NSStringDrawingUsesLineFragmentOrigin
+                                                   attributes:attrs
+                                                      context:nil].size;
+        
+        CGRect boxRect = CGRectMake(rect.size.width - textSize.width - self.axisMarginRight, valueY - textSize.height / 2.0, textSize.width, textSize.height);
+        
+        CGContextAddRect(context,boxRect);
+        CGContextFillPath(context);
+        
+        [firstValueStr drawInRect:boxRect withAttributes:attrs];
+    }
+    
+    //还原线条
+    CGContextSetLineDash(context, 0, nil, 0);
+
+}
+
+- (void) drawVerticalLines:(CGRect)rect {
 }
 
 - (void)drawLongitudeLines:(CGRect)rect {
@@ -445,7 +618,6 @@
         }
     }
 }
-
 
 
 - (void)initAxisY {
@@ -761,6 +933,18 @@
         }
     }
     return result;
+}
+
+- (NSString *)calcAxisYValue:(CCFloat) value inRect:(CGRect)rect {
+    if (self.maxValue == 0. && self.minValue == 0.) {
+        return @"";
+    }
+    if (self.axisCalc == 1) {
+        CCInt degree = (value * (self.maxValue - self.minValue) + self.minValue) / self.axisCalc;
+        return [[NSNumber numberWithInteger:degree]stringValue];
+    } else {
+        return [NSString stringWithFormat:@"%-.2f", (value * (self.maxValue - self.minValue) + self.minValue) / self.axisCalc];
+    }
 }
 
 - (NSString *)calcAxisYGraduate:(CGRect)rect {

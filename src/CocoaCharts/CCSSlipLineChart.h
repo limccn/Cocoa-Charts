@@ -44,6 +44,7 @@ typedef enum {
 //    CCUInt _zoomBaseLine;
     
     CCSLineChartTouchMode _touchMode;
+    
 }
 
 @property(assign, nonatomic) CCInt displayNumber;
@@ -51,6 +52,7 @@ typedef enum {
 @property(assign, nonatomic) CCInt minDisplayNumber;
 @property(assign, nonatomic) CCInt maxDisplayNumber;
 //@property(assign, nonatomic) CCUInt zoomBaseLine;
+
 
 @property(assign, nonatomic) CCSLineChartTouchMode touchMode;
 

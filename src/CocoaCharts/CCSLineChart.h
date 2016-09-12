@@ -27,6 +27,13 @@ typedef enum {
     CCSLineAlignTypeJustify
 } CCSLineAlignType;
 
+extern NSString * const CCSLineValue;
+extern NSString * const CCSStyleLabelPosition;
+extern NSString * const CCSStyleLabelPositionNone;
+extern NSString * const CCSStyleLabelPositionLeft;
+extern NSString * const CCSStyleLabelPositionRight;
+extern NSString * const CCSStyleLabelPositionBoth;
+
 /*!
  CCSLineChart
  
@@ -46,6 +53,9 @@ typedef enum {
     BOOL _autoCalcRange;
     BOOL _balanceRange;
     CCSLineAlignType _lineAlignType;
+    
+    NSMutableArray *_horizontalLines;
+    NSMutableArray *_verticalLines;
 }
 
 /*!
@@ -95,6 +105,8 @@ typedef enum {
 
 @property(assign, nonatomic) CCSLineAlignType lineAlignType;
 
+@property(strong, nonatomic) NSMutableArray *horizontalLines;
+@property(strong, nonatomic) NSMutableArray *verticalLines;
 
 /*!
  @abstract Draw lines to this graph

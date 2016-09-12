@@ -20,6 +20,13 @@
 
 #import "CCSBaseChartView.h"
 
+NSString * const CCSStyleBackgroundColor = @"CCSStyleBackgroundColor";
+NSString * const CCSStyleForegroundColor = @"CCSStyleForegroundColor";
+NSString * const CCSStyleLineColor = @"CCSStyleLineColor";
+NSString * const CCSStyleLineWidth = @"CCSStyleLineWidth";
+NSString * const CCSStyleLineDash = @"CCSStyleLineDash";
+NSString * const CCSStyleTextFont = @"CCSStyleTextFont";
+NSString * const CCSStyleTextFormat = @"CCSStyleTextFormat";
 
 @implementation CCSBaseChartView
 

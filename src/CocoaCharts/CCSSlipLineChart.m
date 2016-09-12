@@ -44,6 +44,7 @@
 //@synthesize zoomBaseLine = _zoomBaseLine;
 @synthesize touchMode = _touchMode;
 
+
 - (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
@@ -144,6 +145,11 @@
     [self initAxisX];
     
     [super drawRect:rect];
+}
+
+
+-(void) drawData:(CGRect)rect{
+    [super drawData:rect];
 }
 
 - (void)drawLines:(CGRect)rect {

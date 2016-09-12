@@ -160,7 +160,11 @@
     }
 }
 
-- (void)drawData:(CGRect)rect {
+-(void) drawData:(CGRect)rect{
+    [super drawData:rect];
+}
+
+- (void)drawArea:(CGRect)rect {
 
     // 起始位置
     CCFloat startX;

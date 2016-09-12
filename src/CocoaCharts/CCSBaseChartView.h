@@ -21,6 +21,15 @@
 #import <Foundation/Foundation.h>
 #import "CCSHeader.h"
 
+extern NSString * const CCSStyleBackgroundColor;
+extern NSString * const CCSStyleForegroundColor;
+extern NSString * const CCSStyleLineColor;
+extern NSString * const CCSStyleLineWidth;
+extern NSString * const CCSStyleLineDash;
+extern NSString * const CCSStyleTextFont;
+extern NSString * const CCSStyleTextFormat;
+
+
 /*!
  CCSBaseChartView
  

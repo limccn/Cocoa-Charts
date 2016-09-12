@@ -806,27 +806,34 @@
 }
 
 
-- (CCFloat )touchPointAxisXValue:(CGRect)rect {
+- (CCFloat )computeAxisXValueForPointX:(CCFloat)ptX inRect:(CGRect)rect {
     CCFloat length = rect.size.width - self.axisMarginLeft - self.axisMarginRight;
-    CCFloat valueLength = self.singleTouchPoint.x - self.axisMarginLeft ;
+    CCFloat valueLength = ptX - self.axisMarginLeft ;
     return valueLength / length;
 }
 
-- (CCFloat )touchPointAxisYValue:(CGRect)rect {
+- (CCFloat )touchPointAxisXValue:(CGRect)rect {
+   return [self computeAxisXValueForPointX:self.singleTouchPoint.x inRect:rect];
+}
+
+- (CCFloat )computeAxisYValueForPointY:(CCFloat)ptY inRect:(CGRect)rect {
     if (self.axisXPosition == CCSGridChartXAxisPositionBottom) {
         CCFloat length = rect.size.height - self.axisMarginBottom - 2 * self.axisMarginTop;
-        CCFloat valueLength = length - self.singleTouchPoint.y + self.axisMarginTop;
-
+        CCFloat valueLength = length - ptY + self.axisMarginTop;
+        
         return valueLength / length;
     }
     else {
         CCFloat length = rect.size.height - 2 * self.axisMarginBottom - self.axisMarginTop;
-        CCFloat valueLength = length - self.singleTouchPoint.y - self.axisMarginBottom;
-
+        CCFloat valueLength = length - ptY - self.axisMarginBottom;
+        
         return valueLength / length;
     }
 }
 
+- (CCFloat )touchPointAxisYValue:(CGRect)rect {
+    return [self computeAxisYValueForPointY:self.singleTouchPoint.y inRect:rect];
+}
 
 CCFloat _startDistance = 0;
 CCFloat _minDistance = 8;
